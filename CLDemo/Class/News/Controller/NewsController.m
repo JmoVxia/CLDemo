@@ -19,7 +19,7 @@
     
     self.view.backgroundColor = [UIColor orangeColor];
     
-    self.navigationItem.title = @"最新";
+    self.navigationItem.title = @"课程";
 }
 
 /*

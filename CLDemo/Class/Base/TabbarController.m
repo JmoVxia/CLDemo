@@ -13,9 +13,9 @@
 #import "NewsController.h"
 #import "MeController.h"
 #import "CustomTabbar.h"
-#define FONESIZT         13
-#define SELECTEDCOLOR    [UIColor colorWithRed:0.31765f green:0.31765f blue:0.31765f alpha:1.00000f]
-#define UNSELECTEDCOLOR  [UIColor grayColor]
+#define FontSize         13
+#define SelectedColor    [UIColor blackColor]
+#define UnSelectedColor  [UIColor lightGrayColor]
 
 @interface TabbarController ()
 
@@ -35,19 +35,19 @@
     
     EssenceController *ec = [[EssenceController alloc]init];
     NavigationController *nc1 = [[NavigationController alloc]initWithRootViewController:ec];
-    [Tools setControllerTabBarItem:nc1 Title:@"精华" andFoneSize:FONESIZT withFoneName:nil selectedImage:@"tabBar_essence_click_icon" withTitleColor:SELECTEDCOLOR unselectedImage:@"tabBar_essence_icon" withTitleColor:UNSELECTEDCOLOR];
+    [Tools setControllerTabBarItem:nc1 Title:@"主页" andFoneSize:FontSize withFoneName:nil selectedImage:@"tabBar_essence_click_icon" withTitleColor:SelectedColor unselectedImage:@"tabBar_essence_icon" withTitleColor:UnSelectedColor];
     
     NewsController *nc = [[NewsController alloc]init];
     NavigationController *nc2 = [[NavigationController alloc]initWithRootViewController:nc];
-    [Tools setControllerTabBarItem:nc2 Title:@"最新" andFoneSize:FONESIZT withFoneName:nil selectedImage:@"tabBar_new_click_icon" withTitleColor:SELECTEDCOLOR unselectedImage:@"tabBar_new_icon" withTitleColor:UNSELECTEDCOLOR];
+    [Tools setControllerTabBarItem:nc2 Title:@"课程" andFoneSize:FontSize withFoneName:nil selectedImage:@"tabBar_new_click_icon" withTitleColor:SelectedColor unselectedImage:@"tabBar_new_icon" withTitleColor:UnSelectedColor];
     
     FollowController *fc = [[FollowController alloc]init];
     NavigationController *nc3 = [[NavigationController alloc]initWithRootViewController:fc];
-    [Tools setControllerTabBarItem:nc3 Title:@"关注" andFoneSize:FONESIZT withFoneName:nil selectedImage:@"tabBar_me_click_icon" withTitleColor:SELECTEDCOLOR unselectedImage:@"tabBar_me_icon" withTitleColor:UNSELECTEDCOLOR];
+    [Tools setControllerTabBarItem:nc3 Title:@"收藏" andFoneSize:FontSize withFoneName:nil selectedImage:@"tabBar_me_click_icon" withTitleColor:SelectedColor unselectedImage:@"tabBar_me_icon" withTitleColor:UnSelectedColor];
     
     MeController *mc = [[MeController alloc]init];
     NavigationController *nc4 = [[NavigationController alloc]initWithRootViewController:mc];
-    [Tools setControllerTabBarItem:nc4 Title:@"我" andFoneSize:FONESIZT withFoneName:nil selectedImage:@"tabBar_friendTrends_click_icon" withTitleColor:SELECTEDCOLOR unselectedImage:@"tabBar_friendTrends_icon" withTitleColor:UNSELECTEDCOLOR];
+    [Tools setControllerTabBarItem:nc4 Title:@"我的" andFoneSize:FontSize withFoneName:nil selectedImage:@"tabBar_friendTrends_click_icon" withTitleColor:SelectedColor unselectedImage:@"tabBar_friendTrends_icon" withTitleColor:UnSelectedColor];
     
     self.viewControllers = @[nc1,nc2,nc3,nc4];
 

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor grayColor];
-    self.navigationItem.title = @"关注";
+    self.navigationItem.title = @"收藏";
 }
 
 /*
