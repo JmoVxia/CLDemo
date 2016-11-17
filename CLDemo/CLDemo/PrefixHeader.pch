@@ -1,0 +1,35 @@
+//
+//  PrefixHeader.pch
+//  CLDemo
+//
+//  Created by JmoVxia on 2016/11/17.
+//  Copyright © 2016年 JmoVxia. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+/**如果是OC中的全部写在这里边，如果是C语言或者其他，就写在外边*/
+#ifdef __OBJC__
+
+
+/**使用CLlog，调试模式下才会打印，发布模式不会打印*/
+#ifdef DEBUG//调试阶段的log
+#define CLlog(...) NSLog(__VA_ARGS__)
+#else
+#define CLlog(...)
+#endif
+/**打印方法名称*/
+#define CLlogFunc  CLlog(@"%s",__func__);
+
+
+#import "UIView+CLSetRect.h"
+#import "Tools.h"
+
+
+
+
+
+#endif
+
+#endif /* PrefixHeader_pch */
