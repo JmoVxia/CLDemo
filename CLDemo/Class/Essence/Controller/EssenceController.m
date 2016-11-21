@@ -38,12 +38,12 @@
     {
         UIViewController *vc1 = [[UIViewController alloc] init];
         vc1.view.backgroundColor = RandomColor;
-        [self.controllersArray addObject:vc1];
+        [self addChildViewController:vc1];
     }
 
     
     TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64-49)];
-    [titleView initWithTitleArray:_titlesArray controllersArray:self.controllersArray fatherController:self];
+    [titleView initWithTitleArray:_titlesArray fatherController:self];
     
     [self.view addSubview:titleView];
     
