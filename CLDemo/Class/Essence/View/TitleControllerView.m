@@ -128,6 +128,11 @@
     if (_titlesView == nil)
     {
         UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
+        //有导航条下移64
+        if (_fatherController.navigationController.navigationBarHidden == NO)
+        {
+            titlesView.top = 64;
+        }
         CGFloat width = self.width/5.0;
         titlesView.contentSize = CGSizeMake(width * _titlesArray.count, titlesView.height);
         titlesView.bounces = NO;

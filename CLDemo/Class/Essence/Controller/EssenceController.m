@@ -8,6 +8,9 @@
 
 #import "EssenceController.h"
 #import "TitleControllerView.h"
+
+
+
 #define RandomColor [UIColor colorWithRed:arc4random_uniform(256.0)/255.0 green:arc4random_uniform(256.0)/255.0 blue:arc4random_uniform(256.0)/255.0 alpha:1.0]
 
 @interface EssenceController ()<UIScrollViewDelegate>
@@ -42,7 +45,7 @@
     }
 
     
-    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64-49)];
+    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [titleView initWithTitleArray:_titlesArray fatherController:self];
     
     [self.view addSubview:titleView];
