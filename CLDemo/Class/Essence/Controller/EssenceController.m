@@ -16,13 +16,6 @@
 @interface EssenceController ()<UIScrollViewDelegate>
 
 
-/** 底部的所有内容 */
-@property (nonatomic, weak) UIScrollView *contentView;
-
-/* 控制器数组和标题数组 */
-@property (nonatomic, strong) NSArray *titlesArray;
-
-@property (nonatomic, strong) NSMutableArray *controllersArray;
 
 @end
 
@@ -33,20 +26,25 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"主页";
+
+    NSArray *titlesArray = @[@"推荐",@"精华",@"图片",@"声音",@"视频",@"段子",@"社会",@"福利"];
     
-    self.controllersArray = [NSMutableArray array];
-    _titlesArray = @[@"推荐",@"精华",@"图片",@"声音",@"视频",@"段子",@"社会",@"福利"];
     
-    for (int i = 0; i < _titlesArray.count; i++)
+    NSMutableArray *controllerArray = [NSMutableArray array];
+    
+    for (int i = 0; i < titlesArray.count; i++)
     {
-        UIViewController *vc1 = [[UIViewController alloc] init];
-        vc1.view.backgroundColor = RandomColor;
-        [self addChildViewController:vc1];
+        NSString *classString = @"AAAAViewController";
+        
+        [controllerArray addObject:classString];
+        
     }
 
     
-    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    [titleView initWithTitleArray:_titlesArray fatherController:self];
+    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight)];
+    
+    [titleView initWithTitleArray:[NSMutableArray arrayWithArray:titlesArray] controllerArray:controllerArray fatherController:self];
+    
     
     [self.view addSubview:titleView];
     

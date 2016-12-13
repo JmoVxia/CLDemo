@@ -15,21 +15,25 @@
 @property (nonatomic, weak) UIScrollView *scrollView;
 /**标题数组*/
 @property (nonatomic, strong) NSArray *titlesArray;
+/**控制器类名数组*/
+@property (nonatomic,strong) NSMutableArray *controllerClassArray;
 /**父控制器*/
 @property (nonatomic,weak) UIViewController *fatherController;
 /**标题按钮选中标记*/
 @property (nonatomic,weak) UIButton *selectedButton;
 /**选中下标控件*/
 @property (nonatomic,weak) UIView *selectedView;
-
+/**是否被点击数组*/
+@property (nonatomic,strong) NSMutableArray *clickArray;
 
 @end
 
 
 @implementation TitleControllerView
 
-- (void)initWithTitleArray:(NSArray *)titleArray fatherController:(UIViewController *)fatherController
+- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerArray:(NSMutableArray *)controllerArray fatherController:(UIViewController *)fatherController;
 {
+        _controllerClassArray = controllerArray;
         _fatherController = fatherController;
         _titlesArray = titleArray;
         [self initUI];
@@ -37,6 +41,9 @@
 
 - (void)initUI
 {
+    //关掉自动上移
+    _fatherController.automaticallyAdjustsScrollViewInsets = NO;
+    //调用懒加载
     self.titlesView.backgroundColor = [UIColor clearColor];
     self.scrollView.backgroundColor = [UIColor clearColor];
 }
@@ -84,13 +91,19 @@
 {
     // 当前的索引
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
+
+    NSNumber *num = _clickArray[index];
     
-    // 取出子控制器
-    UIViewController *vc = _fatherController.childViewControllers[index];
-    
-    vc.view.frame = CGRectMake(scrollView.contentOffset.x, 0, scrollView.frame.size.width, scrollView.frame.size.height);
-    
-    [scrollView addSubview:vc.view];
+    if ([num integerValue] == 0) {
+        UIViewController *vc = [NSClassFromString(_controllerClassArray[index]) new];
+        // 创建控制器
+        vc.view.frame = CGRectMake(scrollView.contentOffset.x, 0, scrollView.frame.size.width, scrollView.frame.size.height);
+        //添加到父控制器
+        [_fatherController addChildViewController:vc];
+        [scrollView addSubview:vc.view];
+        //被点击
+        [_clickArray replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:1]];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -105,8 +118,6 @@
 {
     if (_scrollView == nil)
     {
-        // 不要自动调整inset
-        _fatherController.automaticallyAdjustsScrollViewInsets = NO;
         UIScrollView *scrollView = [[UIScrollView alloc] init];
         scrollView.frame = CGRectMake(0, self.titlesView.bottom, self.width, self.height - self.titlesView.height);
         scrollView.delegate = self;
@@ -115,7 +126,7 @@
         scrollView.showsVerticalScrollIndicator = NO;
         scrollView.showsHorizontalScrollIndicator = NO;
         [self addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * _fatherController.childViewControllers.count, 0);
+        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * _controllerClassArray.count, 0);
         _scrollView = scrollView;
         // 添加第一个控制器的view
         [self scrollViewDidEndScrollingAnimation:_scrollView];
@@ -128,11 +139,6 @@
     if (_titlesView == nil)
     {
         UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
-        //有导航条下移64
-        if (_fatherController.navigationController.navigationBarHidden == NO)
-        {
-            titlesView.top = 64;
-        }
         CGFloat width = self.width/5.0;
         titlesView.contentSize = CGSizeMake(width * _titlesArray.count, titlesView.height);
         titlesView.bounces = NO;
@@ -141,6 +147,8 @@
         [self addSubview:titlesView];
         
         _titlesView = titlesView;
+        
+        _clickArray = [NSMutableArray array];
         
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIButton * button = [[UIButton alloc]init];
@@ -151,6 +159,8 @@
             [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [titlesView addSubview:button];
+            //初始化
+            [_clickArray addObject:[NSNumber numberWithInteger:0]];
         }];
         
         UIButton *fristButton = titlesView.subviews.firstObject;

@@ -10,6 +10,6 @@
 
 @interface TitleControllerView : UIView
 
-- (void)initWithTitleArray:(NSArray *)titleArray fatherController:(UIViewController *)fatherController;
+- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerArray:(NSMutableArray *)controllerArray fatherController:(UIViewController *)fatherController;
 
 @end

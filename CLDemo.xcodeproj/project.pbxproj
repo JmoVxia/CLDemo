@@ -23,6 +23,7 @@
 		5B80DA551DDD9BD500A20E34 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA541DDD9BD500A20E34 /* NavigationController.m */; };
 		5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* TabbarController.m */; };
 		5B80DA5B1DDD9C5000A20E34 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA5A1DDD9C5000A20E34 /* UIView+CLSetRect.m */; };
+		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,9 @@
 		5B80DA571DDD9C3A00A20E34 /* TabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarController.m; sourceTree = "<group>"; };
 		5B80DA591DDD9C5000A20E34 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5B80DA5A1DDD9C5000A20E34 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
+		5BB848241E00237900BB266D /* AAAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAAViewController.h; sourceTree = "<group>"; };
+		5BB848251E00237900BB266D /* AAAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAViewController.m; sourceTree = "<group>"; };
+		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 				5B80D9F81DDD976A00A20E34 /* Info.plist */,
 				5B80D9E81DDD976A00A20E34 /* main.m */,
 				5B80DA1A1DDD97D300A20E34 /* PrefixHeader.pch */,
+				5BB848271E002C5000BB266D /* Define.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,6 +157,8 @@
 			children = (
 				5B80DA211DDD993F00A20E34 /* EssenceController.h */,
 				5B80DA221DDD993F00A20E34 /* EssenceController.m */,
+				5BB848241E00237900BB266D /* AAAAViewController.h */,
+				5BB848251E00237900BB266D /* AAAAViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -386,6 +393,7 @@
 				5B80DA471DDD993F00A20E34 /* EssenceController.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CustomTabbar.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* ViewController.m in Sources */,
+				5BB848261E00237900BB266D /* AAAAViewController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* TitleControllerView.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* MeController.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* NewsController.m in Sources */,
