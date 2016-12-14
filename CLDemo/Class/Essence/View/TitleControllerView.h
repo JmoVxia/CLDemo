@@ -10,6 +10,15 @@
 
 @interface TitleControllerView : UIView
 
-- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerArray:(NSMutableArray *)controllerArray fatherController:(UIViewController *)fatherController;
+/**
+ 根据传入参数创建UI
+
+ @param titleArray 标题数组
+ @param controllerClassNameArray 控制器类名数组
+ @param titleNormalColorArray 标题常态颜色
+ @param titleSelectedColorArray 标题选中颜色
+ @param fatherController 父控制器
+ */
+- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerClassNameArray:(NSMutableArray *)controllerClassNameArray titleNormalColorArray:(NSMutableArray *)titleNormalColorArray titleSelectedColorArray:(NSMutableArray *)titleSelectedColorArray fatherController:(UIViewController *)fatherController;
 
 @end

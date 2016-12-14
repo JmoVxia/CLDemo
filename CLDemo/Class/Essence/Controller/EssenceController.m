@@ -28,27 +28,51 @@
     self.navigationItem.title = @"主页";
 
     NSArray *titlesArray = @[@"推荐",@"精华",@"图片",@"声音",@"视频",@"段子",@"社会",@"福利"];
-    
-    
-    NSMutableArray *controllerArray = [NSMutableArray array];
-    
-    for (int i = 0; i < titlesArray.count; i++)
-    {
-        NSString *classString = @"AAAAViewController";
+    NSString *classString = @"AAAAViewController";
+
+    //控制器类名数组
+    NSMutableArray *controllerClassNameArray = [NSMutableArray array];
+    //常态颜色数组
+    NSMutableArray *titleNormalColorArray = [NSMutableArray array];
+    //选中颜色数组
+    NSMutableArray *titleSelectedColorArray = [NSMutableArray array];
+
+    [titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        [controllerArray addObject:classString];
-        
-    }
+        [controllerClassNameArray addObject:classString];
+        [titleNormalColorArray addObject:CLRandomColor];
+        [titleSelectedColorArray addObject:CLRandomColor];
+
+    }];
+    
+    //创建
+    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 49 - 64)];
 
     
-    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight)];
-    
-    [titleView initWithTitleArray:[NSMutableArray arrayWithArray:titlesArray] controllerArray:controllerArray fatherController:self];
+    //初始化
+    [titleView initWithTitleArray:[NSMutableArray arrayWithArray:titlesArray] controllerClassNameArray:controllerClassNameArray titleNormalColorArray:titleNormalColorArray titleSelectedColorArray:titleSelectedColorArray fatherController:self];
     
     
     [self.view addSubview:titleView];
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

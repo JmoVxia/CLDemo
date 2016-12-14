@@ -7,6 +7,10 @@
 //
 
 #import "TitleControllerView.h"
+
+#define ButtonTag    1132
+
+
 @interface TitleControllerView ()<UIScrollViewDelegate>
 
 /**标题滑动视图*/
@@ -16,7 +20,11 @@
 /**标题数组*/
 @property (nonatomic, strong) NSArray *titlesArray;
 /**控制器类名数组*/
-@property (nonatomic,strong) NSMutableArray *controllerClassArray;
+@property (nonatomic,strong) NSMutableArray *controllerClassNameArray;
+/**标题常态颜色数组*/
+@property (nonatomic,strong) NSMutableArray *titleNormalColorArray;
+/**标题选中颜色数组*/
+@property (nonatomic,strong) NSMutableArray *titleSelectedColorArray;
 /**父控制器*/
 @property (nonatomic,weak) UIViewController *fatherController;
 /**标题按钮选中标记*/
@@ -31,12 +39,14 @@
 
 @implementation TitleControllerView
 
-- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerArray:(NSMutableArray *)controllerArray fatherController:(UIViewController *)fatherController;
+- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerClassNameArray:(NSMutableArray *)controllerClassNameArray titleNormalColorArray:(NSMutableArray *)titleNormalColorArray titleSelectedColorArray:(NSMutableArray *)titleSelectedColorArray fatherController:(UIViewController *)fatherController;
 {
-        _controllerClassArray = controllerArray;
-        _fatherController = fatherController;
-        _titlesArray = titleArray;
-        [self initUI];
+    _titlesArray = titleArray;
+    _controllerClassNameArray = controllerClassNameArray;
+    _titleNormalColorArray = titleNormalColorArray;
+    _titleSelectedColorArray = titleSelectedColorArray;
+    _fatherController = fatherController;
+    [self initUI];
 }
 
 - (void)initUI
@@ -81,39 +91,44 @@
     
     // 滚动
     CGPoint offset = self.scrollView.contentOffset;
-    offset.x = (button.tag - 1234) * _scrollView.width;
+    offset.x = (button.tag - ButtonTag) * _scrollView.width;
     [self.scrollView setContentOffset:offset animated:YES];
     
 }
 
 #pragma mark - <UIScrollViewDelegate>
+//手动拖拽不会触发
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    // 当前的索引
+    // 当前的按钮所在索引
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
 
     NSNumber *num = _clickArray[index];
-    
-    if ([num integerValue] == 0) {
-        UIViewController *vc = [NSClassFromString(_controllerClassArray[index]) new];
+    //为0代表没有被点击过，需要创建控制器
+    if ([num integerValue] == 0)
+    {
+        UIViewController *vc = [NSClassFromString(_controllerClassNameArray[index]) new];
         // 创建控制器
         vc.view.frame = CGRectMake(scrollView.contentOffset.x, 0, scrollView.frame.size.width, scrollView.frame.size.height);
-        //添加到父控制器
-        [_fatherController addChildViewController:vc];
         [scrollView addSubview:vc.view];
-        //被点击
+        //将当前控制器添加到父控制器
+        [_fatherController addChildViewController:vc];
+        //将被点击按钮标记为1
         [_clickArray replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:1]];
     }
 }
-
+#pragma mark - 手动拖拽结束
+//通过代码调用滑动时不会触发的
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    //手动拖拽不会触发scrollViewDidEndScrollingAnimation，这里通过代码调用
     [self scrollViewDidEndScrollingAnimation:scrollView];
     // 点击按钮
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self buttonAction:self.titlesView.subviews[index]];
 }
 #pragma mark - 懒加载
+//下方滑动视图
 - (UIScrollView *) scrollView
 {
     if (_scrollView == nil)
@@ -126,14 +141,14 @@
         scrollView.showsVerticalScrollIndicator = NO;
         scrollView.showsHorizontalScrollIndicator = NO;
         [self addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * _controllerClassArray.count, 0);
+        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * _controllerClassNameArray.count, 0);
         _scrollView = scrollView;
         // 添加第一个控制器的view
         [self scrollViewDidEndScrollingAnimation:_scrollView];
     }
     return _scrollView;
 }
-
+//标题视图
 - (UIScrollView *) titlesView
 {
     if (_titlesView == nil)
@@ -149,20 +164,22 @@
         _titlesView = titlesView;
         
         _clickArray = [NSMutableArray array];
-        
+        //根据标题数组创建标题按钮
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIButton * button = [[UIButton alloc]init];
             button.frame = CGRectMake(idx * width, 0, width, titlesView.height);
-            button.tag = 1234 + idx;
+            button.tag = ButtonTag + idx;
             [button setTitle:_titlesArray[idx] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            //常态颜色
+            [button setTitleColor:_titleNormalColorArray[idx] forState:UIControlStateNormal];
+            //选中颜色
+            [button setTitleColor:_titleSelectedColorArray[idx] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [titlesView addSubview:button];
-            //初始化
+            //将所有按钮都标记为0
             [_clickArray addObject:[NSNumber numberWithInteger:0]];
         }];
-        
+        //取出第一个按钮
         UIButton *fristButton = titlesView.subviews.firstObject;
         UIView *view = [[UIView alloc]init];
         view.height = 2;
