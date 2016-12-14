@@ -27,7 +27,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"主页";
 
-    NSArray *titlesArray = @[@"推荐",@"精华",@"图片",@"声音",@"视频",@"段子",@"社会",@"福利"];
+    NSArray *titlesArray = @[@"推荐视频",@"精华",@"图片",@"声音",@"视频",@"段子",@"社会",@"福利"];
     NSString *classString = @"AAAAViewController";
 
     //控制器类名数组

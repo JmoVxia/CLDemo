@@ -67,6 +67,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.selectedView.width = button.titleLabel.width;
         self.selectedView.centerX = button.centerX;
+        self.selectedView.backgroundColor = [button titleColorForState:UIControlStateSelected];
     }];
     
     //计算按钮和屏幕中间需要的偏移量
@@ -181,17 +182,16 @@
         }];
         //取出第一个按钮
         UIButton *fristButton = titlesView.subviews.firstObject;
-        UIView *view = [[UIView alloc]init];
-        view.height = 2;
-        view.top = titlesView.height-view.height;
-        view.backgroundColor = [fristButton titleColorForState:UIControlStateSelected];
-        [titlesView addSubview:view];
-        self.selectedView = view;
+        UIView *selectedView = [[UIView alloc]init];
+        selectedView.height = 2;
+        selectedView.top = titlesView.height-selectedView.height;
+        [titlesView addSubview:selectedView];
+        self.selectedView = selectedView;
         //根据文字内容计算宽高
         [fristButton.titleLabel sizeToFit];
-        //设置位置
-        view.width = fristButton.titleLabel.width;
-        view.centerX = fristButton.centerX;
+        //给定初始位置
+        selectedView.width = fristButton.titleLabel.width;
+        selectedView.centerX = fristButton.centerX;
         //默认选中第一个按钮
         [self buttonAction:fristButton];
     }
