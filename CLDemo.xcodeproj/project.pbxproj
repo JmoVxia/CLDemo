@@ -25,6 +25,7 @@
 		5B80DA5B1DDD9C5000A20E34 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA5A1DDD9C5000A20E34 /* UIView+CLSetRect.m */; };
 		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
 		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
+		5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCalculateSize.h"; sourceTree = "<group>"; };
 		5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCalculateSize.m"; sourceTree = "<group>"; };
+		5BE0FA3D1E03E03900914DFF /* CLSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchBar.h; sourceTree = "<group>"; };
+		5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				5B80DA541DDD9BD500A20E34 /* NavigationController.m */,
 				5B80DA561DDD9C3A00A20E34 /* TabbarController.h */,
 				5B80DA571DDD9C3A00A20E34 /* TabbarController.m */,
+				5BE0FA3D1E03E03900914DFF /* CLSearchBar.h */,
+				5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				5B80DA471DDD993F00A20E34 /* EssenceController.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CustomTabbar.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* ViewController.m in Sources */,
+				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* AAAAViewController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* TitleControllerView.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* MeController.m in Sources */,
