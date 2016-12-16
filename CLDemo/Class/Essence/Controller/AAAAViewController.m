@@ -18,7 +18,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = CLRandomColor;
-    NSLog(@"------->>>>>>");
+    CLlog(@"------->>>>>>");
     
 }
 

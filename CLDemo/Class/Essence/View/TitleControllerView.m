@@ -62,9 +62,13 @@
 #pragma mark - 标题按钮点击事件
 - (void)buttonAction:(UIButton *)button
 {
+    CLlog(@"我被点击了");
     self.selectedButton.selected = NO;
     button.selected = YES;
     self.selectedButton = button;
+    
+    self.titlesView.userInteractionEnabled = NO;
+    [self performSelector:@selector(changeButtonStatus) withObject:nil afterDelay:0.5];
     
     [UIView animateWithDuration:0.2 animations:^{
         self.selectedView.width = button.titleLabel.width;
@@ -97,6 +101,11 @@
     [self.scrollView setContentOffset:offset animated:YES];
     
 }
+- (void)changeButtonStatus
+{
+    self.titlesView.userInteractionEnabled = YES;
+}
+
 #pragma mark - <UIScrollViewDelegate>
 //手动拖拽不会触发
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
