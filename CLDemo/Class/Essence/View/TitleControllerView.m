@@ -101,6 +101,7 @@
     [self.scrollView setContentOffset:offset animated:YES];
     
 }
+#pragma mark - 延迟执行
 - (void)changeButtonStatus
 {
     self.titlesView.userInteractionEnabled = YES;
