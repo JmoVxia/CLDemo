@@ -8,7 +8,6 @@
 
 #import "TitleControllerView.h"
 
-#define ButtonTag    1132
 
 
 @interface TitleControllerView ()<UIScrollViewDelegate>
