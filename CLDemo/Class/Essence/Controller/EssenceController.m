@@ -50,14 +50,11 @@
 
     
     //初始化
-    [titleView initWithTitleArray:[NSMutableArray arrayWithArray:titlesArray] controllerClassNameArray:controllerClassNameArray titleNormalColorArray:titleNormalColorArray titleSelectedColorArray:titleSelectedColorArray fatherController:self];
+    [titleView initWithTitleArray:[NSMutableArray arrayWithArray:titlesArray] controllerClassNameArray:controllerClassNameArray titleNormalColorArray:titleNormalColorArray titleSelectedColorArray:titleSelectedColorArray number:5 fatherController:self];
     
     
     [self.view addSubview:titleView];
-    
 
-    
-    
 }
 
 

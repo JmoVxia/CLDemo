@@ -7,7 +7,7 @@
 //
 
 #import "TitleControllerView.h"
-
+#import "NSString+CLCalculateSize.h"
 
 
 @interface TitleControllerView ()<UIScrollViewDelegate>
@@ -24,6 +24,8 @@
 @property (nonatomic,strong) NSMutableArray *titleNormalColorArray;
 /**标题选中颜色数组*/
 @property (nonatomic,strong) NSMutableArray *titleSelectedColorArray;
+/**个数*/
+@property (nonatomic,assign) NSInteger number;
 /**父控制器*/
 @property (nonatomic,weak) UIViewController *fatherController;
 /**标题按钮选中标记*/
@@ -38,12 +40,13 @@
 
 @implementation TitleControllerView
 
-- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerClassNameArray:(NSMutableArray *)controllerClassNameArray titleNormalColorArray:(NSMutableArray *)titleNormalColorArray titleSelectedColorArray:(NSMutableArray *)titleSelectedColorArray fatherController:(UIViewController *)fatherController;
+- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerClassNameArray:(NSMutableArray *)controllerClassNameArray titleNormalColorArray:(NSMutableArray *)titleNormalColorArray titleSelectedColorArray:(NSMutableArray *)titleSelectedColorArray number:(NSInteger)number fatherController:(UIViewController *)fatherController;
 {
     _titlesArray = titleArray;
     _controllerClassNameArray = controllerClassNameArray;
     _titleNormalColorArray = titleNormalColorArray;
     _titleSelectedColorArray = titleSelectedColorArray;
+    _number = number;
     _fatherController = fatherController;
     [self initUI];
 }
@@ -88,14 +91,12 @@
     }
     //设置偏移
     [_titlesView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-    
     // 滚动
     CGPoint offset = self.scrollView.contentOffset;
     offset.x = (button.tag - ButtonTag) * _scrollView.width;
     [self.scrollView setContentOffset:offset animated:YES];
     
 }
-
 #pragma mark - <UIScrollViewDelegate>
 //手动拖拽不会触发
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -154,8 +155,6 @@
     if (_titlesView == nil)
     {
         UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
-        CGFloat width = self.width/5.0;
-        titlesView.contentSize = CGSizeMake(width * _titlesArray.count, titlesView.height);
         titlesView.bounces = NO;
         titlesView.showsHorizontalScrollIndicator = NO;
         titlesView.showsVerticalScrollIndicator = NO;
@@ -165,20 +164,41 @@
         
         _clickArray = [NSMutableArray array];
         //根据标题数组创建标题按钮
+        __block UIButton *lastButton;
+        //计算文字占用宽度
+        __block NSString *string = @"";
+        [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *newString = [string stringByAppendingString:obj];
+            string = newString;
+            if (idx == (_number - 1)) {
+               * stop = YES;
+            }
+        }];
+        //计算文字长度
+        CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.height)];
+        //间隙
+        CGFloat padding = (self.width - size.width) / (_number + 1);
+        //创建标题按钮
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIButton * button = [[UIButton alloc]init];
-            button.frame = CGRectMake(idx * width, 0, width, titlesView.height);
+            button.frame = CGRectMake(lastButton.right + padding, 0, 0, titlesView.height);
             button.tag = ButtonTag + idx;
-            [button setTitle:_titlesArray[idx] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:18];
+            [button setTitle:obj forState:UIControlStateNormal];
             //常态颜色
             [button setTitleColor:_titleNormalColorArray[idx] forState:UIControlStateNormal];
             //选中颜色
             [button setTitleColor:_titleSelectedColorArray[idx] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+            [button sizeToFit];
             [titlesView addSubview:button];
+            lastButton = button;
             //将所有按钮都标记为0
             [_clickArray addObject:[NSNumber numberWithInteger:0]];
         }];
+        
+        _titlesView.contentSize = CGSizeMake(lastButton.right + padding, titlesView.height);
+        
         //取出第一个按钮
         UIButton *fristButton = titlesView.subviews.firstObject;
         UIView *selectedView = [[UIView alloc]init];

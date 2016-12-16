@@ -17,8 +17,9 @@
  @param controllerClassNameArray 控制器类名数组
  @param titleNormalColorArray 标题常态颜色
  @param titleSelectedColorArray 标题选中颜色
+ @param number  可见标题个数
  @param fatherController 父控制器
  */
-- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerClassNameArray:(NSMutableArray *)controllerClassNameArray titleNormalColorArray:(NSMutableArray *)titleNormalColorArray titleSelectedColorArray:(NSMutableArray *)titleSelectedColorArray fatherController:(UIViewController *)fatherController;
+- (void)initWithTitleArray:(NSMutableArray *)titleArray controllerClassNameArray:(NSMutableArray *)controllerClassNameArray titleNormalColorArray:(NSMutableArray *)titleNormalColorArray titleSelectedColorArray:(NSMutableArray *)titleSelectedColorArray number:(NSInteger)number fatherController:(UIViewController *)fatherController;
 
 @end

@@ -24,6 +24,7 @@
 		5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* TabbarController.m */; };
 		5B80DA5B1DDD9C5000A20E34 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA5A1DDD9C5000A20E34 /* UIView+CLSetRect.m */; };
 		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
+		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		5BB848241E00237900BB266D /* AAAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAAViewController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* AAAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAViewController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCalculateSize.h"; sourceTree = "<group>"; };
+		5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCalculateSize.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +297,8 @@
 				5B80DA5A1DDD9C5000A20E34 /* UIView+CLSetRect.m */,
 				5B80DA3B1DDD993F00A20E34 /* UIImage+CLScaleToSize.h */,
 				5B80DA3C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m */,
+				5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */,
+				5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* FollowController.m in Sources */,
 				5B80DA4D1DDD993F00A20E34 /* Tools.m in Sources */,
 				5B80DA5B1DDD9C5000A20E34 /* UIView+CLSetRect.m in Sources */,

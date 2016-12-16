@@ -51,7 +51,7 @@
             index++;
         }
     }
-    self.button.frame = CGRectMake(0, 0, itemW, self.height + 30);
+    self.button.frame = CGRectMake(0, 0, itemW, itemW);
     self.button.center = CGPointMake(self.width/2.0, (self.height - 30)/2.0);
 }
 //重写hitTest方法，去监听发布按钮的点击，目的是为了让凸出的部分点击也有反应
