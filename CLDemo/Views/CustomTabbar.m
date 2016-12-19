@@ -8,13 +8,19 @@
 
 #import "CustomTabbar.h"
 #import "UIImage+CLScaleToSize.h"
+
 @interface CustomTabbar ()
 
 @property (nonatomic,weak) UIButton *button;
 
+/** shapeLayer*/
+@property(nonatomic,weak)CAShapeLayer *shapeLayer;
 @end
 
 @implementation CustomTabbar
+
+
+
 - (UIButton *) button
 {
     if (_button==nil)
@@ -27,6 +33,17 @@
         _button = button;
     }
     return _button;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        self.shapeLayer          = shapeLayer;
+        shapeLayer.fillColor     = [UIColor blueColor].CGColor;
+    }
+    return self;
 }
 
 
@@ -53,32 +70,26 @@
     }
     self.button.frame = CGRectMake(0, 0, itemW, itemW);
     self.button.center = CGPointMake(self.width/2.0, (self.height - 30)/2.0);
+    UIBezierPath *circle  = [UIBezierPath bezierPathWithArcCenter:self.button.center radius:37 startAngle:0 endAngle:2* M_PI clockwise:YES];
+    self.shapeLayer.path          = circle.CGPath;
+   
 }
-//重写hitTest方法，去监听发布按钮的点击，目的是为了让凸出的部分点击也有反应
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    //这一个判断是关键，不判断的话push到其他页面，点击发布按钮的位置也是会有反应的，这样就不好了
-    //self.isHidden == NO 说明当前页面是有tabbar的，那么肯定是在导航控制器的根控制器页面
-    //在导航控制器根控制器页面，那么我们就需要判断手指点击的位置是否在发布按钮身上
-    //是的话让发布按钮自己处理点击事件，不是的话让系统去处理点击事件就可以了
-    if (self.isHidden == NO)
-    {
-        //将当前tabbar的触摸点转换坐标系，转换到发布按钮的身上，生成一个新的点
-        CGPoint newP = [self convertPoint:point toView:self.button];
-        
-        //判断如果这个新的点是在发布按钮身上，那么处理点击事件最合适的view就是发布按钮
-        if ( [self.button pointInside:newP withEvent:event])
-        {
-            return self.button;
+
+-(void)didMoveToWindow {
+    [super didMoveToWindow];
+    [self.layer addSublayer:self.shapeLayer];
+}
+//判断点是否在响应范围
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (self.isHidden == NO) {
+        UIBezierPath *circle  = [UIBezierPath bezierPathWithArcCenter:self.button.center radius:37 startAngle:0 endAngle:2* M_PI clockwise:YES];
+        UIBezierPath *tabbar  = [UIBezierPath bezierPathWithRect:self.bounds];
+        if ( [circle containsPoint:point] || [tabbar containsPoint:point]) {
+            return YES;
         }
-        else
-        {//如果点不在发布按钮身上，直接让系统处理就可以了
-            return [super hitTest:point withEvent:event];
-        }
-    }
-    else
-    {//tabbar隐藏了，那么说明已经push到其他的页面了，这个时候还是让系统去判断最合适的view处理就好了
-        return [super hitTest:point withEvent:event];
+        return NO;
+    }else {
+        return [super pointInside:point withEvent:event];
     }
 }
 
