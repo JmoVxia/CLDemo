@@ -62,7 +62,6 @@
 #pragma mark - 标题按钮点击事件
 - (void)buttonAction:(UIButton *)button
 {
-    CLlog(@"我被点击了");
     self.selectedButton.selected = NO;
     button.selected = YES;
     self.selectedButton = button;
