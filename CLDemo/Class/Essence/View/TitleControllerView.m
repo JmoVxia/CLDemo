@@ -70,13 +70,13 @@
     [self performSelector:@selector(changeButtonStatus) withObject:nil afterDelay:0.5];
     
     [UIView animateWithDuration:0.2 animations:^{
-        self.selectedView.width = button.titleLabel.width;
-        self.selectedView.centerX = button.centerX;
+        self.selectedView.CLwidth = button.titleLabel.CLwidth;
+        self.selectedView.CLcenterX = button.CLcenterX;
         self.selectedView.backgroundColor = [button titleColorForState:UIControlStateSelected];
     }];
     
     //计算按钮和屏幕中间需要的偏移量
-    CGFloat offsetX = button.centerX - ScreenWidth / 2.0;
+    CGFloat offsetX = button.CLcenterX - CLscreenWidth / 2.0;
     //屏幕左边按钮,重置偏移
     if (offsetX < 0)
     {
@@ -85,7 +85,7 @@
     else
     {
         //得到最大偏移量
-        CGFloat maxOffsetX = _titlesView.contentSize.width - ScreenWidth;
+        CGFloat maxOffsetX = _titlesView.contentSize.width - CLscreenWidth;
         // 处理最大偏移量
         if (offsetX > maxOffsetX)
         {
@@ -96,7 +96,7 @@
     [_titlesView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
     // 滚动
     CGPoint offset = self.scrollView.contentOffset;
-    offset.x = (button.tag - ButtonTag) * _scrollView.width;
+    offset.x = (button.tag - ButtonTag) * _scrollView.CLwidth;
     [self.scrollView setContentOffset:offset animated:YES];
     
 }
@@ -144,7 +144,7 @@
     if (_scrollView == nil)
     {
         UIScrollView *scrollView = [[UIScrollView alloc] init];
-        scrollView.frame = CGRectMake(0, self.titlesView.bottom, self.width, self.height - self.titlesView.height);
+        scrollView.frame = CGRectMake(0, self.titlesView.CLbottom, self.CLwidth, self.CLheight - self.titlesView.CLheight);
         scrollView.delegate = self;
         scrollView.pagingEnabled = YES;
         scrollView.bounces = NO;
@@ -163,7 +163,7 @@
 {
     if (_titlesView == nil)
     {
-        UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
+        UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.CLwidth, 40)];
         titlesView.bounces = NO;
         titlesView.showsHorizontalScrollIndicator = NO;
         titlesView.showsVerticalScrollIndicator = NO;
@@ -184,13 +184,13 @@
             }
         }];
         //计算文字长度
-        CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.height)];
+        CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.CLheight)];
         //间隙
-        CGFloat padding = (self.width - size.width) / (_number + 1);
+        CGFloat padding = (self.CLwidth - size.width) / (_number + 1);
         //创建标题按钮
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIButton * button = [[UIButton alloc]init];
-            button.frame = CGRectMake(lastButton.right + padding, 0, 0, titlesView.height);
+            button.frame = CGRectMake(lastButton.CLright + padding, 0, 0, titlesView.CLheight);
             button.tag = ButtonTag + idx;
             button.titleLabel.font = [UIFont systemFontOfSize:18];
             [button setTitle:obj forState:UIControlStateNormal];
@@ -206,20 +206,20 @@
             [_clickArray addObject:[NSNumber numberWithInteger:0]];
         }];
         
-        _titlesView.contentSize = CGSizeMake(lastButton.right + padding, titlesView.height);
+        _titlesView.contentSize = CGSizeMake(lastButton.CLright + padding, titlesView.CLheight);
         
         //取出第一个按钮
         UIButton *fristButton = titlesView.subviews.firstObject;
         UIView *selectedView = [[UIView alloc]init];
-        selectedView.height = 2;
-        selectedView.top = titlesView.height-selectedView.height;
+        selectedView.CLheight = 2;
+        selectedView.CLtop = titlesView.CLheight-selectedView.CLheight;
         [titlesView addSubview:selectedView];
         self.selectedView = selectedView;
         //根据文字内容计算宽高
         [fristButton.titleLabel sizeToFit];
         //给定初始位置
-        selectedView.width = fristButton.titleLabel.width;
-        selectedView.centerX = fristButton.centerX;
+        selectedView.CLwidth = fristButton.titleLabel.CLwidth;
+        selectedView.CLcenterX = fristButton.CLcenterX;
         //默认选中第一个按钮
         [self buttonAction:fristButton];
     }

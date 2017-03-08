@@ -46,7 +46,7 @@
     }];
     
     //创建
-    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 49 - 64)];
+    TitleControllerView *titleView =  [[TitleControllerView alloc] initWithFrame:CGRectMake(0, 64, CLscreenWidth, CLscreenHeight - 49 - 64)];
 
     
     //初始化

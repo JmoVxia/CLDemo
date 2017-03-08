@@ -52,24 +52,24 @@
     [super layoutSubviews];
    
     int index = 0;
-    CGFloat itemW = self.width/5.0;
+    CGFloat itemW = self.CLwidth/5.0;
 
     for (UIView *subviews in self.subviews)
     {
         //取到系统tabbar的Item方法
         if ([@"UITabBarButton" isEqualToString:NSStringFromClass(subviews.class)])
         {
-            subviews.left = index*itemW;
-            subviews.width = itemW;
+            subviews.CLleft = index*itemW;
+            subviews.CLwidth = itemW;
             if (index >= 2)
             {
-                subviews.left +=itemW;
+                subviews.CLleft +=itemW;
             }
             index++;
         }
     }
     self.button.frame = CGRectMake(0, 0, itemW, itemW);
-    self.button.center = CGPointMake(self.width/2.0, (self.height - 30)/2.0);
+    self.button.center = CGPointMake(self.CLwidth/2.0, (self.CLheight - 30)/2.0);
     UIBezierPath *circle  = [UIBezierPath bezierPathWithArcCenter:self.button.center radius:37 startAngle:0 endAngle:2* M_PI clockwise:YES];
     self.shapeLayer.path          = circle.CGPath;
    
