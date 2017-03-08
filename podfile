@@ -1,0 +1,4 @@
+target 'CLDemo' do
+pod 'Masonry'
+pod 'UITableView+FDTemplateLayoutCell'
+end

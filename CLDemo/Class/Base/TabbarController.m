@@ -47,7 +47,7 @@
     
     MeController *mc = [[MeController alloc]init];
     NavigationController *nc4 = [[NavigationController alloc]initWithRootViewController:mc];
-    [Tools setControllerTabBarItem:nc4 Title:@"我的" andFoneSize:FontSize withFoneName:nil selectedImage:@"tabBar_friendTrends_click_icon" withTitleColor:SelectedColor unselectedImage:@"tabBar_friendTrends_icon" withTitleColor:UnSelectedColor];
+    [Tools setControllerTabBarItem:nc4 Title:@"朋友圈" andFoneSize:FontSize withFoneName:nil selectedImage:@"tabBar_friendTrends_click_icon" withTitleColor:SelectedColor unselectedImage:@"tabBar_friendTrends_icon" withTitleColor:UnSelectedColor];
     
     self.viewControllers = @[nc1,nc2,nc3,nc4];
 
