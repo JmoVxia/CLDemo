@@ -454,6 +454,6 @@ static Tools * manager = nil;
     [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:NULL forDate:endDate];
     NSDateComponents *dayComponents = [gregorian components:NSCalendarUnitDay fromDate:fromDate toDate:toDate options:0];
     
-    return dayComponents.day + 1;
+    return dayComponents.day;
 }
 @end

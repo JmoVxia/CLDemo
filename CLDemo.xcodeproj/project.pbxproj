@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5B12FC171E6FEF020091A0E2 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC161E6FEF020091A0E2 /* UIView+CLSetRect.m */; };
+		5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */; };
+		5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC741E7157BF0091A0E2 /* CLChartView.m */; };
+		5B12FC781E7157D00091A0E2 /* 血糖数据.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B12FC771E7157D00091A0E2 /* 血糖数据.json */; };
 		5B39CED11DE2BE6800C7DD5C /* TitleControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B39CED01DE2BE6800C7DD5C /* TitleControllerView.m */; };
 		5B80D9E91DDD976A00A20E34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80D9E81DDD976A00A20E34 /* main.m */; };
 		5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80D9EB1DDD976A00A20E34 /* AppDelegate.m */; };
@@ -31,6 +34,11 @@
 /* Begin PBXFileReference section */
 		5B12FC151E6FEF020091A0E2 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5B12FC161E6FEF020091A0E2 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
+		5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartMaskView.h; sourceTree = "<group>"; };
+		5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartMaskView.m; sourceTree = "<group>"; };
+		5B12FC731E7157BF0091A0E2 /* CLChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartView.h; sourceTree = "<group>"; };
+		5B12FC741E7157BF0091A0E2 /* CLChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartView.m; sourceTree = "<group>"; };
+		5B12FC771E7157D00091A0E2 /* 血糖数据.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "血糖数据.json"; sourceTree = "<group>"; };
 		5B39CECF1DE2BE6800C7DD5C /* TitleControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleControllerView.h; sourceTree = "<group>"; };
 		5B39CED01DE2BE6800C7DD5C /* TitleControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleControllerView.m; sourceTree = "<group>"; };
 		5B80D9E41DDD976A00A20E34 /* CLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +89,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B12FC701E7157710091A0E2 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */,
+				5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */,
+				5B12FC731E7157BF0091A0E2 /* CLChartView.h */,
+				5B12FC741E7157BF0091A0E2 /* CLChartView.m */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
 		5B80D9DB1DDD976A00A20E34 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +132,7 @@
 		5B80D9E71DDD976A00A20E34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B12FC771E7157D00091A0E2 /* 血糖数据.json */,
 				5B80D9F31DDD976A00A20E34 /* Assets.xcassets */,
 				5B80D9F51DDD976A00A20E34 /* LaunchScreen.storyboard */,
 				5B80D9F81DDD976A00A20E34 /* Info.plist */,
@@ -257,8 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				5B80DA341DDD993F00A20E34 /* Controller */,
-				5B80DA371DDD993F00A20E34 /* Model */,
-				5B80DA381DDD993F00A20E34 /* View */,
+				5B12FC701E7157710091A0E2 /* VIew */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -270,20 +289,6 @@
 				5B80DA361DDD993F00A20E34 /* NewsController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		5B80DA371DDD993F00A20E34 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5B80DA381DDD993F00A20E34 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		5B80DA391DDD993F00A20E34 /* Others */ = {
@@ -387,6 +392,7 @@
 			files = (
 				5B80D9F71DDD976A00A20E34 /* LaunchScreen.storyboard in Resources */,
 				5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */,
+				5B12FC781E7157D00091A0E2 /* 血糖数据.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* FollowController.m in Sources */,
 				5B80DA4D1DDD993F00A20E34 /* Tools.m in Sources */,
@@ -411,6 +418,7 @@
 				5B80DA4C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
+				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* NavigationController.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */,
 				5B12FC171E6FEF020091A0E2 /* UIView+CLSetRect.m in Sources */,
