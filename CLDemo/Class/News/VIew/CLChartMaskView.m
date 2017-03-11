@@ -61,7 +61,7 @@
     [timeArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSDate *date1 = [[Tools sharedTools] stringToDate:obj1[@"date"] withDateFormat:@"yyyy-MM-dd"];
         NSDate *date2 = [[Tools sharedTools] stringToDate:obj2[@"date"] withDateFormat:@"yyyy-MM-dd"];
-        if ([Tools compareOneDay:date1 withAnotherDay:date2] == -1) {
+        if ([Tools compareOneDay:date1 withAnotherDay:date2] == 1) {
             return YES;
         }else{
             return NO;
@@ -69,8 +69,8 @@
     }];
     
     
-    NSDictionary *maxDateDic = [timeArray firstObject];
-    NSDictionary *minDateDic = [timeArray lastObject];
+    NSDictionary *maxDateDic = [timeArray lastObject];
+    NSDictionary *minDateDic = [timeArray firstObject];
     NSDate *maxDate = [[Tools sharedTools] stringToDate:maxDateDic[@"date"] withDateFormat:@"yyyy-MM-dd"];
     NSDate *minDate = [[Tools sharedTools] stringToDate:minDateDic[@"date"] withDateFormat:@"yyyy-MM-dd"];
     NSInteger allDays = [Tools getDaysFrom:minDate To:maxDate];
@@ -97,7 +97,7 @@
     
     self.path = [UIBezierPath bezierPath];
     
-    [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [timeArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSDate *newDate = [[Tools sharedTools] stringToDate:obj[@"date"] withDateFormat:@"yyyy-MM-dd"];
         NSInteger days = [Tools getDaysFrom:minDate To:newDate];
@@ -132,10 +132,6 @@
     
 
     
-}
-
--(void)layoutSubviews{
-    [super layoutSubviews];
 }
 
 
