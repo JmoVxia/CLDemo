@@ -77,47 +77,18 @@
         [zoomBtn setImage:[UIImage imageNamed:@"collapse_icon"] forState:(UIControlStateNormal)];
         [zoomBtn addTarget:self action:@selector(onClickZoomBtn:) forControlEvents:(UIControlEventTouchUpInside)];
         
-        //布局
-        [self fitUI];
         
     }
     return self;
 }
 
 - (void)fitUI {
-    [self.weekBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self);
-        make.width.equalTo(self.width).dividedBy(6);
-        make.left.mas_equalTo(0);
-    }];
-    [self.oneMonthBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self);
-        make.width.equalTo(self.width).dividedBy(6);
-        make.left.mas_equalTo(self.weekBtn.mas_right);
-    }];
-    [self.threeMonthBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self);
-        make.width.equalTo(self.width).dividedBy(6);
-        make.left.mas_equalTo(self.oneMonthBtn.mas_right);
-    }];
-    [self.sixMonthBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self);
-        make.width.equalTo(self.width).dividedBy(6);
-        make.left.mas_equalTo(self.threeMonthBtn.mas_right);
-    }];
-    [self.yearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self);
-        make.width.equalTo(self.width).dividedBy(6);
-        make.left.mas_equalTo(self.sixMonthBtn.mas_right);
-    }];
-    [self.zoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(self.weekBtn.mas_top);
-        make.centerY.mas_equalTo(self.yearBtn.centerY);
-        make.height.width.equalTo(self.height);
-        make.right.mas_equalTo(-10);
-//        make.left.mas_equalTo(self.yearBtn.mas_right);
-//        make.bottom.mas_equalTo(self.yearBtn.mas_bottom);
-    }];
+    self.weekBtn.frame = CGRectMake(0, 0, (self.CLwidth - 60)/5.0, 40);
+    self.oneMonthBtn.frame = CGRectMake(self.weekBtn.CLright, 0, self.weekBtn.CLwidth, 40);
+    self.threeMonthBtn.frame = CGRectMake(self.oneMonthBtn.CLright, 0, self.weekBtn.CLwidth, 40);
+    self.sixMonthBtn.frame = CGRectMake(self.threeMonthBtn.CLright, 0, self.weekBtn.CLwidth, 40);
+    self.yearBtn.frame = CGRectMake(self.sixMonthBtn.CLright, 0, self.weekBtn.CLwidth, 40);
+    self.zoomBtn.frame = CGRectMake(self.yearBtn.CLright + 10, 0, 40, 40);
 }
 
 #pragma mark -Action 
@@ -170,5 +141,13 @@
 - (void)selectedFirst {
     [self onClickWeek:self.weekBtn];
 }
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [self fitUI];
+}
+
+
+
 
 @end
