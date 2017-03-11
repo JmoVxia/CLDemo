@@ -11,7 +11,8 @@
 #import "CLChartToolBar.h"
 //左边间距
 #define leftSpace  40
-
+//右边间距
+#define rightSpace 40
 
 
 @interface CLChartView ()<CLMaxChartLegendViewDelegate>
@@ -57,7 +58,7 @@
         [self addSubview:self.toolBar];
         self.toolBar.nameString = @"血压";
         self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, 40);
-        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.width - 10 - leftSpace, self.frame.size.height - 10 - 40);
+        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - 10 - 40);
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -103,12 +104,12 @@
 -(void)setIsFullScreen:(BOOL)isFullScreen{
     if (isFullScreen) {
         self.toolBar.frame = CGRectMake(0, 0, self.frame.size.height, 40);
-        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.height - 10 - leftSpace, self.frame.size.width - 10 - 40);
+        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - 10 - 40);
         [self setNeedsLayout];
         [self layoutIfNeeded];
     }else{
         self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, 40);
-        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.width - 10 - leftSpace, self.frame.size.height - 10 - 40);
+        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - 10 - 40);
         [self setNeedsLayout];
         [self layoutIfNeeded];
     }
