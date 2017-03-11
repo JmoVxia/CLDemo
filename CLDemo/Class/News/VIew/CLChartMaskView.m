@@ -72,7 +72,7 @@
     CGFloat value = maxValue - minValue;
     
     CGContextRef ctx =UIGraphicsGetCurrentContext();
-    
+
     [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSDate *newDate = [[Tools sharedTools] stringToDate:obj[@"date"] withDateFormat:@"yyyy-MM-dd"];
@@ -83,13 +83,72 @@
         
         CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - 20);
         
-        CGFloat y = ((CGFloat)(value - newValue) / (CGFloat)value) * (self.frame.size.height - 20);
+        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 20);
         
-        UIBezierPath*path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(x - 5 + 10,y - 5 + 10,10,10)];
+        UIBezierPath*path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(x - 5 + 10 ,y - 5 + 10 ,10,10)];
         CGContextAddPath(ctx,path.CGPath);
         CGContextDrawPath(ctx,kCGPathStroke);
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + 10, y - 5 + 10, 10, 10)];
+//        label.layer.cornerRadius = 5;
+//        label.clipsToBounds = YES;
+//        label.backgroundColor = [UIColor redColor];
+//        [self addSubview:label];
+        
+//        label.text = obj[@"date"];
+
     }];
+    
+    
+    
+    UIBezierPath*path = [UIBezierPath bezierPath];
+    [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSDate *newDate = [[Tools sharedTools] stringToDate:obj[@"date"] withDateFormat:@"yyyy-MM-dd"];
+        NSInteger days = [Tools getDaysFrom:minDate To:newDate];
+        
+        CGFloat newValue = [obj[@"FPG"] floatValue];
+        
+        
+        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - 20);
+        
+        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 20);
+
+        
+        if (idx == 0) {
+            [path moveToPoint:CGPointMake(x + 10, y + 10)];
+        }else{
+            [path addLineToPoint:CGPointMake(x + 10, y + 10)];
+        }
+        
+       }];
+
+    
+    CGContextAddPath(ctx,path.CGPath);
+    CGContextDrawPath(ctx,kCGPathStroke);
+
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end
