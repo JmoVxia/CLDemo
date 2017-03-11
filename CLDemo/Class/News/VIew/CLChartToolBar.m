@@ -1,17 +1,15 @@
 //
-//  AIMaxChartLegendView.m
-//  CKD
+//  CLChartToolBar.m
+//  CLDemo
 //
-//  Created by 艾泽鑫 on 2017/2/6.
+//  Created by JmoVxia on 2017/3/11.
 //  Copyright © 2017年 JmoVxia. All rights reserved.
-//  全屏的时候图例
+//
 
-#import "AIMaxChartLegendView.h"
+#import "CLChartToolBar.h"
 #import "UIColor+AIExtension.h"
-@interface AIMaxChartLegendView ()
 
-
-
+@interface CLChartToolBar ()
 /**一周*/
 @property(nonatomic,weak)UIButton *weekBtn;
 /** 一个月*/
@@ -31,7 +29,7 @@
 
 @end
 
-@implementation AIMaxChartLegendView
+@implementation CLChartToolBar
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -102,7 +100,7 @@
         self.nameToolBar.hidden = NO;
         self.dateToolBar.hidden = YES;
         [self fitUI];
-
+        
     }
     return self;
 }
@@ -151,7 +149,7 @@
     }];
 }
 
-#pragma mark -Action 
+#pragma mark -Action
 - (void)onClickWeek:(UIButton*)btn {
     self.selectedBtn.selected = !self.selectedBtn.isSelected;
     btn.selected              = !btn.isSelected;
@@ -204,12 +202,6 @@
 - (void)selectedFirst {
     [self onClickWeek:self.weekBtn];
 }
-
--(void)layoutSubviews{
-    [super layoutSubviews];
-}
-
-
 
 
 @end

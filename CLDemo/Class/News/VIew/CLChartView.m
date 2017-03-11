@@ -8,13 +8,13 @@
 
 #import "CLChartView.h"
 #import "CLChartMaskView.h"
-#import "AIMaxChartLegendView.h"
-@interface CLChartView ()<AIMaxChartLegendViewDelegate>
+#import "CLChartToolBar.h"
+@interface CLChartView ()<CLMaxChartLegendViewDelegate>
 
 /**遮罩*/
 @property (nonatomic,strong) CLChartMaskView *maskView;
 /**顶部工具条*/
-@property (nonatomic,strong) AIMaxChartLegendView *toolBar;
+@property (nonatomic,strong) CLChartToolBar *toolBar;
 
 
 @end
@@ -29,9 +29,9 @@
     }
     return _maskView;
 }
-- (AIMaxChartLegendView *) toolBar{
+- (CLChartToolBar *) toolBar{
     if (_toolBar == nil){
-        _toolBar = [[AIMaxChartLegendView alloc] init];
+        _toolBar = [[CLChartToolBar alloc] init];
         _toolBar.delegate = self;
     }
     return _toolBar;
