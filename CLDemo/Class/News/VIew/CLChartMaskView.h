@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CLChartMaskView : UIView
-/**dic*/
-@property (nonatomic,strong) NSDictionary *dic;
+
+-(instancetype)initWithFrame:(CGRect)frame Array:(NSArray *)array;
+
 
 @end

@@ -92,10 +92,10 @@
 		5B12FC701E7157710091A0E2 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
-				5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */,
-				5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */,
 				5B12FC731E7157BF0091A0E2 /* CLChartView.h */,
 				5B12FC741E7157BF0091A0E2 /* CLChartView.m */,
+				5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */,
+				5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
