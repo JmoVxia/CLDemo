@@ -28,6 +28,8 @@
 		5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* TabbarController.m */; };
 		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
 		5BBB62891E73D62100B28FC3 /* 血压数据.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BBB62881E73D62100B28FC3 /* 血压数据.json */; };
+		5BBB628C1E73E55800B28FC3 /* AIMaxChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB628B1E73E55800B28FC3 /* AIMaxChartLegendView.m */; };
+		5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */; };
 		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
 		5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */; };
 		E9EEC30690C393893AD6852D /* libPods-CLDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE2B946E5FAE4FAD9F651FC /* libPods-CLDemo.a */; };
@@ -75,6 +77,10 @@
 		5BB848251E00237900BB266D /* AAAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAViewController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		5BBB62881E73D62100B28FC3 /* 血压数据.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "血压数据.json"; sourceTree = "<group>"; };
+		5BBB628A1E73E55800B28FC3 /* AIMaxChartLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIMaxChartLegendView.h; sourceTree = "<group>"; };
+		5BBB628B1E73E55800B28FC3 /* AIMaxChartLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIMaxChartLegendView.m; sourceTree = "<group>"; };
+		5BBB628D1E73E5A700B28FC3 /* UIColor+AIExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AIExtension.h"; sourceTree = "<group>"; };
+		5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AIExtension.m"; sourceTree = "<group>"; };
 		5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCalculateSize.h"; sourceTree = "<group>"; };
 		5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCalculateSize.m"; sourceTree = "<group>"; };
 		5BE0FA3D1E03E03900914DFF /* CLSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchBar.h; sourceTree = "<group>"; };
@@ -120,6 +126,8 @@
 				5B12FC741E7157BF0091A0E2 /* CLChartView.m */,
 				5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */,
 				5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */,
+				5BBB628A1E73E55800B28FC3 /* AIMaxChartLegendView.h */,
+				5BBB628B1E73E55800B28FC3 /* AIMaxChartLegendView.m */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -332,6 +340,8 @@
 			children = (
 				5B12FC151E6FEF020091A0E2 /* UIView+CLSetRect.h */,
 				5B12FC161E6FEF020091A0E2 /* UIView+CLSetRect.m */,
+				5BBB628D1E73E5A700B28FC3 /* UIColor+AIExtension.h */,
+				5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */,
 				5B80DA3B1DDD993F00A20E34 /* UIImage+CLScaleToSize.h */,
 				5B80DA3C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m */,
 				5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */,
@@ -483,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
+				5BBB628C1E73E55800B28FC3 /* AIMaxChartLegendView.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* FollowController.m in Sources */,
 				5B80DA4D1DDD993F00A20E34 /* Tools.m in Sources */,
@@ -498,6 +509,7 @@
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
 				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
+				5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* NavigationController.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */,
 				5B12FC171E6FEF020091A0E2 /* UIView+CLSetRect.m in Sources */,

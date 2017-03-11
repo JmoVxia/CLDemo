@@ -8,10 +8,14 @@
 
 #import "CLChartView.h"
 #import "CLChartMaskView.h"
-@interface CLChartView ()
+#import "AIMaxChartLegendView.h"
+@interface CLChartView ()<AIMaxChartLegendViewDelegate>
 
 /**遮罩*/
 @property (nonatomic,strong) CLChartMaskView *maskView;
+/**顶部工具条*/
+@property (nonatomic,strong) AIMaxChartLegendView *toolBar;
+
 
 @end
 
@@ -25,13 +29,21 @@
     }
     return _maskView;
 }
+- (AIMaxChartLegendView *) toolBar{
+    if (_toolBar == nil){
+        _toolBar = [[AIMaxChartLegendView alloc] init];
+        _toolBar.delegate = self;
+    }
+    return _toolBar;
+}
+
+
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.maskView = [[CLChartMaskView alloc] init];
         [self addSubview:self.maskView];
+        [self addSubview:self.toolBar];
         self.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
 }
@@ -47,7 +59,8 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.maskView.frame = CGRectMake(10, 10, self.frame.size.width - 20, self.frame.size.height - 20);
+    self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, 40);
+    self.maskView.frame = CGRectMake(10 ,40, self.frame.size.width - 20, self.frame.size.height - 10 - 40);
     self.maskView.array = _array;
 }
 
