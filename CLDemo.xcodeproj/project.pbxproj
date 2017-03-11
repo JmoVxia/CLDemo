@@ -27,6 +27,7 @@
 		5B80DA551DDD9BD500A20E34 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA541DDD9BD500A20E34 /* NavigationController.m */; };
 		5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* TabbarController.m */; };
 		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
+		5BBB62891E73D62100B28FC3 /* 血压数据.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BBB62881E73D62100B28FC3 /* 血压数据.json */; };
 		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
 		5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */; };
 		E9EEC30690C393893AD6852D /* libPods-CLDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE2B946E5FAE4FAD9F651FC /* libPods-CLDemo.a */; };
@@ -73,6 +74,7 @@
 		5BB848241E00237900BB266D /* AAAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAAViewController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* AAAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAViewController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		5BBB62881E73D62100B28FC3 /* 血压数据.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "血压数据.json"; sourceTree = "<group>"; };
 		5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCalculateSize.h"; sourceTree = "<group>"; };
 		5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCalculateSize.m"; sourceTree = "<group>"; };
 		5BE0FA3D1E03E03900914DFF /* CLSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchBar.h; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				5B12FC771E7157D00091A0E2 /* 血糖数据.json */,
+				5BBB62881E73D62100B28FC3 /* 血压数据.json */,
 				5B80D9F31DDD976A00A20E34 /* Assets.xcassets */,
 				5B80D9F51DDD976A00A20E34 /* LaunchScreen.storyboard */,
 				5B80D9F81DDD976A00A20E34 /* Info.plist */,
@@ -419,6 +422,7 @@
 			files = (
 				5B80D9F71DDD976A00A20E34 /* LaunchScreen.storyboard in Resources */,
 				5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */,
+				5BBB62891E73D62100B28FC3 /* 血压数据.json in Resources */,
 				5B12FC781E7157D00091A0E2 /* 血糖数据.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,11 +31,32 @@
     NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     
     
-    _chartView = [[CLChartView alloc] initWithFrame:CGRectMake(0, 99, self.view.frame.size.width, 200) Array:dic[@"data"]];
+    _chartView = [[CLChartView alloc] init];
     [self.view addSubview:_chartView];
+    [_chartView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(99);
+        make.height.equalTo(200);
+    }];
     
     
+    _chartView.array = dic[@"data"];
     
 }
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"血压数据" ofType:@"json"];
+    NSData * data = [NSData dataWithContentsOfFile:path];
+    NSError * error = nil;
+    NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    _chartView.array = dic[@"data"];
+
+    
+}
+
+
+
 
 @end

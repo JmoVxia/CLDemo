@@ -10,7 +10,9 @@
 
 @interface CLChartMaskView : UIView
 
--(instancetype)initWithFrame:(CGRect)frame Array:(NSArray *)array;
+/**数据*/
+@property (nonatomic,strong) NSArray *array;
+
 
 
 @end

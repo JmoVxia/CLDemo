@@ -46,15 +46,11 @@
     return _pathAnimation;
 }
 
--(instancetype)initWithFrame:(CGRect)frame Array:(NSArray *)array{
-    if (self = [super initWithFrame:frame]) {
-        [self initUIWithArray:array];
-    }
-    return self;
-}
 
 
-- (void)initUIWithArray:(NSArray *)array{
+-(void)setArray:(NSArray *)array{
+    
+    _array = array;
     
     self.backgroundColor = [UIColor lightGrayColor];
     NSMutableArray *timeArray = [NSMutableArray arrayWithArray:array];
@@ -99,27 +95,6 @@
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    
-    [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        NSDate *newDate = [[Tools sharedTools] stringToDate:obj[@"date"] withDateFormat:@"yyyy-MM-dd"];
-        NSInteger days = [Tools getDaysFrom:minDate To:newDate];
-        
-        CGFloat newValue = [obj[@"FPG"] floatValue];
-        
-        
-        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - 20);
-        
-        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 20);
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + 10 ,y - 5 + 10 ,10,10)];
-        label.layer.cornerRadius = 5;
-        label.clipsToBounds = YES;
-        label.backgroundColor = [UIColor orangeColor];
-        [self addSubview:label];
-        
-    }];
-    
     self.path = [UIBezierPath bezierPath];
     
     [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -141,6 +116,12 @@
             [self.path addLineToPoint:CGPointMake(x + 10, y + 10)];
         }
         
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + 10 ,y - 5 + 10 ,10,10)];
+        label.layer.cornerRadius = 5;
+        label.clipsToBounds = YES;
+        label.backgroundColor = [UIColor orangeColor];
+        [self addSubview:label];
+
     }];
     
     
@@ -151,6 +132,10 @@
     
 
     
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
 }
 
 
