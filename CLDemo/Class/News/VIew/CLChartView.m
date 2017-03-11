@@ -15,6 +15,9 @@
 #define rightSpace 40
 //底部间距
 #define bottomSpace 40
+//工具条高度
+#define toolBarHeight  40
+
 
 @interface CLChartView ()<CLMaxChartLegendViewDelegate>
 
@@ -58,8 +61,8 @@
         [self addSubview:self.maskView];
         [self addSubview:self.toolBar];
         self.toolBar.nameString = @"血压";
-        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, 40);
-        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - 40);
+        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, toolBarHeight);
+        self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -103,13 +106,13 @@
 }
 -(void)setIsFullScreen:(BOOL)isFullScreen{
     if (isFullScreen) {
-        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.height, 40);
-        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - 40);
+        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.height, toolBarHeight);
+        self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
     }else{
-        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, 40);
-        self.maskView.frame = CGRectMake(leftSpace ,40, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - 40);
+        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, toolBarHeight);
+        self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
     }
