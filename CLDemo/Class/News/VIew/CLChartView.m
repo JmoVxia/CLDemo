@@ -10,11 +10,11 @@
 #import "CLChartMaskView.h"
 #import "CLChartToolBar.h"
 //左边间距
-#define leftSpace  40
+#define leftSpace  20
 //右边间距
 #define rightSpace 40
 //底部间距
-#define bottomSpace 40
+#define bottomSpace 20
 //工具条高度
 #define toolBarHeight  40
 
@@ -31,7 +31,8 @@
 @property (nonatomic,strong) UIView *fatherView;
 /**全屏标记*/
 @property (nonatomic,assign) BOOL   isFullScreen;
-
+/** 缩放*/
+@property(nonatomic,strong)UIButton *zoomButton;
 
 @end
 
@@ -41,18 +42,25 @@
 
 - (CLChartMaskView *) maskView{
     if (_maskView == nil){
-        _maskView = [[CLChartMaskView alloc] init];
+        _maskView = [[CLChartMaskView alloc] initWithFrame:CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight)];
     }
     return _maskView;
 }
 - (CLChartToolBar *) toolBar{
     if (_toolBar == nil){
-        _toolBar = [[CLChartToolBar alloc] init];
+        _toolBar = [[CLChartToolBar alloc] initWithFrame:CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace, toolBarHeight)];
         _toolBar.delegate = self;
     }
     return _toolBar;
 }
-
+- (UIButton *) zoomButton{
+    if (_zoomButton == nil){
+        _zoomButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - rightSpace, 0, rightSpace, toolBarHeight)];
+        _zoomButton.backgroundColor = [UIColor redColor];
+        [_zoomButton addTarget:self action:@selector(zoomButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _zoomButton;
+}
 
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -60,9 +68,8 @@
         _isFullScreen = NO;
         [self addSubview:self.maskView];
         [self addSubview:self.toolBar];
+        [self addSubview:self.zoomButton];
         self.toolBar.nameString = @"血压";
-        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, toolBarHeight);
-        self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -80,7 +87,7 @@
     self.maskView.array = _array;
 }
 
-- (void)maxChartLegendViewDidSelectedZoom:(UIButton*)button{
+- (void)zoomButtonAction:(UIButton*)button{
     self.toolBar.dateToolBar.hidden = button.selected;
     self.toolBar.nameToolBar.hidden = !button.selected;
     if (!button.selected) {
@@ -106,12 +113,14 @@
 }
 -(void)setIsFullScreen:(BOOL)isFullScreen{
     if (isFullScreen) {
-        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.height, toolBarHeight);
+        self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace, 0, rightSpace, toolBarHeight);
+        self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
     }else{
-        self.toolBar.frame = CGRectMake(0, 0, self.frame.size.width, toolBarHeight);
+        self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace, 0, rightSpace, toolBarHeight);
+        self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];

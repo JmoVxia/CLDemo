@@ -20,8 +20,6 @@
 @property(nonatomic,weak)UIButton *sixMonthBtn;
 /** 一年*/
 @property(nonatomic,weak)UIButton *yearBtn;
-/** 缩放*/
-@property(nonatomic,weak)UIButton *zoomBtn;
 /** 被选中的button*/
 @property(nonatomic,weak)UIButton *selectedBtn;
 /**名称label*/
@@ -38,10 +36,12 @@
         
         //时间工具条
         _dateToolBar = [UIView new];
+        _dateToolBar.backgroundColor = [UIColor orangeColor];
         [self addSubview:_dateToolBar];
         
         //名称工具条
         _nameToolBar = [UIView new];
+        _nameToolBar.backgroundColor = [UIColor yellowColor];
         [self addSubview:_nameToolBar];
         
         //名称label
@@ -89,13 +89,7 @@
         [yearBtn setTitle:@"一年" forState:(UIControlStateNormal)];
         [self.dateToolBar addSubview:yearBtn];
         [yearBtn addTarget:self action:@selector(onClickYearBtn:) forControlEvents:(UIControlEventTouchUpInside)];
-        //缩放
-        UIButton *zoomBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        self.zoomBtn                = zoomBtn;
-        self.zoomBtn.backgroundColor = [UIColor redColor];
-        [self addSubview:zoomBtn];
-        [zoomBtn setImage:[UIImage imageNamed:@"collapse_icon"] forState:(UIControlStateNormal)];
-        [zoomBtn addTarget:self action:@selector(onClickZoomBtn:) forControlEvents:(UIControlEventTouchUpInside)];
+        
         
         self.nameToolBar.hidden = NO;
         self.dateToolBar.hidden = YES;
@@ -108,8 +102,7 @@
 - (void)fitUI {
     
     [self.dateToolBar makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self);
-        make.right.equalTo(-50);
+        make.left.right.top.bottom.equalTo(self);
     }];
     [self.nameToolBar makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.dateToolBar);
@@ -117,11 +110,6 @@
     [self.nameLable makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameToolBar).offset(10);
         make.top.bottom.right.equalTo(self.nameToolBar);
-    }];
-    [self.zoomBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self);
-        make.right.equalTo(-10);
-        make.width.height.equalTo(40);
     }];
     [self.weekBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.equalTo(self.dateToolBar);
@@ -190,11 +178,7 @@
         [self.delegate maxChartLegendViewDidSelectedYear:btn];
     }
 }
-- (void)onClickZoomBtn:(UIButton*)btn {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(maxChartLegendViewDidSelectedZoom:)]) {
-        [self.delegate maxChartLegendViewDidSelectedZoom:btn];
-    }
-}
+
 -(void)setNameString:(NSString *)nameString{
     _nameString = nameString;
     _nameLable.text = _nameString;

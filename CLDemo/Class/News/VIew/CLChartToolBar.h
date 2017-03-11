@@ -15,7 +15,6 @@
 - (void)maxChartLegendViewDidSelectedThreeMonth:(UIButton*)button;
 - (void)maxChartLegendViewDidSelectedSixMonth:(UIButton*)button;
 - (void)maxChartLegendViewDidSelectedYear:(UIButton*)button;
-- (void)maxChartLegendViewDidSelectedZoom:(UIButton*)button;
 
 
 @end
