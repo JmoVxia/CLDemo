@@ -23,9 +23,12 @@
 @interface AIMaxChartLegendView : UIView
 /** 代理*/
 @property(nonatomic,weak)id<AIMaxChartLegendViewDelegate> delegate;
-
-/** 缩放*/
-@property(nonatomic, copy)void(^zoomBlock)();
+/**日期切换工具条*/
+@property (nonatomic,strong) UIView *dateToolBar;
+/**名称工具条*/
+@property (nonatomic,strong) UIView *nameToolBar;
+/**图表名称*/
+@property (nonatomic,copy) NSString *nameString;
 
 - (void)selectedFirst;
 

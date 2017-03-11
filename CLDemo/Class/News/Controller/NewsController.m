@@ -36,7 +36,7 @@
     [_chartView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(99);
-        make.height.equalTo(200);
+        make.height.equalTo(300);
     }];
     
     

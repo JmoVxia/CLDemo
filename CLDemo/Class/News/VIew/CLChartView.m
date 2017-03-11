@@ -43,6 +43,7 @@
     if (self = [super initWithFrame:frame]) {
         [self addSubview:self.maskView];
         [self addSubview:self.toolBar];
+        self.toolBar.nameString = @"血压";
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -54,7 +55,6 @@
     [self setNeedsLayout];
     [self layoutIfNeeded];
     
-    
 }
 
 -(void)layoutSubviews{
@@ -64,7 +64,11 @@
     self.maskView.array = _array;
 }
 
-
+- (void)maxChartLegendViewDidSelectedZoom:(UIButton*)button{
+    self.toolBar.dateToolBar.hidden = button.selected;
+    self.toolBar.nameToolBar.hidden = !button.selected;
+    button.selected = !button.selected;
+}
 
 
 @end
