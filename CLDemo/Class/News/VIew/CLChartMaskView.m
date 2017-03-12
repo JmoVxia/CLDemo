@@ -20,6 +20,8 @@
 /**path*/
 @property (nonatomic,strong) UIBezierPath*path;
 
+/**点数组*/
+@property (nonatomic,strong) NSMutableArray<NSValue*> *pointArray;
 
 @end
 
@@ -51,6 +53,8 @@
 -(void)setArray:(NSArray *)array{
     
     _array = array;
+    
+    self.pointArray = [NSMutableArray array];
     
     self.backgroundColor = [UIColor lightGrayColor];
     NSMutableArray *timeArray = [NSMutableArray arrayWithArray:array];
@@ -109,6 +113,9 @@
         
         CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 20);
         
+        NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
+        [self.pointArray addObject:point];
+        
         
         if (idx == 0) {
             [self.path moveToPoint:CGPointMake(x + 10, y + 10)];
@@ -133,7 +140,36 @@
 
     
 }
+-(void)drawRect:(CGRect)rect{
+    [super drawRect:rect];
+ 
+    //获得处理的上下文
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //指定直线样式
+    CGContextSetLineCap(context, kCGLineCapSquare);
+    //直线宽度
+    CGContextSetLineWidth(context,1.0);
+    //设置颜色
+    [[UIColor blackColor] set];
+    
 
+    
+    [self.pointArray enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGPoint point = [obj CGPointValue];
+        //开始绘制
+        CGContextBeginPath(context);
+        //画笔移动到点(31,170)
+        CGContextMoveToPoint(context,0, point.y + 10);
+        //下一点
+        CGContextAddLineToPoint(context,3, point.y + 10);
+        //绘制完成
+        CGContextStrokePath(context);
+    }];
+    
+    
+    
+    
+}
 
 
 
