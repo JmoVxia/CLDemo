@@ -144,7 +144,7 @@
     self.shapeLayer.path = self.path.CGPath;
     [self.shapeLayer addAnimation:_pathAnimation forKey:nil];
     
-
+    [self setNeedsDisplay];
     
 }
 -(void)drawRect:(CGRect)rect{

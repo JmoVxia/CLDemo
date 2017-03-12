@@ -118,14 +118,14 @@
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
-        [self.maskView setNeedsDisplay];
+//        [self.maskView setNeedsDisplay];
     }else{
         self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace, 0, rightSpace, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
-        [self.maskView setNeedsDisplay];
+//        [self.maskView setNeedsDisplay];
     }
 }
 
