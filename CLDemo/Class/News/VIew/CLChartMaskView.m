@@ -9,6 +9,13 @@
 #import "CLChartMaskView.h"
 #import "Tools.h"
 
+//Y轴上下间隙
+#define YSpace  15
+//X轴左右间距
+#define XSpace  15
+
+
+
 @interface CLChartMaskView ()
 
 /**layer*/
@@ -109,21 +116,21 @@
         CGFloat newValue = [obj[@"FPG"] floatValue];
         
         
-        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - 30);
+        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - XSpace * 2);
         
-        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 30);
+        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - YSpace * 2);
         
         NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
         [self.pointArray addObject:point];
         
         
         if (idx == 0) {
-            [self.path moveToPoint:CGPointMake(x + 15, y + 15)];
+            [self.path moveToPoint:CGPointMake(x + XSpace, y + YSpace)];
         }else{
-            [self.path addLineToPoint:CGPointMake(x + 15, y + 15)];
+            [self.path addLineToPoint:CGPointMake(x + XSpace, y + YSpace)];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + 15 ,y - 5 + 15 ,10,10)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + XSpace ,y - 5 + YSpace ,10,10)];
         label.layer.cornerRadius = 5;
         label.clipsToBounds = YES;
         label.backgroundColor = [UIColor orangeColor];
@@ -159,9 +166,9 @@
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,0, point.y + 15);
+        CGContextMoveToPoint(context,0, point.y + YSpace);
         //下一点
-        CGContextAddLineToPoint(context,5, point.y + 15);
+        CGContextAddLineToPoint(context,5, point.y + YSpace);
         //绘制完成
         CGContextStrokePath(context);
     }];
