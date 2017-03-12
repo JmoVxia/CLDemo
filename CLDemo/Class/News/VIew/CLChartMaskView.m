@@ -109,21 +109,21 @@
         CGFloat newValue = [obj[@"FPG"] floatValue];
         
         
-        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - 20);
+        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - 30);
         
-        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 20);
+        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - 30);
         
         NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
         [self.pointArray addObject:point];
         
         
         if (idx == 0) {
-            [self.path moveToPoint:CGPointMake(x + 10, y + 10)];
+            [self.path moveToPoint:CGPointMake(x + 15, y + 15)];
         }else{
-            [self.path addLineToPoint:CGPointMake(x + 10, y + 10)];
+            [self.path addLineToPoint:CGPointMake(x + 15, y + 15)];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + 10 ,y - 5 + 10 ,10,10)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + 15 ,y - 5 + 15 ,10,10)];
         label.layer.cornerRadius = 5;
         label.clipsToBounds = YES;
         label.backgroundColor = [UIColor orangeColor];
@@ -159,15 +159,19 @@
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,0, point.y + 10);
+        CGContextMoveToPoint(context,0, point.y + 15);
         //下一点
-        CGContextAddLineToPoint(context,3, point.y + 10);
+        CGContextAddLineToPoint(context,5, point.y + 15);
         //绘制完成
         CGContextStrokePath(context);
     }];
     
-    
-    
+    CGContextSetLineWidth(context,1.5);
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context,1, 0);
+    CGContextAddLineToPoint(context,1, self.CLheight);
+    CGContextStrokePath(context);
+
     
 }
 
