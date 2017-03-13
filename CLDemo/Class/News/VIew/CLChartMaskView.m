@@ -167,7 +167,10 @@
     [[UIColor blackColor] set];
     
 
-    //Y轴刻度
+    //Y轴刻度和数字label
+    CGFloat maxValue = [_dic[@"ymax"] floatValue];
+    CGFloat minValue = [_dic[@"ymin"] floatValue];
+    CGFloat value = maxValue - minValue;
     for (NSInteger i = 0; i < 10; i++) {
         //开始绘制
         CGContextBeginPath(context);
@@ -177,14 +180,8 @@
         CGContextAddLineToPoint(context,LeftSpace - YPointSpace, i * (self.frame.size.height - TopSpace - BottomSpace)/9.0 + TopSpace);
         //绘制完成
         CGContextStrokePath(context);
-  
-    }
-    //Y轴数字label
-    CGFloat maxValue = [_dic[@"ymax"] floatValue];
-    CGFloat minValue = [_dic[@"ymin"] floatValue];
-    CGFloat value = maxValue - minValue;
-    for (NSInteger i = 0; i < 10; i++) {
         
+        //数字label
         CGFloat y = i * (self.frame.size.height - TopSpace - BottomSpace)/9.0 + TopSpace;
         CGFloat height = (self.frame.size.height - TopSpace - BottomSpace)/9.0 - 1;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,y - height * 0.5,LeftSpace - 5 - YPointSpace,height)];
@@ -194,8 +191,8 @@
         label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
     }
-    
-    //X轴刻度
+
+    //X轴刻度和数字label
     for (NSInteger i = 0; i < 7; i++) {
         //开始绘制
         CGContextBeginPath(context);
@@ -206,6 +203,16 @@
         //绘制完成
         CGContextStrokePath(context);
         
+        //数字label
+        CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/6.0 + LeftSpace;
+        CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/6.0 - 1;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
+        NSInteger num = (NSInteger)((value/6) * (6 - i) + minValue);
+        label.text = [NSString stringWithFormat:@"%ld",(long)num];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:label];
+
     }
     
     
