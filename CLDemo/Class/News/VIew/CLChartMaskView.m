@@ -9,14 +9,18 @@
 #import "CLChartMaskView.h"
 #import "Tools.h"
 
-//Y轴上边间隙
-#define YTopSpace  15
-//Y轴下边间距
-#define YbottomSpace 45
-//Y轴左边间距
-#define YLeftSpace  45
-//X轴右边间距
-#define XRightSpace 90
+//点距离上边最近间距
+#define TopSpace  15
+//点距离下边最近间距
+#define BottomSpace 45
+//点距离左边最近间距
+#define LeftSpace  45
+//点距离右边最近间距
+#define RightSpace 15
+//点距离Y轴刻度起点最近间距
+#define YPointSpace  15
+//点距离X轴刻度起点最近间距
+#define XPointSpace  15
 
 
 @interface CLChartMaskView ()
@@ -119,21 +123,21 @@
         CGFloat newValue = [obj[@"FPG"] floatValue];
         
         
-        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - YLeftSpace - XRightSpace);
+        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - LeftSpace - RightSpace);
         
-        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - YTopSpace - YbottomSpace);
+        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - TopSpace - BottomSpace);
         
         NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
         [self.pointArray addObject:point];
         
         
         if (idx == 0) {
-            [self.path moveToPoint:CGPointMake(x + YLeftSpace, y + YTopSpace)];
+            [self.path moveToPoint:CGPointMake(x + LeftSpace, y + TopSpace)];
         }else{
-            [self.path addLineToPoint:CGPointMake(x + YLeftSpace, y + YTopSpace)];
+            [self.path addLineToPoint:CGPointMake(x + LeftSpace, y + TopSpace)];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + YLeftSpace ,y - 5 + YTopSpace ,10,10)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + LeftSpace ,y - 5 + TopSpace ,10,10)];
         label.layer.cornerRadius = 5;
         label.clipsToBounds = YES;
         label.backgroundColor = [UIColor orangeColor];
@@ -168,9 +172,9 @@
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,YLeftSpace - 5 - 15, i * (self.frame.size.height - YTopSpace - YbottomSpace)/9.0 + YTopSpace);
+        CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, i * (self.frame.size.height - TopSpace - BottomSpace)/9.0 + TopSpace);
         //下一点
-        CGContextAddLineToPoint(context,YLeftSpace - 15, i * (self.frame.size.height - YTopSpace - YbottomSpace)/9.0 + YTopSpace);
+        CGContextAddLineToPoint(context,LeftSpace - YPointSpace, i * (self.frame.size.height - TopSpace - BottomSpace)/9.0 + TopSpace);
         //绘制完成
         CGContextStrokePath(context);
   
@@ -181,9 +185,9 @@
     CGFloat value = maxValue - minValue;
     for (NSInteger i = 0; i < 10; i++) {
         
-        CGFloat y = i * (self.frame.size.height - YTopSpace - YbottomSpace)/9.0 + YTopSpace;
-        CGFloat height = (self.frame.size.height - YTopSpace - YbottomSpace)/9.0 - 1;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,y - height * 0.5,YLeftSpace - 5 - 15,height)];
+        CGFloat y = i * (self.frame.size.height - TopSpace - BottomSpace)/9.0 + TopSpace;
+        CGFloat height = (self.frame.size.height - TopSpace - BottomSpace)/9.0 - 1;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,y - height * 0.5,LeftSpace - 5 - YPointSpace,height)];
         NSInteger num = (NSInteger)((value/9) * (9 - i) + minValue);
         label.text = [NSString stringWithFormat:@"%ld",(long)num];
         label.font = [UIFont systemFontOfSize:12];
@@ -196,9 +200,9 @@
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,i * (self.frame.size.width - YLeftSpace - XRightSpace)/6.0 + YLeftSpace, self.CLheight - YbottomSpace + 5 + 15 - 5);
+        CGContextMoveToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/6.0 + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace - 5);
         //下一点
-        CGContextAddLineToPoint(context,i * (self.frame.size.width - YLeftSpace - XRightSpace)/6.0 + YLeftSpace, self.CLheight - YbottomSpace + 5 + 15);
+        CGContextAddLineToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/6.0 + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
         //绘制完成
         CGContextStrokePath(context);
         
@@ -234,13 +238,13 @@
     //Y轴竖线
     CGContextSetLineWidth(context,1.5);
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context,YLeftSpace - 5 - 15, 0);
-    CGContextAddLineToPoint(context,YLeftSpace - 5 - 15, self.CLheight - YbottomSpace + 5 + 15);
+    CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, 0);
+    CGContextAddLineToPoint(context,LeftSpace - 5 - YPointSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
     CGContextStrokePath(context);
     CGContextBeginPath(context);
     //X轴竖线
-    CGContextMoveToPoint(context,YLeftSpace - 5 - 15, self.CLheight - YbottomSpace + 5 + 15);
-    CGContextAddLineToPoint(context,self.CLwidth, self.CLheight - YbottomSpace + 5 + 15);
+    CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
+    CGContextAddLineToPoint(context,self.CLwidth, self.CLheight - BottomSpace + 5 + XPointSpace);
     CGContextStrokePath(context);
 
     
