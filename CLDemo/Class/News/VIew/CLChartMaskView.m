@@ -162,13 +162,13 @@
     
 
     
-    for (NSInteger i = 0; i < 11; i++) {
+    for (NSInteger i = 0; i < 10; i++) {
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace);
+        CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, i * (self.frame.size.height - YSpace * 2)/9.0 + YSpace);
         //下一点
-        CGContextAddLineToPoint(context,XLeftSpace - XRightSpace, i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace);
+        CGContextAddLineToPoint(context,XLeftSpace - XRightSpace, i * (self.frame.size.height - YSpace * 2)/9.0 + YSpace);
         //绘制完成
         CGContextStrokePath(context);
   
@@ -177,12 +177,12 @@
     CGFloat maxValue = [_dic[@"ymax"] floatValue];
     CGFloat minValue = [_dic[@"ymin"] floatValue];
     CGFloat value = maxValue - minValue;
-    for (NSInteger i = 0; i < 11; i++) {
+    for (NSInteger i = 0; i < 10; i++) {
         
-        CGFloat y = i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace;
-        CGFloat height = (self.frame.size.height - YSpace * 2)/10.0 - 1;
+        CGFloat y = i * (self.frame.size.height - YSpace * 2)/9.0 + YSpace;
+        CGFloat height = (self.frame.size.height - YSpace * 2)/9.0 - 1;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,y - height * 0.5,XLeftSpace - 5 - XRightSpace,height)];
-        NSInteger num = (NSInteger)((value/10) * (10 - i) + minValue);
+        NSInteger num = (NSInteger)((value/9) * (9 - i) + minValue);
         label.text = [NSString stringWithFormat:@"%ld",(long)num];
         label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
