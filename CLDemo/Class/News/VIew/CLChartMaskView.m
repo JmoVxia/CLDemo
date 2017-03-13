@@ -11,9 +11,10 @@
 
 //Y轴上下间隙
 #define YSpace  15
-//X轴左右间距
-#define XSpace  15
-
+//X轴左边间距
+#define XLeftSpace  45
+//X轴右边间距
+#define XRightSpace 15
 
 
 @interface CLChartMaskView ()
@@ -66,7 +67,7 @@
     self.backgroundColor = [UIColor lightGrayColor];
     NSMutableArray *timeArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
-    NSMutableArray *dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
+//    NSMutableArray *dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
     
     [timeArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -116,7 +117,7 @@
         CGFloat newValue = [obj[@"FPG"] floatValue];
         
         
-        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - XSpace * 2);
+        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - XLeftSpace - XRightSpace);
         
         CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - YSpace * 2);
         
@@ -125,12 +126,12 @@
         
         
         if (idx == 0) {
-            [self.path moveToPoint:CGPointMake(x + XSpace, y + YSpace)];
+            [self.path moveToPoint:CGPointMake(x + XLeftSpace, y + YSpace)];
         }else{
-            [self.path addLineToPoint:CGPointMake(x + XSpace, y + YSpace)];
+            [self.path addLineToPoint:CGPointMake(x + XLeftSpace, y + YSpace)];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + XSpace ,y - 5 + YSpace ,10,10)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + XLeftSpace ,y - 5 + YSpace ,10,10)];
         label.layer.cornerRadius = 5;
         label.clipsToBounds = YES;
         label.backgroundColor = [UIColor orangeColor];
@@ -161,22 +162,30 @@
     
 
     
-    [self.pointArray enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGPoint point = [obj CGPointValue];
+    for (NSInteger i = 0; i < 11; i++) {
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,0, point.y + YSpace);
+        CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace);
         //下一点
-        CGContextAddLineToPoint(context,5, point.y + YSpace);
+        CGContextAddLineToPoint(context,XLeftSpace - XRightSpace, i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace);
         //绘制完成
         CGContextStrokePath(context);
-    }];
+  
+    }
+    
+    for (NSInteger i = 0; i < 11; i++) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace * 0.5 ,25,(self.frame.size.height - YSpace * 2)/10.0 - 5)];
+        label.backgroundColor = [UIColor redColor];
+        [self addSubview:label];
+    }
+    
+    
     
     CGContextSetLineWidth(context,1.5);
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context,1, 0);
-    CGContextAddLineToPoint(context,1, self.CLheight);
+    CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, 0);
+    CGContextAddLineToPoint(context,XLeftSpace - 5 - XRightSpace, self.CLheight);
     CGContextStrokePath(context);
 
     

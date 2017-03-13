@@ -10,7 +10,7 @@
 #import "CLChartMaskView.h"
 #import "CLChartToolBar.h"
 //左边间距
-#define leftSpace  20
+#define leftSpace  0
 //右边间距
 #define rightSpace 40
 //底部间距
