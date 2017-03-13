@@ -10,7 +10,7 @@
 #import "Tools.h"
 
 //Y轴上下间隙
-#define YSpace  15
+#define YSpace  30
 //X轴左边间距
 #define XLeftSpace  45
 //X轴右边间距
@@ -174,9 +174,18 @@
   
     }
     
+    CGFloat maxValue = [_dic[@"ymax"] floatValue];
+    CGFloat minValue = [_dic[@"ymin"] floatValue];
+    CGFloat value = maxValue - minValue;
     for (NSInteger i = 0; i < 11; i++) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace * 0.5 ,25,(self.frame.size.height - YSpace * 2)/10.0 - 5)];
-        label.backgroundColor = [UIColor redColor];
+        
+        CGFloat y = i * (self.frame.size.height - YSpace * 2)/10.0 + YSpace;
+        CGFloat height = (self.frame.size.height - YSpace * 2)/10.0 - 1;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 ,y - height * 0.5,XLeftSpace - 5 - XRightSpace,height)];
+        NSInteger num = (NSInteger)((value/10) * (10 - i) + minValue);
+        label.text = [NSString stringWithFormat:@"%ld",(long)num];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
     }
     

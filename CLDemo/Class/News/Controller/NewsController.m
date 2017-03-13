@@ -56,6 +56,10 @@
     
 }
 
+#pragma mark - 隐藏状态栏
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 
 
