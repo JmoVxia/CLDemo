@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    Week,
+    OneMonth,
+    ThreeMonth,
+    SixMonth,
+    Year
+} timeType;
+
+
 @interface CLChartMaskView : UIView
 
 /**数据*/

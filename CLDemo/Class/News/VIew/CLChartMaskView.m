@@ -35,7 +35,7 @@
 @property (nonatomic,strong) UIBezierPath*path;
 
 /**点数组*/
-@property (nonatomic,strong) NSMutableArray<NSValue*> *pointArray;
+@property (nonatomic,strong) NSMutableArray *dataArray;
 
 @end
 
@@ -68,12 +68,11 @@
     
     _dic = dic;
     
-    self.pointArray = [NSMutableArray array];
     
     self.backgroundColor = [UIColor lightGrayColor];
     NSMutableArray *timeArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
-//    NSMutableArray *dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
+    self.dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
     
     [timeArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -94,19 +93,19 @@
     NSInteger allDays = [Tools getDaysFrom:minDate To:maxDate];
     
     
-//    [dataArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-//        CGFloat value1 = [obj1[@"FPG"] floatValue];
-//        CGFloat value2 = [obj2[@"FPG"] floatValue];
-//        if (value1 < value2) {
-//            return YES;
-//        }else{
-//            return NO;
-//        }
-//    }];
-//    NSDictionary *maxValueDic = [dataArray firstObject];
-//    NSDictionary *minValueDic = [dataArray lastObject];
-    CGFloat maxValue = [_dic[@"ymax"] floatValue];
-    CGFloat minValue = [_dic[@"ymin"] floatValue];
+    [self.dataArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        CGFloat value1 = [obj1[@"FPG"] floatValue];
+        CGFloat value2 = [obj2[@"FPG"] floatValue];
+        if (value1 < value2) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }];
+    NSDictionary *maxValueDic = [self.dataArray firstObject];
+    NSDictionary *minValueDic = [self.dataArray lastObject];
+    CGFloat maxValue = [maxValueDic[@"FPG"] floatValue];
+    CGFloat minValue = [minValueDic[@"FPG"] floatValue];
     
     CGFloat value = maxValue - minValue;
     
@@ -127,8 +126,6 @@
         
         CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - TopSpace - BottomSpace);
         
-        NSValue *point = [NSValue valueWithCGPoint:CGPointMake(x, y)];
-        [self.pointArray addObject:point];
         
         
         if (idx == 0) {
@@ -166,10 +163,12 @@
     //设置颜色
     [[UIColor blackColor] set];
     
-
     //Y轴刻度和数字label
-    CGFloat maxValue = [_dic[@"ymax"] floatValue];
-    CGFloat minValue = [_dic[@"ymin"] floatValue];
+    NSDictionary *maxValueDic = [self.dataArray firstObject];
+    NSDictionary *minValueDic = [self.dataArray lastObject];
+    CGFloat maxValue = [maxValueDic[@"FPG"] floatValue];
+    CGFloat minValue = [minValueDic[@"FPG"] floatValue];
+    
     CGFloat value = maxValue - minValue;
     for (NSInteger i = 0; i < 10; i++) {
         //开始绘制
