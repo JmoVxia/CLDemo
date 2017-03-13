@@ -14,7 +14,7 @@
 //右边间距
 #define rightSpace 40
 //底部间距
-#define bottomSpace 20
+#define bottomSpace 0
 //工具条高度
 #define toolBarHeight  40
 
