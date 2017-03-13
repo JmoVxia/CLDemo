@@ -87,19 +87,19 @@
     NSInteger allDays = [Tools getDaysFrom:minDate To:maxDate];
     
     
-    [dataArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        CGFloat value1 = [obj1[@"FPG"] floatValue];
-        CGFloat value2 = [obj2[@"FPG"] floatValue];
-        if (value1 < value2) {
-            return YES;
-        }else{
-            return NO;
-        }
-    }];
-    NSDictionary *maxValueDic = [dataArray firstObject];
-    NSDictionary *minValueDic = [dataArray lastObject];
-    CGFloat maxValue = [maxValueDic[@"FPG"] floatValue];
-    CGFloat minValue = [minValueDic[@"FPG"] floatValue];
+//    [dataArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//        CGFloat value1 = [obj1[@"FPG"] floatValue];
+//        CGFloat value2 = [obj2[@"FPG"] floatValue];
+//        if (value1 < value2) {
+//            return YES;
+//        }else{
+//            return NO;
+//        }
+//    }];
+//    NSDictionary *maxValueDic = [dataArray firstObject];
+//    NSDictionary *minValueDic = [dataArray lastObject];
+    CGFloat maxValue = [_dic[@"ymax"] floatValue];
+    CGFloat minValue = [_dic[@"ymin"] floatValue];
     
     CGFloat value = maxValue - minValue;
     
