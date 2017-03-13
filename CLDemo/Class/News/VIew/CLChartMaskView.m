@@ -10,7 +10,7 @@
 #import "Tools.h"
 
 //Y轴上边间隙
-#define YTopSpace  20
+#define YTopSpace  40
 //Y轴下边间距
 #define YbottomSpace 45
 //X轴左边间距
@@ -194,12 +194,12 @@
     CGContextSetLineWidth(context,1.5);
     CGContextBeginPath(context);
     CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, 0);
-    CGContextAddLineToPoint(context,XLeftSpace - 5 - XRightSpace, self.CLheight);
+    CGContextAddLineToPoint(context,XLeftSpace - 5 - XRightSpace, self.CLheight - YbottomSpace + 5 + XRightSpace);
     CGContextStrokePath(context);
 
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, self.CLheight);
-    CGContextAddLineToPoint(context,self.CLwidth, self.CLheight);
+    CGContextMoveToPoint(context,XLeftSpace - 5 - XRightSpace, self.CLheight - YbottomSpace + 5 + XRightSpace);
+    CGContextAddLineToPoint(context,self.CLwidth, self.CLheight - YbottomSpace + 5 + XRightSpace);
     CGContextStrokePath(context);
 
     
