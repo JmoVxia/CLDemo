@@ -57,16 +57,16 @@
 
 
 
--(void)setArray:(NSArray *)array{
+-(void)setDic:(NSDictionary *)dic{
     
-    _array = array;
+    _dic = dic;
     
     self.pointArray = [NSMutableArray array];
     
     self.backgroundColor = [UIColor lightGrayColor];
-    NSMutableArray *timeArray = [NSMutableArray arrayWithArray:array];
+    NSMutableArray *timeArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
-    NSMutableArray *dataArray = [NSMutableArray arrayWithArray:array];
+    NSMutableArray *dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
     
     [timeArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {

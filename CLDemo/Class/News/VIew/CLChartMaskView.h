@@ -11,7 +11,7 @@
 @interface CLChartMaskView : UIView
 
 /**数据*/
-@property (nonatomic,strong) NSArray *array;
+@property (nonatomic,strong) NSDictionary *dic;
 
 
 

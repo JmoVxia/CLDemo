@@ -75,8 +75,8 @@
     return self;
 }
 
--(void)setArray:(NSArray *)array{
-    _array = array;
+-(void)setDic:(NSDictionary *)dic{
+    _dic = dic;
     
     [self setNeedsLayout];
     [self layoutIfNeeded];
@@ -84,7 +84,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.maskView.array = _array;
+    self.maskView.dic = _dic;
 }
 
 - (void)zoomButtonAction:(UIButton*)button{

@@ -40,7 +40,7 @@
 //    }];
     
     
-    _chartView.array = dic[@"data"];
+    _chartView.dic = dic;
     
 }
 
@@ -51,7 +51,7 @@
     NSData * data = [NSData dataWithContentsOfFile:path];
     NSError * error = nil;
     NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-    _chartView.array = dic[@"data"];
+    _chartView.dic = dic;
 
     
 }
