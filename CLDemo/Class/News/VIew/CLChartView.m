@@ -12,7 +12,7 @@
 //左边间距
 #define leftSpace  0
 //右边间距
-#define rightSpace 40
+#define rightSpace 0
 //底部间距
 #define bottomSpace 0
 //工具条高度
@@ -48,14 +48,14 @@
 }
 - (CLChartToolBar *) toolBar{
     if (_toolBar == nil){
-        _toolBar = [[CLChartToolBar alloc] initWithFrame:CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace, toolBarHeight)];
+        _toolBar = [[CLChartToolBar alloc] initWithFrame:CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight)];
         _toolBar.delegate = self;
     }
     return _toolBar;
 }
 - (UIButton *) zoomButton{
     if (_zoomButton == nil){
-        _zoomButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - rightSpace, 0, rightSpace, toolBarHeight)];
+        _zoomButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, 0, 40, toolBarHeight)];
         _zoomButton.backgroundColor = [UIColor redColor];
         [_zoomButton addTarget:self action:@selector(zoomButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -113,15 +113,15 @@
 }
 -(void)setIsFullScreen:(BOOL)isFullScreen{
     if (isFullScreen) {
-        self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace, 0, rightSpace, toolBarHeight);
-        self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace, toolBarHeight);
+        self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace - 40, 0, 40, toolBarHeight);
+        self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
 //        [self.maskView setNeedsDisplay];
     }else{
-        self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace, 0, rightSpace, toolBarHeight);
-        self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace, toolBarHeight);
+        self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace - 40, 0, 40, toolBarHeight);
+        self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
         [self setNeedsLayout];
         [self layoutIfNeeded];
