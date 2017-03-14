@@ -86,9 +86,32 @@
     }];
     
     
-    NSDictionary *maxDateDic = [timeArray lastObject];
+    NSInteger days = 7;
+    switch (self.dayType) {
+        case Week:
+            days = 7;
+            break;
+            
+        case OneMonth:
+            days = 4;
+            break;
+            
+        case ThreeMonth:
+            days = 3;
+            break;
+        case SixMonth:
+            days = 6;
+            break;
+        case Year:
+            days = 12;
+            break;
+    }
+    
+//    NSDictionary *maxDateDic = [timeArray lastObject];
     NSDictionary *minDateDic = [timeArray firstObject];
-    NSDate *maxDate = [[Tools sharedTools] stringToDate:maxDateDic[@"date"] withDateFormat:@"yyyy-MM-dd"];
+    
+    //最大日期为今天
+    NSDate *maxDate = [NSDate date];
     NSDate *minDate = [[Tools sharedTools] stringToDate:minDateDic[@"date"] withDateFormat:@"yyyy-MM-dd"];
     NSInteger allDays = [Tools getDaysFrom:minDate To:maxDate];
     
@@ -190,23 +213,43 @@
         label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
     }
-
+    NSInteger xCount = 7;
+    switch (self.dayType) {
+        case Week:
+            xCount = 7;
+            break;
+            
+        case OneMonth:
+            xCount = 4;
+            break;
+            
+        case ThreeMonth:
+            xCount = 3;
+            break;
+        case SixMonth:
+            xCount = 6;
+            break;
+        case Year:
+            xCount = 12;
+            break;
+    }
+    
     //X轴刻度和数字label
-    for (NSInteger i = 0; i < 7; i++) {
+    for (NSInteger i = 0; i < xCount; i++) {
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/6.0 + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace - 5);
+        CGContextMoveToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace - 5);
         //下一点
-        CGContextAddLineToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/6.0 + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
+        CGContextAddLineToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
         //绘制完成
         CGContextStrokePath(context);
         
         //数字label
-        CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/6.0 + LeftSpace;
-        CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/6.0 - 1;
+        CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace;
+        CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) - 1;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
-        NSInteger num = (NSInteger)((value/6) * (6 - i) + minValue);
+        NSInteger num = (NSInteger)((value/(xCount - 1)) * (xCount - i) + minValue);
         label.text = [NSString stringWithFormat:@"%ld",(long)num];
         label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;

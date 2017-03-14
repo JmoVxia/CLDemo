@@ -70,6 +70,7 @@
         [self addSubview:self.toolBar];
         [self addSubview:self.zoomButton];
         self.toolBar.nameString = @"血压";
+        [self.toolBar selectedFirst];
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -90,6 +91,7 @@
 - (void)zoomButtonAction:(UIButton*)button{
     self.toolBar.dateToolBar.hidden = button.selected;
     self.toolBar.nameToolBar.hidden = !button.selected;
+    [self.toolBar selectedFirst];
     if (!button.selected) {
         self.customFarme = self.frame;
         self.fatherView = self.superview;
@@ -129,23 +131,50 @@
 #pragma mark - 按钮点击事件
 //一周
 - (void)maxChartLegendViewDidSelectedWeek:(UIButton*)button{
+    self.maskView.dayType = Week;
+    if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedWeek:)]) {
+        [_delegate CLChartViewDidSelectedWeek:button];
+    }else{
+        CLlog(@"未实现代理或者没有代理人");
+    }
+    
     
 }
 //一月
 - (void)maxChartLegendViewDidSelectedOneMonth:(UIButton*)button{
-    
+    self.maskView.dayType = OneMonth;
+    if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedOneMonth:)]) {
+        [_delegate CLChartViewDidSelectedOneMonth:button];
+    }else{
+        CLlog(@"未实现代理或者没有代理人");
+    }
 }
 //三月
 - (void)maxChartLegendViewDidSelectedThreeMonth:(UIButton*)button{
-    
+    self.maskView.dayType = ThreeMonth;
+    if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedThreeMonth:)]) {
+        [_delegate CLChartViewDidSelectedThreeMonth:button];
+    }else{
+        CLlog(@"未实现代理或者没有代理人");
+    }
 }
 //六月
 - (void)maxChartLegendViewDidSelectedSixMonth:(UIButton*)button{
-    
+    self.maskView.dayType = SixMonth;
+    if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedSixMonth:)]) {
+        [_delegate CLChartViewDidSelectedSixMonth:button];
+    }else{
+        CLlog(@"未实现代理或者没有代理人");
+    }
 }
 //一年
 - (void)maxChartLegendViewDidSelectedYear:(UIButton*)button{
-    
+    self.maskView.dayType = Year;
+    if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedYear:)]) {
+        [_delegate CLChartViewDidSelectedYear:button];
+    }else{
+        CLlog(@"未实现代理或者没有代理人");
+    }
 }
 
 

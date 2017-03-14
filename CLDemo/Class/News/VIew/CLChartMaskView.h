@@ -9,19 +9,20 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    Week,
+    Week = 0,
     OneMonth,
     ThreeMonth,
     SixMonth,
     Year
-} timeType;
+} DayType;
 
 
 @interface CLChartMaskView : UIView
 
 /**数据*/
 @property (nonatomic,strong) NSDictionary *dic;
-
+/**类型*/
+@property (nonatomic,assign) DayType dayType;
 
 
 @end

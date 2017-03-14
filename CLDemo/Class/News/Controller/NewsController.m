@@ -8,7 +8,7 @@
 
 #import "NewsController.h"
 #import "CLChartView.h"
-@interface NewsController ()
+@interface NewsController ()<CLChartViewDelegate>
 
 /**chartView*/
 @property (nonatomic,strong) CLChartView *chartView;
@@ -25,7 +25,7 @@
     self.navigationItem.title = @"课程";
     
     
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"血糖数据" ofType:@"json"];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"一周" ofType:@"json"];
     NSData * data = [NSData dataWithContentsOfFile:path];
     NSError * error = nil;
     NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
@@ -33,27 +33,50 @@
     
     _chartView = [[CLChartView alloc] initWithFrame:CGRectMake(0, 99, self.view.CLwidth, 250)];
     [self.view addSubview:_chartView];
-//    [_chartView makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.equalTo(self.view);
-//        make.top.equalTo(99);
-//        make.height.equalTo(200);
-//    }];
-    
-    
+    _chartView.delegate = self;
     _chartView.dic = dic;
     
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [super touchesBegan:touches withEvent:event];
-    
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"血压数据" ofType:@"json"];
+/**周*/
+- (void)CLChartViewDidSelectedWeek:(UIButton *)weekButton{
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"一周" ofType:@"json"];
     NSData * data = [NSData dataWithContentsOfFile:path];
     NSError * error = nil;
     NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     _chartView.dic = dic;
-
-    
+}
+/**一月*/
+- (void)CLChartViewDidSelectedOneMonth:(UIButton *)oneMonth{
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"一月" ofType:@"json"];
+    NSData * data = [NSData dataWithContentsOfFile:path];
+    NSError * error = nil;
+    NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    _chartView.dic = dic;
+}
+/**三月*/
+- (void)CLChartViewDidSelectedThreeMonth:(UIButton *)threeMonth{
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"三月" ofType:@"json"];
+    NSData * data = [NSData dataWithContentsOfFile:path];
+    NSError * error = nil;
+    NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    _chartView.dic = dic;
+}
+/**六月*/
+- (void)CLChartViewDidSelectedSixMonth:(UIButton *)sixMonth{
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"六月" ofType:@"json"];
+    NSData * data = [NSData dataWithContentsOfFile:path];
+    NSError * error = nil;
+    NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    _chartView.dic = dic;
+}
+/**一年*/
+- (void)CLChartViewDidSelectedYear:(UIButton *)year{
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"一年" ofType:@"json"];
+    NSData * data = [NSData dataWithContentsOfFile:path];
+    NSError * error = nil;
+    NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    _chartView.dic = dic;
 }
 
 #pragma mark - 隐藏状态栏
