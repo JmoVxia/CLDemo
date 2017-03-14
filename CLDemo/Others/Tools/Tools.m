@@ -349,13 +349,13 @@ static Tools * manager = nil;
     NSString *pathDocuments = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     return pathDocuments;
 }
-//获取明天时间
-+ (NSString *)getTomorrowDayWithDateFormat:(NSString *)format
+//获取今天时间
++ (NSString *)getToDayWithDateFormat:(NSString *)format
 {
     NSDate *date = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
-    [components setDay:([components day]+1)];
+    [components setDay:([components day])];
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateday = [[NSDateFormatter alloc] init];

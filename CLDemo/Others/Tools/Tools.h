@@ -64,8 +64,8 @@ typedef void(^CancelBlock)(UIAlertAction *cancelAction);
 + (NSString*)deviceVersion;
 /**沙盒路径*/
 + (NSString*)pathDocuments;
-/**获取明天时间*/
-+ (NSString *)getTomorrowDayWithDateFormat:(NSString *)format;
+/**获取今天时间*/
++ (NSString *)getToDayWithDateFormat:(NSString *)format;
 /**字符串转date时间*/
 - (NSDate *)stringToDate:(NSString *)dateString withDateFormat:(NSString *)format;
 /**判断两个时间大小*/

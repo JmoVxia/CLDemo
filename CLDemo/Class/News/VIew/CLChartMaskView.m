@@ -55,6 +55,7 @@
     if (_pathAnimation == nil){
         _pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         _pathAnimation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:1 :1 :1 :1] ;
+        _pathAnimation.duration = 2;
         _pathAnimation.fromValue = @0 ;
         _pathAnimation.toValue = @1 ;
         _pathAnimation.autoreverses = NO ;
@@ -74,7 +75,7 @@
     
     self.dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
-    
+    //数据按照日期排序
     [timeArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSDate *date1 = [[Tools sharedTools] stringToDate:obj1[@"date"] withDateFormat:@"yyyy-MM-dd"];
         NSDate *date2 = [[Tools sharedTools] stringToDate:obj2[@"date"] withDateFormat:@"yyyy-MM-dd"];
@@ -86,36 +87,44 @@
     }];
     
     
-    NSInteger days = 7;
+    //最大日期为今天
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *maxDateString = [dateFormatter stringFromDate:[NSDate date]];
+    //最大日期
+    NSDate *maxDate = [[Tools sharedTools] stringToDate:maxDateString withDateFormat:@"yyyy-MM-dd"];
+    
+    //日期
+    NSDate *date;
+    
     switch (self.dayType) {
         case Week:
-            days = 7;
+            date = [[NSDate date] dateBySubtractingWeeks:1];
             break;
             
         case OneMonth:
-            days = 4;
+            date = [[NSDate date] dateBySubtractingMonths:1];
             break;
             
         case ThreeMonth:
-            days = 3;
+            date = [[NSDate date] dateBySubtractingMonths:3];
             break;
         case SixMonth:
-            days = 6;
+            date = [[NSDate date] dateBySubtractingMonths:6];
             break;
         case Year:
-            days = 12;
+            date = [[NSDate date] dateBySubtractingYears:1];
             break;
     }
+    NSString *minDateString = [dateFormatter stringFromDate:[date dateByAddingDays:1]];
+    //最小时间
+    NSDate *minDate = [[Tools sharedTools] stringToDate:minDateString withDateFormat:@"yyyy-MM-dd"];
+    //间隔天数
+    NSInteger allDays = [maxDate daysFrom:minDate];
     
-//    NSDictionary *maxDateDic = [timeArray lastObject];
-    NSDictionary *minDateDic = [timeArray firstObject];
-    
-    //最大日期为今天
-    NSDate *maxDate = [NSDate date];
-    NSDate *minDate = [[Tools sharedTools] stringToDate:minDateDic[@"date"] withDateFormat:@"yyyy-MM-dd"];
-    NSInteger allDays = [Tools getDaysFrom:minDate To:maxDate];
-    
-    
+    //数据排序
     [self.dataArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         CGFloat value1 = [obj1[@"FPG"] floatValue];
         CGFloat value2 = [obj2[@"FPG"] floatValue];
@@ -129,34 +138,35 @@
     NSDictionary *minValueDic = [self.dataArray lastObject];
     CGFloat maxValue = [maxValueDic[@"FPG"] floatValue];
     CGFloat minValue = [minValueDic[@"FPG"] floatValue];
-    
+    //间隔大小
     CGFloat value = maxValue - minValue;
     
-    
+    //删除子控件
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+    //贝塞尔曲线
     self.path = [UIBezierPath bezierPath];
-    
+    //根据排好顺序的时间创建点
     [timeArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //当前时间
+        NSDate *nowDate = [[Tools sharedTools] stringToDate:obj[@"date"] withDateFormat:@"yyyy-MM-dd"];
+        //当前时间到最小时间间距
+        NSInteger days = [nowDate daysFrom:minDate];
+        //当前数据
+        CGFloat nowValue = [obj[@"FPG"] floatValue];
         
-        NSDate *newDate = [[Tools sharedTools] stringToDate:obj[@"date"] withDateFormat:@"yyyy-MM-dd"];
-        NSInteger days = [Tools getDaysFrom:minDate To:newDate];
-        
-        CGFloat newValue = [obj[@"FPG"] floatValue];
-        
-        
-        CGFloat x = ((CGFloat)days / (CGFloat)allDays) * (self.frame.size.width - LeftSpace - RightSpace);
-        
-        CGFloat y = ((CGFloat)(value - (newValue - minValue)) / (CGFloat)value) * (self.frame.size.height - TopSpace - BottomSpace);
-        
-        
-        
+        //X坐标
+        CGFloat x = ((CGFloat)(days) / (CGFloat)allDays) * (self.frame.size.width - LeftSpace - RightSpace);
+        //Y坐标
+        CGFloat y = ((CGFloat)(value - (nowValue - minValue)) / (CGFloat)value) * (self.frame.size.height - TopSpace - BottomSpace);
+        //添加贝塞尔曲线路径
         if (idx == 0) {
+            //起点
             [self.path moveToPoint:CGPointMake(x + LeftSpace, y + TopSpace)];
         }else{
+            //添加其他点
             [self.path addLineToPoint:CGPointMake(x + LeftSpace, y + TopSpace)];
         }
-        
+        //创建点label
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + LeftSpace ,y - 5 + TopSpace ,10,10)];
         label.layer.cornerRadius = 5;
         label.clipsToBounds = YES;
@@ -165,11 +175,10 @@
 
     }];
     
-    
+    //添加动画
     [self.layer insertSublayer:self.shapeLayer atIndex:0];
-    self.pathAnimation.duration = 3 ;
     self.shapeLayer.path = self.path.CGPath;
-    [self.shapeLayer addAnimation:_pathAnimation forKey:nil];
+    [self.shapeLayer addAnimation:self.pathAnimation forKey:nil];
     
     [self setNeedsDisplay];
     
@@ -191,7 +200,6 @@
     NSDictionary *minValueDic = [self.dataArray lastObject];
     CGFloat maxValue = [maxValueDic[@"FPG"] floatValue];
     CGFloat minValue = [minValueDic[@"FPG"] floatValue];
-    
     CGFloat value = maxValue - minValue;
     for (NSInteger i = 0; i < 10; i++) {
         //开始绘制
@@ -213,6 +221,7 @@
         label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
     }
+    //X轴刻度数量
     NSInteger xCount = 7;
     switch (self.dayType) {
         case Week:
@@ -256,33 +265,6 @@
         [self addSubview:label];
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     //Y轴竖线
     CGContextSetLineWidth(context,1.5);
