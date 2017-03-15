@@ -7,16 +7,17 @@
 //
 
 #import "CLChartMaskView.h"
+#import "CLChartXLabel.h"
 #import "Tools.h"
 
 //点距离上边最近间距
 #define TopSpace  15
 //点距离下边最近间距
-#define BottomSpace 45
+#define BottomSpace 50
 //点距离左边最近间距
-#define LeftSpace  45
+#define LeftSpace  50
 //点距离右边最近间距
-#define RightSpace 15
+#define RightSpace 25
 //点距离Y轴刻度起点最近间距
 #define YPointSpace  15
 //点距离X轴刻度起点最近间距
@@ -258,17 +259,19 @@
         //数字label
         CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace;
         CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) - 1;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
-        label.font = [UIFont systemFontOfSize:12];
-        label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:label];
-
+        CLChartXLabel *chartXLabel = [[CLChartXLabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
+       
+        [self addSubview:chartXLabel];
+        
+        
+        
+        //填充文字
         switch (self.dayType) {
             case Week:
             {
                 NSDate *date = [[NSDate date] dateBySubtractingDays:(xCount - i - 1)];
                 NSInteger day = [date day];
-                label.text = [NSString stringWithFormat:@"%ld",(long)day];
+                chartXLabel.label.text = [NSString stringWithFormat:@"%ld",(long)day];
             }
                 break;
                 
@@ -276,7 +279,7 @@
             {
                 NSDate *date = [[NSDate date] dateBySubtractingWeeks:(xCount - i - 1)];
                 NSInteger day = [date day];
-                label.text = [NSString stringWithFormat:@"%ld",(long)day];
+                chartXLabel.label.text = [NSString stringWithFormat:@"%ld",(long)day];
             }
                 break;
                 
@@ -284,28 +287,27 @@
             {
                 NSDate *date = [[NSDate date] dateBySubtractingMonths:(xCount - i - 1)];
                 NSInteger month = [date month];
-                label.text = [NSString stringWithFormat:@"%ld月",(long)month];
+                chartXLabel.label.text = [NSString stringWithFormat:@"%ld月",(long)month];
             }
                 break;
             case SixMonth:
             {
                 NSDate *date = [[NSDate date] dateBySubtractingMonths:(xCount - i - 1)];
                 NSInteger month = [date month];
-                label.text = [NSString stringWithFormat:@"%ld月",(long)month];
+                chartXLabel.label.text = [NSString stringWithFormat:@"%ld月",(long)month];
             }
                 break;
             case Year:
             {
                 NSDate *date = [[NSDate date] dateBySubtractingMonths:(xCount - i - 1)];
                 NSInteger month = [date month];
-                label.text = [NSString stringWithFormat:@"%ld月",(long)month];
+                chartXLabel.label.text = [NSString stringWithFormat:@"%ld月",(long)month];
             }
                 break;
         }
 }
-    
     //Y轴竖线
-    CGContextSetLineWidth(context,1.5);
+//    CGContextSetLineWidth(context,1);
     CGContextBeginPath(context);
     CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, 0);
     CGContextAddLineToPoint(context,LeftSpace - 5 - YPointSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
