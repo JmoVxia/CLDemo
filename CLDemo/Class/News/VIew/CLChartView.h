@@ -31,5 +31,9 @@
 /**代理*/
 @property (nonatomic,weak) id<CLChartViewDelegate> delegate;
 
+/**
+ 选中一周
+ */
+- (void)selectedWeek;
 
 @end

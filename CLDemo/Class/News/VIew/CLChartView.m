@@ -70,12 +70,13 @@
         [self addSubview:self.toolBar];
         [self addSubview:self.zoomButton];
         self.toolBar.nameString = @"血压";
-        [self.toolBar selectedFirst];
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
-
+- (void)selectedWeek{
+    [self.toolBar selectedFirst];
+}
 -(void)setDic:(NSDictionary *)dic{
     _dic = dic;
     

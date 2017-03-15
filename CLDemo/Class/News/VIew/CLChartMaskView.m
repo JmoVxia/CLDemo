@@ -243,6 +243,7 @@
             break;
     }
     
+    
     //X轴刻度和数字label
     for (NSInteger i = 0; i < xCount; i++) {
         //开始绘制
@@ -258,13 +259,50 @@
         CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace;
         CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) - 1;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
-        NSInteger num = (NSInteger)((value/(xCount - 1)) * (xCount - i) + minValue);
-        label.text = [NSString stringWithFormat:@"%ld",(long)num];
         label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
 
-    }
+        switch (self.dayType) {
+            case Week:
+            {
+                NSDate *date = [[NSDate date] dateBySubtractingDays:(xCount - i - 1)];
+                NSInteger day = [date day];
+                label.text = [NSString stringWithFormat:@"%ld",(long)day];
+            }
+                break;
+                
+            case OneMonth:
+            {
+                NSDate *date = [[NSDate date] dateBySubtractingWeeks:(xCount - i - 1)];
+                NSInteger day = [date day];
+                label.text = [NSString stringWithFormat:@"%ld",(long)day];
+            }
+                break;
+                
+            case ThreeMonth:
+            {
+                NSDate *date = [[NSDate date] dateBySubtractingMonths:(xCount - i - 1)];
+                NSInteger month = [date month];
+                label.text = [NSString stringWithFormat:@"%ld月",(long)month];
+            }
+                break;
+            case SixMonth:
+            {
+                NSDate *date = [[NSDate date] dateBySubtractingMonths:(xCount - i - 1)];
+                NSInteger month = [date month];
+                label.text = [NSString stringWithFormat:@"%ld月",(long)month];
+            }
+                break;
+            case Year:
+            {
+                NSDate *date = [[NSDate date] dateBySubtractingMonths:(xCount - i - 1)];
+                NSInteger month = [date month];
+                label.text = [NSString stringWithFormat:@"%ld月",(long)month];
+            }
+                break;
+        }
+}
     
     //Y轴竖线
     CGContextSetLineWidth(context,1.5);
