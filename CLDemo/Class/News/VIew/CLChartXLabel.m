@@ -24,8 +24,18 @@
     _label.CLcenterX = self.CLwidth * 0.5;
     _label.font = [UIFont systemFontOfSize:12];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.backgroundColor = CLRandomColor;
     [self addSubview:_label];
 }
+
+-(void)setRound:(BOOL)round{
+    _round = round;
+    if (_round) {
+        _label.layer.cornerRadius = _label.CLwidth *0.5;
+        _label.clipsToBounds = YES;
+        _label.backgroundColor = CLRandomColor;
+    }
+}
+
+
 
 @end

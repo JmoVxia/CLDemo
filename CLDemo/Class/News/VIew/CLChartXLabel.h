@@ -13,5 +13,8 @@
 /**label*/
 @property (nonatomic,strong) UILabel *label;
 
+/**是否需要圆形*/
+@property (nonatomic,assign) BOOL round;
+
 
 @end

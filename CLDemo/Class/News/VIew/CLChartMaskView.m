@@ -260,11 +260,11 @@
         CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace;
         CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) - 1;
         CLChartXLabel *chartXLabel = [[CLChartXLabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
-       
         [self addSubview:chartXLabel];
-        
-        
-        
+        if (i == xCount - 1) {
+            //最后一个
+            chartXLabel.round = YES;
+        }
         //填充文字
         switch (self.dayType) {
             case Week:
