@@ -46,7 +46,7 @@
 - (CAShapeLayer *) shapeLayer{
     if (_shapeLayer == nil){
         _shapeLayer = [CAShapeLayer layer];
-        _shapeLayer.lineWidth = 2;
+        _shapeLayer.lineWidth = 1;
         _shapeLayer.fillColor = [UIColor clearColor].CGColor;
         _shapeLayer.strokeColor = [UIColor redColor].CGColor;
     }
