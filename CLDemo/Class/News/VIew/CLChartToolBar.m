@@ -22,6 +22,10 @@
 @property(nonatomic,weak)UIButton *yearBtn;
 /** 被选中的button*/
 @property(nonatomic,weak)UIButton *selectedBtn;
+/**线*/
+@property (nonatomic,weak) UIView *lineView;
+
+
 
 @end
 
@@ -34,12 +38,10 @@
         
         //时间工具条
         _dateToolBar = [UIView new];
-        _dateToolBar.backgroundColor = [UIColor orangeColor];
         [self addSubview:_dateToolBar];
         
         //名称工具条
         _nameToolBar = [CLChartNameToolBar new];
-        _nameToolBar.backgroundColor = [UIColor yellowColor];
         [self addSubview:_nameToolBar];
         
         
@@ -84,6 +86,10 @@
         [self.dateToolBar addSubview:yearBtn];
         [yearBtn addTarget:self action:@selector(onClickYearBtn:) forControlEvents:(UIControlEventTouchUpInside)];
         
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor colorWithRed:0.83529 green:0.83529 blue:0.83529 alpha:1.00000];
+        [self.dateToolBar addSubview:lineView];
+        _lineView = lineView;
         
         self.nameToolBar.hidden = NO;
         self.dateToolBar.hidden = YES;
@@ -126,6 +132,13 @@
         make.top.bottom.equalTo(self.dateToolBar);
         make.width.equalTo(self.dateToolBar).multipliedBy(0.2);
     }];
+    
+    [self.lineView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.equalTo(self.dateToolBar);
+        make.height.equalTo(1);
+        make.width.equalTo(CLscreenHeight);
+    }];
+    
 }
 
 #pragma mark -Action

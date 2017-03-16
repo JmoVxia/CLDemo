@@ -66,7 +66,6 @@
 - (UIButton *) zoomButton{
     if (_zoomButton == nil){
         _zoomButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, 0, 40, toolBarHeight)];
-        _zoomButton.backgroundColor = [UIColor redColor];
         [_zoomButton addTarget:self action:@selector(zoomButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _zoomButton;
@@ -82,7 +81,6 @@
         [self addSubview:self.nameToolBar];
         
         
-        self.nameToolBar.backgroundColor = CLRandomColor;
         
         self.backgroundColor = [UIColor whiteColor];
     }
