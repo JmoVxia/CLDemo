@@ -12,6 +12,7 @@
 		5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC741E7157BF0091A0E2 /* CLChartView.m */; };
 		5B12FC781E7157D00091A0E2 /* 一周.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B12FC771E7157D00091A0E2 /* 一周.json */; };
 		5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C74251E78F120000AB534 /* CLChartXLabel.m */; };
+		5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */; };
 		5B39CED11DE2BE6800C7DD5C /* TitleControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B39CED01DE2BE6800C7DD5C /* TitleControllerView.m */; };
 		5B80D9E91DDD976A00A20E34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80D9E81DDD976A00A20E34 /* main.m */; };
 		5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80D9EB1DDD976A00A20E34 /* AppDelegate.m */; };
@@ -49,6 +50,8 @@
 		5B12FC771E7157D00091A0E2 /* 一周.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一周.json"; sourceTree = "<group>"; };
 		5B1C74241E78F120000AB534 /* CLChartXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartXLabel.h; sourceTree = "<group>"; };
 		5B1C74251E78F120000AB534 /* CLChartXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartXLabel.m; sourceTree = "<group>"; };
+		5B32C81A1E7A4AF8000C1749 /* CLChartNameToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartNameToolBar.h; sourceTree = "<group>"; };
+		5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartNameToolBar.m; sourceTree = "<group>"; };
 		5B39CECF1DE2BE6800C7DD5C /* TitleControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleControllerView.h; sourceTree = "<group>"; };
 		5B39CED01DE2BE6800C7DD5C /* TitleControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleControllerView.m; sourceTree = "<group>"; };
 		5B80D9E41DDD976A00A20E34 /* CLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +138,8 @@
 				5B12FC741E7157BF0091A0E2 /* CLChartView.m */,
 				5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */,
 				5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */,
+				5B32C81A1E7A4AF8000C1749 /* CLChartNameToolBar.h */,
+				5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */,
 				5BBB62901E7444A100B28FC3 /* CLChartToolBar.h */,
 				5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */,
 				5B1C74241E78F120000AB534 /* CLChartXLabel.h */,
@@ -520,6 +525,7 @@
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* AAAAViewController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* TitleControllerView.m in Sources */,
+				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* MeController.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* NewsController.m in Sources */,
 				5B80DA4C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m in Sources */,

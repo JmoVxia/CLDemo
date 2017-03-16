@@ -22,8 +22,6 @@
 @property(nonatomic,weak)UIButton *yearBtn;
 /** 被选中的button*/
 @property(nonatomic,weak)UIButton *selectedBtn;
-/**名称label*/
-@property (nonatomic,weak) UILabel *nameLable;
 
 @end
 
@@ -40,14 +38,10 @@
         [self addSubview:_dateToolBar];
         
         //名称工具条
-        _nameToolBar = [UIView new];
+        _nameToolBar = [CLChartNameToolBar new];
         _nameToolBar.backgroundColor = [UIColor yellowColor];
         [self addSubview:_nameToolBar];
         
-        //名称label
-        UILabel *nameLabel = [UILabel new];
-        [self.nameToolBar addSubview:nameLabel];
-        _nameLable = nameLabel;
         
         //一周
         UIButton *weekBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
@@ -107,10 +101,7 @@
     [self.nameToolBar makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(self);
     }];
-    [self.nameLable makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameToolBar).offset(10);
-        make.top.bottom.right.equalTo(self.nameToolBar);
-    }];
+    
     [self.weekBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.equalTo(self.dateToolBar);
         make.width.equalTo(self.dateToolBar).multipliedBy(0.2);
@@ -181,7 +172,7 @@
 
 -(void)setNameString:(NSString *)nameString{
     _nameString = nameString;
-    _nameLable.text = _nameString;
+    _nameToolBar.nameString = _nameString;
 }
 - (void)selectedFirst {
     [self onClickWeek:self.weekBtn];

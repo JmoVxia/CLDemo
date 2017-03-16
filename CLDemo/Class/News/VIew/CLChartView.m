@@ -9,6 +9,7 @@
 #import "CLChartView.h"
 #import "CLChartMaskView.h"
 #import "CLChartToolBar.h"
+#import "CLChartNameToolBar.h"
 //左边间距
 #define leftSpace  0
 //右边间距
@@ -26,7 +27,7 @@
 /**顶部工具条*/
 @property (nonatomic,strong) CLChartToolBar *toolBar;
 /**全屏名称工具条*/
-@property (nonatomic,strong) UILabel *maxNameLabel;
+@property (nonatomic,strong) CLChartNameToolBar *nameToolBar;
 /**控件原始Farme*/
 @property (nonatomic,assign) CGRect customFarme;
 /**父类控件*/
@@ -55,12 +56,12 @@
     }
     return _toolBar;
 }
-- (UILabel *) maxNameLabel{
-    if (_maxNameLabel == nil){
-        _maxNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight)];
-        _maxNameLabel.hidden = YES;
+- (CLChartNameToolBar *) nameToolBar{
+    if (_nameToolBar == nil){
+        _nameToolBar = [[CLChartNameToolBar alloc] initWithFrame:CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight)];
+        _nameToolBar.hidden = YES;
     }
-    return _maxNameLabel;
+    return _nameToolBar;
 }
 - (UIButton *) zoomButton{
     if (_zoomButton == nil){
@@ -78,12 +79,11 @@
         [self addSubview:self.maskView];
         [self addSubview:self.toolBar];
         [self addSubview:self.zoomButton];
-        [self addSubview:self.maxNameLabel];
+        [self addSubview:self.nameToolBar];
         
         
-        self.maxNameLabel.backgroundColor = CLRandomColor;
+        self.nameToolBar.backgroundColor = CLRandomColor;
         
-        self.toolBar.nameString = @"血压";
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -93,7 +93,8 @@
 }
 -(void)setDic:(NSDictionary *)dic{
     _dic = dic;
-    
+    self.toolBar.nameString = @"血压";
+    self.nameToolBar.nameString = @"血压";
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
@@ -106,7 +107,7 @@
 - (void)zoomButtonAction:(UIButton*)button{
     self.toolBar.dateToolBar.hidden = button.selected;
     self.toolBar.nameToolBar.hidden = !button.selected;
-    self.maxNameLabel.hidden = button.selected;
+    self.nameToolBar.hidden = button.selected;
     [self.toolBar selectedFirst];
     if (!button.selected) {
         self.customFarme = self.frame;
@@ -133,12 +134,12 @@
     if (isFullScreen) {
         self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
-        self.maxNameLabel.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
+        self.nameToolBar.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
     }else{
         self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
-        self.maxNameLabel.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
+        self.nameToolBar.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
     }
     self.maskView.isFullScreen = isFullScreen;

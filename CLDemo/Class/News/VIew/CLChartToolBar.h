@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CLChartNameToolBar.h"
 @protocol CLMaxChartLegendViewDelegate <NSObject>
 
 - (void)maxChartLegendViewDidSelectedWeek:(UIButton*)button;
@@ -30,7 +30,7 @@
 /**日期切换工具条*/
 @property (nonatomic,strong) UIView *dateToolBar;
 /**名称工具条*/
-@property (nonatomic,strong) UIView *nameToolBar;
+@property (nonatomic,strong) CLChartNameToolBar *nameToolBar;
 /**图表名称*/
 @property (nonatomic,copy) NSString *nameString;
 
