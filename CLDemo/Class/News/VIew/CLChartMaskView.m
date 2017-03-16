@@ -22,7 +22,8 @@
 #define YPointSpace  15
 //点距离X轴刻度起点最近间距
 #define XPointSpace  15
-
+//点的大小
+#define PointWidthHeight   12
 
 @interface CLChartMaskView ()
 
@@ -56,7 +57,7 @@
     if (_pathAnimation == nil){
         _pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         _pathAnimation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:1 :1 :1 :1] ;
-        _pathAnimation.duration = 2;
+        _pathAnimation.duration = 0.8;
         _pathAnimation.fromValue = @0 ;
         _pathAnimation.toValue = @1 ;
         _pathAnimation.autoreverses = NO ;
@@ -70,7 +71,7 @@
     
     _dic = dic;
     
-    self.backgroundColor = [UIColor lightGrayColor];
+    self.backgroundColor = [UIColor whiteColor];
     NSMutableArray *timeArray = [NSMutableArray arrayWithArray:dic[@"data"]];
     
     self.dataArray = [NSMutableArray arrayWithArray:dic[@"data"]];
@@ -85,7 +86,6 @@
             return NO;
         }
     }];
-    
     
     //最大日期为今天
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -167,10 +167,12 @@
             [self.path addLineToPoint:CGPointMake(x + LeftSpace, y + TopSpace)];
         }
         //创建点label
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - 5 + LeftSpace ,y - 5 + TopSpace ,10,10)];
-        label.layer.cornerRadius = 5;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x - PointWidthHeight * 0.5 + LeftSpace ,y - PointWidthHeight * 0.5 + TopSpace ,PointWidthHeight,PointWidthHeight)];
+        label.layer.cornerRadius = PointWidthHeight * 0.5;
         label.clipsToBounds = YES;
-        label.backgroundColor = [UIColor orangeColor];
+        label.layer.borderWidth = 1;
+        label.backgroundColor = [UIColor whiteColor];
+        label.layer.borderColor = [UIColor redColor].CGColor;
         [self addSubview:label];
 
     }];

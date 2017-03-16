@@ -19,7 +19,7 @@
 
 - (void)initUI{
     _label = [UILabel new];
-    _label.frame = CGRectMake(0, 0, self.CLheight - 1, self.CLheight - 1);
+    _label.frame = CGRectMake(0, 0, self.CLheight - 3, self.CLheight - 3);
     _label.CLcenterY = self.CLheight * 0.5;
     _label.CLcenterX = self.CLwidth * 0.5;
     _label.font = [UIFont systemFontOfSize:12];
