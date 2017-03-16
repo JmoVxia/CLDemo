@@ -310,7 +310,7 @@
     //Y轴竖线
 //    CGContextSetLineWidth(context,1);
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, _isFullScreen ? (40) : (0));
+    CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, _isFullScreen ? (20) : (0));
     CGContextAddLineToPoint(context,LeftSpace - 5 - YPointSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
     CGContextStrokePath(context);
     CGContextBeginPath(context);

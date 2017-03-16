@@ -91,8 +91,8 @@
 }
 -(void)setDic:(NSDictionary *)dic{
     _dic = dic;
-    self.toolBar.nameString = @"血压";
-    self.nameToolBar.nameString = @"血压";
+    self.toolBar.nameString = @"血肌酐算法";
+    self.nameToolBar.nameString = @"血肌酐算法";
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
