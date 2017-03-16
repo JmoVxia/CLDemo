@@ -11,7 +11,7 @@
 #import "Tools.h"
 
 //点距离上边最近间距
-#define TopSpace  15
+#define TopSpace  (self.isFullScreen ? 40 : 15)
 //点距离下边最近间距
 #define BottomSpace 50
 //点距离左边最近间距
@@ -69,7 +69,6 @@
 -(void)setDic:(NSDictionary *)dic{
     
     _dic = dic;
-    
     
     self.backgroundColor = [UIColor lightGrayColor];
     NSMutableArray *timeArray = [NSMutableArray arrayWithArray:dic[@"data"]];

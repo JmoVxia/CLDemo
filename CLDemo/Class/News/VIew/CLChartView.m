@@ -119,15 +119,15 @@
         self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
     }else{
         self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
     }
+    self.maskView.isFullScreen = isFullScreen;
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+
 }
 #pragma mark - 按钮点击事件
 //一周

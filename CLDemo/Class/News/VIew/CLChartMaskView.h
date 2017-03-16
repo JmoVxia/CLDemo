@@ -23,6 +23,9 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) NSDictionary *dic;
 /**类型*/
 @property (nonatomic,assign) DayType dayType;
+/**是否全屏*/
+@property (nonatomic,assign) BOOL isFullScreen;
+
 
 
 @end
