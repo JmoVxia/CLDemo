@@ -25,6 +25,8 @@
 @property (nonatomic,strong) CLChartMaskView *maskView;
 /**顶部工具条*/
 @property (nonatomic,strong) CLChartToolBar *toolBar;
+/**全屏名称工具条*/
+@property (nonatomic,strong) UILabel *maxNameLabel;
 /**控件原始Farme*/
 @property (nonatomic,assign) CGRect customFarme;
 /**父类控件*/
@@ -53,6 +55,13 @@
     }
     return _toolBar;
 }
+- (UILabel *) maxNameLabel{
+    if (_maxNameLabel == nil){
+        _maxNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight)];
+        _maxNameLabel.hidden = YES;
+    }
+    return _maxNameLabel;
+}
 - (UIButton *) zoomButton{
     if (_zoomButton == nil){
         _zoomButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, 0, 40, toolBarHeight)];
@@ -69,6 +78,11 @@
         [self addSubview:self.maskView];
         [self addSubview:self.toolBar];
         [self addSubview:self.zoomButton];
+        [self addSubview:self.maxNameLabel];
+        
+        
+        self.maxNameLabel.backgroundColor = CLRandomColor;
+        
         self.toolBar.nameString = @"血压";
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -92,6 +106,7 @@
 - (void)zoomButtonAction:(UIButton*)button{
     self.toolBar.dateToolBar.hidden = button.selected;
     self.toolBar.nameToolBar.hidden = !button.selected;
+    self.maxNameLabel.hidden = button.selected;
     [self.toolBar selectedFirst];
     if (!button.selected) {
         self.customFarme = self.frame;
@@ -118,10 +133,12 @@
     if (isFullScreen) {
         self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
+        self.maxNameLabel.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
     }else{
         self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
+        self.maxNameLabel.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
         self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
     }
     self.maskView.isFullScreen = isFullScreen;

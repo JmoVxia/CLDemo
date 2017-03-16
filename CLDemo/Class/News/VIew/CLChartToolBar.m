@@ -105,7 +105,7 @@
         make.left.right.top.bottom.equalTo(self);
     }];
     [self.nameToolBar makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.dateToolBar);
+        make.left.right.top.bottom.equalTo(self);
     }];
     [self.nameLable makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameToolBar).offset(10);

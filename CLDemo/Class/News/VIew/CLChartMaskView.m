@@ -11,7 +11,7 @@
 #import "Tools.h"
 
 //点距离上边最近间距
-#define TopSpace  (self.isFullScreen ? 40 : 15)
+#define TopSpace  (self.isFullScreen ? (40 + YPointSpace) : (15))
 //点距离下边最近间距
 #define BottomSpace 50
 //点距离左边最近间距
