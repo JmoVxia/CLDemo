@@ -15,4 +15,8 @@
  */
 + (CalendarManger *)sharedManger;
 
+/**日历事件数组*/
+@property (nonatomic,strong,readonly) NSMutableArray *calendararray;
+
+
 @end

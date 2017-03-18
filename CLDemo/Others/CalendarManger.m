@@ -12,6 +12,9 @@ static CalendarManger * manger = nil;
 
 @interface CalendarManger ()<CalendarEventDelegate>
 
+/**日历事件数组*/
+@property (nonatomic,strong) NSMutableArray *calendararray;
+
 @end
 
 @implementation CalendarManger
@@ -26,7 +29,35 @@ static CalendarManger * manger = nil;
     }
     return manger;
 }
+-(instancetype)init{
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
 
 
+
+
+
+- (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
+    CalendarEvent *event = [CalendarEvent calendarEventWithEventTitle:title startDate:startDate endDate:endDate];
+    event.delegate = self;
+    [event save];
+}
+#pragma mark - 储存代理
+- (void)calendarEvent:(CalendarEvent *)event savedStatus:(ECalendarEventStatus)status error:(NSError *)error{
+    if (status == kCalendarEventAccessSavedSucess) {
+        
+        NSLog(@"保存成功");
+    }
+}
+#pragma mark - 删除代理
+- (void)calendarEvent:(CalendarEvent *)event removedStatus:(ECalendarEventStatus)status error:(NSError *)error{
+    if (status == kCalendarEventAccessRemovedSucess) {
+        
+        NSLog(@"删除成功");
+    }
+}
 
 @end
