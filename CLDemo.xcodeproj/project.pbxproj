@@ -28,6 +28,8 @@
 		5B80DA521DDD9BBE00A20E34 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA511DDD9BBE00A20E34 /* ViewController.m */; };
 		5B80DA551DDD9BD500A20E34 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA541DDD9BD500A20E34 /* NavigationController.m */; };
 		5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* TabbarController.m */; };
+		5BB29D031E7D884000766673 /* CalendarEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29D001E7D884000766673 /* CalendarEvent.m */; };
+		5BB29D041E7D884000766673 /* CalendarManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29D021E7D884000766673 /* CalendarManger.m */; };
 		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
 		5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
@@ -82,6 +84,10 @@
 		5B80DA541DDD9BD500A20E34 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		5B80DA561DDD9C3A00A20E34 /* TabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarController.h; sourceTree = "<group>"; };
 		5B80DA571DDD9C3A00A20E34 /* TabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarController.m; sourceTree = "<group>"; };
+		5BB29CFF1E7D884000766673 /* CalendarEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarEvent.h; sourceTree = "<group>"; };
+		5BB29D001E7D884000766673 /* CalendarEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarEvent.m; sourceTree = "<group>"; };
+		5BB29D011E7D884000766673 /* CalendarManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarManger.h; sourceTree = "<group>"; };
+		5BB29D021E7D884000766673 /* CalendarManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarManger.m; sourceTree = "<group>"; };
 		5BB848241E00237900BB266D /* AAAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAAViewController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* AAAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAViewController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
@@ -348,6 +354,7 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				5BB29CFE1E7D881900766673 /* CalendarManger */,
 				5B80DA3A1DDD993F00A20E34 /* Category */,
 				5B80DA3E1DDD993F00A20E34 /* Tools */,
 			);
@@ -387,6 +394,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		5BB29CFE1E7D881900766673 /* CalendarManger */ = {
+			isa = PBXGroup;
+			children = (
+				5BB29D011E7D884000766673 /* CalendarManger.h */,
+				5BB29D021E7D884000766673 /* CalendarManger.m */,
+				5BB29CFF1E7D884000766673 /* CalendarEvent.h */,
+				5BB29D001E7D884000766673 /* CalendarEvent.m */,
+			);
+			name = CalendarManger;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -421,7 +439,7 @@
 				TargetAttributes = {
 					5B80D9E31DDD976A00A20E34 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 533J5B8T42;
+						DevelopmentTeam = Y56852HD87;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -521,6 +539,7 @@
 				5B80DA4D1DDD993F00A20E34 /* Tools.m in Sources */,
 				5B80DA471DDD993F00A20E34 /* EssenceController.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CustomTabbar.m in Sources */,
+				5BB29D041E7D884000766673 /* CalendarManger.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* ViewController.m in Sources */,
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* AAAAViewController.m in Sources */,
@@ -536,6 +555,7 @@
 				5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* NavigationController.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */,
+				5BB29D031E7D884000766673 /* CalendarEvent.m in Sources */,
 				5B12FC171E6FEF020091A0E2 /* UIView+CLSetRect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,7 +671,7 @@
 			baseConfigurationReference = 7F29D2D63E4FCF727DAB90EE /* Pods-CLDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				DEVELOPMENT_TEAM = Y56852HD87;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = CLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -667,7 +687,7 @@
 			baseConfigurationReference = AFF9BFDE81DC6F568D3C9863 /* Pods-CLDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				DEVELOPMENT_TEAM = Y56852HD87;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = CLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
