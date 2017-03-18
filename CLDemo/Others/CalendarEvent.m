@@ -10,14 +10,47 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <EventKit/EventKit.h>
 
+@interface CalendarEvent ()
+
+/**
+ *  Event title.
+ */
+@property (nonatomic, strong) NSString *eventTitle;
+
+/**
+ *  Alarm date.
+ */
+@property (nonatomic, strong) NSDate   *alarmDate;
+
+/**
+ *  Event start date.
+ */
+@property (nonatomic, strong) NSDate   *startDate;
+
+/**
+ *  Event end date.
+ */
+@property (nonatomic, strong) NSDate   *endDate;
+
+/**
+ *  Event location.
+ */
+@property (nonatomic, strong) NSString *eventLocation;
+
+/**eventIdKey*/
+@property (nonatomic,strong) NSString *eventIdKey;
+
+@end
+
+
 @implementation CalendarEvent
 
-- (void)remove {
+- (void)removeWithEventIdKey:(NSString *)eventIdKey {
     
-    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
+    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:eventIdKey];
     
     if (eventId) {
-        
+    
         EKEventStore *eventStore = [[EKEventStore alloc] init];
         EKEvent      *event      = [eventStore eventWithIdentifier:eventId];
         NSError      *error      = nil;
@@ -37,7 +70,7 @@
 
 - (BOOL)haveSaved {
     
-    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
+    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:self.eventIdKey];
     
     if (eventId.length) {
         
@@ -84,7 +117,7 @@
                 }
                 
                 // 存储事件的键值
-                [[NSUserDefaults standardUserDefaults] setObject:event.eventIdentifier forKey:[self storedKey]];
+                [[NSUserDefaults standardUserDefaults] setObject:event.eventIdentifier forKey:self.eventIdKey];
                 
             } else {
                 
@@ -119,8 +152,9 @@
     NSParameterAssert(self.eventTitle);
     NSParameterAssert(self.startDate);
     NSParameterAssert(self.endDate);
-    
-    NSString *string = [NSString stringWithFormat:@"%@%@%@", self.eventTitle, self.startDate, self.endDate];
+    NSParameterAssert(self.eventIdKey);
+
+    NSString *string = [NSString stringWithFormat:@"%@%@%@%@", self.eventTitle, self.startDate, self.endDate,self.eventIdKey];
     
     return [self md532BitLower:string];
 }
@@ -138,13 +172,14 @@
              result[12], result[13], result[14], result[15]] lowercaseString];
 }
 
-+ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
++ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate eventIdKey:(NSString *)eventIdKey{
     
     CalendarEvent *event = [[self class] new];
     event.eventTitle     = title;
     event.startDate      = startDate;
     event.endDate        = endDate;
-    
+    event.alarmDate      = alarmDate;
+    event.eventIdKey     = eventIdKey;
     return event;
 }
 

@@ -66,31 +66,6 @@ typedef enum : NSUInteger {
 @interface CalendarEvent : NSObject
 
 /**
- *  Event title.
- */
-@property (nonatomic, strong) NSString *eventTitle;
-
-/**
- *  Alarm date.
- */
-@property (nonatomic, strong) NSDate   *alarmDate;
-
-/**
- *  Event start date.
- */
-@property (nonatomic, strong) NSDate   *startDate;
-
-/**
- *  Event end date.
- */
-@property (nonatomic, strong) NSDate   *endDate;
-
-/**
- *  Event location.
- */
-@property (nonatomic, strong) NSString *eventLocation;
-
-/**
  *  CalendarEvent's delegate.
  */
 @property (nonatomic, weak)   id <CalendarEventDelegate>  delegate;
@@ -103,7 +78,7 @@ typedef enum : NSUInteger {
 /**
  *  Remove the event.
  */
-- (void)remove;
+- (void)removeWithEventIdKey:(NSString *)eventIdKey;
 
 /**
  *  To indicate the event have saved or not.
@@ -112,6 +87,6 @@ typedef enum : NSUInteger {
 
 #pragma mark - Constructor method.
 
-+ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
++ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate eventIdKey:(NSString *)eventIdKey;
 
 @end

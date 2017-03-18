@@ -7,7 +7,7 @@
 //
 
 #import "FollowController.h"
-
+#import "CalendarManger.h"
 @interface FollowController ()
 
 @end
@@ -21,14 +21,11 @@
     self.navigationItem.title = @"收藏";
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    [[CalendarManger sharedManger] calendarEventWithEventTitle:@"测试" startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:90] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5] eventIdKey:@"key"];
 }
-*/
+
+
 
 @end

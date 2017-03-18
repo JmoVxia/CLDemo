@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YYCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -32,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE56ACA06BD36871823AEA0CE23B805D</key>
+		<key>D975A2027C5E09C85F37B2031971CCD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFEA7BD9D564509925E9F876B5222987</key>
 		<dict>
 			<key>primary</key>
 			<true/>
