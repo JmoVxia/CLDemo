@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,7 +32,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>88D754A87E7631AF886D20B4BDF4D98F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A316B54C67E947D23CECD230FA5BFAEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,12 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D975A2027C5E09C85F37B2031971CCD8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EFEA7BD9D564509925E9F876B5222987</key>
+		<key>BAEA3208AAD4A9BBB987483A08173382</key>
 		<dict>
 			<key>primary</key>
 			<true/>

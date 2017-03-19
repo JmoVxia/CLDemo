@@ -2,4 +2,5 @@ target 'CLDemo' do
 pod 'Masonry'
 pod 'DateTools'
 pod 'YYCache'
+pod 'MJExtension'
 end

@@ -9,6 +9,7 @@
 #import "CalendarEvent.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <EventKit/EventKit.h>
+#import "MJExtension.h"
 
 @interface CalendarEvent ()
 
@@ -18,6 +19,8 @@
 
 
 @implementation CalendarEvent
+
+MJExtensionCodingImplementation
 
 - (void)remove {
     

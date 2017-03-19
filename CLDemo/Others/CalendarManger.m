@@ -7,7 +7,6 @@
 //
 
 #import "CalendarManger.h"
-#import "CalendarEvent.h"
 #import "YYCache.h"
 
 #define Calendararray  @"calendararray"
@@ -48,17 +47,24 @@ static CalendarManger * manger = nil;
     }
     return self;
 }
-
 - (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate{
     CalendarEvent *event = [CalendarEvent calendarEventWithEventTitle:title startDate:startDate endDate:endDate alarmDate:alarmDate];
-    event.delegate = self;
+//    event.delegate = self;
     [event save];
+    [self.calendararray addObject:event];
+    [self.cache setObject:self.calendararray forKey:Calendararray];
 }
+- (void)removeCalendarEventWithEvent:(CalendarEvent *)event{
+//    event.delegate = self;
+    [event remove];
+    [self.calendararray removeObject:event];
+    [self.cache setObject:self.calendararray forKey:Calendararray];
+
+}
+
 #pragma mark - 储存代理
 - (void)calendarEvent:(CalendarEvent *)event savedStatus:(ECalendarEventStatus)status error:(NSError *)error{
     if (status == kCalendarEventAccessSavedSucess) {
-        [self.calendararray addObject:event];
-        [self.cache setObject:self.calendararray forKey:Calendararray];
         NSLog(@"保存成功");
     }
 }
