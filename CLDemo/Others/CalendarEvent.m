@@ -158,7 +158,17 @@ MJExtensionCodingImplementation
     event.startDate      = startDate;
     event.endDate        = endDate;
     event.alarmDate      = alarmDate;
+    event.creatDate      = [event changeDate:[[NSDate date] dateBySubtractingDays:1]];
     return event;
 }
-
+//转化为本地时间
+-(NSDate *)changeDate:(NSDate *)originDate
+{
+    NSTimeZone *zone = [NSTimeZone localTimeZone];
+    
+    NSInteger interval = [zone secondsFromGMTForDate:originDate];
+    
+    NSDate *localeDate = [originDate  dateByAddingTimeInterval: interval];
+    return localeDate;
+}
 @end

@@ -95,6 +95,11 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic, strong) NSString *eventLocation;
 
+/**创建时间*/
+@property (nonatomic,strong) NSDate *creatDate;
+
+
+
 /**
  *  Save the event to system.
  */
@@ -109,6 +114,8 @@ typedef enum : NSUInteger {
  *  To indicate the event have saved or not.
  */
 - (BOOL)haveSaved;
+
+-(NSDate *)changeDate:(NSDate *)originDate;
 
 #pragma mark - Constructor method.
 

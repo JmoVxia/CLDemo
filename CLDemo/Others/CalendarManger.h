@@ -25,7 +25,7 @@
  @param endDate 结束时间
  @param alarmDate 提醒时间
  */
-- (CalendarEvent *)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate;
+- (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate;
 
 
 

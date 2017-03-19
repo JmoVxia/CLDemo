@@ -21,7 +21,7 @@
     self.navigationItem.title = @"收藏";
     
 //    for (NSInteger i = 0; i < 10; i++) {
-    CalendarEvent *event = [[CalendarManger sharedManger] calendarEventWithEventTitle:[NSString stringWithFormat:@"测试222"] startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:90] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5]];
+    [[CalendarManger sharedManger] calendarEventWithEventTitle:[NSString stringWithFormat:@"测试222"] startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:90] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5]];
     
 //    }
 //    
@@ -37,7 +37,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
  
-    
+   NSMutableArray *array = [[CalendarManger sharedManger] queryCalendar];
    
 }
 

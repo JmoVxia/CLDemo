@@ -9,6 +9,7 @@
 #import "CalendarManger.h"
 #import "YYCache.h"
 #import "CalendarEvent.h"
+#import "DateTools.h"
 #define Calendararray  @"calendararray"
 
 
@@ -55,17 +56,21 @@ static CalendarManger * manger = nil;
             //日历中不存在，从数组中删除
             [tempArray removeObject:obj];
         }
+        if ([obj.creatDate isEarlierThan:[obj changeDate:[NSDate date]]]) {
+            //比今天早，过期日历时间
+            [tempArray removeObject:obj];
+        }
     }];
     self.calendararray = tempArray;
+    [self.cache setObject:self.calendararray forKey:Calendararray];
     return self.calendararray;
 }
 
-- (CalendarEvent *)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate{
+- (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate{
     CalendarEvent *event = [CalendarEvent calendarEventWithEventTitle:title startDate:startDate endDate:endDate alarmDate:alarmDate];
     [event save];
     [self.calendararray addObject:event];
     [self.cache setObject:self.calendararray forKey:Calendararray];
-    return event;
 }
 
 
