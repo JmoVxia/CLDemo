@@ -30,7 +30,6 @@
 		5B80DA581DDD9C3A00A20E34 /* TabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* TabbarController.m */; };
 		5BB29D031E7D884000766673 /* CalendarEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29D001E7D884000766673 /* CalendarEvent.m */; };
 		5BB29D041E7D884000766673 /* CalendarManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29D021E7D884000766673 /* CalendarManger.m */; };
-		5BB29D0A1E7DA30E00766673 /* CalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29D091E7DA30E00766673 /* CalendarModel.m */; };
 		5BB848261E00237900BB266D /* AAAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* AAAAViewController.m */; };
 		5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
@@ -89,8 +88,6 @@
 		5BB29D001E7D884000766673 /* CalendarEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarEvent.m; sourceTree = "<group>"; };
 		5BB29D011E7D884000766673 /* CalendarManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarManger.h; sourceTree = "<group>"; };
 		5BB29D021E7D884000766673 /* CalendarManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarManger.m; sourceTree = "<group>"; };
-		5BB29D081E7DA30E00766673 /* CalendarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarModel.h; sourceTree = "<group>"; };
-		5BB29D091E7DA30E00766673 /* CalendarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarModel.m; sourceTree = "<group>"; };
 		5BB848241E00237900BB266D /* AAAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAAViewController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* AAAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAViewController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
@@ -404,8 +401,6 @@
 				5BB29D021E7D884000766673 /* CalendarManger.m */,
 				5BB29CFF1E7D884000766673 /* CalendarEvent.h */,
 				5BB29D001E7D884000766673 /* CalendarEvent.m */,
-				5BB29D081E7DA30E00766673 /* CalendarModel.h */,
-				5BB29D091E7DA30E00766673 /* CalendarModel.m */,
 			);
 			name = CalendarManger;
 			sourceTree = "<group>";
@@ -538,7 +533,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
-				5BB29D0A1E7DA30E00766673 /* CalendarModel.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* FollowController.m in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,

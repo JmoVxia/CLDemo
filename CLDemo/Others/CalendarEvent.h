@@ -71,6 +71,31 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak)   id <CalendarEventDelegate>  delegate;
 
 /**
+ *  Event title.
+ */
+@property (nonatomic, strong) NSString *eventTitle;
+
+/**
+ *  Alarm date.
+ */
+@property (nonatomic, strong) NSDate   *alarmDate;
+
+/**
+ *  Event start date.
+ */
+@property (nonatomic, strong) NSDate   *startDate;
+
+/**
+ *  Event end date.
+ */
+@property (nonatomic, strong) NSDate   *endDate;
+
+/**
+ *  Event location.
+ */
+@property (nonatomic, strong) NSString *eventLocation;
+
+/**
  *  Save the event to system.
  */
 - (void)save;
@@ -78,7 +103,7 @@ typedef enum : NSUInteger {
 /**
  *  Remove the event.
  */
-- (void)removeWithEventIdKey:(NSString *)eventIdKey;
+- (void)remove;
 
 /**
  *  To indicate the event have saved or not.
@@ -87,6 +112,6 @@ typedef enum : NSUInteger {
 
 #pragma mark - Constructor method.
 
-+ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate eventIdKey:(NSString *)eventIdKey;
++ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate;
 
 @end

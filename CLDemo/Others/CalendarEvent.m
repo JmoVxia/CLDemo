@@ -12,42 +12,16 @@
 
 @interface CalendarEvent ()
 
-/**
- *  Event title.
- */
-@property (nonatomic, strong) NSString *eventTitle;
 
-/**
- *  Alarm date.
- */
-@property (nonatomic, strong) NSDate   *alarmDate;
-
-/**
- *  Event start date.
- */
-@property (nonatomic, strong) NSDate   *startDate;
-
-/**
- *  Event end date.
- */
-@property (nonatomic, strong) NSDate   *endDate;
-
-/**
- *  Event location.
- */
-@property (nonatomic, strong) NSString *eventLocation;
-
-/**eventIdKey*/
-@property (nonatomic,strong) NSString *eventIdKey;
 
 @end
 
 
 @implementation CalendarEvent
 
-- (void)removeWithEventIdKey:(NSString *)eventIdKey {
+- (void)remove {
     
-    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:eventIdKey];
+    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
     
     if (eventId) {
     
@@ -70,7 +44,7 @@
 
 - (BOOL)haveSaved {
     
-    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:self.eventIdKey];
+    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
     
     if (eventId.length) {
         
@@ -117,7 +91,7 @@
                 }
                 
                 // 存储事件的键值
-                [[NSUserDefaults standardUserDefaults] setObject:event.eventIdentifier forKey:self.eventIdKey];
+                [[NSUserDefaults standardUserDefaults] setObject:event.eventIdentifier forKey:[self storedKey]];
                 
             } else {
                 
@@ -152,9 +126,8 @@
     NSParameterAssert(self.eventTitle);
     NSParameterAssert(self.startDate);
     NSParameterAssert(self.endDate);
-    NSParameterAssert(self.eventIdKey);
 
-    NSString *string = [NSString stringWithFormat:@"%@%@%@%@", self.eventTitle, self.startDate, self.endDate,self.eventIdKey];
+    NSString *string = [NSString stringWithFormat:@"%@%@%@", self.eventTitle, self.startDate, self.endDate];
     
     return [self md532BitLower:string];
 }
@@ -172,14 +145,13 @@
              result[12], result[13], result[14], result[15]] lowercaseString];
 }
 
-+ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate eventIdKey:(NSString *)eventIdKey{
++ (instancetype)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate{
     
     CalendarEvent *event = [[self class] new];
     event.eventTitle     = title;
     event.startDate      = startDate;
     event.endDate        = endDate;
     event.alarmDate      = alarmDate;
-    event.eventIdKey     = eventIdKey;
     return event;
 }
 

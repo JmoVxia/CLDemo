@@ -28,8 +28,7 @@
  @param startDate 开始时间
  @param endDate 结束时间
  @param alarmDate 提醒时间
- @param eventIdKey 关键词
  */
-- (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate eventIdKey:(NSString *)eventIdKey;
+- (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate;
 
 @end
