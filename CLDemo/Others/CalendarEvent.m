@@ -49,7 +49,10 @@ MJExtensionCodingImplementation
     
     NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
     
-    if (eventId.length) {
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    EKEvent      *event      = [eventStore eventWithIdentifier:eventId];
+    
+    if (event) {
         
         return YES;
         

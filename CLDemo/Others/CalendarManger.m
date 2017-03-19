@@ -38,9 +38,16 @@ static CalendarManger * manger = nil;
     if (self = [super init]) {
         NSString *path = [[Tools pathDocuments] stringByAppendingPathComponent:@"CalendarManger"];
         self.cache = [[YYCache alloc] initWithPath:path];
-        NSMutableArray *array = (NSMutableArray *)[self.cache objectForKey:Calendararray];
+        NSMutableArray<CalendarEvent*> *array = (NSMutableArray *)[self.cache objectForKey:Calendararray];
         if (array) {
-            self.calendararray = array;
+            NSMutableArray *tempArray = [NSMutableArray arrayWithArray:array];
+            [array enumerateObjectsUsingBlock:^(CalendarEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (![obj haveSaved]) {
+                    //日历中不存在，从数组中删除
+                    [tempArray removeObject:obj];
+                }
+            }];
+            self.calendararray = tempArray;
         }else{
             self.calendararray  = [NSMutableArray array];
         }
