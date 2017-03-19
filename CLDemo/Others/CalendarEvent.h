@@ -115,7 +115,6 @@ typedef enum : NSUInteger {
  */
 - (BOOL)haveSaved;
 
--(NSDate *)changeDate:(NSDate *)originDate;
 
 #pragma mark - Constructor method.
 

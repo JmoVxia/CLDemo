@@ -56,9 +56,13 @@ static CalendarManger * manger = nil;
             //日历中不存在，从数组中删除
             [tempArray removeObject:obj];
         }
-        if ([obj.creatDate isEarlierThan:[obj changeDate:[NSDate date]]]) {
+        NSString *dateString = [[NSDate date] formattedDateWithFormat:@"yyyy-MM-dd"];
+        NSDate *date = [[Tools sharedTools] stringToDate:dateString withDateFormat:@"yyyy-MM-dd"];
+        if ([date isLaterThan:obj.creatDate]) {
             //比今天早，过期日历时间
             [tempArray removeObject:obj];
+            //删除日历事件
+            [obj remove];
         }
     }];
     self.calendararray = tempArray;
