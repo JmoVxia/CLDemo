@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CalendarEvent.h"
-
+@class CalendarEvent;
 
 @interface CalendarManger : NSObject
 
@@ -17,8 +16,6 @@
  */
 + (CalendarManger *)sharedManger;
 
-/**日历事件数组*/
-@property (nonatomic,strong,readonly) NSMutableArray<CalendarEvent *> *calendararray;
 
 /**
  创建日历事件
@@ -28,7 +25,8 @@
  @param endDate 结束时间
  @param alarmDate 提醒时间
  */
-- (void)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate;
+- (CalendarEvent *)calendarEventWithEventTitle:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate alarmDate:(NSDate *)alarmDate;
+
 
 
 /**
@@ -37,6 +35,20 @@
  @param event 日历事件
  */
 - (void)removeCalendarEventWithEvent:(CalendarEvent *)event;
+
+
+/**
+ 查询日历事件
+
+ @return 所有日历事件
+ */
+- (NSMutableArray *)queryCalendar;
+
+
+
+
+
+
 
 
 @end
