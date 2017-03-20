@@ -29,7 +29,13 @@
 //        [[CalendarManger sharedManger] calendarEventWithEventTitle:[NSString stringWithFormat:@"测试333"] startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:90] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5]];
 //    });
     
-    
+    [[CalendarManger sharedManger] calendarEventWithEventTitle:@"测试" startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:100] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5] sucess:^{
+        
+    } failed:^{
+        
+    } denied:^{
+        
+    }];
     
     
 }

@@ -8,10 +8,9 @@
 
 #import "CalendarEvent.h"
 #import <CommonCrypto/CommonDigest.h>
-#import <EventKit/EventKit.h>
 #import "MJExtension.h"
-#import "Tools.h"
 #import "DateTools.h"
+#import <EventKit/EventKit.h>
 
 @interface CalendarEvent ()
 
@@ -24,7 +23,7 @@
 
 MJExtensionCodingImplementation
 
-- (void)remove {
+- (void)removeSucess:(EventAccessSucessBlock)sucess failed:(EventAccessFailedBlock)failed{
     
     NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
     
@@ -34,16 +33,22 @@ MJExtensionCodingImplementation
         EKEvent      *event      = [eventStore eventWithIdentifier:eventId];
         NSError      *error      = nil;
         [eventStore removeEvent:event span:EKSpanThisEvent error:&error];
-        
-        if (self.delegate && [self.delegate respondsToSelector:@selector(calendarEvent:removedStatus:error:)]) {
-            
+        if (error) {
+            //主线程
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.delegate calendarEvent:self
-                               removedStatus:error ? kCalendarEventAccessRemovedFailed : kCalendarEventAccessRemovedSucess
-                                       error:nil];
+                //失败
+                failed();
+            });
+        }else{
+            //主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //成功
+                sucess();
+ 
             });
         }
+
     }
 }
 
@@ -64,18 +69,32 @@ MJExtensionCodingImplementation
     }
 }
 
-- (void)save {
+- (CalendarEvent *)readEvent{
+    NSString *eventId = [[NSUserDefaults standardUserDefaults] objectForKey:[self storedKey]];
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    EKEvent      *event      = [eventStore eventWithIdentifier:eventId];
+    CalendarEvent *calendarEvent = [CalendarEvent new];
+    calendarEvent.eventTitle     = event.title;
+    calendarEvent.startDate      = event.startDate;
+    calendarEvent.endDate   = event.endDate;
+    calendarEvent.eventLocation = event.location;
+    calendarEvent.alarmDate = [event.alarms firstObject].absoluteDate;
+    calendarEvent.creatDate = self.creatDate;
+    return calendarEvent;
+}
+
+- (void)saveSucess:(EventAccessSucessBlock)sucess failed:(EventAccessFailedBlock)failed denied:(EventAccessDeniedBlock)denied{
     
     NSParameterAssert(self.eventTitle);
     NSParameterAssert(self.startDate);
     NSParameterAssert(self.endDate);
     
-    EKEventStore *eventStore = [[EKEventStore alloc] init];
     
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
     [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         
         if (granted) {
-            
+            //有权限
             EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
             event.calendar  = [eventStore defaultCalendarForNewEvents];
             event.title     = self.eventTitle;
@@ -87,44 +106,28 @@ MJExtensionCodingImplementation
             
             NSError *savedError = nil;
             if ([eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&savedError]) {
-                
-                if (self.delegate && [self.delegate respondsToSelector:@selector(calendarEvent:savedStatus:error:)]) {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.delegate calendarEvent:self
-                                         savedStatus:kCalendarEventAccessSavedSucess
-                                               error:nil];
-                    });
-                }
-                
+                //主线程
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //保存成功
+                    sucess();
+                });
                 // 存储事件的键值
                 [[NSUserDefaults standardUserDefaults] setObject:event.eventIdentifier forKey:[self storedKey]];
                 
             } else {
-                
-                if (self.delegate && [self.delegate respondsToSelector:@selector(calendarEvent:savedStatus:error:)]) {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.delegate calendarEvent:self
-                                         savedStatus:kCalendarEventAccessSavedFailed
-                                               error:savedError];
-                    });
-                }
+                //主线程
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //保存失败
+                    failed();
+                });
             }
             
         } else {
-            
-            if (self.delegate && [self.delegate respondsToSelector:@selector(calendarEvent:savedStatus:error:)]) {
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self.delegate calendarEvent:self
-                                     savedStatus:kCalendarEventAccessDenied
-                                           error:error];
-                });
-            }
+            //主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //没有权限
+                denied();
+            });
         }
     }];
 }

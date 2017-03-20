@@ -8,67 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^EventAccessSucessBlock)();
+typedef void(^EventAccessFailedBlock)();
+typedef void(^EventAccessDeniedBlock)();
+
+
+
 @class CalendarEvent;
 
-typedef enum : NSUInteger {
-    
-    /**
-     *  Have not permission to save the event to system.
-     */
-    kCalendarEventAccessDenied = 1000,
-    
-    /**
-     *  Saved the event success.
-     */
-    kCalendarEventAccessSavedSucess,
-    
-    /**
-     *  Saved the event failed.
-     */
-    kCalendarEventAccessSavedFailed,
-    
-    /**
-     *  Removed the event success.
-     */
-    kCalendarEventAccessRemovedSucess,
-    
-    /**
-     *  Removed the event failed.
-     */
-    kCalendarEventAccessRemovedFailed,
-    
-} ECalendarEventStatus;
-
-@protocol CalendarEventDelegate <NSObject>
-
-@optional
-
-/**
- *  The CalendarEvent saved status.
- *
- *  @param event  CalendarEvent's object.
- *  @param status Saved status.
- *  @param error  Error infomation.
- */
-- (void)calendarEvent:(CalendarEvent *)event savedStatus:(ECalendarEventStatus)status error:(NSError *)error;
-
-/**
- *  The CalendarEvent removed status.
- *
- *  @param event  CalendarEvent's object.
- *  @param status Removed status.
- *  @param error  Error infomation.
- */
-- (void)calendarEvent:(CalendarEvent *)event removedStatus:(ECalendarEventStatus)status error:(NSError *)error;
-
-@end
 
 @interface CalendarEvent : NSObject
-
-/**
- *  CalendarEvent's delegate.
- */
-@property (nonatomic, weak)   id <CalendarEventDelegate>  delegate;
 
 /**
  *  Event title.
@@ -103,17 +52,24 @@ typedef enum : NSUInteger {
 /**
  *  Save the event to system.
  */
-- (void)save;
+- (void)saveSucess:(EventAccessSucessBlock)sucess failed:(EventAccessFailedBlock)failed denied:(EventAccessDeniedBlock)denied;
 
 /**
  *  Remove the event.
  */
-- (void)remove;
+- (void)removeSucess:(EventAccessSucessBlock)sucess failed:(EventAccessFailedBlock)failed;
 
 /**
  *  To indicate the event have saved or not.
  */
 - (BOOL)haveSaved;
+
+/**
+ 读取日历事件
+ */
+- (CalendarEvent *)readEvent;
+
+
 
 
 #pragma mark - Constructor method.
