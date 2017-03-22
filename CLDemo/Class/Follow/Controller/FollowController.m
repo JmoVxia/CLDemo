@@ -7,7 +7,6 @@
 //
 
 #import "FollowController.h"
-#import "CalendarManger.h"
 @interface FollowController ()
 
 @end
@@ -29,22 +28,15 @@
 //        [[CalendarManger sharedManger] calendarEventWithEventTitle:[NSString stringWithFormat:@"测试333"] startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:90] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5]];
 //    });
     
-    [[CalendarManger sharedManger] calendarEventWithEventTitle:@"测试" startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:100] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5] sucess:^{
-        
-    } failed:^{
-        
-    } denied:^{
-        
-    }];
-    
+   
     
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
  
-   NSMutableArray *array = [[CalendarManger sharedManger] queryCalendar];
-   
+
+    
 }
 
 
