@@ -13,4 +13,14 @@
 
 MJExtensionCodingImplementation
 
+
+- (instancetype)init{
+    if (self = [super init]) {
+        NSString *dateString = [[NSDate date] formattedDateWithFormat:@"yyyy-MM-dd"];
+        self.creatDate = [[Tools sharedTools] stringToDate:dateString withDateFormat:@"yyyy-MM-dd"];
+    }
+    return self;
+}
+
+
 @end

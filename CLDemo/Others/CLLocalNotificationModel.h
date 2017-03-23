@@ -15,8 +15,12 @@
 /**唯一标识符*/
 @property (nonatomic,copy) NSString *identifier;
 /**提醒时间*/
-@property (nonatomic,copy) NSString *fireDate;
+@property (nonatomic,copy) NSDate *fireDate;
 /**是否在本地通知中心*/
 @property (nonatomic,assign) BOOL isLocalNotification;
+/**创建时间*/
+@property (nonatomic,strong) NSDate *creatDate;
+
+
 
 @end

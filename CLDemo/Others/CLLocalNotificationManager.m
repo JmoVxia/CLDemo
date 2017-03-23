@@ -7,7 +7,6 @@
 //
 
 #import "CLLocalNotificationManager.h"
-#import <CommonCrypto/CommonDigest.h>
 #import "YYCache.h"
 #import "DateTools.h"
 
@@ -58,8 +57,6 @@ static CLLocalNotificationManager * manger = nil;
 
 - (void)insertLocalNotificationWithModel:(CLLocalNotificationModel *)model{
     
-    NSString *notificationID = [self storedKeyWithFireDate:model.fireDate title:model.title];
-    
     //新增前先清楚已注册的相同ID的本地推送
     [self deleteLocadNotificationWithModel:model dateBase:YES];
     
@@ -67,19 +64,19 @@ static CLLocalNotificationManager * manger = nil;
     UILocalNotification * localNotification = [[UILocalNotification alloc] init];
     
     //设置开火时间(演示为当前时间5秒后)
-    localNotification.fireDate = [NSDate dateWithString:model.fireDate formatString:@"yyyy-MM-dd HH:mm:ss"];
+    localNotification.fireDate = model.fireDate;
     
     //设置时区，取手机系统默认时区
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     
     //重复次数 kCFCalendarUnitEra为不重复
-    localNotification.repeatInterval = kCFCalendarUnitEra;
+    localNotification.repeatInterval = 0;
     
     //通知的主要内容
     localNotification.alertBody = model.title;
     
     //小提示
-//    localNotification.alertAction = @"查看详情";
+    localNotification.alertAction = @"查看详情";
     
     //设置音效，系统默认为电子音，在系统音效中标号为1015
     localNotification.soundName = UILocalNotificationDefaultSoundName;
@@ -89,7 +86,7 @@ static CLLocalNotificationManager * manger = nil;
     //localNotification.applicationIconBadgeNumber = 1; Icon上的红点和数字
     
     //查找本地系统通知的标识
-    localNotification.userInfo = @{KEY_NOTIFICATION: notificationID};
+    localNotification.userInfo = @{KEY_NOTIFICATION: model.identifier};
     
     //提交到系统服务中，系统限制一个APP只能注册64条通知，已经提醒过的通知可以清除掉
     /**
@@ -100,6 +97,8 @@ static CLLocalNotificationManager * manger = nil;
     //添加id保存到数据库
     [self.localArray addObject:model];
     [self.cache setObject:self.localArray forKey:CLLocalArray];
+    NSArray *array = [self queryAllSystemNotifications];
+    CLlog(@"+++%lu+++",(unsigned long)array.count);
 }
 
 
@@ -125,19 +124,8 @@ static CLLocalNotificationManager * manger = nil;
 #pragma mark - 查询所有已注册的本地推送
 
 - (NSArray *)queryAllSystemNotifications{
-    return [[UIApplication sharedApplication] scheduledLocalNotifications];
-}
-
-#pragma mark - 对比，是否过期
-
-- (void)compareFiretime:(UILocalNotification *)notification needRemove:(void(^)(UILocalNotification * item))needRemove{
-    
-    NSComparisonResult result = [notification.fireDate compare:[NSDate date]];
-    
-    if (result == NSOrderedAscending) {
-        needRemove(notification);
-    }
-    
+    NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    return array;
 }
 
 #pragma mark - 注销一条本地推送(用于更新同一个ID的推送)
@@ -145,44 +133,27 @@ static CLLocalNotificationManager * manger = nil;
 - (void)deleteLocadNotificationWithModel:(CLLocalNotificationModel *)model dateBase:(BOOL)dateBase{
     
     UILocalNotification * notification = [self queryNotificationWithNotificatioID:model.identifier];
-    
-    if (notification) {
+    if (notification) {        
         //删除通知中心
         [[UIApplication sharedApplication] cancelLocalNotification:notification];
-        //本地存在
-        if (dateBase) {
-            //从数据库删除
-            [self.localArray removeObject:model];
-        }else{
-            //不删除数据库
-            //取出对应模型替换
-            NSInteger index = [self.localArray indexOfObject:model];
-            model.isLocalNotification = NO;
-            [self.localArray replaceObjectAtIndex:index withObject:model];
-        }
-        [self.cache setObject:self.localArray forKey:CLLocalArray];
+        NSArray *array = [self queryAllSystemNotifications];
+        CLlog(@"---%lu---",(unsigned long)array.count);
     }
+    if (dateBase) {
+        //从数据库删除
+        [self.localArray removeObject:model];
+    }else{
+        //不删除数据库
+        model.isLocalNotification = NO;
+    }
+    [self.cache setObject:self.localArray forKey:CLLocalArray];
 }
 
-
-- (NSString *)storedKeyWithFireDate:(NSString *)fireDate title:(NSString *)title{
-    
-    NSString *string = [NSString stringWithFormat:@"%@%@", fireDate, title];
-    
-    return [self md532BitLower:string];
-}
-
-- (NSString*)md532BitLower:(NSString *)string {
-    
-    const char    *cStr = [string UTF8String];
-    unsigned char  result[16];
-    CC_MD5(cStr, (unsigned int)strlen(cStr), result);
-    
-    return [[NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-             result[0], result[1], result[2], result[3],
-             result[4], result[5], result[6], result[7],
-             result[8], result[9], result[10], result[11],
-             result[12], result[13], result[14], result[15]] lowercaseString];
+- (void)deleteAllLocalNotification{
+    //删除所有
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [self.localArray removeAllObjects];
+    [self.cache setObject:self.localArray forKey:CLLocalArray];
 }
 
 

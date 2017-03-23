@@ -7,6 +7,7 @@
 //
 
 #import "FollowController.h"
+#import "CLLocalNotificationManager.h"
 @interface FollowController ()
 
 @end
@@ -28,14 +29,19 @@
 //        [[CalendarManger sharedManger] calendarEventWithEventTitle:[NSString stringWithFormat:@"测试333"] startDate:[NSDate dateWithTimeIntervalSinceNow:80] endDate:[NSDate dateWithTimeIntervalSinceNow:90] alarmDate:[NSDate dateWithTimeIntervalSinceNow:5]];
 //    });
     
-   
     
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
  
-
+    
+    CLLocalNotificationModel *model = [CLLocalNotificationModel new];
+    model.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+    model.title = @"我是测试数据";
+    model.identifier = @"BBB";
+    NSLog(@"%@",model.fireDate);
+    [[CLLocalNotificationManager sharedManger] insertLocalNotificationWithModel:model];
     
 }
 

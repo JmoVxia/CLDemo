@@ -15,6 +15,7 @@
 #define ButtonTag    1132
 
 
+#define CurrenVersiongreaterThan(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
 
 
 
