@@ -26,7 +26,7 @@
     
     
     
-    _chartView = [[CLChartView alloc] initWithFrame:CGRectMake(0, 99, self.view.CLwidth, 250)];
+    _chartView = [[CLChartView alloc] initWithFrame:CGRectMake(0, 99, self.view.cl_width, 250)];
     [self.view addSubview:_chartView];
     _chartView.delegate = self;
     [_chartView selectedWeek];

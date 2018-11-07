@@ -23,12 +23,16 @@
 
 - (UIButton *) button
 {
-    if (_button==nil)
+    if (_button == nil)
     {
         
         UIImage *normalImage = [UIImage OriginImage:[UIImage imageNamed:@"tabBar_publish_icon"] scaleToSize:CGSizeMake(80, 80)];
         UIImage *selectedImage = [UIImage OriginImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] scaleToSize:CGSizeMake(80, 80)];
-        UIButton * button = [Tools createButtonNormalImage:normalImage selectedImage:selectedImage tag:1000 addTarget:self action:@selector(PublishButton:)];
+        UIButton * button = [[UIButton alloc] init];
+        [button setImage:selectedImage forState:UIControlStateSelected];
+        [button setImage:normalImage forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(publishButton:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:button];
         _button = button;
     }
@@ -52,24 +56,24 @@
     [super layoutSubviews];
    
     int index = 0;
-    CGFloat itemW = self.CLwidth/5.0;
+    CGFloat itemW = self.cl_width/5.0;
 
     for (UIView *subviews in self.subviews)
     {
         //取到系统tabbar的Item方法
         if ([@"UITabBarButton" isEqualToString:NSStringFromClass(subviews.class)])
         {
-            subviews.CLleft = index*itemW;
-            subviews.CLwidth = itemW;
+            subviews.cl_left = index * itemW;
+            subviews.cl_width = itemW;
             if (index >= 2)
             {
-                subviews.CLleft +=itemW;
+                subviews.cl_left +=itemW;
             }
             index++;
         }
     }
     self.button.frame = CGRectMake(0, 0, itemW, itemW);
-    self.button.center = CGPointMake(self.CLwidth/2.0, (self.CLheight - 30)/2.0);
+    self.button.center = CGPointMake(self.cl_width/2.0, (self.cl_height - 30)/2.0);
     UIBezierPath *circle  = [UIBezierPath bezierPathWithArcCenter:self.button.center radius:37 startAngle:0 endAngle:2* M_PI clockwise:YES];
     self.shapeLayer.path          = circle.CGPath;
    
@@ -93,7 +97,7 @@
     }
 }
 
-- (void)PublishButton:(UIButton *)button
+- (void)publishButton:(UIButton *)button
 {
     NSLog(@"-------->>凸起按钮被点击了");
 }

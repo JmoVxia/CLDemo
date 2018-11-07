@@ -10,171 +10,158 @@
 
 @implementation UIView (CLSetRect)
 
-- (CGPoint)CLviewOrigin {
+- (CGPoint)cl_origin {
     
     return self.frame.origin;
 }
 
-- (void)setCLviewOrigin:(CGPoint)CLviewOrigin {
+- (void)setCl_origin:(CGPoint)cl_origin {
     
     CGRect newFrame = self.frame;
-    newFrame.origin = CLviewOrigin;
+    newFrame.origin = cl_origin;
     self.frame      = newFrame;
 }
 
-- (CGSize)CLviewSize {
-    
-    return self.frame.size;
-}
-
-- (void)setCLviewSize:(CGSize)CLviewSize {
-    
-    CGRect newFrame = self.frame;
-    newFrame.size   = CLviewSize;
-    self.frame      = newFrame;
-}
-
-- (CGFloat)CLx {
+- (CGFloat)cl_x {
     
     return self.frame.origin.x;
 }
 
-- (void)setCLx:(CGFloat)CLx {
+- (void)setCl_x:(CGFloat)cl_x {
     
     CGRect newFrame   = self.frame;
-    newFrame.origin.x = CLx;
+    newFrame.origin.x = cl_x;
     self.frame        = newFrame;
 }
 
-- (CGFloat)CLy {
+- (CGFloat)cl_y {
     
     return self.frame.origin.y;
 }
 
-- (void)setCLy:(CGFloat)CLy {
+- (void)setCl_y:(CGFloat)cl_y {
     
     CGRect newFrame   = self.frame;
-    newFrame.origin.y = CLy;
+    newFrame.origin.y = cl_y;
     self.frame        = newFrame;
 }
 
-- (CGFloat)CLwidth {
+- (CGFloat)cl_width {
     
     return CGRectGetWidth(self.bounds);
 }
 
-- (void)setCLwidth:(CGFloat)CLwidth {
+-(void)setCl_width:(CGFloat)cl_width {
     
     CGRect newFrame     = self.frame;
-    newFrame.size.width = CLwidth;
+    newFrame.size.width = cl_width;
     self.frame          = newFrame;
 }
 
-- (CGFloat)CLheight {
+- (CGFloat)cl_height {
     
     return CGRectGetHeight(self.bounds);
 }
 
-- (void)setCLheight:(CGFloat)CLheight {
+-(void)setCl_height:(CGFloat)cl_height {
     
     CGRect newFrame      = self.frame;
-    newFrame.size.height = CLheight;
+    newFrame.size.height = cl_height;
     self.frame           = newFrame;
 }
 
-- (CGFloat)CLtop {
+- (CGFloat)cl_top {
     
     return self.frame.origin.y;
 }
 
-- (void)setCLtop:(CGFloat)CLtop {
+- (void)setCl_top:(CGFloat)cl_top {
     
     CGRect newFrame   = self.frame;
-    newFrame.origin.y = CLtop;
+    newFrame.origin.y = cl_top;
     self.frame        = newFrame;
 }
 
-- (CGFloat)CLbottom {
+- (CGFloat)cl_bottom {
     
     return self.frame.origin.y + self.frame.size.height;
 }
 
-- (void)setCLbottom:(CGFloat)CLbottom {
+- (void)setCl_bottom:(CGFloat)cl_bottom {
     
     CGRect newFrame   = self.frame;
-    newFrame.origin.y = CLbottom - self.frame.size.height;
+    newFrame.origin.y = cl_bottom - self.frame.size.height;
     self.frame        = newFrame;
 }
 
-- (CGFloat)CLleft {
+- (CGFloat)cl_left {
     
     return self.frame.origin.x;
 }
 
-- (void)setCLleft:(CGFloat)CLleft {
+- (void)setCl_left:(CGFloat)cl_left {
     
     CGRect newFrame   = self.frame;
-    newFrame.origin.x = CLleft;
+    newFrame.origin.x = cl_left;
     self.frame        = newFrame;
 }
 
-- (CGFloat)CLright {
+- (CGFloat)cl_right {
     
     return self.frame.origin.x + self.frame.size.width;
 }
 
-- (void)setCLright:(CGFloat)CLright {
+- (void)setCl_right:(CGFloat)cl_right {
     
     CGRect newFrame   = self.frame;
-    newFrame.origin.x = CLright - self.frame.size.width;
+    newFrame.origin.x = cl_right - self.frame.size.width;
     self.frame        = newFrame;
 }
 
-- (CGFloat)CLcenterX {
+- (CGFloat)cl_centerX {
     
     return self.center.x;
 }
-
-- (void)setCLcenterX:(CGFloat)CLcenterX {
+- (void)setCl_centerX:(CGFloat)cl_centerX {
     
     CGPoint newCenter = self.center;
-    newCenter.x       = CLcenterX;
+    newCenter.x       = cl_centerX;
     self.center       = newCenter;
 }
 
-- (CGFloat)CLcenterY {
+- (CGFloat)cl_centerY {
     
     return self.center.y;
 }
 
-- (void)setCLcenterY:(CGFloat)CLcenterY {
+- (void)setCl_centerY:(CGFloat)cl_centerY {
     
     CGPoint newCenter = self.center;
-    newCenter.y       = CLcenterY;
+    newCenter.y       = cl_centerY;
     self.center       = newCenter;
 }
 
-- (CGPoint)CLbottomRight
+- (CGPoint)cl_bottomRight
 {
     CGFloat x = self.frame.origin.x + self.frame.size.width;
     CGFloat y = self.frame.origin.y + self.frame.size.height;
     return CGPointMake(x, y);
 }
 
-- (CGPoint)CLbottomLeft
+- (CGPoint)cl_bottomLeft
 {
     CGFloat x = self.frame.origin.x;
     CGFloat y = self.frame.origin.y + self.frame.size.height;
     return CGPointMake(x, y);
 }
 
-- (CGPoint)CLtopRight
+- (CGPoint)cl_topRight
 {
     CGFloat x = self.frame.origin.x + self.frame.size.width;
     CGFloat y = self.frame.origin.y;
     return CGPointMake(x, y);
 }
-- (CGPoint)CLtopLeft
+- (CGPoint)cl_topLeft
 {
     CGFloat x = self.frame.origin.x;
     CGFloat y = self.frame.origin.y;
@@ -183,25 +170,34 @@
 
 
 
-- (CGFloat)CLmiddleX {
+- (CGFloat)cl_middleX {
     
     return CGRectGetWidth(self.bounds) / 2.f;
 }
 
-- (CGFloat)CLmiddleY {
+- (CGFloat)cl_middleY {
     
     return CGRectGetHeight(self.bounds) / 2.f;
 }
 
-- (CGPoint)CLmiddlePoint {
+- (CGPoint)cl_middlePoint {
     
     return CGPointMake(CGRectGetWidth(self.bounds) / 2.f, CGRectGetHeight(self.bounds) / 2.f);
 }
 
+- (CGSize)cl_size {
+    return self.frame.size;
+}
+
+-(void)setCl_size:(CGSize)cl_size {
+    CGRect frame = self.frame;
+    frame.size = cl_size;
+    self.frame = frame;
+}
 
 #pragma mark - 设置圆角
 
-- (void)setCornerOnTop:(CGFloat) conner {
+- (void)cl_setCornerOnTop:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
@@ -212,7 +208,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnBottom:(CGFloat) conner {
+- (void)cl_setCornerOnBottom:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)
@@ -223,7 +219,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnLeft:(CGFloat) conner {
+- (void)cl_setCornerOnLeft:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft)
@@ -234,7 +230,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnRight:(CGFloat) conner {
+- (void)cl_setCornerOnRight:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerTopRight | UIRectCornerBottomRight)
@@ -245,7 +241,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnTopLeft:(CGFloat) conner {
+- (void)cl_setCornerOnTopLeft:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:UIRectCornerTopLeft
@@ -256,7 +252,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnTopRight:(CGFloat) conner {
+- (void)cl_setCornerOnTopRight:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:UIRectCornerTopRight
@@ -267,7 +263,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnBottomLeft:(CGFloat) conner {
+- (void)cl_setCornerOnBottomLeft:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:UIRectCornerBottomLeft
@@ -278,7 +274,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setCornerOnBottomRight:(CGFloat) conner {
+- (void)cl_setCornerOnBottomRight:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:UIRectCornerBottomRight
@@ -289,7 +285,7 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)setAllCorner:(CGFloat) conner {
+- (void)cl_setAllCorner:(CGFloat) conner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                           cornerRadius:conner];
@@ -303,3 +299,4 @@
 
 
 @end
+

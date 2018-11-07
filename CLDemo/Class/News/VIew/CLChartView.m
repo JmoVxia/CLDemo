@@ -116,7 +116,7 @@
         [UIView animateWithDuration:0.25 animations:^{
             self.transform = CGAffineTransformMakeRotation(M_PI / 2);
         }];
-        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+        self.frame = CGRectMake(0, 0, cl_screenWidth, cl_screenHeight);
         self.isFullScreen = YES;
     }else{
         [self.fatherView addSubview:self];

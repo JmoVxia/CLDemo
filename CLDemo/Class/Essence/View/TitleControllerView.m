@@ -70,13 +70,13 @@
     [self performSelector:@selector(changeButtonStatus) withObject:nil afterDelay:0.5];
     
     [UIView animateWithDuration:0.2 animations:^{
-        self.selectedView.CLwidth = button.titleLabel.CLwidth;
-        self.selectedView.CLcenterX = button.CLcenterX;
+        self.selectedView.cl_width = button.titleLabel.cl_width;
+        self.selectedView.cl_centerX = button.cl_centerX;
         self.selectedView.backgroundColor = [button titleColorForState:UIControlStateSelected];
     }];
     
     //计算按钮和屏幕中间需要的偏移量
-    CGFloat offsetX = button.CLcenterX - CLscreenWidth / 2.0;
+    CGFloat offsetX = button.cl_centerX - cl_screenWidth / 2.0;
     //屏幕左边按钮,重置偏移
     if (offsetX < 0)
     {
@@ -85,7 +85,7 @@
     else
     {
         //得到最大偏移量
-        CGFloat maxOffsetX = _titlesView.contentSize.width - CLscreenWidth;
+        CGFloat maxOffsetX = _titlesView.contentSize.width - cl_screenWidth;
         // 处理最大偏移量
         if (offsetX > maxOffsetX)
         {
@@ -96,7 +96,7 @@
     [_titlesView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
     // 滚动
     CGPoint offset = self.scrollView.contentOffset;
-    offset.x = (button.tag - ButtonTag) * _scrollView.CLwidth;
+    offset.x = (button.tag - ButtonTag) * _scrollView.cl_width;
     [self.scrollView setContentOffset:offset animated:YES];
     
 }
@@ -144,7 +144,7 @@
     if (_scrollView == nil)
     {
         UIScrollView *scrollView = [[UIScrollView alloc] init];
-        scrollView.frame = CGRectMake(0, self.titlesView.CLbottom, self.CLwidth, self.CLheight - self.titlesView.CLheight);
+        scrollView.frame = CGRectMake(0, self.titlesView.cl_bottom, self.cl_width, self.cl_height - self.titlesView.cl_height);
         scrollView.delegate = self;
         scrollView.pagingEnabled = YES;
         scrollView.bounces = NO;
@@ -163,7 +163,7 @@
 {
     if (_titlesView == nil)
     {
-        UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.CLwidth, 40)];
+        UIScrollView *titlesView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.cl_width, 40)];
         titlesView.bounces = NO;
         titlesView.showsHorizontalScrollIndicator = NO;
         titlesView.showsVerticalScrollIndicator = NO;
@@ -179,47 +179,47 @@
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSString *newString = [string stringByAppendingString:obj];
             string = newString;
-            if (idx == (_number - 1)) {
+            if (idx == (self->_number - 1)) {
                * stop = YES;
             }
         }];
         //计算文字长度
-        CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.CLheight)];
+        CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.cl_height)];
         //间隙
-        CGFloat padding = (self.CLwidth - size.width) / (_number + 1);
+        CGFloat padding = (self.cl_width - size.width) / (_number + 1);
         //创建标题按钮
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIButton * button = [[UIButton alloc]init];
-            button.frame = CGRectMake(lastButton.CLright + padding, 0, 0, titlesView.CLheight);
+            button.frame = CGRectMake(lastButton.cl_right + padding, 0, 0, titlesView.cl_height);
             button.tag = ButtonTag + idx;
             button.titleLabel.font = [UIFont systemFontOfSize:18];
             [button setTitle:obj forState:UIControlStateNormal];
             //常态颜色
-            [button setTitleColor:_titleNormalColorArray[idx] forState:UIControlStateNormal];
+            [button setTitleColor:self->_titleNormalColorArray[idx] forState:UIControlStateNormal];
             //选中颜色
-            [button setTitleColor:_titleSelectedColorArray[idx] forState:UIControlStateSelected];
+            [button setTitleColor:self->_titleSelectedColorArray[idx] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [button sizeToFit];
             [titlesView addSubview:button];
             lastButton = button;
             //将所有按钮都标记为0
-            [_clickArray addObject:[NSNumber numberWithInteger:0]];
+            [self->_clickArray addObject:[NSNumber numberWithInteger:0]];
         }];
         
-        _titlesView.contentSize = CGSizeMake(lastButton.CLright + padding, titlesView.CLheight);
+        _titlesView.contentSize = CGSizeMake(lastButton.cl_right + padding, titlesView.cl_height);
         
         //取出第一个按钮
         UIButton *fristButton = titlesView.subviews.firstObject;
         UIView *selectedView = [[UIView alloc]init];
-        selectedView.CLheight = 2;
-        selectedView.CLtop = titlesView.CLheight-selectedView.CLheight;
+        selectedView.cl_height = 2;
+        selectedView.cl_top = titlesView.cl_height-selectedView.cl_height;
         [titlesView addSubview:selectedView];
         self.selectedView = selectedView;
         //根据文字内容计算宽高
         [fristButton.titleLabel sizeToFit];
         //给定初始位置
-        selectedView.CLwidth = fristButton.titleLabel.CLwidth;
-        selectedView.CLcenterX = fristButton.CLcenterX;
+        selectedView.cl_width = fristButton.titleLabel.cl_width;
+        selectedView.cl_centerX = fristButton.cl_centerX;
         //默认选中第一个按钮
         [self buttonAction:fristButton];
     }

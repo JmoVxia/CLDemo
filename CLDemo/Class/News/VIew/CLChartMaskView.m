@@ -251,16 +251,16 @@
         //开始绘制
         CGContextBeginPath(context);
         //画笔移动到点(31,170)
-        CGContextMoveToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace - 5);
+        CGContextMoveToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace, self.cl_height - BottomSpace + 5 + XPointSpace - 5);
         //下一点
-        CGContextAddLineToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
+        CGContextAddLineToPoint(context,i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace, self.cl_height - BottomSpace + 5 + XPointSpace);
         //绘制完成
         CGContextStrokePath(context);
         
         //数字label
         CGFloat x = i * (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) + LeftSpace;
         CGFloat width = (self.frame.size.width - LeftSpace - RightSpace)/(xCount - 1) - 1;
-        CLChartXLabel *chartXLabel = [[CLChartXLabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.CLheight - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
+        CLChartXLabel *chartXLabel = [[CLChartXLabel alloc] initWithFrame:CGRectMake(x - width * 0.5, self.cl_height - (BottomSpace - 5 - XPointSpace), width, BottomSpace - 5 - XPointSpace)];
         [self addSubview:chartXLabel];
         if (i == xCount - 1) {
             //最后一个
@@ -311,12 +311,12 @@
 //    CGContextSetLineWidth(context,1);
     CGContextBeginPath(context);
     CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, _isFullScreen ? (20) : (0));
-    CGContextAddLineToPoint(context,LeftSpace - 5 - YPointSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
+    CGContextAddLineToPoint(context,LeftSpace - 5 - YPointSpace, self.cl_height - BottomSpace + 5 + XPointSpace);
     CGContextStrokePath(context);
     CGContextBeginPath(context);
     //X轴竖线
-    CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, self.CLheight - BottomSpace + 5 + XPointSpace);
-    CGContextAddLineToPoint(context,self.CLwidth, self.CLheight - BottomSpace + 5 + XPointSpace);
+    CGContextMoveToPoint(context,LeftSpace - 5 - YPointSpace, self.cl_height - BottomSpace + 5 + XPointSpace);
+    CGContextAddLineToPoint(context,self.cl_width, self.cl_height - BottomSpace + 5 + XPointSpace);
     CGContextStrokePath(context);
 
     

@@ -1,8 +1,8 @@
 //
 //  Tools.m
-//  Tools
+//  CKD
 //
-//  Created by JmoVxia on 2016/11/17.
+//  Created by JmoVxia on 2016/12/30.
 //  Copyright © 2016年 JmoVxia. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 
 
 static Tools * manager = nil;
+static NSString *const kAppVersion = @"ADappVersion";
 
 @implementation Tools
 
@@ -25,204 +26,14 @@ static Tools * manager = nil;
 }
 
 
-// 创建一个textField控件
-+(UITextField *)createTextFieldPlaceholder:(NSString *)placeholder
-                              keyboardType:(UIKeyboardType)kbType
-{
-    UITextField * textField = [[UITextField alloc] init];
-    textField.placeholder = placeholder;
-    textField.borderStyle = UITextBorderStyleRoundedRect;
-    textField.keyboardType = kbType;
-    textField.textAlignment = NSTextAlignmentCenter;
-    return textField;
-}
 
-// 创建一个按钮（文字）
-+(UIButton *)createButtonTitle:(NSString *)title
-                        target:(id)target
-                        action:(SEL)action
-{
-    UIButton * button = [[UIButton alloc] init];
-    [button setTitle:title forState:UIControlStateNormal];
-    //    button.backgroundColor = [UIColor redColor];
-    button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    
-    return button;
-}
 
-// 创建一个按钮 （以图片展现）
-+(UIButton *)createButtonNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectImage tag:(NSUInteger)tag addTarget:(id)target action:(SEL)action
-{
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:normalImage forState:UIControlStateNormal];
-    [btn setImage:selectImage forState:UIControlStateSelected];
-    [btn setImage:selectImage forState:UIControlStateHighlighted];
-    btn.tag = tag;
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    
-    return btn;
-}
 
-// 展示警告框(只能确定)
-+(void)showOneAlertMessage:(NSString *)msg andTitle:(NSString *)string byController:(UIViewController *)vc sure:(SureBlock)sure
-{
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:string message:msg preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // 确定的回调
-        if(sure)
-        {
-            sure(action);
-        }
-        
-    }];
-    [alert addAction:sureAction];
-    
-    [vc presentViewController:alert animated:YES completion:nil];
-}
-//展示提示框（可以确定和取消）
-+(void)showTwoAlertMessage:(NSString *)msg andTitle:(NSString *)string byController:(UIViewController *)vc sure:(SureBlock)sure cancel:(CancelBlock)cancel
-{
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:string message:msg preferredStyle:UIAlertControllerStyleAlert];
-    
-    
-    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        //取消的回调
-        if (cancel)
-        {
-            cancel(action);
-        }
-    }];
-    [alert addAction:cancelAction];
-    
-    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // 确定的回调
-        if(sure)
-        {
-            sure(action);
-        }
-        
-    }];
-    [alert addAction:sureAction];
-    
-    [vc presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark----------------清除缓存和显示缓存
-/**
- *  清除和显示缓存方法
- */
-
-/**
- *  遍历文件夹获得文件夹大小，返回多少 M（提示：你可以在工程界设置（)m）
- */
-
-/**
- *  NSString *str =  [ NSString stringWithFormat : @"清除缓存(%.2fM)" , [ self filePath ]];
- *
- *  @return 显示缓存（字符串）
- */
-/**
- *  [self clearFile];
- *
- *  @return 清除缓存并弹出提示框
- */
-
-- (NSString *)cacheSize
-{
-    NSString *str =  [ NSString stringWithFormat : @"清除缓存(%.2fM)" , [ self filePath ]];
-    
-    return str;
-}
-
-- ( float ) folderSizeAtPath:( NSString *) folderPath{
-    
-    NSFileManager * manager = [ NSFileManager defaultManager ];
-    
-    if (![manager fileExistsAtPath :folderPath]) return 0 ;
-    
-    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath :folderPath] objectEnumerator ];
-    
-    NSString * fileName;
-    
-    long long folderSize = 0 ;
-    
-    while ((fileName = [childFilesEnumerator nextObject ]) != nil ){
-        
-        NSString * fileAbsolutePath = [folderPath stringByAppendingPathComponent :fileName];
-        
-        folderSize += [ self fileSizeAtPath :fileAbsolutePath];
-        
-    }
-    
-    return folderSize/( 1024.0 * 1024.0 );
-    
-}
-- ( long long ) fileSizeAtPath:( NSString *) filePath{
-    
-    NSFileManager * manager = [ NSFileManager defaultManager ];
-    
-    if ([manager fileExistsAtPath :filePath]){
-        
-        return [[manager attributesOfItemAtPath :filePath error : nil ] fileSize ];
-        
-    }
-    
-    return 0 ;
-    
-}
-/**
- *  显示缓存大小
- */
-- ( float )filePath
-
-{
-    
-    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
-    
-    return [ self folderSizeAtPath :cachPath];
-    
-}
-/**
- *  清理文件缓存
- */
-- ( void )clearFile:(NSString *)string andController:(UIViewController *)controller
-
-{
-    
-    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
-    
-    NSArray * files = [[ NSFileManager defaultManager ] subpathsAtPath :cachPath];
-    
-    NSLog ( @"cachpath = %@" , cachPath);
-    
-    for ( NSString * p in files) {
-        
-        NSError * error = nil ;
-        
-        NSString * path = [cachPath stringByAppendingPathComponent :p];
-        
-        if ([[ NSFileManager defaultManager ] fileExistsAtPath :path]) {
-            
-            [[ NSFileManager defaultManager ] removeItemAtPath :path error :&error];
-            
-        }
-        
-    }
-    /**
-     *  清理成功弹出提示框
-     */
-    [Tools showOneAlertMessage:@"清理缓存成功" andTitle:nil byController:controller sure:^(UIAlertAction *sureAction) {
-        
-    }];
-    
-}
 
 /**
  *  设置系统默认标签控制器Item常态和选中状态图片颜色和字体大小
  *
- *  @param controller      要设置item的controller
+ *  @param controller      要设置的item
  *  @param title           文字
  *  @param size            字体大小
  *  @param foneName        字体名称（为nil就是系统默认）
@@ -241,7 +52,7 @@ static Tools * manager = nil;
                  withTitleColor:(UIColor *)selectColor
                 unselectedImage:(NSString *)unselectedImage
                  withTitleColor:(UIColor *)unselectColor{
-    
+       
     //设置图片
     controller.tabBarItem = [controller.tabBarItem initWithTitle:title image:[[UIImage imageNamed:unselectedImage]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:selectedImage]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
@@ -271,6 +82,10 @@ static Tools * manager = nil;
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
+
+
+
+
 //生成随机UUID
 + (NSString *)uuidString
 {
@@ -283,65 +98,89 @@ static Tools * manager = nil;
 }
 
 //判断手机具体型号
-+ (NSString*)deviceVersion
++ (NSString *)deviceVersion
 {
     // 需要#import "sys/utsname.h"
     struct utsname systemInfo;
     uname(&systemInfo);
-    NSString * platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    NSString * machineString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
     //iPhone
-    if ([platform isEqualToString:@"iPhone1,1"]) return @"iPhone 1G";
-    if ([platform isEqualToString:@"iPhone1,2"]) return @"iPhone 3G";
-    if ([platform isEqualToString:@"iPhone2,1"]) return @"iPhone 3GS";
-    if ([platform isEqualToString:@"iPhone3,1"]) return @"iPhone 4";
-    if ([platform isEqualToString:@"iPhone3,3"]) return @"Verizon iPhone 4";
-    if ([platform isEqualToString:@"iPhone4,1"]) return @"iPhone 4S";
-    if ([platform isEqualToString:@"iPhone5,1"]) return @"iPhone 5 (GSM)";
-    if ([platform isEqualToString:@"iPhone5,2"]) return @"iPhone 5 (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPhone5,3"]) return @"iPhone 5c (GSM)";
-    if ([platform isEqualToString:@"iPhone5,4"]) return @"iPhone 5c (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPhone6,1"]) return @"iPhone 5s (GSM)";
-    if ([platform isEqualToString:@"iPhone6,2"]) return @"iPhone 5s (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPhone7,1"]) return @"iPhone 6 Plus";
-    if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone 6";
-    if ([platform isEqualToString:@"iPhone8,1"]) return @"iPhone6s";
-    if ([platform isEqualToString:@"iPhone8,2"]) return @"iPhone6sPlus";
-    if ([platform isEqualToString:@"iPhone8,3"]) return @"iPhoneSE";
-    if ([platform isEqualToString:@"iPhone8,4"]) return @"iPhoneSE";
-    if ([platform isEqualToString:@"iPhone9,1"]) return @"iPhone7";
-    if ([platform isEqualToString:@"iPhone9,2"]) return @"iPhone7Plus";
-    if ([platform isEqualToString:@"iPod1,1"]) return @"iPod Touch 1G";
-    if ([platform isEqualToString:@"iPod2,1"]) return @"iPod Touch 2G";
-    if ([platform isEqualToString:@"iPod3,1"]) return @"iPod Touch 3G";
-    if ([platform isEqualToString:@"iPod4,1"]) return @"iPod Touch 4G";
-    if ([platform isEqualToString:@"iPod5,1"]) return @"iPod Touch 5G";
-    if ([platform isEqualToString:@"iPad1,1"]) return @"iPad";
-    if ([platform isEqualToString:@"iPad2,1"]) return @"iPad 2 (WiFi)";
-    if ([platform isEqualToString:@"iPad2,2"]) return @"iPad 2 (GSM)";
-    if ([platform isEqualToString:@"iPad2,3"]) return @"iPad 2 (CDMA)";
-    if ([platform isEqualToString:@"iPad2,4"]) return @"iPad 2 (WiFi)";
-    if ([platform isEqualToString:@"iPad2,5"]) return @"iPad Mini (WiFi)";
-    if ([platform isEqualToString:@"iPad2,6"]) return @"iPad Mini (GSM)";
-    if ([platform isEqualToString:@"iPad2,7"]) return @"iPad Mini (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPad3,1"]) return @"iPad 3 (WiFi)";
-    if ([platform isEqualToString:@"iPad3,2"]) return @"iPad 3 (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPad3,3"]) return @"iPad 3 (GSM)";
-    if ([platform isEqualToString:@"iPad3,4"]) return @"iPad 4 (WiFi)";
-    if ([platform isEqualToString:@"iPad3,5"]) return @"iPad 4 (GSM)";
-    if ([platform isEqualToString:@"iPad3,6"]) return @"iPad 4 (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPad4,1"]) return @"iPad Air (WiFi)";
-    if ([platform isEqualToString:@"iPad4,2"]) return @"iPad Air (Cellular)";
-    if ([platform isEqualToString:@"iPad4,4"]) return @"iPad mini 2G (WiFi)";
-    if ([platform isEqualToString:@"iPad4,5"]) return @"iPad mini 2G (Cellular)";
-    if ([platform isEqualToString:@"iPad4,7"]) return @"iPad mini 3 (WiFi)";
-    if ([platform isEqualToString:@"iPad4,8"]) return @"iPad mini 3 (Cellular)";
-    if ([platform isEqualToString:@"iPad4,9"]) return @"iPad mini 3 (China Model)";
-    if ([platform isEqualToString:@"iPad5,3"]) return @"iPad Air 2 (WiFi)";
-    if ([platform isEqualToString:@"iPad5,4"]) return @"iPad Air 2 (Cellular)";
-    if ([platform isEqualToString:@"i386"]) return @"Simulator";
-    if ([platform isEqualToString:@"x86_64"]) return @"Simulator";
+    if ([machineString isEqualToString:@"iPhone1,1"])   return @"iPhone_1G";
+    if ([machineString isEqualToString:@"iPhone1,2"])   return @"iPhone_3G";
+    if ([machineString isEqualToString:@"iPhone2,1"])   return @"iPhone_3GS";
+    if ([machineString isEqualToString:@"iPhone3,1"])   return @"iPhone_4";
+    if ([machineString isEqualToString:@"iPhone3,3"])   return @"iPhone_4_Verizon";
+    if ([machineString isEqualToString:@"iPhone4,1"])   return @"iPhone_4S";
+    if ([machineString isEqualToString:@"iPhone5,1"])   return @"iPhone_5_GSM";
+    if ([machineString isEqualToString:@"iPhone5,2"])   return @"iPhone_5_CDMA";
+    if ([machineString isEqualToString:@"iPhone5,3"])   return @"iPhone_5C_GSM";
+    if ([machineString isEqualToString:@"iPhone5,4"])   return @"iPhone_5C_GSM_CDMA";
+    if ([machineString isEqualToString:@"iPhone6,1"])   return @"iPhone_5S_GSM";
+    if ([machineString isEqualToString:@"iPhone6,2"])   return @"iPhone_5S_GSM_CDMA";
+    if ([machineString isEqualToString:@"iPhone7,2"])   return @"iPhone_6";
+    if ([machineString isEqualToString:@"iPhone7,1"])   return @"iPhone_6_Plus";
+    if ([machineString isEqualToString:@"iPhone8,1"])   return @"iPhone_6S";
+    if ([machineString isEqualToString:@"iPhone8,2"])   return @"iPhone_6S_Plus";
+    if ([machineString isEqualToString:@"iPhone8,4"])   return @"iPhone_SE";
+    // 日行两款手机型号均为日本独占，可能使用索尼FeliCa支付方案而不是苹果支付
+    if ([machineString isEqualToString:@"iPhone9,1"])   return @"Chinese_iPhone_7";
+    if ([machineString isEqualToString:@"iPhone9,2"])   return @"Chinese_iPhone_7_Plus";
+    if ([machineString isEqualToString:@"iPhone9,3"])   return @"American_iPhone_7";
+    if ([machineString isEqualToString:@"iPhone9,4"])   return @"American_iPhone_7_Plus";
+    if ([machineString isEqualToString:@"iPhone10,1"])  return @"iPhone_8";
+    if ([machineString isEqualToString:@"iPhone10,4"])  return @"iPhone_8";
+    if ([machineString isEqualToString:@"iPhone10,2"])  return @"iPhone_8_Plus";
+    if ([machineString isEqualToString:@"iPhone10,5"])  return @"iPhone_8_Plus";
+    if ([machineString isEqualToString:@"iPhone10,3"])  return @"iPhone_X";
+    if ([machineString isEqualToString:@"iPhone10,6"])  return @"iPhone_X";
+    //Touch
+    if ([machineString isEqualToString:@"iPod1,1"])     return @"iPod_Touch_1G";
+    if ([machineString isEqualToString:@"iPod2,1"])     return @"iPod_Touch_2G";
+    if ([machineString isEqualToString:@"iPod3,1"])     return @"iPod_Touch_3G";
+    if ([machineString isEqualToString:@"iPod4,1"])     return @"iPod_Touch_4G";
+    if ([machineString isEqualToString:@"iPod5,1"])     return @"iPod_Touch_5Gen";
+    if ([machineString isEqualToString:@"iPod7,1"])     return @"iPod_Touch_6G";
+    //iPad
+    if ([machineString isEqualToString:@"iPad1,1"])     return @"iPad_1";
+    if ([machineString isEqualToString:@"iPad1,2"])     return @"iPad_3G";
+    if ([machineString isEqualToString:@"iPad2,1"])     return @"iPad_2_WiFi";
+    if ([machineString isEqualToString:@"iPad2,2"])     return @"iPad_2_GSM";
+    if ([machineString isEqualToString:@"iPad2,3"])     return @"iPad_2_CDMA";
+    if ([machineString isEqualToString:@"iPad2,4"])     return @"iPad_2_CDMA";
+    if ([machineString isEqualToString:@"iPad2,5"])     return @"iPad_Mini_WiFi";
+    if ([machineString isEqualToString:@"iPad2,6"])     return @"iPad_Mini_GSM";
+    if ([machineString isEqualToString:@"iPad2,7"])     return @"iPad_Mini_CDMA";
+    if ([machineString isEqualToString:@"iPad3,1"])     return @"iPad_3_WiFi";
+    if ([machineString isEqualToString:@"iPad3,2"])     return @"iPad_3_GSM";
+    if ([machineString isEqualToString:@"iPad3,3"])     return @"iPad_3_CDMA";
+    if ([machineString isEqualToString:@"iPad3,4"])     return @"iPad_4_WiFi";
+    if ([machineString isEqualToString:@"iPad3,5"])     return @"iPad_4_GSM";
+    if ([machineString isEqualToString:@"iPad3,6"])     return @"iPad_4_CDMA";
+    if ([machineString isEqualToString:@"iPad4,1"])     return @"iPad_Air";
+    if ([machineString isEqualToString:@"iPad4,2"])     return @"iPad_Air_Cellular";
+    if ([machineString isEqualToString:@"iPad4,4"])     return @"iPad_Mini_2";
+    if ([machineString isEqualToString:@"iPad4,5"])     return @"iPad_Mini_2_Cellular";
+    if ([machineString isEqualToString:@"iPad4,7"])     return @"iPad_Mini_3_WiFi";
+    if ([machineString isEqualToString:@"iPad4,8"])     return @"iPad_Mini_3_Cellular";
+    if ([machineString isEqualToString:@"iPad4,9"])     return @"iPad_Mini_3_Cellular";
+    if ([machineString isEqualToString:@"iPad5,1"])     return @"iPad_Mini_4_WiFi";
+    if ([machineString isEqualToString:@"iPad5,2"])     return @"iPad_Mini_3_Cellular";
+    if ([machineString isEqualToString:@"iPad5,3"])     return @"iPad_Air_2_WiFi";
+    if ([machineString isEqualToString:@"iPad5,4"])     return @"iPad_Air_2_Cellular";
+    if ([machineString isEqualToString:@"iPad6,3"])     return @"iPad_Pro_97inch_WiFi";
+    if ([machineString isEqualToString:@"iPad6,4"])     return @"iPad_Pro_97inch_Cellular";
+    if ([machineString isEqualToString:@"iPad6,7"])     return @"iPad_Pro_129inch_WiFi";
+    if ([machineString isEqualToString:@"iPad6,8"])     return @"iPad_Pro_129inch_Cellular";
+    //TV
+    if ([machineString isEqualToString:@"AppleTV2,1"])  return @"appleTV2";
+    if ([machineString isEqualToString:@"AppleTV3,1"])  return @"appleTV3";
+    if ([machineString isEqualToString:@"AppleTV3,2"])  return @"appleTV3";
+    if ([machineString isEqualToString:@"AppleTV5,3"])  return @"appleTV4";
+    //模拟器
+    if ([machineString isEqualToString:@"i386"])        return @"i386Simulator";
+    if ([machineString isEqualToString:@"x86_64"])      return @"x86_64Simulator";
     
-    return platform;
+    return @"iUnknown";
 }
 //沙盒路径
 + (NSString*)pathDocuments
@@ -349,13 +188,13 @@ static Tools * manager = nil;
     NSString *pathDocuments = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     return pathDocuments;
 }
-//获取今天时间
-+ (NSString *)getToDayWithDateFormat:(NSString *)format
+//获取明天时间
++ (NSString *)getTomorrowDayWithDateFormat:(NSString *)format
 {
     NSDate *date = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
-    [components setDay:([components day])];
+    [components setDay:([components day]+1)];
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
@@ -374,7 +213,7 @@ static Tools * manager = nil;
 //将世界时间转化为中国区时间
 - (NSDate *)worldTimeToChinaTime:(NSDate *)date
 {
-    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
     NSInteger interval = [timeZone secondsFromGMTForDate:date];
     NSDate *localeDate = [date  dateByAddingTimeInterval:interval];
     return localeDate;
@@ -389,16 +228,19 @@ static Tools * manager = nil;
     NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
     NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
     NSComparisonResult result = [dateA compare:dateB];
-    //    NSLog(@"date1 : %@, date2 : %@", oneDay, anotherDay);
+//    NSLog(@"date1 : %@, date2 : %@", oneDay, anotherDay);
     if (result == NSOrderedDescending) {
         //NSLog(@"Date1  is in the future");
+        //大于
         return 1;
     }
     else if (result == NSOrderedAscending){
         //NSLog(@"Date1 is in the past");
+        //小于
         return -1;
     }
     //NSLog(@"Both dates are the same");
+    //等于
     return 0;
     
 }
@@ -456,4 +298,108 @@ static Tools * manager = nil;
     
     return dayComponents.day;
 }
++ (NSDate *)getLocalDate:(NSDate *)date {
+    //设置源日期时区
+    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];//或GMT
+    //设置转换后的目标日期时区
+    NSTimeZone* destinationTimeZone = [NSTimeZone localTimeZone];
+    //得到源日期与世界标准时间的偏移量
+    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:date];
+    //目标日期与本地时区的偏移量
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:date];
+    //得到时间偏移量的差值
+    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+    //转为现在时间
+    NSDate* destinationDateNow = [[NSDate alloc] initWithTimeInterval:interval sinceDate:date];
+    return destinationDateNow;
+}
+// 查找路径及其子路径下所有指定类型文件
++ (NSMutableArray *)findAllFileWithType:(NSString *)type andPath:(NSString *)path{
+    
+    NSFileManager *manager = [NSFileManager defaultManager];
+    //深度遍历路径及其子路径下所有文件以及文件夹
+    NSDirectoryEnumerator *dirEnum = [manager enumeratorAtPath:path];
+    //文件及文件夹名称数组
+    NSMutableArray *fileNameListArray = [NSMutableArray array];
+    //路径下所有文件和文件夹
+    NSString *allPath;
+    while ((allPath = [dirEnum nextObject]) != nil)
+    {
+        [fileNameListArray addObject:allPath];
+    }
+    //所需文件数组
+    NSMutableArray *fileArray = [NSMutableArray array];
+    //遍历所有所有文件和文件夹名称数组
+    [fileNameListArray enumerateObjectsUsingBlock:^(NSString *filePath, NSUInteger idx, BOOL * _Nonnull stop) {
+        //后缀名称
+        NSString *lastPath = [filePath pathExtension];
+        //判断后缀名称是否是需要类型
+        if([lastPath isEqualToString:type]){
+            //是
+            [fileArray addObject:[NSString stringWithFormat:@"%@/%@",path,filePath]];
+        }else{
+            //不是
+        }
+    }];
+    return fileArray;
+}
+
++ (NSMutableArray *)findAllFolderWithType:(NSString *)type andPath:(NSString *)path{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    //深度遍历路径及其子路径下所有文件以及文件夹
+    NSDirectoryEnumerator *dirEnum = [manager enumeratorAtPath:path];
+    //文件及文件夹名称数组
+    NSMutableArray *fileNameListArray = [NSMutableArray array];
+    //路径下所有文件和文件夹
+    NSString *allPath;
+    while ((allPath = [dirEnum nextObject]) != nil)
+    {
+        [fileNameListArray addObject:allPath];
+    }
+    //所需文件数组
+    NSMutableArray *fileArray = [NSMutableArray array];
+    //遍历所有所有文件和文件夹名称数组
+    [fileNameListArray enumerateObjectsUsingBlock:^(NSString *filePath, NSUInteger idx, BOOL * _Nonnull stop) {
+        //后缀名称
+        NSString *lastPath = [filePath pathExtension];
+        //判断后缀名称是否是需要类型
+        if([lastPath isEqualToString:type]){
+            //是
+            [fileArray addObject:path];
+        }else{
+            //不是
+        }
+    }];
+    return fileArray;
+}
+//判断是不是首次登录或者版本更新
++(BOOL )isFirstLaunch{
+    //获取当前版本号
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *currentAppVersion = infoDic[@"CFBundleShortVersionString"];
+    //获取上次启动应用保存的appVersion
+    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:kAppVersion];
+    //版本升级或首次登录
+    if (version == nil || ![version isEqualToString:currentAppVersion]) {
+        [[NSUserDefaults standardUserDefaults] setObject:currentAppVersion forKey:kAppVersion];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }else{
+        return NO;
+    }
+}
+/**
+ 判断是不是第一次进入某个页面
+ */
++(BOOL)isFirstWithClassName:(NSString *)className{
+    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:className];
+    if (version == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"isFirst" forKey:className];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 @end

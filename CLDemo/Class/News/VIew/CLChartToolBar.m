@@ -136,7 +136,7 @@
     [self.lineView makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.equalTo(self.dateToolBar);
         make.height.equalTo(1);
-        make.width.equalTo(CLscreenHeight);
+        make.width.equalTo(cl_screenHeight);
     }];
     
 }

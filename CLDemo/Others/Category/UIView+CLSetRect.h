@@ -7,205 +7,225 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
+/**
+ * 随机色
+ */
+#define cl_RandomColor [UIColor colorWithHue:(arc4random() % (256) / (256.0)) saturation:(arc4random() % (128) / (256.0)) + (0.5) brightness:(arc4random() % (128) / (256.0)) + (0.5) alpha:(1)];
 /**
  *  UIScreen width.
  */
-#define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
+#define  cl_screenWidth   [UIScreen mainScreen].bounds.size.width
 
 /**
  *  UIScreen height.
  */
-#define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
+#define  cl_screenHeight  [UIScreen mainScreen].bounds.size.height
 
-/**iPhone5为标准，乘以宽的比例*/
-#define CLscaleX(value) ((value)/320.0f * CLscreenWidth)
+/**iPhone6为标准，乘以宽的比例*/
+#define cl_scaleX_px(value) (((value) * 0.5f)/(375.f) * cl_screenWidth)
+/**iPhone6为标准，乘以高的比例*/
+#define cl_scaleY_px(value) (((value) * 0.5f)/(667.f) * cl_screenHeight)
+/**直接使用像素*/
+#define cl_px(value) ((value) * 0.5f)
 
-/**iPhone5为标准，乘以高的比例*/
-#define CLscaleY(value) ((value)/568.0f * CLscreenHeight)
+/**iPhone6为标准，乘以宽的比例*/
+#define cl_scaleX_pt(value) ((value)/(375.f) * cl_screenWidth)
+/**iPhone6为标准，乘以高的比例*/
+#define cl_scaleY_pt(value) ((value)/(667.f) * cl_screenHeight)
+/**直接使用点*/
+#define cl_pt(value) ((value) * 0.5f)
+
 
 /**
  *  Status bar height.
  */
-#define  CLstatusBarHeight      20.f
+#define  cl_statusBarHeight      [[UIApplication sharedApplication] statusBarFrame].size.height
 
 /**
  *  Navigation bar height.
  */
-#define  CLnavigationBarHeight  44.f
-
-/**
- *  Tabbar height.
- */
-#define  CLtabbarHeight         49.f
+#define  cl_navigationBarHeight  44.f
 
 /**
  *  Status bar & navigation bar height.
  */
-#define  CLstatusBarAndNavigationBarHeight   (20.f + 44.f)
+#define  cl_statusBarAndNavigationBarHeight   (cl_statusBarHeight + 44.f)
 
 /**
- *  iPhone4 or iPhone4s
+ tabbar高度
  */
-#define  iPhone4_4s     (Width == 320.f && Height == 480.f ? YES : NO)
-
+#define  cl_tabbarHeight         ((cl_iPhoneX || cl_iPhoneXr || cl_iPhoneXs || cl_iPhoneXsMax) ? (49.f + 34.f) : 49.f)
 /**
- *  iPhone5 or iPhone5s
+ 底部安全间距
  */
-#define  iPhone5_5s     (Width == 320.f && Height == 568.f ? YES : NO)
+#define  cl_safeBottomMargin  ((cl_iPhoneX || cl_iPhoneXr || cl_iPhoneXs || cl_iPhoneXsMax) ? 34.f : 0.f)
 
-/**
- *  iPhone6 or iPhone6s
- */
-#define  iPhone6_6s     (Width == 375.f && Height == 667.f ? YES : NO)
 
-/**
- *  iPhone6Plus or iPhone6sPlus
- */
-#define  iPhone6_6sPlus (Width == 414.f && Height == 736.f ? YES : NO)
 
-@interface UIView (CLSetRect)
+// 判断是否是ipad
+#define cl_isPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+// 判断iPhone4系列
+#define cl_iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+// 判断iPhone5系列
+#define cl_iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+// 判断iPhone6系列
+#define cl_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+//判断iphone6+系列
+#define cl_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+// 判断iPhoneX
+#define cl_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+// 判断iPHoneXr
+#define cl_iPhoneXr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+// 判断iPhoneXs
+#define cl_iPhoneXs ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+// 判断iPhoneXs Max
+#define cl_iPhoneXsMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
+
+
+
+@interface UIView (cl_SetRect)
 
 
 
 /**
  控件起点
  */
-@property (nonatomic) CGPoint CLviewOrigin;
-
-/**
- 控件大小
- */
-@property (nonatomic) CGSize  CLviewSize;
+@property (nonatomic) CGPoint cl_origin;
 
 /**
  控件起点x
  */
-@property (nonatomic) CGFloat CLx;
+@property (nonatomic) CGFloat cl_x;
 
 /**
  控件起点Y
  */
-@property (nonatomic) CGFloat CLy;
+@property (nonatomic) CGFloat cl_y;
 
 /**
  控件宽
  */
-@property (nonatomic) CGFloat CLwidth;
+@property (nonatomic) CGFloat cl_width;
 
 /**
  控件高
  */
-@property (nonatomic) CGFloat CLheight;
+@property (nonatomic) CGFloat cl_height;
 
 /**
  控件顶部
  */
-@property (nonatomic) CGFloat CLtop;
+@property (nonatomic) CGFloat cl_top;
 
 /**
  控件底部
  */
-@property (nonatomic) CGFloat CLbottom;
+@property (nonatomic) CGFloat cl_bottom;
 
 /**
  控件左边
  */
-@property (nonatomic) CGFloat CLleft;
+@property (nonatomic) CGFloat cl_left;
 
 /**
  控件右边
  */
-@property (nonatomic) CGFloat CLright;
+@property (nonatomic) CGFloat cl_right;
 
 /**
  控件中心点X
  */
-@property (nonatomic) CGFloat CLcenterX;
+@property (nonatomic) CGFloat cl_centerX;
 
 /**
  控件中心点Y
  */
-@property (nonatomic) CGFloat CLcenterY;
+@property (nonatomic) CGFloat cl_centerY;
 
 /**
  控件左下
  */
-@property(readonly) CGPoint CLbottomLeft ;
+@property(readonly) CGPoint cl_bottomLeft ;
 
 /**
  控件右下
  */
-@property(readonly) CGPoint CLbottomRight ;
+@property(readonly) CGPoint cl_bottomRight ;
 
 /**
  控件左上
  */
-@property(readonly) CGPoint CLtopLeft ;
+@property(readonly) CGPoint cl_topLeft ;
 /**
  控件右上
  */
-@property(readonly) CGPoint CLtopRight ;
+@property(readonly) CGPoint cl_topRight ;
 
 
 /**
  屏幕中心点X
  */
-@property (nonatomic, readonly) CGFloat CLmiddleX;
+@property (nonatomic, readonly) CGFloat cl_middleX;
 
 /**
  屏幕中心点Y
  */
-@property (nonatomic, readonly) CGFloat CLmiddleY;
+@property (nonatomic, readonly) CGFloat cl_middleY;
 
 /**
  屏幕中心点
  */
-@property (nonatomic, readonly) CGPoint CLmiddlePoint;
+@property (nonatomic, readonly) CGPoint cl_middlePoint;
+
+/**
+ 控件size
+ */
+@property (nonatomic) CGSize cl_size;
+
 
 
 /**
  设置上边圆角
  */
-- (void)setCornerOnTop:(CGFloat) conner;
+- (void)cl_setCornerOnTop:(CGFloat) conner;
 
 /**
  设置下边圆角
  */
-- (void)setCornerOnBottom:(CGFloat) conner;
+- (void)cl_setCornerOnBottom:(CGFloat) conner;
 /**
  设置左边圆角
  */
-- (void)setCornerOnLeft:(CGFloat) conner;
+- (void)cl_setCornerOnLeft:(CGFloat) conner;
 /**
  设置右边圆角
  */
-- (void)setCornerOnRight:(CGFloat) conner;
+- (void)cl_setCornerOnRight:(CGFloat) conner;
 
 /**
  设置左上圆角
  */
-- (void)setCornerOnTopLeft:(CGFloat) conner;
+- (void)cl_setCornerOnTopLeft:(CGFloat) conner;
 
 /**
  设置右上圆角
  */
-- (void)setCornerOnTopRight:(CGFloat) conner;
+- (void)cl_setCornerOnTopRight:(CGFloat) conner;
 /**
  设置左下圆角
  */
-- (void)setCornerOnBottomLeft:(CGFloat) conner;
+- (void)cl_setCornerOnBottomLeft:(CGFloat) conner;
 /**
  设置右下圆角
  */
-- (void)setCornerOnBottomRight:(CGFloat) conner;
+- (void)cl_setCornerOnBottomRight:(CGFloat) conner;
 
 
 /**
  设置所有圆角
  */
-- (void)setAllCorner:(CGFloat) conner;
+- (void)cl_setAllCorner:(CGFloat) conner;
 
 
 @end
+
