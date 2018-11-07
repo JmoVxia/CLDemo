@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "TabbarController.h"
+#import "CLTabbarController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    TabbarController *tbc = [[TabbarController alloc]init];
+    CLTabbarController *tbc = [[CLTabbarController alloc] init];
     self.window.rootViewController = tbc;
     [self.window makeKeyAndVisible];
     [self registerLocalNotification];

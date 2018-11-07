@@ -10,7 +10,7 @@
 /**
  * 随机色
  */
-#define cl_RandomColor [UIColor colorWithHue:(arc4random() % (256) / (256.0)) saturation:(arc4random() % (128) / (256.0)) + (0.5) brightness:(arc4random() % (128) / (256.0)) + (0.5) alpha:(1)];
+#define cl_RandomColor [UIColor colorWithHue:(arc4random() % (256) / (256.0)) saturation:(arc4random() % (128) / (256.0)) + (0.5) brightness:(arc4random() % (128) / (256.0)) + (0.5) alpha:(1)]
 /**
  *  UIScreen width.
  */
@@ -81,6 +81,8 @@
 // 判断iPhoneXs Max
 #define cl_iPhoneXsMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !cl_isPad : NO)
 
+// 判断iPhoneX系列
+#define cl_iPhoneX_Xr_Xs_XsMax ((cl_iPhoneX) || (cl_iPhoneXr) || (cl_iPhoneXs) || (cl_iPhoneXsMax))
 
 
 @interface UIView (cl_SetRect)

@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  CLDemo
+
+  Created by AUG on 2018/11/7.
+  Copyright © 2018年 JmoVxia. All rights reserved.
+*/
+
+
+"返回" = "Back";
+"主页" = "Home";
+"跟随系统" = "Follow System";
+"中文" = "Chinese";
+"英文" = "English";
+"我的" = "Me";
+"切换语言" = "Change Language";
+"收藏" = "Collection";
+"课程" = "Curriculum";

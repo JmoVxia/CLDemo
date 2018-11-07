@@ -80,8 +80,6 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    
     // 设置左侧图片的frame
     self.leftView.frame = CGRectMake(self.frame.size.width - 50, 0, 50, self.frame.size.height);
 }
