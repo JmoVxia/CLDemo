@@ -13,9 +13,21 @@
 		0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C52EF72219298B00079A0E7 /* Localizable.strings */; };
 		0CE7333F2191CB9D00270851 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7333D2191CB9C00270851 /* Tools.m */; };
 		0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE733402191CBC700270851 /* UIView+CLSetRect.m */; };
+		0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */; };
+		0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AF5219678D100DD0BF1 /* CLSearchViewController.m */; };
+		0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AF8219678FB00DD0BF1 /* NSString+PinYin.m */; };
+		0CF79AFD219678FB00DD0BF1 /* UITableView+IndexTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AFB219678FB00DD0BF1 /* UITableView+IndexTip.m */; };
+		0CF79B012196792700DD0BF1 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79B002196792700DD0BF1 /* Aspects.m */; };
+		0CF79B082196798400DD0BF1 /* BankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79B052196798300DD0BF1 /* BankModel.m */; };
+		0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79B062196798400DD0BF1 /* BankDataModel.m */; };
+		0CF79B0B2196799C00DD0BF1 /* bank.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CF79B0A2196799C00DD0BF1 /* bank.json */; };
+		0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CF79B0D21967AE500DD0BF1 /* 六月.json */; };
+		0CF79B1321967AE600DD0BF1 /* 一周.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CF79B0E21967AE500DD0BF1 /* 一周.json */; };
+		0CF79B1421967AE600DD0BF1 /* 三月.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CF79B0F21967AE500DD0BF1 /* 三月.json */; };
+		0CF79B1521967AE600DD0BF1 /* 一年.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CF79B1021967AE600DD0BF1 /* 一年.json */; };
+		0CF79B1621967AE600DD0BF1 /* 一月.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CF79B1121967AE600DD0BF1 /* 一月.json */; };
 		5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */; };
 		5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC741E7157BF0091A0E2 /* CLChartView.m */; };
-		5B12FC781E7157D00091A0E2 /* 一周.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B12FC771E7157D00091A0E2 /* 一周.json */; };
 		5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C74251E78F120000AB534 /* CLChartXLabel.m */; };
 		5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */; };
 		5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */; };
@@ -37,10 +49,6 @@
 		5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* CLEssenceListController.m */; };
 		5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
-		5BD546381E77E63A00EEBFB9 /* 一月.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BD546371E77E63A00EEBFB9 /* 一月.json */; };
-		5BD5463C1E77E65C00EEBFB9 /* 六月.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BD546391E77E65C00EEBFB9 /* 六月.json */; };
-		5BD5463D1E77E65C00EEBFB9 /* 三月.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BD5463A1E77E65C00EEBFB9 /* 三月.json */; };
-		5BD5463E1E77E65C00EEBFB9 /* 一年.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BD5463B1E77E65C00EEBFB9 /* 一年.json */; };
 		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
 		5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */; };
 		E9EEC30690C393893AD6852D /* libPods-CLDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE2B946E5FAE4FAD9F651FC /* libPods-CLDemo.a */; };
@@ -60,11 +68,30 @@
 		0CE7333E2191CB9D00270851 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		0CE733402191CBC700270851 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		0CE733412191CBC700270851 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		0CF79AE52195B1C800DD0BF1 /* UIButton+CLBlockAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+CLBlockAction.h"; sourceTree = "<group>"; };
+		0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CLBlockAction.m"; sourceTree = "<group>"; };
+		0CF79AF5219678D100DD0BF1 /* CLSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchViewController.m; sourceTree = "<group>"; };
+		0CF79AF6219678D100DD0BF1 /* CLSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchViewController.h; sourceTree = "<group>"; };
+		0CF79AF8219678FB00DD0BF1 /* NSString+PinYin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PinYin.m"; sourceTree = "<group>"; };
+		0CF79AF9219678FB00DD0BF1 /* NSString+PinYin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PinYin.h"; sourceTree = "<group>"; };
+		0CF79AFA219678FB00DD0BF1 /* UITableView+IndexTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+IndexTip.h"; sourceTree = "<group>"; };
+		0CF79AFB219678FB00DD0BF1 /* UITableView+IndexTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+IndexTip.m"; sourceTree = "<group>"; };
+		0CF79AFF2196792700DD0BF1 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		0CF79B002196792700DD0BF1 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		0CF79B042196798300DD0BF1 /* BankDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankDataModel.h; sourceTree = "<group>"; };
+		0CF79B052196798300DD0BF1 /* BankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankModel.m; sourceTree = "<group>"; };
+		0CF79B062196798400DD0BF1 /* BankDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankDataModel.m; sourceTree = "<group>"; };
+		0CF79B072196798400DD0BF1 /* BankModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankModel.h; sourceTree = "<group>"; };
+		0CF79B0A2196799C00DD0BF1 /* bank.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bank.json; sourceTree = "<group>"; };
+		0CF79B0D21967AE500DD0BF1 /* 六月.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "六月.json"; sourceTree = "<group>"; };
+		0CF79B0E21967AE500DD0BF1 /* 一周.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一周.json"; sourceTree = "<group>"; };
+		0CF79B0F21967AE500DD0BF1 /* 三月.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "三月.json"; sourceTree = "<group>"; };
+		0CF79B1021967AE600DD0BF1 /* 一年.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一年.json"; sourceTree = "<group>"; };
+		0CF79B1121967AE600DD0BF1 /* 一月.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一月.json"; sourceTree = "<group>"; };
 		5B12FC711E7157BF0091A0E2 /* CLChartMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartMaskView.h; sourceTree = "<group>"; };
 		5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartMaskView.m; sourceTree = "<group>"; };
 		5B12FC731E7157BF0091A0E2 /* CLChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartView.h; sourceTree = "<group>"; };
 		5B12FC741E7157BF0091A0E2 /* CLChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartView.m; sourceTree = "<group>"; };
-		5B12FC771E7157D00091A0E2 /* 一周.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一周.json"; sourceTree = "<group>"; };
 		5B1C74241E78F120000AB534 /* CLChartXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartXLabel.h; sourceTree = "<group>"; };
 		5B1C74251E78F120000AB534 /* CLChartXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartXLabel.m; sourceTree = "<group>"; };
 		5B32C81A1E7A4AF8000C1749 /* CLChartNameToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartNameToolBar.h; sourceTree = "<group>"; };
@@ -108,10 +135,6 @@
 		5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AIExtension.m"; sourceTree = "<group>"; };
 		5BBB62901E7444A100B28FC3 /* CLChartToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartToolBar.h; sourceTree = "<group>"; };
 		5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartToolBar.m; sourceTree = "<group>"; };
-		5BD546371E77E63A00EEBFB9 /* 一月.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一月.json"; sourceTree = "<group>"; };
-		5BD546391E77E65C00EEBFB9 /* 六月.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "六月.json"; sourceTree = "<group>"; };
-		5BD5463A1E77E65C00EEBFB9 /* 三月.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "三月.json"; sourceTree = "<group>"; };
-		5BD5463B1E77E65C00EEBFB9 /* 一年.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "一年.json"; sourceTree = "<group>"; };
 		5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCalculateSize.h"; sourceTree = "<group>"; };
 		5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCalculateSize.m"; sourceTree = "<group>"; };
 		5BE0FA3D1E03E03900914DFF /* CLSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchBar.h; sourceTree = "<group>"; };
@@ -151,6 +174,46 @@
 				0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */,
 			);
 			path = CLLanguageManager;
+			sourceTree = "<group>";
+		};
+		0CF79AFE2196792000DD0BF1 /* Aspects */ = {
+			isa = PBXGroup;
+			children = (
+				0CF79AFF2196792700DD0BF1 /* Aspects.h */,
+				0CF79B002196792700DD0BF1 /* Aspects.m */,
+			);
+			path = Aspects;
+			sourceTree = "<group>";
+		};
+		0CF79B022196794D00DD0BF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0CF79B042196798300DD0BF1 /* BankDataModel.h */,
+				0CF79B062196798400DD0BF1 /* BankDataModel.m */,
+				0CF79B072196798400DD0BF1 /* BankModel.h */,
+				0CF79B052196798300DD0BF1 /* BankModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0CF79B032196795500DD0BF1 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		0CF79B0C219679AB00DD0BF1 /* DataJson */ = {
+			isa = PBXGroup;
+			children = (
+				0CF79B0A2196799C00DD0BF1 /* bank.json */,
+				0CF79B0E21967AE500DD0BF1 /* 一周.json */,
+				0CF79B1121967AE600DD0BF1 /* 一月.json */,
+				0CF79B0F21967AE500DD0BF1 /* 三月.json */,
+				0CF79B0D21967AE500DD0BF1 /* 六月.json */,
+				0CF79B1021967AE600DD0BF1 /* 一年.json */,
+			);
+			path = DataJson;
 			sourceTree = "<group>";
 		};
 		23B1EFE4AC7CCB37407B3D19 /* Frameworks */ = {
@@ -220,11 +283,6 @@
 		5B80D9E71DDD976A00A20E34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5B12FC771E7157D00091A0E2 /* 一周.json */,
-				5BD546371E77E63A00EEBFB9 /* 一月.json */,
-				5BD5463A1E77E65C00EEBFB9 /* 三月.json */,
-				5BD546391E77E65C00EEBFB9 /* 六月.json */,
-				5BD5463B1E77E65C00EEBFB9 /* 一年.json */,
 				5B80D9F31DDD976A00A20E34 /* Assets.xcassets */,
 				5B80D9F51DDD976A00A20E34 /* LaunchScreen.storyboard */,
 				5B80D9F81DDD976A00A20E34 /* Info.plist */,
@@ -306,8 +364,6 @@
 			isa = PBXGroup;
 			children = (
 				5B80DA281DDD993F00A20E34 /* Controller */,
-				5B80DA2B1DDD993F00A20E34 /* Model */,
-				5B80DA2C1DDD993F00A20E34 /* View */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -317,22 +373,12 @@
 			children = (
 				5B80DA291DDD993F00A20E34 /* CLCollectionController.h */,
 				5B80DA2A1DDD993F00A20E34 /* CLCollectionController.m */,
+				0CF79AF6219678D100DD0BF1 /* CLSearchViewController.h */,
+				0CF79AF5219678D100DD0BF1 /* CLSearchViewController.m */,
+				0CF79B022196794D00DD0BF1 /* Model */,
+				0CF79B032196795500DD0BF1 /* VIew */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		5B80DA2B1DDD993F00A20E34 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5B80DA2C1DDD993F00A20E34 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		5B80DA2D1DDD993F00A20E34 /* My */ = {
@@ -391,6 +437,8 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0CF79B0C219679AB00DD0BF1 /* DataJson */,
+				0CF79AFE2196792000DD0BF1 /* Aspects */,
 				0C52EF6421928C2A0079A0E7 /* CLLanguageManager */,
 				0C52EF6321928C1D0079A0E7 /* LocalNotificationManager */,
 				5B80DA3A1DDD993F00A20E34 /* Category */,
@@ -402,6 +450,10 @@
 		5B80DA3A1DDD993F00A20E34 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				0CF79AF9219678FB00DD0BF1 /* NSString+PinYin.h */,
+				0CF79AF8219678FB00DD0BF1 /* NSString+PinYin.m */,
+				0CF79AFA219678FB00DD0BF1 /* UITableView+IndexTip.h */,
+				0CF79AFB219678FB00DD0BF1 /* UITableView+IndexTip.m */,
 				0CE733412191CBC700270851 /* UIView+CLSetRect.h */,
 				0CE733402191CBC700270851 /* UIView+CLSetRect.m */,
 				5BBB628D1E73E5A700B28FC3 /* UIColor+AIExtension.h */,
@@ -412,6 +464,8 @@
 				5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */,
 				0C52EF6B2192949A0079A0E7 /* NSBundle+CLLanguage.h */,
 				0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */,
+				0CF79AE52195B1C800DD0BF1 /* UIButton+CLBlockAction.h */,
+				0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -488,14 +542,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BD5463D1E77E65C00EEBFB9 /* 三月.json in Resources */,
-				5BD5463E1E77E65C00EEBFB9 /* 一年.json in Resources */,
+				0CF79B1621967AE600DD0BF1 /* 一月.json in Resources */,
+				0CF79B0B2196799C00DD0BF1 /* bank.json in Resources */,
 				5B80D9F71DDD976A00A20E34 /* LaunchScreen.storyboard in Resources */,
 				5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */,
-				5B12FC781E7157D00091A0E2 /* 一周.json in Resources */,
+				0CF79B1521967AE600DD0BF1 /* 一年.json in Resources */,
+				0CF79B1421967AE600DD0BF1 /* 三月.json in Resources */,
+				0CF79B1321967AE600DD0BF1 /* 一周.json in Resources */,
+				0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
-				5BD5463C1E77E65C00EEBFB9 /* 六月.json in Resources */,
-				5BD546381E77E63A00EEBFB9 /* 一月.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +611,7 @@
 			files = (
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
 				0CE7333F2191CB9D00270851 /* Tools.m in Sources */,
+				0CF79AFD219678FB00DD0BF1 /* UITableView+IndexTip.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,
@@ -567,18 +623,24 @@
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
+				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
+				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
 				0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */,
 				5B80DA4C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m in Sources */,
+				0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
+				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
 				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
+				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */,
 				5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */,
+				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */,

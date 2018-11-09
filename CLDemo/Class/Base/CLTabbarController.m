@@ -50,6 +50,8 @@
     self.viewControllers = @[nc1,nc2,nc3,nc4];
 
 }
-
+-(void)dealloc {
+    NSLog(@"Tabbar页面销毁了");
+}
 
 @end

@@ -79,7 +79,9 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-
+-(void)dealloc {
+    NSLog(@"课程页面销毁了");
+}
 
 
 @end

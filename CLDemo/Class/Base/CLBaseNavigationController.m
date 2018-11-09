@@ -23,10 +23,11 @@
     if (self.viewControllers.count > 0) { // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
         viewController.hidesBottomBarWhenPushed = YES;
     }
+    // 修改tabBra的frame
+//    CGRect frame = self.tabBarController.tabBar.frame;
+//    frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+//    self.tabBarController.tabBar.frame = frame;
     [super pushViewController:viewController animated:animated];
-}
-- (void)back {
-    [self popViewControllerAnimated:YES];
 }
 
 @end

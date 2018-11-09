@@ -10,8 +10,7 @@
 
 @implementation UIImage (CLScaleToSize)
 
-+ (UIImage*) OriginImage:(UIImage*)image scaleToSize:(CGSize)size
-{
++ (UIImage*) originImage:(UIImage*)image scaleToSize:(CGSize)size {
     //size为CGSize类型，即你所需要的图片尺寸
     UIGraphicsBeginImageContext(size);
     [image drawInRect:CGRectMake(0,0, size.width, size.height)];

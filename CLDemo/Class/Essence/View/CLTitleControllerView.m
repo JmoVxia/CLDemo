@@ -202,7 +202,11 @@
             [button setTitleColor:self->_titleNormalColorArray[idx] forState:UIControlStateNormal];
             //选中颜色
             [button setTitleColor:self->_titleSelectedColorArray[idx] forState:UIControlStateSelected];
-            [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+            __weak __typeof(self) weakSelf = self;
+            [button addActionBlock:^(UIButton *button) {
+                __typeof(&*weakSelf) strongSelf = weakSelf;
+                [strongSelf buttonAction:button];
+            }];
             [button sizeToFit];
             [titlesView addSubview:button];
             lastButton = button;

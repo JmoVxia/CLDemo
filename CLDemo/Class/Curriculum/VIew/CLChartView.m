@@ -66,7 +66,12 @@
 - (UIButton *) zoomButton{
     if (_zoomButton == nil){
         _zoomButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, 0, 40, toolBarHeight)];
-        [_zoomButton addTarget:self action:@selector(zoomButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        _zoomButton.backgroundColor = cl_RandomColor;
+        __weak __typeof(self) weakSelf = self;
+        [_zoomButton addActionBlock:^(UIButton *button) {
+            __typeof(&*weakSelf) strongSelf = weakSelf;
+            [strongSelf zoomButtonAction:button];
+        }];
     }
     return _zoomButton;
 }

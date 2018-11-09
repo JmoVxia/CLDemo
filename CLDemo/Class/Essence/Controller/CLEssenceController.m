@@ -43,5 +43,8 @@
     CLTitleControllerView *titleView =  [[CLTitleControllerView alloc] initWithFrame:CGRectMake(0, cl_statusBarAndNavigationBarHeight, cl_screenWidth, cl_screenHeight - cl_tabbarHeight - cl_statusBarAndNavigationBarHeight) titleArray:[NSMutableArray arrayWithArray:titlesArray] controllerClassNameArray:controllerClassNameArray titleNormalColorArray:titleNormalColorArray titleSelectedColorArray:titleSelectedColorArray number:5 fatherController:self];
     [self.view addSubview:titleView];
 }
+-(void)dealloc {
+    NSLog(@"主页页面销毁了");
+}
 
 @end

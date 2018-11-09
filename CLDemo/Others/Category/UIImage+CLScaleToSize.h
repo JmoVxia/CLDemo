@@ -19,6 +19,6 @@
 
  @return 返回改变大小后图片
  */
-+ (UIImage*) OriginImage:(UIImage*)image scaleToSize:(CGSize)size;
++ (UIImage*) originImage:(UIImage*)image scaleToSize:(CGSize)size;
 
 @end

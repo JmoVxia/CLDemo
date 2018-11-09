@@ -25,10 +25,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = cl_RandomColor;
-
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
-        make.top.mas_equalTo(cl_statusBarAndNavigationBarHeight);
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
     }];
 }
 
@@ -126,6 +125,8 @@
     return _tableView;
 }
 
-
+-(void)dealloc {
+    NSLog(@"语言切换页面销毁了");
+}
 
 @end

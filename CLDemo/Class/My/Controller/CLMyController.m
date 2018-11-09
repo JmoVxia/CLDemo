@@ -26,19 +26,18 @@
     button.backgroundColor = cl_RandomColor;
     [button setTitle:NSLocalizedString(@"切换语言", nil) forState:UIControlStateNormal];
     [button setTitle:NSLocalizedString(@"切换语言", nil) forState:UIControlStateSelected];
-    [button addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
+    __weak __typeof(self) weakSelf = self;
+    [button addActionBlock:^(UIButton *button) {
+        __typeof(&*weakSelf) strongSelf = weakSelf;
+        CLChangeLanguageController *languageController = [[CLChangeLanguageController alloc] init];
+        [strongSelf.navigationController pushViewController:languageController animated:YES];
+    }];
     [button sizeToFit];
     button.center = self.view.center;
     [self.view addSubview:button];
 }
-
-- (void)settingAction {
-    
-    CLChangeLanguageController *languageController = [[CLChangeLanguageController alloc] init];
-    [self.navigationController pushViewController:languageController animated:YES];
+-(void)dealloc {
+    NSLog(@"我的页面销毁了");
 }
-
-
-
 
 @end
