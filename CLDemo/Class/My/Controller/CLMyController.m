@@ -10,8 +10,16 @@
 
 #import "CLMyController.h"
 #import "CLChangeLanguageController.h"
+#import "CLChangeFontSizeController.h"
 
-@interface CLMyController ()
+@interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
+
+/**tableview*/
+@property (nonatomic, strong) UITableView *tableView;
+/**数据源*/
+@property (nonatomic, strong) NSMutableArray<NSString *> *arrayDS;
+
+
 
 @end
 
@@ -19,23 +27,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor greenColor];
     self.navigationItem.title = NSLocalizedString(@"我的", nil);
-    UIButton *button = [[UIButton alloc] init];
-    button.backgroundColor = cl_RandomColor;
-    [button setTitle:NSLocalizedString(@"切换语言", nil) forState:UIControlStateNormal];
-    [button setTitle:NSLocalizedString(@"切换语言", nil) forState:UIControlStateSelected];
-    __weak __typeof(self) weakSelf = self;
-    [button addActionBlock:^(UIButton *button) {
-        __typeof(&*weakSelf) strongSelf = weakSelf;
-        CLChangeLanguageController *languageController = [[CLChangeLanguageController alloc] init];
-        [strongSelf.navigationController pushViewController:languageController animated:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
     }];
-    [button sizeToFit];
-    button.center = self.view.center;
-    [self.view addSubview:button];
 }
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayDS.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+    }
+    cell.textLabel.text = self.arrayDS[indexPath.row];
+    cell.textLabel.font = [UIFont clFontOfSize:18];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    });
+    if (indexPath.row == 0) {
+        CLChangeLanguageController *languageController = [CLChangeLanguageController new];
+        [self.navigationController pushViewController:languageController animated:YES];
+    }else if (indexPath.row == 1) {
+        CLChangeFontSizeController *fontSizeController = [CLChangeFontSizeController new];
+        [self.navigationController pushViewController:fontSizeController animated:YES];
+    }
+}
+- (UITableView *) tableView{
+    if (_tableView == nil){
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
+- (NSMutableArray *) arrayDS{
+    if (_arrayDS == nil){
+        _arrayDS = [[NSMutableArray alloc] init];
+        [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+    }
+    return _arrayDS;
+}
+
 -(void)dealloc {
     NSLog(@"我的页面销毁了");
 }

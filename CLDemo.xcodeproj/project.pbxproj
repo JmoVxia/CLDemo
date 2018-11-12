@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */; };
 		0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */; };
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
 		0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C52EF72219298B00079A0E7 /* Localizable.strings */; };
+		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
+		0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */; };
+		0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */; };
+		0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */; };
+		0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */; };
 		0CE7333F2191CB9D00270851 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7333D2191CB9C00270851 /* Tools.m */; };
 		0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE733402191CBC700270851 /* UIView+CLSetRect.m */; };
 		0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */; };
@@ -55,6 +61,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C31C38321994CCF001860C2 /* UIFont+CLFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CLFont.h"; sourceTree = "<group>"; };
+		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C52EF5F219287280079A0E7 /* CLChangeLanguageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeLanguageController.h; sourceTree = "<group>"; };
 		0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeLanguageController.m; sourceTree = "<group>"; };
 		0C52EF6521928C5C0079A0E7 /* CLLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLanguageManager.h; sourceTree = "<group>"; };
@@ -64,6 +72,16 @@
 		0C52EF71219298B00079A0E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0C52EF73219299300079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0C52EF74219299310079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeController.h; sourceTree = "<group>"; };
+		0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeController.m; sourceTree = "<group>"; };
+		0CCDA314219855A20057BA14 /* CLChangeFontSizeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeCell.h; sourceTree = "<group>"; };
+		0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeCell.m; sourceTree = "<group>"; };
+		0CCDA317219855B90057BA14 /* ChangeFontSizeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeFontSizeModel.h; sourceTree = "<group>"; };
+		0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeFontSizeModel.m; sourceTree = "<group>"; };
+		0CCDA31A219922680057BA14 /* CLChangeFontSizeSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeSlider.h; sourceTree = "<group>"; };
+		0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeSlider.m; sourceTree = "<group>"; };
+		0CCDA324219927370057BA14 /* CLChangeFontSizeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeManager.h; sourceTree = "<group>"; };
+		0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeManager.m; sourceTree = "<group>"; };
 		0CE7333D2191CB9C00270851 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		0CE7333E2191CB9D00270851 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		0CE733402191CBC700270851 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
@@ -174,6 +192,35 @@
 				0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */,
 			);
 			path = CLLanguageManager;
+			sourceTree = "<group>";
+		};
+		0CCDA30C219854D90057BA14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0CCDA317219855B90057BA14 /* ChangeFontSizeModel.h */,
+				0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0CCDA310219855620057BA14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0CCDA314219855A20057BA14 /* CLChangeFontSizeCell.h */,
+				0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */,
+				0CCDA31A219922680057BA14 /* CLChangeFontSizeSlider.h */,
+				0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0CCDA31D219922C50057BA14 /* CLChangeFontSizeManager */ = {
+			isa = PBXGroup;
+			children = (
+				0CCDA324219927370057BA14 /* CLChangeFontSizeManager.h */,
+				0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */,
+			);
+			path = CLChangeFontSizeManager;
 			sourceTree = "<group>";
 		};
 		0CF79AFE2196792000DD0BF1 /* Aspects */ = {
@@ -385,8 +432,6 @@
 			isa = PBXGroup;
 			children = (
 				5B80DA2E1DDD993F00A20E34 /* Controller */,
-				5B80DA311DDD993F00A20E34 /* Model */,
-				5B80DA321DDD993F00A20E34 /* View */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -398,22 +443,12 @@
 				5B80DA301DDD993F00A20E34 /* CLMyController.m */,
 				0C52EF5F219287280079A0E7 /* CLChangeLanguageController.h */,
 				0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */,
+				0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */,
+				0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */,
+				0CCDA30C219854D90057BA14 /* Model */,
+				0CCDA310219855620057BA14 /* View */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		5B80DA311DDD993F00A20E34 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5B80DA321DDD993F00A20E34 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		5B80DA331DDD993F00A20E34 /* Curriculum */ = {
@@ -437,6 +472,7 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0CCDA31D219922C50057BA14 /* CLChangeFontSizeManager */,
 				0CF79B0C219679AB00DD0BF1 /* DataJson */,
 				0CF79AFE2196792000DD0BF1 /* Aspects */,
 				0C52EF6421928C2A0079A0E7 /* CLLanguageManager */,
@@ -466,6 +502,8 @@
 				0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */,
 				0CF79AE52195B1C800DD0BF1 /* UIButton+CLBlockAction.h */,
 				0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */,
+				0C31C38321994CCF001860C2 /* UIFont+CLFont.h */,
+				0C31C38421994CCF001860C2 /* UIFont+CLFont.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -620,12 +658,15 @@
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */,
+				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
+				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
+				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
 				0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */,
@@ -633,8 +674,10 @@
 				0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
+				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
+				0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */,
 				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
@@ -643,6 +686,7 @@
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
+				0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
