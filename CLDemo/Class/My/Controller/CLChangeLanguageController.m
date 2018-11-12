@@ -70,6 +70,7 @@
     }else if (indexPath.row == 2) {
         cell.textLabel.text = NSLocalizedString(@"英文", nil);
     }
+    cell.textLabel.font = [UIFont clFontOfSize:18];
     return cell;
 }
 

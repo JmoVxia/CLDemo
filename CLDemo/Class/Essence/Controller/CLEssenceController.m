@@ -24,7 +24,7 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"主页", nil);
-    NSArray *titlesArray = @[@"推荐视频",@"精华",@"图片",@"声音",@"视频",@"段子",@"社会",@"福利"];
+    NSArray *titlesArray = @[NSLocalizedString(@"推荐", nil),NSLocalizedString(@"精华", nil),NSLocalizedString(@"图片", nil),NSLocalizedString(@"声音", nil),NSLocalizedString(@"视频", nil),NSLocalizedString(@"福利", nil)];
     NSString *classString = @"CLEssenceListController";
     //控制器类名数组
     NSMutableArray *controllerClassNameArray = [NSMutableArray array];

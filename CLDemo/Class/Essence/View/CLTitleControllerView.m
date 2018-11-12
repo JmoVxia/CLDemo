@@ -188,15 +188,15 @@
             }
         }];
         //计算文字长度
-        CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.cl_height)];
+        CGSize size = [string sizeWithFont:[UIFont clFontOfSize:18] maxSize:CGSizeMake(1000, titlesView.cl_height)];
         //间隙
-        CGFloat padding = (self.cl_width - size.width) / (_number + 1);
+        CGFloat padding = MAX((self.cl_width - size.width) / (_number + 1), 10);
         //创建标题按钮
         [_titlesArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIButton * button = [[UIButton alloc]init];
             button.frame = CGRectMake(lastButton.cl_right + padding, 0, 0, titlesView.cl_height);
             button.tag = 10086 + idx;
-            button.titleLabel.font = [UIFont systemFontOfSize:18];
+            button.titleLabel.font = [UIFont clFontOfSize:18];
             [button setTitle:obj forState:UIControlStateNormal];
             //常态颜色
             [button setTitleColor:self->_titleNormalColorArray[idx] forState:UIControlStateNormal];
