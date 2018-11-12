@@ -187,6 +187,7 @@
     UILabel *label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.00];
     label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont clFontOfSize:16];
     NSString *string;
     if (!self.active) {
         string = self.arrayDS[section];
@@ -222,7 +223,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont clFontOfSize:14];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (!self.active) {
         NSArray *stringArray = [[self.allKeysDict[self.arrayDS[indexPath.section]] objectAtIndex:indexPath.row] componentsSeparatedByString:@"+"];
