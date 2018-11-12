@@ -1,7 +1,7 @@
 PODS:
   - DateTools (2.0.0)
-  - Masonry (1.0.2)
-  - MJExtension (3.0.13)
+  - Masonry (1.1.0)
+  - MJExtension (3.0.15.1)
   - YYCache (1.0.4)
 
 DEPENDENCIES:
@@ -10,12 +10,19 @@ DEPENDENCIES:
   - MJExtension
   - YYCache
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DateTools
+    - Masonry
+    - MJExtension
+    - YYCache
+
 SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
-  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
 PODFILE CHECKSUM: 45f4222f04f62f42a7dbce92d8ecac3d5d070221
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3
