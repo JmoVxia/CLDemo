@@ -80,7 +80,7 @@
     return YES;
 }
 -(void)dealloc {
-    NSLog(@"课程页面销毁了");
+    CLLog(@"课程页面销毁了");
 }
 
 

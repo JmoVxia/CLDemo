@@ -34,7 +34,7 @@
             [button setTitle:name forState:UIControlStateNormal];
             [button sizeToFit];
             button.center = self.view.center;
-            NSLog(@"----%@-----%@",name,bankCode);
+            CLLog(@"----%@-----%@",name,bankCode);
         };
         [strongSelf presentViewController:searchController animated:YES completion:nil];
     }];
@@ -44,7 +44,7 @@
 }
 
 -(void)dealloc {
-    NSLog(@"收藏页面销毁了");
+    CLLog(@"收藏页面销毁了");
 }
 
 

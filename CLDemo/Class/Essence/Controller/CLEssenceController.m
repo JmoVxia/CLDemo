@@ -42,7 +42,7 @@
     [self.view addSubview:titleView];
 }
 -(void)dealloc {
-    NSLog(@"主页页面销毁了");
+    CLLog(@"主页页面销毁了");
 }
 
 @end

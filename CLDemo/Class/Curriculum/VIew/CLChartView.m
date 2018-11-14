@@ -157,7 +157,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedWeek:)]) {
         [_delegate CLChartViewDidSelectedWeek:button];
     }else{
-        CLlog(@"未实现代理或者没有代理人");
+        CLLog(@"未实现代理或者没有代理人");
     }
     
     
@@ -168,7 +168,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedOneMonth:)]) {
         [_delegate CLChartViewDidSelectedOneMonth:button];
     }else{
-        CLlog(@"未实现代理或者没有代理人");
+        CLLog(@"未实现代理或者没有代理人");
     }
 }
 //三月
@@ -177,7 +177,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedThreeMonth:)]) {
         [_delegate CLChartViewDidSelectedThreeMonth:button];
     }else{
-        CLlog(@"未实现代理或者没有代理人");
+        CLLog(@"未实现代理或者没有代理人");
     }
 }
 //六月
@@ -186,7 +186,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedSixMonth:)]) {
         [_delegate CLChartViewDidSelectedSixMonth:button];
     }else{
-        CLlog(@"未实现代理或者没有代理人");
+        CLLog(@"未实现代理或者没有代理人");
     }
 }
 //一年
@@ -195,7 +195,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedYear:)]) {
         [_delegate CLChartViewDidSelectedYear:button];
     }else{
-        CLlog(@"未实现代理或者没有代理人");
+        CLLog(@"未实现代理或者没有代理人");
     }
 }
 

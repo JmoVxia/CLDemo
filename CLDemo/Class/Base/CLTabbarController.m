@@ -51,7 +51,7 @@
 
 }
 -(void)dealloc {
-    NSLog(@"Tabbar页面销毁了");
+    CLLog(@"Tabbar页面销毁了");
 }
 
 @end

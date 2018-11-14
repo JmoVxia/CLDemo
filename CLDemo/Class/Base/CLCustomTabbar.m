@@ -88,7 +88,7 @@
 }
 
 - (void)publishButton:(UIButton *)button {
-    NSLog(@"-------->>凸起按钮被点击了");
+    CLLog(@"-------->>凸起按钮被点击了");
 }
 
 @end

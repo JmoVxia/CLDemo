@@ -13,26 +13,22 @@
 #ifdef __OBJC__
 
 
-/**使用CLlog，调试模式下才会打印，发布模式不会打印*/
-#ifdef DEBUG//调试阶段的log
-#define CLlog(...) NSLog(__VA_ARGS__)
+#ifdef DEBUG
+# define CLLog(fmt, ...) CLLogWithFile((@"[文件名:%s] " "[函数名:%s] " "[行号:%d] " fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
-#define CLlog(...)
+# define CLLog(...);
 #endif
-/**打印方法名称*/
-#define CLlogFunc  CLlog(@"%s",__func__);
+
 
 
 #import  "Masonry.h"
-
-
 #import "UIView+CLSetRect.h"
 #import "UIButton+CLBlockAction.h"
 #import "UIFont+CLFont.h"
 #import "Tools.h"
 #import "Define.h"
 #import "DateTools.h"
-
+#import "CLLogManager.h"
 
 
 

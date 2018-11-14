@@ -98,7 +98,9 @@ static CLLocalNotificationManager * manger = nil;
     [self.localArray addObject:model];
     [self.cache setObject:self.localArray forKey:CLLocalArray];
     NSArray *array = [self queryAllSystemNotifications];
-    CLlog(@"+++%lu+++",(unsigned long)array.count);
+    CLLog(@"+++%lu+++",(unsigned long)array.count);
+
+    
 }
 
 
@@ -137,7 +139,9 @@ static CLLocalNotificationManager * manger = nil;
         //删除通知中心
         [[UIApplication sharedApplication] cancelLocalNotification:notification];
         NSArray *array = [self queryAllSystemNotifications];
-        CLlog(@"---%lu---",(unsigned long)array.count);
+        CLLog(@"---%lu---",(unsigned long)array.count);
+        
+        
     }
     if (dateBase) {
         //从数据库删除

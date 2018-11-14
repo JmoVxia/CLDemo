@@ -22,7 +22,6 @@
     self.window.rootViewController = tbc;
     [self.window makeKeyAndVisible];
     [self registerLocalNotification];
-
     
     return YES;
 }
@@ -48,20 +47,20 @@
     //    [alert show];
     
     // 查看当前的状态出于(前台: 0)/(后台: 2)/(从后台进入前台: 1)
-    NSLog(@"applicationState.rawValue: %zd", application.applicationState);
+    CLLog(@"applicationState.rawValue: %zd", application.applicationState);
     
     // 执行响应操作
     // 如果当前App在前台,执行操作
     if (application.applicationState == UIApplicationStateActive) {
-        NSLog(@"执行前台对应的操作");
+        CLLog(@"执行前台对应的操作");
     } else if (application.applicationState == UIApplicationStateInactive) {
         // 后台进入前台
-        NSLog(@"执行后台进入前台对应的操作");
-        NSLog(@"*****%@", notification.userInfo);
+        CLLog(@"执行后台进入前台对应的操作");
+        CLLog(@"*****%@", notification.userInfo);
     } else if (application.applicationState == UIApplicationStateBackground) {
         // 当前App在后台
         
-        NSLog(@"执行后台对应的操作");
+        CLLog(@"执行后台对应的操作");
     }
 }
 

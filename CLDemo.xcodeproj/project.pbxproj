@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
+		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
 		0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */; };
 		0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */; };
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
@@ -63,6 +64,8 @@
 /* Begin PBXFileReference section */
 		0C31C38321994CCF001860C2 /* UIFont+CLFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CLFont.h"; sourceTree = "<group>"; };
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
+		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
+		0C33BC78219AF71000583B4C /* CLLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogManager.m; sourceTree = "<group>"; };
 		0C52EF5F219287280079A0E7 /* CLChangeLanguageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeLanguageController.h; sourceTree = "<group>"; };
 		0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeLanguageController.m; sourceTree = "<group>"; };
 		0C52EF6521928C5C0079A0E7 /* CLLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLanguageManager.h; sourceTree = "<group>"; };
@@ -174,6 +177,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C33BC6F219AEF5D00583B4C /* CLLog */ = {
+			isa = PBXGroup;
+			children = (
+				0C33BC77219AF71000583B4C /* CLLogManager.h */,
+				0C33BC78219AF71000583B4C /* CLLogManager.m */,
+			);
+			path = CLLog;
+			sourceTree = "<group>";
+		};
 		0C52EF6321928C1D0079A0E7 /* LocalNotificationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,8 +484,9 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				0CCDA31D219922C50057BA14 /* CLChangeFontSizeManager */,
 				0CF79B0C219679AB00DD0BF1 /* DataJson */,
+				0C33BC6F219AEF5D00583B4C /* CLLog */,
+				0CCDA31D219922C50057BA14 /* CLChangeFontSizeManager */,
 				0CF79AFE2196792000DD0BF1 /* Aspects */,
 				0C52EF6421928C2A0079A0E7 /* CLLanguageManager */,
 				0C52EF6321928C1D0079A0E7 /* LocalNotificationManager */,
@@ -664,6 +677,7 @@
 				0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
+				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,

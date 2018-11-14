@@ -110,7 +110,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].keyWindow.rootViewController = tabbarController;
         navigationController.viewControllers = viewControllers;
-        CLlog(@"已切换到语言 %@", [NSBundle currentLanguage]);
+        CLLog(@"已切换到语言 %@", [NSBundle currentLanguage]);
     });
 }
 
@@ -127,7 +127,7 @@
 }
 
 -(void)dealloc {
-    NSLog(@"语言切换页面销毁了");
+    CLLog(@"语言切换页面销毁了");
 }
 
 @end

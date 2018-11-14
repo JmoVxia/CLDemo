@@ -87,7 +87,7 @@
 }
 
 -(void)dealloc {
-    NSLog(@"我的页面销毁了");
+    CLLog(@"我的页面销毁了");
 }
 
 @end
