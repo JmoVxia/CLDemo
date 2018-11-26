@@ -11,10 +11,9 @@
 
 @implementation CLLogManager
 
-static NSFileHandle *TGLogFileHandle()
+static NSFileHandle *CLLogFileHandle()
 {
     static NSFileHandle *fileHandle = nil;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^
                   {
@@ -23,13 +22,14 @@ static NSFileHandle *TGLogFileHandle()
                       NSString *documentsDirectory = [Tools pathDocuments];
                       
                       NSString *currentFilePath = [documentsDirectory stringByAppendingPathComponent:@"application-0.log"];
-                      NSString *oldestFilePath = [documentsDirectory stringByAppendingPathComponent:@"application-30.log"];
+                      NSString *oldestFilePath = [documentsDirectory stringByAppendingPathComponent:@"application-60.log"];
                       
-                      if ([fileManager fileExistsAtPath:oldestFilePath])
+                      //60文件存在，删除
+                      if ([fileManager fileExistsAtPath:oldestFilePath]){
                           [fileManager removeItemAtPath:oldestFilePath error:nil];
-                      
-                      for (int i = 60 - 1; i >= 0; i--)
-                      {
+                      }
+                      //遍历文件，将文件编号往后移动，新增第0的一个文件
+                      for (int i = 60 - 1; i >= 0; i--) {
                           NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"application-%d.log", i]];
                           NSString *nextFilePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"application-%d.log", i + 1]];
                           if ([fileManager fileExistsAtPath:filePath])
@@ -46,15 +46,14 @@ static NSFileHandle *TGLogFileHandle()
     return fileHandle;
 }
 
-void CLLogWithFile(NSString *format, ...)
-{
+void CLLogWithFile(NSString *format, ...) {
     va_list L;
     va_start(L, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:L];
     NSLog(@"%@", message);
-    // 开启异步子线程
+    // 开启异步子线程，将打印写入文件
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSFileHandle *output = TGLogFileHandle();
+        NSFileHandle *output = CLLogFileHandle();
         if (output != nil) {
             time_t rawtime;
             struct tm timeinfo;
