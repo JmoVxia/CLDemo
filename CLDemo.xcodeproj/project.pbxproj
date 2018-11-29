@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
+		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
+		0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */; };
 		0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */; };
 		0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */; };
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
@@ -66,6 +68,10 @@
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
 		0C33BC78219AF71000583B4C /* CLLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogManager.m; sourceTree = "<group>"; };
+		0C3CAA5321AF89BD00A352F0 /* CLRotateAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationController.h; sourceTree = "<group>"; };
+		0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationController.m; sourceTree = "<group>"; };
+		0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationView.h; sourceTree = "<group>"; };
+		0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationView.m; sourceTree = "<group>"; };
 		0C52EF5F219287280079A0E7 /* CLChangeLanguageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeLanguageController.h; sourceTree = "<group>"; };
 		0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeLanguageController.m; sourceTree = "<group>"; };
 		0C52EF6521928C5C0079A0E7 /* CLLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLanguageManager.h; sourceTree = "<group>"; };
@@ -222,6 +228,8 @@
 				0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */,
 				0CCDA31A219922680057BA14 /* CLChangeFontSizeSlider.h */,
 				0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */,
+				0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */,
+				0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -457,6 +465,8 @@
 				0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */,
 				0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */,
 				0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */,
+				0C3CAA5321AF89BD00A352F0 /* CLRotateAnimationController.h */,
+				0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */,
 				0CCDA30C219854D90057BA14 /* Model */,
 				0CCDA310219855620057BA14 /* View */,
 			);
@@ -668,6 +678,7 @@
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
+				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
@@ -684,6 +695,7 @@
 				0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */,
 				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
+				0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */,
 				5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */,
