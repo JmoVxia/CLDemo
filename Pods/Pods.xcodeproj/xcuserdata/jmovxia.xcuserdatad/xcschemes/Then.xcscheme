@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0AA6621578CE16D7D80015719C3FC01E"
-               BuildableName = "libPods-CLDemo.a"
-               BlueprintName = "Pods-CLDemo"
+               BlueprintIdentifier = "DFB4D3AC8CAE3CEC2658795132AB4420"
+               BuildableName = "libThen.a"
+               BlueprintName = "Then"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0AA6621578CE16D7D80015719C3FC01E"
-            BuildableName = "libPods-CLDemo.a"
-            BlueprintName = "Pods-CLDemo"
+            BlueprintIdentifier = "DFB4D3AC8CAE3CEC2658795132AB4420"
+            BuildableName = "libThen.a"
+            BlueprintName = "Then"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -1,0 +1,6 @@
+module Then [system] {
+  umbrella header "Then-umbrella.h"
+
+  export *
+  module * { export * }
+}

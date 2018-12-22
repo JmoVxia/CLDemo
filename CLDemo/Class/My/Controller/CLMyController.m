@@ -12,6 +12,7 @@
 #import "CLChangeLanguageController.h"
 #import "CLChangeFontSizeController.h"
 #import "CLRotateAnimationController.h"
+#import "CLDemo-Swift.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -69,6 +70,9 @@
     }else if (indexPath.row == 2) {
         CLRotateAnimationController *rotateAnimationController = [CLRotateAnimationController new];
         [self.navigationController pushViewController:rotateAnimationController animated:YES];
+    }else if (indexPath.row == 3) {
+        CLRotatingPictureViewController *rotatingPictureViewController = [CLRotatingPictureViewController new];
+        [self.navigationController pushViewController:rotatingPictureViewController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -87,6 +91,7 @@
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
         [_arrayDS addObject:NSLocalizedString(@"转子动画", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"图片旋转", nil)];
     }
     return _arrayDS;
 }
