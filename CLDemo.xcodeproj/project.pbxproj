@@ -15,6 +15,9 @@
 		0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */; };
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
 		0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C52EF72219298B00079A0E7 /* Localizable.strings */; };
+		0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */; };
+		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
+		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
 		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
 		0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */; };
 		0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */; };
@@ -82,6 +85,12 @@
 		0C52EF71219298B00079A0E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0C52EF73219299300079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0C52EF74219299310079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPasswordView.m; sourceTree = "<group>"; };
+		0C6B40E021ECFC3C00360FAD /* CLPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPasswordView.h; sourceTree = "<group>"; };
+		0C6B40E221ECFC7100360FAD /* UITextField+CLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CLDelegate.h"; sourceTree = "<group>"; };
+		0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CLDelegate.m"; sourceTree = "<group>"; };
+		0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPasswordViewController.h; sourceTree = "<group>"; };
+		0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPasswordViewController.m; sourceTree = "<group>"; };
 		0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeController.h; sourceTree = "<group>"; };
 		0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeController.m; sourceTree = "<group>"; };
 		0CCDA314219855A20057BA14 /* CLChangeFontSizeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeCell.h; sourceTree = "<group>"; };
@@ -233,6 +242,8 @@
 				0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */,
 				0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */,
 				0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */,
+				0C6B40E021ECFC3C00360FAD /* CLPasswordView.h */,
+				0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -471,6 +482,8 @@
 				0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */,
 				0C3CAA5321AF89BD00A352F0 /* CLRotateAnimationController.h */,
 				0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */,
+				0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */,
+				0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */,
 				5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */,
 				0CCDA30C219854D90057BA14 /* Model */,
 				0CCDA310219855620057BA14 /* View */,
@@ -532,6 +545,8 @@
 				0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */,
 				0C31C38321994CCF001860C2 /* UIFont+CLFont.h */,
 				0C31C38421994CCF001860C2 /* UIFont+CLFont.m */,
+				0C6B40E221ECFC7100360FAD /* UITextField+CLDelegate.h */,
+				0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -680,12 +695,15 @@
 				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
+				0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
+				0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */,
+				0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
@@ -861,7 +879,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jmovxia/仓库/CLDemo/CLDemo/CLDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -881,7 +899,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jmovxia/仓库/CLDemo/CLDemo/CLDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

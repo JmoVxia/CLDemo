@@ -12,6 +12,7 @@
 #import "CLChangeLanguageController.h"
 #import "CLChangeFontSizeController.h"
 #import "CLRotateAnimationController.h"
+#import "CLPasswordViewController.h"
 #import "CLDemo-Swift.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
@@ -73,6 +74,9 @@
     }else if (indexPath.row == 3) {
         CLRotatingPictureViewController *rotatingPictureViewController = [CLRotatingPictureViewController new];
         [self.navigationController pushViewController:rotatingPictureViewController animated:YES];
+    }else if (indexPath.row == 4) {
+        CLPasswordViewController *passwordViewController = [[CLPasswordViewController alloc] init];
+        [self.navigationController pushViewController:passwordViewController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -91,7 +95,8 @@
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
         [_arrayDS addObject:NSLocalizedString(@"转子动画", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"图片旋转", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"自定义密码框", nil)];
     }
     return _arrayDS;
 }
