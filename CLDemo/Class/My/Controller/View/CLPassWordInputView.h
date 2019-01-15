@@ -15,19 +15,24 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol  CLPassWordInputViewDelegate<NSObject>
 @optional
 /**
- *  监听输入的改变
+ *  输入改变
  */
 - (void)passWordDidChange:(CLPassWordInputView *)passWord;
 
 /**
- *  监听输入的完成时
+ *  输入完成
  */
 - (void)passWordCompleteInput:(CLPassWordInputView *)passWord;
 
 /**
- *  监听开始输入
+ *  开始输入
  */
 - (void)passWordBeginInput:(CLPassWordInputView *)passWord;
+
+/**
+ *  结束输入
+ */
+- (void)passWordEndInput:(CLPassWordInputView *)passWord;
 
 @end
 

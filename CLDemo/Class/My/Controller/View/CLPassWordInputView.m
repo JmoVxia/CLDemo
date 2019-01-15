@@ -32,6 +32,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
         self.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
         self.pointColor = [UIColor blackColor];
         self.backgroundColor = [UIColor whiteColor];
+        [self becomeFirstResponder];
     }
     return self;
 }
@@ -65,6 +66,15 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     }
     return [super becomeFirstResponder];
 }
+
+- (BOOL)resignFirstResponder {
+    if ([self.delegate respondsToSelector:@selector(passWordEndInput:)]) {
+        [self.delegate passWordEndInput:self];
+    }
+    return [super resignFirstResponder];
+}
+
+
 
 /**
  *  是否能成为第一响应者

@@ -36,37 +36,29 @@
 
     CLPassWordInputView *inputView = [CLPassWordInputView new];
     inputView.delegate = self;
-    [inputView becomeFirstResponder];
     [self.view addSubview:inputView];
     [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(50);
         make.centerY.mas_equalTo(0);
     }];
-    
-    
 }
 
-/**
- *  监听输入的改变
- */
 - (void)passWordDidChange:(CLPassWordInputView *)passWord {
     NSLog(@"------>>>>>%@",passWord.textStore);
 }
 
-/**
- *  监听输入的完成时
- */
 - (void)passWordCompleteInput:(CLPassWordInputView *)passWord {
     NSLog(@"输入完毕------%@",passWord.textStore);
-//    [passWord endEditing:YES];
+    [passWord resignFirstResponder];
 }
 
-/**
- *  监听开始输入
- */
 - (void)passWordBeginInput:(CLPassWordInputView *)passWord {
     NSLog(@"-----------开始输入++++++++++++");
+}
+
+- (void)passWordEndInput:(CLPassWordInputView *)passWord {
+    NSLog(@"-----------结束输入++++++++++++");
 }
 
 @end
