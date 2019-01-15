@@ -134,13 +134,14 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (void)drawRect:(CGRect)rect {
     CGFloat height = rect.size.height;
     CGFloat width = rect.size.width;
-    CGFloat middleSpace = (width - self.configure.passwordNum * self.configure.squareWidth) / (self.configure.passwordNum - 1 + self.configure.spaceMultiple * 2);
+    CGFloat squareWidth = MAX(MIN(height, self.configure.squareWidth), (self.configure.pointRadius * 4));
+    CGFloat middleSpace = (width - self.configure.passwordNum * squareWidth) / (self.configure.passwordNum - 1 + self.configure.spaceMultiple * 2);
     CGFloat leftSpace = middleSpace * self.configure.spaceMultiple;
-    CGFloat y = (height - self.configure.squareWidth) * 0.5;
+    CGFloat y = (height - squareWidth) * 0.5;
     CGContextRef context = UIGraphicsGetCurrentContext();
     //画外框
     for (int i = 0; i < self.configure.passwordNum; i++) {
-        CGContextAddRect(context, CGRectMake(leftSpace + i * self.configure.squareWidth + i * middleSpace, y, self.configure.squareWidth, self.configure.squareWidth));
+        CGContextAddRect(context, CGRectMake(leftSpace + i * squareWidth + i * middleSpace, y, squareWidth, squareWidth));
         CGContextSetLineWidth(context, 1);
         CGContextSetStrokeColorWithColor(context, self.configure.rectColor.CGColor);
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
@@ -149,7 +150,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
     //画黑点
     for (int i = 1; i <= self.password.length; i++) {
-        CGContextAddArc(context,  leftSpace + i * self.configure.squareWidth + (i - 1) * middleSpace - self.configure.squareWidth * 0.5, y + self.configure.squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
+        CGContextAddArc(context,  leftSpace + i * squareWidth + (i - 1) * middleSpace - squareWidth * 0.5, y + squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
         CGContextDrawPath(context, kCGPathFill);
     }
 }
