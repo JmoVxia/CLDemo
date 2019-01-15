@@ -42,6 +42,12 @@
         make.height.mas_equalTo(50);
         make.centerY.mas_equalTo(0);
     }];
+    
+    [inputView updateWithConfig:^(CLPassWordInputViewConfigure * _Nonnull config) {
+        config.pointColor = [UIColor redColor];
+    }];
+    
+    
 }
 
 - (void)passWordDidChange:(CLPassWordInputView *)passWord {
@@ -52,7 +58,9 @@
     NSLog(@"输入完毕------%@",passWord.textStore);
     [passWord resignFirstResponder];
 }
-
+- (void)passWordDidDeleteBackward:(CLPassWordInputView *)passWord {
+    NSLog(@"----点击删除----");
+}
 - (void)passWordBeginInput:(CLPassWordInputView *)passWord {
     NSLog(@"-----------开始输入++++++++++++");
 }

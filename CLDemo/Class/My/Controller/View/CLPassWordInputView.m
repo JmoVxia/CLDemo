@@ -8,11 +8,26 @@
 
 #import "CLPassWordInputView.h"
 #import "UIColor+CLHex.h"
-
 static NSString  * const MONEYNUMBERS = @"0123456789";
+
+@implementation CLPassWordInputViewConfigure
+
++ (instancetype)defaultConfig {
+    CLPassWordInputViewConfigure *configure = [[CLPassWordInputViewConfigure alloc] init];
+    configure.squareWidth = 50;
+    configure.passWordNum = 6;
+    configure.pointRadius = 9 * 0.5;
+    configure.spaceMultiple = 5;
+    configure.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
+    configure.pointColor = [UIColor blackColor];
+    return configure;
+}
+
+@end
 
 @interface CLPassWordInputView ()
 
+@property (nonatomic, strong) CLPassWordInputViewConfigure *configure;
 @property (strong, nonatomic) NSMutableString *textStore;//保存密码的字符串
 
 @end
@@ -20,44 +35,25 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 
 @implementation CLPassWordInputView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (CLPassWordInputViewConfigure *) configure{
+    if (_configure == nil){
+        _configure = [CLPassWordInputViewConfigure defaultConfig];
+    }
+    return _configure;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.textStore = [NSMutableString string];
-        self.squareWidth = 50;
-        self.passWordNum = 6;
-        self.pointRadius = 9 * 0.5;
-        self.spaceMultiple = 5;
-        self.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
-        self.pointColor = [UIColor blackColor];
         self.backgroundColor = [UIColor whiteColor];
         [self becomeFirstResponder];
     }
     return self;
 }
 
-/**
- *  设置正方形的边长
- */
-- (void)setSquareWidth:(CGFloat)squareWidth {
-    _squareWidth = squareWidth;
-    [self setNeedsDisplay];
-}
-
-/**
- *  设置键盘的类型
- */
 - (UIKeyboardType)keyboardType {
     return UIKeyboardTypeNumberPad;
-}
-
-/**
- *  设置密码的位数
- */
-- (void)setPassWordNum:(NSUInteger)passWordNum {
-    _passWordNum = passWordNum;
-    [self setNeedsDisplay];
 }
 
 - (BOOL)becomeFirstResponder {
@@ -74,11 +70,6 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     return [super resignFirstResponder];
 }
 
-
-
-/**
- *  是否能成为第一响应者
- */
 - (BOOL)canBecomeFirstResponder {
     return YES;
 }
@@ -88,20 +79,20 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
         [self becomeFirstResponder];
     }
 }
-
+- (void)updateWithConfig:(void(^)(CLPassWordInputViewConfigure *config))configBlock {
+    if (configBlock) {
+        configBlock(self.configure);
+    }
+    [self setNeedsDisplay];
+}
 #pragma mark - UIKeyInput
-/**
- *  用于显示的文本对象是否有任何文本
- */
+
 - (BOOL)hasText {
     return self.textStore.length > 0;
 }
 
-/**
- *  插入文本
- */
 - (void)insertText:(NSString *)text {
-    if (self.textStore.length < self.passWordNum) {
+    if (self.textStore.length < self.configure.passWordNum) {
         //判断是否是数字
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:MONEYNUMBERS] invertedSet];
         NSString*filtered = [[text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
@@ -111,7 +102,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
             if ([self.delegate respondsToSelector:@selector(passWordDidChange:)]) {
                 [self.delegate passWordDidChange:self];
             }
-            if (self.textStore.length == self.passWordNum) {
+            if (self.textStore.length == self.configure.passWordNum) {
                 if ([self.delegate respondsToSelector:@selector(passWordCompleteInput:)]) {
                     [self.delegate passWordCompleteInput:self];
                 }
@@ -121,15 +112,15 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     }
 }
 
-/**
- *  删除文本
- */
 - (void)deleteBackward {
     if (self.textStore.length > 0) {
         [self.textStore deleteCharactersInRange:NSMakeRange(self.textStore.length - 1, 1)];
         if ([self.delegate respondsToSelector:@selector(passWordDidChange:)]) {
             [self.delegate passWordDidChange:self];
         }
+    }
+    if ([self.delegate respondsToSelector:@selector(passWordDidDeleteBackward:)]) {
+        [self.delegate passWordDidDeleteBackward:self];
     }
     [self setNeedsDisplay];
 }
@@ -142,22 +133,22 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (void)drawRect:(CGRect)rect {
     CGFloat height = rect.size.height;
     CGFloat width = rect.size.width;
-    CGFloat middleSpace = (width - self.passWordNum * self.squareWidth) / (self.passWordNum - 1 + self.spaceMultiple * 2);
-    CGFloat leftSpace = middleSpace * self.spaceMultiple;
-    CGFloat y = (height - self.squareWidth) * 0.5;
+    CGFloat middleSpace = (width - self.configure.passWordNum * self.configure.squareWidth) / (self.configure.passWordNum - 1 + self.configure.spaceMultiple * 2);
+    CGFloat leftSpace = middleSpace * self.configure.spaceMultiple;
+    CGFloat y = (height - self.configure.squareWidth) * 0.5;
     CGContextRef context = UIGraphicsGetCurrentContext();
     //画外框
-    for (int i = 0; i < self.passWordNum; i++) {
-        CGContextAddRect(context, CGRectMake(leftSpace + i * self.squareWidth + i * middleSpace, y, self.squareWidth, self.squareWidth));
+    for (int i = 0; i < self.configure.passWordNum; i++) {
+        CGContextAddRect(context, CGRectMake(leftSpace + i * self.configure.squareWidth + i * middleSpace, y, self.configure.squareWidth, self.configure.squareWidth));
         CGContextSetLineWidth(context, 1);
-        CGContextSetStrokeColorWithColor(context, self.rectColor.CGColor);
+        CGContextSetStrokeColorWithColor(context, self.configure.rectColor.CGColor);
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     }
     CGContextDrawPath(context, kCGPathFillStroke);
-    CGContextSetFillColorWithColor(context, self.pointColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
     //画黑点
     for (int i = 1; i <= self.textStore.length; i++) {
-        CGContextAddArc(context,  leftSpace + i * self.squareWidth + (i - 1) * middleSpace - self.squareWidth * 0.5, y + self.squareWidth * 0.5, self.pointRadius, 0, M_PI * 2, YES);
+        CGContextAddArc(context,  leftSpace + i * self.configure.squareWidth + (i - 1) * middleSpace - self.configure.squareWidth * 0.5, y + self.configure.squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
         CGContextDrawPath(context, kCGPathFill);
     }
 }
