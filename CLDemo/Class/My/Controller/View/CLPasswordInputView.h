@@ -16,19 +16,19 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**输入改变*/
-- (void)passwordDidChange:(CLPasswordInputView *)password;
+- (void)passwordInputViewDidChange:(CLPasswordInputView *)passwordInputView;
 
 /**点击删除*/
-- (void)passwordDidDeleteBackward:(CLPasswordInputView *)password;
+- (void)passwordInputViewDidDeleteBackward:(CLPasswordInputView *)passwordInputView;
 
 /**输入完成*/
-- (void)passwordCompleteInput:(CLPasswordInputView *)password;
+- (void)passwordInputViewCompleteInput:(CLPasswordInputView *)passwordInputView;
 
 /**开始输入*/
-- (void)passwordBeginInput:(CLPasswordInputView *)password;
+- (void)passwordInputViewBeginInput:(CLPasswordInputView *)passwordInputView;
 
 /**结束输入*/
-- (void)passwordEndInput:(CLPasswordInputView *)password;
+- (void)passwordInputViewEndInput:(CLPasswordInputView *)passwordInputView;
 
 @end
 

@@ -59,15 +59,15 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 }
 
 - (BOOL)becomeFirstResponder {
-    if ([self.delegate respondsToSelector:@selector(passwordBeginInput:)]) {
-        [self.delegate passwordBeginInput:self];
+    if ([self.delegate respondsToSelector:@selector(passwordInputViewBeginInput:)]) {
+        [self.delegate passwordInputViewBeginInput:self];
     }
     return [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder {
-    if ([self.delegate respondsToSelector:@selector(passwordEndInput:)]) {
-        [self.delegate passwordEndInput:self];
+    if ([self.delegate respondsToSelector:@selector(passwordInputViewEndInput:)]) {
+        [self.delegate passwordInputViewEndInput:self];
     }
     return [super resignFirstResponder];
 }
@@ -101,12 +101,12 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
         BOOL basicTest = [text isEqualToString:filtered];
         if(basicTest) {
             [self.password appendString:text];
-            if ([self.delegate respondsToSelector:@selector(passwordDidChange:)]) {
-                [self.delegate passwordDidChange:self];
+            if ([self.delegate respondsToSelector:@selector(passwordInputViewDidChange:)]) {
+                [self.delegate passwordInputViewDidChange:self];
             }
             if (self.password.length == self.configure.passwordNum) {
-                if ([self.delegate respondsToSelector:@selector(passwordCompleteInput:)]) {
-                    [self.delegate passwordCompleteInput:self];
+                if ([self.delegate respondsToSelector:@selector(passwordInputViewCompleteInput:)]) {
+                    [self.delegate passwordInputViewCompleteInput:self];
                 }
             }
             [self setNeedsDisplay];
@@ -117,12 +117,12 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (void)deleteBackward {
     if (self.password.length > 0) {
         [self.password deleteCharactersInRange:NSMakeRange(self.password.length - 1, 1)];
-        if ([self.delegate respondsToSelector:@selector(passwordDidChange:)]) {
-            [self.delegate passwordDidChange:self];
+        if ([self.delegate respondsToSelector:@selector(passwordInputViewDidChange:)]) {
+            [self.delegate passwordInputViewDidChange:self];
         }
     }
-    if ([self.delegate respondsToSelector:@selector(passwordDidDeleteBackward:)]) {
-        [self.delegate passwordDidDeleteBackward:self];
+    if ([self.delegate respondsToSelector:@selector(passwordInputViewDidDeleteBackward:)]) {
+        [self.delegate passwordInputViewDidDeleteBackward:self];
     }
     [self setNeedsDisplay];
 }

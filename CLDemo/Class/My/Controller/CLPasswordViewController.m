@@ -50,22 +50,22 @@
     
 }
 
-- (void)passwordDidChange:(CLPasswordInputView *)passWord {
-    NSLog(@"------>>>>>%@",passWord.password);
+- (void)passwordInputViewDidChange:(CLPasswordInputView *)passwordInputView {
+    NSLog(@"------>>>>>%@",passwordInputView.password);
 }
 
-- (void)passwordCompleteInput:(CLPasswordInputView *)passWord {
-    NSLog(@"输入完毕------%@",passWord.password);
+- (void)passwordInputViewCompleteInput:(CLPasswordInputView *)passwordInputView {
+    NSLog(@"输入完毕------%@",passwordInputView.password);
 //    [passWord resignFirstResponder];
 }
-- (void)passwordDidDeleteBackward:(CLPasswordInputView *)passWord {
+- (void)passwordInputViewDidDeleteBackward:(CLPasswordInputView *)passwordInputView {
     NSLog(@"----点击删除----");
 }
-- (void)passwordBeginInput:(CLPasswordInputView *)passWord {
+- (void)passwordInputViewBeginInput:(CLPasswordInputView *)passwordInputView {
     NSLog(@"-----------开始输入++++++++++++");
 }
 
-- (void)passwordEndInput:(CLPasswordInputView *)passWord {
+- (void)passwordInputViewEndInput:(CLPasswordInputView *)passwordInputView {
     NSLog(@"-----------结束输入++++++++++++");
 }
 
