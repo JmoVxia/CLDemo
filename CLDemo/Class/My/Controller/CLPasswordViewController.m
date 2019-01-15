@@ -10,6 +10,7 @@
 #import "CLPasswordView.h"
 #import "CLPassWordInputView.h"
 #import "Masonry.h"
+#import "CLCoreTextView.h"
 
 @interface CLPasswordViewController ()<CLPasswordInputViewDelegate>
 
@@ -34,18 +35,28 @@
 //    }];
     
 
-    CLPasswordInputView *inputView = [CLPasswordInputView new];
-    inputView.delegate = self;
-    [self.view addSubview:inputView];
-    [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(50);
-        make.centerY.mas_equalTo(0);
-    }];
+//    CLPasswordInputView *inputView = [CLPasswordInputView new];
+//    inputView.delegate = self;
+//    [self.view addSubview:inputView];
+//    [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(0);
+//        make.height.mas_equalTo(50);
+//        make.centerY.mas_equalTo(0);
+//    }];
+//
+//    [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
+//        config.pointColor = [UIColor redColor];
+//        config.rectColor = [UIColor orangeColor];
+//    }];
     
-    [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
-        config.pointColor = [UIColor redColor];
-        config.rectColor = [UIColor orangeColor];
+    
+    CLCoreTextView *textView = [[CLCoreTextView alloc] init];
+    textView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:textView];
+    [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.center.mas_equalTo(0);
+        make.height.mas_equalTo(200);
     }];
     
 }
