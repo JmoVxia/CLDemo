@@ -140,7 +140,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     CGFloat y = (height - squareWidth) * 0.5;
     CGContextRef context = UIGraphicsGetCurrentContext();
     //画外框
-    for (int i = 0; i < self.configure.passwordNum; i++) {
+    for (NSUInteger i = 0; i < self.configure.passwordNum; i++) {
         CGContextAddRect(context, CGRectMake(leftSpace + i * squareWidth + i * middleSpace, y, squareWidth, squareWidth));
         CGContextSetLineWidth(context, 1);
         CGContextSetStrokeColorWithColor(context, self.configure.rectColor.CGColor);
@@ -149,7 +149,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     CGContextDrawPath(context, kCGPathFillStroke);
     CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
     //画黑点
-    for (int i = 1; i <= self.password.length; i++) {
+    for (NSUInteger i = 1; i <= self.password.length; i++) {
         CGContextAddArc(context,  leftSpace + i * squareWidth + (i - 1) * middleSpace - squareWidth * 0.5, y + squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
         CGContextDrawPath(context, kCGPathFill);
     }
