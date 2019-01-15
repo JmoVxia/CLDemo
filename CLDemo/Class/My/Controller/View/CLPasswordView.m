@@ -47,7 +47,7 @@
         textField.secureTextEntry = YES;
         textField.textAlignment = NSTextAlignmentCenter;
         textField.delegate = self;
-//        textField.tintColor = [UIColor whiteColor];
+        textField.tintColor = [UIColor whiteColor];
         [textField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
         [self addSubview:textField];
         [_viewArray addObject:textField];
@@ -62,7 +62,7 @@
 - (void)textDidChange:(UITextField *)textFiled {
     if (textFiled.text.length == 1) {
         NSInteger index = [_viewArray indexOfObject:textFiled];
-        [self changeFirstResponder:MIN(index + 1, _viewArray.count - 1) delete:NO text:self.inputString];
+        [self changeFirstResponder:MIN(index + 1, _viewArray.count) delete:NO text:self.inputString];
     }
 }
 -(void)setPassword:(NSString *)password {
@@ -90,14 +90,17 @@
     [self changeFirstResponder:MAX(index - 1, 0) delete:YES text:nil];
 }
 - (void)changeFirstResponder:(NSInteger)index delete:(BOOL)delete text:(NSString *)text {
-    UITextField *textField =  [_viewArray objectAtIndex:index];
+    UITextField *textField =  [_viewArray objectAtIndex:MIN(index, _viewArray.count - 1)];
+    [textField becomeFirstResponder];
     if (delete && !_hasValue) {
         textField.text = nil;
     }
     if (!delete && _hasValue) {
         textField.text = text;
     }
-    [textField becomeFirstResponder];
+    if (!_hasValue && index == 6) {
+
+    }
     NSString *password = @"";
     for (UITextField *filed in _viewArray) {
         password = [password stringByAppendingString:filed.text];
