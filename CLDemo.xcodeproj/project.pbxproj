@@ -15,7 +15,7 @@
 		0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */; };
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
 		0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C52EF72219298B00079A0E7 /* Localizable.strings */; };
-		0C558A9521ED956700C2C096 /* CLPassWordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558A9421ED956700C2C096 /* CLPassWordInputView.m */; };
+		0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558A9421ED956700C2C096 /* CLPasswordInputView.m */; };
 		0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */; };
 		0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
@@ -86,8 +86,8 @@
 		0C52EF71219298B00079A0E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0C52EF73219299300079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0C52EF74219299310079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		0C558A9321ED956700C2C096 /* CLPassWordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPassWordInputView.h; sourceTree = "<group>"; };
-		0C558A9421ED956700C2C096 /* CLPassWordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPassWordInputView.m; sourceTree = "<group>"; };
+		0C558A9321ED956700C2C096 /* CLPasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPasswordInputView.h; sourceTree = "<group>"; };
+		0C558A9421ED956700C2C096 /* CLPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPasswordInputView.m; sourceTree = "<group>"; };
 		0C558AE221EDA2E800C2C096 /* UIColor+CLHex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CLHex.h"; sourceTree = "<group>"; };
 		0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CLHex.m"; sourceTree = "<group>"; };
 		0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPasswordView.m; sourceTree = "<group>"; };
@@ -247,8 +247,8 @@
 				0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */,
 				0C6B40E021ECFC3C00360FAD /* CLPasswordView.h */,
 				0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */,
-				0C558A9321ED956700C2C096 /* CLPassWordInputView.h */,
-				0C558A9421ED956700C2C096 /* CLPassWordInputView.m */,
+				0C558A9321ED956700C2C096 /* CLPasswordInputView.h */,
+				0C558A9421ED956700C2C096 /* CLPasswordInputView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -693,7 +693,7 @@
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,
 				5B80DA471DDD993F00A20E34 /* CLEssenceController.m in Sources */,
-				0C558A9521ED956700C2C096 /* CLPassWordInputView.m in Sources */,
+				0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */,
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,

@@ -11,7 +11,7 @@
 #import "CLPassWordInputView.h"
 #import "Masonry.h"
 
-@interface CLPasswordViewController ()<CLPassWordInputViewDelegate>
+@interface CLPasswordViewController ()<CLPasswordInputViewDelegate>
 
 @end
 
@@ -34,7 +34,7 @@
 //    }];
     
 
-    CLPassWordInputView *inputView = [CLPassWordInputView new];
+    CLPasswordInputView *inputView = [CLPasswordInputView new];
     inputView.delegate = self;
     [self.view addSubview:inputView];
     [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,29 +43,29 @@
         make.centerY.mas_equalTo(0);
     }];
     
-    [inputView updateWithConfig:^(CLPassWordInputViewConfigure * _Nonnull config) {
+    [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
         config.pointColor = [UIColor redColor];
+        config.rectColor = [UIColor orangeColor];
     }];
     
-    
 }
 
-- (void)passWordDidChange:(CLPassWordInputView *)passWord {
-    NSLog(@"------>>>>>%@",passWord.textStore);
+- (void)passwordDidChange:(CLPasswordInputView *)passWord {
+    NSLog(@"------>>>>>%@",passWord.password);
 }
 
-- (void)passWordCompleteInput:(CLPassWordInputView *)passWord {
-    NSLog(@"输入完毕------%@",passWord.textStore);
-    [passWord resignFirstResponder];
+- (void)passwordCompleteInput:(CLPasswordInputView *)passWord {
+    NSLog(@"输入完毕------%@",passWord.password);
+//    [passWord resignFirstResponder];
 }
-- (void)passWordDidDeleteBackward:(CLPassWordInputView *)passWord {
+- (void)passwordDidDeleteBackward:(CLPasswordInputView *)passWord {
     NSLog(@"----点击删除----");
 }
-- (void)passWordBeginInput:(CLPassWordInputView *)passWord {
+- (void)passwordBeginInput:(CLPasswordInputView *)passWord {
     NSLog(@"-----------开始输入++++++++++++");
 }
 
-- (void)passWordEndInput:(CLPassWordInputView *)passWord {
+- (void)passwordEndInput:(CLPasswordInputView *)passWord {
     NSLog(@"-----------结束输入++++++++++++");
 }
 
