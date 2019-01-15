@@ -1,17 +1,18 @@
 //
-//  UIColor+AIExtension.m
-//  RJStreetLamp
+//  UIColor+CLHex.m
+//  CLDemo
 //
-//  Created by 艾泽鑫 on 16/2/23.
-//  Copyright © 2016年 艾泽鑫. All rights reserved.
+//  Created by AUG on 2019/1/15.
+//  Copyright © 2019年 JmoVxia. All rights reserved.
 //
 
-#import "UIColor+AIExtension.h"
+#import "UIColor+CLHex.h"
 
-@implementation UIColor(AIExtension)
-+ (UIColor *)colorWithHexString:(NSString *)stringToConvert
+@implementation UIColor (CLHex)
+
++ (UIColor *)colorWithHex:(NSString *)hex
 {
-    NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
     
     // String should be 6 or 8 characters
     if ([cString length] < 6) {
@@ -42,4 +43,5 @@
                             blue:b / 255.0f
                            alpha:1.0f];
 }
+
 @end

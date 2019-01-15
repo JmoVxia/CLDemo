@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLPassWordInputView;
 
 @protocol  CLPassWordInputViewDelegate<NSObject>
-
+@optional
 /**
  *  监听输入的改变
  */
@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat squareWidth;
 //黑点的半径
 @property (nonatomic, assign) CGFloat pointRadius;
+/**边距相对中间间隙倍数*/
+@property (nonatomic, assign) CGFloat spaceMultiple;
 //黑点的颜色
 @property (nonatomic, strong) UIColor *pointColor;
 //边框的颜色

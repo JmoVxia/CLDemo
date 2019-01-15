@@ -7,7 +7,7 @@
 //
 
 #import "CLChartToolBar.h"
-#import "UIColor+AIExtension.h"
+#import "UIColor+CLHex.h"
 
 @interface CLChartToolBar ()
 /**一周*/
@@ -48,40 +48,40 @@
         //一周
         UIButton *weekBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
         self.weekBtn                = weekBtn;
-        [weekBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        [weekBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateSelected)];
+        [weekBtn setTitleColor:[UIColor colorWithHex:@"#999999"] forState:(UIControlStateNormal)];
+        [weekBtn setTitleColor:[UIColor colorWithHex:@"#333333"] forState:(UIControlStateSelected)];
         [weekBtn setTitle:@"一周" forState:(UIControlStateNormal)];
         [self.dateToolBar addSubview:weekBtn];
         [weekBtn addTarget:self action:@selector(onClickWeek:) forControlEvents:(UIControlEventTouchUpInside)];
         //一个月
         UIButton *oneMonthBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
         self.oneMonthBtn                = oneMonthBtn;
-        [oneMonthBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        [oneMonthBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateSelected)];
+        [oneMonthBtn setTitleColor:[UIColor colorWithHex:@"#999999"] forState:(UIControlStateNormal)];
+        [oneMonthBtn setTitleColor:[UIColor colorWithHex:@"#333333"] forState:(UIControlStateSelected)];
         [oneMonthBtn setTitle:@"1个月" forState:(UIControlStateNormal)];
         [self.dateToolBar addSubview:oneMonthBtn];
         [oneMonthBtn addTarget:self action:@selector(onClickOneMonthBtn:) forControlEvents:(UIControlEventTouchUpInside)];
         //3
         UIButton *threeMonthBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
         self.threeMonthBtn                = threeMonthBtn;
-        [threeMonthBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        [threeMonthBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateSelected)];
+        [threeMonthBtn setTitleColor:[UIColor colorWithHex:@"#999999"] forState:(UIControlStateNormal)];
+        [threeMonthBtn setTitleColor:[UIColor colorWithHex:@"#333333"] forState:(UIControlStateSelected)];
         [threeMonthBtn setTitle:@"3个月" forState:(UIControlStateNormal)];
         [self.dateToolBar addSubview:threeMonthBtn];
         [threeMonthBtn addTarget:self action:@selector(onClickThreeMonthBtn:) forControlEvents:(UIControlEventTouchUpInside)];
         //6
         UIButton *sixMonthBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
         self.sixMonthBtn                = sixMonthBtn;
-        [sixMonthBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        [sixMonthBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateSelected)];
+        [sixMonthBtn setTitleColor:[UIColor colorWithHex:@"#999999"] forState:(UIControlStateNormal)];
+        [sixMonthBtn setTitleColor:[UIColor colorWithHex:@"#333333"] forState:(UIControlStateSelected)];
         [sixMonthBtn setTitle:@"6个月" forState:(UIControlStateNormal)];
         [self.dateToolBar addSubview:sixMonthBtn];
         [sixMonthBtn addTarget:self action:@selector(onClickSixMonthBtn:) forControlEvents:(UIControlEventTouchUpInside)];
         //year
         UIButton *yearBtn           = [UIButton buttonWithType:(UIButtonTypeCustom)];
         self.yearBtn                = yearBtn;
-        [yearBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        [yearBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateSelected)];
+        [yearBtn setTitleColor:[UIColor colorWithHex:@"#999999"] forState:(UIControlStateNormal)];
+        [yearBtn setTitleColor:[UIColor colorWithHex:@"#333333"] forState:(UIControlStateSelected)];
         [yearBtn setTitle:@"一年" forState:(UIControlStateNormal)];
         [self.dateToolBar addSubview:yearBtn];
         [yearBtn addTarget:self action:@selector(onClickYearBtn:) forControlEvents:(UIControlEventTouchUpInside)];

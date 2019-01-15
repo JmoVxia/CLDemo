@@ -7,6 +7,7 @@
 //
 
 #import "CLPassWordInputView.h"
+#import "UIColor+CLHex.h"
 
 static NSString  * const MONEYNUMBERS = @"0123456789";
 
@@ -24,13 +25,13 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     self = [super initWithFrame:frame];
     if (self) {
         self.textStore = [NSMutableString string];
-        self.squareWidth = 45;
+        self.squareWidth = 50;
         self.passWordNum = 6;
-        self.pointRadius = 6;
-        self.rectColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
+        self.pointRadius = 9 * 0.5;
+        self.spaceMultiple = 5;
+        self.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
         self.pointColor = [UIColor blackColor];
         self.backgroundColor = [UIColor whiteColor];
-        [self becomeFirstResponder];
     }
     return self;
 }
@@ -122,6 +123,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     }
     [self setNeedsDisplay];
 }
+
 -(void)layoutSubviews {
     [super layoutSubviews];
     [self setNeedsDisplay];
@@ -130,9 +132,9 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (void)drawRect:(CGRect)rect {
     CGFloat height = rect.size.height;
     CGFloat width = rect.size.width;
-    CGFloat middleSpace = (width - self.passWordNum * self.squareWidth) / (self.passWordNum - 1 + 5);
-    CGFloat leftSpace = middleSpace * 2.5;
-    CGFloat y = (height - self.squareWidth) / 2.0;
+    CGFloat middleSpace = (width - self.passWordNum * self.squareWidth) / (self.passWordNum - 1 + self.spaceMultiple * 2);
+    CGFloat leftSpace = middleSpace * self.spaceMultiple;
+    CGFloat y = (height - self.squareWidth) * 0.5;
     CGContextRef context = UIGraphicsGetCurrentContext();
     //画外框
     for (int i = 0; i < self.passWordNum; i++) {
@@ -145,7 +147,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     CGContextSetFillColorWithColor(context, self.pointColor.CGColor);
     //画黑点
     for (int i = 1; i <= self.textStore.length; i++) {
-        CGContextAddArc(context,  leftSpace + i * self.squareWidth + (i - 1) * middleSpace - self.squareWidth / 2.0, y + self.squareWidth / 2.0, self.pointRadius, 0, M_PI * 2, YES);
+        CGContextAddArc(context,  leftSpace + i * self.squareWidth + (i - 1) * middleSpace - self.squareWidth * 0.5, y + self.squareWidth * 0.5, self.pointRadius, 0, M_PI * 2, YES);
         CGContextDrawPath(context, kCGPathFill);
     }
 }

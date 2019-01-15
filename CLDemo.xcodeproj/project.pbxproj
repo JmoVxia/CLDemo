@@ -16,6 +16,7 @@
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
 		0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C52EF72219298B00079A0E7 /* Localizable.strings */; };
 		0C558A9521ED956700C2C096 /* CLPassWordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558A9421ED956700C2C096 /* CLPassWordInputView.m */; };
+		0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */; };
 		0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
 		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
@@ -60,7 +61,6 @@
 		5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8B77D21E83760E0033F35A /* CLLocalNotificationManager.m */; };
 		5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8B77D41E83760E0033F35A /* CLLocalNotificationModel.m */; };
 		5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* CLEssenceListController.m */; };
-		5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
 		5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */; };
 		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
@@ -88,6 +88,8 @@
 		0C52EF74219299310079A0E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0C558A9321ED956700C2C096 /* CLPassWordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPassWordInputView.h; sourceTree = "<group>"; };
 		0C558A9421ED956700C2C096 /* CLPassWordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPassWordInputView.m; sourceTree = "<group>"; };
+		0C558AE221EDA2E800C2C096 /* UIColor+CLHex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CLHex.h"; sourceTree = "<group>"; };
+		0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CLHex.m"; sourceTree = "<group>"; };
 		0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPasswordView.m; sourceTree = "<group>"; };
 		0C6B40E021ECFC3C00360FAD /* CLPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPasswordView.h; sourceTree = "<group>"; };
 		0C6B40E221ECFC7100360FAD /* UITextField+CLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CLDelegate.h"; sourceTree = "<group>"; };
@@ -171,8 +173,6 @@
 		5BB848241E00237900BB266D /* CLEssenceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEssenceListController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* CLEssenceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEssenceListController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
-		5BBB628D1E73E5A700B28FC3 /* UIColor+AIExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AIExtension.h"; sourceTree = "<group>"; };
-		5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AIExtension.m"; sourceTree = "<group>"; };
 		5BBB62901E7444A100B28FC3 /* CLChartToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartToolBar.h; sourceTree = "<group>"; };
 		5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartToolBar.m; sourceTree = "<group>"; };
 		5BC3FB8521CE966A00B7FF82 /* CLDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLDemo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -538,8 +538,8 @@
 				0CF79AFB219678FB00DD0BF1 /* UITableView+IndexTip.m */,
 				0CE733412191CBC700270851 /* UIView+CLSetRect.h */,
 				0CE733402191CBC700270851 /* UIView+CLSetRect.m */,
-				5BBB628D1E73E5A700B28FC3 /* UIColor+AIExtension.h */,
-				5BBB628E1E73E5A700B28FC3 /* UIColor+AIExtension.m */,
+				0C558AE221EDA2E800C2C096 /* UIColor+CLHex.h */,
+				0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */,
 				5B80DA3B1DDD993F00A20E34 /* UIImage+CLScaleToSize.h */,
 				5B80DA3C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m */,
 				5BE0FA3A1E03C2C400914DFF /* NSString+CLCalculateSize.h */,
@@ -695,6 +695,7 @@
 				5B80DA471DDD993F00A20E34 /* CLEssenceController.m in Sources */,
 				0C558A9521ED956700C2C096 /* CLPassWordInputView.m in Sources */,
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
+				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */,
@@ -729,7 +730,6 @@
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,
 				5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */,
-				5BBB628F1E73E5A700B28FC3 /* UIColor+AIExtension.m in Sources */,
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
