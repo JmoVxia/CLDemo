@@ -20,6 +20,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     configure.spaceMultiple = 5;
     configure.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
     configure.pointColor = [UIColor blackColor];
+    configure.rectBackgroundColor = [UIColor whiteColor];
     return configure;
 }
 
@@ -144,7 +145,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
         CGContextAddRect(context, CGRectMake(leftSpace + i * squareWidth + i * middleSpace, y, squareWidth, squareWidth));
         CGContextSetLineWidth(context, 1);
         CGContextSetStrokeColorWithColor(context, self.configure.rectColor.CGColor);
-        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetFillColorWithColor(context, self.configure.rectBackgroundColor.CGColor);
     }
     CGContextDrawPath(context, kCGPathFillStroke);
     CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
