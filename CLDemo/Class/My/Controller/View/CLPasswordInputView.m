@@ -32,6 +32,8 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 
 @property (nonatomic, strong) NSMutableString *password;
 
+@property (nonatomic, assign) BOOL isShow;
+
 @end
 
 
@@ -49,7 +51,6 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     if (self) {
         self.password = [NSMutableString string];
         self.backgroundColor = [UIColor whiteColor];
-        [self becomeFirstResponder];
     }
     return self;
 }
@@ -59,16 +60,22 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 }
 
 - (BOOL)becomeFirstResponder {
-    if ([self.delegate respondsToSelector:@selector(passwordInputViewBeginInput:)]) {
-        [self.delegate passwordInputViewBeginInput:self];
+    if (!self.isShow) {
+        if ([self.delegate respondsToSelector:@selector(passwordInputViewBeginInput:)]) {
+            [self.delegate passwordInputViewBeginInput:self];
+        }
     }
+    self.isShow = YES;
     return [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder {
-    if ([self.delegate respondsToSelector:@selector(passwordInputViewEndInput:)]) {
-        [self.delegate passwordInputViewEndInput:self];
+    if (self.isShow) {
+        if ([self.delegate respondsToSelector:@selector(passwordInputViewEndInput:)]) {
+            [self.delegate passwordInputViewEndInput:self];
+        }
     }
+    self.isShow = NO;
     return [super resignFirstResponder];
 }
 

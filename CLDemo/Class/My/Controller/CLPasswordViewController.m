@@ -33,31 +33,22 @@
 //    [pass passwordEnd:^(NSString * _Nonnull password) {
 //        NSLog(@"--->>>%@",password);
 //    }];
-    
 
-//    CLPasswordInputView *inputView = [CLPasswordInputView new];
-//    inputView.delegate = self;
-//    [self.view addSubview:inputView];
-//    [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.mas_equalTo(0);
-//        make.height.mas_equalTo(50);
-//        make.centerY.mas_equalTo(0);
-//    }];
-//
-//    [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
-//        config.pointColor = [UIColor redColor];
-//        config.rectColor = [UIColor orangeColor];
-//    }];
-    
-    
-    CLCoreTextView *textView = [[CLCoreTextView alloc] init];
-    textView.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:textView];
-    [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+    CLPasswordInputView *inputView = [CLPasswordInputView new];
+    inputView.delegate = self;
+    [self.view addSubview:inputView];
+
+    [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.center.mas_equalTo(0);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(50);
+        make.centerY.mas_equalTo(0);
     }];
+
+    [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
+        config.pointColor = [UIColor redColor];
+        config.rectColor = [UIColor orangeColor];
+    }];
+    [inputView becomeFirstResponder];
     
 }
 
