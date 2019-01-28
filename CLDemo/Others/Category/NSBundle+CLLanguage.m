@@ -28,6 +28,9 @@
 + (NSBundle *)cl_mainBundle {
     if ([NSBundle currentLanguage].length) {
         NSString *path = [[NSBundle mainBundle] pathForResource:[NSBundle currentLanguage] ofType:@"lproj"];
+        if ([self isChineseLanguage]) {
+            path = [[NSBundle mainBundle] pathForResource:@"zh-Hans" ofType:@"lproj"];
+        }
         if (path.length) {
             return [NSBundle bundleWithPath:path];
         }
