@@ -48,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *rectColor;
 /**输入框背景颜色*/
 @property (nonatomic, strong) UIColor *rectBackgroundColor;
+/**控件背景颜色*/
+@property (nonatomic, strong) UIColor *backgroundColor;
+
 /**默认配置*/
 + (instancetype)defaultConfig;
 
@@ -59,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<CLPasswordInputViewDelegate> delegate;
 
 /**输入的密码*/
-@property (nonatomic, strong, readonly) NSMutableString *password;
+@property (nonatomic, strong, readonly) NSMutableString *text;
 
 /**更新基本配置*/
 - (void)updateWithConfig:(void(^)(CLPasswordInputViewConfigure *config))configBlock;

@@ -21,6 +21,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     configure.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
     configure.pointColor = [UIColor blackColor];
     configure.rectBackgroundColor = [UIColor whiteColor];
+    configure.backgroundColor = [UIColor whiteColor];
     return configure;
 }
 
@@ -30,7 +31,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 
 @property (nonatomic, strong) CLPasswordInputViewConfigure *configure;
 
-@property (nonatomic, strong) NSMutableString *password;
+@property (nonatomic, strong) NSMutableString *text;
 
 @property (nonatomic, assign) BOOL isShow;
 
@@ -49,8 +50,8 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.password = [NSMutableString string];
-        self.backgroundColor = [UIColor whiteColor];
+        self.text = [NSMutableString string];
+        self.backgroundColor = self.configure.backgroundColor;
     }
     return self;
 }
@@ -92,26 +93,27 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     if (configBlock) {
         configBlock(self.configure);
     }
+    self.backgroundColor = self.configure.backgroundColor;
     [self setNeedsDisplay];
 }
 #pragma mark - UIKeyInput
 
 - (BOOL)hasText {
-    return self.password.length > 0;
+    return self.text.length > 0;
 }
 
 - (void)insertText:(NSString *)text {
-    if (self.password.length < self.configure.passwordNum) {
+    if (self.text.length < self.configure.passwordNum) {
         //判断是否是数字
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:MONEYNUMBERS] invertedSet];
         NSString*filtered = [[text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         BOOL basicTest = [text isEqualToString:filtered];
         if(basicTest) {
-            [self.password appendString:text];
+            [self.text appendString:text];
             if ([self.delegate respondsToSelector:@selector(passwordInputViewDidChange:)]) {
                 [self.delegate passwordInputViewDidChange:self];
             }
-            if (self.password.length == self.configure.passwordNum) {
+            if (self.text.length == self.configure.passwordNum) {
                 if ([self.delegate respondsToSelector:@selector(passwordInputViewCompleteInput:)]) {
                     [self.delegate passwordInputViewCompleteInput:self];
                 }
@@ -122,8 +124,8 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 }
 
 - (void)deleteBackward {
-    if (self.password.length > 0) {
-        [self.password deleteCharactersInRange:NSMakeRange(self.password.length - 1, 1)];
+    if (self.text.length > 0) {
+        [self.text deleteCharactersInRange:NSMakeRange(self.text.length - 1, 1)];
         if ([self.delegate respondsToSelector:@selector(passwordInputViewDidChange:)]) {
             [self.delegate passwordInputViewDidChange:self];
         }
@@ -157,7 +159,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     CGContextDrawPath(context, kCGPathFillStroke);
     CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
     //画黑点
-    for (NSUInteger i = 1; i <= self.password.length; i++) {
+    for (NSUInteger i = 1; i <= self.text.length; i++) {
         CGContextAddArc(context,  leftSpace + i * squareWidth + (i - 1) * middleSpace - squareWidth * 0.5, y + squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
         CGContextDrawPath(context, kCGPathFill);
     }

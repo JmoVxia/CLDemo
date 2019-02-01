@@ -14,6 +14,10 @@
 
 @interface CLPasswordViewController ()<CLPasswordInputViewDelegate>
 
+@property (nonatomic, strong) UILabel *label1;
+
+@property (nonatomic, strong) UILabel *label2;
+
 @end
 
 @implementation CLPasswordViewController
@@ -23,16 +27,20 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
 
-//    CLPasswordView *pass = [CLPasswordView new];
-//    [self.view addSubview:pass];
-//    [pass mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.mas_equalTo(0);
-//        make.height.mas_equalTo(50);
-//        make.centerY.mas_equalTo(0);
-//    }];
-//    [pass passwordEnd:^(NSString * _Nonnull password) {
-//        NSLog(@"--->>>%@",password);
-//    }];
+    self.label1 = [[UILabel alloc] init];
+    [self.view addSubview:self.label1];
+    [self.label1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom).mas_equalTo(30);
+        make.centerX.mas_equalTo(0);
+    }];
+    
+    
+    self.label2 = [[UILabel alloc] init];
+    [self.view addSubview:self.label2];
+    [self.label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.label1.mas_bottom).mas_equalTo(30);
+        make.centerX.mas_equalTo(0);
+    }];
 
     CLPasswordInputView *inputView = [CLPasswordInputView new];
     inputView.delegate = self;
@@ -47,28 +55,33 @@
     [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
         config.pointColor = [UIColor redColor];
         config.rectColor = [UIColor orangeColor];
+//        config.rectBackgroundColor = [UIColor purpleColor];
+//        config.backgroundColor = [UIColor lightGrayColor];
     }];
-    [inputView becomeFirstResponder];
-    
 }
 
 - (void)passwordInputViewDidChange:(CLPasswordInputView *)passwordInputView {
-    NSLog(@"------>>>>>%@",passwordInputView.password);
+    self.label1.text = passwordInputView.text;
+    self.label2.text = @"正在输入";
 }
 
 - (void)passwordInputViewCompleteInput:(CLPasswordInputView *)passwordInputView {
-    NSLog(@"输入完毕------%@",passwordInputView.password);
-//    [passWord resignFirstResponder];
+    self.label2.text = @"输入完毕";
 }
 - (void)passwordInputViewDidDeleteBackward:(CLPasswordInputView *)passwordInputView {
-    NSLog(@"----点击删除----");
+    self.label2.text = @"点击删除";
 }
 - (void)passwordInputViewBeginInput:(CLPasswordInputView *)passwordInputView {
-    NSLog(@"-----------开始输入++++++++++++");
+    self.label2.text = @"开始输入";
 }
 
 - (void)passwordInputViewEndInput:(CLPasswordInputView *)passwordInputView {
-    NSLog(@"-----------结束输入++++++++++++");
+    self.label2.text = @"结束输入";
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
 }
 
 @end
