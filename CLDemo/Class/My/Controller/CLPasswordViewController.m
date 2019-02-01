@@ -34,7 +34,6 @@
         make.centerX.mas_equalTo(0);
     }];
     
-    
     self.label2 = [[UILabel alloc] init];
     [self.view addSubview:self.label2];
     [self.label2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,8 +52,8 @@
     }];
 
     [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
-        config.pointColor = [UIColor redColor];
-        config.rectColor = [UIColor orangeColor];
+//        config.pointColor = [UIColor redColor];
+//        config.rectColor = [UIColor orangeColor];
 //        config.rectBackgroundColor = [UIColor purpleColor];
 //        config.backgroundColor = [UIColor lightGrayColor];
     }];

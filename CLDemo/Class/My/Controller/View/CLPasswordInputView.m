@@ -46,7 +46,6 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     }
     return _configure;
 }
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -55,11 +54,9 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     }
     return self;
 }
-
 - (UIKeyboardType)keyboardType {
     return UIKeyboardTypeNumberPad;
 }
-
 - (BOOL)becomeFirstResponder {
     if (!self.isShow) {
         if ([self.delegate respondsToSelector:@selector(passwordInputViewBeginInput:)]) {
@@ -69,7 +66,6 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     self.isShow = YES;
     return [super becomeFirstResponder];
 }
-
 - (BOOL)resignFirstResponder {
     if (self.isShow) {
         if ([self.delegate respondsToSelector:@selector(passwordInputViewEndInput:)]) {
@@ -79,11 +75,9 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     self.isShow = NO;
     return [super resignFirstResponder];
 }
-
 - (BOOL)canBecomeFirstResponder {
     return YES;
 }
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (![self isFirstResponder]) {
         [self becomeFirstResponder];
@@ -96,12 +90,10 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     self.backgroundColor = self.configure.backgroundColor;
     [self setNeedsDisplay];
 }
-#pragma mark - UIKeyInput
-
+//MARK:JmoVxia---UIKeyInput
 - (BOOL)hasText {
     return self.text.length > 0;
 }
-
 - (void)insertText:(NSString *)text {
     if (self.text.length < self.configure.passwordNum) {
         //判断是否是数字
@@ -122,7 +114,6 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
         }
     }
 }
-
 - (void)deleteBackward {
     if (self.text.length > 0) {
         [self.text deleteCharactersInRange:NSMakeRange(self.text.length - 1, 1)];
