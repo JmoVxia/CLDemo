@@ -63,7 +63,6 @@
     self.label1.text = passwordInputView.text;
     self.label2.text = @"正在输入";
 }
-
 - (void)passwordInputViewCompleteInput:(CLPasswordInputView *)passwordInputView {
     self.label2.text = @"输入完毕";
 }
@@ -73,7 +72,6 @@
 - (void)passwordInputViewBeginInput:(CLPasswordInputView *)passwordInputView {
     self.label2.text = @"开始输入";
 }
-
 - (void)passwordInputViewEndInput:(CLPasswordInputView *)passwordInputView {
     self.label2.text = @"结束输入";
 }

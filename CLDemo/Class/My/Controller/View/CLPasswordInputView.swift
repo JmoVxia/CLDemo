@@ -12,11 +12,11 @@ class CLPasswordInputViewConfigure: NSObject {
     ///密码的位数
     var passwordNum: UInt = 6
     ///边框正方形的大小
-    var squareWidth: Float = 50
+    var squareWidth: CGFloat = 50
     ///黑点的半径
-    var pointRadius: Float = 9 * 0.5
+    var pointRadius: CGFloat = 9 * 0.5
     ///边距相对中间间隙倍数
-    var spaceMultiple: Float = 5;
+    var spaceMultiple: CGFloat = 5;
     ///黑点颜色
     var pointColor: UIColor = UIColor.black
     ///边框颜色
@@ -76,10 +76,7 @@ extension CLPasswordInputView {
         }
         return super.resignFirstResponder()
     }
-    var keyboardType: UIKeyboardType {
-        return .numberPad
-    }
-    override var canBecomeFocused: Bool {
+    override var canBecomeFirstResponder: Bool {
         return true
     }
     override var canResignFirstResponder: Bool {
@@ -101,28 +98,28 @@ extension CLPasswordInputView {
         setNeedsDisplay()
     }
     override func draw(_ rect: CGRect) {
+        let height = rect.size.height
+        let width = rect.size.width
+        let squareWidth = max(min(height, config.squareWidth), config.pointRadius * 4)
+        let middleSpace = CGFloat(width - CGFloat(config.passwordNum) * squareWidth) / CGFloat(CGFloat(config.passwordNum - 1) + config.spaceMultiple * 2)
+        let leftSpace = middleSpace * config.spaceMultiple
+        let y = (height - squareWidth) * 0.5
         
-//        CGFloat height = rect.size.height;
-//        CGFloat width = rect.size.width;
-//        CGFloat squareWidth = MAX(MIN(height, self.configure.squareWidth), (self.configure.pointRadius * 4));
-//        CGFloat middleSpace = (width - self.configure.passwordNum * squareWidth) / (self.configure.passwordNum - 1 + self.configure.spaceMultiple * 2);
-//        CGFloat leftSpace = middleSpace * self.configure.spaceMultiple;
-//        CGFloat y = (height - squareWidth) * 0.5;
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//        //画外框
-//        for (NSUInteger i = 0; i < self.configure.passwordNum; i++) {
-//            CGContextAddRect(context, CGRectMake(leftSpace + i * squareWidth + i * middleSpace, y, squareWidth, squareWidth));
-//            CGContextSetLineWidth(context, 1);
-//            CGContextSetStrokeColorWithColor(context, self.configure.rectColor.CGColor);
-//            CGContextSetFillColorWithColor(context, self.configure.rectBackgroundColor.CGColor);
-//        }
-//        CGContextDrawPath(context, kCGPathFillStroke);
-//        CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
-//        //画黑点
-//        for (NSUInteger i = 1; i <= self.text.length; i++) {
-//            CGContextAddArc(context,  leftSpace + i * squareWidth + (i - 1) * middleSpace - squareWidth * 0.5, y + squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
-//            CGContextDrawPath(context, kCGPathFill);
-//        }
+        let context = UIGraphicsGetCurrentContext()
+        
+        for i in 0 ..< config.passwordNum {
+            context?.addRect(CGRect(x: leftSpace + CGFloat(i) * squareWidth + CGFloat(i) * middleSpace, y: y, width: squareWidth, height: squareWidth))
+            context?.setLineWidth(1)
+            context?.setStrokeColor(config.rectColor.cgColor)
+            context?.setFillColor(config.rectBackgroundColor.cgColor)
+        }
+        context?.drawPath(using: .fillStroke)
+        context?.setFillColor(config.pointColor.cgColor)
+        
+        for i in 0 ..< text.length {
+            context?.addArc(center: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5, y: y + squareWidth * 0.5), radius: config.pointRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+            context?.drawPath(using: .fill)
+        }
     }
 }
 
@@ -133,11 +130,11 @@ extension CLPasswordInputView: UIKeyInput {
     
     func insertText(_ text: String) {
         if self.text.length < config.passwordNum {
-            let cs = NSCharacterSet.init(charactersIn: "123456789").inverted
+            let cs = NSCharacterSet.init(charactersIn: "0123456789").inverted
             let string = text.components(separatedBy: cs).joined(separator: "")
             let basicTest = text == string
             if basicTest {
-                self.text.components(separatedBy: text)
+                self.text.append(text)
                 delete?.passwordInputViewDidChange(passwordInputView: self)
                 if self.text.length == config.passwordNum {
                     delete?.passwordInputViewCompleteInput(passwordInputView: self)
@@ -149,7 +146,7 @@ extension CLPasswordInputView: UIKeyInput {
     
     func deleteBackward() {
         if text.length > 0 {
-            text.deleteCharacters(in: NSRange(location: text.length, length: 1))
+            text.deleteCharacters(in: NSRange(location: text.length - 1, length: 1))
             delete?.passwordInputViewDidChange(passwordInputView: self)
         }
         delete?.passwordInputViewDidDeleteBackward(passwordInputView: self)
