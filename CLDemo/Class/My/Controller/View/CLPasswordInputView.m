@@ -78,6 +78,9 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (BOOL)canBecomeFirstResponder {
     return YES;
 }
+- (BOOL)canResignFirstResponder {
+    return YES;
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (![self isFirstResponder]) {
         [self becomeFirstResponder];

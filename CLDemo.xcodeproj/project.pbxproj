@@ -27,6 +27,7 @@
 		0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */; };
 		0CE7333F2191CB9D00270851 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7333D2191CB9C00270851 /* Tools.m */; };
 		0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE733402191CBC700270851 /* UIView+CLSetRect.m */; };
+		0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE94862204395B007FA31B /* CLPasswordInputView.swift */; };
 		0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */; };
 		0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AF5219678D100DD0BF1 /* CLSearchViewController.m */; };
 		0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF79AF8219678FB00DD0BF1 /* NSString+PinYin.m */; };
@@ -111,6 +112,7 @@
 		0CE7333E2191CB9D00270851 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		0CE733402191CBC700270851 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		0CE733412191CBC700270851 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		0CEE94862204395B007FA31B /* CLPasswordInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordInputView.swift; sourceTree = "<group>"; };
 		0CF79AE52195B1C800DD0BF1 /* UIButton+CLBlockAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+CLBlockAction.h"; sourceTree = "<group>"; };
 		0CF79AE62195B1C800DD0BF1 /* UIButton+CLBlockAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CLBlockAction.m"; sourceTree = "<group>"; };
 		0CF79AF5219678D100DD0BF1 /* CLSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchViewController.m; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */,
 				0C558A9321ED956700C2C096 /* CLPasswordInputView.h */,
 				0C558A9421ED956700C2C096 /* CLPasswordInputView.m */,
+				0CEE94862204395B007FA31B /* CLPasswordInputView.swift */,
 				5B28650C21EE428200334E6C /* CLCoreTextView.h */,
 				5B28650D21EE428200334E6C /* CLCoreTextView.m */,
 			);
@@ -716,6 +719,7 @@
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
 				0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */,
 				0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */,
+				0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
