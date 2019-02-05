@@ -47,7 +47,7 @@ protocol CLPasswordInputViewDelegate {
 
 class CLPasswordInputView: UIView {
     
-    var delete: CLPasswordInputViewDelegate?
+    var delegate: CLPasswordInputViewDelegate?
     var config: CLPasswordInputViewConfigure
     
     private (set) var text: NSMutableString = NSMutableString()
@@ -65,16 +65,25 @@ class CLPasswordInputView: UIView {
 extension CLPasswordInputView {
     override func becomeFirstResponder() -> Bool {
         if !isShow {
-            delete?.passwordInputViewBeginInput(passwordInputView: self)
+            delegate?.passwordInputViewBeginInput(passwordInputView: self)
         }
         isShow = true;
         return super.becomeFirstResponder()
     }
     override func resignFirstResponder() -> Bool {
         if isShow {
-            delete?.passwordInputViewEndInput(passwordInputView: self)
+            delegate?.passwordInputViewEndInput(passwordInputView: self)
         }
+        isShow = false
         return super.resignFirstResponder()
+    }
+    var keyboardType: UIKeyboardType {
+        get {
+            return .numberPad
+        }
+        set {
+            
+        }
     }
     override var canBecomeFirstResponder: Bool {
         return true
@@ -100,7 +109,8 @@ extension CLPasswordInputView {
     override func draw(_ rect: CGRect) {
         let height = rect.size.height
         let width = rect.size.width
-        let squareWidth = max(min(height, config.squareWidth), config.pointRadius * 4)
+        let squareWidth = min(max(min(height, config.squareWidth), config.pointRadius * 4), height)
+        let pointRadius = min(config.pointRadius, squareWidth * 0.5) * 0.8
         let middleSpace = CGFloat(width - CGFloat(config.passwordNum) * squareWidth) / CGFloat(CGFloat(config.passwordNum - 1) + config.spaceMultiple * 2)
         let leftSpace = middleSpace * config.spaceMultiple
         let y = (height - squareWidth) * 0.5
@@ -117,7 +127,7 @@ extension CLPasswordInputView {
         context?.setFillColor(config.pointColor.cgColor)
         
         for i in 0 ..< text.length {
-            context?.addArc(center: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5, y: y + squareWidth * 0.5), radius: config.pointRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+            context?.addArc(center: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5, y: y + squareWidth * 0.5), radius: pointRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
             context?.drawPath(using: .fill)
         }
     }
@@ -135,9 +145,9 @@ extension CLPasswordInputView: UIKeyInput {
             let basicTest = text == string
             if basicTest {
                 self.text.append(text)
-                delete?.passwordInputViewDidChange(passwordInputView: self)
+                delegate?.passwordInputViewDidChange(passwordInputView: self)
                 if self.text.length == config.passwordNum {
-                    delete?.passwordInputViewCompleteInput(passwordInputView: self)
+                    delegate?.passwordInputViewCompleteInput(passwordInputView: self)
                 }
                 setNeedsDisplay()
             }
@@ -147,9 +157,9 @@ extension CLPasswordInputView: UIKeyInput {
     func deleteBackward() {
         if text.length > 0 {
             text.deleteCharacters(in: NSRange(location: text.length - 1, length: 1))
-            delete?.passwordInputViewDidChange(passwordInputView: self)
+            delegate?.passwordInputViewDidChange(passwordInputView: self)
         }
-        delete?.passwordInputViewDidDeleteBackward(passwordInputView: self)
+        delegate?.passwordInputViewDidDeleteBackward(passwordInputView: self)
         setNeedsDisplay()
     }
 }

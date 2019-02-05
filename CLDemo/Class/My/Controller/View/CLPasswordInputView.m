@@ -8,7 +8,6 @@
 
 #import "CLPasswordInputView.h"
 #import "UIColor+CLHex.h"
-static NSString  * const MONEYNUMBERS = @"0123456789";
 
 @implementation CLPasswordInputViewConfigure
 
@@ -100,7 +99,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (void)insertText:(NSString *)text {
     if (self.text.length < self.configure.passwordNum) {
         //判断是否是数字
-        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:MONEYNUMBERS] invertedSet];
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString*filtered = [[text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         BOOL basicTest = [text isEqualToString:filtered];
         if(basicTest) {
@@ -138,7 +137,8 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
 - (void)drawRect:(CGRect)rect {
     CGFloat height = rect.size.height;
     CGFloat width = rect.size.width;
-    CGFloat squareWidth = MAX(MIN(height, self.configure.squareWidth), (self.configure.pointRadius * 4));
+    CGFloat squareWidth = MIN(MAX(MIN(height, self.configure.squareWidth), (self.configure.pointRadius * 4)), height);
+    CGFloat pointRadius = MIN(self.configure.pointRadius, squareWidth * 0.5) * 0.8;
     CGFloat middleSpace = (width - self.configure.passwordNum * squareWidth) / (self.configure.passwordNum - 1 + self.configure.spaceMultiple * 2);
     CGFloat leftSpace = middleSpace * self.configure.spaceMultiple;
     CGFloat y = (height - squareWidth) * 0.5;
@@ -154,7 +154,7 @@ static NSString  * const MONEYNUMBERS = @"0123456789";
     CGContextSetFillColorWithColor(context, self.configure.pointColor.CGColor);
     //画黑点
     for (NSUInteger i = 1; i <= self.text.length; i++) {
-        CGContextAddArc(context,  leftSpace + i * squareWidth + (i - 1) * middleSpace - squareWidth * 0.5, y + squareWidth * 0.5, self.configure.pointRadius, 0, M_PI * 2, YES);
+        CGContextAddArc(context,  leftSpace + i * squareWidth + (i - 1) * middleSpace - squareWidth * 0.5, y + squareWidth * 0.5, pointRadius, 0, M_PI * 2, YES);
         CGContextDrawPath(context, kCGPathFill);
     }
 }

@@ -52,10 +52,10 @@
     }];
 
     [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
-//        config.pointColor = [UIColor redColor];
-//        config.rectColor = [UIColor orangeColor];
-//        config.rectBackgroundColor = [UIColor purpleColor];
-//        config.backgroundColor = [UIColor lightGrayColor];
+        config.pointColor = [UIColor redColor];
+        config.rectColor = [UIColor orangeColor];
+        config.rectBackgroundColor = [UIColor purpleColor];
+        config.backgroundColor = [UIColor lightGrayColor];
     }];
 }
 
@@ -65,6 +65,7 @@
 }
 - (void)passwordInputViewCompleteInput:(CLPasswordInputView *)passwordInputView {
     self.label2.text = @"输入完毕";
+    [passwordInputView endEditing:YES];
 }
 - (void)passwordInputViewDidDeleteBackward:(CLPasswordInputView *)passwordInputView {
     self.label2.text = @"点击删除";
