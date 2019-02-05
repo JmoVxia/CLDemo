@@ -1,6 +1,1 @@
-module Then [system] {
-  umbrella header "Then-umbrella.h"
-
-  export *
-  module * { export * }
-}
+../../../Target Support Files/Then/Then.modulemap

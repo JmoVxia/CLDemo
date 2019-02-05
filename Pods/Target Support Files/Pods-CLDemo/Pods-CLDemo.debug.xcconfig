@@ -1,12 +1,12 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/DateTools" "${PODS_ROOT}/Headers/Public/MJExtension" "${PODS_ROOT}/Headers/Public/Masonry" "${PODS_ROOT}/Headers/Public/YYCache"
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/DateTools" "${PODS_CONFIGURATION_BUILD_DIR}/MJExtension" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/Then" "${PODS_CONFIGURATION_BUILD_DIR}/YYCache"
-OTHER_CFLAGS = $(inherited) -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Then/Then.modulemap" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/DateTools" -isystem "${PODS_ROOT}/Headers/Public/MJExtension" -isystem "${PODS_ROOT}/Headers/Public/Masonry" -isystem "${PODS_ROOT}/Headers/Public/YYCache"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"DateTools" -l"MJExtension" -l"Masonry" -l"Then" -l"YYCache" -l"sqlite3" -framework "CoreFoundation" -framework "Foundation" -framework "QuartzCore" -framework "UIKit"
-OTHER_SWIFT_FLAGS = $(inherited) -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Then/Then.modulemap" $(inherited) "-D" "COCOAPODS"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/DateTools" "${PODS_CONFIGURATION_BUILD_DIR}/MJExtension" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/SnapKit" "${PODS_CONFIGURATION_BUILD_DIR}/Then" "${PODS_CONFIGURATION_BUILD_DIR}/YYCache"
+OTHER_CFLAGS = $(inherited) -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap" -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Then/Then.modulemap"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"DateTools" -l"MJExtension" -l"Masonry" -l"SnapKit" -l"Then" -l"YYCache" -l"sqlite3" -framework "CoreFoundation" -framework "Foundation" -framework "QuartzCore" -framework "UIKit"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap" -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Then/Then.modulemap"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
-SWIFT_INCLUDE_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Then"
+SWIFT_INCLUDE_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/SnapKit" "${PODS_CONFIGURATION_BUILD_DIR}/Then"

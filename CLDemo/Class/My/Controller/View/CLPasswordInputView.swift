@@ -14,7 +14,7 @@ class CLPasswordInputViewConfigure: NSObject {
     ///边框正方形的大小
     var squareWidth: CGFloat = 50
     ///黑点的半径
-    var pointRadius: CGFloat = 9 * 0.5
+    var pointRadius: CGFloat = 18 * 0.5
     ///边距相对中间间隙倍数
     var spaceMultiple: CGFloat = 5;
     ///黑点颜色

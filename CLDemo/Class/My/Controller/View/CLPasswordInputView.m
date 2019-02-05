@@ -15,7 +15,7 @@
     CLPasswordInputViewConfigure *configure = [[CLPasswordInputViewConfigure alloc] init];
     configure.squareWidth = 50;
     configure.passwordNum = 6;
-    configure.pointRadius = 9 * 0.5;
+    configure.pointRadius = 18 * 0.5;
     configure.spaceMultiple = 5;
     configure.rectColor = [UIColor colorWithRGBHex:0xb2b2b2];
     configure.pointColor = [UIColor blackColor];

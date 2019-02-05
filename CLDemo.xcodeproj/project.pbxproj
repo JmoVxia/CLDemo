@@ -20,6 +20,7 @@
 		0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
 		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
+		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
 		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
 		0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */; };
 		0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */; };
@@ -98,6 +99,7 @@
 		0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CLDelegate.m"; sourceTree = "<group>"; };
 		0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPasswordViewController.h; sourceTree = "<group>"; };
 		0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPasswordViewController.m; sourceTree = "<group>"; };
+		0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordViewSwiftController.swift; sourceTree = "<group>"; };
 		0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeController.h; sourceTree = "<group>"; };
 		0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeController.m; sourceTree = "<group>"; };
 		0CCDA314219855A20057BA14 /* CLChangeFontSizeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeCell.h; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */,
 				0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */,
 				0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */,
+				0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */,
 				5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */,
 				0CCDA30C219854D90057BA14 /* Model */,
 				0CCDA310219855620057BA14 /* View */,
@@ -657,7 +660,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CLDemo/Pods-CLDemo-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CLDemo/Pods-CLDemo-resources.sh",
 				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -666,7 +669,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLDemo/Pods-CLDemo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CLDemo/Pods-CLDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7BF20DDC0F5284CC048BE878 /* [CP] Check Pods Manifest.lock */ = {
@@ -706,6 +709,7 @@
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
+				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
 				5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */,
 				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,

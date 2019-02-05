@@ -2,6 +2,7 @@ PODS:
   - DateTools (2.0.0)
   - Masonry (1.1.0)
   - MJExtension (3.0.15.1)
+  - SnapKit (4.2.0)
   - Then (2.3.0)
   - YYCache (1.0.4)
 
@@ -9,14 +10,16 @@ DEPENDENCIES:
   - DateTools
   - Masonry
   - MJExtension
+  - SnapKit
   - Then
   - YYCache
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - DateTools
     - Masonry
     - MJExtension
+    - SnapKit
     - Then
     - YYCache
 
@@ -24,9 +27,10 @@ SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 2c128c966e66bb7d61794bd56a75e4d0916f1924
+PODFILE CHECKSUM: 9fb2f270004920232a47c2387b5a2924627fa417
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.0.rc.2

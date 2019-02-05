@@ -77,6 +77,9 @@
     }else if (indexPath.row == 4) {
         CLPasswordViewController *passwordViewController = [[CLPasswordViewController alloc] init];
         [self.navigationController pushViewController:passwordViewController animated:YES];
+    }else if (indexPath.row == 5) {
+        CLPasswordViewSwiftController *passwordViewController = [[CLPasswordViewSwiftController alloc] init];
+        [self.navigationController pushViewController:passwordViewController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -96,7 +99,8 @@
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
         [_arrayDS addObject:NSLocalizedString(@"转子动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"自定义密码框", nil)];
+        [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-OC"]];
+        [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-Swift"]];
     }
     return _arrayDS;
 }

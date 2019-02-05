@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AB6E5B9ECC019B7287B3E96028415CA"
+               BlueprintIdentifier = "61CEB941EC1E1BE9C10637473C6F11E3"
                BuildableName = "libYYCache.a"
                BlueprintName = "YYCache"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AB6E5B9ECC019B7287B3E96028415CA"
+            BlueprintIdentifier = "61CEB941EC1E1BE9C10637473C6F11E3"
             BuildableName = "libYYCache.a"
             BlueprintName = "YYCache"
             ReferencedContainer = "container:Pods.xcodeproj">
