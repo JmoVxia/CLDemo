@@ -52,10 +52,10 @@
     }];
 
     [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
-        config.pointColor = cl_RandomColor;
-        config.rectColor = cl_RandomColor;
-        config.rectBackgroundColor = cl_RandomColor;
-        config.backgroundColor = cl_RandomColor;
+        config.pointColor = [UIColor blackColor];
+        config.rectColor = [UIColor blackColor];
+        config.rectBackgroundColor = [UIColor whiteColor];
+        config.backgroundColor = [UIColor whiteColor];
     }];
 }
 

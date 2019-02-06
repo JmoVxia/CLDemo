@@ -39,10 +39,6 @@ class CLPasswordViewSwiftController: CLBaseViewController {
             })
         }
         inputView.updateWithConfig { (configure) in
-            configure.backgroundColor = UIColor.lightGray
-            configure.rectBackgroundColor = UIColor.gray
-            configure.rectColor = UIColor.purple
-            configure.pointColor = UIColor.red
             configure.spaceMultiple = 1000
         }
     }
