@@ -88,7 +88,7 @@ static CGFloat widthCallBacks(void *ref)
     //4.设置要显示的文字
     NSMutableAttributedString *mabString = [[NSMutableAttributedString alloc] initWithString:@"\n这里在测试图文混排,我是富文本"];
     [mabString insertAttributedString:placeHolderMabString atIndex:12];
-    [mabString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:30] range:NSMakeRange(0, 12)];
+    [mabString addAttribute:NSFontAttributeName value:[UIFont clFontOfSize:30] range:NSMakeRange(0, 12)];
     
     
     //5.绘制文本

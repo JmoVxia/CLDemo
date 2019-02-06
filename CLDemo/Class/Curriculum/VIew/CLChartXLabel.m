@@ -22,7 +22,7 @@
     _label.frame = CGRectMake(0, 0, self.cl_height - 3, self.cl_height - 3);
     _label.cl_centerY = self.cl_height * 0.5;
     _label.cl_centerX = self.cl_width * 0.5;
-    _label.font = [UIFont systemFontOfSize:12];
+    _label.font = [UIFont clFontOfSize:12];
     _label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_label];
 }

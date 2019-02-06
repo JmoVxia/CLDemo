@@ -11,13 +11,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CLChangeFontSizeManager : NSObject
-//设置字体大小系数，1到6  2为默认标准
+
+/**
+ 设置字体大小系数，1到6  2为默认标准
+ */
 + (void)setFontSizeCoefficient:(NSInteger )coefficient;
 
-//读取字体大小系数，1到6  2为默认标准
+/**
+ 读取字体大小系数，1到6  2为默认标准
+ */
 + (NSInteger )fontSizeCoefficient;
 
-//读取比例系数 (0.925~1.30)
+/**
+ 读取比例系数 (0.925~1.30)
+ */
 + (float )scaleCoefficient;
 
 @end

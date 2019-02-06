@@ -31,18 +31,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"修改字号", nil);
-    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
         make.bottom.mas_equalTo(self.slider.mas_top);
     }];
 }
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrayDS.count;
 }
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CLChangeFontSizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CLChangeFontSizeCell" forIndexPath:indexPath];
     if (!cell) {
@@ -52,12 +49,10 @@
     cell.model = model;
     return cell;
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChangeFontSizeModel *model = self.arrayDS[indexPath.row];
     return model.cellHeight;
 }
-
 - (void)refreshRootViewController {
     //创建新的根控制器
     CLTabbarController *tabbarController = [[CLTabbarController alloc] init];
@@ -78,7 +73,6 @@
         CLLog(@"已切文字大小");
     });
 }
-
 - (NSMutableArray *) arrayDS{
     if (_arrayDS == nil){
         _arrayDS = [[NSMutableArray alloc] init];
@@ -95,7 +89,6 @@
     }
     return _arrayDS;
 }
-
 - (UITableView *) tableView{
     if (_tableView == nil){
         _tableView = [[UITableView alloc] init];
@@ -129,8 +122,6 @@
     }
     return _slider;
 }
-
-
 -(void)dealloc {
     CLLog(@"修改字号页面销毁了");
 }

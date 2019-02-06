@@ -27,7 +27,7 @@
     //        self.layer.cornerRadius = 5;
     
     // 设置字体
-    self.font = [UIFont systemFontOfSize:14];
+    self.font = [UIFont clFontOfSize:14];
     
     
     // 设置清楚按钮

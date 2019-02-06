@@ -223,7 +223,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     }
-    cell.textLabel.font = [UIFont clFontOfSize:14];
+    cell.textLabel.font = [UIFont clFontOfSize:16];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (!self.active) {
         NSArray *stringArray = [[self.allKeysDict[self.arrayDS[indexPath.section]] objectAtIndex:indexPath.row] componentsSeparatedByString:@"+"];
@@ -378,7 +378,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"选择银行";
         _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.font = [UIFont systemFontOfSize:18];
+        _titleLabel.font = [UIFont clFontOfSize:18];
         [self.view addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -391,7 +391,7 @@
         _indexTipLabel.backgroundColor = [UIColor colorWithRed:192.6/255.0 green:254.6/255.0 blue:61.7/255.0 alpha:255.0/255.0];
         _indexTipLabel.textAlignment = NSTextAlignmentCenter;
         _indexTipLabel.textColor = [UIColor whiteColor];
-        _indexTipLabel.font = [UIFont systemFontOfSize:24];
+        _indexTipLabel.font = [UIFont clFontOfSize:24];
     }
     return _indexTipLabel;
 }

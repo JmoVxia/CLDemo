@@ -71,18 +71,18 @@
     [self bringSubviewToFront:_slider];
     
     _leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backgroundImageView.cl_x - 3, 20, 30, 20)];
-    _leftLabel .font = [UIFont systemFontOfSize:13];
+    _leftLabel .font = [UIFont clFontOfSize:13];
     _leftLabel .text = @"A";
     [self addSubview:_leftLabel];
     
     _standardLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backgroundImageView.cl_x + _backgroundImageView.cl_width / 5.0 - 12, 20, 50, 20)];
-    _standardLabel .font = [UIFont systemFontOfSize:15.5];
+    _standardLabel .font = [UIFont clFontOfSize:15.5];
     _standardLabel .text = @"标准";
     _standardLabel.textColor = [UIColor grayColor];
     [self addSubview:_standardLabel];
     
     _rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backgroundImageView.frame.origin.x + _backgroundImageView.cl_width - 7, 20, 30, 20)];
-    _rightLabel .font = [UIFont systemFontOfSize:24];
+    _rightLabel .font = [UIFont clFontOfSize:24];
     _rightLabel .text = @"A";
     [self addSubview:_rightLabel];
 }
