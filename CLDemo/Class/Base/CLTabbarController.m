@@ -14,7 +14,6 @@
 #import "CLMyController.h"
 #import "CLCustomTabbar.h"
 
-
 @interface CLTabbarController ()
 
 @end
@@ -29,6 +28,7 @@
    }
 - (void)initUI
 {
+    CLLog(@"沙盒路径----->>>%@",Tools.pathDocuments);
     [self setValue:[[CLCustomTabbar alloc] init] forKeyPath:@"tabBar"];
     
     CLEssenceController *ec = [[CLEssenceController alloc] init];
