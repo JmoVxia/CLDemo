@@ -12,6 +12,8 @@
 @interface CLLogViewController ()<UITableViewDelegate, UITableViewDataSource>
 /**tableview*/
 @property (nonatomic, strong) UITableView *tableView;
+/**数据源*/
+@property (nonatomic, strong) NSArray<NSString *> *array;
 
 @end
 
@@ -19,12 +21,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSURL *url = [NSURL fileURLWithPath:[Tools.pathDocuments stringByAppendingString:@"/application-0.log"]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSMutableArray<NSString *> *array = [NSMutableArray arrayWithArray:[string componentsSeparatedByString:@"\n"]];
+    [array removeLastObject];
+    self.array = array;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
         make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
     }];
-
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.array.count;

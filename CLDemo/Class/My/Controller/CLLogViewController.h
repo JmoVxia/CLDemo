@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLLogViewController : CLBaseViewController
 
-/**数据源*/
-@property (nonatomic, strong) NSArray<NSString *> *array;
 
 @end
 

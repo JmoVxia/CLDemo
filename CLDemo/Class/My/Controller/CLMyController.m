@@ -82,13 +82,7 @@
         CLPasswordViewSwiftController *passwordViewController = [[CLPasswordViewSwiftController alloc] init];
         [self.navigationController pushViewController:passwordViewController animated:YES];
     }else if (indexPath.row == 6) {
-        NSURL *url = [NSURL fileURLWithPath:[Tools.pathDocuments stringByAppendingString:@"/application-0.log"]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSMutableArray<NSString *> *array = [NSMutableArray arrayWithArray:[string componentsSeparatedByString:@"\n"]];
         CLLogViewController *vc = [[CLLogViewController alloc] init];
-        [array removeLastObject];
-        vc.array = array;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
