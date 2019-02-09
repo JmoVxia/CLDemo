@@ -19,4 +19,15 @@
  */
 - (CGSize)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
 
+
+/**
+ 使用核心文本计算字符串高度
+
+ @param font 字体
+ @param maxWidth 最大宽度
+ @param maxLines 最大行数
+ @return 高度
+ */
+- (int)calculateHeightWithFont:(UIFont*)font maxWidth:(CGFloat) maxWidth maxLines:(NSInteger)maxLines;
+
 @end

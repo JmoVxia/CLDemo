@@ -38,8 +38,10 @@
     cell.textLabel.text = self.array[indexPath.row];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont clFontOfSize:18];
-    if (indexPath.row %2 == 0) {
+    if (indexPath.row % 2 == 0) {
         cell.backgroundColor = [UIColor lightGrayColor];
+    }else {
+        cell.backgroundColor = [UIColor whiteColor];
     }
     cell.selectionStyle = normal;
     return cell;

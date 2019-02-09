@@ -29,6 +29,7 @@
     __weak __typeof(self) weakSelf = self;
     [button addActionBlock:^(UIButton *button) {
         __typeof(&*weakSelf) strongSelf = weakSelf;
+        CLLog(@"----点击搜索按钮----");
         CLSearchViewController *searchController = [[CLSearchViewController alloc] init];
         searchController.tapAction = ^(NSString * _Nonnull name, NSString * _Nonnull bankCode) {
             [button setTitle:name forState:UIControlStateNormal];

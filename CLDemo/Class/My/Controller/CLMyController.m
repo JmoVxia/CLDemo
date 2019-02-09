@@ -111,7 +111,7 @@
         [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-Swift"]];
-        [_arrayDS addObject:[NSLocalizedString(@"日志记录", nil) stringByAppendingString:@"-Swift"]];
+        [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
     }
     return _arrayDS;
 }

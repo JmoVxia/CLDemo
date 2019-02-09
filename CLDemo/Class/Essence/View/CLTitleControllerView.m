@@ -122,6 +122,7 @@
     if ([num integerValue] == 0)
     {
         UIViewController *vc = [NSClassFromString(_controllerClassNameArray[index]) new];
+        vc.title = self.titlesArray[index];
         // 创建控制器
         vc.view.frame = CGRectMake(scrollView.contentOffset.x, 0, scrollView.frame.size.width, scrollView.frame.size.height);
         [scrollView addSubview:vc.view];
