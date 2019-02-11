@@ -45,6 +45,29 @@ protocol CLPasswordInputViewDelegate {
     func passwordInputViewEndInput(passwordInputView:CLPasswordInputView) -> Void
 }
 
+extension CLPasswordInputViewDelegate {
+    ///输入改变
+    func passwordInputViewDidChange(passwordInputView:CLPasswordInputView) -> Void {
+        
+    }
+    ///点击删除
+    func passwordInputViewDidDeleteBackward(passwordInputView:CLPasswordInputView) -> Void {
+        
+    }
+    ///输入完成
+    func passwordInputViewCompleteInput(passwordInputView:CLPasswordInputView) -> Void {
+        
+    }
+    ///开始输入
+    func passwordInputViewBeginInput(passwordInputView:CLPasswordInputView) -> Void {
+        
+    }
+    ///结束输入
+    func passwordInputViewEndInput(passwordInputView:CLPasswordInputView) -> Void {
+        
+    }
+}
+
 class CLPasswordInputView: UIView {
     
     var delegate: CLPasswordInputViewDelegate?
@@ -164,25 +187,3 @@ extension CLPasswordInputView: UIKeyInput {
     }
 }
 
-extension CLPasswordInputViewDelegate {
-    ///输入改变
-    func passwordInputViewDidChange(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///点击删除
-    func passwordInputViewDidDeleteBackward(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///输入完成
-    func passwordInputViewCompleteInput(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///开始输入
-    func passwordInputViewBeginInput(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///结束输入
-    func passwordInputViewEndInput(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-}
