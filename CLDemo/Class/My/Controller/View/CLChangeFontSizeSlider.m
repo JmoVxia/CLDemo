@@ -8,6 +8,7 @@
 
 #import "CLChangeFontSizeSlider.h"
 #import "CLChangeFontSizeManager.h"
+#import "UIView+CLEvents.h"
 
 @interface CLChangeFontSizeSlider ()<UIGestureRecognizerDelegate>
 
@@ -56,8 +57,11 @@
     [_slider addTarget:self action:@selector(sliderTouchDown:) forControlEvents:UIControlEventTouchDown];
     [_slider addTarget:self action:@selector(sliderTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_slider];
-    
-    _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    __weak __typeof(self) weakSelf = self;
+    _tapGesture = [_slider addGestureTapEventHandle:^(id  _Nonnull sender, UITapGestureRecognizer * _Nonnull gestureRecognizer) {
+        __typeof(&*weakSelf) strongSelf = weakSelf;
+        [strongSelf tapAction:gestureRecognizer];
+    }];
     _tapGesture.delegate = self;
     [_slider addGestureRecognizer:_tapGesture];
     
