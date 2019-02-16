@@ -17,7 +17,10 @@
 @end
 
 @implementation CLInputToolbarController
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.inputToolbar dissmissToolbar];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -33,14 +36,14 @@
 
 -(void)setTextViewToolbar {
     self.inputToolbar = [[CLInputToolbar alloc] init];
-    self.inputToolbar.textViewMaxLine = 3;
-    self.inputToolbar.fontSize = 20;
-    self.inputToolbar.placeholder = @"请输入...";
-    self.inputToolbar.showMaskView = YES;
+    [self.inputToolbar updateWithConfig:^(CLInputToolbarConfigure *configure) {
+        configure.textViewMaxLine = 4;
+        configure.font = [UIFont systemFontOfSize:10];
+    }];
     __weak __typeof(self) weakSelf = self;
     [self.inputToolbar inputToolbarSendText:^(NSString *text) {
         __typeof(&*weakSelf) strongSelf = weakSelf;
-        NSLog(@"%@",strongSelf.inputToolbar.inputText);
+        NSLog(@"%@",text);
         [strongSelf.btn setTitle:text forState:UIControlStateNormal];
         // 清空输入框文字
         [strongSelf.inputToolbar clearText];
@@ -52,7 +55,7 @@
 }
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.btn.frame = CGRectMake(10, 90, self.view.cl_width - 20, 100);
+    self.btn.frame = CGRectMake(10, 150, self.view.cl_width - 20, 100);
 }
 
 @end

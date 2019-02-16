@@ -51,9 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**控件背景颜色*/
 @property (nonatomic, strong) UIColor *backgroundColor;
 
-/**默认配置*/
-+ (instancetype)defaultConfig;
-
 @end
 
 @interface CLPasswordInputView : UIView<UIKeyInput>

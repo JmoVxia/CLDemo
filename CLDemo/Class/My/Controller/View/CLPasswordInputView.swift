@@ -26,7 +26,7 @@ class CLPasswordInputViewConfigure: NSObject {
     ///控件背景颜色
     var backgroundColor: UIColor = UIColor.white
     
-    class func defaultConfig() -> CLPasswordInputViewConfigure {
+    fileprivate class func defaultConfig() -> CLPasswordInputViewConfigure {
         let configure = CLPasswordInputViewConfigure()
         return configure
     }
