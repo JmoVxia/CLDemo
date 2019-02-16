@@ -52,6 +52,18 @@
 		5B28650E21EE428200334E6C /* CLCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B28650D21EE428200334E6C /* CLCoreTextView.m */; };
 		5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */; };
 		5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */; };
+		5B8095F62218700E000F72F3 /* CLBankCardScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8095F52218700E000F72F3 /* CLBankCardScanController.m */; };
+		5B809615221870BD000F72F3 /* CLBankCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8095FE221870BC000F72F3 /* CLBankCardView.m */; };
+		5B809616221870BD000F72F3 /* CLScanBankCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B809601221870BC000F72F3 /* CLScanBankCardManager.m */; };
+		5B809617221870BD000F72F3 /* CLScanBankCardBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B809603221870BC000F72F3 /* CLScanBankCardBase.m */; };
+		5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B809605221870BC000F72F3 /* CLBankCardSearch.m */; };
+		5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B809606221870BC000F72F3 /* UIImage+Extend.m */; };
+		5B80961A221870BD000F72F3 /* CLDesign.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B809607221870BC000F72F3 /* CLDesign.m */; };
+		5B80961B221870BD000F72F3 /* CLBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B809609221870BC000F72F3 /* CLBankCardModel.m */; };
+		5B80961C221870BD000F72F3 /* libexbankcardios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B809611221870BD000F72F3 /* libexbankcardios.a */; };
+		5B80961D221870BD000F72F3 /* libbexbankcard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B809612221870BD000F72F3 /* libbexbankcard.a */; };
+		5B80961E221870BD000F72F3 /* zocr0.lib in Resources */ = {isa = PBXBuildFile; fileRef = 5B809613221870BD000F72F3 /* zocr0.lib */; };
+		5B80962122187115000F72F3 /* CLBankCardDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80962022187115000F72F3 /* CLBankCardDetailController.m */; };
 		5B80D9E91DDD976A00A20E34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80D9E81DDD976A00A20E34 /* main.m */; };
 		5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80D9EB1DDD976A00A20E34 /* AppDelegate.m */; };
 		5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B80D9F31DDD976A00A20E34 /* Assets.xcassets */; };
@@ -159,6 +171,32 @@
 		5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartNameToolBar.m; sourceTree = "<group>"; };
 		5B39CECF1DE2BE6800C7DD5C /* CLTitleControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTitleControllerView.h; sourceTree = "<group>"; };
 		5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTitleControllerView.m; sourceTree = "<group>"; };
+		5B8095F42218700E000F72F3 /* CLBankCardScanController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBankCardScanController.h; sourceTree = "<group>"; };
+		5B8095F52218700E000F72F3 /* CLBankCardScanController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBankCardScanController.m; sourceTree = "<group>"; };
+		5B8095FD221870BC000F72F3 /* CLBankCardSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBankCardSearch.h; sourceTree = "<group>"; };
+		5B8095FE221870BC000F72F3 /* CLBankCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBankCardView.m; sourceTree = "<group>"; };
+		5B8095FF221870BC000F72F3 /* UIImage+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extend.h"; sourceTree = "<group>"; };
+		5B809600221870BC000F72F3 /* CLBankCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBankCardModel.h; sourceTree = "<group>"; };
+		5B809601221870BC000F72F3 /* CLScanBankCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScanBankCardManager.m; sourceTree = "<group>"; };
+		5B809602221870BC000F72F3 /* CLDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDesign.h; sourceTree = "<group>"; };
+		5B809603221870BC000F72F3 /* CLScanBankCardBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScanBankCardBase.m; sourceTree = "<group>"; };
+		5B809604221870BC000F72F3 /* CLBankCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBankCardView.h; sourceTree = "<group>"; };
+		5B809605221870BC000F72F3 /* CLBankCardSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBankCardSearch.m; sourceTree = "<group>"; };
+		5B809606221870BC000F72F3 /* UIImage+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extend.m"; sourceTree = "<group>"; };
+		5B809607221870BC000F72F3 /* CLDesign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDesign.m; sourceTree = "<group>"; };
+		5B809608221870BC000F72F3 /* CLScanBankCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScanBankCardManager.h; sourceTree = "<group>"; };
+		5B809609221870BC000F72F3 /* CLBankCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBankCardModel.m; sourceTree = "<group>"; };
+		5B80960A221870BC000F72F3 /* CLScanBankCardBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScanBankCardBase.h; sourceTree = "<group>"; };
+		5B80960C221870BD000F72F3 /* exbankcardcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exbankcardcore.h; sourceTree = "<group>"; };
+		5B80960D221870BD000F72F3 /* commondef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commondef.h; sourceTree = "<group>"; };
+		5B80960E221870BD000F72F3 /* exbankcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exbankcard.h; sourceTree = "<group>"; };
+		5B80960F221870BD000F72F3 /* excards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = excards.h; sourceTree = "<group>"; };
+		5B809611221870BD000F72F3 /* libexbankcardios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libexbankcardios.a; sourceTree = "<group>"; };
+		5B809612221870BD000F72F3 /* libbexbankcard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbexbankcard.a; sourceTree = "<group>"; };
+		5B809613221870BD000F72F3 /* zocr0.lib */ = {isa = PBXFileReference; lastKnownFileType = file; path = zocr0.lib; sourceTree = "<group>"; };
+		5B809614221870BD000F72F3 /* BankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCard.h; sourceTree = "<group>"; };
+		5B80961F22187115000F72F3 /* CLBankCardDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBankCardDetailController.h; sourceTree = "<group>"; };
+		5B80962022187115000F72F3 /* CLBankCardDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBankCardDetailController.m; sourceTree = "<group>"; };
 		5B80D9E41DDD976A00A20E34 /* CLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B80D9E81DDD976A00A20E34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B80D9EA1DDD976A00A20E34 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -210,7 +248,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B80961C221870BD000F72F3 /* libexbankcardios.a in Frameworks */,
 				E9EEC30690C393893AD6852D /* libPods-CLDemo.a in Frameworks */,
+				5B80961D221870BD000F72F3 /* libbexbankcard.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +398,59 @@
 				5B1C74251E78F120000AB534 /* CLChartXLabel.m */,
 			);
 			path = VIew;
+			sourceTree = "<group>";
+		};
+		5B8095F722187061000F72F3 /* CLBankScan */ = {
+			isa = PBXGroup;
+			children = (
+				5B80960B221870BD000F72F3 /* bank_card */,
+				5B8095FC221870BC000F72F3 /* CLBank */,
+			);
+			path = CLBankScan;
+			sourceTree = "<group>";
+		};
+		5B8095FC221870BC000F72F3 /* CLBank */ = {
+			isa = PBXGroup;
+			children = (
+				5B8095FD221870BC000F72F3 /* CLBankCardSearch.h */,
+				5B8095FE221870BC000F72F3 /* CLBankCardView.m */,
+				5B8095FF221870BC000F72F3 /* UIImage+Extend.h */,
+				5B809600221870BC000F72F3 /* CLBankCardModel.h */,
+				5B809601221870BC000F72F3 /* CLScanBankCardManager.m */,
+				5B809602221870BC000F72F3 /* CLDesign.h */,
+				5B809603221870BC000F72F3 /* CLScanBankCardBase.m */,
+				5B809604221870BC000F72F3 /* CLBankCardView.h */,
+				5B809605221870BC000F72F3 /* CLBankCardSearch.m */,
+				5B809606221870BC000F72F3 /* UIImage+Extend.m */,
+				5B809607221870BC000F72F3 /* CLDesign.m */,
+				5B809608221870BC000F72F3 /* CLScanBankCardManager.h */,
+				5B809609221870BC000F72F3 /* CLBankCardModel.m */,
+				5B80960A221870BC000F72F3 /* CLScanBankCardBase.h */,
+			);
+			path = CLBank;
+			sourceTree = "<group>";
+		};
+		5B80960B221870BD000F72F3 /* bank_card */ = {
+			isa = PBXGroup;
+			children = (
+				5B80960C221870BD000F72F3 /* exbankcardcore.h */,
+				5B80960D221870BD000F72F3 /* commondef.h */,
+				5B80960E221870BD000F72F3 /* exbankcard.h */,
+				5B80960F221870BD000F72F3 /* excards.h */,
+				5B809610221870BD000F72F3 /* exbankcardcore */,
+				5B809614221870BD000F72F3 /* BankCard.h */,
+			);
+			path = bank_card;
+			sourceTree = "<group>";
+		};
+		5B809610221870BD000F72F3 /* exbankcardcore */ = {
+			isa = PBXGroup;
+			children = (
+				5B809611221870BD000F72F3 /* libexbankcardios.a */,
+				5B809612221870BD000F72F3 /* libbexbankcard.a */,
+				5B809613221870BD000F72F3 /* zocr0.lib */,
+			);
+			path = exbankcardcore;
 			sourceTree = "<group>";
 		};
 		5B80D9DB1DDD976A00A20E34 = {
@@ -519,6 +612,10 @@
 				0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */,
 				0C777A492217A8B900BC8AFB /* CLInputToolbarController.h */,
 				0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */,
+				5B8095F42218700E000F72F3 /* CLBankCardScanController.h */,
+				5B8095F52218700E000F72F3 /* CLBankCardScanController.m */,
+				5B80961F22187115000F72F3 /* CLBankCardDetailController.h */,
+				5B80962022187115000F72F3 /* CLBankCardDetailController.m */,
 				0CCDA30C219854D90057BA14 /* Model */,
 				0CCDA310219855620057BA14 /* View */,
 			);
@@ -546,6 +643,7 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				5B8095F722187061000F72F3 /* CLBankScan */,
 				0CF79B0C219679AB00DD0BF1 /* DataJson */,
 				0C33BC6F219AEF5D00583B4C /* CLLog */,
 				0CCDA31D219922C50057BA14 /* CLChangeFontSizeManager */,
@@ -667,6 +765,7 @@
 				0CF79B1421967AE600DD0BF1 /* 三月.json in Resources */,
 				0CF79B1321967AE600DD0BF1 /* 一周.json in Resources */,
 				0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */,
+				5B80961E221870BD000F72F3 /* zocr0.lib in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,14 +816,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B8095F62218700E000F72F3 /* CLBankCardScanController.m in Sources */,
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
 				0CE7333F2191CB9D00270851 /* Tools.m in Sources */,
 				0CF79AFD219678FB00DD0BF1 /* UITableView+IndexTip.m in Sources */,
+				5B809617221870BD000F72F3 /* CLScanBankCardBase.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,
 				5B80DA471DDD993F00A20E34 /* CLEssenceController.m in Sources */,
 				0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */,
+				5B809616221870BD000F72F3 /* CLScanBankCardManager.m in Sources */,
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
@@ -739,6 +841,7 @@
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
+				5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
 				0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */,
@@ -747,16 +850,21 @@
 				0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */,
 				0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
+				5B80961B221870BD000F72F3 /* CLBankCardModel.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
+				5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
 				0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */,
 				5B80DA4C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m in Sources */,
 				0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */,
 				0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */,
+				5B80961A221870BD000F72F3 /* CLDesign.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
 				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
+				5B80962122187115000F72F3 /* CLBankCardDetailController.m in Sources */,
+				5B809615221870BD000F72F3 /* CLBankCardView.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
 				0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */,
@@ -921,6 +1029,10 @@
 				INFOPLIST_FILE = CLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CLDemo/Others/CLBankScan/bank_card/exbankcardcore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";
@@ -941,6 +1053,10 @@
 				INFOPLIST_FILE = CLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CLDemo/Others/CLBankScan/bank_card/exbankcardcore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";

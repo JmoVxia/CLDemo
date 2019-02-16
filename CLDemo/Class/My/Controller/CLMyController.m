@@ -16,6 +16,7 @@
 #import "CLPasswordViewController.h"
 #import "CLLogViewController.h"
 #import "CLInputToolbarController.h"
+#import "CLBankCardScanController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -88,6 +89,9 @@
     }else if (indexPath.row == 7) {
         CLInputToolbarController *inputToolbarController = [[CLInputToolbarController alloc] init];
         [self.navigationController pushViewController:inputToolbarController animated:YES];
+    }else if (indexPath.row == 8) {
+        CLBankCardScanController *bankCardScanController = [[CLBankCardScanController alloc] init];
+        [self.navigationController pushViewController:bankCardScanController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -111,6 +115,7 @@
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
     }
     return _arrayDS;
 }
