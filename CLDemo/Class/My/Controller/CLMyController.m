@@ -9,12 +9,13 @@
 //
 
 #import "CLMyController.h"
+#import "CLDemo-Swift.h"
 #import "CLChangeLanguageController.h"
 #import "CLChangeFontSizeController.h"
 #import "CLRotateAnimationController.h"
 #import "CLPasswordViewController.h"
-#import "CLDemo-Swift.h"
 #import "CLLogViewController.h"
+#import "CLInputToolbarController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -82,8 +83,11 @@
         CLPasswordViewSwiftController *passwordViewController = [[CLPasswordViewSwiftController alloc] init];
         [self.navigationController pushViewController:passwordViewController animated:YES];
     }else if (indexPath.row == 6) {
-        CLLogViewController *vc = [[CLLogViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        CLLogViewController *logViewController = [[CLLogViewController alloc] init];
+        [self.navigationController pushViewController:logViewController animated:YES];
+    }else if (indexPath.row == 7) {
+        CLInputToolbarController *inputToolbarController = [[CLInputToolbarController alloc] init];
+        [self.navigationController pushViewController:inputToolbarController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -106,6 +110,7 @@
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
     }
     return _arrayDS;
 }
