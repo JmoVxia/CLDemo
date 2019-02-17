@@ -167,6 +167,9 @@
 - (void)showToolbar{
     if (self.configure.showMaskView) {
         [self.keyWindow addSubview:self.maskView];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.maskView.backgroundColor = [UIColor colorWithRed:0.00 green:0.00 blue:0.00 alpha:0.4];
+        }];
     }
     [self.keyWindow addSubview:self.backgroundView];
     [self.backgroundView addSubview:self.textView];
@@ -178,7 +181,11 @@
     [self.textView resignFirstResponder];
     [self.backgroundView removeFromSuperview];
     if (self.configure.showMaskView) {
-        [self.maskView removeFromSuperview];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.maskView.backgroundColor = [UIColor colorWithRed:0.00 green:0.00 blue:0.00 alpha:0.0];
+        }completion:^(BOOL finished) {
+            [self.maskView removeFromSuperview];
+        }];
     }
 }
 - (void)clearText {
@@ -252,8 +259,6 @@
 - (UIView *) maskView {
     if (_maskView == nil) {
         _maskView = [[UIView alloc] init];
-        _maskView.backgroundColor = [UIColor lightGrayColor];
-        _maskView.alpha = 0.5;
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapActions:)];
         [_maskView addGestureRecognizer:tapGestureRecognizer];
     }
@@ -299,7 +304,7 @@
     }
     return _textView;
 }
-- (UILabel *)placeholderLabel {
+- (UILabel *) placeholderLabel {
     if (_placeholderLabel == nil) {
         _placeholderLabel = [[UILabel alloc] init];
     }
