@@ -39,6 +39,15 @@
     [self.inputToolbar updateWithConfig:^(CLInputToolbarConfigure *configure) {
         configure.textViewMaxLine = 4;
         configure.font = [UIFont systemFontOfSize:10];
+//        configure.cursorColor = [UIColor redColor];
+//        configure.textColor = cl_RandomColor;
+//        configure.backgroundColor = cl_RandomColor;
+//        configure.topLineColor = cl_RandomColor;
+//        configure.bottomLineColor = cl_RandomColor;
+//        configure.edgeLineViewColor = cl_RandomColor;
+//        configure.sendButtonBorderColor = cl_RandomColor;
+//        configure.sendButtonTextColor = cl_RandomColor;
+//        configure.placeholderTextColor = cl_RandomColor;
     }];
     __weak __typeof(self) weakSelf = self;
     [self.inputToolbar inputToolbarSendText:^(NSString *text) {

@@ -21,6 +21,10 @@ typedef void(^inputToolBarSendBlock)(NSString *text);
 @property (nonatomic, strong) UIFont *font;
 /**占位文字*/
 @property (nonatomic, copy) NSString *placeholder;
+/**光标颜色*/
+@property (nonatomic, strong) UIColor *cursorColor;
+/**输入文字颜色*/
+@property (nonatomic, strong) UIColor *textColor;
 /**背景颜色*/
 @property (nonatomic, strong) UIColor *backgroundColor;
 /**顶部线条颜色*/

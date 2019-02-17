@@ -19,7 +19,9 @@
     configure.textViewMaxLine = 3;
     configure.font = [UIFont systemFontOfSize:18];
     configure.placeholder = @"请输入...";
+    configure.cursorColor = [UIColor colorWithRed:0.08 green:0.54 blue:0.95 alpha:1.00];
     configure.backgroundColor = [UIColor whiteColor];
+    configure.textColor = RGBACOLOR(1, 1, 1, 1);
     configure.topLineColor = RGBACOLOR(0, 0, 0, 0.2);
     configure.bottomLineColor = RGBACOLOR(0, 0, 0, 0.2);
     configure.edgeLineViewColor = RGBACOLOR(0, 0, 0, 0.5);
@@ -101,6 +103,8 @@
     CGFloat lineH = self.textView.font.lineHeight;
     self.cl_height = ceil(lineH) + 10 + 10;
     self.textView.cl_height = lineH;
+    self.textView.tintColor = self.configure.cursorColor;
+    self.textView.textColor = self.configure.textColor;
     self.placeholderLabel.text = self.configure.placeholder;
     self.backgroundView.backgroundColor = self.configure.backgroundColor;
     self.topLine.backgroundColor = self.configure.topLineColor;
