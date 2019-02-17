@@ -20,6 +20,12 @@
     configure.font = [UIFont systemFontOfSize:18];
     configure.placeholder = @"请输入...";
     configure.backgroundColor = [UIColor whiteColor];
+    configure.topLineColor = RGBACOLOR(0, 0, 0, 0.2);
+    configure.bottomLineColor = RGBACOLOR(0, 0, 0, 0.2);
+    configure.edgeLineViewColor = RGBACOLOR(0, 0, 0, 0.5);
+    configure.placeholderTextColor = RGBACOLOR(0, 0, 0, 0.5);
+    configure.sendButtonBorderColor = RGBACOLOR(0, 0, 0, 1.0);
+    configure.sendButtonTextColor = RGBACOLOR(0, 0, 0, 1.0);
     return configure;
 }
 - (void)setFont:(UIFont *)font {
@@ -97,6 +103,13 @@
     self.textView.cl_height = lineH;
     self.placeholderLabel.text = self.configure.placeholder;
     self.backgroundView.backgroundColor = self.configure.backgroundColor;
+    self.topLine.backgroundColor = self.configure.topLineColor;
+    self.bottomLine.backgroundColor = self.configure.bottomLineColor;
+    self.edgeLineView.layer.borderColor = self.configure.edgeLineViewColor.CGColor;
+    self.placeholderLabel.textColor = self.configure.placeholderTextColor;
+    self.sendButton.layer.borderColor = self.textView.text.length > 0 ? self.configure.sendButtonBorderColor.CGColor : RGBACOLOR(0, 0, 0, 0.2).CGColor;
+    [self.sendButton setTitleColor:self.textView.text.length > 0 ? self.configure.sendButtonTextColor : RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateNormal];
+    [self.sendButton setTitleColor:self.textView.text.length > 0 ? self.configure.sendButtonTextColor : RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateSelected];
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
@@ -112,9 +125,13 @@
     if (textView.text.length == 0) {
         self.sendButton.enabled = NO;
         [self.sendButton setTitleColor:RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateNormal];
+        [self.sendButton setTitleColor:RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateSelected];
+        self.sendButton.layer.borderColor = RGBACOLOR(0, 0, 0, 0.2).CGColor;
     }else{
         self.sendButton.enabled = YES;
-        [self.sendButton setTitleColor:RGBACOLOR(0, 0, 0, 1.0) forState:UIControlStateNormal];
+        [self.sendButton setTitleColor:self.configure.sendButtonTextColor forState:UIControlStateNormal];
+        [self.sendButton setTitleColor:self.configure.sendButtonTextColor forState:UIControlStateSelected];
+        self.sendButton.layer.borderColor = self.configure.sendButtonBorderColor.CGColor;
     }
     CGFloat contentSizeH = textView.contentSize.height;
     CGFloat lineH = textView.font.lineHeight;
@@ -135,11 +152,7 @@
 - (void)tapActions:(UITapGestureRecognizer *)tapGestureRecognizer {
     [self dissmissToolbar];
 }
-- (NSString *)inputText {
-    return self.textView.text;
-}
-// 发送按钮
--(void)didClicksendButton {
+-(void)didClickSendButton {
     if (self.sendBlock) {
         self.sendBlock(self.textView.text);
     }
@@ -251,14 +264,12 @@
 - (UIView *) topLine {
     if (_topLine == nil) {
         _topLine = [[UIView alloc] init];
-        _topLine.backgroundColor = RGBACOLOR(0, 0, 0, 0.2);
     }
     return _topLine;
 }
 - (UIView *) bottomLine {
     if (_bottomLine == nil) {
         _bottomLine = [[UIView alloc] init];
-        _bottomLine.backgroundColor = RGBACOLOR(0, 0, 0, 0.2);
     }
     return _bottomLine;
 }
@@ -266,7 +277,6 @@
     if (_edgeLineView == nil) {
         _edgeLineView = [[UIView alloc]init];
         _edgeLineView.layer.cornerRadius = 5;
-        _edgeLineView.layer.borderColor = RGBACOLOR(0, 0, 0, 0.5).CGColor;
         _edgeLineView.layer.borderWidth = 1;
         _edgeLineView.layer.masksToBounds = YES;
     }
@@ -288,7 +298,6 @@
 - (UILabel *)placeholderLabel {
     if (_placeholderLabel == nil) {
         _placeholderLabel = [[UILabel alloc] init];
-        _placeholderLabel.textColor = RGBACOLOR(0, 0, 0, 0.5);
     }
     return _placeholderLabel;
 }
@@ -297,12 +306,10 @@
         _sendButton = [[UIButton alloc] init];
         _sendButton.layer.borderWidth = 1.0;
         _sendButton.layer.cornerRadius = 5.0;
-        _sendButton.layer.borderColor = RGBACOLOR(0, 0, 0, 0.5).CGColor;
         _sendButton.enabled = NO;
         _sendButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_sendButton setTitle:@"发送" forState:UIControlStateNormal];
-        [_sendButton setTitleColor:RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateNormal];
-        [_sendButton addTarget:self action:@selector(didClicksendButton) forControlEvents:UIControlEventTouchUpInside];
+        [_sendButton addTarget:self action:@selector(didClickSendButton) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sendButton;
 }

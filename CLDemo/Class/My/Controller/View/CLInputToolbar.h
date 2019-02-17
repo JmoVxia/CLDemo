@@ -23,6 +23,18 @@ typedef void(^inputToolBarSendBlock)(NSString *text);
 @property (nonatomic, copy) NSString *placeholder;
 /**背景颜色*/
 @property (nonatomic, strong) UIColor *backgroundColor;
+/**顶部线条颜色*/
+@property (nonatomic, strong) UIColor *topLineColor;
+/**底部线条颜色*/
+@property (nonatomic, strong) UIColor *bottomLineColor;
+/**边框颜色*/
+@property (nonatomic, strong) UIColor *edgeLineViewColor;
+/**发送按钮边框颜色*/
+@property (nonatomic, strong) UIColor *sendButtonBorderColor;
+/**发送按钮文字颜色*/
+@property (nonatomic, strong) UIColor *sendButtonTextColor;
+/**占位文字颜色*/
+@property (nonatomic, strong) UIColor *placeholderTextColor;
 
 @end
 
