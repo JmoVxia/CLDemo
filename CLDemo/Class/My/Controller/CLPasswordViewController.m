@@ -51,11 +51,12 @@
         make.centerY.mas_equalTo(0);
     }];
 
-    [inputView updateWithConfig:^(CLPasswordInputViewConfigure * _Nonnull config) {
-        config.pointColor = [UIColor blackColor];
-        config.rectColor = [UIColor blackColor];
-        config.rectBackgroundColor = [UIColor whiteColor];
-        config.backgroundColor = [UIColor whiteColor];
+    [inputView updateWithConfigure:^(CLPasswordInputViewConfigure * _Nonnull configure) {
+        configure.pointColor = [UIColor blackColor];
+        configure.rectColor = [UIColor blackColor];
+        configure.rectBackgroundColor = [UIColor whiteColor];
+        configure.backgroundColor = [UIColor whiteColor];
+        configure.threePartyKeyboard = YES;
     }];
 }
 

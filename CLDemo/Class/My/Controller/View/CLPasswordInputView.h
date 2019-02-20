@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLPasswordInputView;
 
 @protocol  CLPasswordInputViewDelegate<NSObject>
+
 @optional
 
 /**输入改变*/
@@ -50,6 +51,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *rectBackgroundColor;
 /**控件背景颜色*/
 @property (nonatomic, strong) UIColor *backgroundColor;
+/**是否允许三方键盘，默认NO*/
+@property (nonatomic, assign) BOOL threePartyKeyboard;
+
++ (instancetype)defaultConfig;
 
 @end
 
@@ -62,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSMutableString *text;
 
 /**更新基本配置*/
-- (void)updateWithConfig:(void(^)(CLPasswordInputViewConfigure *config))configBlock;
+- (void)updateWithConfigure:(void(^)(CLPasswordInputViewConfigure *configure))configBlock;
 
 @end
 

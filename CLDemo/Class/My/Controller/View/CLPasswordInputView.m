@@ -21,6 +21,7 @@
     configure.pointColor = [UIColor blackColor];
     configure.rectBackgroundColor = [UIColor whiteColor];
     configure.backgroundColor = [UIColor whiteColor];
+    configure.threePartyKeyboard = NO;
     return configure;
 }
 
@@ -80,12 +81,15 @@
 - (BOOL)canResignFirstResponder {
     return YES;
 }
+- (BOOL)isSecureTextEntry {
+    return !self.configure.threePartyKeyboard;
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (![self isFirstResponder]) {
         [self becomeFirstResponder];
     }
 }
-- (void)updateWithConfig:(void(^)(CLPasswordInputViewConfigure *config))configBlock {
+- (void)updateWithConfigure:(void(^)(CLPasswordInputViewConfigure *configure))configBlock {
     if (configBlock) {
         configBlock(self.configure);
     }

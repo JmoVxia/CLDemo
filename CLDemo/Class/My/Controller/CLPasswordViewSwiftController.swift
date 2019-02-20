@@ -38,8 +38,9 @@ class CLPasswordViewSwiftController: CLBaseViewController {
                 make.height.equalTo(50)
             })
         }
-        inputView.updateWithConfig { (configure) in
+        inputView.updateWithConfigure { (configure) in
             configure.spaceMultiple = 1000
+//            configure.threePartyKeyboard = true
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

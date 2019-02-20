@@ -25,6 +25,8 @@ class CLPasswordInputViewConfigure: NSObject {
     var rectBackgroundColor: UIColor = UIColor.white
     ///控件背景颜色
     var backgroundColor: UIColor = UIColor.white
+    ///是否支持三方键盘
+    var threePartyKeyboard: Bool = false
     
     fileprivate class func defaultConfig() -> CLPasswordInputViewConfigure {
         let configure = CLPasswordInputViewConfigure()
@@ -71,15 +73,15 @@ extension CLPasswordInputViewDelegate {
 class CLPasswordInputView: UIView {
     
     var delegate: CLPasswordInputViewDelegate?
-    var config: CLPasswordInputViewConfigure
+    var configure: CLPasswordInputViewConfigure
     
     private (set) var text: NSMutableString = NSMutableString()
     private var isShow: Bool = false
     
     override init(frame: CGRect) {
-        config = CLPasswordInputViewConfigure.defaultConfig()
+        configure = CLPasswordInputViewConfigure.defaultConfig()
         super.init(frame: frame)
-        backgroundColor = config.backgroundColor
+        backgroundColor = configure.backgroundColor
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -105,6 +107,14 @@ extension CLPasswordInputView {
             return .numberPad
         }
         set {
+
+        }
+    }
+    var isSecureTextEntry: Bool {
+        get {
+            return !configure.threePartyKeyboard
+        }
+        set {
             
         }
     }
@@ -120,9 +130,9 @@ extension CLPasswordInputView {
             _ = becomeFirstResponder()
         }
     }
-    func updateWithConfig(config: ((CLPasswordInputViewConfigure) -> Void)?) -> Void {
-        config?(self.config)
-        backgroundColor = self.config.backgroundColor
+    func updateWithConfigure(configure: ((CLPasswordInputViewConfigure) -> Void)?) -> Void {
+        configure?(self.configure)
+        backgroundColor = self.configure.backgroundColor
         setNeedsDisplay()
     }
     override func layoutSubviews() {
@@ -132,22 +142,22 @@ extension CLPasswordInputView {
     override func draw(_ rect: CGRect) {
         let height = rect.size.height
         let width = rect.size.width
-        let squareWidth = min(max(min(height, config.squareWidth), config.pointRadius * 4), height)
-        let pointRadius = min(config.pointRadius, squareWidth * 0.5) * 0.8
-        let middleSpace = CGFloat(width - CGFloat(config.passwordNum) * squareWidth) / CGFloat(CGFloat(config.passwordNum - 1) + config.spaceMultiple * 2)
-        let leftSpace = middleSpace * config.spaceMultiple
+        let squareWidth = min(max(min(height, configure.squareWidth), configure.pointRadius * 4), height)
+        let pointRadius = min(configure.pointRadius, squareWidth * 0.5) * 0.8
+        let middleSpace = CGFloat(width - CGFloat(configure.passwordNum) * squareWidth) / CGFloat(CGFloat(configure.passwordNum - 1) + configure.spaceMultiple * 2)
+        let leftSpace = middleSpace * configure.spaceMultiple
         let y = (height - squareWidth) * 0.5
         
         let context = UIGraphicsGetCurrentContext()
         
-        for i in 0 ..< config.passwordNum {
+        for i in 0 ..< configure.passwordNum {
             context?.addRect(CGRect(x: leftSpace + CGFloat(i) * squareWidth + CGFloat(i) * middleSpace, y: y, width: squareWidth, height: squareWidth))
             context?.setLineWidth(1)
-            context?.setStrokeColor(config.rectColor.cgColor)
-            context?.setFillColor(config.rectBackgroundColor.cgColor)
+            context?.setStrokeColor(configure.rectColor.cgColor)
+            context?.setFillColor(configure.rectBackgroundColor.cgColor)
         }
         context?.drawPath(using: .fillStroke)
-        context?.setFillColor(config.pointColor.cgColor)
+        context?.setFillColor(configure.pointColor.cgColor)
         
         for i in 0 ..< text.length {
             context?.addArc(center: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5, y: y + squareWidth * 0.5), radius: pointRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
@@ -162,14 +172,14 @@ extension CLPasswordInputView: UIKeyInput {
     }
     
     func insertText(_ text: String) {
-        if self.text.length < config.passwordNum {
+        if self.text.length < configure.passwordNum {
             let cs = NSCharacterSet.init(charactersIn: "0123456789").inverted
             let string = text.components(separatedBy: cs).joined(separator: "")
             let basicTest = text == string
             if basicTest {
                 self.text.append(text)
                 delegate?.passwordInputViewDidChange(passwordInputView: self)
-                if self.text.length == config.passwordNum {
+                if self.text.length == configure.passwordNum {
                     delegate?.passwordInputViewCompleteInput(passwordInputView: self)
                 }
                 setNeedsDisplay()
