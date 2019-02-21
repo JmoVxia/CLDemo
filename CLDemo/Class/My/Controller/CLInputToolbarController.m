@@ -19,7 +19,7 @@
 @implementation CLInputToolbarController
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.inputToolbar dissmissToolbar];
+//    [self.inputToolbar dissmissToolbar];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,5 +66,7 @@
     [super viewDidLayoutSubviews];
     self.btn.frame = CGRectMake(10, 150, self.view.cl_width - 20, 100);
 }
+-(void)dealloc {
 
+}
 @end

@@ -76,10 +76,14 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self initUI];
+        [self addNotification];
     }
     return self;
 }
-
+- (void)addNotification {
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
 -(void)initUI {
     self.backgroundColor = [UIColor clearColor];
     self.frame = CGRectMake(0,0, cl_screenWidth, 50);
@@ -122,6 +126,13 @@
         configBlock(self.configure);
     }
     [self refreshUI];
+}
+- (void)keyboardDidShow:(NSNotification *)notification {
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
 }
 //MARK:JmoVxia---UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
@@ -177,6 +188,7 @@
 }
 -(void)dissmissToolbar {
     self.textView.text = nil;
+    self.textView.inputAccessoryView = nil;
     [self.textView.delegate textViewDidChange:self.textView];
     [self.textView resignFirstResponder];
     [self.backgroundView removeFromSuperview];
@@ -248,6 +260,9 @@
     self.sendButton.cl_centerY = self.cl_height * 0.5;
     self.backgroundView.frame = [self convertRect:self.bounds toView:self.keyWindow];
     self.textView.cl_centerY = self.backgroundView.cl_height * 0.5;
+}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 //MARK:JmoVxia---懒加载
 - (CLInputToolbarConfigure *) configure {
