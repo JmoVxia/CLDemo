@@ -118,14 +118,11 @@
     self.sendButton.layer.borderColor = self.textView.text.length > 0 ? self.configure.sendButtonBorderColor.CGColor : RGBACOLOR(0, 0, 0, 0.2).CGColor;
     [self.sendButton setTitleColor:self.textView.text.length > 0 ? self.configure.sendButtonTextColor : RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateNormal];
     [self.sendButton setTitleColor:self.textView.text.length > 0 ? self.configure.sendButtonTextColor : RGBACOLOR(0, 0, 0, 0.2) forState:UIControlStateSelected];
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
 }
 - (void)updateWithConfig:(void(^)(CLInputToolbarConfigure *configure))configBlock {
     if (configBlock) {
         configBlock(self.configure);
     }
-    [self refreshUI];
 }
 - (void)keyboardDidShow:(NSNotification *)notification {
     [self setNeedsLayout];
@@ -184,6 +181,7 @@
     }
     [self.keyWindow addSubview:self.backgroundView];
     [self.backgroundView addSubview:self.textView];
+    self.textView.inputAccessoryView = self;
     [self.textView becomeFirstResponder];
 }
 -(void)dissmissToolbar {
@@ -315,7 +313,6 @@
         _textView.scrollsToTop = NO;
         _textView.textContainerInset = UIEdgeInsetsZero;
         _textView.textContainer.lineFragmentPadding = 0;
-        _textView.inputAccessoryView = self;
     }
     return _textView;
 }
