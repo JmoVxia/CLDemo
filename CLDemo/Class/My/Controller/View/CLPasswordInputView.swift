@@ -34,7 +34,7 @@ class CLPasswordInputViewConfigure: NSObject {
     }
 }
 
-protocol CLPasswordInputViewDelegate {
+protocol CLPasswordInputViewDelegate: class {
     ///输入改变
     func passwordInputViewDidChange(passwordInputView:CLPasswordInputView) -> Void
     ///点击删除
@@ -72,7 +72,7 @@ extension CLPasswordInputViewDelegate {
 
 class CLPasswordInputView: UIView {
     
-    var delegate: CLPasswordInputViewDelegate?
+    weak var delegate: CLPasswordInputViewDelegate?
     var configure: CLPasswordInputViewConfigure
     
     private (set) var text: NSMutableString = NSMutableString()
@@ -130,6 +130,7 @@ extension CLPasswordInputView {
             _ = becomeFirstResponder()
         }
     }
+    ///更新配置，block不会造成循环引用
     func updateWithConfigure(configure: ((CLPasswordInputViewConfigure) -> Void)?) -> Void {
         configure?(self.configure)
         backgroundColor = self.configure.backgroundColor

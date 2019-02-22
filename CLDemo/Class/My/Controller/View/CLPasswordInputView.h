@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**输入的密码*/
 @property (nonatomic, strong, readonly) NSMutableString *text;
 
-/**更新基本配置*/
+/**更新基本配置，block不会造成循环引用*/
 - (void)updateWithConfigure:(void(^)(CLPasswordInputViewConfigure *configure))configBlock;
 
 @end

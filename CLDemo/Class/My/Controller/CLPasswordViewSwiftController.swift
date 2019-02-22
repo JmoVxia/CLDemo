@@ -13,7 +13,8 @@ class CLPasswordViewSwiftController: CLBaseViewController {
     
     var label1: UILabel!
     var label2: UILabel!
-
+    var passwordInputView: CLPasswordInputView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         label1 = UILabel().then { (label) in
@@ -30,7 +31,7 @@ class CLPasswordViewSwiftController: CLBaseViewController {
                 make.centerX.equalToSuperview()
             })
         }
-        let inputView = CLPasswordInputView().then { (inputView) in
+        passwordInputView = CLPasswordInputView().then { (inputView) in
             view.addSubview(inputView)
             inputView.delegate = self
             inputView.snp.makeConstraints({ (make) in
@@ -38,7 +39,8 @@ class CLPasswordViewSwiftController: CLBaseViewController {
                 make.height.equalTo(50)
             })
         }
-        inputView.updateWithConfigure { (configure) in
+        passwordInputView.updateWithConfigure { (configure) in
+            print("我不会循环引用\(self)")
             configure.spaceMultiple = 1000
 //            configure.threePartyKeyboard = true
         }
@@ -46,6 +48,9 @@ class CLPasswordViewSwiftController: CLBaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
+    }
+    deinit {
+        print("自定义密码输入框Swift控制器销毁了")
     }
 }
 

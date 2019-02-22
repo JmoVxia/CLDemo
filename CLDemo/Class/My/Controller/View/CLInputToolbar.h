@@ -45,7 +45,7 @@ typedef void(^inputToolBarSendBlock)(NSString *text);
 
 @interface CLInputToolbar : UIView
 
-/**更新基本配置*/
+/**更新基本配置，block不会造成循环引用*/
 - (void)updateWithConfig:(void(^)(CLInputToolbarConfigure *configure))configBlock;
 
 /**弹出键盘*/

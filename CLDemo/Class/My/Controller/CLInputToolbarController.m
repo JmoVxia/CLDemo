@@ -19,7 +19,7 @@
 @implementation CLInputToolbarController
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-//    [self.inputToolbar dissmissToolbar];
+    [self.inputToolbar dissmissToolbar];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,8 +37,11 @@
 -(void)setTextViewToolbar {
     self.inputToolbar = [[CLInputToolbar alloc] init];
     [self.inputToolbar updateWithConfig:^(CLInputToolbarConfigure *configure) {
+        //这里的block是一个局部变量，不会造成循环引用，内部可以使用self
+        NSLog(@"我不会被循环引用%@",self);
         configure.textViewMaxLine = 4;
         configure.font = [UIFont systemFontOfSize:10];
+        configure.showMaskView = NO;
 //        configure.cursorColor = [UIColor redColor];
 //        configure.textColor = cl_RandomColor;
 //        configure.backgroundColor = cl_RandomColor;
@@ -67,6 +70,6 @@
     self.btn.frame = CGRectMake(10, 150, self.view.cl_width - 20, 100);
 }
 -(void)dealloc {
-
+    CLLog(@"自定义输入框页面销毁了");
 }
 @end
