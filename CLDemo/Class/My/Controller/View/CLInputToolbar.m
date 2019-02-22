@@ -68,7 +68,8 @@
 @property (nonatomic, strong) UIWindow *keyWindow;
 /**发送回调*/
 @property (nonatomic, copy) inputToolBarSendBlock sendBlock;
-
+///是否显示
+@property (nonatomic, assign) BOOL keyboardIsShow;
 @end
 
 @implementation CLInputToolbar
@@ -123,13 +124,15 @@
     if (configBlock) {
         configBlock(self.configure);
     }
+    [self refreshUI];
 }
 - (void)keyboardDidShow:(NSNotification *)notification {
+    [self showToolbar];
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
 - (void)keyboardWillHide:(NSNotification *)notification {
-    
+    [self dissmissToolbar];
 }
 //MARK:JmoVxia---UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
@@ -173,6 +176,9 @@
     self.sendBlock = sendBlock;
 }
 - (void)showToolbar{
+    if (self.keyboardIsShow) {
+        return;
+    }
     if (self.configure.showMaskView) {
         [self.keyWindow addSubview:self.maskView];
         [UIView animateWithDuration:0.25 animations:^{
@@ -183,8 +189,12 @@
     [self.backgroundView addSubview:self.textView];
     self.textView.inputAccessoryView = self;
     [self.textView becomeFirstResponder];
+    self.keyboardIsShow = YES;
 }
 -(void)dissmissToolbar {
+    if (!self.keyboardIsShow) {
+        return;
+    }
     self.textView.text = nil;
     self.textView.inputAccessoryView = nil;
     [self.textView.delegate textViewDidChange:self.textView];
@@ -197,6 +207,7 @@
             [self.maskView removeFromSuperview];
         }];
     }
+    self.keyboardIsShow = NO;
 }
 - (void)clearText {
     self.textView.text = nil;
