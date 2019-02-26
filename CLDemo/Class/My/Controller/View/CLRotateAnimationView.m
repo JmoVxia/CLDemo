@@ -49,18 +49,5 @@
         [self.layer addSublayer:layer];
     }
 }
-//贝塞尔
-//- (void)drawRect:(CGRect)rect {
-//    CGFloat origin_x = self.frame.size.width * 0.5;
-//    CGFloat origin_y = self.frame.size.height * 0.5;
-//
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSaveGState(context);
-//    //整个椭圆
-//    UIBezierPath *arc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(origin_x, origin_y) radius:20 startAngle:-M_PI endAngle:M_PI clockwise:YES];
-//    [[UIColor whiteColor] setStroke];
-//    [arc stroke];
-//    CGContextRestoreGState(context);
-//}
 
 @end

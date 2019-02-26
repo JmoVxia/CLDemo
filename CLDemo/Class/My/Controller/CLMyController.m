@@ -17,6 +17,7 @@
 #import "CLLogViewController.h"
 #import "CLInputToolbarController.h"
 #import "CLBankCardScanController.h"
+#import "CLCardController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -48,9 +49,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
-    }
     cell.textLabel.text = self.arrayDS[indexPath.row];
     cell.textLabel.font = [UIFont clFontOfSize:18];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -92,6 +90,9 @@
     }else if (indexPath.row == 8) {
         CLBankCardScanController *bankCardScanController = [[CLBankCardScanController alloc] init];
         [self.navigationController pushViewController:bankCardScanController animated:YES];
+    }else if (indexPath.row == 9) {
+        CLCardController *cardViewController = [[CLCardController alloc] init];
+        [self.navigationController pushViewController:cardViewController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -116,6 +117,7 @@
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"卡片视图", nil)];
     }
     return _arrayDS;
 }

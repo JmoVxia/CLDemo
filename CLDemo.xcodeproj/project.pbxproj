@@ -22,6 +22,8 @@
 		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
 		0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A472217A71200BC8AFB /* CLInputToolbar.m */; };
 		0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */; };
+		0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1236E22255A6F007DDE6D /* CLCardView.m */; };
+		0CA1237522255B81007DDE6D /* CLCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1237422255B81007DDE6D /* CLCardController.m */; };
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
 		0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */; };
 		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
@@ -119,6 +121,10 @@
 		0C777A472217A71200BC8AFB /* CLInputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbar.m; sourceTree = "<group>"; };
 		0C777A492217A8B900BC8AFB /* CLInputToolbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLInputToolbarController.h; sourceTree = "<group>"; };
 		0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbarController.m; sourceTree = "<group>"; };
+		0CA1236D22255A6F007DDE6D /* CLCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardView.h; sourceTree = "<group>"; };
+		0CA1236E22255A6F007DDE6D /* CLCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCardView.m; sourceTree = "<group>"; };
+		0CA1237322255B81007DDE6D /* CLCardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardController.h; sourceTree = "<group>"; };
+		0CA1237422255B81007DDE6D /* CLCardController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCardController.m; sourceTree = "<group>"; };
 		0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordViewSwiftController.swift; sourceTree = "<group>"; };
 		0CBBE92E220DBAEC00640BB9 /* CLLogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogViewController.h; sourceTree = "<group>"; };
 		0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogViewController.m; sourceTree = "<group>"; };
@@ -313,6 +319,8 @@
 				5B28650D21EE428200334E6C /* CLCoreTextView.m */,
 				0C777A462217A71200BC8AFB /* CLInputToolbar.h */,
 				0C777A472217A71200BC8AFB /* CLInputToolbar.m */,
+				0CA1236D22255A6F007DDE6D /* CLCardView.h */,
+				0CA1236E22255A6F007DDE6D /* CLCardView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -616,6 +624,8 @@
 				5B8095F52218700E000F72F3 /* CLBankCardScanController.m */,
 				5B80961F22187115000F72F3 /* CLBankCardDetailController.h */,
 				5B80962022187115000F72F3 /* CLBankCardDetailController.m */,
+				0CA1237322255B81007DDE6D /* CLCardController.h */,
+				0CA1237422255B81007DDE6D /* CLCardController.m */,
 				0CCDA30C219854D90057BA14 /* Model */,
 				0CCDA310219855620057BA14 /* View */,
 			);
@@ -842,6 +852,7 @@
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */,
+				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
 				0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */,
@@ -863,6 +874,7 @@
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
 				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
+				0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */,
 				5B80962122187115000F72F3 /* CLBankCardDetailController.m in Sources */,
 				5B809615221870BD000F72F3 /* CLBankCardView.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
