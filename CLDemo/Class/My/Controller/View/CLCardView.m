@@ -89,7 +89,7 @@ const int TOP_MARGTIN = 16;
     
     UITableViewCell * nextCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 1 < self.totalNum ? self.nowIndex + 1 : 0)];
     
-    UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 1 < self.totalNum ? self.nowIndex + 1 : 0)];
+    UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalNum ? self.nowIndex + 2 : 0)];
     
     if (self.isStackCard) {
         [thirdCell setAlpha:0.8f];
@@ -147,6 +147,7 @@ const int TOP_MARGTIN = 16;
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
+
         CGFloat yTotalMove = translation.y - self.pointStart.y;
         if (yTotalMove < 0) {
             [self swipeEnd];
@@ -190,9 +191,7 @@ const int TOP_MARGTIN = 16;
         self.nextCell = self.thirdCell;
         
         UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalNum ? (int)self.nowIndex + 2 : (int)self.nowIndex + 2 - (int)self.totalNum)];
-        
         [thirdCell removeFromSuperview];
-        
         thirdCell.layer.anchorPoint = CGPointMake(1, 1);
         thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, TOP_MARGTIN, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
         self.thirdCell = thirdCell;
