@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 
 
--(NSInteger)cardView:(CLCardView *)cardView rows:(NSInteger)rows;
+-(NSInteger)cardViewRows:(CLCardView *)cardView;
 
--(UITableViewCell *)cardView:(UITableView *)cardView cellForRowAtIndexIndex:(NSInteger)index;
+-(UITableViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index;
 
 
 @end
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)reloadData;
 
 ///根据id获取缓存的cell
--(UITableViewCell*)dequeueReusableCellWithIdentifier:(NSString*)identifier;
+-(UITableViewCell*)dequeueReusableViewWithIdentifier:(NSString*)identifier;
 
 @end
 

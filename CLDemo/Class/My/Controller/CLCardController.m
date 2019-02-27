@@ -9,7 +9,7 @@
 #import "CLCardController.h"
 #import "CLCardView.h"
 
-@interface CLCardController ()
+@interface CLCardController ()<CLCardViewDataSource>
 ///卡片视图
 @property (nonatomic, strong) CLCardView *cardView;
 @end
@@ -18,14 +18,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self.view addSubview:self.cardView];
 }
 - (CLCardView *) cardView{
     if (_cardView == nil){
-        _cardView = [[CLCardView alloc] init];
+        _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 150, self.view.cl_width - 20, 120)];
+        _cardView.dataSource = self;
     }
     return _cardView;
 }
+
+
+-(NSInteger)cardViewRows:(CLCardView *)cardView {
+    return 6;
+}
+
+-(UITableViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index {
+    UITableViewCell * cell = [cardView dequeueReusableViewWithIdentifier:@"Identifier"];
+    cell.textLabel.text = [NSString stringWithFormat:@"我是第%ld个",(long)index];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.backgroundColor = cl_RandomColor;
+    cell.layer.cornerRadius = 10;
+    return cell;
+}
+
+
 
 
 @end
