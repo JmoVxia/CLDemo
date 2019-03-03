@@ -22,7 +22,7 @@
 }
 - (CLCardView *) cardView{
     if (_cardView == nil){
-        _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 150, self.view.cl_width - 20, 120)];
+        _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 150, self.view.cl_width - 20, 150)];
         _cardView.dataSource = self;
     }
     return _cardView;

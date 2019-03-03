@@ -95,20 +95,20 @@ const int TOP_MARGTIN = 15;
     
     [thirdCell removeFromSuperview];
     thirdCell.layer.anchorPoint = CGPointMake(1, 1);
-    thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, TOP_MARGTIN, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
+    thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, (self.height * 0.5), self.width - 2 * 2 * LEFT_RIGHT_MARGIN, (self.height * 0.5));
     [self addSubview:thirdCell];
     self.thirdCell = thirdCell;
     
     [nextCell removeFromSuperview];
     nextCell.layer.anchorPoint = CGPointMake(1, 1);
-    nextCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, TOP_MARGTIN / 2 * 1, self.width - 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
+    nextCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - TOP_MARGTIN / 2 * 1, self.width - 2 * LEFT_RIGHT_MARGIN, (self.height * 0.5));
     [self addSubview:nextCell];
     self.nextCell = nextCell;
     
     
     [nowCell removeFromSuperview];
     nowCell.layer.anchorPoint = CGPointMake(1, 1);
-    nowCell.frame = CGRectMake(0, 0, self.width, self.height - TOP_MARGTIN);
+    nowCell.frame = CGRectMake(0, (self.height * 0.5) - TOP_MARGTIN, self.width, (self.height * 0.5));
     [self addSubview:nowCell];
     self.nowCell = nowCell;
     self.originalCenter = self.nowCell.center;
@@ -131,9 +131,9 @@ const int TOP_MARGTIN = 15;
         }else {
             self.nowCell.center = self.originalCenter;
         }
-        CGFloat alpha = 1 - MIN((self.originalCenter.y - center.y) / self.height, 1);
+        CGFloat offset = (self.originalCenter.y - center.y - ((self.height * 0.5)) * 0.5);
+        CGFloat alpha = 1 - MIN((offset / ((self.height * 0.5))) * 1, 1);
         self.nowCell.alpha = alpha;
-        NSLog(@"=======     %f    -----",alpha);
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
@@ -178,13 +178,13 @@ const int TOP_MARGTIN = 15;
         UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalNum ? (int)self.nowIndex + 2 : (int)self.nowIndex + 2 - (int)self.totalNum)];
         [thirdCell removeFromSuperview];
         thirdCell.layer.anchorPoint = CGPointMake(1, 1);
-        thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, TOP_MARGTIN, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
+        thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, (self.height * 0.5), self.width - 2 * 2 * LEFT_RIGHT_MARGIN, (self.height * 0.5));
         self.thirdCell = thirdCell;
 
         [self insertSubview:thirdCell belowSubview:self.nextCell];
         [UIView animateWithDuration:0.1 animations:^{
-            self.nowCell.frame = CGRectMake(0, 0, self.width, self.height - TOP_MARGTIN);
-            self.nextCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, TOP_MARGTIN / 2 * 1, self.width - 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
+            self.nowCell.frame = CGRectMake(0, (self.height * 0.5) - TOP_MARGTIN, self.width, (self.height * 0.5));
+            self.nextCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - TOP_MARGTIN / 2 * 1, self.width - 2 * LEFT_RIGHT_MARGIN, (self.height * 0.5));
         }];
     }];
 }
