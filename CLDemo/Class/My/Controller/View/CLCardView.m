@@ -129,8 +129,9 @@ const int BOTTOM_MARGTIN = 8;
         }else {
             self.fristCell.center = self.originalCenter;
         }
-        CGFloat offset = (self.originalCenter.y - center.y + BOTTOM_MARGTIN);
-        CGFloat alpha = 1 - MIN((offset / ((self.height - BOTTOM_MARGTIN ) * 0.5)) * 1, 1);
+        CGFloat offset = (self.originalCenter.y - center.y);
+        CGFloat height = (self.height - BOTTOM_MARGTIN ) * 0.5;
+        CGFloat alpha = 1 - MIN((offset / (height - BOTTOM_MARGTIN)), 1);
         self.fristCell.alpha = alpha;
     }
     
