@@ -93,18 +93,11 @@ const int TOP_MARGTIN = 15;
     
     UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalNum ? self.nowIndex + 2 : 0)];
     
-    if (self.isStackCard) {
-        [thirdCell setAlpha:0.8f];
-        [nextCell setAlpha:0.9f];
-        [nowCell setAlpha:1];
-    }
-    
     [thirdCell removeFromSuperview];
     thirdCell.layer.anchorPoint = CGPointMake(1, 1);
     thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, TOP_MARGTIN, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
     [self addSubview:thirdCell];
     self.thirdCell = thirdCell;
-    
     
     [nextCell removeFromSuperview];
     nextCell.layer.anchorPoint = CGPointMake(1, 1);
@@ -133,12 +126,14 @@ const int TOP_MARGTIN = 15;
         CGFloat yMove = translation.y - self.pointLast.y;
         self.pointLast = translation;
         CGPoint center = self.nowCell.center;
-        NSLog(@"=======     %f    -----",yMove);
         if (translation.y < 0) {
             self.nowCell.center = CGPointMake(center.x, center.y + yMove);
         }else {
             self.nowCell.center = self.originalCenter;
         }
+        CGFloat alpha = 1 - MIN((self.originalCenter.y - center.y) / self.height, 1);
+        self.nowCell.alpha = alpha;
+        NSLog(@"=======     %f    -----",alpha);
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
@@ -175,6 +170,7 @@ const int TOP_MARGTIN = 15;
             [self.viewRemove removeFromSuperview];
         }
         self.viewRemove = self.nowCell;
+        self.viewRemove.alpha = 1;
         
         self.nowCell = self.nextCell;
         self.nextCell = self.thirdCell;
@@ -184,12 +180,7 @@ const int TOP_MARGTIN = 15;
         thirdCell.layer.anchorPoint = CGPointMake(1, 1);
         thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, TOP_MARGTIN, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, self.height - TOP_MARGTIN);
         self.thirdCell = thirdCell;
-        
-        if (self.isStackCard) {
-            [self.thirdCell setAlpha:0.8f];
-            [self.nextCell setAlpha:0.9f];
-            [self.nowCell setAlpha:1];
-        }
+
         [self insertSubview:thirdCell belowSubview:self.nextCell];
         [UIView animateWithDuration:0.1 animations:^{
             self.nowCell.frame = CGRectMake(0, 0, self.width, self.height - TOP_MARGTIN);
