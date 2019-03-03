@@ -13,36 +13,38 @@
 //childView距离父View左右的距离
 const int LEFT_RIGHT_MARGIN = 10;
 //当前view距离父view的顶部的值
-const int TOP_MARGTIN = 16;
+const int TOP_MARGTIN = 15;
 
 @interface CLCardView ()
 
 //已经划动到边界外的一个view
-@property(nonatomic, weak)UITableViewCell * viewRemove;
+@property (nonatomic, weak) UITableViewCell * viewRemove;
 //放当前显示的子View的数组
-@property(nonatomic, strong)NSMutableArray * cacheViews;
+@property (nonatomic, strong) NSMutableArray * cacheViews;
 //view总共的数量
-@property(nonatomic, assign)NSInteger totalNum;
+@property (nonatomic, assign) NSInteger totalNum;
 //当前的下标
-@property(nonatomic, assign)NSInteger nowIndex;
+@property (nonatomic, assign) NSInteger nowIndex;
 //触摸开始的坐标
-@property(nonatomic, assign)CGPoint pointStart;
+@property (nonatomic, assign) CGPoint pointStart;
 //上一次触摸的坐标
-@property(nonatomic, assign)CGPoint pointLast;
+@property (nonatomic, assign) CGPoint pointLast;
 //最后一次触摸的坐标
-@property(nonatomic, assign)CGPoint pointEnd;
+@property (nonatomic, assign) CGPoint pointEnd;
 //正在显示的cell
-@property(nonatomic, weak)UITableViewCell * nowCell;
+@property (nonatomic, weak) UITableViewCell * nowCell;
 //下一个cell
-@property(nonatomic, weak)UITableViewCell * nextCell;
+@property (nonatomic, weak) UITableViewCell * nextCell;
 //第三个cell
-@property(nonatomic, weak)UITableViewCell * thirdCell;
+@property (nonatomic, weak) UITableViewCell * thirdCell;
+///第一个cell原始center
+@property (nonatomic, assign) CGPoint originalCenter;
 //自身的宽度
-@property(nonatomic, assign)CGFloat width;
+@property (nonatomic, assign) CGFloat width;
 //自身的高度
-@property(nonatomic, assign)CGFloat height;
+@property (nonatomic, assign) CGFloat height;
 //是否是第一次执行
-@property(nonatomic, assign)BOOL isFirstLayoutSub;
+@property (nonatomic, assign) BOOL isFirstLayoutSub;
 
 @end
 
@@ -50,7 +52,7 @@ const int TOP_MARGTIN = 16;
 @implementation CLCardView
 
 //直接用方法初始化
--(instancetype)initWithFrame:(CGRect)frame{
+-(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self initUI];
     }
@@ -58,7 +60,7 @@ const int TOP_MARGTIN = 16;
 }
 
 //进行一些自身的初始化和设置
--(void)initUI{
+-(void)initUI {
     self.clipsToBounds = YES;
     self.cacheViews = [[NSMutableArray alloc]init];
     //手势识别
@@ -69,7 +71,7 @@ const int TOP_MARGTIN = 16;
 //布局subview的方法
 -(void)layoutSubviews {
     [super layoutSubviews];
-    if(!self.isFirstLayoutSub){
+    if(!self.isFirstLayoutSub) {
         self.isFirstLayoutSub = YES;
         self.width = self.bounds.size.width;
         self.height = self.bounds.size.height;
@@ -78,7 +80,7 @@ const int TOP_MARGTIN = 16;
 }
 
 //重新加载数据方法，会再首次执行layoutSubviews的时候调用
--(void)reloadData{
+-(void)reloadData {
     if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(cardView:cellForRowAtIndexIndex:)] || ![self.dataSource respondsToSelector:@selector(cardViewRows:)]) {
         return;
     }
@@ -116,6 +118,7 @@ const int TOP_MARGTIN = 16;
     nowCell.frame = CGRectMake(0, 0, self.width, self.height - TOP_MARGTIN);
     [self addSubview:nowCell];
     self.nowCell = nowCell;
+    self.originalCenter = self.nowCell.center;
 }
 
 -(void)pan:(UIPanGestureRecognizer*)sender {
@@ -127,27 +130,18 @@ const int TOP_MARGTIN = 16;
     }
     
     if (sender.state == UIGestureRecognizerStateChanged) {
-        //NSLog(@"change");
-        //                CGFloat xMove=translation.x-self.pointLast.x;
         CGFloat yMove = translation.y - self.pointLast.y;
         self.pointLast = translation;
-        
         CGPoint center = self.nowCell.center;
-        self.nowCell.center = CGPointMake(center.x, center.y + yMove);
-        
-        //        CGFloat xTotalMove=translation.x-self.pointStart.x;
-        //        if (xTotalMove<0) {
-        //            self.nowCell.transform = CGAffineTransformMakeRotation(degreeTOradians(90*xTotalMove/self.width));
-        //            self.nextCell.transform= CGAffineTransformMakeRotation(degreeTOradians(90*xTotalMove/self.width/2));
-        //        }else{
-        //            self.nowCell.transform = CGAffineTransformMakeRotation(degreeTOradians(0));
-        //            self.nextCell.transform= CGAffineTransformMakeRotation(degreeTOradians(0));
-        //        }
-        
+        NSLog(@"=======     %f    -----",yMove);
+        if (translation.y < 0) {
+            self.nowCell.center = CGPointMake(center.x, center.y + yMove);
+        }else {
+            self.nowCell.center = self.originalCenter;
+        }
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
-
         CGFloat yTotalMove = translation.y - self.pointStart.y;
         if (yTotalMove < 0) {
             [self swipeEnd];
@@ -157,7 +151,7 @@ const int TOP_MARGTIN = 16;
     }
 }
 
--(UITableViewCell*)dequeueReusableViewWithIdentifier:(NSString *)identifier{
+-(UITableViewCell*)dequeueReusableViewWithIdentifier:(NSString *)identifier {
     for (UITableViewCell * cell in self.cacheViews) {
         if ([identifier isEqualToString:cell.reuseIdentifier]) {
             [self.cacheViews removeObject:cell];
@@ -169,15 +163,10 @@ const int TOP_MARGTIN = 16;
 }
 
 //滑动到下一个界面
--(void)swipeEnd{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.nextCell.transform = CGAffineTransformMakeRotation(degreeTOradians(0));
-    }];
-    
+-(void)swipeEnd {
     CGPoint center = self.nowCell.center;
     [UIView animateWithDuration:0.2 animations:^{
         self.nowCell.center = CGPointMake(center.x, center.y - self.height);
-        self.nowCell.transform = CGAffineTransformMakeRotation(degreeTOradians(0));
     } completion:^(BOOL finished) {
         self.nowIndex++;
         self.nowIndex = self.nowIndex < self.totalNum ? self.nowIndex : 0;
@@ -210,12 +199,12 @@ const int TOP_MARGTIN = 16;
 }
 
 //滑动到上一个界面
--(void)swipeGoBack{
+-(void)swipeGoBack {
     
 }
 
 //是否需要加入到缓存中去
--(BOOL)isNeedAddToCache:(UITableViewCell*)cell{
+-(BOOL)isNeedAddToCache:(UITableViewCell*)cell {
     for (UITableViewCell * cellIn in self.cacheViews) {
         if ([cellIn.reuseIdentifier isEqualToString:cell.reuseIdentifier]) {
             return NO;
