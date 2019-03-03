@@ -17,35 +17,39 @@ const int BOTTOM_MARGTIN = 8;
 
 @interface CLCardView ()
 
-//已经划动到边界外的一个view
+///已经划动到边界外的一个view
 @property (nonatomic, weak) UITableViewCell * viewRemove;
-//放当前显示的子View的数组
+///放当前显示的子View的数组
 @property (nonatomic, strong) NSMutableArray * caches;
-//view总共的数量
+///view总共的数量
 @property (nonatomic, assign) NSInteger totalRow;
-//当前的下标
+///当前的下标
 @property (nonatomic, assign) NSInteger nowIndex;
-//触摸开始的坐标
+///触摸开始的坐标
 @property (nonatomic, assign) CGPoint pointStart;
-//上一次触摸的坐标
+///上一次触摸的坐标
 @property (nonatomic, assign) CGPoint pointLast;
-//正在显示的cell
+///第一个cell
 @property (nonatomic, weak) UITableViewCell * fristCell;
-//下一个cell
+///第二个cell
 @property (nonatomic, weak) UITableViewCell * secondCell;
-//第三个cell
+///第三个cell
 @property (nonatomic, weak) UITableViewCell * thirdCell;
+///第四个cell
+@property (nonatomic, weak) UITableViewCell * fourthCell;
 ///第一个cell原始位置
 @property (nonatomic, assign) CGRect fristFrame;
 ///第二个cell原始位置
 @property (nonatomic, assign) CGRect secondFrame;
-///第二个cell原始位置
+///第三个cell原始位置
 @property (nonatomic, assign) CGRect thirdFrame;
-//自身的宽度
+///第四个cell原始位置
+@property (nonatomic, assign) CGRect fourthFrame;
+///自身的宽度
 @property (nonatomic, assign) CGFloat width;
-//自身的高度
+///自身的高度
 @property (nonatomic, assign) CGFloat height;
-//是否是第一次执行
+///是否是第一次执行
 @property (nonatomic, assign) BOOL isFirstLayoutSub;
 
 @end
@@ -95,6 +99,16 @@ const int BOTTOM_MARGTIN = 8;
     
     UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalRow ? self.nowIndex + 2 : 0)];
     
+    UITableViewCell * fourthCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 3 < self.totalRow ? self.nowIndex + 3 : 0)];
+
+    [fourthCell removeFromSuperview];
+    fourthCell.layer.anchorPoint = CGPointMake(1, 1);
+    fourthCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 3, (self.height * 0.5) + BOTTOM_MARGTIN * 1.5, self.width - 3 * 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
+    [self addSubview:fourthCell];
+    self.fourthCell = fourthCell;
+    self.fourthFrame = CGRectMake(fourthCell.frame.origin.x, fourthCell.frame.origin.y, fourthCell.frame.size.width, fourthCell.frame.size.height);
+    
+    
     [thirdCell removeFromSuperview];
     thirdCell.layer.anchorPoint = CGPointMake(1, 1);
     thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, (self.height * 0.5) + BOTTOM_MARGTIN * 0.5, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
@@ -139,20 +153,20 @@ const int BOTTOM_MARGTIN = 8;
         CGFloat alpha = MIN(1 - MIN((offset / (height - BOTTOM_MARGTIN)), 1), 1);
         self.fristCell.alpha = alpha;
         
-        CGFloat second_x = self.secondFrame.origin.x * alpha;
+        CGFloat second_x = self.secondFrame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
         CGFloat second_y = self.secondFrame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
         CGFloat second_width = self.secondFrame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
         CGFloat second_height = self.secondFrame.size.height;
         self.secondCell.frame = CGRectMake(second_x, second_y, second_width, second_height);
         
         
-        CGFloat third_x = self.thirdFrame.origin.x * alpha;
+        CGFloat third_x = self.thirdFrame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
         CGFloat third_y = self.thirdFrame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
         CGFloat third_width = self.thirdFrame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
         CGFloat third_height = self.thirdFrame.size.height;
         self.thirdCell.frame = CGRectMake(third_x, third_y, third_width, third_height);
         
-        
+        NSLog(@"===  %f  ===",third_x);
         
     }
     
