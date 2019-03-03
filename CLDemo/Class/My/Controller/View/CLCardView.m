@@ -13,28 +13,26 @@
 //childView距离父View左右的距离
 const int LEFT_RIGHT_MARGIN = 10;
 //第一个和最后一个View的底部距离
-const int BOTTOM_MARGTIN = 15;
+const int BOTTOM_MARGTIN = 8;
 
 @interface CLCardView ()
 
 //已经划动到边界外的一个view
 @property (nonatomic, weak) UITableViewCell * viewRemove;
 //放当前显示的子View的数组
-@property (nonatomic, strong) NSMutableArray * cacheViews;
+@property (nonatomic, strong) NSMutableArray * caches;
 //view总共的数量
-@property (nonatomic, assign) NSInteger totalNum;
+@property (nonatomic, assign) NSInteger totalRow;
 //当前的下标
 @property (nonatomic, assign) NSInteger nowIndex;
 //触摸开始的坐标
 @property (nonatomic, assign) CGPoint pointStart;
 //上一次触摸的坐标
 @property (nonatomic, assign) CGPoint pointLast;
-//最后一次触摸的坐标
-@property (nonatomic, assign) CGPoint pointEnd;
 //正在显示的cell
-@property (nonatomic, weak) UITableViewCell * nowCell;
+@property (nonatomic, weak) UITableViewCell * fristCell;
 //下一个cell
-@property (nonatomic, weak) UITableViewCell * nextCell;
+@property (nonatomic, weak) UITableViewCell * secondCell;
 //第三个cell
 @property (nonatomic, weak) UITableViewCell * thirdCell;
 ///第一个cell原始center
@@ -62,7 +60,7 @@ const int BOTTOM_MARGTIN = 15;
 //进行一些自身的初始化和设置
 -(void)initUI {
     self.clipsToBounds = YES;
-    self.cacheViews = [[NSMutableArray alloc]init];
+    self.caches = [[NSMutableArray alloc]init];
     //手势识别
     UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
     [self addGestureRecognizer:pan];
@@ -84,14 +82,14 @@ const int BOTTOM_MARGTIN = 15;
     if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(cardView:cellForRowAtIndexIndex:)] || ![self.dataSource respondsToSelector:@selector(cardViewRows:)]) {
         return;
     }
-    self.totalNum = [self.dataSource cardViewRows:self];
+    self.totalRow = [self.dataSource cardViewRows:self];
     self.viewRemove = nil;
     
-    UITableViewCell * nowCell = [self.dataSource cardView:self cellForRowAtIndexIndex:self.nowIndex];
+    UITableViewCell * fristCell = [self.dataSource cardView:self cellForRowAtIndexIndex:self.nowIndex];
     
-    UITableViewCell * nextCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 1 < self.totalNum ? self.nowIndex + 1 : 0)];
+    UITableViewCell * secondCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 1 < self.totalRow ? self.nowIndex + 1 : 0)];
     
-    UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalNum ? self.nowIndex + 2 : 0)];
+    UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalRow ? self.nowIndex + 2 : 0)];
     
     [thirdCell removeFromSuperview];
     thirdCell.layer.anchorPoint = CGPointMake(1, 1);
@@ -99,19 +97,19 @@ const int BOTTOM_MARGTIN = 15;
     [self addSubview:thirdCell];
     self.thirdCell = thirdCell;
     
-    [nextCell removeFromSuperview];
-    nextCell.layer.anchorPoint = CGPointMake(1, 1);
-    nextCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
-    [self addSubview:nextCell];
-    self.nextCell = nextCell;
+    [secondCell removeFromSuperview];
+    secondCell.layer.anchorPoint = CGPointMake(1, 1);
+    secondCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
+    [self addSubview:secondCell];
+    self.secondCell = secondCell;
     
     
-    [nowCell removeFromSuperview];
-    nowCell.layer.anchorPoint = CGPointMake(1, 1);
-    nowCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
-    [self addSubview:nowCell];
-    self.nowCell = nowCell;
-    self.originalCenter = self.nowCell.center;
+    [fristCell removeFromSuperview];
+    fristCell.layer.anchorPoint = CGPointMake(1, 1);
+    fristCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
+    [self addSubview:fristCell];
+    self.fristCell = fristCell;
+    self.originalCenter = self.fristCell.center;
 }
 
 -(void)pan:(UIPanGestureRecognizer*)sender {
@@ -125,18 +123,15 @@ const int BOTTOM_MARGTIN = 15;
     if (sender.state == UIGestureRecognizerStateChanged) {
         CGFloat yMove = translation.y - self.pointLast.y;
         self.pointLast = translation;
-        CGPoint center = self.nowCell.center;
+        CGPoint center = self.fristCell.center;
         if (translation.y < 0) {
-            self.nowCell.center = CGPointMake(center.x, center.y + yMove);
+            self.fristCell.center = CGPointMake(center.x, center.y + yMove);
         }else {
-            self.nowCell.center = self.originalCenter;
+            self.fristCell.center = self.originalCenter;
         }
         CGFloat offset = (self.originalCenter.y - center.y + BOTTOM_MARGTIN);
         CGFloat alpha = 1 - MIN((offset / ((self.height - BOTTOM_MARGTIN ) * 0.5)) * 1, 1);
-        
-        NSLog(@"=====   %f   =====",offset);
-        
-        self.nowCell.alpha = alpha;
+        self.fristCell.alpha = alpha;
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
@@ -150,9 +145,9 @@ const int BOTTOM_MARGTIN = 15;
 }
 
 -(UITableViewCell*)dequeueReusableViewWithIdentifier:(NSString *)identifier {
-    for (UITableViewCell * cell in self.cacheViews) {
+    for (UITableViewCell * cell in self.caches) {
         if ([identifier isEqualToString:cell.reuseIdentifier]) {
-            [self.cacheViews removeObject:cell];
+            [self.caches removeObject:cell];
             NSLog(@"我被复用了");
             return cell;
         }
@@ -162,32 +157,33 @@ const int BOTTOM_MARGTIN = 15;
 
 //滑动到下一个界面
 -(void)swipeEnd {
-    CGPoint center = self.nowCell.center;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.nowCell.center = CGPointMake(center.x, center.y - self.height);
+    CGPoint center = self.fristCell.center;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.fristCell.center = CGPointMake(center.x, center.y - self.height);
+        self.fristCell.alpha = 0;
     } completion:^(BOOL finished) {
         self.nowIndex++;
-        self.nowIndex = self.nowIndex < self.totalNum ? self.nowIndex : 0;
+        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : 0;
         if (self.viewRemove && [self isNeedAddToCache:self.viewRemove]) {
-            [self.cacheViews addObject:self.viewRemove];
+            [self.caches addObject:self.viewRemove];
             [self.viewRemove removeFromSuperview];
         }
-        self.viewRemove = self.nowCell;
+        self.viewRemove = self.fristCell;
         self.viewRemove.alpha = 1;
         
-        self.nowCell = self.nextCell;
-        self.nextCell = self.thirdCell;
+        self.fristCell = self.secondCell;
+        self.secondCell = self.thirdCell;
         
-        UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalNum ? (int)self.nowIndex + 2 : (int)self.nowIndex + 2 - (int)self.totalNum)];
+        UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + 2 < self.totalRow ? (int)self.nowIndex + 2 : (int)self.nowIndex + 2 - (int)self.totalRow)];
         [thirdCell removeFromSuperview];
         thirdCell.layer.anchorPoint = CGPointMake(1, 1);
         thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, (self.height * 0.5) + BOTTOM_MARGTIN * 0.5, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
         self.thirdCell = thirdCell;
 
-        [self insertSubview:thirdCell belowSubview:self.nextCell];
+        [self insertSubview:thirdCell belowSubview:self.secondCell];
         [UIView animateWithDuration:0.1 animations:^{
-            self.nowCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
-            self.nextCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
+            self.fristCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
+            self.secondCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
         }];
     }];
 }
@@ -199,7 +195,7 @@ const int BOTTOM_MARGTIN = 15;
 
 //是否需要加入到缓存中去
 -(BOOL)isNeedAddToCache:(UITableViewCell*)cell {
-    for (UITableViewCell * cellIn in self.cacheViews) {
+    for (UITableViewCell * cellIn in self.caches) {
         if ([cellIn.reuseIdentifier isEqualToString:cell.reuseIdentifier]) {
             return NO;
         }
