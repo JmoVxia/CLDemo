@@ -39,6 +39,8 @@ const int BOTTOM_MARGTIN = 8;
 @property (nonatomic, assign) CGRect fristFrame;
 ///第二个cell原始位置
 @property (nonatomic, assign) CGRect secondFrame;
+///第二个cell原始位置
+@property (nonatomic, assign) CGRect thirdFrame;
 //自身的宽度
 @property (nonatomic, assign) CGFloat width;
 //自身的高度
@@ -98,20 +100,21 @@ const int BOTTOM_MARGTIN = 8;
     thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, (self.height * 0.5) + BOTTOM_MARGTIN * 0.5, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
     [self addSubview:thirdCell];
     self.thirdCell = thirdCell;
+    self.thirdFrame = CGRectMake(thirdCell.frame.origin.x, thirdCell.frame.origin.y, thirdCell.frame.size.width, thirdCell.frame.size.height);
     
     [secondCell removeFromSuperview];
     secondCell.layer.anchorPoint = CGPointMake(1, 1);
     secondCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
     [self addSubview:secondCell];
     self.secondCell = secondCell;
-    self.secondFrame = secondCell.frame;
-    
+    self.secondFrame = CGRectMake(secondCell.frame.origin.x, secondCell.frame.origin.y, secondCell.frame.size.width, secondCell.frame.size.height);
+
     [fristCell removeFromSuperview];
     fristCell.layer.anchorPoint = CGPointMake(1, 1);
     fristCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
     [self addSubview:fristCell];
     self.fristCell = fristCell;
-    self.fristFrame = fristCell.frame;
+    self.fristFrame = CGRectMake(fristCell.frame.origin.x, fristCell.frame.origin.y, fristCell.frame.size.width, fristCell.frame.size.height);
 }
 
 -(void)pan:(UIPanGestureRecognizer*)sender {
@@ -143,7 +146,14 @@ const int BOTTOM_MARGTIN = 8;
         self.secondCell.frame = CGRectMake(second_x, second_y, second_width, second_height);
         
         
-        NSLog(@"==== %f  ====  %f  ==  %f  ==",second_y,second_width,second_height);
+        CGFloat third_x = self.thirdFrame.origin.x * alpha;
+        CGFloat third_y = self.thirdFrame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
+        CGFloat third_width = self.thirdFrame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
+        CGFloat third_height = self.thirdFrame.size.height;
+        self.thirdCell.frame = CGRectMake(third_x, third_y, third_width, third_height);
+        
+        
+        
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
