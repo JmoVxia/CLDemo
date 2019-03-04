@@ -15,7 +15,7 @@ const int LEFT_RIGHT_MARGIN = 10;
 ///第一个和最后一个View的底部距离
 const int BOTTOM_MARGTIN = 8;
 ///显示几行
-const int SHOW_ROWS = 3;
+const int SHOW_ROWS = 4;
 
 @interface CLCardView ()
 
@@ -162,11 +162,8 @@ const int SHOW_ROWS = 3;
     }
     CGFloat offset = (fristFrame.origin.y + fristFrame.size.height - center.y);
     CGFloat height = (self.height - BOTTOM_MARGTIN * (SHOW_ROWS - 1)) * 0.5;
-    CGFloat alpha = MIN(1 - MIN((offset / height), 1), 1);
+    CGFloat alpha = end ? 0 : MIN(1 - MIN((offset / height), 1), 1);
     fristCell.alpha = alpha;
-    if (end) {
-        alpha = 0;
-    }
     for (NSInteger i = 1; i < self.cellArray.count; i++) {
         UITableViewCell *cell = [self.cellArray objectAtIndex:i];
         CGRect frame = [[self.frameArray objectAtIndex:i] CGRectValue];
@@ -187,31 +184,23 @@ const int SHOW_ROWS = 3;
     [UIView animateWithDuration:0.2 animations:^{
         [self gestureEnd:YES animate:move];
     } completion:^(BOOL finished) {
-//        self.nowIndex++;
-//        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : 0;
-//        if (self.viewRemove && [self isNeedAddToCache:self.viewRemove]) {
-//            [self.caches addObject:self.viewRemove];
-//            [self.viewRemove removeFromSuperview];
-//        }
-//        self.viewRemove = fristCell;
-//        self.viewRemove.alpha = 1;
-//
-////        fristCell = self.secondCell;
-////        self.secondCell = self.thirdCell;
-//
-//        NSInteger index = ((self.nowIndex + SHOW_ROWS - 1) < self.totalRow ? (self.nowIndex + SHOW_ROWS - 1) : (self.nowIndex + SHOW_ROWS - 1 - self.totalRow));
-//        NSLog(@"===   %ld   ===",index);
-//        UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
-//        [thirdCell removeFromSuperview];
-//        thirdCell.layer.anchorPoint = CGPointMake(1, 1);
-//        thirdCell.frame = CGRectMake(LEFT_RIGHT_MARGIN * 2, (self.height * 0.5) + BOTTOM_MARGTIN * 0.5, self.width - 2 * 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
-//        self.thirdCell = thirdCell;
-//
-//        [self insertSubview:thirdCell belowSubview:self.secondCell];
-//        [UIView animateWithDuration:0.1 animations:^{
-//            fristCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
-//            self.secondCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
-//        }];
+        self.nowIndex++;
+        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : 0;
+        if (self.viewRemove && [self isNeedAddToCache:self.viewRemove]) {
+            self.viewRemove.alpha = 1;
+            [self.caches addObject:self.viewRemove];
+            [self.viewRemove removeFromSuperview];
+        }
+        self.viewRemove = fristCell;
+        [self.cellArray removeObject:fristCell];
+        NSInteger index = ((self.nowIndex + SHOW_ROWS - 1) < self.totalRow ? (self.nowIndex + SHOW_ROWS - 1) : (self.nowIndex + SHOW_ROWS - 1 - self.totalRow));
+        UITableViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
+        CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
+        cell.frame = lastFrame;
+        cell.alpha = 0;
+        [cell removeFromSuperview];
+        [self insertSubview:cell atIndex:0];
+        [self.cellArray addObject:cell];
     }];
 }
 
