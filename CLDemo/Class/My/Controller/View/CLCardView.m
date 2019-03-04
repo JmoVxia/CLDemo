@@ -15,7 +15,7 @@ const int LEFT_RIGHT_MARGIN = 10;
 ///第一个和最后一个View的底部距离
 const int BOTTOM_MARGTIN = 8;
 ///显示几行
-const int SHOW_ROWS = 6;
+const int SHOW_ROWS = 3;
 
 @interface CLCardView ()
 
@@ -129,31 +129,7 @@ const int SHOW_ROWS = 6;
     if (sender.state == UIGestureRecognizerStateChanged) {
         CGFloat yMove = translation.y - self.pointLast.y;
         self.pointLast = translation;
-        UITableViewCell *fristCell = [self.cellArray firstObject];
-        CGRect fristFrame = [[self.frameArray firstObject] CGRectValue];
-        CGPoint center = fristCell.center;
-        if (translation.y < 0) {
-            fristCell.center = CGPointMake(center.x, center.y + yMove);
-        }else {
-            fristCell.frame = fristFrame;
-        }
-        CGFloat offset = (fristFrame.origin.y + fristFrame.size.height - center.y);
-        CGFloat height = (self.height - BOTTOM_MARGTIN * (SHOW_ROWS - 1)) * 0.5;
-        CGFloat alpha = MIN(1 - MIN((offset / height), 1), 1);
-        fristCell.alpha = alpha;
-        
-        for (NSInteger i = 1; i < self.cellArray.count; i++) {
-            UITableViewCell *cell = [self.cellArray objectAtIndex:i];
-            CGRect frame = [[self.frameArray objectAtIndex:i] CGRectValue];
-            CGFloat x = frame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
-            CGFloat y = frame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
-            CGFloat width = frame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
-            CGFloat height = frame.size.height;
-            cell.frame = CGRectMake(x, y, width, height);
-            if (i == self.cellArray.count - 1) {
-                cell.alpha = 1 - alpha;
-            }
-        }
+        [self gestureEnd:NO animate:yMove];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGFloat yTotalMove = translation.y - self.pointStart.y;
@@ -175,14 +151,41 @@ const int SHOW_ROWS = 6;
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];;
 }
-
+- (void)gestureEnd:(BOOL)end animate:(CGFloat)animate {
+    UITableViewCell *fristCell = [self.cellArray firstObject];
+    CGRect fristFrame = [[self.frameArray firstObject] CGRectValue];
+    CGPoint center = fristCell.center;
+    if (self.pointLast.y < 0) {
+        fristCell.center = CGPointMake(center.x, center.y + animate);
+    }else {
+        fristCell.frame = fristFrame;
+    }
+    CGFloat offset = (fristFrame.origin.y + fristFrame.size.height - center.y);
+    CGFloat height = (self.height - BOTTOM_MARGTIN * (SHOW_ROWS - 1)) * 0.5;
+    CGFloat alpha = MIN(1 - MIN((offset / height), 1), 1);
+    fristCell.alpha = alpha;
+    if (end) {
+        alpha = 0;
+    }
+    for (NSInteger i = 1; i < self.cellArray.count; i++) {
+        UITableViewCell *cell = [self.cellArray objectAtIndex:i];
+        CGRect frame = [[self.frameArray objectAtIndex:i] CGRectValue];
+        CGFloat x = frame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
+        CGFloat y = frame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
+        CGFloat width = frame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
+        CGFloat height = frame.size.height;
+        cell.frame = CGRectMake(x, y, width, height);
+        if (i == self.cellArray.count - 1) {
+            cell.alpha = 1 - alpha;
+        }
+    }
+}
 //滑动到下一个界面
 -(void)swipeEnd {
     UITableViewCell *fristCell = [self.cellArray firstObject];
-    CGPoint center = fristCell.center;
-    [UIView animateWithDuration:0.3 animations:^{
-        fristCell.center = CGPointMake(center.x, center.y - self.height);
-        fristCell.alpha = 0;
+    CGFloat move = - fristCell.center.y;
+    [UIView animateWithDuration:0.2 animations:^{
+        [self gestureEnd:YES animate:move];
     } completion:^(BOOL finished) {
 //        self.nowIndex++;
 //        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : 0;
