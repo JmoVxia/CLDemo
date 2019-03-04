@@ -30,7 +30,7 @@
 
 
 -(NSInteger)cardViewRows:(CLCardView *)cardView {
-    return 8;
+    return 9;
 }
 
 -(UITableViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index {
