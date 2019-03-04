@@ -110,6 +110,9 @@ const int SHOW_ROWS = 6;
         CGFloat width = self.width - 2 * i * LEFT_RIGHT_MARGIN;
         CGFloat height = (self.height - BOTTOM_MARGTIN * (SHOW_ROWS - 1)) * 0.5;
         cell.frame = CGRectMake(x, y, width, height);
+        if (i == SHOW_ROWS - 1) {
+            cell.alpha = 0;
+        }
         [self insertSubview:cell atIndex:0];
         [self.cellArray addObject:cell];
         [self.frameArray addObject:[NSValue valueWithCGRect:cell.frame]];
@@ -118,7 +121,6 @@ const int SHOW_ROWS = 6;
 
 -(void)pan:(UIPanGestureRecognizer*)sender {
     CGPoint translation = [sender translationInView: self];
-    //CGPoint speed=[sender velocityInView:self];//获取速度
     if (sender.state == UIGestureRecognizerStateBegan) {
         self.pointStart = translation;
         self.pointLast = translation;
@@ -140,18 +142,7 @@ const int SHOW_ROWS = 6;
         CGFloat alpha = MIN(1 - MIN((offset / height), 1), 1);
         fristCell.alpha = alpha;
         
-//        UITableViewCell *lastCell = [self.cellArray lastObject];
-//        CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
-//
-//        CGFloat last_x = lastFrame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
-//        CGFloat last_y = lastFrame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
-//        CGFloat last_width = lastFrame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
-//        CGFloat last_height = lastFrame.size.height;
-//        self.thirdCell.frame = CGRectMake(third_x, third_y, third_width, third_height);
-        
-        
-        
-        for (NSInteger i = 1; i < self.cellArray.count - 1; i++) {
+        for (NSInteger i = 1; i < self.cellArray.count; i++) {
             UITableViewCell *cell = [self.cellArray objectAtIndex:i];
             CGRect frame = [[self.frameArray objectAtIndex:i] CGRectValue];
             CGFloat x = frame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
@@ -159,31 +150,11 @@ const int SHOW_ROWS = 6;
             CGFloat width = frame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
             CGFloat height = frame.size.height;
             cell.frame = CGRectMake(x, y, width, height);
+            if (i == self.cellArray.count - 1) {
+                cell.alpha = 1 - alpha;
+            }
         }
-        
-        
-        
-        
-        
-//        CGFloat second_x = self.secondFrame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
-//        CGFloat second_y = self.secondFrame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
-//        CGFloat second_width = self.secondFrame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
-//        CGFloat second_height = self.secondFrame.size.height;
-//        self.secondCell.frame = CGRectMake(second_x, second_y, second_width, second_height);
-        
-        
-        
-        
-        
-//        CGFloat third_x = self.thirdFrame.origin.x - LEFT_RIGHT_MARGIN * (1 - alpha);
-//        CGFloat third_y = self.thirdFrame.origin.y - BOTTOM_MARGTIN * (1 - alpha);
-//        CGFloat third_width = self.thirdFrame.size.width + LEFT_RIGHT_MARGIN * (1 - alpha) * 2;
-//        CGFloat third_height = self.thirdFrame.size.height;
-//        self.thirdCell.frame = CGRectMake(third_x, third_y, third_width, third_height);
-        
-        
     }
-    
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGFloat yTotalMove = translation.y - self.pointStart.y;
         if (yTotalMove < 0) {
@@ -207,24 +178,25 @@ const int SHOW_ROWS = 6;
 
 //滑动到下一个界面
 -(void)swipeEnd {
-//    CGPoint center = self.fristCell.center;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.fristCell.center = CGPointMake(center.x, center.y - self.height);
-//        self.fristCell.alpha = 0;
-//    } completion:^(BOOL finished) {
+    UITableViewCell *fristCell = [self.cellArray firstObject];
+    CGPoint center = fristCell.center;
+    [UIView animateWithDuration:0.3 animations:^{
+        fristCell.center = CGPointMake(center.x, center.y - self.height);
+        fristCell.alpha = 0;
+    } completion:^(BOOL finished) {
 //        self.nowIndex++;
 //        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : 0;
 //        if (self.viewRemove && [self isNeedAddToCache:self.viewRemove]) {
 //            [self.caches addObject:self.viewRemove];
 //            [self.viewRemove removeFromSuperview];
 //        }
-//        self.viewRemove = self.fristCell;
+//        self.viewRemove = fristCell;
 //        self.viewRemove.alpha = 1;
 //
-//        self.fristCell = self.secondCell;
-//        self.secondCell = self.thirdCell;
+////        fristCell = self.secondCell;
+////        self.secondCell = self.thirdCell;
 //
-//        NSInteger index = (self.nowIndex + 2 < self.totalRow ? self.nowIndex + 2 : self.nowIndex + 2 - self.totalRow);
+//        NSInteger index = ((self.nowIndex + SHOW_ROWS - 1) < self.totalRow ? (self.nowIndex + SHOW_ROWS - 1) : (self.nowIndex + SHOW_ROWS - 1 - self.totalRow));
 //        NSLog(@"===   %ld   ===",index);
 //        UITableViewCell * thirdCell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
 //        [thirdCell removeFromSuperview];
@@ -234,10 +206,10 @@ const int SHOW_ROWS = 6;
 //
 //        [self insertSubview:thirdCell belowSubview:self.secondCell];
 //        [UIView animateWithDuration:0.1 animations:^{
-//            self.fristCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
+//            fristCell.frame = CGRectMake(0, (self.height * 0.5) - BOTTOM_MARGTIN * 1.5, self.width, ((self.height - BOTTOM_MARGTIN ) * 0.5));
 //            self.secondCell.frame = CGRectMake(LEFT_RIGHT_MARGIN, (self.height * 0.5) - BOTTOM_MARGTIN * 0.5, self.width - 2 * LEFT_RIGHT_MARGIN, ((self.height - BOTTOM_MARGTIN ) * 0.5));
 //        }];
-//    }];
+    }];
 }
 
 //滑动到上一个界面
