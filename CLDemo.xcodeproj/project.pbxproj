@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C29D596222FE7E400635F25 /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */; };
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
@@ -91,6 +92,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C29D594222FE7E400635F25 /* CLGCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
+		0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
 		0C31C38321994CCF001860C2 /* UIFont+CLFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CLFont.h"; sourceTree = "<group>"; };
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
@@ -266,6 +269,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C29D593222FE7DB00635F25 /* CLGCDTimerManager */ = {
+			isa = PBXGroup;
+			children = (
+				0C29D594222FE7E400635F25 /* CLGCDTimerManager.h */,
+				0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */,
+			);
+			path = CLGCDTimerManager;
+			sourceTree = "<group>";
+		};
 		0C33BC6F219AEF5D00583B4C /* CLLog */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,6 +677,7 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0C29D593222FE7DB00635F25 /* CLGCDTimerManager */,
 				0C7316A7222814AB005ACFE7 /* CLJumpManager */,
 				5B8095F722187061000F72F3 /* CLBankScan */,
 				0CF79B0C219679AB00DD0BF1 /* DataJson */,
@@ -890,6 +903,7 @@
 				0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */,
 				5B80962122187115000F72F3 /* CLBankCardDetailController.m in Sources */,
 				5B809615221870BD000F72F3 /* CLBankCardView.m in Sources */,
+				0C29D596222FE7E400635F25 /* CLGCDTimerManager.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
 				0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */,

@@ -8,7 +8,6 @@
 
 #import "CLCardView.h"
 
-
 @interface CLCardViewConfigure ()
 
 @end
@@ -194,6 +193,9 @@
 }
 //MARK:JmoVxia---滑动到下一个界面
 - (void)scrollToNext {
+    if (self.isAnimation) {
+        return;
+    }
     self.isAnimation = YES;
     UITableViewCell *fristCell = [self.cellArray firstObject];
     CGFloat move = - fristCell.center.y;
