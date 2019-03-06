@@ -53,6 +53,9 @@
 @property (nonatomic, assign) BOOL isFirstLayoutSub;
 ///配置
 @property (nonatomic, strong) CLCardViewConfigure *configure;
+///是否正在动画
+@property (nonatomic, assign) BOOL isAnimation;
+
 
 @end
 
@@ -141,6 +144,9 @@
 }
 //MARK:JmoVxia---手势
 - (void)panGestureRecognizer:(UIPanGestureRecognizer*)sender {
+    if (self.isAnimation) {
+        return;
+    }
     CGPoint translation = [sender translationInView: self];
     if (sender.state == UIGestureRecognizerStateBegan) {
         self.pointStart = translation;
@@ -188,6 +194,7 @@
 }
 //MARK:JmoVxia---滑动到下一个界面
 - (void)scrollToNext {
+    self.isAnimation = YES;
     UITableViewCell *fristCell = [self.cellArray firstObject];
     CGFloat move = - fristCell.center.y;
     [UIView animateWithDuration:0.2 animations:^{
@@ -210,6 +217,7 @@
         [cell removeFromSuperview];
         [self insertSubview:cell atIndex:0];
         [self.cellArray addObject:cell];
+        self.isAnimation = NO;
     }];
 }
 //MARK:JmoVxia---是否需要加入到缓存池

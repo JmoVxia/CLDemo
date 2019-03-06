@@ -22,7 +22,7 @@
 }
 - (CLCardView *) cardView{
     if (_cardView == nil){
-        _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 150, self.view.cl_width - 20, 150)];
+        _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 200, self.view.cl_width - 20, 200)];
         [_cardView updateWithConfig:^(CLCardViewConfigure * _Nonnull configure) {
             configure.showRows = 5;
         }];
