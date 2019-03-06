@@ -28,7 +28,7 @@ class CLPasswordInputViewConfigure: NSObject {
     ///是否支持三方键盘
     var threePartyKeyboard: Bool = false
     
-    fileprivate class func defaultConfig() -> CLPasswordInputViewConfigure {
+    fileprivate class func defaultConfigure() -> CLPasswordInputViewConfigure {
         let configure = CLPasswordInputViewConfigure()
         return configure
     }
@@ -79,7 +79,7 @@ class CLPasswordInputView: UIView {
     private var isShow: Bool = false
     
     override init(frame: CGRect) {
-        configure = CLPasswordInputViewConfigure.defaultConfig()
+        configure = CLPasswordInputViewConfigure.defaultConfigure()
         super.init(frame: frame)
         backgroundColor = configure.backgroundColor
     }

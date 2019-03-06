@@ -13,7 +13,7 @@
 
 @implementation CLInputToolbarConfigure
 
-+ (instancetype)defaultConfig {
++ (instancetype)defaultConfigure {
     CLInputToolbarConfigure *configure = [[CLInputToolbarConfigure alloc] init];
     configure.showMaskView = YES;
     configure.textViewMaxLine = 3;
@@ -276,7 +276,7 @@
 //MARK:JmoVxia---懒加载
 - (CLInputToolbarConfigure *) configure {
     if (_configure == nil) {
-        _configure = [CLInputToolbarConfigure defaultConfig];
+        _configure = [CLInputToolbarConfigure defaultConfigure];
     }
     return _configure;
 }
