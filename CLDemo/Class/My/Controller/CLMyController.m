@@ -18,6 +18,7 @@
 #import "CLInputToolbarController.h"
 #import "CLBankCardScanController.h"
 #import "CLCardController.h"
+#import "CLWaveViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -93,6 +94,9 @@
     }else if (indexPath.row == 9) {
         CLCardController *cardViewController = [[CLCardController alloc] init];
         [self.navigationController pushViewController:cardViewController animated:YES];
+    }else if (indexPath.row == 10) {
+        CLWaveViewController *waveViewController = [[CLWaveViewController alloc] init];
+        [self.navigationController pushViewController:waveViewController animated:YES];
     }
 }
 - (UITableView *) tableView{
@@ -118,6 +122,7 @@
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
         [_arrayDS addObject:NSLocalizedString(@"卡片视图", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"波浪视图", nil)];
     }
     return _arrayDS;
 }
