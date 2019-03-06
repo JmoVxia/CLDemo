@@ -175,7 +175,7 @@
     }else {
         fristCell.frame = fristFrame;
     }
-    CGFloat offset = (fristFrame.origin.y + fristFrame.size.height - center.y);
+    CGFloat offset = (CGRectGetMaxY(fristFrame) - CGRectGetMaxY(fristCell.frame));
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
     CGFloat alpha = end ? 0 : MIN(1 - MIN((offset / height), 1), 1);
     fristCell.alpha = alpha;

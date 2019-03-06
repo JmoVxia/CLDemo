@@ -41,9 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///数据源
 @property (nonatomic, weak) id<CLCardViewDataSource> dataSource;
 
-///层叠透明方式显示 默认NO
-@property (nonatomic, assign) BOOL isStackCard;
-
 ///加载方法
 -(void)reloadData;
 
