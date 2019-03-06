@@ -14,7 +14,7 @@
 
 @implementation CLCardViewConfigure
 
-+ (instancetype)defaultConfig {
++ (instancetype)defaultConfigure {
     CLCardViewConfigure *configure = [[CLCardViewConfigure alloc] init];
     configure.leftRightMargin = 10;
     configure.bottomMargin = 10;
@@ -62,7 +62,7 @@
 
 - (CLCardViewConfigure *) configure{
     if (_configure == nil){
-        _configure = [CLCardViewConfigure defaultConfig];
+        _configure = [CLCardViewConfigure defaultConfigure];
     }
     return _configure;
 }
@@ -92,6 +92,7 @@
 }
 - (void)updateWithConfig:(void(^)(CLCardViewConfigure *configure))configBlock {
     configBlock(self.configure);
+    configBlock = nil;
     self.configure.showRows = self.configure.showRows + 1;
     [self reloadData];
 }

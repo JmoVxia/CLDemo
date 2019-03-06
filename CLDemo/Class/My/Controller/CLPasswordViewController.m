@@ -52,7 +52,7 @@
     }];
 
     [inputView updateWithConfigure:^(CLPasswordInputViewConfigure * _Nonnull configure) {
-        configure.pointColor = [UIColor blackColor];
+        configure.pointColor = [UIColor redColor];
         configure.rectColor = [UIColor blackColor];
         configure.rectBackgroundColor = [UIColor whiteColor];
         configure.backgroundColor = [UIColor whiteColor];

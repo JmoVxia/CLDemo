@@ -124,6 +124,7 @@
     if (configBlock) {
         configBlock(self.configure);
     }
+    configBlock = nil;
     [self refreshUI];
 }
 - (void)keyboardDidShow:(NSNotification *)notification {
