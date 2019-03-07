@@ -32,7 +32,6 @@
         CAShapeLayer *shapeLayer = [self shapeLayerWithStrokeStart:0 strokeEnd:0.2];
         [self.animationLayer setMask:shapeLayer];
         [self.layer addSublayer:self.animationLayer];
-        
         //动画
         CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         rotationAnimation.fromValue = [NSNumber numberWithFloat:0];

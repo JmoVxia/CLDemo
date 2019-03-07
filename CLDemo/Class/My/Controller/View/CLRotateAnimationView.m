@@ -19,11 +19,9 @@
     return self;
 }
 
-- (void)createCircle:(float)startAngle andEndAngle:(float)endAngle {
-    
+- (void)createCircle:(float)startAngle endAngle:(float)endAngle {
     CGFloat origin_x = self.frame.size.width * 0.5;
     CGFloat origin_y = self.frame.size.height * 0.5;
-    
     for (NSInteger i = 0; i < 5; i++) {
         CALayer *layer = [CALayer layer];
         layer.backgroundColor = [UIColor redColor].CGColor;

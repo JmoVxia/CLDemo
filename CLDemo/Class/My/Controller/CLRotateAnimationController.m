@@ -20,7 +20,7 @@
     [super viewDidLoad];
 
     CLRotateAnimationView *rotateAnimationView = [[CLRotateAnimationView alloc] initWithFrame:CGRectMake(120, 120, 120, 120)];
-    [rotateAnimationView createCircle:-M_PI_2 andEndAngle:(M_PI + M_PI_2)];
+    [rotateAnimationView createCircle:-M_PI_2 endAngle:(M_PI + M_PI_2)];
     [self.view addSubview:rotateAnimationView];
 
     

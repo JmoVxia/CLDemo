@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLRotateAnimationView : UIView
 
-- (void)createCircle:(float)startAngle andEndAngle:(float)endAngle;
+- (void)createCircle:(float)startAngle endAngle:(float)endAngle;
 
 @end
 
