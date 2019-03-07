@@ -17,11 +17,11 @@
 
 + (instancetype)defaultConfigure {
     CLWaveViewConfigure *configure = [[CLWaveViewConfigure alloc] init];
-    configure.waveColor = [UIColor orangeColor];
-    configure.waveSpeed = 0.05;
-    configure.waveA = 12;
-    configure.waveW = 0.5/30.0;
-    configure.waveY = configure.waveA;
+    configure.color = [UIColor orangeColor];
+    configure.speed = 0.05;
+    configure.amplitude = 12;
+    configure.cycle = 0.5/30.0;
+    configure.y = configure.amplitude;
     return configure;
 }
 
@@ -47,14 +47,14 @@
 - (CLWaveViewConfigure *) configure{
     if (_configure == nil){
         _configure = [CLWaveViewConfigure defaultConfigure];
-        _configure.waveWidth = self.frame.size.width;
+        _configure.width = self.frame.size.width;
     }
     return _configure;
 }
 - (void)updateWithConfig:(void(^)(CLWaveViewConfigure *configure))configBlock {
     configBlock(self.configure);
     configBlock = nil;
-    self.shapeLayer.fillColor = self.configure.waveColor.CGColor;
+    self.shapeLayer.fillColor = self.configure.color.CGColor;
 }
 /*
  y =Asin（ωx+φ）+C
@@ -78,7 +78,7 @@
         //初始化
         self.shapeLayer = [CAShapeLayer layer];
         //设置闭环的颜色
-        self.shapeLayer.fillColor = self.configure.waveColor.CGColor;
+        self.shapeLayer.fillColor = self.configure.color.CGColor;
         [self.layer addSublayer:self.shapeLayer];
     }
     //启动定时器
@@ -88,22 +88,22 @@
 }
 -(void)currentWave:(CADisplayLink *)displayLink{
     //实时的位移
-    self.offsetX += self.configure.waveSpeed;
+    self.offsetX += self.configure.speed;
     [self currentFirstWaveLayerPath];
 }
 -(void)currentFirstWaveLayerPath{
     //创建一个路径
     CGMutablePathRef path = CGPathCreateMutable();
-    CGFloat y = self.configure.waveY;
-    //将点移动到 x=0,y=waveY的位置
+    CGFloat y = self.configure.y;
+    //将点移动到 x=0,y=y的位置
     CGPathMoveToPoint(path, nil, 0, y);
-    for (NSInteger i = 0.0f; i <= self.configure.waveWidth; i++) {
+    for (NSInteger i = 0.0f; i <= self.configure.width; i++) {
         //正弦函数波浪公式
-        y = self.configure.waveA * sin(self.configure.waveW * i + self.offsetX) + self.configure.waveY;
+        y = self.configure.amplitude * sin(self.configure.cycle * i + self.offsetX) + self.configure.y;
         //将点连成线
         CGPathAddLineToPoint(path, nil, i, y);
     }
-    CGPathAddLineToPoint(path, nil, self.configure.waveWidth, self.frame.size.height);
+    CGPathAddLineToPoint(path, nil, self.configure.width, self.frame.size.height);
     CGPathAddLineToPoint(path, nil, 0, self.frame.size.height);
     CGPathCloseSubpath(path);
     self.shapeLayer.path = path;

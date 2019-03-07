@@ -14,17 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CLWaveViewConfigure : NSObject
 
 ///波浪颜色
-@property (nonatomic, strong) UIColor *waveColor;
+@property (nonatomic, strong) UIColor *color;
 ///水纹振幅
-@property (nonatomic, assign) CGFloat waveA;
+@property (nonatomic, assign) CGFloat amplitude;
 ///水纹周期
-@property (nonatomic, assign) CGFloat waveW;
+@property (nonatomic, assign) CGFloat cycle;
 ///波浪Y
-@property (nonatomic, assign) CGFloat waveY;
+@property (nonatomic, assign) CGFloat y;
 ///水纹速度
-@property (nonatomic, assign) CGFloat waveSpeed;
+@property (nonatomic, assign) CGFloat speed;
 ///水纹宽度
-@property (nonatomic, assign) CGFloat waveWidth;
+@property (nonatomic, assign) CGFloat width;
 
 @end
 

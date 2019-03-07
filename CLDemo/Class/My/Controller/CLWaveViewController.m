@@ -21,10 +21,11 @@
     [super viewDidLoad];
 
     self.waveView = [[CLWaveView alloc] initWithFrame:CGRectMake(0, 99, self.view.cl_width, 90)];
+    self.waveView.alpha = 0.6;
     [self.waveView updateWithConfig:^(CLWaveViewConfigure * _Nonnull configure) {
-        configure.waveColor = [UIColor redColor];
-        configure.waveY = 40;
-        configure.waveSpeed = 0.05;
+        configure.color = [UIColor redColor];
+        configure.y = 40;
+        configure.speed = 0.05;
     }];
     [self.view addSubview:self.waveView];
 }
