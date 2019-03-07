@@ -8,6 +8,7 @@
 
 #import "CLRotateAnimationController.h"
 #import "CLRotateAnimationView.h"
+#import "CLRoundAnimationView.h"
 
 @interface CLRotateAnimationController ()
 
@@ -22,6 +23,10 @@
     [rotateAnimationView createCircle:-M_PI_2 andEndAngle:(M_PI + M_PI_2)];
     [self.view addSubview:rotateAnimationView];
 
+    
+    
+    CLRoundAnimationView *roundAnimationView = [[CLRoundAnimationView alloc] initWithFrame:CGRectMake(120, 320, 90, 90)];
+    [self.view addSubview:roundAnimationView];
 }
 
 

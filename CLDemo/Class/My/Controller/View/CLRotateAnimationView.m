@@ -43,6 +43,8 @@
         CAAnimationGroup *group = [CAAnimationGroup animation];
         group.animations = @[pathAnimation];
         group.duration = 2;
+        group.removedOnCompletion = NO;
+        group.fillMode = kCAFillModeForwards;
         group.repeatCount = INTMAX_MAX;
         //设置运转的动画
         [layer addAnimation:group forKey:@"moveTheCircleOne"];
