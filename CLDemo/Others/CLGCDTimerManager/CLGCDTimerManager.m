@@ -117,6 +117,10 @@
         self.isRuning = YES;
     }
 }
+-(void)dealloc {
+    [self cancelTimer];
+}
+
 @end
 
 @interface CLGCDTimerManager ()
