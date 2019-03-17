@@ -36,10 +36,6 @@
 @property (nonatomic, assign) NSInteger totalRow;
 ///当前的下标
 @property (nonatomic, assign) NSInteger nowIndex;
-///触摸开始的坐标
-@property (nonatomic, assign) CGPoint pointStart;
-///上一次触摸的坐标
-@property (nonatomic, assign) CGPoint pointLast;
 ///cell数组
 @property (nonatomic, strong) NSMutableArray<UITableViewCell *> *cellArray;
 ///原始frame数组
@@ -148,13 +144,8 @@
         return;
     }
     CGPoint translation = [sender translationInView: self];
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        self.pointStart = translation;
-        self.pointLast = translation;
-    }
     if (sender.state == UIGestureRecognizerStateChanged) {
-        CGFloat yMove = translation.y - self.pointLast.y;
-        self.pointLast = translation;
+        CGFloat yMove = translation.y;
         [self animationWithGestureEnd:NO move:yMove];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
@@ -169,14 +160,10 @@
 - (void)animationWithGestureEnd:(BOOL)end move:(CGFloat)move {
     UITableViewCell *fristCell = [self.cellArray firstObject];
     CGRect fristFrame = [[self.frameArray firstObject] CGRectValue];
-    CGPoint center = fristCell.center;
-    if (self.pointLast.y < 0) {
-        fristCell.center = CGPointMake(center.x, center.y + move);
-    }else {
-        fristCell.frame = fristFrame;
-    }
-    CGFloat offset = (CGRectGetMaxY(fristFrame) - CGRectGetMaxY(fristCell.frame));
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
+    move = MIN(MAX(move, - height), 0);
+    fristCell.frame = CGRectMake(CGRectGetMinX(fristFrame), end ? 0 : (CGRectGetMinY(fristFrame) + move), CGRectGetWidth(fristFrame), CGRectGetHeight(fristFrame));
+    CGFloat offset = (CGRectGetMaxY(fristFrame) - CGRectGetMaxY(fristCell.frame));
     CGFloat alpha = end ? 0 : MIN(1 - MIN((offset / height), 1), 1);
     fristCell.alpha = alpha;
     for (NSInteger i = 1; i < self.cellArray.count; i++) {
@@ -199,7 +186,8 @@
     }
     self.isAnimation = YES;
     UITableViewCell *fristCell = [self.cellArray firstObject];
-    CGFloat move = - fristCell.center.y;
+    CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
+    CGFloat move = CGRectGetMinY(fristCell.frame) - height;
     [UIView animateWithDuration:0.2 animations:^{
         [self animationWithGestureEnd:YES move:move];
     } completion:^(BOOL finished) {
