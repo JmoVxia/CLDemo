@@ -25,28 +25,22 @@
         _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 200, self.view.cl_width - 20, 200)];
         [_cardView updateWithConfig:^(CLCardViewConfigure * _Nonnull configure) {
             configure.showRows = 3;
-            configure.loopScroll = NO;
+            configure.loopScroll = YES;
         }];
         _cardView.dataSource = self;
     }
     return _cardView;
 }
-
-
 -(NSInteger)cardViewRows:(CLCardView *)cardView {
     return 7;
 }
-
--(UITableViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index {
-    UITableViewCell * cell = [cardView dequeueReusableViewWithIdentifier:@"Identifier"];
-    cell.textLabel.text = [NSString stringWithFormat:@"我是第%ld个",(long)index];
-    cell.textLabel.textColor = [UIColor whiteColor];
+-(CLCardViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index {
+    CLCardViewCell * cell = [cardView dequeueReusableViewWithIdentifier:@"Identifier"];
     cell.backgroundColor = cl_RandomColor;
     cell.layer.cornerRadius = 10;
+    cell.text = [NSString stringWithFormat:@"我是第%ld个",index];
     return cell;
 }
-
-
 
 
 @end

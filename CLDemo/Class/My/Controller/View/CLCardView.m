@@ -8,8 +8,34 @@
 
 #import "CLCardView.h"
 
-@interface CLCardViewConfigure ()
+@interface CLCardViewCell ()
 
+@property (nonatomic, copy) NSString *reuseIdentifier;
+
+///label
+@property (nonatomic, strong) UILabel *label;
+
+@end
+
+
+@implementation CLCardViewCell
+
+-(instancetype)initWithReuseIdentifier: (NSString *)reuseIdentifier {
+    if (self = [super init]) {
+        self.reuseIdentifier = reuseIdentifier;
+        self.label = [[UILabel alloc] init];
+        [self addSubview:self.label];
+    }
+    return self;
+}
+- (void)setText:(NSString *)text {
+    self.label.text = text;
+    [self.label sizeToFit];
+}
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.label.center = CGPointMake(self.cl_width * 0.5, self.cl_height * 0.5);
+}
 @end
 
 @implementation CLCardViewConfigure
@@ -25,12 +51,10 @@
 
 @end
 
-
-
 @interface CLCardView ()
 
 ///已经划动到边界外的一个view
-@property (nonatomic, weak) UITableViewCell *viewRemoved;
+@property (nonatomic, weak) CLCardViewCell *viewRemoved;
 ///放当前显示的子View的数组
 @property (nonatomic, strong) NSMutableArray *caches;
 ///view总共的数量
@@ -38,7 +62,7 @@
 ///当前的下标
 @property (nonatomic, assign) NSInteger nowIndex;
 ///cell数组
-@property (nonatomic, strong) NSMutableArray<UITableViewCell *> *cellArray;
+@property (nonatomic, strong) NSMutableArray<CLCardViewCell *> *cellArray;
 ///原始frame数组
 @property (nonatomic, strong) NSMutableArray<NSValue *> *frameArray;
 ///自身的宽度
@@ -105,7 +129,7 @@
     [self.frameArray removeAllObjects];
     self.configure.showRows = MIN(self.configure.showRows, self.totalRow + 1);
     for (NSInteger i = 0; i < self.configure.showRows; i++) {
-        UITableViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + i) < self.totalRow ? (self.nowIndex + i) : 0];
+        CLCardViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:(self.nowIndex + i) < self.totalRow ? (self.nowIndex + i) : 0];
         [cell removeFromSuperview];
         cell.layer.anchorPoint = CGPointMake(1, 1);
         CGFloat x = self.configure.leftRightMargin * i;
@@ -122,9 +146,9 @@
     }
 }
 //MARK:JmoVxia---复用
-- (UITableViewCell*)dequeueReusableViewWithIdentifier:(NSString *)identifier {
-    UITableViewCell *cell;
-    for (UITableViewCell * cacheCell in self.caches) {
+- (CLCardViewCell *)dequeueReusableViewWithIdentifier:(NSString *)identifier {
+    CLCardViewCell *cell;
+    for (CLCardViewCell * cacheCell in self.caches) {
         if ([identifier isEqualToString:cacheCell.reuseIdentifier]) {
             [self.caches removeObject:cacheCell];
             cell = cacheCell;
@@ -132,14 +156,14 @@
         }
     }
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[CLCardViewCell alloc] initWithReuseIdentifier:identifier];
     }
     UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panGestureRecognizer:)];
     [cell addGestureRecognizer:panGestureRecognizer];
     return cell;
 }
 //MARK:JmoVxia---手势
-- (void)panGestureRecognizer:(UIPanGestureRecognizer*)sender {
+- (void)panGestureRecognizer:(UIPanGestureRecognizer *)sender {
     if (self.isAnimation) {
         return;
     }
@@ -149,7 +173,7 @@
         [self animationWithGestureEnd:NO move:yMove];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
-        UITableViewCell *fristCell = [self.cellArray firstObject];
+        CLCardViewCell *fristCell = [self.cellArray firstObject];
         CGRect fristFrame = [[self.frameArray firstObject] CGRectValue];
         if (!CGRectEqualToRect(fristFrame, fristCell.frame)) {
             [self scrollToNext];
@@ -158,7 +182,7 @@
 }
 //MARK:JmoVxia---动画
 - (void)animationWithGestureEnd:(BOOL)end move:(CGFloat)move {
-    UITableViewCell *fristCell = [self.cellArray firstObject];
+    CLCardViewCell *fristCell = [self.cellArray firstObject];
     CGRect fristFrame = [[self.frameArray firstObject] CGRectValue];
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
     move = MIN(MAX(move, - height), 0);
@@ -167,7 +191,7 @@
     CGFloat alpha = end ? 0 : MIN(1 - MIN((offset / height), 1), 1);
     fristCell.alpha = alpha;
     for (NSInteger i = 1; i < self.cellArray.count; i++) {
-        UITableViewCell *cell = [self.cellArray objectAtIndex:i];
+        CLCardViewCell *cell = [self.cellArray objectAtIndex:i];
         CGRect frame = [[self.frameArray objectAtIndex:i] CGRectValue];
         CGFloat x = frame.origin.x - self.configure.leftRightMargin * (1 - alpha);
         CGFloat y = frame.origin.y - self.configure.bottomMargin * (1 - alpha);
@@ -189,7 +213,7 @@
         return;
     }
     self.isAnimation = YES;
-    UITableViewCell *fristCell = [self.cellArray firstObject];
+    CLCardViewCell *fristCell = [self.cellArray firstObject];
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
     CGFloat move = CGRectGetMinY(fristCell.frame) - height;
     [UIView animateWithDuration:0.2 animations:^{
@@ -206,7 +230,7 @@
         [self.cellArray removeObject:fristCell];
         if (self.nowIndex <= self.totalRow - self.configure.showRows || self.configure.loopScroll) {
             NSInteger index = ((self.nowIndex + self.configure.showRows - 1) < self.totalRow ? (self.nowIndex + self.configure.showRows - 1) : (self.nowIndex + self.configure.showRows - 1 - self.totalRow));
-            UITableViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
+            CLCardViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
             CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
             cell.frame = lastFrame;
             cell.alpha = 0;
@@ -218,8 +242,8 @@
     }];
 }
 //MARK:JmoVxia---是否需要加入到缓存池
-- (BOOL)isNeedAddToCache:(UITableViewCell*)cell {
-    for (UITableViewCell * cellIn in self.caches) {
+- (BOOL)isNeedAddToCache:(CLCardViewCell *)cell {
+    for (CLCardViewCell *cellIn in self.caches) {
         if ([cellIn.reuseIdentifier isEqualToString:cell.reuseIdentifier]) {
             return NO;
         }
