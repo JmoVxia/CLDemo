@@ -204,6 +204,14 @@
 -(void)setText:(NSString *)text{
     _text = text;
     [self setTitle:text forState:UIControlStateNormal];
+    if ([_text isEqualToString:@"0"]) {
+        self.hidden = YES;
+        self.samllCircleView.hidden = YES;
+    }
+    else{
+        self.hidden = NO;
+        self.samllCircleView.hidden = NO;
+    }
 }
 #pragma 文字颜色
 -(void)setTextColor:(UIColor *)textColor{
@@ -249,13 +257,5 @@
     [super layoutSubviews];
     //在这里设置颜色是因为这里才能够取得self的颜色
     _samllCircleView.backgroundColor = self.backgroundColor;
-    if ([_text isEqualToString:@"0"]) {
-        self.hidden = YES;
-        self.samllCircleView.hidden = YES;
-    }
-    else{
-        self.hidden = NO;
-        self.samllCircleView.hidden = NO;
-    }
 }
 @end
