@@ -24,58 +24,17 @@
 @end
 
 @implementation CLBubbleView
-- (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)superView
-{
+- (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)superView {
     if (self = [super initWithFrame:frame]) {
-        
         self.superView = superView;
-        
         [self initUI];
     }
     
     return self;
 }
-
-#pragma mark - 懒加载
-- (CAShapeLayer *)shapeLayer
-{
-    if (!_shapeLayer) {
-        _shapeLayer = [CAShapeLayer layer];
-        _shapeLayer.fillColor = self.backgroundColor.CGColor;
-        [self.superView.layer insertSublayer:_shapeLayer below:self.layer];
-    }
-    
-    return _shapeLayer;
-}
-
-- (UIView *)samllCircleView
-{
-    if (!_samllCircleView) {
-        _samllCircleView = [[UIView alloc] init];
-        [self.superView insertSubview:_samllCircleView belowSubview:self];
-    }
-    
-    return _samllCircleView;
-}
-
-- (NSMutableArray *)images
-{
-    if (_images == nil) {
-        _images = [NSMutableArray array];
-        for (NSInteger i = 0; i < 4; i++) {
-            UIImage *image = [self getPictureWithName:[NSString stringWithFormat:@"disappear%ld",i]];
-            [_images addObject:image];
-        }
-    }
-    
-    return _images;
-}
-- (void)initUI
-{
+- (void)initUI {
     CGFloat cornerRadius = (self.frame.size.height > self.frame.size.width ? self.frame.size.width / 2.0 : self.frame.size.height / 2.0);
-    
     _maxDistance = cornerRadius * 4;
-    
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = cornerRadius;
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -89,61 +48,68 @@
 }
 
 #pragma mark - 拖拽手势
-- (void)drag:(UIPanGestureRecognizer *)pan
-{
+- (void)drag:(UIPanGestureRecognizer *)pan {
+    UIView *window = [UIApplication sharedApplication].delegate.window;
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        CGRect frame = [self.superView convertRect:self.frame toView:window];
+        self.frame = frame;
+        
+        CGRect samllCircleViewFrame = [self.superView convertRect:self.samllCircleView.frame toView:window];
+        self.samllCircleView.frame = samllCircleViewFrame;
+        
+        [window addSubview:self];
+        [window.layer insertSublayer:self.shapeLayer below:self.layer];
+        [window insertSubview:self.samllCircleView belowSubview:self];
+    }
     [self.layer removeAnimationForKey:@"shake"];
-    
     CGPoint panPoint = [pan translationInView:self];
-    
     CGPoint changeCenter = self.center;
     changeCenter.x += panPoint.x;
     changeCenter.y += panPoint.y;
     self.center = changeCenter;
     [pan setTranslation:CGPointZero inView:self];
-    
     //俩个圆的中心点之间的距离
     CGFloat dist = [self pointToPoitnDistanceWithPoint:self.center potintB:self.samllCircleView.center];
-    
     if (dist < _maxDistance) {
         //拖拽距离小于设置最大距离
         CGFloat cornerRadius = (self.frame.size.height > self.frame.size.width ? self.frame.size.width / 2 : self.frame.size.height / 2);
         CGFloat samllCrecleRadius = cornerRadius - dist / 10;
         _samllCircleView.bounds = CGRectMake(0, 0, samllCrecleRadius * (2 - 1.0), samllCrecleRadius * (2 - 1.0));
         _samllCircleView.layer.cornerRadius = _samllCircleView.bounds.size.width / 2;
-        
         if (_samllCircleView.hidden == NO && dist > 0) {
             //画不规则矩形
             self.shapeLayer.path = [self pathWithBigCirCleView:self smallCirCleView:_samllCircleView].CGPath;
         }
     } else {
-        
         [self.shapeLayer removeFromSuperlayer];
         self.shapeLayer = nil;
         self.samllCircleView.hidden = YES;
-        
     }
     //拖拽结束
     if (pan.state == UIGestureRecognizerStateEnded) {
+
+        CGRect frame = [window convertRect:self.frame toView:self.superView];
+        self.frame = frame;
         
+        CGRect samllCircleViewFrame = [window convertRect:self.samllCircleView.frame toView:self.superView];
+        self.samllCircleView.frame = samllCircleViewFrame;
+
+        [self.superView addSubview:self];
+        [self.superView.layer insertSublayer:self.shapeLayer below:self.layer];
+        [self.superView insertSubview:self.samllCircleView belowSubview:self];
         if (dist > _maxDistance) {
-            
             //销毁全部控件
             [self killAll];
-            
         } else {
-            
             [self.shapeLayer removeFromSuperlayer];
             self.shapeLayer = nil;
-            
             if (self.samllCircleView.hidden == YES) {
                 //隐藏代表已经被拉出去过（包括被拉出去又回来的情况）
                 //销毁全部控件
                 [self killAll];
             }
             else{
-                
                 self.samllCircleView.hidden = YES;
-                
                 //弹性动画
                 [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.2 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.center = self.samllCircleView.center;
@@ -156,16 +122,14 @@
 }
 
 #pragma mark - 俩个圆心之间的距离
-- (CGFloat)pointToPoitnDistanceWithPoint:(CGPoint)pointA potintB:(CGPoint)pointB
-{
+- (CGFloat)pointToPoitnDistanceWithPoint:(CGPoint)pointA potintB:(CGPoint)pointB {
     CGFloat offestX = pointA.x - pointB.x;
     CGFloat offestY = pointA.y - pointB.y;
     CGFloat dist = sqrtf(offestX * offestX + offestY * offestY);
     return dist;
 }
 #pragma mark - 销毁控件
-- (void)killAll
-{
+- (void)killAll {
     //播放销毁动画
     [self startDestroyAnimations];
     //移除控件
@@ -182,8 +146,7 @@
     self.disappear = disappear;
 }
 #pragma mark - 不规则路径
-- (UIBezierPath *)pathWithBigCirCleView:(UIView *)bigCirCleView  smallCirCleView:(UIView *)smallCirCleView
-{
+- (UIBezierPath *)pathWithBigCirCleView:(UIView *)bigCirCleView  smallCirCleView:(UIView *)smallCirCleView {
     CGPoint bigCenter = bigCirCleView.center;
     CGFloat x2 = bigCenter.x;
     CGFloat y2 = bigCenter.y;
@@ -222,19 +185,16 @@
     return path;
 }
 #pragma mark - 消失动画
-- (void)startDestroyAnimations
-{
+- (void)startDestroyAnimations {
     UIImageView *ainmImageView = [[UIImageView alloc] initWithFrame:self.frame];
     ainmImageView.animationImages = self.images;
     ainmImageView.animationRepeatCount = 1;
     ainmImageView.animationDuration = 0.5;
     [ainmImageView startAnimating];
-    
     [self.superview addSubview:ainmImageView];
 }
 #pragma mark - 获取资源图片
-- (UIImage *)getPictureWithName:(NSString *)name
-{
+- (UIImage *)getPictureWithName:(NSString *)name {
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLBubbleView" ofType:@"bundle"]];
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
@@ -254,6 +214,35 @@
 -(void)setTextFont:(UIFont *)textFont{
     _textFont = textFont;
     [self.titleLabel setFont:textFont];
+}
+#pragma mark - 懒加载
+- (CAShapeLayer *)shapeLayer {
+    if (!_shapeLayer) {
+        _shapeLayer = [CAShapeLayer layer];
+        _shapeLayer.fillColor = self.backgroundColor.CGColor;
+        [self.superView.layer insertSublayer:_shapeLayer below:self.layer];
+    }
+    return _shapeLayer;
+}
+
+- (UIView *)samllCircleView {
+    if (!_samllCircleView) {
+        _samllCircleView = [[UIView alloc] init];
+        [self.superView insertSubview:_samllCircleView belowSubview:self];
+    }
+    
+    return _samllCircleView;
+}
+
+- (NSMutableArray *)images {
+    if (_images == nil) {
+        _images = [NSMutableArray array];
+        for (NSInteger i = 0; i < 4; i++) {
+            UIImage *image = [self getPictureWithName:[NSString stringWithFormat:@"disappear%ld",i]];
+            [_images addObject:image];
+        }
+    }
+    return _images;
 }
 #pragma mark - 布局
 -(void)layoutSubviews{
