@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0C29D596222FE7E400635F25 /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */; };
+		0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE86C223F488D007D5DC5 /* CLBubbleView.m */; };
+		0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C2AE870223F48C0007D5DC5 /* CLBubbleView.bundle */; };
+		0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */; };
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
@@ -97,6 +100,11 @@
 /* Begin PBXFileReference section */
 		0C29D594222FE7E400635F25 /* CLGCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
 		0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
+		0C2AE86B223F488D007D5DC5 /* CLBubbleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBubbleView.h; sourceTree = "<group>"; };
+		0C2AE86C223F488D007D5DC5 /* CLBubbleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBubbleView.m; sourceTree = "<group>"; };
+		0C2AE870223F48C0007D5DC5 /* CLBubbleView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLBubbleView.bundle; sourceTree = "<group>"; };
+		0C2AE872223F48DE007D5DC5 /* CLBubbleViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBubbleViewViewController.h; sourceTree = "<group>"; };
+		0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBubbleViewViewController.m; sourceTree = "<group>"; };
 		0C31C38321994CCF001860C2 /* UIFont+CLFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CLFont.h"; sourceTree = "<group>"; };
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
@@ -287,6 +295,16 @@
 			path = CLGCDTimerManager;
 			sourceTree = "<group>";
 		};
+		0C2AE86A223F4862007D5DC5 /* CLBubbleView */ = {
+			isa = PBXGroup;
+			children = (
+				0C2AE870223F48C0007D5DC5 /* CLBubbleView.bundle */,
+				0C2AE86B223F488D007D5DC5 /* CLBubbleView.h */,
+				0C2AE86C223F488D007D5DC5 /* CLBubbleView.m */,
+			);
+			path = CLBubbleView;
+			sourceTree = "<group>";
+		};
 		0C33BC6F219AEF5D00583B4C /* CLLog */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +376,7 @@
 				0CF642FC222FECA800227361 /* CLWaveView.m */,
 				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
 				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
+				0C2AE86A223F4862007D5DC5 /* CLBubbleView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -665,6 +684,8 @@
 				0CA1237422255B81007DDE6D /* CLCardController.m */,
 				0CF642FE222FECBD00227361 /* CLWaveViewController.h */,
 				0CF642FF222FECBD00227361 /* CLWaveViewController.m */,
+				0C2AE872223F48DE007D5DC5 /* CLBubbleViewViewController.h */,
+				0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */,
 				0CCDA30C219854D90057BA14 /* Model */,
 				0CCDA310219855620057BA14 /* View */,
 			);
@@ -818,6 +839,7 @@
 				0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */,
 				5B80961E221870BD000F72F3 /* zocr0.lib in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
+				0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,6 +911,7 @@
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
 				0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */,
+				0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
@@ -936,6 +959,7 @@
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
 				0CF5680D2215049600926A4C /* UIView+CLEvents.m in Sources */,
+				0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */,
 				0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */,
 				5B28650E21EE428200334E6C /* CLCoreTextView.m in Sources */,

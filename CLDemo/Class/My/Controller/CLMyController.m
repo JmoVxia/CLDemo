@@ -26,8 +26,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 /**数据源*/
 @property (nonatomic, strong) NSMutableArray<NSString *> *arrayDS;
-
-
+///控制器数组
+@property (nonatomic, strong) NSMutableArray<Class> *controllerArray;
 
 @end
 
@@ -64,40 +64,9 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     });
-    if (indexPath.row == 0) {
-        CLChangeLanguageController *languageController = [CLChangeLanguageController new];
-        [self.navigationController pushViewController:languageController animated:YES];
-    }else if (indexPath.row == 1) {
-        CLChangeFontSizeController *fontSizeController = [CLChangeFontSizeController new];
-        [self.navigationController pushViewController:fontSizeController animated:YES];
-    }else if (indexPath.row == 2) {
-        CLRotateAnimationController *rotateAnimationController = [CLRotateAnimationController new];
-        [self.navigationController pushViewController:rotateAnimationController animated:YES];
-    }else if (indexPath.row == 3) {
-        CLRotatingPictureViewController *rotatingPictureViewController = [CLRotatingPictureViewController new];
-        [self.navigationController pushViewController:rotatingPictureViewController animated:YES];
-    }else if (indexPath.row == 4) {
-        CLPasswordViewController *passwordViewController = [[CLPasswordViewController alloc] init];
-        [self.navigationController pushViewController:passwordViewController animated:YES];
-    }else if (indexPath.row == 5) {
-        CLPasswordViewSwiftController *passwordViewController = [[CLPasswordViewSwiftController alloc] init];
-        [self.navigationController pushViewController:passwordViewController animated:YES];
-    }else if (indexPath.row == 6) {
-        CLLogViewController *logViewController = [[CLLogViewController alloc] init];
-        [self.navigationController pushViewController:logViewController animated:YES];
-    }else if (indexPath.row == 7) {
-        CLInputToolbarController *inputToolbarController = [[CLInputToolbarController alloc] init];
-        [self.navigationController pushViewController:inputToolbarController animated:YES];
-    }else if (indexPath.row == 8) {
-        CLBankCardScanController *bankCardScanController = [[CLBankCardScanController alloc] init];
-        [self.navigationController pushViewController:bankCardScanController animated:YES];
-    }else if (indexPath.row == 9) {
-        CLCardController *cardViewController = [[CLCardController alloc] init];
-        [self.navigationController pushViewController:cardViewController animated:YES];
-    }else if (indexPath.row == 10) {
-        CLWaveViewController *waveViewController = [[CLWaveViewController alloc] init];
-        [self.navigationController pushViewController:waveViewController animated:YES];
-    }
+    Class class = [self.controllerArray objectAtIndex:indexPath.row];
+    UIViewController *controller =  (UIViewController *)[[class alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (UITableView *) tableView{
     if (_tableView == nil){
@@ -126,6 +95,25 @@
     }
     return _arrayDS;
 }
+- (NSMutableArray *) controllerArray{
+    if (_controllerArray == nil){
+        _controllerArray = [[NSMutableArray alloc] init];
+        [_controllerArray addObject:[CLChangeLanguageController class]];
+        [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLRotateAnimationController class]];
+        [_controllerArray addObject:[CLRotatingPictureViewController class]];
+        [_controllerArray addObject:[CLPasswordViewController class]];
+        [_controllerArray addObject:[CLPasswordViewSwiftController class]];
+        [_controllerArray addObject:[CLLogViewController class]];
+        [_controllerArray addObject:[CLInputToolbarController class]];
+        [_controllerArray addObject:[CLBankCardScanController class]];
+        [_controllerArray addObject:[CLCardController class]];
+        [_controllerArray addObject:[CLWaveViewController class]];
+    }
+    return _controllerArray;
+}
+
+
 
 -(void)dealloc {
     CLLog(@"我的页面销毁了");
