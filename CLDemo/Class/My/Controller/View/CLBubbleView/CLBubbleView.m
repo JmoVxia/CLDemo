@@ -24,6 +24,8 @@
 @property (nonatomic, assign) CGFloat height;
 ///宽
 @property (nonatomic, assign) CGFloat width;
+///第一次
+@property (nonatomic, assign) BOOL isFristLayoutSubviews;
 
 @end
 
@@ -31,32 +33,26 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.height = self.frame.size.height;
-        self.width = self.frame.size.width;
         [self initUI];
     }
-    
     return self;
 }
 - (void)initUI {
-    CGFloat cornerRadius = (self.height > self.width ? self.width / 2.0 : self.height / 2.0);
-    self.maxDistance = cornerRadius * 4;
-    self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = cornerRadius;
-    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.isFristLayoutSubviews = YES;
+    self.userInteractionEnabled = YES;
+    self.textAlignment = NSTextAlignmentCenter;
     self.backgroundColor = [UIColor redColor];
-    CGRect samllCireleRect = CGRectMake(0, 0, cornerRadius * (2 - 1.0) , cornerRadius * (2 - 1.0));
-    self.samllCircleView.bounds = samllCireleRect;
-    self.samllCircleView.center = self.center;
-    self.samllCircleView.layer.cornerRadius = self.samllCircleView.bounds.size.width / 2.0;
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drag:)];
-    [self addGestureRecognizer:pan];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
+    [self addGestureRecognizer:panGestureRecognizer];
 }
-
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:backgroundColor];
+    self.samllCircleView.backgroundColor = backgroundColor;
+}
 #pragma mark - 拖拽手势
-- (void)drag:(UIPanGestureRecognizer *)pan {
+- (void)panGestureRecognizer:(UIPanGestureRecognizer*)sender {
     UIView *window = [UIApplication sharedApplication].delegate.window;
-    if (pan.state == UIGestureRecognizerStateBegan) {
+    if (sender.state == UIGestureRecognizerStateBegan) {
         self.fatherView = self.superview;
         CGRect frame = [self.superview convertRect:self.frame toView:window];
         self.frame = frame;
@@ -67,12 +63,12 @@
         [window insertSubview:self.samllCircleView belowSubview:self];
     }
     [self.layer removeAnimationForKey:@"shake"];
-    CGPoint panPoint = [pan translationInView:self];
+    CGPoint panPoint = [sender translationInView:self];
     CGPoint changeCenter = self.center;
     changeCenter.x += panPoint.x;
     changeCenter.y += panPoint.y;
     self.center = changeCenter;
-    [pan setTranslation:CGPointZero inView:self];
+    [sender setTranslation:CGPointZero inView:self];
     //俩个圆的中心点之间的距离
     CGFloat dist = [self pointToPoitnDistanceWithPoint:self.center potintB:self.samllCircleView.center];
     if (dist < _maxDistance) {
@@ -91,7 +87,8 @@
         self.samllCircleView.hidden = YES;
     }
     //拖拽结束
-    if (pan.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        
         CGRect frame = [window convertRect:self.frame toView:self.fatherView];
         self.frame = frame;
         
@@ -101,6 +98,7 @@
         [self.fatherView addSubview:self];
         [self.fatherView.layer insertSublayer:self.shapeLayer below:self.layer];
         [self.fatherView insertSubview:self.samllCircleView belowSubview:self];
+        
         if (dist > _maxDistance) {
             //销毁全部控件
             [self killAll];
@@ -124,7 +122,6 @@
         }
     }
 }
-
 #pragma mark - 俩个圆心之间的距离
 - (CGFloat)pointToPoitnDistanceWithPoint:(CGPoint)pointA potintB:(CGPoint)pointB {
     CGFloat offestX = pointA.x - pointB.x;
@@ -206,9 +203,8 @@
 
 #pragma mark - 文字
 -(void)setText:(NSString *)text{
-    _text = text;
-    [self setTitle:text forState:UIControlStateNormal];
-    if ([_text isEqualToString:@"0"]) {
+    [super setText:text];
+    if ([text isEqualToString:@"0"]) {
         self.hidden = YES;
         self.samllCircleView.hidden = YES;
     }
@@ -216,16 +212,6 @@
         self.hidden = NO;
         self.samllCircleView.hidden = NO;
     }
-}
-#pragma 文字颜色
--(void)setTextColor:(UIColor *)textColor{
-    _textColor = textColor;
-    [self setTitleColor:textColor forState:UIControlStateNormal];
-}
-#pragma mark - 字体大小
--(void)setTextFont:(UIFont *)textFont{
-    _textFont = textFont;
-    [self.titleLabel setFont:textFont];
 }
 #pragma mark - 懒加载
 - (CAShapeLayer *)shapeLayer {
@@ -256,7 +242,18 @@
 #pragma mark - 布局
 -(void)layoutSubviews{
     [super layoutSubviews];
-    //在这里设置颜色是因为这里才能够取得self的颜色
-    _samllCircleView.backgroundColor = self.backgroundColor;
+    self.height = self.frame.size.height;
+    self.width = self.frame.size.width;
+    if (self.isFristLayoutSubviews) {
+        CGFloat cornerRadius = (self.height > self.width ? self.width * 0.5 : self.height * 0.5);
+        self.maxDistance = cornerRadius * 6;
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = cornerRadius;
+        CGRect samllCireleRect = CGRectMake(0, 0, cornerRadius * (2 - 1.0) , cornerRadius * (2 - 1.0));
+        self.samllCircleView.bounds = samllCireleRect;
+        self.samllCircleView.center = self.center;
+        self.samllCircleView.layer.cornerRadius = self.samllCircleView.bounds.size.width * 0.5;
+    }
+    self.isFristLayoutSubviews = NO;
 }
 @end

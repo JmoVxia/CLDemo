@@ -26,9 +26,10 @@
     [self.view addSubview:backgroundView];
     
     self.bubbleView = [[CLBubbleView alloc] initWithFrame:CGRectMake(99, 99, 90, 90)];
+    self.bubbleView.cl_centerX = backgroundView.cl_width * 0.5;
+    self.bubbleView.cl_centerY = backgroundView.cl_height * 0.5;
     self.bubbleView.textColor = [UIColor whiteColor];
-    self.bubbleView.textFont = [UIFont systemFontOfSize:32];
-    self.bubbleView.maxDistance = 200;
+    self.bubbleView.font = [UIFont systemFontOfSize:24];
     self.bubbleView.text = @"1";
 
     [backgroundView addSubview:self.bubbleView];
