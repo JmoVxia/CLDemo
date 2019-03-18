@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat bottomMargin;
 ///显示几层
 @property (nonatomic, assign) NSInteger showRows;
+///循环滚动
+@property (nonatomic, assign) BOOL loopScroll;
 
 @end
 

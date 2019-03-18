@@ -19,6 +19,7 @@
     configure.leftRightMargin = 10;
     configure.bottomMargin = 10;
     configure.showRows = 4;
+    configure.loopScroll = YES;
     return configure;
 }
 
@@ -127,7 +128,6 @@
         if ([identifier isEqualToString:cacheCell.reuseIdentifier]) {
             [self.caches removeObject:cacheCell];
             cell = cacheCell;
-            NSLog(@"我被复用了");
             break;
         }
     }
@@ -174,10 +174,14 @@
         CGFloat width = frame.size.width + self.configure.leftRightMargin * (1 - alpha) * 2;
         CGFloat height = frame.size.height;
         cell.frame = CGRectMake(x, y, width, height);
-        if (i == self.cellArray.count - 1) {
+        if (i == self.cellArray.count - 1 && self.cellArray.count > (self.totalRow - self.configure.showRows)) {
             cell.alpha = 1 - alpha;
         }
     }
+}
+//MARK:JmoVxia---滑动到上一个界面
+- (void)scrollToLast {
+    
 }
 //MARK:JmoVxia---滑动到下一个界面
 - (void)scrollToNext {
@@ -192,7 +196,7 @@
         [self animationWithGestureEnd:YES move:move];
     } completion:^(BOOL finished) {
         self.nowIndex++;
-        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : 0;
+        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : (self.configure.loopScroll ? 0 : self.totalRow);
         if (self.viewRemoved && [self isNeedAddToCache:self.viewRemoved]) {
             self.viewRemoved.alpha = 1;
             [self.caches addObject:self.viewRemoved];
@@ -200,14 +204,16 @@
         }
         self.viewRemoved = fristCell;
         [self.cellArray removeObject:fristCell];
-        NSInteger index = ((self.nowIndex + self.configure.showRows - 1) < self.totalRow ? (self.nowIndex + self.configure.showRows - 1) : (self.nowIndex + self.configure.showRows - 1 - self.totalRow));
-        UITableViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
-        CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
-        cell.frame = lastFrame;
-        cell.alpha = 0;
-        [cell removeFromSuperview];
-        [self insertSubview:cell atIndex:0];
-        [self.cellArray addObject:cell];
+        if (self.nowIndex <= self.totalRow - self.configure.showRows || self.configure.loopScroll) {
+            NSInteger index = ((self.nowIndex + self.configure.showRows - 1) < self.totalRow ? (self.nowIndex + self.configure.showRows - 1) : (self.nowIndex + self.configure.showRows - 1 - self.totalRow));
+            UITableViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
+            CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
+            cell.frame = lastFrame;
+            cell.alpha = 0;
+            [cell removeFromSuperview];
+            [self insertSubview:cell atIndex:0];
+            [self.cellArray addObject:cell];
+        }
         self.isAnimation = NO;
     }];
 }

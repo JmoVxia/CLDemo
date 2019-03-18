@@ -24,7 +24,8 @@
     if (_cardView == nil){
         _cardView = [[CLCardView alloc] initWithFrame:CGRectMake(10, 200, self.view.cl_width - 20, 200)];
         [_cardView updateWithConfig:^(CLCardViewConfigure * _Nonnull configure) {
-            configure.showRows = 5;
+            configure.showRows = 3;
+            configure.loopScroll = NO;
         }];
         _cardView.dataSource = self;
     }
@@ -33,7 +34,7 @@
 
 
 -(NSInteger)cardViewRows:(CLCardView *)cardView {
-    return 3;
+    return 7;
 }
 
 -(UITableViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index {
