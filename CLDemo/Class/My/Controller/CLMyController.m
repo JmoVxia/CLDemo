@@ -19,6 +19,7 @@
 #import "CLBankCardScanController.h"
 #import "CLCardController.h"
 #import "CLWaveViewController.h"
+#import "CLBubbleViewViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -68,6 +69,7 @@
     UIViewController *controller =  (UIViewController *)[[class alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
+
 - (UITableView *) tableView{
     if (_tableView == nil){
         _tableView = [[UITableView alloc] init];
@@ -78,8 +80,9 @@
     }
     return _tableView;
 }
-- (NSMutableArray *) arrayDS{
-    if (_arrayDS == nil){
+
+- (NSMutableArray *) arrayDS {
+    if (_arrayDS == nil) {
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
@@ -92,11 +95,13 @@
         [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
         [_arrayDS addObject:NSLocalizedString(@"卡片视图", nil)];
         [_arrayDS addObject:NSLocalizedString(@"波浪视图", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"气泡拖拽", nil)];
     }
     return _arrayDS;
 }
-- (NSMutableArray *) controllerArray{
-    if (_controllerArray == nil){
+
+- (NSMutableArray *) controllerArray {
+    if (_controllerArray == nil) {
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
@@ -109,11 +114,10 @@
         [_controllerArray addObject:[CLBankCardScanController class]];
         [_controllerArray addObject:[CLCardController class]];
         [_controllerArray addObject:[CLWaveViewController class]];
+        [_controllerArray addObject:[CLBubbleViewViewController class]];
     }
     return _controllerArray;
 }
-
-
 
 -(void)dealloc {
     CLLog(@"我的页面销毁了");

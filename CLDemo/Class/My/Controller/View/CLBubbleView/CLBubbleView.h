@@ -10,7 +10,35 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CLBubbleView : UIView
+typedef void(^disappearBlock)(void);
+
+
+@interface CLBubbleView : UIButton
+
+/** 大圆脱离小圆的最大距离 */
+@property (nonatomic, assign) CGFloat maxDistance;
+/**文字*/
+@property (nonatomic,copy) NSString *text;
+/**文字颜色*/
+@property (nonatomic,strong) UIColor *textColor;
+/**字体大小*/
+@property (nonatomic,strong) UIFont *textFont;
+
+/**
+ 初始化方法
+ 
+ @param frame frame
+ @param superView 父控件·
+ @return 控件
+ */
+- (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)superView;
+
+/**
+ 按钮消失回调方法
+ 
+ @param disappear 回调block
+ */
+- (void)disappear:(disappearBlock)disappear;
 
 @end
 

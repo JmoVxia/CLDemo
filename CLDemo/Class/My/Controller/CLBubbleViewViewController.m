@@ -7,8 +7,11 @@
 //
 
 #import "CLBubbleViewViewController.h"
+#import "CLBubbleView.h"
 
 @interface CLBubbleViewViewController ()
+
+@property (nonatomic, strong) CLBubbleView *bubbleView;
 
 @end
 
@@ -16,17 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, self.view.cl_width, 200)];
+    backgroundView.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:backgroundView];
+    
+    self.bubbleView = [[CLBubbleView alloc] initWithFrame:CGRectMake(99, 99, 90, 90) superView:backgroundView];
+    [backgroundView addSubview:self.bubbleView];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end
