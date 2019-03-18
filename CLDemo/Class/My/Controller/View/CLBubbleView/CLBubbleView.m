@@ -10,15 +10,15 @@
 
 @interface CLBubbleView ()
 
-/**小圆*/
+///小圆
 @property (nonatomic, strong) UIView *samllCircleView;
-/**绘制不规则图形*/
+///绘制不规则图形layer
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 ///父控件
-@property (nonatomic,strong) UIView *fatherView;
-/**disappearBlock*/
-@property (nonatomic,copy) disappearBlock disappear;
-/** 按钮消失的动画图片组 */
+@property (nonatomic, strong) UIView *fatherView;
+///销毁block回掉
+@property (nonatomic, copy) disappearBlock disappear;
+///按钮消失的动画图片组
 @property (nonatomic, strong) NSMutableArray *images;
 ///高
 @property (nonatomic, assign) CGFloat height;
@@ -37,19 +37,31 @@
     }
     return self;
 }
-- (void)initUI {
-    self.isFristLayoutSubviews = YES;
-    self.userInteractionEnabled = YES;
-    self.textAlignment = NSTextAlignmentCenter;
-    self.backgroundColor = [UIColor redColor];
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
-    [self addGestureRecognizer:panGestureRecognizer];
-}
+//MARK:JmoVxia---set
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
     self.samllCircleView.backgroundColor = backgroundColor;
 }
-#pragma mark - 拖拽手势
+-(void)setText:(NSString *)text{
+    [super setText:text];
+    self.textAlignment = NSTextAlignmentCenter;
+    if ([text isEqualToString:@"0"]) {
+        self.hidden = YES;
+        self.samllCircleView.hidden = YES;
+    }else {
+        self.hidden = NO;
+        self.samllCircleView.hidden = NO;
+    }
+}
+//MARK:JmoVxia---创建UI
+- (void)initUI {
+    self.isFristLayoutSubviews = YES;
+    self.userInteractionEnabled = YES;
+    self.backgroundColor = [UIColor redColor];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
+    [self addGestureRecognizer:panGestureRecognizer];
+}
+//MARK:JmoVxia---拖拽手势
 - (void)panGestureRecognizer:(UIPanGestureRecognizer*)sender {
     UIView *window = [UIApplication sharedApplication].delegate.window;
     if (sender.state == UIGestureRecognizerStateBegan) {
@@ -69,9 +81,9 @@
     changeCenter.y += panPoint.y;
     self.center = changeCenter;
     [sender setTranslation:CGPointZero inView:self];
-    //俩个圆的中心点之间的距离
+    //两个圆的中心点之间的距离
     CGFloat dist = [self pointToPoitnDistanceWithPoint:self.center potintB:self.samllCircleView.center];
-    if (dist < _maxDistance) {
+    if (dist < self.maxDistance) {
         //拖拽距离小于设置最大距离
         CGFloat cornerRadius = (self.height > self.width ? self.width / 2 : self.height / 2);
         CGFloat samllCrecleRadius = cornerRadius - dist / 10;
@@ -88,27 +100,20 @@
     }
     //拖拽结束
     if (sender.state == UIGestureRecognizerStateEnded) {
-        
         CGRect frame = [window convertRect:self.frame toView:self.fatherView];
         self.frame = frame;
-        
         CGRect samllCircleViewFrame = [window convertRect:self.samllCircleView.frame toView:self.fatherView];
         self.samllCircleView.frame = samllCircleViewFrame;
-
         [self.fatherView addSubview:self];
         [self.fatherView.layer insertSublayer:self.shapeLayer below:self.layer];
         [self.fatherView insertSubview:self.samllCircleView belowSubview:self];
-        
-        if (dist > _maxDistance) {
-            //销毁全部控件
-            [self killAll];
+        if (dist > self.maxDistance) {
+            [self destroy];
         } else {
             [self.shapeLayer removeFromSuperlayer];
             self.shapeLayer = nil;
             if (self.samllCircleView.hidden == YES) {
-                //隐藏代表已经被拉出去过（包括被拉出去又回来的情况）
-                //销毁全部控件
-                [self killAll];
+                [self destroy];
             }
             else{
                 self.samllCircleView.hidden = YES;
@@ -122,31 +127,7 @@
         }
     }
 }
-#pragma mark - 俩个圆心之间的距离
-- (CGFloat)pointToPoitnDistanceWithPoint:(CGPoint)pointA potintB:(CGPoint)pointB {
-    CGFloat offestX = pointA.x - pointB.x;
-    CGFloat offestY = pointA.y - pointB.y;
-    CGFloat dist = sqrtf(offestX * offestX + offestY * offestY);
-    return dist;
-}
-#pragma mark - 销毁控件
-- (void)killAll {
-    //播放销毁动画
-    [self startDestroyAnimations];
-    //移除控件
-    [self removeFromSuperview];
-    [self.samllCircleView removeFromSuperview];
-    self.samllCircleView = nil;
-    [self.shapeLayer removeFromSuperlayer];
-    self.shapeLayer = nil;
-    if (self.disappear) {
-        self.disappear();
-    }
-}
-- (void)disappear:(disappearBlock)disappear {
-    self.disappear = disappear;
-}
-#pragma mark - 不规则路径
+//MARK:JmoVxia---路径
 - (UIBezierPath *)pathWithBigCirCleView:(UIView *)bigCirCleView  smallCirCleView:(UIView *)smallCirCleView {
     CGPoint bigCenter = bigCirCleView.center;
     CGFloat x2 = bigCenter.x;
@@ -157,12 +138,10 @@
     CGFloat x1 = smallCenter.x;
     CGFloat y1 = smallCenter.y;
     CGFloat r1 = smallCirCleView.bounds.size.width / 2;
-    
     // 获取圆心距离
     CGFloat d = [self pointToPoitnDistanceWithPoint:self.samllCircleView.center potintB:self.center];
     CGFloat sinθ = (x2 - x1) / d;
     CGFloat cosθ = (y2 - y1) / d;
-    
     // 坐标系基于父控件
     CGPoint pointA = CGPointMake(x1 - r1 * cosθ , y1 + r1 * sinθ);
     CGPoint pointB = CGPointMake(x1 + r1 * cosθ , y1 - r1 * sinθ);
@@ -182,10 +161,35 @@
     [path addLineToPoint:pointD];
     // 绘制DA曲线
     [path addQuadCurveToPoint:pointA controlPoint:pointO];
-    
     return path;
 }
-#pragma mark - 消失动画
+//MARK:JmoVxia---两个圆心之间的距离
+- (CGFloat)pointToPoitnDistanceWithPoint:(CGPoint)pointA potintB:(CGPoint)pointB {
+    CGFloat offestX = pointA.x - pointB.x;
+    CGFloat offestY = pointA.y - pointB.y;
+    CGFloat dist = sqrtf(offestX * offestX + offestY * offestY);
+    return dist;
+}
+//MARK:JmoVxia---销毁控件
+- (void)destroy {
+    //播放销毁动画
+    [self startDestroyAnimations];
+    //移除控件
+    [self removeFromSuperview];
+    [self.samllCircleView removeFromSuperview];
+    self.samllCircleView = nil;
+    [self.shapeLayer removeFromSuperlayer];
+    self.shapeLayer = nil;
+    if (self.disappear) {
+        self.disappear();
+        self.disappear = nil;
+    }
+}
+//MARK:JmoVxia---销毁回掉
+- (void)disappear:(disappearBlock)disappear {
+    self.disappear = disappear;
+}
+//MARK:JmoVxia---消失动画
 - (void)startDestroyAnimations {
     UIImageView *ainmImageView = [[UIImageView alloc] initWithFrame:self.frame];
     ainmImageView.animationImages = self.images;
@@ -194,26 +198,13 @@
     [ainmImageView startAnimating];
     [self.superview addSubview:ainmImageView];
 }
-#pragma mark - 获取资源图片
+//MARK:JmoVxia---获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name {
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLBubbleView" ofType:@"bundle"]];
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
-
-#pragma mark - 文字
--(void)setText:(NSString *)text{
-    [super setText:text];
-    if ([text isEqualToString:@"0"]) {
-        self.hidden = YES;
-        self.samllCircleView.hidden = YES;
-    }
-    else{
-        self.hidden = NO;
-        self.samllCircleView.hidden = NO;
-    }
-}
-#pragma mark - 懒加载
+//MARK:JmoVxia---懒加载
 - (CAShapeLayer *)shapeLayer {
     if (!_shapeLayer) {
         _shapeLayer = [CAShapeLayer layer];
@@ -221,14 +212,12 @@
     }
     return _shapeLayer;
 }
-
 - (UIView *)samllCircleView {
     if (!_samllCircleView) {
         _samllCircleView = [[UIView alloc] init];
     }
     return _samllCircleView;
 }
-
 - (NSMutableArray *)images {
     if (_images == nil) {
         _images = [NSMutableArray array];
@@ -239,7 +228,7 @@
     }
     return _images;
 }
-#pragma mark - 布局
+//MARK:JmoVxia---布局
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.height = self.frame.size.height;
