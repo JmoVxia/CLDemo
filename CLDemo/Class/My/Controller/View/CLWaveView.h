@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 ///更新基本配置，block不会造成循环引用
-- (void)updateWithConfig:(void(^)(CLWaveViewConfigure *configure))configBlock;
+- (void)updateWithConfigure:(void(^)(CLWaveViewConfigure *configure))configureBlock;
 
 ///销毁
 - (void)invalidate;

@@ -94,7 +94,8 @@
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
         [_arrayDS addObject:NSLocalizedString(@"卡片视图", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"波浪视图", nil)];
+        [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-OC"]];
+        [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:NSLocalizedString(@"气泡拖拽", nil)];
     }
     return _arrayDS;
@@ -114,6 +115,7 @@
         [_controllerArray addObject:[CLBankCardScanController class]];
         [_controllerArray addObject:[CLCardController class]];
         [_controllerArray addObject:[CLWaveViewController class]];
+        [_controllerArray addObject:[CLWaveSwiftViewController class]];
         [_controllerArray addObject:[CLBubbleViewViewController class]];
     }
     return _controllerArray;

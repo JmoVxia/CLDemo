@@ -11,6 +11,8 @@
 		0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE86C223F488D007D5DC5 /* CLBubbleView.m */; };
 		0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C2AE870223F48C0007D5DC5 /* CLBubbleView.bundle */; };
 		0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */; };
+		0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE875223F878D007D5DC5 /* CLWaveView.swift */; };
+		0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */; };
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
@@ -105,6 +107,8 @@
 		0C2AE870223F48C0007D5DC5 /* CLBubbleView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLBubbleView.bundle; sourceTree = "<group>"; };
 		0C2AE872223F48DE007D5DC5 /* CLBubbleViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBubbleViewViewController.h; sourceTree = "<group>"; };
 		0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBubbleViewViewController.m; sourceTree = "<group>"; };
+		0C2AE875223F878D007D5DC5 /* CLWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWaveView.swift; sourceTree = "<group>"; };
+		0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWaveSwiftViewController.swift; sourceTree = "<group>"; };
 		0C31C38321994CCF001860C2 /* UIFont+CLFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CLFont.h"; sourceTree = "<group>"; };
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
@@ -374,6 +378,7 @@
 				0CA1236E22255A6F007DDE6D /* CLCardView.m */,
 				0CF642FB222FECA800227361 /* CLWaveView.h */,
 				0CF642FC222FECA800227361 /* CLWaveView.m */,
+				0C2AE875223F878D007D5DC5 /* CLWaveView.swift */,
 				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
 				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
 				0C2AE86A223F4862007D5DC5 /* CLBubbleView */,
@@ -684,6 +689,7 @@
 				0CA1237422255B81007DDE6D /* CLCardController.m */,
 				0CF642FE222FECBD00227361 /* CLWaveViewController.h */,
 				0CF642FF222FECBD00227361 /* CLWaveViewController.m */,
+				0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */,
 				0C2AE872223F48DE007D5DC5 /* CLBubbleViewViewController.h */,
 				0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */,
 				0CCDA30C219854D90057BA14 /* Model */,
@@ -897,6 +903,7 @@
 				5B809617221870BD000F72F3 /* CLScanBankCardBase.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
+				0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,
 				5B80DA471DDD993F00A20E34 /* CLEssenceController.m in Sources */,
 				0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */,
@@ -952,6 +959,7 @@
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
 				0C7316AA222814AB005ACFE7 /* CLJumpManager.m in Sources */,
 				0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */,
+				0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,
 				5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */,

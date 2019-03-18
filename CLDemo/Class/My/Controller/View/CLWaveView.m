@@ -51,9 +51,9 @@
     }
     return _configure;
 }
-- (void)updateWithConfig:(void(^)(CLWaveViewConfigure *configure))configBlock {
-    configBlock(self.configure);
-    configBlock = nil;
+- (void)updateWithConfigure:(void(^)(CLWaveViewConfigure *configure))configureBlock {
+    configureBlock(self.configure);
+    configureBlock = nil;
     self.shapeLayer.fillColor = self.configure.color.CGColor;
 }
 /*
