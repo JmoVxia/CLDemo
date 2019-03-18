@@ -25,7 +25,7 @@
     backgroundView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:backgroundView];
     
-    self.bubbleView = [[CLBubbleView alloc] initWithFrame:CGRectMake(99, 99, 90, 90) superView:backgroundView];
+    self.bubbleView = [[CLBubbleView alloc] initWithFrame:CGRectMake(99, 99, 90, 90)];
     self.bubbleView.textColor = [UIColor whiteColor];
     self.bubbleView.textFont = [UIFont systemFontOfSize:32];
     self.bubbleView.maxDistance = 200;

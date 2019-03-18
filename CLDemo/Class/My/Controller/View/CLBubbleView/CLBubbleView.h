@@ -25,15 +25,6 @@ typedef void(^disappearBlock)(void);
 @property (nonatomic,strong) UIFont *textFont;
 
 /**
- 初始化方法
- 
- @param frame frame
- @param superView 父控件·
- @return 控件
- */
-- (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)superView;
-
-/**
  按钮消失回调方法
  
  @param disappear 回调block

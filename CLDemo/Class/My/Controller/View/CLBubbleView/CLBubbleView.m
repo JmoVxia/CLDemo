@@ -14,35 +14,41 @@
 @property (nonatomic, strong) UIView *samllCircleView;
 /**绘制不规则图形*/
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
-/**superView*/
-@property (nonatomic,strong) UIView *superView;
+///父控件
+@property (nonatomic,strong) UIView *fatherView;
 /**disappearBlock*/
 @property (nonatomic,copy) disappearBlock disappear;
 /** 按钮消失的动画图片组 */
 @property (nonatomic, strong) NSMutableArray *images;
+///高
+@property (nonatomic, assign) CGFloat height;
+///宽
+@property (nonatomic, assign) CGFloat width;
 
 @end
 
 @implementation CLBubbleView
-- (instancetype)initWithFrame:(CGRect)frame superView:(UIView *)superView {
+
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.superView = superView;
+        self.height = self.frame.size.height;
+        self.width = self.frame.size.width;
         [self initUI];
     }
     
     return self;
 }
 - (void)initUI {
-    CGFloat cornerRadius = (self.frame.size.height > self.frame.size.width ? self.frame.size.width / 2.0 : self.frame.size.height / 2.0);
-    _maxDistance = cornerRadius * 4;
+    CGFloat cornerRadius = (self.height > self.width ? self.width / 2.0 : self.height / 2.0);
+    self.maxDistance = cornerRadius * 4;
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = cornerRadius;
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.backgroundColor = [UIColor redColor];
     CGRect samllCireleRect = CGRectMake(0, 0, cornerRadius * (2 - 1.0) , cornerRadius * (2 - 1.0));
     self.samllCircleView.bounds = samllCireleRect;
-    _samllCircleView.center = self.center;
-    _samllCircleView.layer.cornerRadius = _samllCircleView.bounds.size.width / 2.0;
+    self.samllCircleView.center = self.center;
+    self.samllCircleView.layer.cornerRadius = self.samllCircleView.bounds.size.width / 2.0;
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drag:)];
     [self addGestureRecognizer:pan];
 }
@@ -51,12 +57,11 @@
 - (void)drag:(UIPanGestureRecognizer *)pan {
     UIView *window = [UIApplication sharedApplication].delegate.window;
     if (pan.state == UIGestureRecognizerStateBegan) {
-        CGRect frame = [self.superView convertRect:self.frame toView:window];
+        self.fatherView = self.superview;
+        CGRect frame = [self.superview convertRect:self.frame toView:window];
         self.frame = frame;
-        
-        CGRect samllCircleViewFrame = [self.superView convertRect:self.samllCircleView.frame toView:window];
+        CGRect samllCircleViewFrame = [self.superview convertRect:self.samllCircleView.frame toView:window];
         self.samllCircleView.frame = samllCircleViewFrame;
-        
         [window addSubview:self];
         [window.layer insertSublayer:self.shapeLayer below:self.layer];
         [window insertSubview:self.samllCircleView belowSubview:self];
@@ -72,7 +77,7 @@
     CGFloat dist = [self pointToPoitnDistanceWithPoint:self.center potintB:self.samllCircleView.center];
     if (dist < _maxDistance) {
         //拖拽距离小于设置最大距离
-        CGFloat cornerRadius = (self.frame.size.height > self.frame.size.width ? self.frame.size.width / 2 : self.frame.size.height / 2);
+        CGFloat cornerRadius = (self.height > self.width ? self.width / 2 : self.height / 2);
         CGFloat samllCrecleRadius = cornerRadius - dist / 10;
         _samllCircleView.bounds = CGRectMake(0, 0, samllCrecleRadius * (2 - 1.0), samllCrecleRadius * (2 - 1.0));
         _samllCircleView.layer.cornerRadius = _samllCircleView.bounds.size.width / 2;
@@ -87,16 +92,15 @@
     }
     //拖拽结束
     if (pan.state == UIGestureRecognizerStateEnded) {
-
-        CGRect frame = [window convertRect:self.frame toView:self.superView];
+        CGRect frame = [window convertRect:self.frame toView:self.fatherView];
         self.frame = frame;
         
-        CGRect samllCircleViewFrame = [window convertRect:self.samllCircleView.frame toView:self.superView];
+        CGRect samllCircleViewFrame = [window convertRect:self.samllCircleView.frame toView:self.fatherView];
         self.samllCircleView.frame = samllCircleViewFrame;
 
-        [self.superView addSubview:self];
-        [self.superView.layer insertSublayer:self.shapeLayer below:self.layer];
-        [self.superView insertSubview:self.samllCircleView belowSubview:self];
+        [self.fatherView addSubview:self];
+        [self.fatherView.layer insertSublayer:self.shapeLayer below:self.layer];
+        [self.fatherView insertSubview:self.samllCircleView belowSubview:self];
         if (dist > _maxDistance) {
             //销毁全部控件
             [self killAll];
@@ -228,7 +232,6 @@
     if (!_shapeLayer) {
         _shapeLayer = [CAShapeLayer layer];
         _shapeLayer.fillColor = self.backgroundColor.CGColor;
-        [self.superView.layer insertSublayer:_shapeLayer below:self.layer];
     }
     return _shapeLayer;
 }
@@ -236,9 +239,7 @@
 - (UIView *)samllCircleView {
     if (!_samllCircleView) {
         _samllCircleView = [[UIView alloc] init];
-        [self.superView insertSubview:_samllCircleView belowSubview:self];
     }
-    
     return _samllCircleView;
 }
 
