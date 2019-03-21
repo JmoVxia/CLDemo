@@ -54,8 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**是否允许三方键盘，默认NO*/
 @property (nonatomic, assign) BOOL threePartyKeyboard;
 
-+ (instancetype)defaultConfig;
-
 @end
 
 @interface CLPasswordInputView : UIView<UIKeyInput>
