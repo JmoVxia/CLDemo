@@ -203,10 +203,6 @@
         }
     }
 }
-//MARK:JmoVxia---滑动到上一个界面
-- (void)scrollToLast {
-    
-}
 //MARK:JmoVxia---滑动到下一个界面
 - (void)scrollToNext {
     if (self.isAnimation) {

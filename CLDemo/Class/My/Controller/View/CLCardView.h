@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///文字
 @property (nonatomic, copy) NSString *text;
 
--(instancetype)initWithReuseIdentifier: (NSString *)reuseIdentifier;
+- (instancetype)initWithReuseIdentifier: (NSString *)reuseIdentifier;
 
 @end
 
@@ -30,11 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 
+- (NSInteger)cardViewRows:(CLCardView *)cardView;
 
--(NSInteger)cardViewRows:(CLCardView *)cardView;
-
--(CLCardViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index;
-
+- (CLCardViewCell *)cardView:(CLCardView *)cardView cellForRowAtIndexIndex:(NSInteger)index;
 
 @end
 
@@ -58,10 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<CLCardViewDataSource> dataSource;
 
 ///加载方法
--(void)reloadData;
+- (void)reloadData;
 
 ///根据id获取缓存的cell
--(CLCardViewCell *)dequeueReusableViewWithIdentifier:(NSString *)identifier;
+- (CLCardViewCell *)dequeueReusableViewWithIdentifier:(NSString *)identifier;
 
 ///更新基本配置，block不会造成循环引用
 - (void)updateWithConfig:(void(^)(CLCardViewConfigure *configure))configBlock;
