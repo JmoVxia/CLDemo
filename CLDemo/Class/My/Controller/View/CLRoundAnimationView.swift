@@ -8,47 +8,117 @@
 
 import UIKit
 
+class CLRoundAnimationViewConfigure: NSObject {
+    ///外圆背景色
+    var outBackgroundColor: UIColor = UIColor.lightGray
+    ///内圆背景色
+    var inBackgroundColor: UIColor = UIColor.orange
+    ///外圆线宽
+    var outLineWidth: CGFloat = 5
+    ///内圆线宽
+    var inLineWidth: CGFloat = 5
+    ///开始起点
+    var strokeStart: CGFloat = 0
+    ///开始结束点
+    var strokeEnd: CGFloat = 0.2
+    ///动画时间
+    var duration: CFTimeInterval = 0.8
+    fileprivate class func defaultConfigure() -> CLRoundAnimationViewConfigure {
+        let configure = CLRoundAnimationViewConfigure()
+        return configure
+    }
+}
+
 class CLRoundAnimationView: UIView {
     let animationLayer = CALayer()
+    let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+    let configure = CLRoundAnimationViewConfigure.defaultConfigure()
     var width: CGFloat = 0.0
     var height: CGFloat = 0.0
+    var isPause: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         width = frame.size.width
         height = frame.size.height
         
-        layer.backgroundColor = UIColor.lightGray.cgColor
-        layer.mask = shapeLayer(start: 0, end: 1)
+        layer.backgroundColor = configure.outBackgroundColor.cgColor
+        layer.mask = shapeLayer(lineWidth: configure.outLineWidth, start: 0, end: 1)
         animationLayer.frame = layer.bounds
-        animationLayer.backgroundColor = UIColor.orange.cgColor
-        animationLayer.mask = shapeLayer(start: 0, end: 0.2)
+        animationLayer.backgroundColor = configure.inBackgroundColor.cgColor
+        animationLayer.mask = shapeLayer(lineWidth: configure.inLineWidth, start: configure.strokeStart, end: configure.strokeEnd)
         layer.addSublayer(animationLayer)
-        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.fromValue = 0
         rotationAnimation.toValue = Double.pi * 2
         rotationAnimation.repeatCount = MAXFLOAT
-        rotationAnimation.duration = 0.8
+        rotationAnimation.duration = configure.duration
         rotationAnimation.isRemovedOnCompletion = false
         rotationAnimation.fillMode = .forwards
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
-        animationLayer.add(rotationAnimation, forKey: "rotationAnnimation")
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func shapeLayer(start:CGFloat, end:CGFloat) -> CAShapeLayer {
-        let bezierPath = UIBezierPath(arcCenter: CGPoint(x: width * 0.5, y: height * 0.5), radius: height * 0.5 - 5, startAngle: 0, endAngle: .pi * 2.0, clockwise: true)
+    private func shapeLayer(lineWidth: CGFloat, start:CGFloat, end:CGFloat) -> CAShapeLayer {
+        let bezierPath = UIBezierPath(arcCenter: CGPoint(x: width * 0.5, y: height * 0.5), radius: (height - lineWidth) * 0.5, startAngle: 0, endAngle: .pi * 2.0, clockwise: true)
         let shapeLayer = CAShapeLayer()
         shapeLayer.fillColor = UIColor.clear.cgColor;
         shapeLayer.strokeColor = UIColor.white.cgColor;
-        shapeLayer.lineWidth = 5;
+        shapeLayer.lineWidth = lineWidth;
         shapeLayer.strokeStart = start;
         shapeLayer.strokeEnd = end;
         shapeLayer.lineCap = .round;
         shapeLayer.lineDashPhase = 0.8;
         shapeLayer.path = bezierPath.cgPath;
         return shapeLayer;
+    }
+    ///更新配置
+    func updateWithConfigure(configure: ((CLRoundAnimationViewConfigure) -> (Void))?) -> Void {
+        configure?(self.configure)
+        layer.backgroundColor = self.configure.outBackgroundColor.cgColor
+        layer.mask = shapeLayer(lineWidth: self.configure.outLineWidth, start: 0, end: 1)
+        animationLayer.mask = shapeLayer(lineWidth: self.configure.inLineWidth, start: self.configure.strokeStart, end: self.configure.strokeEnd)
+        animationLayer.backgroundColor = self.configure.inBackgroundColor.cgColor
+        rotationAnimation.duration = self.configure.duration;
+    }
+}
+extension CLRoundAnimationView {
+    ///开始动画
+    func startAnimation() -> Void {
+        animationLayer.add(rotationAnimation, forKey: "rotationAnnimation")
+    }
+    ///停止动画
+    func stopAnimation() -> Void {
+        animationLayer.removeAllAnimations()
+    }
+    ///暂停动画
+    func pauseAnimation() {
+        if isPause {
+            return
+        }
+        isPause = true
+        //取出当前时间,转成动画暂停的时间
+        let pausedTime = animationLayer.convertTime(CACurrentMediaTime(), from: nil)
+        //设置动画运行速度为0
+        animationLayer.speed = 0.0;
+        //设置动画的时间偏移量，指定时间偏移量的目的是让动画定格在该时间点的位置
+        animationLayer.timeOffset = pausedTime
+    }
+    ///恢复动画
+    func resumeAnimation() {
+        if !isPause {
+            return
+        }
+        isPause = false
+        //获取暂停的时间差
+        let pausedTime = animationLayer.timeOffset
+        animationLayer.speed = 1.0
+        animationLayer.timeOffset = 0.0
+        animationLayer.beginTime = 0.0
+        //用现在的时间减去时间差,就是之前暂停的时间,从之前暂停的时间开始动画
+        let timeSincePause = animationLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        animationLayer.beginTime = timeSincePause
     }
 }
