@@ -24,7 +24,6 @@
     [self.view addSubview:rotateAnimationView];
 
     
-    
     CLRoundAnimationView *roundAnimationView = [[CLRoundAnimationView alloc] initWithFrame:CGRectMake(120, 320, 90, 90)];
     [self.view addSubview:roundAnimationView];
 }

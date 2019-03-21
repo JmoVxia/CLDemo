@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C223C772243811200E319E2 /* CLRotateAnimationSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C223C762243811200E319E2 /* CLRotateAnimationSwiftController.swift */; };
+		0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */; };
 		0C29D596222FE7E400635F25 /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */; };
 		0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE86C223F488D007D5DC5 /* CLBubbleView.m */; };
 		0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C2AE870223F48C0007D5DC5 /* CLBubbleView.bundle */; };
@@ -100,6 +102,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C223C762243811200E319E2 /* CLRotateAnimationSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationSwiftController.swift; sourceTree = "<group>"; };
+		0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRoundAnimationView.swift; sourceTree = "<group>"; };
 		0C29D594222FE7E400635F25 /* CLGCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
 		0C29D595222FE7E400635F25 /* CLGCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
 		0C2AE86B223F488D007D5DC5 /* CLBubbleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBubbleView.h; sourceTree = "<group>"; };
@@ -365,6 +369,9 @@
 				0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */,
 				0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */,
 				0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */,
+				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
+				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
+				0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */,
 				0C6B40E021ECFC3C00360FAD /* CLPasswordView.h */,
 				0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */,
 				0C558A9321ED956700C2C096 /* CLPasswordInputView.h */,
@@ -379,8 +386,6 @@
 				0CF642FB222FECA800227361 /* CLWaveView.h */,
 				0CF642FC222FECA800227361 /* CLWaveView.m */,
 				0C2AE875223F878D007D5DC5 /* CLWaveView.swift */,
-				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
-				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
 				0C2AE86A223F4862007D5DC5 /* CLBubbleView */,
 			);
 			path = View;
@@ -673,10 +678,11 @@
 				0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */,
 				0C3CAA5321AF89BD00A352F0 /* CLRotateAnimationController.h */,
 				0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */,
+				0C223C762243811200E319E2 /* CLRotateAnimationSwiftController.swift */,
+				5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */,
 				0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */,
 				0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */,
 				0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */,
-				5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */,
 				0CBBE92E220DBAEC00640BB9 /* CLLogViewController.h */,
 				0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */,
 				0C777A492217A8B900BC8AFB /* CLInputToolbarController.h */,
@@ -905,6 +911,7 @@
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
 				0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,
+				0C223C772243811200E319E2 /* CLRotateAnimationSwiftController.swift in Sources */,
 				5B80DA471DDD993F00A20E34 /* CLEssenceController.m in Sources */,
 				0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */,
 				5B809616221870BD000F72F3 /* CLScanBankCardManager.m in Sources */,
@@ -961,6 +968,7 @@
 				0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */,
 				0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
+				0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,
 				5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */,
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,

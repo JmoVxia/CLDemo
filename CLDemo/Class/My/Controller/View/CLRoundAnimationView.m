@@ -61,6 +61,4 @@
     shapeLayer.path = bezierPath.CGPath;
     return shapeLayer;
 }
-
-
 @end
