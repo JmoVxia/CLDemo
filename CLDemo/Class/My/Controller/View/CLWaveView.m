@@ -22,6 +22,7 @@
     configure.amplitude = 12;
     configure.cycle = 0.5/30.0;
     configure.y = configure.amplitude;
+    configure.upSpeed = 0;
     return configure;
 }
 
@@ -89,6 +90,7 @@
 -(void)currentWave:(CADisplayLink *)displayLink{
     //实时的位移
     self.offsetX += self.configure.speed;
+    self.configure.y = MAX(self.configure.y - self.configure.upSpeed, self.configure.amplitude);
     [self currentFirstWaveLayerPath];
 }
 -(void)currentFirstWaveLayerPath{

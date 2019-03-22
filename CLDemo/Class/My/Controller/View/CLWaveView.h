@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat speed;
 ///水纹宽度
 @property (nonatomic, assign) CGFloat width;
+///水纹速度
+@property (nonatomic, assign) CGFloat upSpeed;
 
 @end
 

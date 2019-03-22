@@ -20,12 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.waveView = [[CLWaveView alloc] initWithFrame:CGRectMake(0, 99, self.view.cl_width, 90)];
+    self.waveView = [[CLWaveView alloc] initWithFrame:CGRectMake(0, 99, self.view.cl_width, 150)];
     self.waveView.alpha = 0.6;
     [self.waveView updateWithConfigure:^(CLWaveViewConfigure * _Nonnull configure) {
         configure.color = [UIColor redColor];
-        configure.y = 40;
+        configure.y = 120;
         configure.speed = 0.05;
+        configure.upSpeed = 0.1;
     }];
     [self.view addSubview:self.waveView];
 }
