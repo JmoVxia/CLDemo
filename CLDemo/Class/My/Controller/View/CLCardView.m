@@ -170,7 +170,7 @@
     CGPoint translation = [sender translationInView: self];
     if (sender.state == UIGestureRecognizerStateChanged) {
         CGFloat yMove = translation.y;
-        [self animationWithGestureEnd:NO move:yMove];
+        [self animationWithMove:yMove];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
         CLCardViewCell *fristCell = [self.cellArray firstObject];
@@ -181,14 +181,14 @@
     }
 }
 //MARK:JmoVxia---动画
-- (void)animationWithGestureEnd:(BOOL)end move:(CGFloat)move {
+- (void)animationWithMove:(CGFloat)move {
     CLCardViewCell *fristCell = [self.cellArray firstObject];
     CGRect fristFrame = [[self.frameArray firstObject] CGRectValue];
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
     move = MIN(MAX(move, - height), 0);
-    fristCell.frame = CGRectMake(CGRectGetMinX(fristFrame), end ? 0 : (CGRectGetMinY(fristFrame) + move), CGRectGetWidth(fristFrame), CGRectGetHeight(fristFrame));
+    fristCell.frame = CGRectMake(CGRectGetMinX(fristFrame), (CGRectGetMinY(fristFrame) + move), CGRectGetWidth(fristFrame), CGRectGetHeight(fristFrame));
     CGFloat offset = (CGRectGetMaxY(fristFrame) - CGRectGetMaxY(fristCell.frame));
-    CGFloat alpha = end ? 0 : MIN(1 - MIN((offset / height), 1), 1);
+    CGFloat alpha = MIN(1 - MIN((offset / height), 1), 1);
     fristCell.alpha = alpha;
     for (NSInteger i = 1; i < self.cellArray.count; i++) {
         CLCardViewCell *cell = [self.cellArray objectAtIndex:i];
@@ -219,7 +219,7 @@
             CLGCDTimer *strongTimer = weakTimer;
             CGFloat offset = (CGFloat)(move + 1) < height ? (CGFloat)(move + 0.5) : height;
             move = offset;
-            [self animationWithGestureEnd:NO move: -move];
+            [self animationWithMove: -move];
             if (offset == height) {
                 [strongTimer cancelTimer];
                 [self endScrollAnimation];
