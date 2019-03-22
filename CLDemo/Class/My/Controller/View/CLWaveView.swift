@@ -21,6 +21,9 @@ class CLWaveViewConfigure: NSObject {
     var speed: CGFloat = 0.05
     ///水纹宽度
     var width: CGFloat = 0
+    ///上升速度
+    var upSpeed: CGFloat = 0
+    
     ///默认配置
     fileprivate class func defaultConfigure() -> CLWaveViewConfigure {
         let configure = CLWaveViewConfigure()
@@ -31,10 +34,10 @@ class CLWaveViewConfigure: NSObject {
 
 class CLWaveView: UIView {
     
-    let defaultConfigure = CLWaveViewConfigure.defaultConfigure()
-    let shapeLayer: CAShapeLayer = CAShapeLayer()
-    var displayLink: CADisplayLink?
-    var offsetX: CGFloat = 0
+    private let defaultConfigure = CLWaveViewConfigure.defaultConfigure()
+    private let shapeLayer: CAShapeLayer = CAShapeLayer()
+    private var displayLink: CADisplayLink?
+    private var offsetX: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +57,7 @@ class CLWaveView: UIView {
     }
     @objc func currentWave() {
         offsetX = offsetX + defaultConfigure.speed
+        defaultConfigure.y = max(defaultConfigure.y - defaultConfigure.upSpeed, defaultConfigure.amplitude)
         currentFirstWaveLayerPath()
     }
     func currentFirstWaveLayerPath() {

@@ -13,12 +13,13 @@ class CLWaveSwiftViewController: CLBaseViewController {
     var waveView: CLWaveView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        waveView = CLWaveView(frame: CGRect(x: 0, y: 99, width: view.frame.size.width, height: 90))
+        waveView = CLWaveView(frame: CGRect(x: 0, y: 99, width: view.frame.size.width, height: 150))
         waveView.alpha = 0.6
         waveView.updateWithConfig(configure: { (configure) in
             configure.color = UIColor.orange;
-            configure.y = 40;
-            configure.speed = 0.05;
+            configure.y = 120
+            configure.speed = 0.05
+            configure.upSpeed = 0.1
         })
         view.addSubview(waveView)
     }
