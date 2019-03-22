@@ -9,24 +9,25 @@
 #import "CLGCDTimerManager.h"
 
 @interface CLGCDTimer ()
-/**响应*/
-@property (nonatomic, copy) void(^actionBlock)(NSInteger actionTimes);
+
 /**线程*/
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
+@property (nonatomic, strong) dispatch_queue_t  serialQueue;
+/**定时器*/
+@property (nonatomic, strong) dispatch_source_t timer_t;
 /**定时器名字*/
-@property (nonatomic, strong) NSString         *timerName;
-/**是否重复*/
-@property (nonatomic, assign) BOOL             repeat;
+@property (nonatomic, strong) NSString          *timerName;
 /**执行时间*/
-@property (nonatomic, assign) NSTimeInterval   timeInterval;
+@property (nonatomic, assign) NSTimeInterval    timeInterval;
 /**延迟时间*/
-@property (nonatomic, assign) NSTimeInterval   delaySecs;
+@property (nonatomic, assign) NSTimeInterval    delaySecs;
+/**是否重复*/
+@property (nonatomic, assign) BOOL              repeat;
 /**是否正在运行*/
-@property (nonatomic, assign) BOOL             isRuning;
-/*定时器*/
-@property (nonatomic,strong) dispatch_source_t timer_t;
-/*响应次数*/
-@property (nonatomic, assign) NSInteger        actionTimes;
+@property (nonatomic, assign) BOOL              isRuning;
+/**响应次数*/
+@property (nonatomic, assign) NSInteger         actionTimes;
+/**响应*/
+@property (nonatomic, copy) void (^actionBlock) (NSInteger actionTimes);
 
 @end
 
