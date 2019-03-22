@@ -41,6 +41,8 @@
     cell.text = [NSString stringWithFormat:@"我是第%ld个",index];
     return cell;
 }
-
+-(void)dealloc {
+    CLLog(@"卡片控制器销毁了");
+}
 
 @end

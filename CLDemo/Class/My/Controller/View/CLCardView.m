@@ -7,6 +7,7 @@
 //
 
 #import "CLCardView.h"
+#import "CLGCDTimerManager.h"
 
 @interface CLCardViewCell ()
 
@@ -81,13 +82,12 @@
 
 @implementation CLCardView
 
-- (CLCardViewConfigure *) configure{
+- (CLCardViewConfigure *) configure {
     if (_configure == nil){
         _configure = [CLCardViewConfigure defaultConfigure];
     }
     return _configure;
 }
-
 //MARK:JmoVxia---初始化
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -96,7 +96,6 @@
     return self;
 }
 - (void)initUI {
-    self.clipsToBounds = YES;
     self.caches = [NSMutableArray array];
     self.cellArray = [NSMutableArray array];
     self.frameArray = [NSMutableArray array];
@@ -111,6 +110,7 @@
         [self reloadData];
     }
 }
+//MARK:JmoVxia---更新配置
 - (void)updateWithConfig:(void(^)(CLCardViewConfigure *configure))configBlock {
     configBlock(self.configure);
     configBlock = nil;
@@ -211,31 +211,53 @@
     self.isAnimation = YES;
     CLCardViewCell *fristCell = [self.cellArray firstObject];
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
-    CGFloat move = CGRectGetMinY(fristCell.frame) - height;
-    [UIView animateWithDuration:0.2 animations:^{
-        [self animationWithGestureEnd:YES move:move];
-    } completion:^(BOOL finished) {
-        self.nowIndex++;
-        self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : (self.configure.loopScroll ? 0 : self.totalRow);
-        if (self.viewRemoved && [self isNeedAddToCache:self.viewRemoved]) {
-            self.viewRemoved.alpha = 1;
-            [self.caches addObject:self.viewRemoved];
-            [self.viewRemoved removeFromSuperview];
-        }
-        self.viewRemoved = fristCell;
-        [self.cellArray removeObject:fristCell];
-        if (self.nowIndex <= self.totalRow - self.configure.showRows || self.configure.loopScroll) {
-            NSInteger index = ((self.nowIndex + self.configure.showRows - 1) < self.totalRow ? (self.nowIndex + self.configure.showRows - 1) : (self.nowIndex + self.configure.showRows - 1 - self.totalRow));
-            CLCardViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
-            CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
-            cell.frame = lastFrame;
-            cell.alpha = 0;
-            [cell removeFromSuperview];
-            [self insertSubview:cell atIndex:0];
-            [self.cellArray addObject:cell];
-        }
-        self.isAnimation = NO;
-    }];
+    __block CGFloat move = height - CGRectGetMinY(fristCell.frame);
+    if ((move - height) < 0) {
+        CLGCDTimer *timer = [self timer];
+        CLGCDTimer * __weak weakTimer = timer;
+        [timer replaceOldAction:^(NSInteger actionTimes) {
+            CLGCDTimer *strongTimer = weakTimer;
+            CGFloat offset = (CGFloat)(move + 1) < height ? (CGFloat)(move + 0.5) : height;
+            move = offset;
+            [self animationWithGestureEnd:NO move: -move];
+            if (offset == height) {
+                [strongTimer cancelTimer];
+                [self endScrollAnimation];
+            }
+        }];
+        [timer startTimer];
+    }else {
+        [self endScrollAnimation];
+    }
+}
+//MARK:JmoVxia---滑动结束
+- (void)endScrollAnimation {
+    CLCardViewCell *fristCell = [self.cellArray firstObject];
+    self.nowIndex++;
+    self.nowIndex = self.nowIndex < self.totalRow ? self.nowIndex : (self.configure.loopScroll ? 0 : self.totalRow);
+    if (self.viewRemoved && [self isNeedAddToCache:self.viewRemoved]) {
+        self.viewRemoved.alpha = 1;
+        [self.caches addObject:self.viewRemoved];
+        [self.viewRemoved removeFromSuperview];
+    }
+    self.viewRemoved = fristCell;
+    [self.cellArray removeObject:fristCell];
+    if (self.nowIndex <= self.totalRow - self.configure.showRows || self.configure.loopScroll) {
+        NSInteger index = ((self.nowIndex + self.configure.showRows - 1) < self.totalRow ? (self.nowIndex + self.configure.showRows - 1) : (self.nowIndex + self.configure.showRows - 1 - self.totalRow));
+        CLCardViewCell *cell = [self.dataSource cardView:self cellForRowAtIndexIndex:index];
+        CGRect lastFrame = [[self.frameArray lastObject] CGRectValue];
+        cell.frame = lastFrame;
+        cell.alpha = 0;
+        [cell removeFromSuperview];
+        [self insertSubview:cell atIndex:0];
+        [self.cellArray addObject:cell];
+    }
+    self.isAnimation = NO;
+}
+//MARK:JmoVxia---定时器
+- (CLGCDTimer *)timer {
+    CLGCDTimer *timer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
+    return timer;
 }
 //MARK:JmoVxia---是否需要加入到缓存池
 - (BOOL)isNeedAddToCache:(CLCardViewCell *)cell {
@@ -246,5 +268,7 @@
     }
     return YES;
 }
-
+-(void)dealloc {
+    CLLog(@"卡片视图销毁了");
+}
 @end
