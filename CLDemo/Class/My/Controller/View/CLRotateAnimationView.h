@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger number;
 ///小球直径
 @property (nonatomic, assign) CGFloat diameter;
-///背景颜色
+///小球背景颜色
 @property (nonatomic, strong) UIColor *backgroundColor;
 
 @end

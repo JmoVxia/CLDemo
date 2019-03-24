@@ -15,8 +15,8 @@
     configure.startAngle = - M_PI_2;
     configure.endAngle = M_PI + M_PI_2;
     configure.number = 5;
-    configure.intervalDuration = 0.2;
-    configure.duration = 3;
+    configure.intervalDuration = 0.12;
+    configure.duration = 2;
     configure.diameter = 8;
     return configure;
 }
@@ -40,7 +40,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layerArray = [NSMutableArray array];
-        [self initLayer];
     }
     return self;
 }
@@ -87,6 +86,7 @@
 }
 //MARK:JmoVxia---开始动画
 - (void)startAnimation {
+    [self initLayer];
     for (CALayer *layer in self.layerArray) {
         [self.layer addSublayer:layer];
     }
@@ -96,6 +96,7 @@
     for (CALayer *layer in self.layerArray) {
         [layer removeFromSuperlayer];
     }
+    [self.layerArray removeAllObjects];
 }
 //MARK:JmoVxia---暂停动画
 - (void)pauseAnimation {

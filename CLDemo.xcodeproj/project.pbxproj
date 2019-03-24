@@ -32,6 +32,7 @@
 		0C7316AA222814AB005ACFE7 /* CLJumpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7316A9222814AB005ACFE7 /* CLJumpManager.m */; };
 		0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A472217A71200BC8AFB /* CLInputToolbar.m */; };
 		0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */; };
+		0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C903001224774430064088E /* CLRotateAnimationView.swift */; };
 		0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1236E22255A6F007DDE6D /* CLCardView.m */; };
 		0CA1237522255B81007DDE6D /* CLCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1237422255B81007DDE6D /* CLCardController.m */; };
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
@@ -148,6 +149,7 @@
 		0C777A472217A71200BC8AFB /* CLInputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbar.m; sourceTree = "<group>"; };
 		0C777A492217A8B900BC8AFB /* CLInputToolbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLInputToolbarController.h; sourceTree = "<group>"; };
 		0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbarController.m; sourceTree = "<group>"; };
+		0C903001224774430064088E /* CLRotateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationView.swift; sourceTree = "<group>"; };
 		0CA1236D22255A6F007DDE6D /* CLCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardView.h; sourceTree = "<group>"; };
 		0CA1236E22255A6F007DDE6D /* CLCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCardView.m; sourceTree = "<group>"; };
 		0CA1237322255B81007DDE6D /* CLCardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardController.h; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */,
 				0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */,
 				0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */,
+				0C903001224774430064088E /* CLRotateAnimationView.swift */,
 				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
 				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
 				0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */,
@@ -918,6 +921,7 @@
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
+				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
 				5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */,
