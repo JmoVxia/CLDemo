@@ -26,7 +26,7 @@
 @interface CLRotateAnimationView ()
 
 ///默认配置
-@property (nonatomic, strong) CLRotateAnimationViewConfigure *configure;
+@property (nonatomic, strong) CLRotateAnimationViewConfigure *defaultConfigure;
 ///是否暂停
 @property (nonatomic, assign) BOOL isPause;
 ///layer数组
@@ -46,26 +46,25 @@
 - (void)initLayer {
     CGFloat origin_x = self.frame.size.width * 0.5;
     CGFloat origin_y = self.frame.size.height * 0.5;
-    for (NSInteger i = 0; i < self.configure.number; i++) {
-        CGFloat scale = (CGFloat)(self.configure.number + 1 - i) / (CGFloat)(self.configure.number + 1);
+    for (NSInteger i = 0; i < self.defaultConfigure.number; i++) {
+        CGFloat scale = (CGFloat)(self.defaultConfigure.number + 1 - i) / (CGFloat)(self.defaultConfigure.number + 1);
         CALayer *layer = [CALayer layer];
-        layer.backgroundColor = self.configure.backgroundColor.CGColor;
-        layer.frame = CGRectMake(-500, -500, scale * self.configure.diameter, scale * self.configure.diameter);
-        layer.cornerRadius = scale * self.configure.diameter * 0.5;
+        layer.backgroundColor = self.defaultConfigure.backgroundColor.CGColor;
+        layer.frame = CGRectMake(-500, -500, scale * self.defaultConfigure.diameter, scale * self.defaultConfigure.diameter);
+        layer.cornerRadius = scale * self.defaultConfigure.diameter * 0.5;
         //创建运动的轨迹动画
         CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
         pathAnimation.calculationMode = kCAAnimationPaced;
         pathAnimation.fillMode = kCAFillModeForwards;
         pathAnimation.removedOnCompletion = NO;
-        pathAnimation.duration = self.configure.duration - self.configure.intervalDuration * self.configure.number;
-        pathAnimation.beginTime = i * self.configure.intervalDuration;
+        pathAnimation.duration = self.defaultConfigure.duration - self.defaultConfigure.intervalDuration * self.defaultConfigure.number;
+        pathAnimation.beginTime = i * self.defaultConfigure.intervalDuration;
         pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        UIBezierPath *arc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(origin_x, origin_y) radius:(self.frame.size.width - self.configure.diameter) * 0.5 startAngle:self.configure.startAngle endAngle:self.configure.endAngle  clockwise:YES];
-        pathAnimation.path = arc.CGPath;
-        
+        pathAnimation.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(origin_x, origin_y) radius:(self.frame.size.width - self.defaultConfigure.diameter) * 0.5 startAngle:self.defaultConfigure.startAngle endAngle:self.defaultConfigure.endAngle  clockwise:YES].CGPath;
+        //组动画
         CAAnimationGroup *group = [CAAnimationGroup animation];
         group.animations = @[pathAnimation];
-        group.duration = self.configure.duration;
+        group.duration = self.defaultConfigure.duration;
         group.removedOnCompletion = NO;
         group.fillMode = kCAFillModeForwards;
         group.repeatCount = INTMAX_MAX;
@@ -77,10 +76,10 @@
 //MARK:JmoVxia---更新配置
 - (void)updateWithConfigure:(void(^)(CLRotateAnimationViewConfigure *configure))configBlock {
     if (configBlock) {
-        configBlock(self.configure);
+        configBlock(self.defaultConfigure);
     }
-    CGFloat intervalDuration = (CGFloat)(self.configure.duration / 2.0 / (CGFloat)self.configure.number);
-    self.configure.intervalDuration = MIN(self.configure.intervalDuration, intervalDuration);
+    CGFloat intervalDuration = (CGFloat)(self.defaultConfigure.duration / 2.0 / (CGFloat)self.defaultConfigure.number);
+    self.defaultConfigure.intervalDuration = MIN(self.defaultConfigure.intervalDuration, intervalDuration);
     [self stopAnimation];
     [self initLayer];
 }
@@ -121,10 +120,11 @@
     CFTimeInterval timeSincePause = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
     self.layer.beginTime = timeSincePause;
 }
-- (CLRotateAnimationViewConfigure *) configure {
-    if (_configure == nil) {
-        _configure = [CLRotateAnimationViewConfigure defaultConfigure];
+//MARK:JmoVxia---默认配置
+- (CLRotateAnimationViewConfigure *) defaultConfigure {
+    if (_defaultConfigure == nil) {
+        _defaultConfigure = [CLRotateAnimationViewConfigure defaultConfigure];
     }
-    return _configure;
+    return _defaultConfigure;
 }
 @end
