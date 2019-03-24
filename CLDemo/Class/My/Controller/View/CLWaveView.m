@@ -45,7 +45,7 @@
 
 @implementation CLWaveView
 
-- (CLWaveViewConfigure *) configure{
+- (CLWaveViewConfigure *) configure {
     if (_configure == nil){
         _configure = [CLWaveViewConfigure defaultConfigure];
         _configure.width = self.frame.size.width;
@@ -57,14 +57,6 @@
     configureBlock = nil;
     self.shapeLayer.fillColor = self.configure.color.CGColor;
 }
-/*
- y =Asin（ωx+φ）+C
- A表示振幅，也就是使用这个变量来调整波浪的高度
- ω表示周期，也就是使用这个变量来调整在屏幕内显示的波浪的数量
- φ表示波浪横向的偏移，也就是使用这个变量来调整波浪的流动
- C表示波浪纵向的位置，也就是使用这个变量来调整波浪在屏幕中竖直的位置。
- */
-
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
@@ -83,17 +75,24 @@
         [self.layer addSublayer:self.shapeLayer];
     }
     //启动定时器
-    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(currentWave:)];
+    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(currentWave)];
     self.displayLink = displayLink;
-    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
--(void)currentWave:(CADisplayLink *)displayLink{
-    //实时的位移
-    self.offsetX += self.configure.speed;
-    self.configure.y = MAX(self.configure.y - self.configure.upSpeed, self.configure.amplitude);
-    [self currentFirstWaveLayerPath];
+- (void)currentWave {
+    if (self.configure.amplitude == 0 && self.configure.y == 0 && self.configure.upSpeed != 0) {
+        [self invalidate];
+    }else {
+        //实时的位移
+        self.offsetX += self.configure.speed;
+        self.configure.y = MAX(self.configure.y - self.configure.upSpeed, 0);
+        if (self.configure.y < self.configure.amplitude) {
+            self.configure.amplitude = self.configure.y;
+        }
+        [self currentFirstWaveLayerPath];
+    }
 }
--(void)currentFirstWaveLayerPath{
+- (void)currentFirstWaveLayerPath {
     //创建一个路径
     CGMutablePathRef path = CGPathCreateMutable();
     CGFloat y = self.configure.y;
@@ -115,7 +114,7 @@
 - (void)invalidate {
     [self.displayLink invalidate];
 }
--(void)dealloc {
+- (void)dealloc {
     CLLog(@"波浪视图销毁了");
 }
 @end

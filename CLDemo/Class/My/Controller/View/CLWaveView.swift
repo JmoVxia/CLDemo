@@ -34,7 +34,7 @@ class CLWaveViewConfigure: NSObject {
 
 class CLWaveView: UIView {
     
-    private let defaultConfigure = CLWaveViewConfigure.defaultConfigure()
+    private let configure = CLWaveViewConfigure.defaultConfigure()
     private let shapeLayer: CAShapeLayer = CAShapeLayer()
     private var displayLink: CADisplayLink?
     private var offsetX: CGFloat = 0
@@ -48,38 +48,45 @@ class CLWaveView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func initUI() {
+    private func initUI() {
         displayLink = CADisplayLink(target: self, selector: #selector(currentWave))
-        shapeLayer.fillColor = defaultConfigure.color.cgColor
+        shapeLayer.fillColor = configure.color.cgColor
         layer.addSublayer(shapeLayer)
         //启动定时器
-        displayLink?.add(to: RunLoop.main, forMode: .common)
+        displayLink?.add(to: RunLoop.current, forMode: .common)
     }
-    @objc func currentWave() {
-        offsetX = offsetX + defaultConfigure.speed
-        defaultConfigure.y = max(defaultConfigure.y - defaultConfigure.upSpeed, defaultConfigure.amplitude)
-        currentFirstWaveLayerPath()
+    @objc private func currentWave() {
+        if configure.amplitude == 0 && configure.y == 0 && configure.upSpeed != 0 {
+            invalidate()
+        }else {
+            offsetX = offsetX + configure.speed
+            configure.y = max(configure.y - configure.upSpeed, 0)
+            if (configure.y < configure.amplitude) {
+                configure.amplitude = configure.y;
+            }
+            currentFirstWaveLayerPath()
+        }
     }
-    func currentFirstWaveLayerPath() {
+    private func currentFirstWaveLayerPath() {
         //创建一个路径
         let path: CGMutablePath = CGMutablePath()
-        var y: CGFloat = defaultConfigure.y
+        var y: CGFloat = configure.y
         path.move(to: CGPoint.init(x: 0, y: y))
-        for i in 0...Int(defaultConfigure.width) {
-            y = defaultConfigure.amplitude * sin(defaultConfigure.cycle * CGFloat(i) + CGFloat(offsetX)) + defaultConfigure.y
+        for i in 0...Int(configure.width) {
+            y = configure.amplitude * sin(configure.cycle * CGFloat(i) + CGFloat(offsetX)) + configure.y
             //将点连成线
             path.addLine(to: CGPoint(x: CGFloat(i), y: y), transform: .identity)
         }
-        path.addLine(to: CGPoint.init(x: defaultConfigure.width, y: frame.size.height))
+        path.addLine(to: CGPoint.init(x: configure.width, y: frame.size.height))
         path.addLine(to: CGPoint.init(x: 0, y: frame.size.height))
         path.closeSubpath()
         shapeLayer.path = path
     }
     ///更新基本配置，block不会造成循环引用
     func updateWithConfig(configure: ((CLWaveViewConfigure) -> Void)?) {
-        defaultConfigure.width = frame.size.width
-        configure?(defaultConfigure);
-        shapeLayer.fillColor = defaultConfigure.color.cgColor;
+        self.configure.width = frame.size.width
+        configure?(self.configure);
+        shapeLayer.fillColor = self.configure.color.cgColor;
     }
     ///销毁
     func invalidate() {
