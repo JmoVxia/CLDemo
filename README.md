@@ -1,26 +1,20 @@
 # CLDemo
 这是一个综合多功能的demo
 
-1.APP内部切换语言
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/1.gif)
 
-2.APP内部改变字体大小
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/2.gif)
 
-3.自定义搜索控制器
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/3.gif)
 
-4.自定义凸起tabbar
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/4.gif)
 
-5.自定义密码输入框
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/5.gif)
 
-6.转子动画
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/6.gif)
 
-7.自定义输入工具条
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/7.gif)
 
-8.银行卡扫描
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/8.gif)
 
-9.自定义log并写入文件
-
-10.转子动画
-
-11.自定义搜索控制器
-
-12。自定义凸起Tabbar
+![效果图](https://github.com/JmoVxia/CLDemo/blob/master/9.gif)
