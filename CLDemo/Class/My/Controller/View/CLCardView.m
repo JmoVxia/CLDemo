@@ -7,7 +7,7 @@
 //
 
 #import "CLCardView.h"
-#import "CLGCDTimer.h"
+#import "CLGCDTimerManager.h"
 
 @interface CLCardViewCell ()
 
@@ -221,11 +221,11 @@
             move = offset;
             [self animationWithMove: -move];
             if (offset == height) {
-                [strongTimer cancelTimer];
+                [strongTimer cancel];
                 [self endScrollAnimation];
             }
         }];
-        [timer startTimer];
+        [timer start];
     }else {
         [self endScrollAnimation];
     }

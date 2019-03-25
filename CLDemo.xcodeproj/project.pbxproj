@@ -25,7 +25,6 @@
 		0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558A9421ED956700C2C096 /* CLPasswordInputView.m */; };
 		0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */; };
 		0C57A8B12248A68300AF50FE /* CLGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C57A8B02248A68300AF50FE /* CLGCDTimer.swift */; };
-		0C57A8B42248A6D000AF50FE /* CLGCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C57A8B32248A6D000AF50FE /* CLGCDTimer.m */; };
 		0C628C1C2230BC65005922A0 /* CLRoundAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */; };
 		0C6B40E121ECFC3C00360FAD /* CLPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
@@ -38,6 +37,7 @@
 		0CA1237522255B81007DDE6D /* CLCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1237422255B81007DDE6D /* CLCardController.m */; };
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
 		0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */; };
+		0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */; };
 		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
 		0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */; };
 		0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */; };
@@ -135,8 +135,6 @@
 		0C558AE221EDA2E800C2C096 /* UIColor+CLHex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CLHex.h"; sourceTree = "<group>"; };
 		0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CLHex.m"; sourceTree = "<group>"; };
 		0C57A8B02248A68300AF50FE /* CLGCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGCDTimer.swift; sourceTree = "<group>"; };
-		0C57A8B22248A6D000AF50FE /* CLGCDTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLGCDTimer.h; sourceTree = "<group>"; };
-		0C57A8B32248A6D000AF50FE /* CLGCDTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimer.m; sourceTree = "<group>"; };
 		0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRoundAnimationView.h; sourceTree = "<group>"; };
 		0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRoundAnimationView.m; sourceTree = "<group>"; };
 		0C6B40DF21ECFC3C00360FAD /* CLPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPasswordView.m; sourceTree = "<group>"; };
@@ -159,6 +157,8 @@
 		0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordViewSwiftController.swift; sourceTree = "<group>"; };
 		0CBBE92E220DBAEC00640BB9 /* CLLogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogViewController.h; sourceTree = "<group>"; };
 		0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogViewController.m; sourceTree = "<group>"; };
+		0CC171402248B4D2005B0F0A /* CLGCDTimerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
+		0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
 		0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeController.h; sourceTree = "<group>"; };
 		0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeController.m; sourceTree = "<group>"; };
 		0CCDA314219855A20057BA14 /* CLChangeFontSizeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeCell.h; sourceTree = "<group>"; };
@@ -301,8 +301,8 @@
 		0C29D593222FE7DB00635F25 /* CLGCDTimerManager */ = {
 			isa = PBXGroup;
 			children = (
-				0C57A8B22248A6D000AF50FE /* CLGCDTimer.h */,
-				0C57A8B32248A6D000AF50FE /* CLGCDTimer.m */,
+				0CC171402248B4D2005B0F0A /* CLGCDTimerManager.h */,
+				0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */,
 				0C57A8B02248A68300AF50FE /* CLGCDTimer.swift */,
 			);
 			path = CLGCDTimerManager;
@@ -960,9 +960,9 @@
 				0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */,
 				5B80961A221870BD000F72F3 /* CLDesign.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
-				0C57A8B42248A6D000AF50FE /* CLGCDTimer.m in Sources */,
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
 				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
+				0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
 				0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */,
 				5B80962122187115000F72F3 /* CLBankCardDetailController.m in Sources */,
