@@ -45,7 +45,7 @@ class CLRotateAnimationView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    private func initLayer() -> Void {
+    private func animation() -> Void {
         let origin_x: CGFloat = frame.size.width * 0.5
         let origin_y: CGFloat = frame.size.height * 0.5
         for item in 0 ..< defaultConfigure.number {
@@ -86,7 +86,7 @@ class CLRotateAnimationView: UIView {
 extension CLRotateAnimationView {
     ///开始动画
     func startAnimation() -> Void {
-        initLayer()
+        animation()
         for item in layerArray {
             layer.addSublayer(item)
         }

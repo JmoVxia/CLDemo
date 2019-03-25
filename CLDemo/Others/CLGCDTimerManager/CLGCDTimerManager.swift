@@ -8,11 +8,10 @@
 
 import UIKit
 
-typealias actionBlock = ((NSInteger) -> Void)
-
-
 class CLGCDTimer: NSObject {
     
+    typealias actionBlock = ((NSInteger) -> Void)
+
     ///执行时间
     private var interval: TimeInterval!
     ///延迟时间
@@ -30,7 +29,15 @@ class CLGCDTimer: NSObject {
     ///响应次数
     private (set) var actionTimes: NSInteger = 0
     
-    init(interval: TimeInterval, delaySecs: TimeInterval, queue: DispatchQueue = DispatchQueue.main, repeats: Bool = true, action:  actionBlock?) {
+    /// 创建定时器
+    ///
+    /// - Parameters:
+    ///   - interval: 间隔时间
+    ///   - delaySecs: 第一次执行延迟时间，默认为0
+    ///   - queue: 定时器调用的队列，默认子队列
+    ///   - repeats: 是否重复执行，默认true
+    ///   - action: 响应
+    init(interval: TimeInterval, delaySecs: TimeInterval = 0, queue: DispatchQueue = DispatchQueue.global(), repeats: Bool = true, action:  actionBlock?) {
         super.init()
         self.interval = interval
         self.delaySecs = delaySecs
@@ -97,14 +104,26 @@ extension CLGCDTimer {
 }
 
 class CLGCDTimerManager: NSObject {
-    static let sharedManager: CLGCDTimerManager = CLGCDTimerManager()
+    
+    typealias actionBlock = ((NSInteger) -> Void)
+    
+    private static let sharedManager: CLGCDTimerManager = CLGCDTimerManager()
     private var timerObjectCache: Dictionary<String, CLGCDTimer> = Dictionary()
     private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
     private override init() {
        semaphore.signal()
     }
-    ///创建定时器
-    func scheduledTimer(name: String, interval: TimeInterval, delaySecs: TimeInterval, queue: DispatchQueue = DispatchQueue.main, repeats: Bool = true, action:  actionBlock?) {
+    
+    /// 创建全局定时器
+    ///
+    /// - Parameters:
+    ///   - name: 定时器名称
+    ///   - interval: 间隔时间
+    ///   - delaySecs: 第一次执行延迟时间，默认为0
+    ///   - queue: 定时器调用的队列，默认子队列
+    ///   - repeats: 是否重复执行，默认true
+    ///   - action: 响应
+    class func scheduledTimer(name: String, interval: TimeInterval, delaySecs: TimeInterval = 0, queue: DispatchQueue = DispatchQueue.global(), repeats: Bool = true, action:  actionBlock?) {
         var GCDTimer: CLGCDTimer? = timer(name)
         if (GCDTimer != nil) {
             return
@@ -115,17 +134,17 @@ class CLGCDTimerManager: NSObject {
 }
 extension CLGCDTimerManager {
     ///开始定时器
-    func start(_ name: String) {
+    class func start(_ name: String) {
         let GCDTimer: CLGCDTimer? = timer(name)
         GCDTimer?.start()
     }
     ///执行一次定时器
-    func responseOnce(_ name: String) {
+    class func responseOnce(_ name: String) {
         let GCDTimer: CLGCDTimer? = timer(name)
         GCDTimer?.responseOnce()
     }
     ///取消定时器
-    func cancel(_ name: String) {
+    class func cancel(_ name: String) {
         let GCDTimer: CLGCDTimer? = timer(name)
         guard let timer = GCDTimer else {
             return
@@ -134,31 +153,31 @@ extension CLGCDTimerManager {
         removeTimer(name)
     }
     ///暂停定时器
-    func suspend(_ name: String) {
+    class func suspend(_ name: String) {
         let GCDTimer: CLGCDTimer? = timer(name)
         GCDTimer?.suspend()
     }
     ///恢复定时器
-    func resume(_ name: String) {
+    class func resume(_ name: String) {
         let GCDTimer: CLGCDTimer? = timer(name)
         GCDTimer?.resume()
     }
 }
 extension CLGCDTimerManager {
-    private func timer(_ name: String) -> CLGCDTimer? {
-        semaphore.wait()
-        let GCDTimer = timerObjectCache[name]
-        semaphore.signal()
+    private class func timer(_ name: String) -> CLGCDTimer? {
+        sharedManager.semaphore.wait()
+        let GCDTimer = sharedManager.timerObjectCache[name]
+        sharedManager.semaphore.signal()
         return GCDTimer
     }
-    private func setTimer(_ timer: CLGCDTimer, _ name: String) {
-        semaphore.wait()
-        timerObjectCache.updateValue(timer, forKey: name)
-        semaphore.signal()
+    private class func setTimer(_ timer: CLGCDTimer, _ name: String) {
+        sharedManager.semaphore.wait()
+        sharedManager.timerObjectCache.updateValue(timer, forKey: name)
+        sharedManager.semaphore.signal()
     }
-    private func removeTimer(_ name: String) {
-        semaphore.wait()
-        timerObjectCache.removeValue(forKey: name)
-        semaphore.signal()
+    private class func removeTimer(_ name: String) {
+        sharedManager.semaphore.wait()
+        sharedManager.timerObjectCache.removeValue(forKey: name)
+        sharedManager.semaphore.signal()
     }
 }

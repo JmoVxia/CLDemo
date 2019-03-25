@@ -1,0 +1,10 @@
+# OSX
+.DS_Store
+
+# Xcode
+xcuserdata
+*.xccheckout
+DerivedData/
+
+# CocoaPods
+Pods/

@@ -170,7 +170,7 @@ static CLGCDTimerManager *_manager = nil;
     return _manager;
 }
 //MARK:JmoVxia---创建定时器
-- (void)scheduledTimerWithName:( NSString * _Nonnull)name
++ (void)scheduledTimerWithName:( NSString * _Nonnull)name
                       interval:(NSTimeInterval)interval
                      delaySecs:(NSTimeInterval)delaySecs
                          queue:(dispatch_queue_t _Nullable)queue
@@ -190,7 +190,7 @@ static CLGCDTimerManager *_manager = nil;
     [self setTimer:GCDTimer name:string];
 }
 //MARK:JmoVxia---开始定时器
-- (void)start:(NSString *_Nonnull)name {
++ (void)start:(NSString *_Nonnull)name {
     __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
@@ -198,7 +198,7 @@ static CLGCDTimerManager *_manager = nil;
     }
 }
 //MARK:JmoVxia---执行一次定时器响应
-- (void)responseOnce:(NSString *_Nonnull)name {
++ (void)responseOnce:(NSString *_Nonnull)name {
     __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
@@ -206,7 +206,7 @@ static CLGCDTimerManager *_manager = nil;
     }
 }
 //MARK:JmoVxia---取消定时器
-- (void)cancel:(NSString *_Nonnull)name {
++ (void)cancel:(NSString *_Nonnull)name {
     __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
@@ -215,7 +215,7 @@ static CLGCDTimerManager *_manager = nil;
     }
 }
 //MARK:JmoVxia---暂停定时器
-- (void)suspend:(NSString *_Nonnull)name {
++ (void)suspend:(NSString *_Nonnull)name {
     __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
@@ -223,7 +223,7 @@ static CLGCDTimerManager *_manager = nil;
     }
 }
 //MARK:JmoVxia---恢复定时器
-- (void)resume:(NSString *_Nonnull)name {
++ (void)resume:(NSString *_Nonnull)name {
     __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
@@ -231,23 +231,23 @@ static CLGCDTimerManager *_manager = nil;
     }
 }
 //MARK:JmoVxia---获取定时器
-- (CLGCDTimer *_Nullable)timer:(NSString *_Nonnull)name {
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
++ (CLGCDTimer *_Nullable)timer:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait([CLGCDTimerManager sharedManager].semaphore, DISPATCH_TIME_FOREVER);
     __strong NSString *string = name;
-    CLGCDTimer *GCDTimer = [self.timerObjectCache objectForKey:string];
-    dispatch_semaphore_signal(self.semaphore);
+    CLGCDTimer *GCDTimer = [[CLGCDTimerManager sharedManager].timerObjectCache objectForKey:string];
+    dispatch_semaphore_signal([CLGCDTimerManager sharedManager].semaphore);
     return GCDTimer;
 }
 //MARK:JmoVxia---储存定时器
-- (void)setTimer:(CLGCDTimer *_Nonnull)timer name:(NSString *_Nonnull)name {
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    [self.timerObjectCache setObject:timer forKey:name];
-    dispatch_semaphore_signal(self.semaphore);
++ (void)setTimer:(CLGCDTimer *_Nonnull)timer name:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait([CLGCDTimerManager sharedManager].semaphore, DISPATCH_TIME_FOREVER);
+    [[CLGCDTimerManager sharedManager].timerObjectCache setObject:timer forKey:name];
+    dispatch_semaphore_signal([CLGCDTimerManager sharedManager].semaphore);
 }
 //MARK:JmoVxia---移除定时器
-- (void)removeTimer:(NSString *_Nonnull)name {
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    [self.timerObjectCache removeObjectForKey:name];
-    dispatch_semaphore_signal(self.semaphore);
++ (void)removeTimer:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait([CLGCDTimerManager sharedManager].semaphore, DISPATCH_TIME_FOREVER);
+    [[CLGCDTimerManager sharedManager].timerObjectCache removeObjectForKey:name];
+    dispatch_semaphore_signal([CLGCDTimerManager sharedManager].semaphore);
 }
 @end

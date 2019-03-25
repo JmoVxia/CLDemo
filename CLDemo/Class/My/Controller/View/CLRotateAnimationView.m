@@ -43,7 +43,7 @@
     }
     return self;
 }
-- (void)initLayer {
+- (void)animation {
     CGFloat origin_x = self.frame.size.width * 0.5;
     CGFloat origin_y = self.frame.size.height * 0.5;
     for (NSInteger i = 0; i < self.defaultConfigure.number; i++) {
@@ -80,12 +80,10 @@
     }
     CGFloat intervalDuration = (CGFloat)(self.defaultConfigure.duration / 2.0 / (CGFloat)self.defaultConfigure.number);
     self.defaultConfigure.intervalDuration = MIN(self.defaultConfigure.intervalDuration, intervalDuration);
-    [self stopAnimation];
-    [self initLayer];
 }
 //MARK:JmoVxia---开始动画
 - (void)startAnimation {
-    [self initLayer];
+    [self animation];
     for (CALayer *layer in self.layerArray) {
         [self.layer addSublayer:layer];
     }

@@ -16,7 +16,9 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
         
         let rotateAnimationView: CLRotateAnimationView = CLRotateAnimationView(frame: CGRect(x: 120, y: 120, width: 80, height: 80));
         rotateAnimationView.updateWithConfigure { (configure) -> (Void) in
-            configure.backgroundColor = UIColor.orange
+            configure.backgroundColor = UIColor.red
+            configure.duration = 5;
+            configure.number = 8;
         }
         rotateAnimationView.startAnimation()
         self.view.addSubview(rotateAnimationView)
@@ -25,8 +27,16 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
             rotateAnimationView.pauseAnimation()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
             rotateAnimationView.resumeAnimation()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
+            rotateAnimationView.stopAnimation()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
+            rotateAnimationView.startAnimation()
         }
 
         let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 120, y: 320, width: 90, height: 90))
@@ -42,12 +52,20 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
         view.addSubview(roundAnimationView)
         roundAnimationView.startAnimation()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
             roundAnimationView.pauseAnimation()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
             roundAnimationView.resumeAnimation()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
+            roundAnimationView.stopAnimation()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
+            roundAnimationView.startAnimation()
         }
     }
 }
