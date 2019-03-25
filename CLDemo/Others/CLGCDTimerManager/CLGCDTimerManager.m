@@ -10,7 +10,7 @@
 
 @interface CLGCDTimer ()
 
-/**线程*/
+/**队列*/
 @property (nonatomic, strong) dispatch_queue_t  serialQueue;
 /**定时器*/
 @property (nonatomic, strong) dispatch_source_t timer_t;
@@ -38,7 +38,7 @@
                                 delaySecs:(NSTimeInterval)delaySecs
                                     queue:(dispatch_queue_t)queue
                                   repeats:(BOOL)repeats
-                                   action:(void(^)(NSInteger actionTimes))action{
+                                   action:(void(^)(NSInteger actionTimes))action {
     if (self = [super init]) {
         self.timeInterval = interval;
         self.delaySecs    = delaySecs;
@@ -78,9 +78,9 @@
 - (void)startTimer {
     dispatch_source_set_timer(self.timer_t, dispatch_time(DISPATCH_TIME_NOW, (NSInteger)(self.delaySecs * NSEC_PER_SEC)),(NSInteger)(self.timeInterval * NSEC_PER_SEC), 0 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(self.timer_t, ^{
+        self.actionTimes ++;
         if (self.actionBlock) {
             self.actionBlock(self.actionTimes);
-            self.actionTimes ++;
         }
         if (!self.repeat) {
             [self cancelTimer];
@@ -90,10 +90,10 @@
 }
 /**执行一次定时器响应*/
 - (void)responseOnceTimer {
+    self.actionTimes ++;
     self.isRuning    = YES;
     if (self.actionBlock) {
         self.actionBlock(self.actionTimes);
-        self.actionTimes ++;
     }
     self.isRuning = NO;
 }
