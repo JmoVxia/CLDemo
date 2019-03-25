@@ -1,20 +1,17 @@
 //
-//  CLGCDTimerManager.swift
+//  CLGCDTimer.swift
 //  CLDemo
 //
-//  Created by AUG on 2019/3/24.
+//  Created by AUG on 2019/3/25.
 //  Copyright © 2019年 JmoVxia. All rights reserved.
 //
 
 import UIKit
 
-
 class CLGCDTimer: NSObject {
     
     typealias actionBlock = ((NSInteger) -> Void)
-
-    ///定时器名字
-    private var name: String?
+    
     ///执行时间
     private var interval: TimeInterval!
     ///延迟时间
@@ -32,9 +29,8 @@ class CLGCDTimer: NSObject {
     ///响应次数
     private (set) var actionTimes: NSInteger = 0
     
-    init(name: String? = nil, interval: TimeInterval, delaySecs: TimeInterval, queue: DispatchQueue = DispatchQueue.main, repeats: Bool = true, action: @escaping actionBlock) {
+    init(interval: TimeInterval, delaySecs: TimeInterval, queue: DispatchQueue = DispatchQueue.main, repeats: Bool = true, action:  actionBlock?) {
         super.init()
-        self.name = name
         self.interval = interval
         self.delaySecs = delaySecs
         self.serialQueue = DispatchQueue.init(label: String(format: "CLGCDTimer.%p", self), target: queue)
@@ -43,6 +39,9 @@ class CLGCDTimer: NSObject {
     }
     ///替换旧响应
     func replaceOldAction(action: actionBlock?) -> Void {
+        guard let action = action else {
+            return
+        }
         self.action = action
     }
     ///执行一次定时器响应
@@ -52,7 +51,11 @@ class CLGCDTimer: NSObject {
         action?(actionTimes)
         isRuning = false
     }
+    deinit {
+        cancelTimer()
+    }
 }
+
 extension CLGCDTimer {
     ///开始定时器
     func startTimer() {
@@ -65,6 +68,13 @@ extension CLGCDTimer {
             }
         }
         resumeTimer()
+    }
+    ///暂停
+    func suspendTimer() {
+        if isRuning {
+            timer.suspend()
+            isRuning = false
+        }
     }
     ///恢复定时器
     func resumeTimer() {
@@ -79,18 +89,5 @@ extension CLGCDTimer {
             resumeTimer()
         }
         timer.cancel()
-    }
-    ///暂停
-    func suspendTimer() {
-        if isRuning {
-            timer.suspend()
-            isRuning = false
-        }
-    }
-}
-class CLGCDTimerManager: NSObject {
-    static let sharedManager:CLGCDTimerManager = CLGCDTimerManager()
-    private override init() {
-
     }
 }

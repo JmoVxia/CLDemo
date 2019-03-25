@@ -49,39 +49,5 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
             roundAnimationView.resumeAnimation()
         }
-        
-        
-        
-        
-        
-        
-        
-        let timer = CLGCDTimer(interval: 1, delaySecs: 0) { (actionTime) in
-            print("========\(actionTime)=======")
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            timer.startTimer()
-        }
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-            print("++++++++暂停++++++++++")
-            timer.suspendTimer()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
-            print("========恢复===========")
-            timer.resumeTimer()
-        }
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
-            print("========取消===========")
-            timer.cancelTimer()
-        }
-        
-        
-        
     }
 }

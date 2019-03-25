@@ -7,7 +7,7 @@
 //
 
 #import "CLCardView.h"
-#import "CLGCDTimerManager.h"
+#import "CLGCDTimer.h"
 
 @interface CLCardViewCell ()
 
@@ -256,7 +256,7 @@
 }
 //MARK:JmoVxia---定时器
 - (CLGCDTimer *)timer {
-    CLGCDTimer *timer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
+    CLGCDTimer *timer = [[CLGCDTimer alloc] initWithInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
     return timer;
 }
 //MARK:JmoVxia---是否需要加入到缓存池

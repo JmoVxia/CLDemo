@@ -28,11 +28,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [rotateAnimationView pauseAnimation];
     });
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [rotateAnimationView resumeAnimation];
     });
-    
+
     CLRoundAnimationView *roundAnimationView = [[CLRoundAnimationView alloc] initWithFrame:CGRectMake(120, 320, 90, 90)];
     [roundAnimationView updateWithConfigure:^(CLRoundAnimationViewConfigure * _Nonnull configure) {
         configure.outBackgroundColor = [UIColor orangeColor];
@@ -45,16 +45,18 @@
     }];
     [self.view addSubview:roundAnimationView];
     [roundAnimationView startAnimation];
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [roundAnimationView pauseAnimation];
     });
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [roundAnimationView resumeAnimation];
     });
 }
 
-
+-(void)dealloc {
+    CLLog(@"转子动画控制器销毁了");
+}
 
 @end
