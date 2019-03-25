@@ -211,7 +211,7 @@ static CLGCDTimerManager *_manager = nil;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
         [GCDTimer cancel];
-        [self.timerObjectCache removeObjectForKey:string];
+        [self removeTimer:name];
     }
 }
 //MARK:JmoVxia---暂停定时器
@@ -244,5 +244,10 @@ static CLGCDTimerManager *_manager = nil;
     [self.timerObjectCache setObject:timer forKey:name];
     dispatch_semaphore_signal(self.semaphore);
 }
-
+//MARK:JmoVxia---移除定时器
+- (void)removeTimer:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    [self.timerObjectCache removeObjectForKey:name];
+    dispatch_semaphore_signal(self.semaphore);
+}
 @end
