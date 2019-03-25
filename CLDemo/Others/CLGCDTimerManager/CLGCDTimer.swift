@@ -60,11 +60,14 @@ extension CLGCDTimer {
     ///开始定时器
     func startTimer() {
         timer.schedule(deadline: .now() + delaySecs, repeating: interval, leeway: DispatchTimeInterval.never)
-        timer.setEventHandler {
-            self.actionTimes += 1
-            self.action?(self.actionTimes)
-            if !self.repeats {
-                self.cancelTimer()
+        timer.setEventHandler { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.actionTimes += 1
+            strongSelf.action?(strongSelf.actionTimes)
+            if !strongSelf.repeats {
+                strongSelf.cancelTimer()
             }
         }
         resumeTimer()

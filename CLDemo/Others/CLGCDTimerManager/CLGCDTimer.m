@@ -56,13 +56,15 @@
 /**开始定时器*/
 - (void)startTimer {
     dispatch_source_set_timer(self.timer, dispatch_time(DISPATCH_TIME_NOW, (NSInteger)(self.delaySecs * NSEC_PER_SEC)),(NSInteger)(self.timeInterval * NSEC_PER_SEC), 0 * NSEC_PER_SEC);
+    __weak __typeof(self) weakSelf = self;
     dispatch_source_set_event_handler(self.timer, ^{
-        self.actionTimes ++;
-        if (self.action) {
-            self.action(self.actionTimes);
+        __typeof(&*weakSelf) strongSelf = weakSelf;
+        strongSelf.actionTimes ++;
+        if (strongSelf.action) {
+            strongSelf.action(strongSelf.actionTimes);
         }
-        if (!self.repeat) {
-            [self cancelTimer];
+        if (!strongSelf.repeat) {
+            [strongSelf cancelTimer];
         }
     });
     [self resumeTimer];
