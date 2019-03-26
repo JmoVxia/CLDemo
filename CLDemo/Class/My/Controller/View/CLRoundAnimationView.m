@@ -30,6 +30,8 @@
 
 @interface CLRoundAnimationView ()
 
+///背景
+@property (nonatomic, strong) CALayer *backgroundLayer;
 ///动画layer
 @property (nonatomic, strong) CALayer *animationLayer;
 ///外圆
@@ -46,29 +48,27 @@
 
 @implementation CLRoundAnimationView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.layer.backgroundColor = self.configure.outBackgroundColor.CGColor;
-        self.layer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1];
-        
-        self.animationLayer = [CALayer layer];
-        self.animationLayer.frame = self.layer.bounds;
-        self.animationLayer.backgroundColor = self.configure.inBackgroundColor.CGColor;
-        self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd];
-        [self.layer addSublayer:self.animationLayer];
-        //动画
-        self.rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-        self.rotationAnimation.fromValue = [NSNumber numberWithFloat:0];
-        self.rotationAnimation.toValue = [NSNumber numberWithFloat:2.0 * M_PI];
-        self.rotationAnimation.repeatCount = MAXFLOAT;
-        self.rotationAnimation.duration = self.configure.duration;
-        self.rotationAnimation.removedOnCompletion = NO;
-        self.rotationAnimation.autoreverses = NO;
-        self.rotationAnimation.fillMode = kCAFillModeForwards;
-        self.rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    }
-    return self;
+- (void)animation {
+    self.backgroundLayer = [CALayer layer];
+    self.backgroundLayer.frame = self.layer.bounds;
+    self.backgroundLayer.backgroundColor = self.configure.outBackgroundColor.CGColor;
+    self.backgroundLayer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1];
+    
+    self.animationLayer = [CALayer layer];
+    self.animationLayer.frame = self.layer.bounds;
+    self.animationLayer.backgroundColor = self.configure.inBackgroundColor.CGColor;
+    self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd];
+    //动画
+    self.rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    self.rotationAnimation.fromValue = [NSNumber numberWithFloat:0];
+    self.rotationAnimation.toValue = [NSNumber numberWithFloat:2.0 * M_PI];
+    self.rotationAnimation.repeatCount = MAXFLOAT;
+    self.rotationAnimation.duration = self.configure.duration;
+    self.rotationAnimation.removedOnCompletion = NO;
+    self.rotationAnimation.autoreverses = NO;
+    self.rotationAnimation.fillMode = kCAFillModeForwards;
+    self.rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    [self.animationLayer addAnimation:self.rotationAnimation forKey:@"rotationAnnimation"];
 }
 - (CAShapeLayer *)shapeLayerWithLineWidth:(CGFloat)lineWidth strokeStart:(CGFloat)strokeStart strokeEnd:(CGFloat)strokeEnd {
     //创建圆环
@@ -89,16 +89,20 @@
     if (configBlock) {
         configBlock(self.configure);
     }
-    self.layer.backgroundColor = self.configure.outBackgroundColor.CGColor;
-    self.layer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1];
+    self.backgroundLayer.backgroundColor = self.configure.outBackgroundColor.CGColor;
+    self.backgroundLayer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1];
     self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd];
     self.animationLayer.backgroundColor = self.configure.inBackgroundColor.CGColor;
     self.rotationAnimation.duration = self.configure.duration;
 }
 - (void)startAnimation {
-    [self.animationLayer addAnimation:self.rotationAnimation forKey:@"rotationAnnimation"];
+    [self animation];
+    [self.layer addSublayer:self.backgroundLayer];
+    [self.layer addSublayer:self.animationLayer];
 }
 - (void)stopAnimation {
+    [self.backgroundLayer removeFromSuperlayer];
+    [self.animationLayer removeFromSuperlayer];
     [self.animationLayer removeAllAnimations];
 }
 - (void)pauseAnimation {

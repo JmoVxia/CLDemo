@@ -47,13 +47,13 @@
     
     CLRoundAnimationView *roundAnimationView = [[CLRoundAnimationView alloc] initWithFrame:CGRectMake(120, 320, 90, 90)];
     [roundAnimationView updateWithConfigure:^(CLRoundAnimationViewConfigure * _Nonnull configure) {
-        configure.outBackgroundColor = [UIColor orangeColor];
-        configure.inBackgroundColor = [UIColor greenColor];
+        configure.outBackgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.60];
+        configure.inBackgroundColor = [UIColor colorWithRed:0.96 green:0.71 blue:0.05 alpha:1.00];
         configure.duration = 1;
         configure.strokeStart = 0;
-        configure.strokeEnd = 0.1;
-        configure.inLineWidth = 3;
-        configure.outLineWidth = 3;
+        configure.strokeEnd = 0.3;
+        configure.inLineWidth = 6;
+        configure.outLineWidth = 10;
     }];
     [self.view addSubview:roundAnimationView];
     [roundAnimationView startAnimation];

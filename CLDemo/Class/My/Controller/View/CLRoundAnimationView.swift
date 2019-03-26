@@ -30,24 +30,28 @@ class CLRoundAnimationViewConfigure: NSObject {
 }
 
 class CLRoundAnimationView: UIView {
-    let animationLayer = CALayer()
-    let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-    let configure = CLRoundAnimationViewConfigure.defaultConfigure()
-    var width: CGFloat = 0.0
-    var height: CGFloat = 0.0
-    var isPause: Bool = false
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private let backgroundLayer: CALayer = CALayer()
+    private let animationLayer: CALayer = CALayer()
+    private let rotationAnimation: CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+    private let configure: CLRoundAnimationViewConfigure = CLRoundAnimationViewConfigure.defaultConfigure()
+    private var width: CGFloat = 0.0
+    private var height: CGFloat = 0.0
+    private var isPause: Bool = false
+    
+    private func animation() {
         width = frame.size.width
         height = frame.size.height
         
-        layer.backgroundColor = configure.outBackgroundColor.cgColor
-        layer.mask = shapeLayer(lineWidth: configure.outLineWidth, start: 0, end: 1)
+        backgroundLayer.frame = layer.bounds
+        backgroundLayer.mask = shapeLayer(lineWidth: configure.outLineWidth, start: 0, end: 1)
+        backgroundLayer.backgroundColor = configure.outBackgroundColor.cgColor
+        
         animationLayer.frame = layer.bounds
-        animationLayer.backgroundColor = configure.inBackgroundColor.cgColor
         animationLayer.mask = shapeLayer(lineWidth: configure.inLineWidth, start: configure.strokeStart, end: configure.strokeEnd)
-        layer.addSublayer(animationLayer)
+        animationLayer.backgroundColor = configure.inBackgroundColor.cgColor
+        backgroundLayer.addSublayer(animationLayer)
+        
         rotationAnimation.fromValue = 0
         rotationAnimation.toValue = Double.pi * 2
         rotationAnimation.repeatCount = MAXFLOAT
@@ -55,10 +59,7 @@ class CLRoundAnimationView: UIView {
         rotationAnimation.isRemovedOnCompletion = false
         rotationAnimation.fillMode = .forwards
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        animationLayer.add(rotationAnimation, forKey: "rotationAnnimation")
     }
     
     private func shapeLayer(lineWidth: CGFloat, start:CGFloat, end:CGFloat) -> CAShapeLayer {
@@ -77,8 +78,8 @@ class CLRoundAnimationView: UIView {
     ///更新配置
     func updateWithConfigure(configure: ((CLRoundAnimationViewConfigure) -> (Void))?) -> Void {
         configure?(self.configure)
-        layer.backgroundColor = self.configure.outBackgroundColor.cgColor
-        layer.mask = shapeLayer(lineWidth: self.configure.outLineWidth, start: 0, end: 1)
+        backgroundLayer.backgroundColor = self.configure.outBackgroundColor.cgColor
+        backgroundLayer.mask = shapeLayer(lineWidth: self.configure.outLineWidth, start: 0, end: 1)
         animationLayer.mask = shapeLayer(lineWidth: self.configure.inLineWidth, start: self.configure.strokeStart, end: self.configure.strokeEnd)
         animationLayer.backgroundColor = self.configure.inBackgroundColor.cgColor
         rotationAnimation.duration = self.configure.duration;
@@ -87,10 +88,14 @@ class CLRoundAnimationView: UIView {
 extension CLRoundAnimationView {
     ///开始动画
     func startAnimation() -> Void {
-        animationLayer.add(rotationAnimation, forKey: "rotationAnnimation")
+        animation()
+        layer.addSublayer(backgroundLayer)
+        layer.addSublayer(animationLayer)
     }
     ///停止动画
     func stopAnimation() -> Void {
+        backgroundLayer.removeFromSuperlayer()
+        animationLayer.removeFromSuperlayer()
         animationLayer.removeAllAnimations()
     }
     ///暂停动画

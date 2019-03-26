@@ -16,9 +16,10 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
         
         let rotateAnimationView: CLRotateAnimationView = CLRotateAnimationView(frame: CGRect(x: 120, y: 120, width: 80, height: 80));
         rotateAnimationView.updateWithConfigure { (configure) -> (Void) in
-            configure.backgroundColor = UIColor.red
-            configure.duration = 5;
+            configure.backgroundColor = UIColor.orange;
             configure.number = 8;
+            configure.duration = 4;
+            configure.intervalDuration = 0.2;
         }
         rotateAnimationView.startAnimation()
         self.view.addSubview(rotateAnimationView)
@@ -41,11 +42,11 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
 
         let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 120, y: 320, width: 90, height: 90))
         roundAnimationView.updateWithConfigure { (configure) -> (Void) in
-            configure.outBackgroundColor = UIColor.lightGray;
+            configure.outBackgroundColor = UIColor.clear;
             configure.inBackgroundColor = UIColor.orange;
             configure.duration = 1;
             configure.strokeStart = 0;
-            configure.strokeEnd = 0.2;
+            configure.strokeEnd = 0.3;
             configure.inLineWidth = 5;
             configure.outLineWidth = 5;
         }
