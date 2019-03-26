@@ -23,6 +23,7 @@
     configure.duration = 0.8;
     configure.outLineWidth = 5;
     configure.inLineWidth = 5;
+    configure.position = AnimationOut;
     return configure;
 }
 
@@ -52,12 +53,12 @@
     self.backgroundLayer = [CALayer layer];
     self.backgroundLayer.frame = self.layer.bounds;
     self.backgroundLayer.backgroundColor = self.configure.outBackgroundColor.CGColor;
-    self.backgroundLayer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1];
+    self.backgroundLayer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1 outLayer:YES];
     
     self.animationLayer = [CALayer layer];
     self.animationLayer.frame = self.layer.bounds;
     self.animationLayer.backgroundColor = self.configure.inBackgroundColor.CGColor;
-    self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd];
+    self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd outLayer:NO];
     //动画
     self.rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     self.rotationAnimation.fromValue = [NSNumber numberWithFloat:0];
@@ -70,9 +71,22 @@
     self.rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     [self.animationLayer addAnimation:self.rotationAnimation forKey:@"rotationAnnimation"];
 }
-- (CAShapeLayer *)shapeLayerWithLineWidth:(CGFloat)lineWidth strokeStart:(CGFloat)strokeStart strokeEnd:(CGFloat)strokeEnd {
+- (CAShapeLayer *)shapeLayerWithLineWidth:(CGFloat)lineWidth strokeStart:(CGFloat)strokeStart strokeEnd:(CGFloat)strokeEnd outLayer:(BOOL)outLayer {
     //创建圆环
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.cl_width * 0.5, self.cl_height * 0.5) radius:(self.cl_height - lineWidth) * 0.5 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+    CGFloat offset;
+    switch (self.configure.position) {
+        case AnimationOut:
+            offset = 0;
+            break;
+        case AnimationMiddle:
+            offset = outLayer ? 0 : self.configure.outLineWidth - self.configure.inLineWidth;
+            break;
+        case AnimationIn:
+            offset = outLayer ? 0 : (self.configure.outLineWidth - self.configure.inLineWidth) * 2;
+            break;
+    }
+    CGFloat radius = (self.cl_height - lineWidth - offset) * 0.5;
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5) radius: radius startAngle:0 endAngle:M_PI * 2 clockwise:YES];
     //圆环遮罩
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
@@ -89,9 +103,10 @@
     if (configBlock) {
         configBlock(self.configure);
     }
+    self.configure.inLineWidth = MIN(self.configure.inLineWidth, self.configure.outLineWidth);
     self.backgroundLayer.backgroundColor = self.configure.outBackgroundColor.CGColor;
-    self.backgroundLayer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1];
-    self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd];
+    self.backgroundLayer.mask = [self shapeLayerWithLineWidth:self.configure.outLineWidth strokeStart:0 strokeEnd:1 outLayer:YES];
+    self.animationLayer.mask = [self shapeLayerWithLineWidth:self.configure.inLineWidth strokeStart:self.configure.strokeStart strokeEnd:self.configure.strokeEnd outLayer:NO];
     self.animationLayer.backgroundColor = self.configure.inBackgroundColor.CGColor;
     self.rotationAnimation.duration = self.configure.duration;
 }

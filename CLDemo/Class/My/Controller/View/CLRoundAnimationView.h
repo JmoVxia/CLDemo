@@ -10,6 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, CLAnimationPosition) {
+    AnimationOut = 0,///<外侧
+    AnimationMiddle = 1,///<中间
+    AnimationIn = 2,///<内侧
+};
 
 @interface CLRoundAnimationViewConfigure : NSObject
 
@@ -27,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat strokeEnd;
 ///动画时间
 @property (nonatomic, assign) CFTimeInterval duration;
+///动画位置
+@property (nonatomic, assign) CLAnimationPosition position;
 
 @end
 

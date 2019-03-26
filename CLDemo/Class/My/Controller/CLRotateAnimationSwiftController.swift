@@ -13,59 +13,47 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let rotateAnimationView: CLRotateAnimationView = CLRotateAnimationView(frame: CGRect(x: 120, y: 120, width: 80, height: 80));
-        rotateAnimationView.updateWithConfigure { (configure) -> (Void) in
-            configure.backgroundColor = UIColor.orange;
-            configure.number = 8;
-            configure.duration = 4;
-            configure.intervalDuration = 0.2;
-        }
-        rotateAnimationView.startAnimation()
-        self.view.addSubview(rotateAnimationView)
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            rotateAnimationView.pauseAnimation()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-            rotateAnimationView.resumeAnimation()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
-            rotateAnimationView.stopAnimation()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
+        do {
+            let rotateAnimationView: CLRotateAnimationView = CLRotateAnimationView(frame: CGRect(x: 120, y: 120, width: 80, height: 80));
+            rotateAnimationView.updateWithConfigure { (configure) -> (Void) in
+                configure.backgroundColor = UIColor.orange;
+                configure.number = 8;
+                configure.duration = 4;
+                configure.intervalDuration = 0.2;
+            }
             rotateAnimationView.startAnimation()
+            self.view.addSubview(rotateAnimationView)
         }
 
-        let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 120, y: 320, width: 90, height: 90))
-        roundAnimationView.updateWithConfigure { (configure) -> (Void) in
-            configure.outBackgroundColor = UIColor.clear;
-            configure.inBackgroundColor = UIColor.orange;
-            configure.duration = 1;
-            configure.strokeStart = 0;
-            configure.strokeEnd = 0.3;
-            configure.inLineWidth = 5;
-            configure.outLineWidth = 5;
+        do {
+            let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 120, y: 250, width: 90, height: 90))
+            roundAnimationView.updateWithConfigure { (configure) -> (Void) in
+                configure.outBackgroundColor = UIColor(red:1.00, green:0.00, blue:0.01, alpha:0.60)
+                configure.inBackgroundColor = UIColor(red:0.28, green:0.54, blue:0.96, alpha:1.00)
+                configure.duration = 1
+                configure.strokeStart = 0
+                configure.strokeEnd = 0.25
+                configure.inLineWidth = 5
+                configure.outLineWidth = 15
+                configure.position = .animationMiddle
+            }
+            view.addSubview(roundAnimationView)
+            roundAnimationView.startAnimation()
         }
-        view.addSubview(roundAnimationView)
-        roundAnimationView.startAnimation()
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            roundAnimationView.pauseAnimation()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-            roundAnimationView.resumeAnimation()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
-            roundAnimationView.stopAnimation()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
+
+        do {
+            let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 150, y: 420, width: 90, height: 90))
+            roundAnimationView.updateWithConfigure { (configure) -> (Void) in
+                configure.outBackgroundColor = UIColor.clear
+                configure.inBackgroundColor = UIColor(red:0.28, green:0.54, blue:0.96, alpha:1.00)
+                configure.duration = 1
+                configure.strokeStart = 0
+                configure.strokeEnd = 0.6
+                configure.inLineWidth = 5
+                configure.outLineWidth = 5
+                configure.position = .animationMiddle
+            }
+            view.addSubview(roundAnimationView)
             roundAnimationView.startAnimation()
         }
     }
