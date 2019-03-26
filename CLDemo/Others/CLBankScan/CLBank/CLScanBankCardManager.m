@@ -412,7 +412,10 @@ static bool initFlag = NO;
     }
     if ([videoConnection isVideoStabilizationSupported]) {
         if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             videoConnection.enablesVideoStabilizationWhenAvailable = YES;
+#pragma clang diagnostic pop
         }
         else {
             videoConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;

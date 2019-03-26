@@ -6,7 +6,6 @@ target 'CLDemo' do
   inhibit_all_warnings!         #Prohibit all warnings
 pod 'Masonry'
 pod 'DateTools'
-pod 'YYCache'
 pod 'MJExtension'
 pod 'Then'
 pod 'SnapKit'

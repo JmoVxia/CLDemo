@@ -94,8 +94,6 @@
 		5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA511DDD9BBE00A20E34 /* CLBaseViewController.m */; };
 		5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA541DDD9BD500A20E34 /* CLBaseNavigationController.m */; };
 		5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* CLTabbarController.m */; };
-		5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8B77D21E83760E0033F35A /* CLLocalNotificationManager.m */; };
-		5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8B77D41E83760E0033F35A /* CLLocalNotificationModel.m */; };
 		5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* CLEssenceListController.m */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
 		5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */; };
@@ -264,10 +262,6 @@
 		5B80DA541DDD9BD500A20E34 /* CLBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBaseNavigationController.m; sourceTree = "<group>"; };
 		5B80DA561DDD9C3A00A20E34 /* CLTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTabbarController.h; sourceTree = "<group>"; };
 		5B80DA571DDD9C3A00A20E34 /* CLTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTabbarController.m; sourceTree = "<group>"; };
-		5B8B77D11E83760E0033F35A /* CLLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLocalNotificationManager.h; sourceTree = "<group>"; };
-		5B8B77D21E83760E0033F35A /* CLLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLocalNotificationManager.m; sourceTree = "<group>"; };
-		5B8B77D31E83760E0033F35A /* CLLocalNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLocalNotificationModel.h; sourceTree = "<group>"; };
-		5B8B77D41E83760E0033F35A /* CLLocalNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLocalNotificationModel.m; sourceTree = "<group>"; };
 		5BB848241E00237900BB266D /* CLEssenceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEssenceListController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* CLEssenceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEssenceListController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
@@ -325,17 +319,6 @@
 				0C33BC78219AF71000583B4C /* CLLogManager.m */,
 			);
 			path = CLLog;
-			sourceTree = "<group>";
-		};
-		0C52EF6321928C1D0079A0E7 /* LocalNotificationManager */ = {
-			isa = PBXGroup;
-			children = (
-				5B8B77D11E83760E0033F35A /* CLLocalNotificationManager.h */,
-				5B8B77D21E83760E0033F35A /* CLLocalNotificationManager.m */,
-				5B8B77D31E83760E0033F35A /* CLLocalNotificationModel.h */,
-				5B8B77D41E83760E0033F35A /* CLLocalNotificationModel.m */,
-			);
-			path = LocalNotificationManager;
 			sourceTree = "<group>";
 		};
 		0C52EF6421928C2A0079A0E7 /* CLLanguageManager */ = {
@@ -739,7 +722,6 @@
 				0CCDA31D219922C50057BA14 /* CLChangeFontSizeManager */,
 				0CF79AFE2196792000DD0BF1 /* Aspects */,
 				0C52EF6421928C2A0079A0E7 /* CLLanguageManager */,
-				0C52EF6321928C1D0079A0E7 /* LocalNotificationManager */,
 				5B80DA3A1DDD993F00A20E34 /* Category */,
 				5B80DA3E1DDD993F00A20E34 /* Tools */,
 			);
@@ -878,7 +860,6 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
-				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -889,7 +870,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -941,7 +921,6 @@
 				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
-				5B8B77D61E83760E0033F35A /* CLLocalNotificationModel.m in Sources */,
 				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
@@ -992,7 +971,6 @@
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,
-				5B8B77D51E83760E0033F35A /* CLLocalNotificationManager.m in Sources */,
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
@@ -1064,7 +1042,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1136,6 +1114,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1145,7 +1124,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F29D2D63E4FCF727DAB90EE /* Pods-CLDemo.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9QC82883K4;
@@ -1171,7 +1149,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFF9BFDE81DC6F568D3C9863 /* Pods-CLDemo.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9QC82883K4;
