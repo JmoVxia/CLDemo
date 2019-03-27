@@ -66,6 +66,8 @@
 @property (nonatomic, strong) NSMutableArray<CLCardViewCell *> *cellArray;
 ///原始frame数组
 @property (nonatomic, strong) NSMutableArray<NSValue *> *frameArray;
+///定时器
+@property (nonatomic, strong) CLGCDTimer *timer;
 ///自身的宽度
 @property (nonatomic, assign) CGFloat width;
 ///自身的高度
@@ -213,19 +215,19 @@
     CGFloat height = (self.height - self.configure.bottomMargin * (self.configure.showRows - 1)) * 0.5;
     __block CGFloat move = height - CGRectGetMinY(fristCell.frame);
     if ((move - height) < 0) {
-        CLGCDTimer *timer = [self timer];
-        CLGCDTimer * __weak weakTimer = timer;
-        [timer replaceOldAction:^(NSInteger actionTimes) {
-            CLGCDTimer *strongTimer = weakTimer;
+        __weak __typeof(self) weakSelf = self;
+        [self.timer replaceOldAction:^(NSInteger actionTimes) {
+            __typeof(&*weakSelf) strongSelf = weakSelf;
             CGFloat offset = (CGFloat)(move + 1) < height ? (CGFloat)(move + 0.5) : height;
             move = offset;
-            [self animationWithMove: -move];
+            [strongSelf animationWithMove: -move];
             if (offset == height) {
-                [strongTimer cancel];
-                [self endScrollAnimation];
+                [strongSelf.timer cancel];
+                strongSelf.timer = nil;
+                [strongSelf endScrollAnimation];
             }
         }];
-        [timer start];
+        [self.timer start];
     }else {
         [self endScrollAnimation];
     }
@@ -255,9 +257,11 @@
     self.isAnimation = NO;
 }
 //MARK:JmoVxia---定时器
-- (CLGCDTimer *)timer {
-    CLGCDTimer *timer = [[CLGCDTimer alloc] initWithInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
-    return timer;
+- (CLGCDTimer *) timer {
+    if (_timer == nil) {
+        _timer = [[CLGCDTimer alloc] initWithInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
+    }
+    return _timer;
 }
 //MARK:JmoVxia---是否需要加入到缓存池
 - (BOOL)isNeedAddToCache:(CLCardViewCell *)cell {
