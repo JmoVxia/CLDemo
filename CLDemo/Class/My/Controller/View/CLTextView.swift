@@ -10,12 +10,26 @@ import UIKit
 import SnapKit
 
 class CLTextViewConfigure: NSObject {
+    ///背景颜色
+    var backgroundColor: UIColor = UIColor.white
     ///占位文字
-    var placeholder: String = "AAAAAA"
+    var placeholder: String = "请输入文字"
+    ///占位文字颜色
+    var placeholderTextColor: UIColor = UIColor.black
+    ///text字体
+    var textFont: UIFont = UIFont.systemFont(ofSize: 12)
+    ///textView颜色
+    var textColor: UIColor = UIColor.black
+    ///光标颜色
+    var cursorColor: UIColor = UIColor.blue
+    ///计数label字体
+    var lengthFont: UIFont = UIFont.systemFont(ofSize: 12)
+    ///计数label字体颜色
+    var lengthColor: UIColor = UIColor.black
     ///默认行数
-    var defaultLine: NSInteger = 2
+    var defaultLine: NSInteger = 3
     ///最大行数
-    var textViewMaxLine: NSInteger = 3
+    var textViewMaxLine: NSInteger = 6
     ///最大字数
     var maxCount = 999999
     ///最大字节
@@ -42,7 +56,9 @@ class CLTextView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        lengthLabel.backgroundColor = UIColor.orange
+        backgroundColor = configure.backgroundColor
+        
+        lengthLabel.font = configure.lengthFont
         lengthLabel.text = String.init(format: "0/%ld", configure.maxBytesLength)
         addSubview(lengthLabel)
         lengthLabel.snp.makeConstraints { (make) in
@@ -51,8 +67,9 @@ class CLTextView: UIView {
         }
         
         textView.delegate = self
-        textView.backgroundColor = UIColor.red
-        textView.font = UIFont.systemFont(ofSize: 12)
+        textView.textColor = configure.textColor
+        textView.tintColor = configure.cursorColor
+        textView.font = configure.textFont
         textView.textContainerInset = UIEdgeInsets.zero
         textView.textContainer.lineFragmentPadding = 0
         addSubview(textView)
@@ -63,6 +80,7 @@ class CLTextView: UIView {
         }
         
         placeholderLabel.backgroundColor = UIColor.clear
+        placeholderLabel.textColor = configure.placeholderTextColor
         placeholderLabel.font = textView.font
         placeholderLabel.numberOfLines = 0
         placeholderLabel.text = configure.placeholder
@@ -87,12 +105,26 @@ class CLTextView: UIView {
     ///更新默认配置
     func updateWithConfigure(_ configure: ((CLTextViewConfigure) -> Void)?) {
         configure?(self.configure);
+        
+        backgroundColor = self.configure.backgroundColor
+        
         textView.snp.updateConstraints { (make) in
             make.left.equalTo(self.configure.edgeInsets.left)
             make.right.equalTo(self.configure.edgeInsets.right)
             make.top.equalTo(self.configure.edgeInsets.top)
             make.bottom.equalTo(lengthLabel.snp.top).offset(self.configure.edgeInsets.bottom)
         }
+        textView.textColor = self.configure.textColor
+        textView.font = self.configure.textFont
+        textView.tintColor = self.configure.cursorColor
+        
+        placeholderLabel.text = self.configure.placeholder
+        placeholderLabel.textColor = self.configure.placeholderTextColor
+        placeholderLabel.font = textView.font
+        
+        lengthLabel.font = self.configure.lengthFont
+        lengthLabel.textColor = self.configure.lengthColor
+        
         setNeedsLayout()
         layoutIfNeeded()
     }
@@ -145,10 +177,9 @@ extension CLTextView: UITextViewDelegate {
         let contentSizeH: CGFloat = max(textView.contentSize.height, defaultHeight())
         let lineH: CGFloat = textView.font!.lineHeight
         let maxTextViewHeight: CGFloat = ceil(lineH * CGFloat(configure.textViewMaxLine))
-        print(contentSizeH)
-            textView.snp.updateConstraints { (make) in
-                make.height.equalTo(min(contentSizeH, maxTextViewHeight))
-            }
+        textView.snp.updateConstraints { (make) in
+            make.height.equalTo(min(contentSizeH, maxTextViewHeight))
+        }
         setNeedsLayout()
         layoutIfNeeded()
         textView.scrollRangeToVisible(NSRange(location: textView.selectedRange.location, length: 1))

@@ -14,7 +14,7 @@ class CLTextViewViewController: CLBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor.lightGray
         let _ = CLTextView().then { (textView) in
             textView.backgroundColor = UIColor.lightGray
             view.addSubview(textView)
