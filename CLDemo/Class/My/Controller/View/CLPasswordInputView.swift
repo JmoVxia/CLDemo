@@ -131,9 +131,9 @@ extension CLPasswordInputView {
         }
     }
     ///更新配置，block不会造成循环引用
-    func updateWithConfigure(_ configure: ((CLPasswordInputViewConfigure) -> Void)?) -> Void {
-        configure?(self.configure)
-        backgroundColor = self.configure.backgroundColor
+    func updateWithConfigure(_ configureBlock: ((CLPasswordInputViewConfigure) -> Void)?) -> Void {
+        configureBlock?(configure)
+        backgroundColor = configure.backgroundColor
         setNeedsDisplay()
     }
     override func layoutSubviews() {

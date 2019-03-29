@@ -33,7 +33,7 @@ class CLRotateAnimationViewConfigure: NSObject {
 
 class CLRotateAnimationView: UIView {
     ///默认配置
-    private let defaultConfigure: CLRotateAnimationViewConfigure = CLRotateAnimationViewConfigure.defaultConfigure()
+    private let configure: CLRotateAnimationViewConfigure = CLRotateAnimationViewConfigure.defaultConfigure()
     ///layer数组
     private var layerArray: Array<CALayer> = Array()
     ///是否暂停
@@ -48,26 +48,26 @@ class CLRotateAnimationView: UIView {
     private func animation() -> Void {
         let origin_x: CGFloat = frame.size.width * 0.5
         let origin_y: CGFloat = frame.size.height * 0.5
-        for item in 0 ..< defaultConfigure.number {
+        for item in 0 ..< configure.number {
             //创建layer
-            let scale: CGFloat = CGFloat(defaultConfigure.number + 1 - item) / CGFloat(defaultConfigure.number + 1)
+            let scale: CGFloat = CGFloat(configure.number + 1 - item) / CGFloat(configure.number + 1)
             let layer: CALayer = CALayer()
-            layer.backgroundColor = defaultConfigure.backgroundColor.cgColor
-            layer.frame = CGRect.init(x: -5000, y: -5000, width: scale * defaultConfigure.diameter, height: scale * defaultConfigure.diameter)
-            layer.cornerRadius = scale * defaultConfigure.diameter * 0.5;
+            layer.backgroundColor = configure.backgroundColor.cgColor
+            layer.frame = CGRect.init(x: -5000, y: -5000, width: scale * configure.diameter, height: scale * configure.diameter)
+            layer.cornerRadius = scale * configure.diameter * 0.5;
             //运动路径
             let pathAnimation: CAKeyframeAnimation = CAKeyframeAnimation.init(keyPath: "position")
             pathAnimation.calculationMode = .paced;
             pathAnimation.fillMode = .forwards;
             pathAnimation.isRemovedOnCompletion = false;
-            pathAnimation.duration = (defaultConfigure.duration) - Double((defaultConfigure.intervalDuration) * Double(defaultConfigure.number));
-            pathAnimation.beginTime = Double(item) * defaultConfigure.intervalDuration;
+            pathAnimation.duration = (configure.duration) - Double((configure.intervalDuration) * Double(configure.number));
+            pathAnimation.beginTime = Double(item) * configure.intervalDuration;
             pathAnimation.timingFunction = CAMediaTimingFunction.init(name: .easeInEaseOut)
-            pathAnimation.path = UIBezierPath(arcCenter: CGPoint.init(x: origin_x, y: origin_y), radius: (self.frame.size.width - self.defaultConfigure.diameter) * 0.5, startAngle: defaultConfigure.startAngle, endAngle: defaultConfigure.endAngle, clockwise: true).cgPath
+            pathAnimation.path = UIBezierPath(arcCenter: CGPoint.init(x: origin_x, y: origin_y), radius: (self.frame.size.width - configure.diameter) * 0.5, startAngle: configure.startAngle, endAngle: configure.endAngle, clockwise: true).cgPath
             //动画组，动画组时间长于单个动画时间，会有停留效果
             let group: CAAnimationGroup = CAAnimationGroup()
             group.animations = [pathAnimation]
-            group.duration = defaultConfigure.duration
+            group.duration = configure.duration
             group.isRemovedOnCompletion = false
             group.fillMode = .forwards
             group.repeatCount = MAXFLOAT
@@ -77,10 +77,10 @@ class CLRotateAnimationView: UIView {
         }
     }
     ///更新配置
-    func updateWithConfigure(_ configure: ((CLRotateAnimationViewConfigure) -> (Void))?) -> Void {
-        configure?(self.defaultConfigure)
-        let intervalDuration: CGFloat = CGFloat(CGFloat(self.defaultConfigure.duration) / 2.0 / CGFloat(self.defaultConfigure.number));
-        self.defaultConfigure.intervalDuration = min(self.defaultConfigure.intervalDuration, TimeInterval(intervalDuration));
+    func updateWithConfigure(_ configureBlock: ((CLRotateAnimationViewConfigure) -> (Void))?) -> Void {
+        configureBlock?(configure)
+        let intervalDuration: CGFloat = CGFloat(CGFloat(configure.duration) / 2.0 / CGFloat(configure.number));
+        configure.intervalDuration = min(configure.intervalDuration, TimeInterval(intervalDuration));
     }
 }
 extension CLRotateAnimationView {

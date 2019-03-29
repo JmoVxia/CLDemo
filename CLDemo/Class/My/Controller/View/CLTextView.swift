@@ -31,11 +31,13 @@ class CLTextViewConfigure: NSObject {
     ///最大行数
     var textViewMaxLine: NSInteger = 6
     ///最大字数
-    var maxCount = 999999
+    var maxCount = INTMAX_MAX
     ///最大字节
     var maxBytesLength: NSInteger = 520
     ///输入框间距
     var edgeInsets: UIEdgeInsets = .zero
+    ///键盘风格
+    var keyboardAppearance: UIKeyboardAppearance = .light
     
     fileprivate class func defaultConfigure() -> CLTextViewConfigure {
         let configure = CLTextViewConfigure()
@@ -43,7 +45,32 @@ class CLTextViewConfigure: NSObject {
     }
 }
 
+protocol CLTextViewDelegate: class {
+    ///输入改变
+    func textViewDidChange(textView:CLTextView) -> Void
+    ///开始输入
+    func textViewBeginEditing(textView:CLTextView) -> Void
+    ///结束输入
+    func textViewEndEditing(textView:CLTextView) -> Void
+}
+extension CLTextViewDelegate {
+    ///输入改变
+    func textViewDidChange(textView:CLTextView) -> Void {
+        
+    }
+    ///开始输入
+    func textViewBeginEditing(textView:CLTextView) -> Void {
+        
+    }
+    ///结束输入
+    func textViewEndEditing(textView:CLTextView) -> Void {
+        
+    }
+}
+
 class CLTextView: UIView {
+    ///代理
+    weak var delegate: CLTextViewDelegate?
     ///输入框
     private let textView: UITextView = UITextView()
     ///占位文字laebl
@@ -52,6 +79,8 @@ class CLTextView: UIView {
     private let lengthLabel: UILabel = UILabel()
     ///默认配置
     private let configure: CLTextViewConfigure = CLTextViewConfigure.defaultConfigure()
+    ///输入的文字
+    private (set) var text: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,6 +98,7 @@ class CLTextView: UIView {
         textView.delegate = self
         textView.textColor = configure.textColor
         textView.tintColor = configure.cursorColor
+        textView.keyboardAppearance = configure.keyboardAppearance
         textView.font = configure.textFont
         textView.textContainerInset = UIEdgeInsets.zero
         textView.textContainer.lineFragmentPadding = 0
@@ -103,27 +133,30 @@ class CLTextView: UIView {
         return textViewHeight
     }
     ///更新默认配置
-    func updateWithConfigure(_ configure: ((CLTextViewConfigure) -> Void)?) {
-        configure?(self.configure);
+    func updateWithConfigure(_ configureBlock: ((CLTextViewConfigure) -> Void)?) {
+        configureBlock?(configure);
         
-        backgroundColor = self.configure.backgroundColor
+        backgroundColor = configure.backgroundColor
         
-        textView.snp.updateConstraints { (make) in
-            make.left.equalTo(self.configure.edgeInsets.left)
-            make.right.equalTo(self.configure.edgeInsets.right)
-            make.top.equalTo(self.configure.edgeInsets.top)
-            make.bottom.equalTo(lengthLabel.snp.top).offset(self.configure.edgeInsets.bottom)
-        }
-        textView.textColor = self.configure.textColor
-        textView.font = self.configure.textFont
-        textView.tintColor = self.configure.cursorColor
-        
-        placeholderLabel.text = self.configure.placeholder
-        placeholderLabel.textColor = self.configure.placeholderTextColor
+        textView.textColor = configure.textColor
+        textView.font = configure.textFont
+        textView.tintColor = configure.cursorColor
+        textView.keyboardAppearance = configure.keyboardAppearance
+
+        placeholderLabel.text = configure.placeholder
+        placeholderLabel.textColor = configure.placeholderTextColor
         placeholderLabel.font = textView.font
         
-        lengthLabel.font = self.configure.lengthFont
-        lengthLabel.textColor = self.configure.lengthColor
+        lengthLabel.font = configure.lengthFont
+        lengthLabel.textColor = configure.lengthColor
+        
+        textView.snp.remakeConstraints { (make) in
+            make.left.equalTo(configure.edgeInsets.left).priority(.low)
+            make.right.equalTo(configure.edgeInsets.right).priority(.low)
+            make.top.equalTo(configure.edgeInsets.top).priority(.low)
+            make.bottom.equalTo(lengthLabel.snp.top).offset(configure.edgeInsets.bottom).priority(.low)
+            make.height.equalTo(defaultHeight())
+        }
         
         setNeedsLayout()
         layoutIfNeeded()
@@ -139,6 +172,8 @@ extension CLTextView: UITextViewDelegate {
                 return
             }
         }
+        //是否变化
+        var isChange: Bool = true
         //限制字数
         if textView.text.utf16.count > configure.maxCount {
             var range: NSRange
@@ -148,6 +183,7 @@ extension CLTextView: UITextViewDelegate {
                 range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
                 inputCount += (textView.text as NSString).substring(with: range).count
                 if (inputCount > configure.maxCount) {
+                    isChange = false
                     let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
                     textView.text = newText
                 }
@@ -164,6 +200,7 @@ extension CLTextView: UITextViewDelegate {
                 range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
                 byteLength += strlen((textView.text as NSString).substring(with: range))
                 if (byteLength > configure.maxBytesLength) {
+                    isChange = false
                     let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
                     textView.text = newText
                 }
@@ -171,9 +208,11 @@ extension CLTextView: UITextViewDelegate {
             }
         }
         
+        text = textView.text
+        
         let string = String.init(format: "%ld/%ld", textView.text.bytesLength(), configure.maxBytesLength)
         lengthLabel.text = string
-
+        
         let contentSizeH: CGFloat = max(textView.contentSize.height, defaultHeight())
         let lineH: CGFloat = textView.font!.lineHeight
         let maxTextViewHeight: CGFloat = ceil(lineH * CGFloat(configure.textViewMaxLine))
@@ -183,6 +222,18 @@ extension CLTextView: UITextViewDelegate {
         setNeedsLayout()
         layoutIfNeeded()
         textView.scrollRangeToVisible(NSRange(location: textView.selectedRange.location, length: 1))
+        
+        if  isChange {
+            delegate?.textViewDidChange(textView: self)
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        delegate?.textViewBeginEditing(textView: self)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        delegate?.textViewEndEditing(textView: self)
     }
 }
 

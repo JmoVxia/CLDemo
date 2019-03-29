@@ -54,14 +54,14 @@ class CLRoundAnimationView: UIView {
     private var isPause: Bool = false
 
     ///更新配置
-    func updateWithConfigure(_ configure: ((CLRoundAnimationViewConfigure) -> (Void))?) -> Void {
-        configure?(self.configure)
-        self.configure.inLineWidth = min(self.configure.inLineWidth, self.configure.outLineWidth)
-        backgroundLayer.backgroundColor = self.configure.outBackgroundColor.cgColor
-        backgroundLayer.mask = shapeLayer(lineWidth: self.configure.outLineWidth, start: 0, end: 1, outLayer: true)
-        animationLayer.mask = shapeLayer(lineWidth: self.configure.inLineWidth, start: self.configure.strokeStart, end: self.configure.strokeEnd, outLayer: false)
-        animationLayer.backgroundColor = self.configure.inBackgroundColor.cgColor
-        rotationAnimation.duration = self.configure.duration;
+    func updateWithConfigure(_ configureBlock: ((CLRoundAnimationViewConfigure) -> (Void))?) -> Void {
+        configureBlock?(configure)
+        configure.inLineWidth = min(configure.inLineWidth, configure.outLineWidth)
+        backgroundLayer.backgroundColor = configure.outBackgroundColor.cgColor
+        backgroundLayer.mask = shapeLayer(lineWidth: configure.outLineWidth, start: 0, end: 1, outLayer: true)
+        animationLayer.mask = shapeLayer(lineWidth: configure.inLineWidth, start: configure.strokeStart, end: configure.strokeEnd, outLayer: false)
+        animationLayer.backgroundColor = configure.inBackgroundColor.cgColor
+        rotationAnimation.duration = configure.duration;
     }
 }
 extension CLRoundAnimationView {
@@ -136,10 +136,10 @@ extension CLRoundAnimationView {
             offset = 0;
             break;
         case .animationMiddle:
-            offset = outLayer ? 0 : self.configure.outLineWidth - self.configure.inLineWidth;
+            offset = outLayer ? 0 : configure.outLineWidth - configure.inLineWidth;
             break;
         case .animationIn:
-            offset = outLayer ? 0 : (self.configure.outLineWidth - self.configure.inLineWidth) * 2;
+            offset = outLayer ? 0 : (configure.outLineWidth - configure.inLineWidth) * 2;
             break;
         }
         let radius: CGFloat = (height - lineWidth - offset) * 0.5;
