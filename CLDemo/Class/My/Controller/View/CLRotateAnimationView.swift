@@ -77,7 +77,7 @@ class CLRotateAnimationView: UIView {
         }
     }
     ///更新配置
-    func updateWithConfigure(configure: ((CLRotateAnimationViewConfigure) -> (Void))?) -> Void {
+    func updateWithConfigure(_ configure: ((CLRotateAnimationViewConfigure) -> (Void))?) -> Void {
         configure?(self.defaultConfigure)
         let intervalDuration: CGFloat = CGFloat(CGFloat(self.defaultConfigure.duration) / 2.0 / CGFloat(self.defaultConfigure.number));
         self.defaultConfigure.intervalDuration = min(self.defaultConfigure.intervalDuration, TimeInterval(intervalDuration));

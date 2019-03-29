@@ -54,7 +54,7 @@ class CLRoundAnimationView: UIView {
     private var isPause: Bool = false
 
     ///更新配置
-    func updateWithConfigure(configure: ((CLRoundAnimationViewConfigure) -> (Void))?) -> Void {
+    func updateWithConfigure(_ configure: ((CLRoundAnimationViewConfigure) -> (Void))?) -> Void {
         configure?(self.configure)
         self.configure.inLineWidth = min(self.configure.inLineWidth, self.configure.outLineWidth)
         backgroundLayer.backgroundColor = self.configure.outBackgroundColor.cgColor

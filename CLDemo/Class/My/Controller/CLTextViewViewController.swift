@@ -22,6 +22,9 @@ class CLTextViewViewController: CLBaseViewController {
                 make.left.right.equalTo(0)
                 make.top.equalTo(100)
             })
+            textView.updateWithConfigure({ (configure) in
+                configure.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10)
+            })
         }
     }
 }

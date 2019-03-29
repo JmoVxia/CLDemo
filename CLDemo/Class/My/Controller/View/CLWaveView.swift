@@ -83,7 +83,7 @@ class CLWaveView: UIView {
         shapeLayer.path = path
     }
     ///更新基本配置，block不会造成循环引用
-    func updateWithConfig(configure: ((CLWaveViewConfigure) -> Void)?) {
+    func updateWithConfigure(_ configure: ((CLWaveViewConfigure) -> Void)?) {
         self.configure.width = frame.size.width
         configure?(self.configure);
         shapeLayer.fillColor = self.configure.color.cgColor;
