@@ -9,6 +9,44 @@
 import UIKit
 import SnapKit
 
+/// 统计类型
+///
+/// - count: 字数
+/// - bytesLength: 字节
+enum Statistics: Int {
+    case count
+    case bytesLength
+}
+
+/// 字符编码格式
+///
+enum Encoding {
+    case gbk
+    case ascii
+    case nextstep
+    case japaneseEUC
+    case utf8
+    case isoLatin1
+    case symbol
+    case nonLossyASCII
+    case shiftJIS
+    case isoLatin2
+    case unicode
+    case windowsCP1251
+    case windowsCP1252
+    case windowsCP1253
+    case windowsCP1254
+    case windowsCP1250
+    case iso2022JP
+    case macOSRoman
+    case utf16
+    case utf16BigEndian
+    case utf16LittleEndian
+    case utf32
+    case utf32BigEndian
+    case utf32LittleEndian
+}
+
 class CLTextViewConfigure: NSObject {
     ///背景颜色
     var backgroundColor: UIColor = UIColor.white
@@ -31,13 +69,17 @@ class CLTextViewConfigure: NSObject {
     ///最大行数
     var textViewMaxLine: NSInteger = 6
     ///最大字数
-    var maxCount = INTMAX_MAX
+    var maxCount = 1000
     ///最大字节
     var maxBytesLength: NSInteger = 520
     ///输入框间距
     var edgeInsets: UIEdgeInsets = .zero
     ///键盘风格
     var keyboardAppearance: UIKeyboardAppearance = .light
+    ///统计类型
+    var statistics: Statistics = .bytesLength
+    ///编码格式
+    var encoding: Encoding = .gbk
     
     fileprivate class func defaultConfigure() -> CLTextViewConfigure {
         let configure = CLTextViewConfigure()
@@ -72,11 +114,40 @@ class CLTextView: UIView {
     ///代理
     weak var delegate: CLTextViewDelegate?
     ///输入框
-    private let textView: UITextView = UITextView()
+    private lazy var textView: UITextView = {
+        let textView = UITextView()
+        textView.delegate = self
+        textView.backgroundColor = .clear
+        textView.textColor = configure.textColor
+        textView.tintColor = configure.cursorColor
+        textView.keyboardAppearance = configure.keyboardAppearance
+        textView.font = configure.textFont
+        textView.textContainerInset = UIEdgeInsets.zero
+        textView.textContainer.lineFragmentPadding = 0
+        textView.layoutManager.allowsNonContiguousLayout = false
+        textView.scrollsToTop = false
+        addSubview(textView)
+        return textView
+    }()
     ///占位文字laebl
-    private let placeholderLabel = UILabel()
+    private lazy var placeholderLabel: UILabel = {
+        let placeholderLabel = UILabel()
+        placeholderLabel.backgroundColor = UIColor.clear
+        placeholderLabel.textColor = configure.placeholderTextColor
+        placeholderLabel.font = configure.textFont
+        placeholderLabel.numberOfLines = 0
+        placeholderLabel.text = configure.placeholder
+        addSubview(placeholderLabel)
+        return placeholderLabel
+    }()
     ///计数label
-    private let lengthLabel: UILabel = UILabel()
+    private lazy var lengthLabel: UILabel = {
+        let lengthLabel = UILabel()
+        lengthLabel.font = configure.lengthFont
+        lengthLabel.text = String.init(format: "0/%ld", configure.maxBytesLength)
+        addSubview(lengthLabel)
+        return lengthLabel
+    }()
     ///默认配置
     private let configure: CLTextViewConfigure = CLTextViewConfigure.defaultConfigure()
     ///输入的文字
@@ -84,85 +155,82 @@ class CLTextView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         backgroundColor = configure.backgroundColor
-        
-        lengthLabel.font = configure.lengthFont
-        lengthLabel.text = String.init(format: "0/%ld", configure.maxBytesLength)
-        addSubview(lengthLabel)
-        lengthLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(0)
-            make.right.equalTo(-5)
-        }
-        
-        textView.delegate = self
-        textView.textColor = configure.textColor
-        textView.tintColor = configure.cursorColor
-        textView.keyboardAppearance = configure.keyboardAppearance
-        textView.font = configure.textFont
-        textView.textContainerInset = UIEdgeInsets.zero
-        textView.textContainer.lineFragmentPadding = 0
-        addSubview(textView)
-        textView.snp.makeConstraints { (make) in
-            make.left.top.right.equalTo(0)
-            make.height.equalTo(defaultHeight())
-            make.bottom.equalTo(lengthLabel.snp.top)
-        }
-        
-        placeholderLabel.backgroundColor = UIColor.clear
-        placeholderLabel.textColor = configure.placeholderTextColor
-        placeholderLabel.font = textView.font
-        placeholderLabel.numberOfLines = 0
-        placeholderLabel.text = configure.placeholder
-        addSubview(placeholderLabel)
-        placeholderLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(textView)
-            make.left.equalTo(textView).offset(4)
-            make.right.lessThanOrEqualTo(textView.snp.right)
-            make.bottom.lessThanOrEqualTo(textView.snp.bottom)
-        }
+        remakeConstraints()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    ///默认高度
-    private func defaultHeight() -> CGFloat {
-        let lineH: CGFloat = textView.font!.lineHeight
-        let textViewHeight: CGFloat = ceil(lineH * CGFloat(configure.defaultLine))
-        return textViewHeight
+    ///textView高度
+    private func textViewHeight() -> CGFloat {
+        let lineH: CGFloat = configure.textFont.lineHeight
+        let contentSizeH: CGFloat = max(ceil(lineH * CGFloat(configure.defaultLine)), textView.contentSize.height)
+        let maxTextViewHeight: CGFloat = ceil(lineH * CGFloat(configure.textViewMaxLine))
+        return min(contentSizeH, maxTextViewHeight)
     }
-    ///更新默认配置
-    func updateWithConfigure(_ configureBlock: ((CLTextViewConfigure) -> Void)?) {
-        configureBlock?(configure);
-        
-        backgroundColor = configure.backgroundColor
-        
-        textView.textColor = configure.textColor
-        textView.font = configure.textFont
-        textView.tintColor = configure.cursorColor
-        textView.keyboardAppearance = configure.keyboardAppearance
-
-        placeholderLabel.text = configure.placeholder
-        placeholderLabel.textColor = configure.placeholderTextColor
-        placeholderLabel.font = textView.font
-        
-        lengthLabel.font = configure.lengthFont
-        lengthLabel.textColor = configure.lengthColor
-        
-        textView.snp.remakeConstraints { (make) in
-            make.left.equalTo(configure.edgeInsets.left).priority(.low)
-            make.right.equalTo(configure.edgeInsets.right).priority(.low)
-            make.top.equalTo(configure.edgeInsets.top).priority(.low)
-            make.bottom.equalTo(lengthLabel.snp.top).offset(configure.edgeInsets.bottom).priority(.low)
-            make.height.equalTo(defaultHeight())
+    ///更新约束
+    private func remakeConstraints() {
+        DispatchQueue.main.async {
+            
+            self.lengthLabel.snp.remakeConstraints { (make) in
+                make.bottom.equalTo(0)
+                make.right.equalTo(self.configure.edgeInsets.right)
+            }
+            self.textView.snp.remakeConstraints { (make) in
+                make.top.equalTo(self.configure.edgeInsets.top)
+                make.left.equalTo(self.configure.edgeInsets.left)
+                make.right.equalTo(self.configure.edgeInsets.right).priority(.low)
+                make.height.equalTo(self.textViewHeight())
+                make.bottom.equalTo(self.lengthLabel.snp.top).offset(self.configure.edgeInsets.bottom).priority(.low)
+            }
+            self.placeholderLabel.snp.remakeConstraints { (make) in
+                make.top.equalTo(self.textView)
+                make.left.equalTo(self.textView).offset(4)
+                make.right.lessThanOrEqualTo(self.textView.snp.right).priority(.low)
+                make.bottom.lessThanOrEqualTo(self.textView.snp.bottom)
+            }
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+            
+            self.textView.scrollRangeToVisible(NSRange(location: self.textView.selectedRange.location, length: 1))
         }
-        
-        setNeedsLayout()
-        layoutIfNeeded()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let height: CGFloat = textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + lengthLabel.sizeThatFits(.zero).height
+        frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: height)
     }
 }
-
+//MARK:JmoVxia---更新相关
+extension CLTextView {
+    ///更新默认配置
+    func updateWithConfigure(_ configure: ((CLTextViewConfigure) -> Void)?) {
+        configure?(self.configure)
+        
+        backgroundColor = self.configure.backgroundColor
+        
+        textView.textColor = self.configure.textColor
+        textView.font = self.configure.textFont
+        textView.tintColor = self.configure.cursorColor
+        textView.keyboardAppearance = self.configure.keyboardAppearance
+        
+        placeholderLabel.text = self.configure.placeholder
+        placeholderLabel.textColor = self.configure.placeholderTextColor
+        placeholderLabel.font = self.configure.textFont
+        
+        lengthLabel.font = self.configure.lengthFont
+        lengthLabel.textColor = self.configure.lengthColor
+        
+        textViewDidChange(textView)
+    }
+    ///更新文字
+    func updateText(_ text: String) {
+        textView.text = text
+        textViewDidChange(textView)
+    }
+}
+//MARK:JmoVxia---UITextViewDelegate
 extension CLTextView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = textView.text.count > 0 ? true : false
@@ -174,8 +242,9 @@ extension CLTextView: UITextViewDelegate {
         }
         //是否变化
         var isChange: Bool = true
+        
         //限制字数
-        if textView.text.utf16.count > configure.maxCount {
+        if textView.text.count > configure.maxCount {
             var range: NSRange
             var inputCount: NSInteger = 0
             var i = 0
@@ -191,14 +260,13 @@ extension CLTextView: UITextViewDelegate {
             }
         }
         //限制字节
-        let textBytesLength: NSInteger = textView.text.bytesLength()
-        if textBytesLength > configure.maxBytesLength {
+        if bytesLength(text: textView.text) > configure.maxBytesLength {
             var range: NSRange
             var byteLength: NSInteger = 0
             var i = 0
             while i < textView.text.utf16.count && byteLength <= configure.maxBytesLength {
                 range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
-                byteLength += strlen((textView.text as NSString).substring(with: range))
+                byteLength += bytesLength(text: (textView.text as NSString).substring(with: range))
                 if (byteLength > configure.maxBytesLength) {
                     isChange = false
                     let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
@@ -209,19 +277,16 @@ extension CLTextView: UITextViewDelegate {
         }
         
         text = textView.text
+        var string: String
+        if configure.statistics == .bytesLength {
+            string = String.init(format: "%ld/%ld",  bytesLength(text: textView.text), configure.maxBytesLength)
+        }else {
+            string = String.init(format: "%ld/%ld", textView.text.count, configure.maxCount)
+        }
         
-        let string = String.init(format: "%ld/%ld", textView.text.bytesLength(), configure.maxBytesLength)
         lengthLabel.text = string
         
-        let contentSizeH: CGFloat = max(textView.contentSize.height, defaultHeight())
-        let lineH: CGFloat = textView.font!.lineHeight
-        let maxTextViewHeight: CGFloat = ceil(lineH * CGFloat(configure.textViewMaxLine))
-        textView.snp.updateConstraints { (make) in
-            make.height.equalTo(min(contentSizeH, maxTextViewHeight))
-        }
-        setNeedsLayout()
-        layoutIfNeeded()
-        textView.scrollRangeToVisible(NSRange(location: textView.selectedRange.location, length: 1))
+        remakeConstraints()
         
         if  isChange {
             delegate?.textViewDidChange(textView: self)
@@ -236,9 +301,83 @@ extension CLTextView: UITextViewDelegate {
         delegate?.textViewEndEditing(textView: self)
     }
 }
-
-extension String {
-    func bytesLength() -> NSInteger {
-        return self.lengthOfBytes(using: .utf8)
+//MARK:JmoVxia---键盘相关
+extension CLTextView {
+    ///成为第一响应者
+    override func becomeFirstResponder() -> Bool {
+        return textView.becomeFirstResponder()
     }
+    ///取消第一响应者
+    override func resignFirstResponder() -> Bool {
+        return textView.resignFirstResponder()
+    }
+}
+extension CLTextView {
+    func bytesLength(text: String) -> Int {
+        switch configure.encoding {
+        case .gbk:
+            return text.gbkLength()
+        case .ascii:
+            return text.bytesLength(using: .ascii)
+        case .nextstep:
+            return text.bytesLength(using: .nextstep)
+        case .japaneseEUC:
+            return text.bytesLength(using: .japaneseEUC)
+        case .utf8:
+            return text.bytesLength(using: .utf8)
+        case .isoLatin1:
+            return text.bytesLength(using: .isoLatin1)
+        case .symbol:
+            return text.bytesLength(using: .symbol)
+        case .nonLossyASCII:
+            return text.bytesLength(using: .nonLossyASCII)
+        case .shiftJIS:
+            return text.bytesLength(using: .shiftJIS)
+        case .isoLatin2:
+            return text.bytesLength(using: .isoLatin2)
+        case .unicode:
+            return text.bytesLength(using: .unicode)
+        case .windowsCP1251:
+            return text.bytesLength(using: .windowsCP1251)
+        case .windowsCP1252:
+            return text.bytesLength(using: .windowsCP1252)
+        case .windowsCP1253:
+            return text.bytesLength(using: .windowsCP1253)
+        case .windowsCP1254:
+            return text.bytesLength(using: .windowsCP1254)
+        case .windowsCP1250:
+            return text.bytesLength(using: .windowsCP1250)
+        case .iso2022JP:
+            return text.bytesLength(using: .iso2022JP)
+        case .macOSRoman:
+            return text.bytesLength(using: .macOSRoman)
+        case .utf16:
+            return text.bytesLength(using: .utf16)
+        case .utf16BigEndian:
+            return text.bytesLength(using: .utf16BigEndian)
+        case .utf16LittleEndian:
+            return text.bytesLength(using: .utf16LittleEndian)
+        case .utf32:
+            return text.bytesLength(using: .utf32)
+        case .utf32BigEndian:
+            return text.bytesLength(using: .utf32BigEndian)
+        case .utf32LittleEndian:
+            return text.bytesLength(using: .utf32LittleEndian)
+        }
+    }
+}
+extension String {
+    ///用GBK编码长度
+    func gbkLength() -> Int {
+        let cfEncoding = CFStringEncodings.GB_18030_2000
+        let encoding = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(cfEncoding.rawValue))
+        let gbkData = (self as NSString).data(using: encoding)!
+        let gbkBytes = [UInt8](gbkData)
+        return gbkBytes.count
+    }
+    ///按照编码获取对应字节
+    func bytesLength(using: String.Encoding) -> NSInteger {
+        return self.lengthOfBytes(using: using)
+    }
+    
 }

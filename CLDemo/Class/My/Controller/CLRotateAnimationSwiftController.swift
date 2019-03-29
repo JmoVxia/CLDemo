@@ -56,5 +56,26 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
             view.addSubview(roundAnimationView)
             roundAnimationView.startAnimation()
         }
+        
+        do {
+            let imageView: CLRotateImageView = CLRotateImageView(frame: CGRect(x: 280, y: 300, width: 60, height: 60), superview: view)
+            imageView.showAnimating()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                imageView.hiddenAnimating()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+                imageView.showAnimating()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
+                imageView.hiddenAnimating()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
+                imageView.showAnimating()
+            }
+        }
     }
 }

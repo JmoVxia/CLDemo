@@ -16,6 +16,7 @@
 		0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */; };
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
+		0C36EDDE224E34AC006BEC18 /* CLRotateImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C36EDDD224E34AC006BEC18 /* CLRotateImageView.swift */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
 		0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */; };
 		0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */; };
@@ -117,6 +118,7 @@
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
 		0C33BC78219AF71000583B4C /* CLLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogManager.m; sourceTree = "<group>"; };
+		0C36EDDD224E34AC006BEC18 /* CLRotateImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateImageView.swift; sourceTree = "<group>"; };
 		0C3CAA5321AF89BD00A352F0 /* CLRotateAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationController.h; sourceTree = "<group>"; };
 		0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationController.m; sourceTree = "<group>"; };
 		0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationView.h; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */,
 				0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */,
 				0C903001224774430064088E /* CLRotateAnimationView.swift */,
+				0C36EDDD224E34AC006BEC18 /* CLRotateImageView.swift */,
 				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
 				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
 				0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */,
@@ -805,7 +808,7 @@
 				TargetAttributes = {
 					5B80D9E31DDD976A00A20E34 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 9QC82883K4;
+						DevelopmentTeam = KZ83WEMA2D;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
@@ -935,6 +938,7 @@
 				0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
+				0C36EDDE224E34AC006BEC18 /* CLRotateImageView.swift in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */,
@@ -1134,8 +1138,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9QC82883K4;
+				DEVELOPMENT_TEAM = KZ83WEMA2D;
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = CLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1144,7 +1149,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo/Others/CLBankScan/bank_card/exbankcardcore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ABCDDDDD.vvv;
+				PRODUCT_BUNDLE_IDENTIFIER = Demo.ccc.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1159,7 +1164,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9QC82883K4;
+				DEVELOPMENT_TEAM = KZ83WEMA2D;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = CLDemo/Info.plist;
@@ -1169,7 +1174,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo/Others/CLBankScan/bank_card/exbankcardcore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ABCDDDDD.vvv;
+				PRODUCT_BUNDLE_IDENTIFIER = Demo.ccc.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
