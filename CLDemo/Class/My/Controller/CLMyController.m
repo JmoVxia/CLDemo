@@ -98,6 +98,7 @@
         [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:NSLocalizedString(@"气泡拖拽", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"自定义输入框", nil)];
     }
     return _arrayDS;
 }
@@ -119,6 +120,7 @@
         [_controllerArray addObject:[CLWaveViewController class]];
         [_controllerArray addObject:[CLWaveSwiftViewController class]];
         [_controllerArray addObject:[CLBubbleViewViewController class]];
+        [_controllerArray addObject:[CLTextViewViewController class]];
     }
     return _controllerArray;
 }
