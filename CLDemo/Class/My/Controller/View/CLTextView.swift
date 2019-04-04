@@ -126,6 +126,9 @@ class CLTextView: UIView {
         textView.textContainer.lineFragmentPadding = 0
         textView.layoutManager.allowsNonContiguousLayout = false
         textView.scrollsToTop = false
+        if #available(iOS 11.0, *) {
+            textView.pasteDelegate = self
+        }
         addSubview(textView)
         return textView
     }()
@@ -222,7 +225,7 @@ extension CLTextView {
         lengthLabel.font = self.configure.lengthFont
         lengthLabel.textColor = self.configure.lengthColor
         
-        textViewDidChange(textView)
+        remakeConstraints()
     }
     ///更新文字
     func updateText(_ text: String) {
@@ -240,9 +243,8 @@ extension CLTextView: UITextViewDelegate {
                 return
             }
         }
-        //是否变化
-        var isChange: Bool = true
-        
+        //记录
+        let startString: String = String.init(stringLiteral: text)
         //限制字数
         if textView.text.count > configure.maxCount {
             var range: NSRange
@@ -252,7 +254,6 @@ extension CLTextView: UITextViewDelegate {
                 range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
                 inputCount += (textView.text as NSString).substring(with: range).count
                 if (inputCount > configure.maxCount) {
-                    isChange = false
                     let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
                     textView.text = newText
                 }
@@ -268,7 +269,6 @@ extension CLTextView: UITextViewDelegate {
                 range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
                 byteLength += bytesLength(text: (textView.text as NSString).substring(with: range))
                 if (byteLength > configure.maxBytesLength) {
-                    isChange = false
                     let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
                     textView.text = newText
                 }
@@ -288,7 +288,7 @@ extension CLTextView: UITextViewDelegate {
         
         remakeConstraints()
         
-        if  isChange {
+        if  startString != textView.text {
             delegate?.textViewDidChange(textView: self)
         }
     }
@@ -379,5 +379,10 @@ extension String {
     func bytesLength(using: String.Encoding) -> NSInteger {
         return self.lengthOfBytes(using: using)
     }
-    
+}
+extension CLTextView: UITextPasteDelegate {
+    @available(iOS 11.0, *)
+    func textPasteConfigurationSupporting(_ textPasteConfigurationSupporting: UITextPasteConfigurationSupporting, shouldAnimatePasteOf attributedString: NSAttributedString, to textRange: UITextRange) -> Bool {
+        return false
+    }
 }
