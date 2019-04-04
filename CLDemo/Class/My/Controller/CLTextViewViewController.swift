@@ -12,43 +12,46 @@ import SnapKit
 
 class CLTextViewViewController: CLBaseViewController {
 
-    lazy var textView: CLTextView = {
-        let textView = CLTextView(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 0)).then { (textView) in
-            textView.updateWithConfigure({ (configure) in
-                configure.statistics = .count
-                configure.edgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: -10, right: -15)
-            })
-            textView.delegate = self
-        }
-        return textView
-    }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.95, alpha:1.00)
-//        let _ = CLTextView().then { (textView) in
-//            view.addSubview(textView)
-//            textView.snp.makeConstraints({ (make) in
-//                if #available(iOS 11.0, *) {
-//                    make.left.right.equalTo(view.safeAreaLayoutGuide)
-//                } else {
-//                    make.left.right.equalTo(0)
-//                }
-//                make.top.equalTo(120).priority(.high)
-//            })
+    //MARK:JmoVxia---frame布局
+//    lazy var textView: CLTextView = {
+//        let textView = CLTextView(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 0)).then { (textView) in
 //            textView.updateWithConfigure({ (configure) in
 //                configure.statistics = .count
-//                configure.edgeInsets = UIEdgeInsets(top: 30, left: 10, bottom: -30, right: -10)
+////                configure.showLengthLabel = true
+//                configure.edgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: -10, right: -15)
 //            })
-//            textView.delegate = self
 //        }
+//        return textView
+//    }()
+    
+    //MARK:JmoVxia---autolayout
+    lazy var textView: CLTextView = CLTextView().then { (textView) in
         view.addSubview(textView)
+        textView.snp.makeConstraints({ (make) in
+            if #available(iOS 11.0, *) {
+                make.left.right.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.left.right.equalTo(0)
+            }
+            make.top.equalTo(120).priority(.high)
+        })
+        textView.updateWithConfigure({ (configure) in
+            configure.statistics = .count
+            configure.showLengthLabel = true
+            configure.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10)
+        })
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textView.delegate = self
+        view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.95, alpha:1.00)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        textView.frame = CGRect(x: 0, y: 120, width: view.frame.width, height: 0)
+        //MARK:JmoVxia---frame布局
+//        textView.frame = CGRect(x: 0, y: 120, width: view.frame.width, height: 0)
     }
     
 }

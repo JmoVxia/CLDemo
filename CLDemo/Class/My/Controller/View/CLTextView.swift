@@ -50,6 +50,8 @@ enum Encoding {
 class CLTextViewConfigure: NSObject {
     ///背景颜色
     var backgroundColor: UIColor = UIColor.white
+    ///显示计数
+    var showLengthLabel: Bool = false
     ///占位文字
     var placeholder: String = "请输入文字"
     ///占位文字颜色
@@ -174,17 +176,23 @@ class CLTextView: UIView {
     ///更新约束
     private func remakeConstraints() {
         DispatchQueue.main.async {
-            
-            self.lengthLabel.snp.remakeConstraints { (make) in
-                make.bottom.equalTo(0)
-                make.right.equalTo(self.configure.edgeInsets.right)
+            self.lengthLabel.isHidden = !self.configure.showLengthLabel
+            if self.configure.showLengthLabel {
+                self.lengthLabel.snp.remakeConstraints { (make) in
+                    make.bottom.equalTo(self.snp.bottom).offset(self.configure.edgeInsets.bottom)
+                    make.right.equalTo(self.configure.edgeInsets.right)
+                }
             }
             self.textView.snp.remakeConstraints { (make) in
                 make.top.equalTo(self.configure.edgeInsets.top)
                 make.left.equalTo(self.configure.edgeInsets.left)
                 make.right.equalTo(self.configure.edgeInsets.right).priority(.low)
                 make.height.equalTo(self.textViewHeight())
-                make.bottom.equalTo(self.lengthLabel.snp.top).offset(self.configure.edgeInsets.bottom).priority(.low)
+                if self.configure.showLengthLabel {
+                    make.bottom.equalTo(self.lengthLabel.snp.top).offset(self.configure.edgeInsets.bottom).priority(.low)
+                }else {
+                    make.bottom.equalTo(self.snp.bottom).offset(self.configure.edgeInsets.bottom).priority(.low)
+                }
             }
             self.placeholderLabel.snp.remakeConstraints { (make) in
                 make.top.equalTo(self.textView)
@@ -201,7 +209,7 @@ class CLTextView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let height: CGFloat = textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + lengthLabel.sizeThatFits(.zero).height
+        let height: CGFloat = textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + (configure.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - configure.edgeInsets.bottom) : 0)
         frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: height)
     }
 }
