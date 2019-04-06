@@ -20,6 +20,7 @@
 #import "CLCardController.h"
 #import "CLWaveViewController.h"
 #import "CLBubbleViewViewController.h"
+#import "CLCustomQRCodeViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -99,6 +100,7 @@
         [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:NSLocalizedString(@"气泡拖拽", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入框", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"自定义二维码", nil)];
     }
     return _arrayDS;
 }
@@ -121,6 +123,7 @@
         [_controllerArray addObject:[CLWaveSwiftViewController class]];
         [_controllerArray addObject:[CLBubbleViewViewController class]];
         [_controllerArray addObject:[CLTextViewViewController class]];
+        [_controllerArray addObject:[CLCustomQRCodeViewController class]];
     }
     return _controllerArray;
 }

@@ -14,18 +14,19 @@ class CLTextViewViewController: CLBaseViewController {
 
     //MARK:JmoVxia---frame布局
 //    lazy var textView: CLTextView = {
-//        let textView = CLTextView(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 0)).then { (textView) in
-//            textView.updateWithConfigure({ (configure) in
-//                configure.statistics = .count
-////                configure.showLengthLabel = true
-//                configure.edgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: -10, right: -15)
-//            })
-//        }
+//        let textView = CLTextView(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 0))
+//        view.addSubview(textView)
+//        textView.updateWithConfigure({ (configure) in
+//            configure.statistics = .count
+//            configure.showLengthLabel = true
+//            configure.edgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: -10, right: -15)
+//        })
 //        return textView
 //    }()
     
     //MARK:JmoVxia---autolayout
-    lazy var textView: CLTextView = CLTextView().then { (textView) in
+    lazy var textView: CLTextView = {
+        let textView = CLTextView()
         view.addSubview(textView)
         textView.snp.makeConstraints({ (make) in
             if #available(iOS 11.0, *) {
@@ -36,15 +37,18 @@ class CLTextViewViewController: CLBaseViewController {
             make.top.equalTo(120).priority(.high)
         })
         textView.updateWithConfigure({ (configure) in
-            configure.statistics = .count
+            configure.statistics = .bytesLength
             configure.showLengthLabel = true
+            configure.maxBytesLength = 20
             configure.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10)
         })
-    }
+        return textView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
+        print(self.textView.height)
         view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.95, alpha:1.00)
     }
     

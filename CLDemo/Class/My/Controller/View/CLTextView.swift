@@ -1,6 +1,6 @@
 //
-//  CLTextView.swift
-//  CLDemo
+//  PTTextView.swift
+//
 //
 //  Created by AUG on 2019/3/28.
 //  Copyright © 2019 JmoVxia. All rights reserved.
@@ -51,7 +51,7 @@ class CLTextViewConfigure: NSObject {
     ///背景颜色
     var backgroundColor: UIColor = UIColor.white
     ///显示计数
-    var showLengthLabel: Bool = false
+    var showLengthLabel: Bool = true
     ///占位文字
     var placeholder: String = "请输入文字"
     ///占位文字颜色
@@ -71,7 +71,7 @@ class CLTextViewConfigure: NSObject {
     ///最大行数
     var textViewMaxLine: NSInteger = 6
     ///最大字数
-    var maxCount = 1000
+    var maxCount = 100
     ///最大字节
     var maxBytesLength: NSInteger = 520
     ///输入框间距
@@ -97,6 +97,7 @@ protocol CLTextViewDelegate: class {
     ///结束输入
     func textViewEndEditing(textView:CLTextView) -> Void
 }
+
 extension CLTextViewDelegate {
     ///输入改变
     func textViewDidChange(textView:CLTextView) -> Void {
@@ -115,6 +116,12 @@ extension CLTextViewDelegate {
 class CLTextView: UIView {
     ///代理
     weak var delegate: CLTextViewDelegate?
+    ///高度
+    var height: CGFloat {
+        return textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + (configure.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - configure.edgeInsets.bottom) : 0)
+    }
+    ///之前光标位置
+    private var beforeSelectedRange: NSRange = NSRange(location: 0, length: 0)
     ///输入框
     private lazy var textView: UITextView = {
         let textView = UITextView()
@@ -149,13 +156,17 @@ class CLTextView: UIView {
     private lazy var lengthLabel: UILabel = {
         let lengthLabel = UILabel()
         lengthLabel.font = configure.lengthFont
-        lengthLabel.text = String.init(format: "0/%ld", configure.maxBytesLength)
+        if configure.statistics == .bytesLength {
+            lengthLabel.text = String.init(format: "0/%ld", configure.maxBytesLength)
+        }else {
+            lengthLabel.text = String.init(format: "0/%ld", configure.maxCount)
+        }
         addSubview(lengthLabel)
         return lengthLabel
     }()
     ///默认配置
     private let configure: CLTextViewConfigure = CLTextViewConfigure.defaultConfigure()
-    ///输入的文字
+    ///当前输入的文字
     private (set) var text: String = ""
     
     override init(frame: CGRect) {
@@ -209,7 +220,6 @@ class CLTextView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let height: CGFloat = textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + (configure.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - configure.edgeInsets.bottom) : 0)
         frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: height)
     }
 }
@@ -243,62 +253,37 @@ extension CLTextView {
 }
 //MARK:JmoVxia---UITextViewDelegate
 extension CLTextView: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        beforeSelectedRange = textView.selectedRange
+        return true
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
-        placeholderLabel.isHidden = textView.text.count > 0 ? true : false
         //输入状态不计算
         if let rang = textView.markedTextRange {
             if let _ = textView.position(from: rang.start, offset: 0) {
                 return
             }
         }
-        //记录
-        let startString: String = String.init(stringLiteral: text)
-        //限制字数
-        if textView.text.count > configure.maxCount {
-            var range: NSRange
-            var inputCount: NSInteger = 0
-            var i = 0
-            while i < textView.text.utf16.count && inputCount <= configure.maxCount {
-                range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
-                inputCount += (textView.text as NSString).substring(with: range).count
-                if (inputCount > configure.maxCount) {
-                    let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
-                    textView.text = newText
-                }
-                i += range.length
-            }
+        //限制字数,字节
+        if (textView.text.count > configure.maxCount) || (bytesLength(text: textView.text) > configure.maxBytesLength){
+            textView.text = text
+            textView.selectedRange = beforeSelectedRange
         }
-        //限制字节
-        if bytesLength(text: textView.text) > configure.maxBytesLength {
-            var range: NSRange
-            var byteLength: NSInteger = 0
-            var i = 0
-            while i < textView.text.utf16.count && byteLength <= configure.maxBytesLength {
-                range = (textView.text as NSString).rangeOfComposedCharacterSequence(at: i)
-                byteLength += bytesLength(text: (textView.text as NSString).substring(with: range))
-                if (byteLength > configure.maxBytesLength) {
-                    let newText = (textView.text as NSString).substring(with: NSRange.init(location: 0, length: range.location))
-                    textView.text = newText
-                }
-                i += range.length
-            }
-        }
-        
-        text = textView.text
-        var string: String
+        placeholderLabel.isHidden = textView.text.count > 0 ? true : false
+        var lengthText: String
         if configure.statistics == .bytesLength {
-            string = String.init(format: "%ld/%ld",  bytesLength(text: textView.text), configure.maxBytesLength)
+            lengthText = String.init(format: "%ld/%ld",  bytesLength(text: textView.text), configure.maxBytesLength)
         }else {
-            string = String.init(format: "%ld/%ld", textView.text.count, configure.maxCount)
+            lengthText = String.init(format: "%ld/%ld", textView.text.count, configure.maxCount)
         }
-        
-        lengthLabel.text = string
-        
+        lengthLabel.text = lengthText
         remakeConstraints()
-        
-        if  startString != textView.text {
+        if text != textView.text {
             delegate?.textViewDidChange(textView: self)
         }
+        text = textView.text
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
