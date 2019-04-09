@@ -120,6 +120,8 @@ class CLTextView: UIView {
     var height: CGFloat {
         return textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + (configure.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - configure.edgeInsets.bottom) : 0)
     }
+    ///上一次的文字
+    private var lastText: String = ""
     ///之前光标位置
     private var beforeSelectedRange: NSRange = NSRange(location: 0, length: 0)
     ///输入框
@@ -255,6 +257,7 @@ extension CLTextView {
 extension CLTextView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        self.lastText = textView.text
         beforeSelectedRange = textView.selectedRange
         return true
     }
@@ -266,24 +269,26 @@ extension CLTextView: UITextViewDelegate {
                 return
             }
         }
-        //限制字数,字节
-        if (textView.text.count > configure.maxCount) || (bytesLength(text: textView.text) > configure.maxBytesLength){
-            textView.text = text
-            textView.selectedRange = beforeSelectedRange
+        DispatchQueue.main.async {
+            //限制字数,字节
+            if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength){
+                textView.text = self.lastText
+                textView.selectedRange = self.beforeSelectedRange
+            }
+            self.placeholderLabel.isHidden = textView.text.count > 0 ? true : false
+            self.text = textView.text
+            var lengthText: String
+            if self.configure.statistics == .bytesLength {
+                lengthText = String.init(format: "%ld/%ld",  self.bytesLength(text: textView.text), self.configure.maxBytesLength)
+            }else {
+                lengthText = String.init(format: "%ld/%ld", textView.text.count, self.configure.maxCount)
+            }
+            self.lengthLabel.text = lengthText
+            self.remakeConstraints()
+            if self.lastText != textView.text {
+                self.delegate?.textViewDidChange(textView: self)
+            }
         }
-        placeholderLabel.isHidden = textView.text.count > 0 ? true : false
-        var lengthText: String
-        if configure.statistics == .bytesLength {
-            lengthText = String.init(format: "%ld/%ld",  bytesLength(text: textView.text), configure.maxBytesLength)
-        }else {
-            lengthText = String.init(format: "%ld/%ld", textView.text.count, configure.maxCount)
-        }
-        lengthLabel.text = lengthText
-        remakeConstraints()
-        if text != textView.text {
-            delegate?.textViewDidChange(textView: self)
-        }
-        text = textView.text
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
