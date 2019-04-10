@@ -257,21 +257,28 @@ extension CLTextView {
 extension CLTextView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        self.lastText = textView.text
-        beforeSelectedRange = textView.selectedRange
+        beforeSelectedRange = NSRange(location: range.location, length: 0)
+        if text == "" {
+            return true
+        }
+        if (lastText.count == self.configure.maxCount) || (self.bytesLength(text: lastText) == self.configure.maxBytesLength) {
+            return false
+        }
         return true
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        //输入状态不计算
-        if let rang = textView.markedTextRange {
-            if let _ = textView.position(from: rang.start, offset: 0) {
-                return
-            }
-        }
+        
         DispatchQueue.main.async {
+            //输入状态不计算
+            self.placeholderLabel.isHidden = textView.text.count > 0 ? true : false
+            if let rang = textView.markedTextRange {
+                if let _ = textView.position(from: rang.start, offset: 0) {
+                    return
+                }
+            }
             //限制字数,字节
-            if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength){
+            if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength) {
                 textView.text = self.lastText
                 textView.selectedRange = self.beforeSelectedRange
             }
@@ -286,6 +293,7 @@ extension CLTextView: UITextViewDelegate {
             self.lengthLabel.text = lengthText
             self.remakeConstraints()
             if self.lastText != textView.text {
+                self.lastText = textView.text
                 self.delegate?.textViewDidChange(textView: self)
             }
         }
