@@ -7,7 +7,6 @@
 //
 
 #import "CLPasswordViewController.h"
-#import "CLPasswordView.h"
 #import "CLPassWordInputView.h"
 #import "Masonry.h"
 #import "CLCoreTextView.h"

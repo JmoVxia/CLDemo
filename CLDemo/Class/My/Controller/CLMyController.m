@@ -21,6 +21,7 @@
 #import "CLWaveViewController.h"
 #import "CLBubbleViewViewController.h"
 #import "CLCustomQRCodeViewController.h"
+#import "CLPopArrowViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -101,6 +102,7 @@
         [_arrayDS addObject:NSLocalizedString(@"气泡拖拽", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入框", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义二维码", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"箭头弹出框", nil)];
     }
     return _arrayDS;
 }
@@ -124,6 +126,7 @@
         [_controllerArray addObject:[CLBubbleViewViewController class]];
         [_controllerArray addObject:[CLTextViewViewController class]];
         [_controllerArray addObject:[CLCustomQRCodeViewController class]];
+        [_controllerArray addObject:[CLPopArrowViewController class]];
     }
     return _controllerArray;
 }
