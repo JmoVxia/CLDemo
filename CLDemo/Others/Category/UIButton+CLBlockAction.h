@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ActionBlock)(UIButton *button);
+typedef void(^ActionBlock)(UIButton * _Nullable button);
 
 
 NS_ASSUME_NONNULL_BEGIN

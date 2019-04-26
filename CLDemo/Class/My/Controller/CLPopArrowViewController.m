@@ -35,11 +35,11 @@
 
 -(void)btnclick
 {
-    CGPoint point = CGPointMake(_button.frame.origin.x + _button.frame.size.width/2, _button.frame.origin.y + _button.frame.size.height);//箭头点的位置
-    CLPopArrowView *view = [[CLPopArrowView alloc] initWithOrigin:point width:200 Height:300 direction:CLArrowDirectionTopRight];//初始化弹出视图的箭头顶点位置point，展示视图的宽度Width，高度Height，Direction以及展示的方向
+    CGPoint point = CGPointMake(_button.frame.origin.x, _button.frame.origin.y + _button.frame.size.height / 2);//箭头点的位置
+    CLPopArrowView *view = [[CLPopArrowView alloc] initWithOrigin:point width:120 Height:200 direction:CLArrowDirectionRightTop];//初始化弹出视图的箭头顶点位置point，展示视图的宽度Width，高度Height，Direction以及展示的方向
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 30)];
     lable.text = @"测试内容";
-    lable.textColor = [UIColor whiteColor];
+    lable.textColor = [UIColor blackColor];
     [view.contentView addSubview:lable];
     [view popView];
     

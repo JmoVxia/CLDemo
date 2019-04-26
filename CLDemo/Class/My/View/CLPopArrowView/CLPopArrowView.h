@@ -11,9 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger,CLArrowDirection){
-    
-    //箭头位置
-    
     CLArrowDirectionLeftTop = 1,///<左上
     CLArrowDirectionLeftMiddle,///<左中
     CLArrowDirectionLeftBottom,///<左下
@@ -24,21 +21,20 @@ typedef NS_ENUM(NSUInteger,CLArrowDirection){
     CLArrowDirectionTopMiddle,///<上中
     CLArrowDirectionTopRight,///<上右
     CLArrowDirectionBottomLeft,///<下左
-    CLArrowDirectionBottomModdle,///<下中
+    CLArrowDirectionBottomMiddle,///<下中
     CLArrowDirectionBottomRight,///<下右
-    
 };
 
 
-@interface CLPopArrowView : UIView
+@interface CLPopArrowView : UIButton
 
-@property (nonatomic, strong) UIView *contentView;
-
--(instancetype)initWithOrigin:(CGPoint)origin width:(CGFloat)width Height:(float)height direction:(CLArrowDirection)direction;//初始化
+@property (nonatomic, strong, readonly) UIView *contentView;
+///初始化
+-(instancetype)initWithOrigin:(CGPoint)origin width:(CGFloat)width Height:(float)height direction:(CLArrowDirection)direction;
 ///弹出视图
 -(void)popView;
 ///隐藏视图
--(void)dismiss;
+-(void)dismiss:(nullable void (^)(void)) completion;
 
 @end
 
