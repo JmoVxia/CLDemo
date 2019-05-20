@@ -53,7 +53,7 @@ class CLTextViewConfigure: NSObject {
     ///显示计数
     var showLengthLabel: Bool = true
     ///占位文字
-    var placeholder: String = "请输入文字"
+    var placeholder: String = "请输入文字..."
     ///占位文字颜色
     var placeholderTextColor: UIColor = UIColor.black
     ///text字体
@@ -120,10 +120,6 @@ class CLTextView: UIView {
     var height: CGFloat {
         return textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + (configure.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - configure.edgeInsets.bottom) : 0)
     }
-    ///上一次的文字
-    private var lastText: String = ""
-    ///之前光标位置
-    private var beforeSelectedRange: NSRange = NSRange(location: 0, length: 0)
     ///输入框
     private lazy var textView: UITextView = {
         let textView = UITextView()
@@ -219,7 +215,6 @@ class CLTextView: UIView {
             self.textView.scrollRangeToVisible(NSRange(location: self.textView.selectedRange.location, length: 1))
         }
     }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: height)
@@ -257,12 +252,17 @@ extension CLTextView {
 extension CLTextView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        beforeSelectedRange = NSRange(location: range.location, length: 0)
         if text == "" {
             return true
         }
-        if (lastText.count == self.configure.maxCount) || (self.bytesLength(text: lastText) == self.configure.maxBytesLength) {
-            return false
+        if let rang = textView.markedTextRange {
+            if let _ = textView.position(from: rang.start, offset: 0) {
+                return true
+            }
+        }
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        if (newText.count > self.configure.maxCount) || (self.bytesLength(text: newText) > self.configure.maxBytesLength) || (self.bytesLength(text: newText) == 0 && newText.count > 0) {
+            return false;
         }
         return true
     }
@@ -277,12 +277,6 @@ extension CLTextView: UITextViewDelegate {
                     return
                 }
             }
-            //限制字数,字节
-            if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength) {
-                textView.text = self.lastText
-                textView.selectedRange = self.beforeSelectedRange
-            }
-            self.placeholderLabel.isHidden = textView.text.count > 0 ? true : false
             self.text = textView.text
             var lengthText: String
             if self.configure.statistics == .bytesLength {
@@ -292,10 +286,7 @@ extension CLTextView: UITextViewDelegate {
             }
             self.lengthLabel.text = lengthText
             self.remakeConstraints()
-            if self.lastText != textView.text {
-                self.lastText = textView.text
-                self.delegate?.textViewDidChange(textView: self)
-            }
+            self.delegate?.textViewDidChange(textView: self)
         }
     }
     
