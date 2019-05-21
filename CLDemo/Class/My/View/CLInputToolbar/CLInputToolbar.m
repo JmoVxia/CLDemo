@@ -77,13 +77,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self initUI];
-        [self addNotification];
     }
     return self;
-}
-- (void)addNotification {
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 -(void)initUI {
     self.backgroundColor = [UIColor clearColor];
@@ -127,14 +122,6 @@
     configBlock = nil;
     [self refreshUI];
 }
-- (void)keyboardDidShow:(NSNotification *)notification {
-    [self showToolbar];
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-}
-- (void)keyboardWillHide:(NSNotification *)notification {
-    [self dissmissToolbar];
-}
 //MARK:JmoVxia---UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
     self.placeholderLabel.hidden = textView.text.length;
@@ -176,9 +163,21 @@
 - (void)inputToolbarSendText:(inputToolBarSendBlock)sendBlock{
     self.sendBlock = sendBlock;
 }
-- (void)showToolbar{
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+- (BOOL)canResignFirstResponder {
+    return YES;
+}
+- (BOOL)becomeFirstResponder {
+    return [self showToolbar];
+}
+- (BOOL)resignFirstResponder {
+    return [self dissmissToolbar];
+}
+- (BOOL)showToolbar {
     if (self.keyboardIsShow) {
-        return;
+        return YES;
     }
     if (self.configure.showMaskView) {
         [self.keyWindow addSubview:self.maskView];
@@ -189,17 +188,16 @@
     [self.keyWindow addSubview:self.backgroundView];
     [self.backgroundView addSubview:self.textView];
     self.textView.inputAccessoryView = self;
-    [self.textView becomeFirstResponder];
     self.keyboardIsShow = YES;
+    return [self.textView becomeFirstResponder];
 }
--(void)dissmissToolbar {
+-(BOOL)dissmissToolbar {
     if (!self.keyboardIsShow) {
-        return;
+        return YES;
     }
     self.textView.text = nil;
     self.textView.inputAccessoryView = nil;
     [self.textView.delegate textViewDidChange:self.textView];
-    [self.textView resignFirstResponder];
     [self.backgroundView removeFromSuperview];
     if (self.configure.showMaskView) {
         [UIView animateWithDuration:0.25 animations:^{
@@ -209,6 +207,7 @@
         }];
     }
     self.keyboardIsShow = NO;
+    return [self.textView resignFirstResponder];
 }
 - (void)clearText {
     self.textView.text = nil;
@@ -221,7 +220,7 @@
     }
     return hitView;
 }
--(void)layoutSubviews {
+- (void)layoutSubviews {
     [super layoutSubviews];
     self.maskView.cl_size = CGSizeMake(cl_screenWidth, cl_screenHeight);
     self.cl_width = cl_screenWidth;
@@ -270,9 +269,6 @@
     self.sendButton.cl_centerY = self.cl_height * 0.5;
     self.backgroundView.frame = [self convertRect:self.bounds toView:self.keyWindow];
     self.textView.cl_centerY = self.backgroundView.cl_height * 0.5;
-}
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 //MARK:JmoVxia---懒加载
 - (CLInputToolbarConfigure *) configure {

@@ -1,5 +1,5 @@
 //
-//  PTTextView.swift
+//  CLTextView.swift
 //
 //
 //  Created by AUG on 2019/3/28.
@@ -164,6 +164,8 @@ class CLTextView: UIView {
     }()
     ///默认配置
     private let configure: CLTextViewConfigure = CLTextViewConfigure.defaultConfigure()
+    ///上一次输入的文字
+    private var lastText: String = ""
     ///当前输入的文字
     private (set) var text: String = ""
     
@@ -268,7 +270,6 @@ extension CLTextView: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        
         DispatchQueue.main.async {
             //输入状态不计算
             self.placeholderLabel.isHidden = textView.text.count > 0 ? true : false
@@ -277,7 +278,13 @@ extension CLTextView: UITextViewDelegate {
                     return
                 }
             }
-            self.text = textView.text
+            //超过限制,恢复上一次文字
+            if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength) || (self.bytesLength(text: textView.text) == 0 && textView.text.count > 0) {
+                textView.text = self.lastText;
+            }else {
+                self.lastText = textView.text;
+            }
+            
             var lengthText: String
             if self.configure.statistics == .bytesLength {
                 lengthText = String.init(format: "%ld/%ld",  self.bytesLength(text: textView.text), self.configure.maxBytesLength)
@@ -286,7 +293,10 @@ extension CLTextView: UITextViewDelegate {
             }
             self.lengthLabel.text = lengthText
             self.remakeConstraints()
-            self.delegate?.textViewDidChange(textView: self)
+            if self.lastText != self.text {
+                self.text = textView.text
+                self.delegate?.textViewDidChange(textView: self)
+            }
         }
     }
     
@@ -307,6 +317,14 @@ extension CLTextView {
     ///取消第一响应者
     override func resignFirstResponder() -> Bool {
         return textView.resignFirstResponder()
+    }
+    ///可以成为第一响应者
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    ///可以注销第一响应者
+    override var canResignFirstResponder: Bool {
+        return true
     }
 }
 extension CLTextView {

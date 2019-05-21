@@ -45,16 +45,15 @@ typedef void(^inputToolBarSendBlock)(NSString *text);
 
 @interface CLInputToolbar : UIView
 
-/**更新基本配置，block不会造成循环引用*/
+///更新基本配置，block不会造成循环引用
 - (void)updateWithConfig:(void(^)(CLInputToolbarConfigure *configure))configBlock;
-
-/**弹出键盘*/
-- (void)showToolbar;
-/**收回键盘*/
-- (void)dissmissToolbar;
-/**清空文字*/
+///弹出键盘
+- (BOOL)becomeFirstResponder;
+///收回键盘
+- (BOOL)resignFirstResponder;
+///清空文字
 - (void)clearText;
-/**点击发送按钮*/
+///点击发送按钮
 - (void)inputToolbarSendText:(inputToolBarSendBlock)sendBlock;
 
 @end

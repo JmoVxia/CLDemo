@@ -19,7 +19,7 @@
 @implementation CLInputToolbarController
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.inputToolbar dissmissToolbar];
+    [self.inputToolbar resignFirstResponder];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@
         NSLog(@"我不会被循环引用%@",self);
         configure.textViewMaxLine = 4;
         configure.font = [UIFont systemFontOfSize:10];
-        configure.showMaskView = NO;
+        configure.showMaskView = YES;
 //        configure.cursorColor = [UIColor redColor];
 //        configure.textColor = cl_RandomColor;
 //        configure.backgroundColor = cl_RandomColor;
@@ -63,7 +63,7 @@
 }
 
 -(void)didTouchBtn {
-    [self.inputToolbar showToolbar];
+    [self.inputToolbar becomeFirstResponder];
 }
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
