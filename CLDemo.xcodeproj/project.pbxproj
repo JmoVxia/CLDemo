@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0C0E36A12257836100478B69 /* CLCustomQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */; };
 		0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */; };
+		0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA022A92B3A009EA457 /* CLCountdownController.m */; };
+		0C108EA622A93108009EA457 /* CLCountdownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA522A93108009EA457 /* CLCountdownModel.m */; };
+		0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA922A93289009EA457 /* CLCountdownCell.m */; };
 		0C223C772243811200E319E2 /* CLRotateAnimationSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C223C762243811200E319E2 /* CLRotateAnimationSwiftController.swift */; };
 		0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */; };
 		0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE86C223F488D007D5DC5 /* CLBubbleView.m */; };
@@ -44,6 +47,7 @@
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
 		0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */; };
 		0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */; };
+		0CCBFB7222AB89FE0078547B /* NSDate+CLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCBFB7122AB89FE0078547B /* NSDate+CLExtension.m */; };
 		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
 		0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */; };
 		0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */; };
@@ -112,6 +116,12 @@
 		0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomQRCodeViewController.m; sourceTree = "<group>"; };
 		0C0E36A22257838F00478B69 /* UIImage+CLQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLQRCode.h"; sourceTree = "<group>"; };
 		0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLQRCode.m"; sourceTree = "<group>"; };
+		0C108E9F22A92B3A009EA457 /* CLCountdownController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownController.h; sourceTree = "<group>"; };
+		0C108EA022A92B3A009EA457 /* CLCountdownController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCountdownController.m; sourceTree = "<group>"; };
+		0C108EA422A93108009EA457 /* CLCountdownModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownModel.h; sourceTree = "<group>"; };
+		0C108EA522A93108009EA457 /* CLCountdownModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCountdownModel.m; sourceTree = "<group>"; };
+		0C108EA822A93289009EA457 /* CLCountdownCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownCell.h; sourceTree = "<group>"; };
+		0C108EA922A93289009EA457 /* CLCountdownCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCountdownCell.m; sourceTree = "<group>"; };
 		0C223C762243811200E319E2 /* CLRotateAnimationSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationSwiftController.swift; sourceTree = "<group>"; };
 		0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRoundAnimationView.swift; sourceTree = "<group>"; };
 		0C2AE86B223F488D007D5DC5 /* CLBubbleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBubbleView.h; sourceTree = "<group>"; };
@@ -172,6 +182,8 @@
 		0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogViewController.m; sourceTree = "<group>"; };
 		0CC171402248B4D2005B0F0A /* CLGCDTimerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
 		0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
+		0CCBFB7022AB89FE0078547B /* NSDate+CLExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+CLExtension.h"; sourceTree = "<group>"; };
+		0CCBFB7122AB89FE0078547B /* NSDate+CLExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CLExtension.m"; sourceTree = "<group>"; };
 		0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeController.h; sourceTree = "<group>"; };
 		0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeController.m; sourceTree = "<group>"; };
 		0CCDA314219855A20057BA14 /* CLChangeFontSizeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeCell.h; sourceTree = "<group>"; };
@@ -307,6 +319,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C108EA222A92E57009EA457 /* CLCountdownController */ = {
+			isa = PBXGroup;
+			children = (
+				0C108EA722A93273009EA457 /* View */,
+				0C108EA322A930F9009EA457 /* Model */,
+				0C108E9F22A92B3A009EA457 /* CLCountdownController.h */,
+				0C108EA022A92B3A009EA457 /* CLCountdownController.m */,
+			);
+			path = CLCountdownController;
+			sourceTree = "<group>";
+		};
+		0C108EA322A930F9009EA457 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C108EA422A93108009EA457 /* CLCountdownModel.h */,
+				0C108EA522A93108009EA457 /* CLCountdownModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0C108EA722A93273009EA457 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0C108EA822A93289009EA457 /* CLCountdownCell.h */,
+				0C108EA922A93289009EA457 /* CLCountdownCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0C29D593222FE7DB00635F25 /* CLGCDTimerManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,6 +832,7 @@
 				0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */,
 				0C6D47F4226C391F00699FBD /* CLPopArrowViewController.h */,
 				0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */,
+				0C108EA222A92E57009EA457 /* CLCountdownController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -857,6 +899,8 @@
 				0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */,
 				0C0E36A22257838F00478B69 /* UIImage+CLQRCode.h */,
 				0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */,
+				0CCBFB7022AB89FE0078547B /* NSDate+CLExtension.h */,
+				0CCBFB7122AB89FE0078547B /* NSDate+CLExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1032,6 +1076,7 @@
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
 				0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */,
+				0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				0C36EDDE224E34AC006BEC18 /* CLRotateImageView.swift in Sources */,
@@ -1043,6 +1088,7 @@
 				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
+				0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */,
 				0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */,
 				0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */,
 				0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */,
@@ -1054,6 +1100,7 @@
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
+				0C108EA622A93108009EA457 /* CLCountdownModel.m in Sources */,
 				0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */,
 				5B80DA4C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m in Sources */,
 				0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */,
@@ -1079,6 +1126,7 @@
 				0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */,
+				0CCBFB7222AB89FE0078547B /* NSDate+CLExtension.m in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,

@@ -140,16 +140,16 @@
 static CLGCDTimerManager *_manager = nil;
 //第2步: 分配内存空间时都会调用这个方法. 保证分配内存alloc时都相同.
 + (id)allocWithZone:(struct _NSZone *)zone {
-    //调用dispatch_once保证在多线程中也只被实例化一次
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _manager = [super allocWithZone:zone];
-    });
-    return _manager;
+    return [self sharedManager];
 }
 //第3步: 保证init初始化时都相同
 + (instancetype)sharedManager {
-    return [[self alloc] init];
+    //调用dispatch_once保证在多线程中也只被实例化一次
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _manager = [[super allocWithZone:NULL] init];
+    });
+    return _manager;
 }
 - (id)init {
     static dispatch_once_t onceToken;
