@@ -33,6 +33,7 @@
 		0C628C1C2230BC65005922A0 /* CLRoundAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
 		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
+		0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CE0BF22ACD71200B4EECF /* FPSDisplay.m */; };
 		0C6D47E9226C37EC00699FBD /* CLPopArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6D47E8226C37EC00699FBD /* CLPopArrowView.m */; };
 		0C6D47F6226C391F00699FBD /* CLPopArrowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */; };
 		0C7316AA222814AB005ACFE7 /* CLJumpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7316A9222814AB005ACFE7 /* CLJumpManager.m */; };
@@ -159,6 +160,8 @@
 		0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CLDelegate.m"; sourceTree = "<group>"; };
 		0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPasswordViewController.h; sourceTree = "<group>"; };
 		0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPasswordViewController.m; sourceTree = "<group>"; };
+		0C6CE0BE22ACD71200B4EECF /* FPSDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPSDisplay.h; sourceTree = "<group>"; };
+		0C6CE0BF22ACD71200B4EECF /* FPSDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPSDisplay.m; sourceTree = "<group>"; };
 		0C6D47E7226C37EC00699FBD /* CLPopArrowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPopArrowView.h; sourceTree = "<group>"; };
 		0C6D47E8226C37EC00699FBD /* CLPopArrowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPopArrowView.m; sourceTree = "<group>"; };
 		0C6D47F4226C391F00699FBD /* CLPopArrowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPopArrowViewController.h; sourceTree = "<group>"; };
@@ -499,6 +502,8 @@
 		0CCDA310219855620057BA14 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0C6CE0BE22ACD71200B4EECF /* FPSDisplay.h */,
+				0C6CE0BF22ACD71200B4EECF /* FPSDisplay.m */,
 				0C6D47F3226C38FA00699FBD /* CLTextView */,
 				0C6D47F2226C38EC00699FBD /* CLWaveView */,
 				0C6D47F1226C389200699FBD /* CLCardView */,
@@ -1096,6 +1101,7 @@
 				0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */,
 				0CF642FD222FECA800227361 /* CLWaveView.m in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
+				0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */,
 				5B80961B221870BD000F72F3 /* CLBankCardModel.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */,

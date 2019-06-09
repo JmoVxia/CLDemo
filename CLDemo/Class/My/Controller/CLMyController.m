@@ -89,12 +89,11 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"Cell倒计时", nil)];
         [_arrayDS addObject:[NSLocalizedString(@"转子动画", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"转子动画", nil) stringByAppendingString:@"-Swift"]];
-        [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-Swift"]];
-        [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
         [_arrayDS addObject:NSLocalizedString(@"卡片视图", nil)];
@@ -104,7 +103,8 @@
         [_arrayDS addObject:NSLocalizedString(@"自定义输入框", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义二维码", nil)];
         [_arrayDS addObject:NSLocalizedString(@"箭头弹出框", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"Cell倒计时", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
     }
     return _arrayDS;
 }
@@ -114,12 +114,11 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLCountdownController class]];
         [_controllerArray addObject:[CLRotateAnimationController class]];
         [_controllerArray addObject:[CLRotateAnimationSwiftController class]];
-        [_controllerArray addObject:[CLRotatingPictureViewController class]];
         [_controllerArray addObject:[CLPasswordViewController class]];
         [_controllerArray addObject:[CLPasswordViewSwiftController class]];
-        [_controllerArray addObject:[CLLogViewController class]];
         [_controllerArray addObject:[CLInputToolbarController class]];
         [_controllerArray addObject:[CLBankCardScanController class]];
         [_controllerArray addObject:[CLCardController class]];
@@ -129,7 +128,8 @@
         [_controllerArray addObject:[CLTextViewViewController class]];
         [_controllerArray addObject:[CLCustomQRCodeViewController class]];
         [_controllerArray addObject:[CLPopArrowViewController class]];
-        [_controllerArray addObject:[CLCountdownController class]];
+        [_controllerArray addObject:[CLRotatingPictureViewController class]];
+        [_controllerArray addObject:[CLLogViewController class]];
     }
     return _controllerArray;
 }

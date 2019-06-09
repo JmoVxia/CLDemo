@@ -130,6 +130,7 @@
     }
 }
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"倒计时页面销毁了");
 }
 - (UITableView *) tableView {

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CLTabbarController.h"
+#import "FPSDisplay.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +23,7 @@
     self.window.rootViewController = tbc;
     [self.window makeKeyAndVisible];
     [self registerLocalNotification];
-    
+    [FPSDisplay shareFPSDisplay];
     return YES;
 }
 - (void)registerLocalNotification{
