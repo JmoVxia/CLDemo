@@ -10,11 +10,13 @@ import UIKit
 
 class CLRotateAnimationSwiftController: CLBaseViewController {
 
+    let timer = CLGCDTimer.init(interval: 0.1, queue: DispatchQueue.main, action: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         do {
-            let rotateAnimationView: CLRotateAnimationView = CLRotateAnimationView(frame: CGRect(x: 120, y: 120, width: 80, height: 80));
+            let rotateAnimationView: CLRotateAnimationView = CLRotateAnimationView(frame: CGRect(x: 80, y: 120, width: 80, height: 80));
             rotateAnimationView.updateWithConfigure { (configure) -> (Void) in
                 configure.backgroundColor = UIColor.orange;
                 configure.number = 8;
@@ -26,7 +28,7 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
         }
 
         do {
-            let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 120, y: 250, width: 90, height: 90))
+            let roundAnimationView = CLRoundAnimationView(frame: CGRect(x: 90, y: 250, width: 90, height: 90))
             roundAnimationView.updateWithConfigure { (configure) -> (Void) in
                 configure.outBackgroundColor = UIColor(red:1.00, green:0.00, blue:0.01, alpha:0.60)
                 configure.inBackgroundColor = UIColor(red:0.28, green:0.54, blue:0.96, alpha:1.00)
@@ -58,24 +60,21 @@ class CLRotateAnimationSwiftController: CLBaseViewController {
         }
         
         do {
-            let imageView: CLRotateImageView = CLRotateImageView(frame: CGRect(x: 280, y: 300, width: 60, height: 60), superview: view)
-            imageView.showAnimating()
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-                imageView.hiddenAnimating()
+            let sectorAnimationView = CLSectorAnimationView(frame: CGRect(x: 200, y: 120, width: 80, height: 80))
+            view.addSubview(sectorAnimationView)
+            timer.replaceOldAction { actions in
+                let progress = CGFloat(CGFloat(actions) / 100.0)
+                sectorAnimationView.updateProgress(progress: progress)
             }
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-                imageView.showAnimating()
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
-                imageView.hiddenAnimating()
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 9) {
-                imageView.showAnimating()
-            }
+            timer.start()
         }
+        
+        
+        do {
+            let sectorAnimationView = CLSectorAnimationView(frame: CGRect(x: 220, y: 220, width: 80, height: 80))
+            view.addSubview(sectorAnimationView)
+            sectorAnimationView.updateProgressAnimation(fromValue: 0.5, toValue: 1, duration: 6)
+        }
+        
     }
 }

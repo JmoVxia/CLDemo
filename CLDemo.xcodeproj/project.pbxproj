@@ -21,7 +21,6 @@
 		0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */; };
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
-		0C36EDDE224E34AC006BEC18 /* CLRotateImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C36EDDD224E34AC006BEC18 /* CLRotateImageView.swift */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
 		0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */; };
 		0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */; };
@@ -30,6 +29,7 @@
 		0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C52EF72219298B00079A0E7 /* Localizable.strings */; };
 		0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558A9421ED956700C2C096 /* CLPasswordInputView.m */; };
 		0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */; };
+		0C61577822BE1241009AABAC /* CLSectorAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C61577722BE1241009AABAC /* CLSectorAnimationView.swift */; };
 		0C628C1C2230BC65005922A0 /* CLRoundAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
 		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
@@ -136,7 +136,6 @@
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
 		0C33BC78219AF71000583B4C /* CLLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogManager.m; sourceTree = "<group>"; };
-		0C36EDDD224E34AC006BEC18 /* CLRotateImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateImageView.swift; sourceTree = "<group>"; };
 		0C3CAA5321AF89BD00A352F0 /* CLRotateAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationController.h; sourceTree = "<group>"; };
 		0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationController.m; sourceTree = "<group>"; };
 		0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationView.h; sourceTree = "<group>"; };
@@ -154,6 +153,7 @@
 		0C558A9421ED956700C2C096 /* CLPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPasswordInputView.m; sourceTree = "<group>"; };
 		0C558AE221EDA2E800C2C096 /* UIColor+CLHex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CLHex.h"; sourceTree = "<group>"; };
 		0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CLHex.m"; sourceTree = "<group>"; };
+		0C61577722BE1241009AABAC /* CLSectorAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSectorAnimationView.swift; sourceTree = "<group>"; };
 		0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRoundAnimationView.h; sourceTree = "<group>"; };
 		0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRoundAnimationView.m; sourceTree = "<group>"; };
 		0C6B40E221ECFC7100360FAD /* UITextField+CLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CLDelegate.h"; sourceTree = "<group>"; };
@@ -408,20 +408,13 @@
 			path = CLRotateAnimationView;
 			sourceTree = "<group>";
 		};
-		0C6D47EC226C382500699FBD /* CLRotateImageView */ = {
-			isa = PBXGroup;
-			children = (
-				0C36EDDD224E34AC006BEC18 /* CLRotateImageView.swift */,
-			);
-			path = CLRotateImageView;
-			sourceTree = "<group>";
-		};
 		0C6D47ED226C383500699FBD /* CLRoundAnimationView */ = {
 			isa = PBXGroup;
 			children = (
 				0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */,
 				0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */,
 				0C223C782243818A00E319E2 /* CLRoundAnimationView.swift */,
+				0C61577722BE1241009AABAC /* CLSectorAnimationView.swift */,
 			);
 			path = CLRoundAnimationView;
 			sourceTree = "<group>";
@@ -511,7 +504,6 @@
 				0C6D47EF226C387800699FBD /* CLInputToolbar */,
 				0C6D47EE226C384600699FBD /* CLPasswordInputView */,
 				0C6D47ED226C383500699FBD /* CLRoundAnimationView */,
-				0C6D47EC226C382500699FBD /* CLRotateImageView */,
 				0C6D47EB226C381000699FBD /* CLRotateAnimationView */,
 				0C6D47EA226C37FC00699FBD /* CLPopArrowView */,
 				0C2AE86A223F4862007D5DC5 /* CLBubbleView */,
@@ -931,6 +923,7 @@
 				5B80D9E11DDD976A00A20E34 /* Frameworks */,
 				5B80D9E21DDD976A00A20E34 /* Resources */,
 				38075095E192ED84624940F7 /* [CP] Embed Pods Frameworks */,
+				0C2BEA6722BE522B0030CB94 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -999,6 +992,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0C2BEA6722BE522B0030CB94 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "REVEAL_APP_PATH=$(mdfind kMDItemCFBundleIdentifier=\"com.ittybittyapps.Reveal2\" | head -n 1)\nBUILD_SCRIPT_PATH=\"${REVEAL_APP_PATH}/Contents/SharedSupport/Scripts/reveal_server_build_phase.sh\"\nif [ \"${REVEAL_APP_PATH}\" -a -e \"${BUILD_SCRIPT_PATH}\" ]; then\n\"${BUILD_SCRIPT_PATH}\"\nelse\necho \"Reveal Server not loaded: Cannot find a compatible Reveal app.\"\nfi\n";
+		};
 		38075095E192ED84624940F7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1073,6 +1083,7 @@
 				5B809616221870BD000F72F3 /* CLScanBankCardManager.m in Sources */,
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
+				0C61577822BE1241009AABAC /* CLSectorAnimationView.swift in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
 				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
@@ -1084,7 +1095,6 @@
 				0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
-				0C36EDDE224E34AC006BEC18 /* CLRotateImageView.swift in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C6D47E9226C37EC00699FBD /* CLPopArrowView.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,

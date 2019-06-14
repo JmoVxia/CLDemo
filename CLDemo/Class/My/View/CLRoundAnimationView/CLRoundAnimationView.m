@@ -35,8 +35,6 @@
 @property (nonatomic, strong) CALayer *backgroundLayer;
 ///动画layer
 @property (nonatomic, strong) CALayer *animationLayer;
-///外圆
-@property (nonatomic, strong) CAShapeLayer *backgroundShapeLayer;
 ///动画
 @property (nonatomic, strong) CABasicAnimation *rotationAnimation;
 ///是否暂停
@@ -85,7 +83,7 @@
             offset = outLayer ? 0 : (self.configure.outLineWidth - self.configure.inLineWidth) * 2;
             break;
     }
-    CGFloat radius = (self.cl_height - lineWidth - offset) * 0.5;
+    CGFloat radius = (self.frame.size.height - lineWidth - offset) * 0.5;
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5) radius: radius startAngle:0 endAngle:M_PI * 2 clockwise:YES];
     //圆环遮罩
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];

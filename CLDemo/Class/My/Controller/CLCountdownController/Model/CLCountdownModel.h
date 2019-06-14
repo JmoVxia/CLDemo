@@ -17,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///倒计时时间
 @property (nonatomic, assign) NSInteger countdownTime;
 ///剩余时间
-@property (nonatomic, assign) NSInteger remainingTime;
+@property (nonatomic, assign, readonly) NSInteger remainingTime;
 ///是否暂停
 @property (nonatomic, assign) BOOL isPause;
 ///定时器响应次数
 @property (nonatomic, assign) NSInteger actionTimes;
 ///离开时间
-@property (nonatomic, assign) NSTimeInterval leaveTime;
+@property (nonatomic, assign) NSInteger leaveTime;
 
 @end
 

@@ -11,7 +11,6 @@
 #import "CLCountdownModel.h"
 #import "CLCountdownCell.h"
 #import "CLGCDTimerManager.h"
-#include <sys/sysctl.h>
 #import "NSDate+CLExtension.h"
 
 @interface CLCountdownController ()<UITableViewDelegate,UITableViewDataSource>
@@ -28,6 +27,8 @@
 @property (nonatomic, assign) NSTimeInterval resignSystemUpTime;
 ///恢复的时间
 @property (nonatomic, assign) NSTimeInterval becomeSystemUpTime;
+///离开总时间
+@property (nonatomic, assign) NSInteger leaveTime;
 
 @end
 
@@ -63,7 +64,6 @@
 }
 - (void)initData {
     self.arrayDS = [NSMutableArray array];
-    // 异步子线程
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSInteger i = 0; i < 100000; i++) {
             CLCountdownModel *model = [[CLCountdownModel alloc] init];
@@ -71,7 +71,6 @@
             model.row = i;
             [self.arrayDS addObject:model];
         }
-        //主线程
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             __weak __typeof(self) weakSelf = self;
@@ -94,18 +93,17 @@
     self.resignSystemUpTime = [NSDate uptimeSinceLastBoot];
     [self.timer suspend];
 }
-
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     self.becomeSystemUpTime = [NSDate uptimeSinceLastBoot];
+    self.leaveTime += (NSInteger)floor(self.becomeSystemUpTime - self.resignSystemUpTime);
     [self.timer resume];
 }
 - (void)reloadVisibleCells {
-//    NSLog(@"========================%ld==========================", self.actionTimes);
     for (CLCountdownCell *cell in self.tableView.visibleCells) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         CLCountdownModel *model = [self.arrayDS objectAtIndex:indexPath.row];
         model.actionTimes = self.actionTimes;
-        model.leaveTime = self.becomeSystemUpTime - self.resignSystemUpTime;
+        model.leaveTime = self.leaveTime;
         if (model.isPause) {
             continue;
         }
@@ -123,7 +121,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     CLCountdownModel *model = [self.arrayDS objectAtIndex:indexPath.row];
     model.actionTimes = self.actionTimes;
-    model.leaveTime = self.becomeSystemUpTime - self.resignSystemUpTime;
+    model.leaveTime = self.leaveTime;
     if (!model.isPause) {
         CLCountdownCell *countdownCell = (CLCountdownCell *)cell;
         countdownCell.model = model;
@@ -131,7 +129,7 @@
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"倒计时页面销毁了");
+    CLLog(@"倒计时页面销毁了");
 }
 - (UITableView *) tableView {
     if (_tableView == nil) {
