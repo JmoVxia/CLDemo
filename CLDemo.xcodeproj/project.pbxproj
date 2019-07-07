@@ -10,6 +10,7 @@
 		0C0E36A12257836100478B69 /* CLCustomQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */; };
 		0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */; };
 		0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */; };
+		0C0F374522D1E72C005E496D /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F374422D1E72C005E496D /* SimplePing.m */; };
 		0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA022A92B3A009EA457 /* CLCountdownController.m */; };
 		0C108EA622A93108009EA457 /* CLCountdownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA522A93108009EA457 /* CLCountdownModel.m */; };
 		0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA922A93289009EA457 /* CLCountdownCell.m */; };
@@ -120,6 +121,8 @@
 		0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLQRCode.m"; sourceTree = "<group>"; };
 		0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTracerouteViewController.h; sourceTree = "<group>"; };
 		0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTracerouteViewController.m; sourceTree = "<group>"; };
+		0C0F374322D1E72C005E496D /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		0C0F374422D1E72C005E496D /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
 		0C108E9F22A92B3A009EA457 /* CLCountdownController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownController.h; sourceTree = "<group>"; };
 		0C108EA022A92B3A009EA457 /* CLCountdownController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCountdownController.m; sourceTree = "<group>"; };
 		0C108EA422A93108009EA457 /* CLCountdownModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownModel.h; sourceTree = "<group>"; };
@@ -325,6 +328,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0F374222D1E70C005E496D /* CLTracerouteManager */ = {
+			isa = PBXGroup;
+			children = (
+				0C0F374322D1E72C005E496D /* SimplePing.h */,
+				0C0F374422D1E72C005E496D /* SimplePing.m */,
+			);
+			path = CLTracerouteManager;
+			sourceTree = "<group>";
+		};
 		0C108EA222A92E57009EA457 /* CLCountdownController */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,6 +872,7 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0C0F374222D1E70C005E496D /* CLTracerouteManager */,
 				0C29D593222FE7DB00635F25 /* CLGCDTimerManager */,
 				0C7316A7222814AB005ACFE7 /* CLJumpManager */,
 				5B8095F722187061000F72F3 /* CLBankScan */,
@@ -1144,6 +1157,7 @@
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
 				0C7316AA222814AB005ACFE7 /* CLJumpManager.m in Sources */,
 				0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */,
+				0C0F374522D1E72C005E496D /* SimplePing.m in Sources */,
 				0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
 				0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */,
