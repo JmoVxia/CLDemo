@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C0E36A12257836100478B69 /* CLCustomQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */; };
 		0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */; };
+		0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */; };
 		0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA022A92B3A009EA457 /* CLCountdownController.m */; };
 		0C108EA622A93108009EA457 /* CLCountdownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA522A93108009EA457 /* CLCountdownModel.m */; };
 		0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA922A93289009EA457 /* CLCountdownCell.m */; };
@@ -117,6 +118,8 @@
 		0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomQRCodeViewController.m; sourceTree = "<group>"; };
 		0C0E36A22257838F00478B69 /* UIImage+CLQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLQRCode.h"; sourceTree = "<group>"; };
 		0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLQRCode.m"; sourceTree = "<group>"; };
+		0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTracerouteViewController.h; sourceTree = "<group>"; };
+		0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTracerouteViewController.m; sourceTree = "<group>"; };
 		0C108E9F22A92B3A009EA457 /* CLCountdownController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownController.h; sourceTree = "<group>"; };
 		0C108EA022A92B3A009EA457 /* CLCountdownController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCountdownController.m; sourceTree = "<group>"; };
 		0C108EA422A93108009EA457 /* CLCountdownModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownModel.h; sourceTree = "<group>"; };
@@ -829,6 +832,8 @@
 				0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */,
 				0C6D47F4226C391F00699FBD /* CLPopArrowViewController.h */,
 				0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */,
+				0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */,
+				0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */,
 				0C108EA222A92E57009EA457 /* CLCountdownController */,
 			);
 			path = Controller;
@@ -1141,6 +1146,7 @@
 				0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */,
 				0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
+				0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */,
 				0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */,
 				0CCBFB7222AB89FE0078547B /* NSDate+CLExtension.m in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,

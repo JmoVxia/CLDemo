@@ -23,6 +23,7 @@
 #import "CLCustomQRCodeViewController.h"
 #import "CLPopArrowViewController.h"
 #import "CLCountdownController.h"
+#import "CLTracerouteViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -105,6 +106,7 @@
         [_arrayDS addObject:NSLocalizedString(@"箭头弹出框", nil)];
         [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"路由追踪", nil)];
     }
     return _arrayDS;
 }
@@ -130,6 +132,7 @@
         [_controllerArray addObject:[CLPopArrowViewController class]];
         [_controllerArray addObject:[CLRotatingPictureViewController class]];
         [_controllerArray addObject:[CLLogViewController class]];
+        [_controllerArray addObject:[CLTracerouteViewController class]];
     }
     return _controllerArray;
 }
