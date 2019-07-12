@@ -83,21 +83,26 @@
         });
     });
 }
+//MARK:JmoVxia---添加系统活动通知
 - (void)addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)
                                                  name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
 }
+//MARK:JmoVxia---进入后台
 - (void)applicationWillResignActive:(NSNotification *)notification {
     self.resignSystemUpTime = [NSDate uptimeSinceLastBoot];
     [self.timer suspend];
 }
+//MARK:JmoVxia---进入前台
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     self.becomeSystemUpTime = [NSDate uptimeSinceLastBoot];
+    //计算离开时间，需要将每次离开时间叠加
     self.leaveTime += (NSInteger)floor(self.becomeSystemUpTime - self.resignSystemUpTime);
     [self.timer resume];
 }
+//MARK:JmoVxia---刷新正在显示的Cell
 - (void)reloadVisibleCells {
     for (CLCountdownCell *cell in self.tableView.visibleCells) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -118,6 +123,7 @@
     cell.model = [self.arrayDS objectAtIndex:indexPath.row];
     return cell;
 }
+//MARK:JmoVxia---Cell将要出现
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     CLCountdownModel *model = [self.arrayDS objectAtIndex:indexPath.row];
     model.actionTimes = self.actionTimes;

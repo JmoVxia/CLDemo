@@ -48,7 +48,6 @@
     [Tools setControllerTabBarItem:nc4 Title:NSLocalizedString(@"我的", nil) andFoneSize:13 withFoneName:nil selectedImage:@"tabBar_friendTrends_click_icon" withTitleColor:[UIColor blackColor] unselectedImage:@"tabBar_friendTrends_icon" withTitleColor:[UIColor lightGrayColor]];
     
     self.viewControllers = @[nc1,nc2,nc3,nc4];
-
 }
 -(void)dealloc {
     CLLog(@"Tabbar页面销毁了");

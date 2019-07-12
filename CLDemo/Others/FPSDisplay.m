@@ -40,7 +40,7 @@
 }
 
 - (void)initDisplayLabel {
-    CGRect frame = CGRectMake(cl_screenWidth - 100, cl_screenHeight - 100, 80, 30);
+    CGRect frame = CGRectMake(cl_screenWidth - 100, cl_statusBarAndNavigationBarHeight, 80, 30);
     self.displayLabel = [[UILabel alloc] initWithFrame: frame];
     
     self.displayLabel.layer.cornerRadius = 5;
