@@ -1,7 +1,37 @@
 PODS:
   - DateTools (2.0.0)
+  - libwebp (1.0.2):
+    - libwebp/core (= 1.0.2)
+    - libwebp/dec (= 1.0.2)
+    - libwebp/demux (= 1.0.2)
+    - libwebp/dsp (= 1.0.2)
+    - libwebp/enc (= 1.0.2)
+    - libwebp/mux (= 1.0.2)
+    - libwebp/utils (= 1.0.2)
+    - libwebp/webp (= 1.0.2)
+  - libwebp/core (1.0.2):
+    - libwebp/webp
+  - libwebp/dec (1.0.2):
+    - libwebp/core
+  - libwebp/demux (1.0.2):
+    - libwebp/core
+  - libwebp/dsp (1.0.2):
+    - libwebp/core
+  - libwebp/enc (1.0.2):
+    - libwebp/core
+  - libwebp/mux (1.0.2):
+    - libwebp/core
+  - libwebp/utils (1.0.2):
+    - libwebp/core
+  - libwebp/webp (1.0.2)
   - Masonry (1.1.0)
   - MJExtension (3.0.17)
+  - SDWebImage (5.0.6):
+    - SDWebImage/Core (= 5.0.6)
+  - SDWebImage/Core (5.0.6)
+  - SDWebImageWebPCoder (0.2.3):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.0)
   - SnapKit (4.2.0)
   - Then (2.5.0)
 
@@ -9,24 +39,32 @@ DEPENDENCIES:
   - DateTools
   - Masonry
   - MJExtension
+  - SDWebImage
+  - SDWebImageWebPCoder
   - SnapKit
   - Then
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DateTools
+    - libwebp
     - Masonry
     - MJExtension
+    - SDWebImage
+    - SDWebImageWebPCoder
     - SnapKit
     - Then
 
 SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  libwebp: b068a3bd7c45f7460f6715be7bed1a18fd5d6b48
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
+  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Then: 0157115e883545c77967b452fe74a1d25fb796e1
 
-PODFILE CHECKSUM: 7abd27ddd8439488fc357894133059cf1ad58016
+PODFILE CHECKSUM: 9fba1321aa12390a7f76cfeda0b0ab056cfbcce1
 
 COCOAPODS: 1.6.0

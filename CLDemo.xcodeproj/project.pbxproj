@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C03A16D22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A16C22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m */; };
 		0C0E36A12257836100478B69 /* CLCustomQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */; };
 		0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */; };
 		0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */; };
@@ -43,7 +44,23 @@
 		0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A472217A71200BC8AFB /* CLInputToolbar.m */; };
 		0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */; };
 		0C77C4B92248C85C007D0FFC /* CLGCDTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77C4B82248C85C007D0FFC /* CLGCDTimerManager.swift */; };
+		0C7DE94722DECC0D00FA9040 /* localImage8.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93922DECC0B00FA9040 /* localImage8.jpeg */; };
+		0C7DE94822DECC0D00FA9040 /* localGifImage1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93A22DECC0C00FA9040 /* localGifImage1.gif */; };
+		0C7DE94922DECC0D00FA9040 /* localImage0.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93B22DECC0C00FA9040 /* localImage0.jpeg */; };
+		0C7DE94A22DECC0D00FA9040 /* localImage3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93C22DECC0C00FA9040 /* localImage3.jpeg */; };
+		0C7DE94B22DECC0D00FA9040 /* localBigImage0.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93D22DECC0C00FA9040 /* localBigImage0.jpeg */; };
+		0C7DE94C22DECC0D00FA9040 /* localImage4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93E22DECC0C00FA9040 /* localImage4.jpeg */; };
+		0C7DE94D22DECC0D00FA9040 /* localLongImage1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93F22DECC0D00FA9040 /* localLongImage1.jpg */; };
+		0C7DE94E22DECC0D00FA9040 /* localImage5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94022DECC0D00FA9040 /* localImage5.jpeg */; };
+		0C7DE94F22DECC0D00FA9040 /* localImage6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94122DECC0D00FA9040 /* localImage6.jpeg */; };
+		0C7DE95022DECC0D00FA9040 /* localLongImage0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94222DECC0D00FA9040 /* localLongImage0.jpg */; };
+		0C7DE95122DECC0D00FA9040 /* localImage7.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94322DECC0D00FA9040 /* localImage7.jpeg */; };
+		0C7DE95222DECC0D00FA9040 /* localImage2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94422DECC0D00FA9040 /* localImage2.jpeg */; };
+		0C7DE95322DECC0D00FA9040 /* localGifImage0.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */; };
+		0C7DE95422DECC0D00FA9040 /* localImage1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */; };
 		0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C903001224774430064088E /* CLRotateAnimationView.swift */; };
+		0C94BA4A22D9DC04008CD7BA /* CLPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94BA4922D9DC04008CD7BA /* CLPhotoCollectionViewCell.m */; };
+		0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FF01522E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m */; };
 		0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1236E22255A6F007DDE6D /* CLCardView.m */; };
 		0CA1237522255B81007DDE6D /* CLCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1237422255B81007DDE6D /* CLCardController.m */; };
 		0CACA4AB224CC1DC0084ECC8 /* CLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CACA4AA224CC1DC0084ECC8 /* CLTextView.swift */; };
@@ -51,12 +68,19 @@
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
 		0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */; };
 		0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */; };
+		0CC7796622D9D7E10027B310 /* CLPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7796522D9D7E10027B310 /* CLPhotoBrowserViewController.m */; };
 		0CCBFB7222AB89FE0078547B /* NSDate+CLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCBFB7122AB89FE0078547B /* NSDate+CLExtension.m */; };
 		0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA30A219850EF0057BA14 /* CLChangeFontSizeController.m */; };
 		0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA315219855A20057BA14 /* CLChangeFontSizeCell.m */; };
 		0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA318219855B90057BA14 /* ChangeFontSizeModel.m */; };
 		0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */; };
 		0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */; };
+		0CCDA3FF22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA3F422D9D1C4007B41C4 /* CLPhotoBrowserPresentationController.m */; };
+		0CCDA40022D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA3F522D9D1C4007B41C4 /* CLPhotoBrowserTransitioningDelegate.m */; };
+		0CCDA40122D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA3F622D9D1C4007B41C4 /* CLPhotoBrowserCollectionViewCell.m */; };
+		0CCDA40222D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA3F722D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m */; };
+		0CCDA40322D9D1C5007B41C4 /* CLPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA3FB22D9D1C5007B41C4 /* CLPhotoBrowser.m */; };
+		0CCDA40422D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA3FD22D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m */; };
 		0CE7333F2191CB9D00270851 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7333D2191CB9C00270851 /* Tools.m */; };
 		0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE733402191CBC700270851 /* UIView+CLSetRect.m */; };
 		0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE94862204395B007FA31B /* CLPasswordInputView.swift */; };
@@ -116,6 +140,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C03A16B22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserTableViewController.h; sourceTree = "<group>"; };
+		0C03A16C22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserTableViewController.m; sourceTree = "<group>"; };
 		0C0E369F2257836100478B69 /* CLCustomQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCustomQRCodeViewController.h; sourceTree = "<group>"; };
 		0C0E36A02257836100478B69 /* CLCustomQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomQRCodeViewController.m; sourceTree = "<group>"; };
 		0C0E36A22257838F00478B69 /* UIImage+CLQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLQRCode.h"; sourceTree = "<group>"; };
@@ -181,7 +207,25 @@
 		0C777A492217A8B900BC8AFB /* CLInputToolbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLInputToolbarController.h; sourceTree = "<group>"; };
 		0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbarController.m; sourceTree = "<group>"; };
 		0C77C4B82248C85C007D0FFC /* CLGCDTimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGCDTimerManager.swift; sourceTree = "<group>"; };
+		0C7DE93922DECC0B00FA9040 /* localImage8.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage8.jpeg; sourceTree = "<group>"; };
+		0C7DE93A22DECC0C00FA9040 /* localGifImage1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = localGifImage1.gif; sourceTree = "<group>"; };
+		0C7DE93B22DECC0C00FA9040 /* localImage0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage0.jpeg; sourceTree = "<group>"; };
+		0C7DE93C22DECC0C00FA9040 /* localImage3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage3.jpeg; sourceTree = "<group>"; };
+		0C7DE93D22DECC0C00FA9040 /* localBigImage0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localBigImage0.jpeg; sourceTree = "<group>"; };
+		0C7DE93E22DECC0C00FA9040 /* localImage4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage4.jpeg; sourceTree = "<group>"; };
+		0C7DE93F22DECC0D00FA9040 /* localLongImage1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localLongImage1.jpg; sourceTree = "<group>"; };
+		0C7DE94022DECC0D00FA9040 /* localImage5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage5.jpeg; sourceTree = "<group>"; };
+		0C7DE94122DECC0D00FA9040 /* localImage6.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage6.jpeg; sourceTree = "<group>"; };
+		0C7DE94222DECC0D00FA9040 /* localLongImage0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localLongImage0.jpg; sourceTree = "<group>"; };
+		0C7DE94322DECC0D00FA9040 /* localImage7.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage7.jpeg; sourceTree = "<group>"; };
+		0C7DE94422DECC0D00FA9040 /* localImage2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage2.jpeg; sourceTree = "<group>"; };
+		0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = localGifImage0.gif; sourceTree = "<group>"; };
+		0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage1.jpeg; sourceTree = "<group>"; };
 		0C903001224774430064088E /* CLRotateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationView.swift; sourceTree = "<group>"; };
+		0C94BA4822D9DC04008CD7BA /* CLPhotoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		0C94BA4922D9DC04008CD7BA /* CLPhotoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		0C9FF01422E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserImageScaleHelper.h; sourceTree = "<group>"; };
+		0C9FF01522E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserImageScaleHelper.m; sourceTree = "<group>"; };
 		0CA1236D22255A6F007DDE6D /* CLCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardView.h; sourceTree = "<group>"; };
 		0CA1236E22255A6F007DDE6D /* CLCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCardView.m; sourceTree = "<group>"; };
 		0CA1237322255B81007DDE6D /* CLCardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardController.h; sourceTree = "<group>"; };
@@ -193,6 +237,8 @@
 		0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogViewController.m; sourceTree = "<group>"; };
 		0CC171402248B4D2005B0F0A /* CLGCDTimerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
 		0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
+		0CC7796422D9D7E10027B310 /* CLPhotoBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		0CC7796522D9D7E10027B310 /* CLPhotoBrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserViewController.m; sourceTree = "<group>"; };
 		0CCBFB7022AB89FE0078547B /* NSDate+CLExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+CLExtension.h"; sourceTree = "<group>"; };
 		0CCBFB7122AB89FE0078547B /* NSDate+CLExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CLExtension.m"; sourceTree = "<group>"; };
 		0CCDA309219850EF0057BA14 /* CLChangeFontSizeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeController.h; sourceTree = "<group>"; };
@@ -205,6 +251,18 @@
 		0CCDA31B219922680057BA14 /* CLChangeFontSizeSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeSlider.m; sourceTree = "<group>"; };
 		0CCDA324219927370057BA14 /* CLChangeFontSizeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeFontSizeManager.h; sourceTree = "<group>"; };
 		0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeFontSizeManager.m; sourceTree = "<group>"; };
+		0CCDA3F322D9D1C4007B41C4 /* CLPhotoBrowserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserCollectionViewCell.h; sourceTree = "<group>"; };
+		0CCDA3F422D9D1C4007B41C4 /* CLPhotoBrowserPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserPresentationController.m; sourceTree = "<group>"; };
+		0CCDA3F522D9D1C4007B41C4 /* CLPhotoBrowserTransitioningDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserTransitioningDelegate.m; sourceTree = "<group>"; };
+		0CCDA3F622D9D1C4007B41C4 /* CLPhotoBrowserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserCollectionViewCell.m; sourceTree = "<group>"; };
+		0CCDA3F722D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserAnimatedTransitioning.m; sourceTree = "<group>"; };
+		0CCDA3F822D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserTransitioningDelegate.h; sourceTree = "<group>"; };
+		0CCDA3F922D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		0CCDA3FA22D9D1C5007B41C4 /* CLPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowser.h; sourceTree = "<group>"; };
+		0CCDA3FB22D9D1C5007B41C4 /* CLPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowser.m; sourceTree = "<group>"; };
+		0CCDA3FC22D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserAnimatedTransitioning.h; sourceTree = "<group>"; };
+		0CCDA3FD22D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoBrowserCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		0CCDA3FE22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserPresentationController.h; sourceTree = "<group>"; };
 		0CE7333D2191CB9C00270851 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		0CE7333E2191CB9D00270851 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		0CE733402191CBC700270851 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
@@ -406,6 +464,27 @@
 			path = CLLanguageManager;
 			sourceTree = "<group>";
 		};
+		0C6392C222DAC3AB00AFD7EB /* LocalFiles */ = {
+			isa = PBXGroup;
+			children = (
+				0C7DE93D22DECC0C00FA9040 /* localBigImage0.jpeg */,
+				0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */,
+				0C7DE93A22DECC0C00FA9040 /* localGifImage1.gif */,
+				0C7DE93B22DECC0C00FA9040 /* localImage0.jpeg */,
+				0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */,
+				0C7DE94422DECC0D00FA9040 /* localImage2.jpeg */,
+				0C7DE93C22DECC0C00FA9040 /* localImage3.jpeg */,
+				0C7DE93E22DECC0C00FA9040 /* localImage4.jpeg */,
+				0C7DE94022DECC0D00FA9040 /* localImage5.jpeg */,
+				0C7DE94122DECC0D00FA9040 /* localImage6.jpeg */,
+				0C7DE94322DECC0D00FA9040 /* localImage7.jpeg */,
+				0C7DE93922DECC0B00FA9040 /* localImage8.jpeg */,
+				0C7DE94222DECC0D00FA9040 /* localLongImage0.jpg */,
+				0C7DE93F22DECC0D00FA9040 /* localLongImage1.jpg */,
+			);
+			path = LocalFiles;
+			sourceTree = "<group>";
+		};
 		0C6D47EA226C37FC00699FBD /* CLPopArrowView */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +587,19 @@
 			path = Transition;
 			sourceTree = "<group>";
 		};
+		0C94BA4722D9DB86008CD7BA /* CLPhotoBrowserViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0C03A16B22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.h */,
+				0C03A16C22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m */,
+				0CC7796422D9D7E10027B310 /* CLPhotoBrowserViewController.h */,
+				0CC7796522D9D7E10027B310 /* CLPhotoBrowserViewController.m */,
+				0C94BA4822D9DC04008CD7BA /* CLPhotoCollectionViewCell.h */,
+				0C94BA4922D9DC04008CD7BA /* CLPhotoCollectionViewCell.m */,
+			);
+			path = CLPhotoBrowserViewController;
+			sourceTree = "<group>";
+		};
 		0CCDA30C219854D90057BA14 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +637,36 @@
 				0CCDA325219927370057BA14 /* CLChangeFontSizeManager.m */,
 			);
 			path = CLChangeFontSizeManager;
+			sourceTree = "<group>";
+		};
+		0CCDA3F122D9D161007B41C4 /* CLPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				0CCDA3FA22D9D1C5007B41C4 /* CLPhotoBrowser.h */,
+				0CCDA3FB22D9D1C5007B41C4 /* CLPhotoBrowser.m */,
+				0C9FF01422E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.h */,
+				0C9FF01522E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m */,
+				0CCDA3F322D9D1C4007B41C4 /* CLPhotoBrowserCollectionViewCell.h */,
+				0CCDA3F622D9D1C4007B41C4 /* CLPhotoBrowserCollectionViewCell.m */,
+				0CCDA3F922D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.h */,
+				0CCDA3FD22D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m */,
+				0CCDA3FC22D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.h */,
+				0CCDA3F722D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m */,
+				0CCDA3FE22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.h */,
+				0CCDA3F422D9D1C4007B41C4 /* CLPhotoBrowserPresentationController.m */,
+				0CCDA3F822D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.h */,
+				0CCDA3F522D9D1C4007B41C4 /* CLPhotoBrowserTransitioningDelegate.m */,
+			);
+			path = CLPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		0CCDA3F222D9D178007B41C4 /* FPSDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				0C6CE0BE22ACD71200B4EECF /* FPSDisplay.h */,
+				0C6CE0BF22ACD71200B4EECF /* FPSDisplay.m */,
+			);
+			path = FPSDisplay;
 			sourceTree = "<group>";
 		};
 		0CF79AFE2196792000DD0BF1 /* Aspects */ = {
@@ -707,6 +829,7 @@
 		5B80D9E71DDD976A00A20E34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0C6392C222DAC3AB00AFD7EB /* LocalFiles */,
 				5BC3FB8521CE966A00B7FF82 /* CLDemo-Bridging-Header.h */,
 				5B80D9F31DDD976A00A20E34 /* Assets.xcassets */,
 				5B80D9F51DDD976A00A20E34 /* LaunchScreen.storyboard */,
@@ -854,6 +977,7 @@
 				0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */,
 				0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */,
 				0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */,
+				0C94BA4722D9DB86008CD7BA /* CLPhotoBrowserViewController */,
 				0C7F179D22D9C70300993005 /* Transition */,
 				0C108EA222A92E57009EA457 /* CLCountdownController */,
 			);
@@ -881,8 +1005,8 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				0C6CE0BE22ACD71200B4EECF /* FPSDisplay.h */,
-				0C6CE0BF22ACD71200B4EECF /* FPSDisplay.m */,
+				0CCDA3F222D9D178007B41C4 /* FPSDisplay */,
+				0CCDA3F122D9D161007B41C4 /* CLPhotoBrowser */,
 				0C0F374222D1E70C005E496D /* CLTracerouteManager */,
 				0C29D593222FE7DB00635F25 /* CLGCDTimerManager */,
 				0C7316A7222814AB005ACFE7 /* CLJumpManager */,
@@ -1005,15 +1129,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CF79B1621967AE600DD0BF1 /* 一月.json in Resources */,
+				0C7DE94D22DECC0D00FA9040 /* localLongImage1.jpg in Resources */,
+				0C7DE95322DECC0D00FA9040 /* localGifImage0.gif in Resources */,
+				0C7DE95222DECC0D00FA9040 /* localImage2.jpeg in Resources */,
 				0CF79B0B2196799C00DD0BF1 /* bank.json in Resources */,
 				5B80D9F71DDD976A00A20E34 /* LaunchScreen.storyboard in Resources */,
+				0C7DE94F22DECC0D00FA9040 /* localImage6.jpeg in Resources */,
 				5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */,
+				0C7DE94A22DECC0D00FA9040 /* localImage3.jpeg in Resources */,
+				0C7DE95022DECC0D00FA9040 /* localLongImage0.jpg in Resources */,
 				0CF79B1521967AE600DD0BF1 /* 一年.json in Resources */,
 				0CF79B1421967AE600DD0BF1 /* 三月.json in Resources */,
+				0C7DE94B22DECC0D00FA9040 /* localBigImage0.jpeg in Resources */,
+				0C7DE95122DECC0D00FA9040 /* localImage7.jpeg in Resources */,
 				0CF79B1321967AE600DD0BF1 /* 一周.json in Resources */,
 				0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */,
+				0C7DE94C22DECC0D00FA9040 /* localImage4.jpeg in Resources */,
+				0C7DE94922DECC0D00FA9040 /* localImage0.jpeg in Resources */,
 				5B80961E221870BD000F72F3 /* zocr0.lib in Resources */,
+				0C7DE95422DECC0D00FA9040 /* localImage1.jpeg in Resources */,
+				0C7DE94E22DECC0D00FA9040 /* localImage5.jpeg in Resources */,
+				0C7DE94822DECC0D00FA9040 /* localGifImage1.gif in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
+				0C7DE94722DECC0D00FA9040 /* localImage8.jpeg in Resources */,
 				0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1050,8 +1188,11 @@
 				"${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImageWebPCoder/SDWebImageWebPCoder.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
+				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -1060,8 +1201,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImageWebPCoder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1097,6 +1241,7 @@
 				0CACA4AB224CC1DC0084ECC8 /* CLTextView.swift in Sources */,
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
 				0CE7333F2191CB9D00270851 /* Tools.m in Sources */,
+				0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */,
 				0C628C1C2230BC65005922A0 /* CLRoundAnimationView.m in Sources */,
 				0C6D47F6226C391F00699FBD /* CLPopArrowViewController.m in Sources */,
 				0CF79AFD219678FB00DD0BF1 /* UITableView+IndexTip.m in Sources */,
@@ -1105,10 +1250,12 @@
 				5B809617221870BD000F72F3 /* CLScanBankCardBase.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
+				0CCDA40122D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewCell.m in Sources */,
 				0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */,
 				5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */,
 				0C223C772243811200E319E2 /* CLRotateAnimationSwiftController.swift in Sources */,
 				5B80DA471DDD993F00A20E34 /* CLEssenceController.m in Sources */,
+				0CCDA40022D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.m in Sources */,
 				0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */,
 				5B809616221870BD000F72F3 /* CLScanBankCardManager.m in Sources */,
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
@@ -1129,6 +1276,7 @@
 				0C6D47E9226C37EC00699FBD /* CLPopArrowView.m in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */,
+				0CCDA40422D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m in Sources */,
 				0CF64300222FECBD00227361 /* CLWaveViewController.m in Sources */,
 				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
@@ -1142,6 +1290,7 @@
 				0CF642FD222FECA800227361 /* CLWaveView.m in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */,
+				0C03A16D22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m in Sources */,
 				5B80961B221870BD000F72F3 /* CLBankCardModel.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */,
@@ -1153,10 +1302,13 @@
 				0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */,
 				5B80961A221870BD000F72F3 /* CLDesign.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
+				0CCDA40222D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m in Sources */,
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
+				0CCDA3FF22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.m in Sources */,
 				0C77C4B92248C85C007D0FFC /* CLGCDTimerManager.swift in Sources */,
 				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
 				0CACA4AD224CC1F80084ECC8 /* CLTextViewViewController.swift in Sources */,
+				0CC7796622D9D7E10027B310 /* CLPhotoBrowserViewController.m in Sources */,
 				0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
 				0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */,
@@ -1172,12 +1324,14 @@
 				0C0F374522D1E72C005E496D /* SimplePing.m in Sources */,
 				0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */,
 				0CF79B082196798400DD0BF1 /* BankModel.m in Sources */,
+				0C94BA4A22D9DC04008CD7BA /* CLPhotoCollectionViewCell.m in Sources */,
 				0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */,
 				0C223C792243818A00E319E2 /* CLRoundAnimationView.swift in Sources */,
 				0CCBFB7222AB89FE0078547B /* NSDate+CLExtension.m in Sources */,
 				5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */,
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
+				0CCDA40322D9D1C5007B41C4 /* CLPhotoBrowser.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
 				0CF5680D2215049600926A4C /* UIView+CLEvents.m in Sources */,
 				0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */,

@@ -9,5 +9,7 @@ pod 'DateTools'
 pod 'MJExtension'
 pod 'Then'
 pod 'SnapKit'
+pod 'SDWebImage'
+pod 'SDWebImageWebPCoder'
 
 end

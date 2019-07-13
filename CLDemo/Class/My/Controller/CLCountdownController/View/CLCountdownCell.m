@@ -7,7 +7,6 @@
 //
 
 #import "CLCountdownCell.h"
-#import "Masonry.h"
 #import "CLCountdownModel.h"
 
 @interface CLCountdownCell ()

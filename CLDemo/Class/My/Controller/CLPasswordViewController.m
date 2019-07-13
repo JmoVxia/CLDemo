@@ -8,7 +8,6 @@
 
 #import "CLPasswordViewController.h"
 #import "CLPassWordInputView.h"
-#import "Masonry.h"
 #import "CLCoreTextView.h"
 
 @interface CLPasswordViewController ()<CLPasswordInputViewDelegate>

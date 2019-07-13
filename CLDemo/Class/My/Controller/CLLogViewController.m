@@ -7,7 +7,6 @@
 //
 
 #import "CLLogViewController.h"
-#import "Masonry.h"
 
 @interface CLLogViewController ()<UITableViewDelegate, UITableViewDataSource>
 /**tableview*/

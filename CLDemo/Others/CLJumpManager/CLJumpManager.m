@@ -28,8 +28,31 @@
     }
     return viewController;
 }
+
 + (UIViewController *)topViewController {
     return [CLJumpManager topViewControllerWithRootViewController:self.rootViewController];
+}
+
++ (void)backToRootViewControllerAnimation:(AnimationType)type belongView:(UIView *)view {
+    UIViewController *viewController = [self findBelongViewControllerForView:view];
+    if (viewController.presentingViewController) {
+        while (viewController.presentingViewController) {
+            viewController = viewController.presentingViewController;
+        }
+        if (type) {
+            [self addAnimationWithType:type];
+        }else {
+            [self addAnimationWithType:AnimationTypeBottom];
+        }
+        [viewController dismissViewControllerAnimated:NO completion:nil];
+    } else{
+        if (type) {
+            [self addAnimationWithType:type];
+        }else {
+            [self addAnimationWithType:AnimationTypeLeft];
+        }
+        [viewController.navigationController popToRootViewControllerAnimated:NO];
+    }
 }
 + (UIViewController *)topViewControllerWithRootViewController:(UIViewController *)rootViewController {
     BOOL runLoopFind = YES;
@@ -54,57 +77,32 @@
     }
     return rootViewController;
 }
-+ (void)backToRootViewControllerAnimation:(AnimationType)type {
-    [self addAnimationWithType:type];
-    [self backToRootViewController];
-}
 + (void)addAnimationWithType:(AnimationType)type {
-    CATransition *animation = [CATransition animation];
-    //动画时间
-    animation.duration = 0.25f;
-    //过滤效果
-    animation.type = kCATransitionReveal;
-    //动画执行完毕时是否被移除
-    animation.removedOnCompletion = YES;
-    animation.subtype = kCATransitionFromBottom;
-    if (type == AnimationTypeLeft) {
-        animation.subtype = kCATransitionFromLeft;
-    }
-    [[UIApplication sharedApplication].keyWindow.layer addAnimation:animation forKey:nil];
-}
-+ (void)backToRootViewController {
-    UIViewController *viewController = [self visibleViewController];
-    if ([viewController isEqual:self.rootViewController]) {
-        return;
-    }
-    if (viewController.presentingViewController) {
-        while (viewController.presentingViewController) {
-            viewController = viewController.presentingViewController;
+    if (type != AnimationTypeNone) {
+        CATransition *animation = [CATransition animation];
+        //动画时间
+        animation.duration = 0.25f;
+        //过滤效果
+        animation.type = kCATransitionReveal;
+        //动画执行完毕时是否被移除
+        animation.removedOnCompletion = YES;
+        animation.subtype = kCATransitionFromBottom;
+        if (type == AnimationTypeLeft) {
+            animation.subtype = kCATransitionFromLeft;
         }
-        [viewController dismissViewControllerAnimated:NO completion:^{
-            [self backToRootViewController];
-        }];
-    } else{
-        [viewController.navigationController popToRootViewControllerAnimated:NO];
-        [self backToRootViewController];
+        [[UIApplication sharedApplication].keyWindow.layer addAnimation:animation forKey:nil];
     }
 }
-+ (UIViewController *)visibleViewController {
-    UIViewController *rootViewController =[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    return [CLJumpManager visibleViewControllerFrom:rootViewController];
++ (void)backToRootViewControllerBelongView:(UIView *)view {
+    [self backToRootViewControllerAnimation:AnimationTypeNone belongView:view];
 }
-+ (UIViewController *)visibleViewControllerFrom:(UIViewController *)viewController {
-    if ([viewController isKindOfClass:[UINavigationController class]]) {
-        return [CLJumpManager visibleViewControllerFrom:[((UINavigationController *)viewController) visibleViewController]];
-    } else if ([viewController isKindOfClass:[UITabBarController class]]) {
-        return [CLJumpManager visibleViewControllerFrom:[((UITabBarController *)viewController) selectedViewController]];
-    } else {
-        if (viewController.presentedViewController) {
-            return [CLJumpManager visibleViewControllerFrom:viewController.presentedViewController];
-        } else {
-            return viewController;
++ (nullable UIViewController *)findBelongViewControllerForView:(UIView *)view {
+    UIResponder *responder = view;
+    while ((responder = [responder nextResponder]))
+        if ([responder isKindOfClass: [UIViewController class]]) {
+            return (UIViewController *)responder;
         }
-    }
+    return nil;
 }
 
 @end

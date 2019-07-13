@@ -10,22 +10,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, AnimationType) {
-    AnimationTypeBottom,
-    AnimationTypeLeft,
+    AnimationTypeBottom,///<底部退出
+    AnimationTypeLeft,///<左侧退出
+    AnimationTypeNone,  ///<没有动画
 };
 
 @interface CLJumpManager : NSObject
 
 ///动画返回到根控制器
-+ (void)backToRootViewControllerAnimation:(AnimationType)type;
++ (void)backToRootViewControllerAnimation:(AnimationType)type belongView:(UIView *)view;
 ///返回跟控制器
-+ (void)backToRootViewController;
++ (void)backToRootViewControllerBelongView:(UIView *)view;
 ///根控制器
 + (UIViewController *)rootViewController;
 ///顶部控制器
 + (UIViewController *)topViewController;
-///显示的控制器
-+ (UIViewController *)visibleViewController;
 
 @end
 

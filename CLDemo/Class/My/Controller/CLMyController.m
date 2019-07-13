@@ -24,6 +24,7 @@
 #import "CLPopArrowViewController.h"
 #import "CLCountdownController.h"
 #import "CLTracerouteViewController.h"
+#import "CLPhotoBrowserTableViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -91,6 +92,7 @@
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
         [_arrayDS addObject:NSLocalizedString(@"Cell倒计时", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"图片浏览器", nil)];
         [_arrayDS addObject:[NSLocalizedString(@"转子动画", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"转子动画", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-OC"]];
@@ -118,6 +120,7 @@
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
         [_controllerArray addObject:[CLCountdownController class]];
+        [_controllerArray addObject:[CLPhotoBrowserTableViewController class]];
         [_controllerArray addObject:[CLRotateAnimationController class]];
         [_controllerArray addObject:[CLRotateAnimationSwiftController class]];
         [_controllerArray addObject:[CLPasswordViewController class]];
