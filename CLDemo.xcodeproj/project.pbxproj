@@ -25,6 +25,7 @@
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
 		0C3CAA5821AF8A3B00A352F0 /* CLRotateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */; };
+		0C47E22422D9C3E4003EDB4E /* CLTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C47E22322D9C3E4003EDB4E /* CLTransitionViewController.swift */; };
 		0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */; };
 		0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6621928C5C0079A0E7 /* CLLanguageManager.m */; };
 		0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52EF6C2192949A0079A0E7 /* NSBundle+CLLanguage.m */; };
@@ -146,6 +147,7 @@
 		0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationController.m; sourceTree = "<group>"; };
 		0C3CAA5621AF8A3B00A352F0 /* CLRotateAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationView.h; sourceTree = "<group>"; };
 		0C3CAA5721AF8A3B00A352F0 /* CLRotateAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationView.m; sourceTree = "<group>"; };
+		0C47E22322D9C3E4003EDB4E /* CLTransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTransitionViewController.swift; sourceTree = "<group>"; };
 		0C52EF5F219287280079A0E7 /* CLChangeLanguageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLChangeLanguageController.h; sourceTree = "<group>"; };
 		0C52EF60219287280079A0E7 /* CLChangeLanguageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLChangeLanguageController.m; sourceTree = "<group>"; };
 		0C52EF6521928C5C0079A0E7 /* CLLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLanguageManager.h; sourceTree = "<group>"; };
@@ -498,6 +500,14 @@
 			path = CLJumpManager;
 			sourceTree = "<group>";
 		};
+		0C7F179D22D9C70300993005 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				0C47E22322D9C3E4003EDB4E /* CLTransitionViewController.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
 		0CCDA30C219854D90057BA14 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,6 +854,7 @@
 				0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */,
 				0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */,
 				0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */,
+				0C7F179D22D9C70300993005 /* Transition */,
 				0C108EA222A92E57009EA457 /* CLCountdownController */,
 			);
 			path = Controller;
@@ -1090,6 +1101,7 @@
 				0C6D47F6226C391F00699FBD /* CLPopArrowViewController.m in Sources */,
 				0CF79AFD219678FB00DD0BF1 /* UITableView+IndexTip.m in Sources */,
 				0C0E36A12257836100478B69 /* CLCustomQRCodeViewController.m in Sources */,
+				0C47E22422D9C3E4003EDB4E /* CLTransitionViewController.swift in Sources */,
 				5B809617221870BD000F72F3 /* CLScanBankCardBase.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,

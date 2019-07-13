@@ -107,6 +107,7 @@
         [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
         [_arrayDS addObject:NSLocalizedString(@"路由追踪", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"过渡动画", nil)];
     }
     return _arrayDS;
 }
@@ -133,6 +134,7 @@
         [_controllerArray addObject:[CLRotatingPictureViewController class]];
         [_controllerArray addObject:[CLLogViewController class]];
         [_controllerArray addObject:[CLTracerouteViewController class]];
+        [_controllerArray addObject:[CLTransitionViewController class]];
     }
     return _controllerArray;
 }
