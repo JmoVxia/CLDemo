@@ -12,7 +12,7 @@
 
 @interface CLPhotoBrowserAnimatedTransitioning ()
 
-@property (nonatomic, assign) PTAnimatedTransitionType animatedType;
+@property (nonatomic, assign) CLAnimatedTransitionType animatedType;
 
 @property (nonatomic, assign) NSTimeInterval animatedDuration;
 
@@ -20,7 +20,7 @@
 
 @implementation CLPhotoBrowserAnimatedTransitioning
 
--(instancetype)initWithAnimatedType:(PTAnimatedTransitionType)type animatedDuration:(NSTimeInterval)duration {
+-(instancetype)initWithAnimatedType:(CLAnimatedTransitionType)type animatedDuration:(NSTimeInterval)duration {
     if (self = [super init]) {
         self.animatedType = type;
         self.animatedDuration = duration;

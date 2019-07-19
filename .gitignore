@@ -5,6 +5,3 @@
 xcuserdata
 *.xccheckout
 DerivedData/
-
-# CocoaPods
-Pods/

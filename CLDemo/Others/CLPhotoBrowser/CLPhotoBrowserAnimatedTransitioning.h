@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, PTAnimatedTransitionType) {
+typedef NS_ENUM(NSUInteger, CLAnimatedTransitionType) {
     present,
     dismiss,
 };
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, PTAnimatedTransitionType) {
  @param type 动画类型
  @param duration 动画时间
  */
--(instancetype)initWithAnimatedType:(PTAnimatedTransitionType)type animatedDuration:(NSTimeInterval)duration;
+-(instancetype)initWithAnimatedType:(CLAnimatedTransitionType)type animatedDuration:(NSTimeInterval)duration;
 
 @end
 

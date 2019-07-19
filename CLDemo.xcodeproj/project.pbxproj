@@ -12,6 +12,8 @@
 		0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0E36A32257838F00478B69 /* UIImage+CLQRCode.m */; };
 		0C0F374122D1E48D005E496D /* CLTracerouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */; };
 		0C0F374522D1E72C005E496D /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F374422D1E72C005E496D /* SimplePing.m */; };
+		0C1075F022E1ADF9005E5843 /* CLTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1075EF22E1ADF9005E5843 /* CLTransitioningDelegate.m */; };
+		0C1075F322E1AE8A005E5843 /* CLAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1075F222E1AE8A005E5843 /* CLAnimatedTransitioning.m */; };
 		0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA022A92B3A009EA457 /* CLCountdownController.m */; };
 		0C108EA622A93108009EA457 /* CLCountdownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA522A93108009EA457 /* CLCountdownModel.m */; };
 		0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C108EA922A93289009EA457 /* CLCountdownCell.m */; };
@@ -35,6 +37,7 @@
 		0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C558AE321EDA2E800C2C096 /* UIColor+CLHex.m */; };
 		0C61577822BE1241009AABAC /* CLSectorAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C61577722BE1241009AABAC /* CLSectorAnimationView.swift */; };
 		0C628C1C2230BC65005922A0 /* CLRoundAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */; };
+		0C66AF8F22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66AF8E22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m */; };
 		0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */; };
 		0C6B40E721ECFCAB00360FAD /* CLPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B40E621ECFCAB00360FAD /* CLPasswordViewController.m */; };
 		0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CE0BF22ACD71200B4EECF /* FPSDisplay.m */; };
@@ -59,6 +62,7 @@
 		0C7DE95322DECC0D00FA9040 /* localGifImage0.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */; };
 		0C7DE95422DECC0D00FA9040 /* localImage1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */; };
 		0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C903001224774430064088E /* CLRotateAnimationView.swift */; };
+		0C93FADA22E1DECF002069F8 /* CLDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C93FAD922E1DECF002069F8 /* CLDrivenInteractiveTransition.m */; };
 		0C94BA4A22D9DC04008CD7BA /* CLPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94BA4922D9DC04008CD7BA /* CLPhotoCollectionViewCell.m */; };
 		0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FF01522E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m */; };
 		0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1236E22255A6F007DDE6D /* CLCardView.m */; };
@@ -66,6 +70,8 @@
 		0CACA4AB224CC1DC0084ECC8 /* CLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CACA4AA224CC1DC0084ECC8 /* CLTextView.swift */; };
 		0CACA4AD224CC1F80084ECC8 /* CLTextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CACA4AC224CC1F80084ECC8 /* CLTextViewViewController.swift */; };
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
+		0CB2769522E1A76800AFCB8C /* CLPresentTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2769422E1A76800AFCB8C /* CLPresentTransitionController.m */; };
+		0CB2769922E1A85F00AFCB8C /* CLTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2769822E1A85F00AFCB8C /* CLTransitionController.m */; };
 		0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */; };
 		0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC171412248B4D2005B0F0A /* CLGCDTimerManager.m */; };
 		0CC7796622D9D7E10027B310 /* CLPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7796522D9D7E10027B310 /* CLPhotoBrowserViewController.m */; };
@@ -150,6 +156,11 @@
 		0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTracerouteViewController.m; sourceTree = "<group>"; };
 		0C0F374322D1E72C005E496D /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
 		0C0F374422D1E72C005E496D /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		0C1075EE22E1ADF9005E5843 /* CLTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTransitioningDelegate.h; sourceTree = "<group>"; };
+		0C1075EF22E1ADF9005E5843 /* CLTransitioningDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTransitioningDelegate.m; sourceTree = "<group>"; };
+		0C1075F122E1AE8A005E5843 /* CLAnimatedTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLAnimatedTransitioning.h; sourceTree = "<group>"; };
+		0C1075F222E1AE8A005E5843 /* CLAnimatedTransitioning.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAnimatedTransitioning.m; sourceTree = "<group>"; };
+		0C1075F722E1B4B3005E5843 /* CLTransitionEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTransitionEnum.h; sourceTree = "<group>"; };
 		0C108E9F22A92B3A009EA457 /* CLCountdownController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownController.h; sourceTree = "<group>"; };
 		0C108EA022A92B3A009EA457 /* CLCountdownController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCountdownController.m; sourceTree = "<group>"; };
 		0C108EA422A93108009EA457 /* CLCountdownModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCountdownModel.h; sourceTree = "<group>"; };
@@ -190,6 +201,8 @@
 		0C61577722BE1241009AABAC /* CLSectorAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSectorAnimationView.swift; sourceTree = "<group>"; };
 		0C628C1A2230BC65005922A0 /* CLRoundAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRoundAnimationView.h; sourceTree = "<group>"; };
 		0C628C1B2230BC65005922A0 /* CLRoundAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRoundAnimationView.m; sourceTree = "<group>"; };
+		0C66AF8D22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPresentTransitionNavigationController.h; sourceTree = "<group>"; };
+		0C66AF8E22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPresentTransitionNavigationController.m; sourceTree = "<group>"; };
 		0C6B40E221ECFC7100360FAD /* UITextField+CLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CLDelegate.h"; sourceTree = "<group>"; };
 		0C6B40E321ECFC7100360FAD /* UITextField+CLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CLDelegate.m"; sourceTree = "<group>"; };
 		0C6B40E521ECFCAB00360FAD /* CLPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPasswordViewController.h; sourceTree = "<group>"; };
@@ -222,6 +235,8 @@
 		0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = localGifImage0.gif; sourceTree = "<group>"; };
 		0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage1.jpeg; sourceTree = "<group>"; };
 		0C903001224774430064088E /* CLRotateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationView.swift; sourceTree = "<group>"; };
+		0C93FAD822E1DECF002069F8 /* CLDrivenInteractiveTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDrivenInteractiveTransition.h; sourceTree = "<group>"; };
+		0C93FAD922E1DECF002069F8 /* CLDrivenInteractiveTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		0C94BA4822D9DC04008CD7BA /* CLPhotoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		0C94BA4922D9DC04008CD7BA /* CLPhotoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		0C9FF01422E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoBrowserImageScaleHelper.h; sourceTree = "<group>"; };
@@ -233,6 +248,10 @@
 		0CACA4AA224CC1DC0084ECC8 /* CLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTextView.swift; sourceTree = "<group>"; };
 		0CACA4AC224CC1F80084ECC8 /* CLTextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTextViewViewController.swift; sourceTree = "<group>"; };
 		0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordViewSwiftController.swift; sourceTree = "<group>"; };
+		0CB2769322E1A76800AFCB8C /* CLPresentTransitionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPresentTransitionController.h; sourceTree = "<group>"; };
+		0CB2769422E1A76800AFCB8C /* CLPresentTransitionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPresentTransitionController.m; sourceTree = "<group>"; };
+		0CB2769722E1A85F00AFCB8C /* CLTransitionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTransitionController.h; sourceTree = "<group>"; };
+		0CB2769822E1A85F00AFCB8C /* CLTransitionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTransitionController.m; sourceTree = "<group>"; };
 		0CBBE92E220DBAEC00640BB9 /* CLLogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogViewController.h; sourceTree = "<group>"; };
 		0CBBE92F220DBAEC00640BB9 /* CLLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogViewController.m; sourceTree = "<group>"; };
 		0CC171402248B4D2005B0F0A /* CLGCDTimerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
@@ -397,6 +416,18 @@
 			path = CLTracerouteManager;
 			sourceTree = "<group>";
 		};
+		0C1075F822E1B57D005E5843 /* CLPresentTransitionController */ = {
+			isa = PBXGroup;
+			children = (
+				0C66AF8D22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.h */,
+				0C66AF8E22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m */,
+				0CB2769322E1A76800AFCB8C /* CLPresentTransitionController.h */,
+				0CB2769422E1A76800AFCB8C /* CLPresentTransitionController.m */,
+				0C66AF8922E1B6DA00C5C9E8 /* CLPresentTransitionAnimated */,
+			);
+			path = CLPresentTransitionController;
+			sourceTree = "<group>";
+		};
 		0C108EA222A92E57009EA457 /* CLCountdownController */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +514,20 @@
 				0C7DE93F22DECC0D00FA9040 /* localLongImage1.jpg */,
 			);
 			path = LocalFiles;
+			sourceTree = "<group>";
+		};
+		0C66AF8922E1B6DA00C5C9E8 /* CLPresentTransitionAnimated */ = {
+			isa = PBXGroup;
+			children = (
+				0C1075F722E1B4B3005E5843 /* CLTransitionEnum.h */,
+				0C1075EE22E1ADF9005E5843 /* CLTransitioningDelegate.h */,
+				0C1075EF22E1ADF9005E5843 /* CLTransitioningDelegate.m */,
+				0C1075F122E1AE8A005E5843 /* CLAnimatedTransitioning.h */,
+				0C1075F222E1AE8A005E5843 /* CLAnimatedTransitioning.m */,
+				0C93FAD822E1DECF002069F8 /* CLDrivenInteractiveTransition.h */,
+				0C93FAD922E1DECF002069F8 /* CLDrivenInteractiveTransition.m */,
+			);
+			path = CLPresentTransitionAnimated;
 			sourceTree = "<group>";
 		};
 		0C6D47EA226C37FC00699FBD /* CLPopArrowView */ = {
@@ -600,6 +645,16 @@
 			path = CLPhotoBrowserViewController;
 			sourceTree = "<group>";
 		};
+		0CB2769622E1A83400AFCB8C /* CLTransitionController */ = {
+			isa = PBXGroup;
+			children = (
+				0CB2769722E1A85F00AFCB8C /* CLTransitionController.h */,
+				0CB2769822E1A85F00AFCB8C /* CLTransitionController.m */,
+				0C1075F822E1B57D005E5843 /* CLPresentTransitionController */,
+			);
+			path = CLTransitionController;
+			sourceTree = "<group>";
+		};
 		0CCDA30C219854D90057BA14 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,12 +705,12 @@
 				0CCDA3F622D9D1C4007B41C4 /* CLPhotoBrowserCollectionViewCell.m */,
 				0CCDA3F922D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.h */,
 				0CCDA3FD22D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m */,
+				0CCDA3F822D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.h */,
+				0CCDA3F522D9D1C4007B41C4 /* CLPhotoBrowserTransitioningDelegate.m */,
 				0CCDA3FC22D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.h */,
 				0CCDA3F722D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m */,
 				0CCDA3FE22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.h */,
 				0CCDA3F422D9D1C4007B41C4 /* CLPhotoBrowserPresentationController.m */,
-				0CCDA3F822D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.h */,
-				0CCDA3F522D9D1C4007B41C4 /* CLPhotoBrowserTransitioningDelegate.m */,
 			);
 			path = CLPhotoBrowser;
 			sourceTree = "<group>";
@@ -977,6 +1032,7 @@
 				0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */,
 				0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */,
 				0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */,
+				0CB2769622E1A83400AFCB8C /* CLTransitionController */,
 				0C94BA4722D9DB86008CD7BA /* CLPhotoBrowserViewController */,
 				0C7F179D22D9C70300993005 /* Transition */,
 				0C108EA222A92E57009EA457 /* CLCountdownController */,
@@ -1239,6 +1295,7 @@
 			files = (
 				5B8095F62218700E000F72F3 /* CLBankCardScanController.m in Sources */,
 				0CACA4AB224CC1DC0084ECC8 /* CLTextView.swift in Sources */,
+				0C1075F322E1AE8A005E5843 /* CLAnimatedTransitioning.m in Sources */,
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
 				0CE7333F2191CB9D00270851 /* Tools.m in Sources */,
 				0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */,
@@ -1262,6 +1319,8 @@
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				0C61577822BE1241009AABAC /* CLSectorAnimationView.swift in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
+				0C66AF8F22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m in Sources */,
+				0CB2769522E1A76800AFCB8C /* CLPresentTransitionController.m in Sources */,
 				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
@@ -1277,6 +1336,7 @@
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */,
 				0CCDA40422D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m in Sources */,
+				0CB2769922E1A85F00AFCB8C /* CLTransitionController.m in Sources */,
 				0CF64300222FECBD00227361 /* CLWaveViewController.m in Sources */,
 				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
@@ -1291,6 +1351,7 @@
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */,
 				0C03A16D22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m in Sources */,
+				0C93FADA22E1DECF002069F8 /* CLDrivenInteractiveTransition.m in Sources */,
 				5B80961B221870BD000F72F3 /* CLBankCardModel.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
 				5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */,
@@ -1339,6 +1400,7 @@
 				0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */,
 				5B28650E21EE428200334E6C /* CLCoreTextView.m in Sources */,
+				0C1075F022E1ADF9005E5843 /* CLTransitioningDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
