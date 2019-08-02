@@ -13,6 +13,7 @@ import SnapKit
 ///
 /// - count: 字数
 /// - bytesLength: 字节
+@objc
 enum Statistics: Int {
     case count
     case bytesLength
@@ -20,7 +21,8 @@ enum Statistics: Int {
 
 /// 字符编码格式
 ///
-enum Encoding {
+@objc
+enum Encoding: Int {
     case gbk
     case ascii
     case nextstep
@@ -47,13 +49,13 @@ enum Encoding {
     case utf32LittleEndian
 }
 
-class CLTextViewConfigure: NSObject {
+@objcMembers class CLTextViewConfigure: NSObject {
     ///背景颜色
     var backgroundColor: UIColor = UIColor.white
     ///显示计数
     var showLengthLabel: Bool = true
     ///占位文字
-    var placeholder: String = "请输入文字..."
+    var placeholder: String = "请输入文字"
     ///占位文字颜色
     var placeholderTextColor: UIColor = UIColor.black
     ///text字体
@@ -71,7 +73,7 @@ class CLTextViewConfigure: NSObject {
     ///最大行数
     var textViewMaxLine: NSInteger = 6
     ///最大字数
-    var maxCount = 100
+    var maxCount: NSInteger = 100
     ///最大字节
     var maxBytesLength: NSInteger = 520
     ///输入框间距
@@ -89,31 +91,15 @@ class CLTextViewConfigure: NSObject {
     }
 }
 
-protocol CLTextViewDelegate: class {
+@objc protocol CLTextViewDelegate: class {
     ///输入改变
-    func textViewDidChange(textView:CLTextView) -> Void
+    @objc optional func textViewDidChange(textView:CLTextView) -> Void
     ///开始输入
-    func textViewBeginEditing(textView:CLTextView) -> Void
+    @objc optional func textViewBeginEditing(textView:CLTextView) -> Void
     ///结束输入
-    func textViewEndEditing(textView:CLTextView) -> Void
+    @objc optional func textViewEndEditing(textView:CLTextView) -> Void
 }
-
-extension CLTextViewDelegate {
-    ///输入改变
-    func textViewDidChange(textView:CLTextView) -> Void {
-        
-    }
-    ///开始输入
-    func textViewBeginEditing(textView:CLTextView) -> Void {
-        
-    }
-    ///结束输入
-    func textViewEndEditing(textView:CLTextView) -> Void {
-        
-    }
-}
-
-class CLTextView: UIView {
+@objcMembers class CLTextView: UIView {
     ///代理
     weak var delegate: CLTextViewDelegate?
     ///高度
@@ -173,6 +159,8 @@ class CLTextView: UIView {
         super.init(frame: frame)
         backgroundColor = configure.backgroundColor
         remakeConstraints()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder))
+        addGestureRecognizer(tapGestureRecognizer)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -283,7 +271,6 @@ extension CLTextView: UITextViewDelegate {
             }else {
                 self.lastText = textView.text;
             }
-            
             var lengthText: String
             if self.configure.statistics == .bytesLength {
                 lengthText = String.init(format: "%ld/%ld",  self.bytesLength(text: textView.text), self.configure.maxBytesLength)
@@ -294,26 +281,28 @@ extension CLTextView: UITextViewDelegate {
             self.remakeConstraints()
             if self.lastText != self.text {
                 self.text = textView.text
-                self.delegate?.textViewDidChange(textView: self)
+                self.delegate?.textViewDidChange?(textView: self)
             }
         }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        delegate?.textViewBeginEditing(textView: self)
+        delegate?.textViewBeginEditing?(textView: self)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        delegate?.textViewEndEditing(textView: self)
+        delegate?.textViewEndEditing?(textView: self)
     }
 }
 //MARK:JmoVxia---键盘相关
 extension CLTextView {
     ///成为第一响应者
+    @discardableResult
     override func becomeFirstResponder() -> Bool {
         return textView.becomeFirstResponder()
     }
     ///取消第一响应者
+    @discardableResult
     override func resignFirstResponder() -> Bool {
         return textView.resignFirstResponder()
     }
