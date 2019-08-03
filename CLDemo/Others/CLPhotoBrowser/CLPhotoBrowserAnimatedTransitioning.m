@@ -57,7 +57,7 @@
         } completion:^(BOOL finished) {
             photoBrowser.view.hidden = NO;
             [imageView removeFromSuperview];
-            [transitionContext completeTransition:YES];
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }else {
         CLPhotoBrowser *photoBrowser = (CLPhotoBrowser *)fromVc;
@@ -80,7 +80,7 @@
             imageView.frame = toFrame;
         } completion:^(BOOL finished) {
             [imageView removeFromSuperview];
-            [transitionContext completeTransition:YES];
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }
 }
