@@ -62,6 +62,8 @@
 		0C7DE95322DECC0D00FA9040 /* localGifImage0.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */; };
 		0C7DE95422DECC0D00FA9040 /* localImage1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */; };
 		0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C903001224774430064088E /* CLRotateAnimationView.swift */; };
+		0C9235A722F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9235A622F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m */; };
+		0C9235AB22F5589100EA3E9F /* CLMailBoxTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9235AA22F5589100EA3E9F /* CLMailBoxTextView.m */; };
 		0C93FADA22E1DECF002069F8 /* CLDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C93FAD922E1DECF002069F8 /* CLDrivenInteractiveTransition.m */; };
 		0C94BA4A22D9DC04008CD7BA /* CLPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94BA4922D9DC04008CD7BA /* CLPhotoCollectionViewCell.m */; };
 		0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FF01522E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m */; };
@@ -235,6 +237,10 @@
 		0C7DE94522DECC0D00FA9040 /* localGifImage0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = localGifImage0.gif; sourceTree = "<group>"; };
 		0C7DE94622DECC0D00FA9040 /* localImage1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage1.jpeg; sourceTree = "<group>"; };
 		0C903001224774430064088E /* CLRotateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationView.swift; sourceTree = "<group>"; };
+		0C9235A522F5584300EA3E9F /* CLMailboxAutoCompletionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMailboxAutoCompletionViewController.h; sourceTree = "<group>"; };
+		0C9235A622F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMailboxAutoCompletionViewController.m; sourceTree = "<group>"; };
+		0C9235A922F5589100EA3E9F /* CLMailBoxTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMailBoxTextView.h; sourceTree = "<group>"; };
+		0C9235AA22F5589100EA3E9F /* CLMailBoxTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMailBoxTextView.m; sourceTree = "<group>"; };
 		0C93FAD822E1DECF002069F8 /* CLDrivenInteractiveTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		0C93FAD922E1DECF002069F8 /* CLDrivenInteractiveTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		0C94BA4822D9DC04008CD7BA /* CLPhotoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLPhotoCollectionViewCell.h; sourceTree = "<group>"; };
@@ -632,6 +638,15 @@
 			path = Transition;
 			sourceTree = "<group>";
 		};
+		0C9235A822F5587800EA3E9F /* CLMailBoxTextView */ = {
+			isa = PBXGroup;
+			children = (
+				0C9235A922F5589100EA3E9F /* CLMailBoxTextView.h */,
+				0C9235AA22F5589100EA3E9F /* CLMailBoxTextView.m */,
+			);
+			path = CLMailBoxTextView;
+			sourceTree = "<group>";
+		};
 		0C94BA4722D9DB86008CD7BA /* CLPhotoBrowserViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +682,7 @@
 		0CCDA310219855620057BA14 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0C9235A822F5587800EA3E9F /* CLMailBoxTextView */,
 				0C6D47F3226C38FA00699FBD /* CLTextView */,
 				0C6D47F2226C38EC00699FBD /* CLWaveView */,
 				0C6D47F1226C389200699FBD /* CLCardView */,
@@ -1032,6 +1048,8 @@
 				0C6D47F5226C391F00699FBD /* CLPopArrowViewController.m */,
 				0C0F373F22D1E48D005E496D /* CLTracerouteViewController.h */,
 				0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */,
+				0C9235A522F5584300EA3E9F /* CLMailboxAutoCompletionViewController.h */,
+				0C9235A622F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m */,
 				0CB2769622E1A83400AFCB8C /* CLTransitionController */,
 				0C94BA4722D9DB86008CD7BA /* CLPhotoBrowserViewController */,
 				0C7F179D22D9C70300993005 /* Transition */,
@@ -1322,6 +1340,7 @@
 				0C66AF8F22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m in Sources */,
 				0CB2769522E1A76800AFCB8C /* CLPresentTransitionController.m in Sources */,
 				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
+				0C9235A722F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
 				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
@@ -1341,6 +1360,7 @@
 				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
+				0C9235AB22F5589100EA3E9F /* CLMailBoxTextView.m in Sources */,
 				0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */,
 				0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */,
 				0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */,
