@@ -27,6 +27,8 @@
 #import "CLPhotoBrowserTableViewController.h"
 #import "CLTransitionController.h"
 #import "CLMailboxAutoCompletionViewController.h"
+#import "CLCustomTransitionViewController.h"
+#import "CLLineChartViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -93,6 +95,8 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"折线图", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"自定义转场动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"模态交互式转场", nil)];
         [_arrayDS addObject:NSLocalizedString(@"Cell倒计时", nil)];
         [_arrayDS addObject:NSLocalizedString(@"图片浏览器", nil)];
@@ -123,6 +127,8 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLLineChartViewController class]];
+        [_controllerArray addObject:[CLCustomTransitionViewController class]];
         [_controllerArray addObject:[CLTransitionController class]];
         [_controllerArray addObject:[CLCountdownController class]];
         [_controllerArray addObject:[CLPhotoBrowserTableViewController class]];

@@ -24,6 +24,9 @@
 		0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */; };
 		0C2AE876223F878D007D5DC5 /* CLWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE875223F878D007D5DC5 /* CLWaveView.swift */; };
 		0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */; };
+		0C30ED49231E44BF00364327 /* CLCustomTransitionPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C30ED48231E44BF00364327 /* CLCustomTransitionPresentationController.m */; };
+		0C30ED4C231E48FC00364327 /* CLLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C30ED4B231E48FC00364327 /* CLLineChartViewController.m */; };
+		0C30ED50231E4D3000364327 /* CLLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C30ED4F231E4D2F00364327 /* CLLineChartView.m */; };
 		0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C38421994CCF001860C2 /* UIFont+CLFont.m */; };
 		0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C33BC78219AF71000583B4C /* CLLogManager.m */; };
 		0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAA5421AF89BD00A352F0 /* CLRotateAnimationController.m */; };
@@ -47,6 +50,9 @@
 		0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A472217A71200BC8AFB /* CLInputToolbar.m */; };
 		0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */; };
 		0C77C4B92248C85C007D0FFC /* CLGCDTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77C4B82248C85C007D0FFC /* CLGCDTimerManager.swift */; };
+		0C7A1E9A231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A1E99231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.m */; };
+		0C7A1EA0231A7129002D75F2 /* CLCustomTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A1E9F231A7129002D75F2 /* CLCustomTransitionDelegate.m */; };
+		0C7A1EA6231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A1EA5231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.m */; };
 		0C7DE94722DECC0D00FA9040 /* localImage8.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93922DECC0B00FA9040 /* localImage8.jpeg */; };
 		0C7DE94822DECC0D00FA9040 /* localGifImage1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93A22DECC0C00FA9040 /* localGifImage1.gif */; };
 		0C7DE94922DECC0D00FA9040 /* localImage0.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DE93B22DECC0C00FA9040 /* localImage0.jpeg */; };
@@ -69,6 +75,7 @@
 		0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FF01522E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m */; };
 		0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1236E22255A6F007DDE6D /* CLCardView.m */; };
 		0CA1237522255B81007DDE6D /* CLCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1237422255B81007DDE6D /* CLCardController.m */; };
+		0CA4B852231E5E46008CB4A1 /* CLLineChartPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4B851231E5E46008CB4A1 /* CLLineChartPoint.m */; };
 		0CACA4AB224CC1DC0084ECC8 /* CLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CACA4AA224CC1DC0084ECC8 /* CLTextView.swift */; };
 		0CACA4AD224CC1F80084ECC8 /* CLTextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CACA4AC224CC1F80084ECC8 /* CLTextViewViewController.swift */; };
 		0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */; };
@@ -92,6 +99,7 @@
 		0CE7333F2191CB9D00270851 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7333D2191CB9C00270851 /* Tools.m */; };
 		0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE733402191CBC700270851 /* UIView+CLSetRect.m */; };
 		0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE94862204395B007FA31B /* CLPasswordInputView.swift */; };
+		0CF2B6EC231A6C2A0071AEC3 /* CLCustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF2B6EB231A6C2A0071AEC3 /* CLCustomTransitionViewController.m */; };
 		0CF5680D2215049600926A4C /* UIView+CLEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5680C2215049500926A4C /* UIView+CLEvents.m */; };
 		0CF642FD222FECA800227361 /* CLWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF642FC222FECA800227361 /* CLWaveView.m */; };
 		0CF64300222FECBD00227361 /* CLWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF642FF222FECBD00227361 /* CLWaveViewController.m */; };
@@ -178,6 +186,12 @@
 		0C2AE873223F48DE007D5DC5 /* CLBubbleViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBubbleViewViewController.m; sourceTree = "<group>"; };
 		0C2AE875223F878D007D5DC5 /* CLWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWaveView.swift; sourceTree = "<group>"; };
 		0C2AE877223F87AF007D5DC5 /* CLWaveSwiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWaveSwiftViewController.swift; sourceTree = "<group>"; };
+		0C30ED47231E44BF00364327 /* CLCustomTransitionPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCustomTransitionPresentationController.h; sourceTree = "<group>"; };
+		0C30ED48231E44BF00364327 /* CLCustomTransitionPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomTransitionPresentationController.m; sourceTree = "<group>"; };
+		0C30ED4A231E48FC00364327 /* CLLineChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLineChartViewController.h; sourceTree = "<group>"; };
+		0C30ED4B231E48FC00364327 /* CLLineChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLineChartViewController.m; sourceTree = "<group>"; };
+		0C30ED4E231E4D2F00364327 /* CLLineChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLineChartView.h; sourceTree = "<group>"; };
+		0C30ED4F231E4D2F00364327 /* CLLineChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLineChartView.m; sourceTree = "<group>"; };
 		0C31C38321994CCF001860C2 /* UIFont+CLFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CLFont.h"; sourceTree = "<group>"; };
 		0C31C38421994CCF001860C2 /* UIFont+CLFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CLFont.m"; sourceTree = "<group>"; };
 		0C33BC77219AF71000583B4C /* CLLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogManager.h; sourceTree = "<group>"; };
@@ -222,6 +236,12 @@
 		0C777A492217A8B900BC8AFB /* CLInputToolbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLInputToolbarController.h; sourceTree = "<group>"; };
 		0C777A4A2217A8B900BC8AFB /* CLInputToolbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbarController.m; sourceTree = "<group>"; };
 		0C77C4B82248C85C007D0FFC /* CLGCDTimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGCDTimerManager.swift; sourceTree = "<group>"; };
+		0C7A1E98231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCustomTransitionAnimationViewController.h; sourceTree = "<group>"; };
+		0C7A1E99231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomTransitionAnimationViewController.m; sourceTree = "<group>"; };
+		0C7A1E9E231A7129002D75F2 /* CLCustomTransitionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCustomTransitionDelegate.h; sourceTree = "<group>"; };
+		0C7A1E9F231A7129002D75F2 /* CLCustomTransitionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomTransitionDelegate.m; sourceTree = "<group>"; };
+		0C7A1EA4231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCustomTransitionAnimatedTransitioning.h; sourceTree = "<group>"; };
+		0C7A1EA5231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomTransitionAnimatedTransitioning.m; sourceTree = "<group>"; };
 		0C7DE93922DECC0B00FA9040 /* localImage8.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage8.jpeg; sourceTree = "<group>"; };
 		0C7DE93A22DECC0C00FA9040 /* localGifImage1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = localGifImage1.gif; sourceTree = "<group>"; };
 		0C7DE93B22DECC0C00FA9040 /* localImage0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = localImage0.jpeg; sourceTree = "<group>"; };
@@ -251,6 +271,8 @@
 		0CA1236E22255A6F007DDE6D /* CLCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCardView.m; sourceTree = "<group>"; };
 		0CA1237322255B81007DDE6D /* CLCardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCardController.h; sourceTree = "<group>"; };
 		0CA1237422255B81007DDE6D /* CLCardController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCardController.m; sourceTree = "<group>"; };
+		0CA4B850231E5E46008CB4A1 /* CLLineChartPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLineChartPoint.h; sourceTree = "<group>"; };
+		0CA4B851231E5E46008CB4A1 /* CLLineChartPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLineChartPoint.m; sourceTree = "<group>"; };
 		0CACA4AA224CC1DC0084ECC8 /* CLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTextView.swift; sourceTree = "<group>"; };
 		0CACA4AC224CC1F80084ECC8 /* CLTextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTextViewViewController.swift; sourceTree = "<group>"; };
 		0CAE2E4E2209855E00003E81 /* CLPasswordViewSwiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordViewSwiftController.swift; sourceTree = "<group>"; };
@@ -293,6 +315,8 @@
 		0CE733402191CBC700270851 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		0CE733412191CBC700270851 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		0CEE94862204395B007FA31B /* CLPasswordInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPasswordInputView.swift; sourceTree = "<group>"; };
+		0CF2B6EA231A6C2A0071AEC3 /* CLCustomTransitionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCustomTransitionViewController.h; sourceTree = "<group>"; };
+		0CF2B6EB231A6C2A0071AEC3 /* CLCustomTransitionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCustomTransitionViewController.m; sourceTree = "<group>"; };
 		0CF5680B2215049500926A4C /* UIView+CLEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLEvents.h"; sourceTree = "<group>"; };
 		0CF5680C2215049500926A4C /* UIView+CLEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLEvents.m"; sourceTree = "<group>"; };
 		0CF642FB222FECA800227361 /* CLWaveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaveView.h; sourceTree = "<group>"; };
@@ -483,6 +507,17 @@
 			path = CLBubbleView;
 			sourceTree = "<group>";
 		};
+		0C30ED4D231E4D1E00364327 /* CLLineChartView */ = {
+			isa = PBXGroup;
+			children = (
+				0CA4B850231E5E46008CB4A1 /* CLLineChartPoint.h */,
+				0CA4B851231E5E46008CB4A1 /* CLLineChartPoint.m */,
+				0C30ED4E231E4D2F00364327 /* CLLineChartView.h */,
+				0C30ED4F231E4D2F00364327 /* CLLineChartView.m */,
+			);
+			path = CLLineChartView;
+			sourceTree = "<group>";
+		};
 		0C33BC6F219AEF5D00583B4C /* CLLog */ = {
 			isa = PBXGroup;
 			children = (
@@ -630,6 +665,31 @@
 			path = CLJumpManager;
 			sourceTree = "<group>";
 		};
+		0C7A1E97231A6D92002D75F2 /* CLCustomTransitionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0CF2B6EA231A6C2A0071AEC3 /* CLCustomTransitionViewController.h */,
+				0CF2B6EB231A6C2A0071AEC3 /* CLCustomTransitionViewController.m */,
+				0C7A1EA7231A72FA002D75F2 /* CLCustomPresentTransitionAnimated */,
+				0C7A1E98231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.h */,
+				0C7A1E99231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.m */,
+			);
+			path = CLCustomTransitionViewController;
+			sourceTree = "<group>";
+		};
+		0C7A1EA7231A72FA002D75F2 /* CLCustomPresentTransitionAnimated */ = {
+			isa = PBXGroup;
+			children = (
+				0C7A1E9E231A7129002D75F2 /* CLCustomTransitionDelegate.h */,
+				0C7A1E9F231A7129002D75F2 /* CLCustomTransitionDelegate.m */,
+				0C30ED47231E44BF00364327 /* CLCustomTransitionPresentationController.h */,
+				0C30ED48231E44BF00364327 /* CLCustomTransitionPresentationController.m */,
+				0C7A1EA4231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.h */,
+				0C7A1EA5231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.m */,
+			);
+			path = CLCustomPresentTransitionAnimated;
+			sourceTree = "<group>";
+		};
 		0C7F179D22D9C70300993005 /* Transition */ = {
 			isa = PBXGroup;
 			children = (
@@ -682,6 +742,7 @@
 		0CCDA310219855620057BA14 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0C30ED4D231E4D1E00364327 /* CLLineChartView */,
 				0C9235A822F5587800EA3E9F /* CLMailBoxTextView */,
 				0C6D47F3226C38FA00699FBD /* CLTextView */,
 				0C6D47F2226C38EC00699FBD /* CLWaveView */,
@@ -1050,6 +1111,9 @@
 				0C0F374022D1E48D005E496D /* CLTracerouteViewController.m */,
 				0C9235A522F5584300EA3E9F /* CLMailboxAutoCompletionViewController.h */,
 				0C9235A622F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m */,
+				0C30ED4A231E48FC00364327 /* CLLineChartViewController.h */,
+				0C30ED4B231E48FC00364327 /* CLLineChartViewController.m */,
+				0C7A1E97231A6D92002D75F2 /* CLCustomTransitionViewController */,
 				0CB2769622E1A83400AFCB8C /* CLTransitionController */,
 				0C94BA4722D9DB86008CD7BA /* CLPhotoBrowserViewController */,
 				0C7F179D22D9C70300993005 /* Transition */,
@@ -1324,6 +1388,7 @@
 				0C47E22422D9C3E4003EDB4E /* CLTransitionViewController.swift in Sources */,
 				5B809617221870BD000F72F3 /* CLScanBankCardBase.m in Sources */,
 				5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */,
+				0C7A1EA6231A7210002D75F2 /* CLCustomTransitionAnimatedTransitioning.m in Sources */,
 				5B80DA491DDD993F00A20E34 /* CLCollectionController.m in Sources */,
 				0CCDA40122D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewCell.m in Sources */,
 				0C2AE878223F87AF007D5DC5 /* CLWaveSwiftViewController.swift in Sources */,
@@ -1337,6 +1402,7 @@
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				0C61577822BE1241009AABAC /* CLSectorAnimationView.swift in Sources */,
 				5B80DA4E1DDD993F00A20E34 /* CLCustomTabbar.m in Sources */,
+				0C30ED49231E44BF00364327 /* CLCustomTransitionPresentationController.m in Sources */,
 				0C66AF8F22E1C75600C5C9E8 /* CLPresentTransitionNavigationController.m in Sources */,
 				0CB2769522E1A76800AFCB8C /* CLPresentTransitionController.m in Sources */,
 				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
@@ -1349,6 +1415,7 @@
 				0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */,
 				0C108EAA22A93289009EA457 /* CLCountdownCell.m in Sources */,
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
+				0CA4B852231E5E46008CB4A1 /* CLLineChartPoint.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				0C6D47E9226C37EC00699FBD /* CLPopArrowView.m in Sources */,
@@ -1368,6 +1435,7 @@
 				0CBBE930220DBAEC00640BB9 /* CLLogViewController.m in Sources */,
 				0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */,
 				0CF642FD222FECA800227361 /* CLWaveView.m in Sources */,
+				0CF2B6EC231A6C2A0071AEC3 /* CLCustomTransitionViewController.m in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */,
 				0C03A16D22DB0C540064ADD5 /* CLPhotoBrowserTableViewController.m in Sources */,
@@ -1388,15 +1456,18 @@
 				0CCDA3FF22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.m in Sources */,
 				0C77C4B92248C85C007D0FFC /* CLGCDTimerManager.swift in Sources */,
 				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
+				0C7A1EA0231A7129002D75F2 /* CLCustomTransitionDelegate.m in Sources */,
 				0CACA4AD224CC1F80084ECC8 /* CLTextViewViewController.swift in Sources */,
 				0CC7796622D9D7E10027B310 /* CLPhotoBrowserViewController.m in Sources */,
 				0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
 				0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */,
+				0C30ED50231E4D3000364327 /* CLLineChartView.m in Sources */,
 				5B80962122187115000F72F3 /* CLBankCardDetailController.m in Sources */,
 				5B809615221870BD000F72F3 /* CLBankCardView.m in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
+				0C30ED4C231E48FC00364327 /* CLLineChartViewController.m in Sources */,
 				0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */,
 				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
@@ -1416,6 +1487,7 @@
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
 				0CF5680D2215049600926A4C /* UIView+CLEvents.m in Sources */,
 				0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */,
+				0C7A1E9A231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.m in Sources */,
 				0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */,
 				0CCDA326219927370057BA14 /* CLChangeFontSizeManager.m in Sources */,
 				5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */,
