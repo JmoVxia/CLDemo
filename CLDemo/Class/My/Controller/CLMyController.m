@@ -29,6 +29,8 @@
 #import "CLMailboxAutoCompletionViewController.h"
 #import "CLCustomTransitionViewController.h"
 #import "CLLineChartViewController.h"
+#import "CLBroadcastViewController.h"
+#import "CLInputPasswordViewController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -95,6 +97,7 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"广播轮播", nil)];
         [_arrayDS addObject:NSLocalizedString(@"折线图", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义转场动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"模态交互式转场", nil)];
@@ -105,6 +108,7 @@
         [_arrayDS addObject:[NSLocalizedString(@"转子动画", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"自定义密码框", nil) stringByAppendingString:@"-Swift"]];
+        [_arrayDS addObject:NSLocalizedString(@"键盘密码工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入框-限制字数", nil)];
         [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
@@ -127,6 +131,7 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLBroadcastViewController class]];
         [_controllerArray addObject:[CLLineChartViewController class]];
         [_controllerArray addObject:[CLCustomTransitionViewController class]];
         [_controllerArray addObject:[CLTransitionController class]];
@@ -137,6 +142,7 @@
         [_controllerArray addObject:[CLRotateAnimationSwiftController class]];
         [_controllerArray addObject:[CLPasswordViewController class]];
         [_controllerArray addObject:[CLPasswordViewSwiftController class]];
+        [_controllerArray addObject:[CLInputPasswordViewController class]];
         [_controllerArray addObject:[CLInputToolbarController class]];
         [_controllerArray addObject:[CLTextViewViewController class]];
         [_controllerArray addObject:[CLBankCardScanController class]];

@@ -54,6 +54,10 @@
     }
     return self;
 }
+- (void)clearText {
+    self.text = [NSMutableString string];
+    [self setNeedsLayout];
+}
 - (UIKeyboardType)keyboardType {
     return UIKeyboardTypeNumberPad;
 }

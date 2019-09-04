@@ -56,6 +56,7 @@
                                [UIImage imageNamed:@"localImage6.jpeg"],
                                [UIImage imageNamed:@"localImage7.jpeg"],
                                [UIImage imageNamed:@"localImage8.jpeg"],
+                               [UIImage imageNamed:@"localImage9.jpeg"],
                                ];
             //主线程
             dispatch_async(dispatch_get_main_queue(), ^{

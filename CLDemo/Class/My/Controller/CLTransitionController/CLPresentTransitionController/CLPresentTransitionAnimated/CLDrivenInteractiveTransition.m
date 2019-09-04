@@ -80,6 +80,9 @@
             break;
         case CLInteractiveCoverDirectionLeftToRight:
         {
+            if (point.x < 0) {
+                return;
+            }
             CGFloat fraction = point.x / [[UIScreen mainScreen] bounds].size.width;
             fraction = fminf(fmaxf(fraction, 0.0), 1.0);
             self.shouldComplete = (fraction > 0.5);
@@ -99,6 +102,9 @@
             break;
         case CLInteractiveCoverDirectionTopToBottom:
         {
+            if (point.y < 0) {
+                return;
+            }
             CGFloat fraction = point.y / [[UIScreen mainScreen] bounds].size.height;
             fraction = fminf(fmaxf(fraction, 0.0), 1.0);
             self.shouldComplete = (fraction > 0.5);

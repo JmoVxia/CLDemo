@@ -100,12 +100,8 @@
 - (CGFloat)lineChartViewYLineMax {
     return 15;
 }
-///图表宽度
-- (CGFloat)lineChartViewWidth {
-    return self.view.frame.size.width;
-}
-///图表高度
-- (CGFloat)lineChartViewHeight {
-    return 200;
+///图表宽高
+- (CGSize)lineChartViewChartSize {
+    return CGSizeMake(self.view.frame.size.width, 200);
 }
 @end

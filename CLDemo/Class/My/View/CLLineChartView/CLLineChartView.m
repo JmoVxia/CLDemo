@@ -62,11 +62,10 @@
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(lineChartViewYLineMax)]) {
         self.yMax = [self.dataSource lineChartViewYLineMax];
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(lineChartViewWidth)]) {
-        self.width = [self.dataSource lineChartViewWidth];
-    }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(lineChartViewHeight)]) {
-        self.height = [self.dataSource lineChartViewHeight];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(lineChartViewChartSize)]) {
+        CGSize size = [self.dataSource lineChartViewChartSize];
+        self.width = size.width;
+        self.height = size.height;
     }
     
     CGFloat xSpace = self.xMax - self.xMin;

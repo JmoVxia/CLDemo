@@ -58,14 +58,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLPasswordInputView : UIView<UIKeyInput>
 
-/**代理*/
+///代理
 @property (nonatomic, weak) id<CLPasswordInputViewDelegate> delegate;
 
-/**输入的密码*/
+///输入的密码
 @property (nonatomic, strong, readonly) NSMutableString *text;
 
-/**更新基本配置，block不会造成循环引用*/
+///更新基本配置，block不会造成循环引用
 - (void)updateWithConfigure:(void(^)(CLPasswordInputViewConfigure *configure))configBlock;
+
+///清除文字
+- (void)clearText;
 
 @end
 

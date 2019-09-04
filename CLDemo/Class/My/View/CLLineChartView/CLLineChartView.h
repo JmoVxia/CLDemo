@@ -24,10 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)lineChartViewYLineMin;
 ///y最大
 - (CGFloat)lineChartViewYLineMax;
-///图表宽度
-- (CGFloat)lineChartViewWidth;
-///图表高度
-- (CGFloat)lineChartViewHeight;
+///图表宽高
+- (CGSize)lineChartViewChartSize;
 
 @end
 
