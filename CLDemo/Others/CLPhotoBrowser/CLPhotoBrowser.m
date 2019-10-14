@@ -9,7 +9,6 @@
 #import "CLPhotoBrowserTransitioningDelegate.h"
 #import "CLPhotoBrowserCollectionViewFlowLayout.h"
 #import "CLPhotoBrowserCollectionViewCell.h"
-#import "CLJumpManager.h"
 #import "CLPhotoBrowserImageScaleHelper.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
@@ -60,7 +59,7 @@
     self.placeholderImages = placeholderImages;
     self.placeholder = placeholder;
     self.zoomView = zoomView;
-    UIViewController *controller = [CLJumpManager topViewController];
+    UIViewController *controller = [[[[UIApplication  sharedApplication] delegate] window] rootViewController];
     [controller presentViewController:self animated:YES completion:nil];
     self.layout.page = index;
     [self.collectionView setNeedsLayout];
@@ -154,6 +153,8 @@
     return self.placeholder ? : [self.placeholderImages objectAtIndex:self.layout.page];
 }
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.collectionView.collectionViewLayout invalidateLayout];
+
     NSIndexPath *indexPath = [[self.collectionView indexPathsForVisibleItems] firstObject];
     CLPhotoBrowserCollectionViewCell *cell = (CLPhotoBrowserCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     cell.hidden = YES;
@@ -167,7 +168,6 @@
     
     CGRect toFrame = [CLPhotoBrowserImageScaleHelper calculateScaleFrameWithImageSize:cell.imageView.image.size maxSize:size offset:NO];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self.collectionView.collectionViewLayout invalidateLayout];
         imageView.frame = toFrame;
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         cell.hidden = NO;
