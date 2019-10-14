@@ -14,9 +14,6 @@
 
 @property (nonatomic, copy) NSString *reuseIdentifier;
 
-///label
-@property (nonatomic, strong) UILabel *label;
-
 @end
 
 @implementation CLBroadcastCell
@@ -24,36 +21,29 @@
 -(instancetype)initWithReuseIdentifier: (NSString *)reuseIdentifier {
     if (self = [super init]) {
         self.reuseIdentifier = reuseIdentifier;
-        self.label = [[UILabel alloc] init];
-        [self addSubview:self.label];
-        [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.mas_equalTo(0);
-            make.width.mas_equalTo(self.mas_width);
-            make.height.mas_equalTo(self.mas_height);
-        }];
     }
     return self;
-}
-- (void)setText:(NSString *)text {
-    _text = text;
-    self.label.text = text;
 }
 @end
 
 @interface CLBroadcastView ()
 
-///缓存数组
+///缓存cell数组
 @property (nonatomic, strong) NSMutableArray<CLBroadcastCell *> *cellCaches;
+///标识符字典
+@property (nonatomic, strong) NSMutableDictionary *cellIdentifierCaches;
 ///已经移除边界的cell
-@property (nonatomic, weak) CLBroadcastCell *removedCell;
-///已经移除边界的cell
-@property (nonatomic, weak) CLBroadcastCell *currentCell;
+@property (nonatomic, strong) CLBroadcastCell *removedCell;
+///当前显示的cell
+@property (nonatomic, strong) CLBroadcastCell *currentCell;
 ///view总共的数量
 @property (nonatomic, assign) NSInteger totalRow;
 ///当前的下标
 @property (nonatomic, assign) NSInteger currentIndex;
 ///定时器
 @property (nonatomic, strong) CLGCDTimer *timer;
+///正在进行动画
+@property (nonatomic, assign) BOOL isAnimtion;
 
 @end
 
@@ -62,10 +52,17 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.cellIdentifierCaches = [NSMutableDictionary dictionary];
         self.cellCaches = [NSMutableArray array];
         self.clipsToBounds = YES;
+        self.rotationTime = 2;
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCell)];
+        [self addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+- (void)registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier {
+    [self.cellIdentifierCaches setObject:cellClass forKey:identifier];
 }
 //MARK:JmoVxia---复用
 - (CLBroadcastCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier {
@@ -74,13 +71,13 @@
     NSArray<CLBroadcastCell *> *array = [self.cellCaches filteredArrayUsingPredicate:predicate];
     cell = [array firstObject];
     if (!cell) {
-        cell = [[CLBroadcastCell alloc] initWithReuseIdentifier:identifier];
+        Class class = [self.cellIdentifierCaches objectForKey:identifier];
+        if (!class) {
+            NSAssert(NO, @"The cell must be register");
+            return nil;
+        }
+        cell = [[class alloc] initWithReuseIdentifier:identifier];
         [self addSubview:cell];
-        [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.mas_equalTo(self);
-            make.width.mas_equalTo(self.mas_width);
-            make.height.mas_equalTo(self.mas_height);
-        }];
     }else {
         [self.cellCaches removeObject:cell];
     }
@@ -88,29 +85,43 @@
 }
 ///加载方法
 - (void)reloadData {
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-    __weak __typeof(self) weakSelf = self;
-    self.timer = [[CLGCDTimer alloc] initWithInterval:2 delaySecs:2 queue:dispatch_get_main_queue() repeats:YES action:^(NSInteger actionTimes) {
-        __typeof(&*weakSelf) strongSelf = weakSelf;
-        [strongSelf scrollToNext];
-    }];
-    [self.timer start];
     if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(broadcastView:cellForRowAtIndexIndex:)] || ![self.dataSource respondsToSelector:@selector(broadcastViewRows:)]) {
         return;
     }
+    if ([self isNeedAddToCache:self.removedCell] && self.removedCell) {
+        [self.cellCaches addObject:self.removedCell];
+    }
     self.totalRow = [self.dataSource broadcastViewRows:self];
+    if (self.totalRow > 1) {
+        __weak __typeof(self) weakSelf = self;
+        self.timer = [[CLGCDTimer alloc] initWithInterval:self.rotationTime delaySecs:self.rotationTime queue:dispatch_get_main_queue() repeats:YES action:^(NSInteger __unused actionTimes) {
+            __typeof(&*weakSelf) strongSelf = weakSelf;
+            [strongSelf scrollToNext];
+        }];
+        [self.timer start];
+    }else {
+        self.timer = nil;
+    }
     if (self.totalRow > 0) {
-        self.removedCell = nil;
-        self.currentIndex = 0;
-        CLBroadcastCell *cell = [self.dataSource broadcastView:self cellForRowAtIndexIndex:self.currentIndex];
-        self.currentCell = cell;
+        if (!self.currentCell) {
+            CLBroadcastCell *cell = [self.dataSource broadcastView:self cellForRowAtIndexIndex:self.currentIndex];
+            [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.mas_equalTo(self);
+                make.width.mas_equalTo(self.mas_width);
+                make.height.mas_equalTo(self.mas_height);
+            }];
+            self.currentCell = cell;
+        }
     }
 }
 - (void)scrollToNext {
+    if (self.isAnimtion) {
+        return;
+    }
     if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(broadcastView:cellForRowAtIndexIndex:)] || ![self.dataSource respondsToSelector:@selector(broadcastViewRows:)]) {
         return;
     }
+    self.isAnimtion = YES;
     ((self.currentIndex + 1) < self.totalRow) ? (self.currentIndex ++) : (self.currentIndex = 0);
     CLBroadcastCell *nextCell = [self.dataSource broadcastView:self cellForRowAtIndexIndex:self.currentIndex];
     [nextCell mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -136,12 +147,13 @@
         }];
         [self setNeedsLayout];
         [self layoutIfNeeded];
-    }completion:^(BOOL finished) {
+    }completion:^(BOOL __unused finished) {
         self.removedCell = self.currentCell;
         self.currentCell = nextCell;
-        if ([self isNeedAddToCache:self.removedCell]) {
+        if ([self isNeedAddToCache:self.removedCell] && self.removedCell) {
             [self.cellCaches addObject:self.removedCell];
         }
+        self.isAnimtion = NO;
     }];
 }
 - (BOOL)isNeedAddToCache:(CLBroadcastCell *)cell {
@@ -151,5 +163,13 @@
         }
     }
     return YES;
+}
+- (void)tapCell {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(broadcastView:didSelectIndex:)]) {
+        [self.delegate broadcastView:self didSelectIndex:self.currentIndex];
+    }
+}
+- (void)setRotationTime:(NSTimeInterval)rotationTime {
+    _rotationTime = MAX(rotationTime, 0);
 }
 @end

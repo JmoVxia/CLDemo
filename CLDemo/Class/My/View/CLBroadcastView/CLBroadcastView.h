@@ -11,12 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface CLBroadcastCell : UIView
 
 ///复用标识符
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
-///文字
-@property (nonatomic, copy) NSString *text;
+
 ///根据复用标识符创建
 - (instancetype)initWithReuseIdentifier: (NSString *)reuseIdentifier;
 
@@ -34,10 +34,27 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@protocol CLBroadcastViewDelegate <NSObject>
+
+@optional
+///点击cell
+- (void)broadcastView:(CLBroadcastView *)broadcast didSelectIndex:(NSInteger)index;
+
+@end
+
 @interface CLBroadcastView : UIView
 
 ///数据源
 @property (nonatomic, weak) id<CLBroadcastViewDataSource> dataSource;
+///代理
+@property (nonatomic, weak) id<CLBroadcastViewDelegate> delegate;
+
+///轮播时间
+@property (nonatomic, assign) NSTimeInterval rotationTime;
+
+
+///注册cell
+- (void)registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier;
 
 ///加载方法
 - (void)reloadData;

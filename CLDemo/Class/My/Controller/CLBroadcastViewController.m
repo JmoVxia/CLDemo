@@ -8,6 +8,7 @@
 
 #import "CLBroadcastViewController.h"
 #import "CLBroadcastView.h"
+#import "CLBroadcastMainCell.h"
 #import <Masonry/Masonry.h>
 
 @interface CLBroadcastViewController ()<CLBroadcastViewDataSource>
@@ -25,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.broadcastView = [[CLBroadcastView alloc] init];
+    [self.broadcastView registerClass:[CLBroadcastMainCell class] forCellReuseIdentifier:@"CLBroadcastMainCell"];
     [self.view addSubview:self.broadcastView];
     [self.broadcastView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
@@ -39,11 +41,11 @@
     
     [self.arrayDS addObject:@"旋转木马"];
     
-//    [self.arrayDS addObject:@"牛津词典"];
-//
-//    [self.arrayDS addObject:@"双语例句"];
-//
-//    [self.arrayDS addObject:@"我找到了一份好工作"];
+    [self.arrayDS addObject:@"牛津词典"];
+
+    [self.arrayDS addObject:@"双语例句"];
+
+    [self.arrayDS addObject:@"我找到了一份好工作"];
 
     [self.broadcastView reloadData];
     
@@ -55,8 +57,8 @@
 }
 ///创建cell
 - (CLBroadcastCell *)broadcastView:(CLBroadcastView *)broadcast cellForRowAtIndexIndex:(NSInteger)index {
-    CLBroadcastCell *cell = [broadcast dequeueReusableCellWithIdentifier:@"CLBroadcastCell"];
-    cell.text = [self.arrayDS objectAtIndex:index];
+    CLBroadcastMainCell *cell = (CLBroadcastMainCell *)[broadcast dequeueReusableCellWithIdentifier:@"CLBroadcastMainCell"];
+    cell.adText = [self.arrayDS objectAtIndex:index];
     cell.backgroundColor = cl_RandomColor;
     return cell;
 }
