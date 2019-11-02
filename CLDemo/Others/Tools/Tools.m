@@ -402,4 +402,15 @@ static NSString *const kAppVersion = @"ADappVersion";
     }
 }
 
++ (UIImage *)screenshotImageFromView:(UIView *)view {
+    //高清方法
+    //第一个参数表示区域大小 第二个参数表示是否是非透明的。如果需要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了
+    CGSize size = CGSizeMake(view.layer.bounds.size.width, view.layer.bounds.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, YES, [UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end

@@ -92,6 +92,7 @@ typedef void(^CancelBlock)(UIAlertAction *cancelAction);
  判断是不是第一次进入某个页面
  */
 +(BOOL)isFirstWithClassName:(NSString *)className;
-
+///截图
++ (UIImage *)screenshotImageFromView:(UIView *)view;
 
 @end

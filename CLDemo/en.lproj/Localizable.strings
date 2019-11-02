@@ -37,7 +37,7 @@
 "自定义二维码" = "CustomQRCode";
 "箭头弹出框" = "ArrowView";
 "Cell倒计时" = "Cell Countdown";
-"路由追踪" = "Traceroute";
+"水平布局" = "Horizontal layout";
 "过渡动画" = "TransitionAnimation";
 "图片浏览器" = "PhotoBrowser";
 "模态交互式转场" = "Present Transition";

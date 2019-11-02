@@ -1,8 +1,8 @@
 //
-//  CLTracerouteViewController.h
+//  CLHorizontalLayoutController.h
 //  CLDemo
 //
-//  Created by AUG on 2019/7/7.
+//  Created by AUG on 2019/11/2.
 //  Copyright © 2019 JmoVxia. All rights reserved.
 //
 
@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CLTracerouteViewController : CLBaseViewController
+@interface CLHorizontalLayoutController : CLBaseViewController
+
+
 
 @end
 

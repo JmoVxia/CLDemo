@@ -23,7 +23,7 @@
 #import "CLCustomQRCodeViewController.h"
 #import "CLPopArrowViewController.h"
 #import "CLCountdownController.h"
-#import "CLTracerouteViewController.h"
+#import "CLHorizontalLayoutController.h"
 #import "CLPhotoBrowserTableViewController.h"
 #import "CLTransitionController.h"
 #import "CLMailboxAutoCompletionViewController.h"
@@ -97,6 +97,7 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"广播轮播", nil)];
         [_arrayDS addObject:NSLocalizedString(@"折线图", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义转场动画", nil)];
@@ -120,7 +121,6 @@
         [_arrayDS addObject:NSLocalizedString(@"箭头弹出框", nil)];
         [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"路由追踪", nil)];
         [_arrayDS addObject:NSLocalizedString(@"过渡动画", nil)];
     }
     return _arrayDS;
@@ -131,6 +131,7 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLHorizontalLayoutController class]];
         [_controllerArray addObject:[CLBroadcastViewController class]];
         [_controllerArray addObject:[CLLineChartViewController class]];
         [_controllerArray addObject:[CLCustomTransitionViewController class]];
@@ -154,7 +155,6 @@
         [_controllerArray addObject:[CLPopArrowViewController class]];
         [_controllerArray addObject:[CLRotatingPictureViewController class]];
         [_controllerArray addObject:[CLLogViewController class]];
-        [_controllerArray addObject:[CLTracerouteViewController class]];
         [_controllerArray addObject:[CLTransitionViewController class]];
     }
     return _controllerArray;
