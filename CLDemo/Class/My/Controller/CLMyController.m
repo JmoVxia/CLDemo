@@ -23,7 +23,7 @@
 #import "CLCustomQRCodeViewController.h"
 #import "CLPopArrowViewController.h"
 #import "CLCountdownController.h"
-#import "CLHorizontalLayoutController.h"
+#import "CLLayoutController.h"
 #import "CLPhotoBrowserTableViewController.h"
 #import "CLTransitionController.h"
 #import "CLMailboxAutoCompletionViewController.h"
@@ -31,6 +31,7 @@
 #import "CLLineChartViewController.h"
 #import "CLBroadcastViewController.h"
 #import "CLInputPasswordViewController.h"
+#import "CLDrawImageController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -97,6 +98,7 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"绘制头像", nil)];
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"广播轮播", nil)];
         [_arrayDS addObject:NSLocalizedString(@"折线图", nil)];
@@ -131,7 +133,8 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
-        [_controllerArray addObject:[CLHorizontalLayoutController class]];
+        [_controllerArray addObject:[CLDrawImageController class]];
+        [_controllerArray addObject:[CLLayoutController class]];
         [_controllerArray addObject:[CLBroadcastViewController class]];
         [_controllerArray addObject:[CLLineChartViewController class]];
         [_controllerArray addObject:[CLCustomTransitionViewController class]];
