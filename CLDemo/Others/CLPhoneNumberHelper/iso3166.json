@@ -1,0 +1,3369 @@
+{
+"PhoneNumberInfo":[
+  {
+    "Alpha2": "US",
+    "Alpha3": "USA",
+    "CountryCode": "1",
+    "CountryName": "United States",
+    "MobileBeginWith": [
+      "201",
+      "202",
+      "203",
+      "205",
+      "206",
+      "207",
+      "208",
+      "209",
+      "210",
+      "212",
+      "213",
+      "214",
+      "215",
+      "216",
+      "217",
+      "218",
+      "219",
+      "224",
+      "225",
+      "227",
+      "228",
+      "229",
+      "231",
+      "234",
+      "239",
+      "240",
+      "248",
+      "251",
+      "252",
+      "253",
+      "254",
+      "256",
+      "260",
+      "262",
+      "267",
+      "269",
+      "270",
+      "272",
+      "274",
+      "276",
+      "278",
+      "281",
+      "283",
+      "301",
+      "302",
+      "303",
+      "304",
+      "305",
+      "307",
+      "308",
+      "309",
+      "310",
+      "312",
+      "313",
+      "314",
+      "315",
+      "316",
+      "317",
+      "318",
+      "319",
+      "320",
+      "321",
+      "323",
+      "325",
+      "327",
+      "330",
+      "331",
+      "334",
+      "336",
+      "337",
+      "339",
+      "341",
+      "346",
+      "347",
+      "351",
+      "352",
+      "360",
+      "361",
+      "364",
+      "369",
+      "380",
+      "385",
+      "386",
+      "401",
+      "402",
+      "404",
+      "405",
+      "406",
+      "407",
+      "408",
+      "409",
+      "410",
+      "412",
+      "413",
+      "414",
+      "415",
+      "417",
+      "419",
+      "423",
+      "424",
+      "425",
+      "430",
+      "432",
+      "434",
+      "435",
+      "440",
+      "442",
+      "443",
+      "445",
+      "447",
+      "458",
+      "464",
+      "469",
+      "470",
+      "475",
+      "478",
+      "479",
+      "480",
+      "484",
+      "501",
+      "502",
+      "503",
+      "504",
+      "505",
+      "507",
+      "508",
+      "509",
+      "510",
+      "512",
+      "513",
+      "515",
+      "516",
+      "517",
+      "518",
+      "520",
+      "530",
+      "531",
+      "534",
+      "539",
+      "540",
+      "541",
+      "551",
+      "557",
+      "559",
+      "561",
+      "562",
+      "563",
+      "564",
+      "567",
+      "570",
+      "571",
+      "573",
+      "574",
+      "575",
+      "580",
+      "582",
+      "585",
+      "586",
+      "601",
+      "602",
+      "603",
+      "605",
+      "606",
+      "607",
+      "608",
+      "609",
+      "610",
+      "612",
+      "614",
+      "615",
+      "616",
+      "617",
+      "618",
+      "619",
+      "620",
+      "623",
+      "626",
+      "627",
+      "628",
+      "630",
+      "631",
+      "636",
+      "641",
+      "646",
+      "650",
+      "651",
+      "657",
+      "659",
+      "660",
+      "661",
+      "662",
+      "667",
+      "669",
+      "678",
+      "679",
+      "681",
+      "682",
+      "689",
+      "701",
+      "702",
+      "703",
+      "704",
+      "706",
+      "707",
+      "708",
+      "712",
+      "713",
+      "714",
+      "715",
+      "716",
+      "717",
+      "718",
+      "719",
+      "720",
+      "724",
+      "725",
+      "727",
+      "730",
+      "731",
+      "732",
+      "734",
+      "737",
+      "740",
+      "747",
+      "752",
+      "754",
+      "757",
+      "760",
+      "762",
+      "763",
+      "764",
+      "765",
+      "769",
+      "770",
+      "772",
+      "773",
+      "774",
+      "775",
+      "779",
+      "781",
+      "785",
+      "786",
+      "801",
+      "802",
+      "803",
+      "804",
+      "805",
+      "806",
+      "808",
+      "810",
+      "812",
+      "813",
+      "814",
+      "815",
+      "816",
+      "817",
+      "818",
+      "828",
+      "830",
+      "831",
+      "832",
+      "835",
+      "843",
+      "845",
+      "847",
+      "848",
+      "850",
+      "856",
+      "857",
+      "858",
+      "859",
+      "860",
+      "862",
+      "863",
+      "864",
+      "865",
+      "870",
+      "872",
+      "878",
+      "901",
+      "903",
+      "904",
+      "906",
+      "907",
+      "908",
+      "909",
+      "910",
+      "912",
+      "913",
+      "914",
+      "915",
+      "916",
+      "917",
+      "918",
+      "919",
+      "920",
+      "925",
+      "927",
+      "928",
+      "929",
+      "931",
+      "935",
+      "936",
+      "937",
+      "938",
+      "940",
+      "941",
+      "947",
+      "949",
+      "951",
+      "952",
+      "954",
+      "956",
+      "957",
+      "959",
+      "970",
+      "971",
+      "972",
+      "973",
+      "975",
+      "978",
+      "979",
+      "980",
+      "984",
+      "985",
+      "989"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "AW",
+    "Alpha3": "ABW",
+    "CountryCode": "297",
+    "CountryName": "Aruba",
+    "MobileBeginWith": [
+      "5",
+      "6",
+      "7",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "AF",
+    "Alpha3": "AFG",
+    "CountryCode": "93",
+    "CountryName": "Afghanistan",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "AO",
+    "Alpha3": "AGO",
+    "CountryCode": "244",
+    "CountryName": "Angola",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "AI",
+    "Alpha3": "AIA",
+    "CountryCode": "1",
+    "CountryName": "Anguilla",
+    "MobileBeginWith": [
+      "2645",
+      "2647"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "AX",
+    "Alpha3": "ALA",
+    "CountryCode": "358",
+    "CountryName": "Åland Islands",
+    "MobileBeginWith": [
+      "18"
+    ],
+    "PhoneNumberLengths": [
+      6,
+      7,
+      8
+    ]
+  },
+  {
+    "Alpha2": "AL",
+    "Alpha3": "ALB",
+    "CountryCode": "355",
+    "CountryName": "Albania",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "AD",
+    "Alpha3": "AND",
+    "CountryCode": "376",
+    "CountryName": "Andorra",
+    "MobileBeginWith": [
+      "3",
+      "4",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "AE",
+    "Alpha3": "ARE",
+    "CountryCode": "971",
+    "CountryName": "United Arab Emirates",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "AR",
+    "Alpha3": "ARG",
+    "CountryCode": "54",
+    "CountryName": "Argentina",
+    "MobileBeginWith": [
+      ""
+    ],
+    "PhoneNumberLengths": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "Alpha2": "AM",
+    "Alpha3": "ARM",
+    "CountryCode": "374",
+    "CountryName": "Armenia",
+    "MobileBeginWith": [
+      "4",
+      "5",
+      "7",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "AS",
+    "Alpha3": "ASM",
+    "CountryCode": "1",
+    "CountryName": "American Samoa",
+    "MobileBeginWith": [
+      "684733",
+      "684258"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "AG",
+    "Alpha3": "ATG",
+    "CountryCode": "1",
+    "CountryName": "Antigua and Barbuda",
+    "MobileBeginWith": [
+      "2687"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "AU",
+    "Alpha3": "AUS",
+    "CountryCode": "61",
+    "CountryName": "Australia",
+    "MobileBeginWith": [
+      "4"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "AT",
+    "Alpha3": "AUT",
+    "CountryCode": "43",
+    "CountryName": "Austria",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "Alpha2": "AZ",
+    "Alpha3": "AZE",
+    "CountryCode": "994",
+    "CountryName": "Azerbaijan",
+    "MobileBeginWith": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "BI",
+    "Alpha3": "BDI",
+    "CountryCode": "257",
+    "CountryName": "Burundi",
+    "MobileBeginWith": [
+      "7",
+      "29"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BE",
+    "Alpha3": "BEL",
+    "CountryCode": "32",
+    "CountryName": "Belgium",
+    "MobileBeginWith": [
+      "4"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "BJ",
+    "Alpha3": "BEN",
+    "CountryCode": "229",
+    "CountryName": "Benin",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BF",
+    "Alpha3": "BFA",
+    "CountryCode": "226",
+    "CountryName": "Burkina Faso",
+    "MobileBeginWith": [
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BD",
+    "Alpha3": "BGD",
+    "CountryCode": "880",
+    "CountryName": "Bangladesh",
+    "MobileBeginWith": [
+      "1"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "BG",
+    "Alpha3": "BGR",
+    "CountryCode": "359",
+    "CountryName": "Bulgaria",
+    "MobileBeginWith": [
+      "87",
+      "88",
+      "89",
+      "98",
+      "99",
+      "43"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "BH",
+    "Alpha3": "BHR",
+    "CountryCode": "973",
+    "CountryName": "Bahrain",
+    "MobileBeginWith": [
+      "3"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BS",
+    "Alpha3": "BHS",
+    "CountryCode": "1",
+    "CountryName": "Bahamas",
+    "MobileBeginWith": [
+      "242"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "BA",
+    "Alpha3": "BIH",
+    "CountryCode": "387",
+    "CountryName": "Bosnia and Herzegovina",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BY",
+    "Alpha3": "BLR",
+    "CountryCode": "375",
+    "CountryName": "Belarus",
+    "MobileBeginWith": [
+      "25",
+      "29",
+      "33",
+      "44"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "BZ",
+    "Alpha3": "BLZ",
+    "CountryCode": "501",
+    "CountryName": "Belize",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "BM",
+    "Alpha3": "BMU",
+    "CountryCode": "1",
+    "CountryName": "Bermuda",
+    "MobileBeginWith": [
+      "4413",
+      "4415",
+      "4417"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "BO",
+    "Alpha3": "BOL",
+    "CountryCode": "591",
+    "CountryName": "Bolivia",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BR",
+    "Alpha3": "BRA",
+    "CountryCode": "55",
+    "CountryName": "Brazil",
+    "MobileBeginWith": [
+      "119",
+      "129",
+      "139",
+      "149",
+      "159",
+      "169",
+      "179",
+      "189",
+      "199",
+      "219",
+      "229",
+      "249",
+      "279",
+      "289",
+      "31",
+      "32",
+      "34",
+      "38",
+      "41",
+      "43",
+      "44",
+      "45",
+      "47",
+      "48",
+      "51",
+      "53",
+      "54",
+      "55",
+      "61",
+      "62",
+      "65",
+      "67",
+      "68",
+      "69",
+      "71",
+      "73",
+      "74",
+      "75",
+      "77",
+      "79",
+      "81",
+      "82",
+      "83",
+      "84",
+      "85",
+      "86",
+      "91",
+      "92",
+      "95",
+      "96",
+      "98"
+    ],
+    "PhoneNumberLengths": [
+      10,
+      11
+    ]
+  },
+  {
+    "Alpha2": "BB",
+    "Alpha3": "BRB",
+    "CountryCode": "1",
+    "CountryName": "Barbados",
+    "MobileBeginWith": [
+      "246"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "BN",
+    "Alpha3": "BRN",
+    "CountryCode": "673",
+    "CountryName": "Brunei Darussalam",
+    "MobileBeginWith": [
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "BT",
+    "Alpha3": "BTN",
+    "CountryCode": "975",
+    "CountryName": "Bhutan",
+    "MobileBeginWith": [
+      "17"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "BW",
+    "Alpha3": "BWA",
+    "CountryCode": "267",
+    "CountryName": "Botswana",
+    "MobileBeginWith": [
+      "71",
+      "72",
+      "73",
+      "74",
+      "75",
+      "76"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "CF",
+    "Alpha3": "CAF",
+    "CountryCode": "236",
+    "CountryName": "Central African Republic",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "CA",
+    "Alpha3": "CAN",
+    "CountryCode": "1",
+    "CountryName": "Canada",
+    "MobileBeginWith": [
+      "204",
+      "226",
+      "236",
+      "249",
+      "250",
+      "289",
+      "306",
+      "343",
+      "365",
+      "403",
+      "416",
+      "418",
+      "431",
+      "437",
+      "438",
+      "450",
+      "506",
+      "514",
+      "519",
+      "579",
+      "581",
+      "587",
+      "600",
+      "604",
+      "613",
+      "639",
+      "647",
+      "705",
+      "709",
+      "778",
+      "780",
+      "807",
+      "819",
+      "867",
+      "873",
+      "902",
+      "905"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "CH",
+    "Alpha3": "CHE",
+    "CountryCode": "41",
+    "CountryName": "Switzerland",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "CL",
+    "Alpha3": "CHL",
+    "CountryCode": "56",
+    "CountryName": "Chile",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "CN",
+    "Alpha3": "CHN",
+    "CountryCode": "86",
+    "CountryName": "China",
+    "MobileBeginWith": [
+      "13",
+      "14",
+      "15",
+      "17",
+      "18",
+      "19",
+      "16",
+      "11",
+      "12",
+      "10"
+    ],
+    "PhoneNumberLengths": [
+      11
+    ]
+  },
+  {
+    "Alpha2": "CI",
+    "Alpha3": "CIV",
+    "CountryCode": "225",
+    "CountryName": "Côte D'Ivoire",
+    "MobileBeginWith": [
+      "0",
+      "4",
+      "5",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "CM",
+    "Alpha3": "CMR",
+    "CountryCode": "237",
+    "CountryName": "Cameroon",
+    "MobileBeginWith": [
+      "7",
+      "9",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "CD",
+    "Alpha3": "COD",
+    "CountryCode": "243",
+    "CountryName": "Congo, The Democratic Republic Of The",
+    "MobileBeginWith": [
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "CG",
+    "Alpha3": "COG",
+    "CountryCode": "242",
+    "CountryName": "Congo",
+    "MobileBeginWith": [
+      "0"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "CK",
+    "Alpha3": "COK",
+    "CountryCode": "682",
+    "CountryName": "Cook Islands",
+    "MobileBeginWith": [
+      "5",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      5
+    ]
+  },
+  {
+    "Alpha2": "CO",
+    "Alpha3": "COL",
+    "CountryCode": "57",
+    "CountryName": "Colombia",
+    "MobileBeginWith": [
+      "3"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "KM",
+    "Alpha3": "COM",
+    "CountryCode": "269",
+    "CountryName": "Comoros",
+    "MobileBeginWith": [
+      "3",
+      "76"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "CV",
+    "Alpha3": "CPV",
+    "CountryCode": "238",
+    "CountryName": "Cape Verde",
+    "MobileBeginWith": [
+      "5",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "CR",
+    "Alpha3": "CRI",
+    "CountryCode": "506",
+    "CountryName": "Costa Rica",
+    "MobileBeginWith": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "CU",
+    "Alpha3": "CUB",
+    "CountryCode": "53",
+    "CountryName": "Cuba",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "KY",
+    "Alpha3": "CYM",
+    "CountryCode": "1",
+    "CountryName": "Cayman Islands",
+    "MobileBeginWith": [
+      "345"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "CY",
+    "Alpha3": "CYP",
+    "CountryCode": "357",
+    "CountryName": "Cyprus",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "CZ",
+    "Alpha3": "CZE",
+    "CountryCode": "420",
+    "CountryName": "Czech Republic",
+    "MobileBeginWith": [
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "DE",
+    "Alpha3": "DEU",
+    "CountryCode": "49",
+    "CountryName": "Germany",
+    "MobileBeginWith": [
+      "15",
+      "16",
+      "17"
+    ],
+    "PhoneNumberLengths": [
+      10,
+      11
+    ]
+  },
+  {
+    "Alpha2": "DJ",
+    "Alpha3": "DJI",
+    "CountryCode": "253",
+    "CountryName": "Djibouti",
+    "MobileBeginWith": [
+      "77"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "DM",
+    "Alpha3": "DMA",
+    "CountryCode": "1",
+    "CountryName": "Dominica",
+    "MobileBeginWith": [
+      "767"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "DK",
+    "Alpha3": "DNK",
+    "CountryCode": "45",
+    "CountryName": "Denmark",
+    "MobileBeginWith": [
+      "2",
+      "30",
+      "31",
+      "40",
+      "41",
+      "42",
+      "50",
+      "51",
+      "52",
+      "53",
+      "60",
+      "61",
+      "71",
+      "81",
+      "91",
+      "92",
+      "93"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "DO",
+    "Alpha3": "DOM",
+    "CountryCode": "1",
+    "CountryName": "Dominican Republic",
+    "MobileBeginWith": [
+      "809",
+      "829",
+      "849"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "DZ",
+    "Alpha3": "DZA",
+    "CountryCode": "213",
+    "CountryName": "Algeria",
+    "MobileBeginWith": [
+      "5",
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "EC",
+    "Alpha3": "ECU",
+    "CountryCode": "593",
+    "CountryName": "Ecuador",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "EG",
+    "Alpha3": "EGY",
+    "CountryCode": "20",
+    "CountryName": "Egypt",
+    "MobileBeginWith": [
+      "1"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "ER",
+    "Alpha3": "ERI",
+    "CountryCode": "291",
+    "CountryName": "Eritrea",
+    "MobileBeginWith": [
+      "1",
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "ES",
+    "Alpha3": "ESP",
+    "CountryCode": "34",
+    "CountryName": "Spain",
+    "MobileBeginWith": [
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "EE",
+    "Alpha3": "EST",
+    "CountryCode": "372",
+    "CountryName": "Estonia",
+    "MobileBeginWith": [
+      "5",
+      "81",
+      "82",
+      "83"
+    ],
+    "PhoneNumberLengths": [
+      7,
+      8
+    ]
+  },
+  {
+    "Alpha2": "ET",
+    "Alpha3": "ETH",
+    "CountryCode": "251",
+    "CountryName": "Ethiopia",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "FI",
+    "Alpha3": "FIN",
+    "CountryCode": "358",
+    "CountryName": "Finland",
+    "MobileBeginWith": [
+      "4",
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "FJ",
+    "Alpha3": "FJI",
+    "CountryCode": "679",
+    "CountryName": "Fiji",
+    "MobileBeginWith": [
+      "7",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "FK",
+    "Alpha3": "FLK",
+    "CountryCode": "500",
+    "CountryName": "Falkland Islands (Malvinas)",
+    "MobileBeginWith": [
+      "5",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      5
+    ]
+  },
+  {
+    "Alpha2": "FR",
+    "Alpha3": "FRA",
+    "CountryCode": "33",
+    "CountryName": "France",
+    "MobileBeginWith": [
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "FO",
+    "Alpha3": "FRO",
+    "CountryCode": "298",
+    "CountryName": "Faroe Islands",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "FM",
+    "Alpha3": "FSM",
+    "CountryCode": "691",
+    "CountryName": "Micronesia, Federated States Of",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "GA",
+    "Alpha3": "GAB",
+    "CountryCode": "241",
+    "CountryName": "Gabon",
+    "MobileBeginWith": [
+      "05",
+      "06",
+      "07"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "GB",
+    "Alpha3": "GBR",
+    "CountryCode": "44",
+    "CountryName": "United Kingdom",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "GE",
+    "Alpha3": "GEO",
+    "CountryCode": "995",
+    "CountryName": "Georgia",
+    "MobileBeginWith": [
+      "5",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "GH",
+    "Alpha3": "GHA",
+    "CountryCode": "233",
+    "CountryName": "Ghana",
+    "MobileBeginWith": [
+      "2",
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "GI",
+    "Alpha3": "GIB",
+    "CountryCode": "350",
+    "CountryName": "Gibraltar",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "GN",
+    "Alpha3": "GIN",
+    "CountryCode": "224",
+    "CountryName": "Guinea",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "GP",
+    "Alpha3": "GLP",
+    "CountryCode": "590",
+    "CountryName": "Guadeloupe",
+    "MobileBeginWith": [
+      "690"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "GM",
+    "Alpha3": "GMB",
+    "CountryCode": "220",
+    "CountryName": "Gambia",
+    "MobileBeginWith": [
+      "7",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "GW",
+    "Alpha3": "GNB",
+    "CountryCode": "245",
+    "CountryName": "Guinea-Bissau",
+    "MobileBeginWith": [
+      "5",
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "GQ",
+    "Alpha3": "GNQ",
+    "CountryCode": "240",
+    "CountryName": "Equatorial Guinea",
+    "MobileBeginWith": [
+      "222",
+      "55"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "GR",
+    "Alpha3": "GRC",
+    "CountryCode": "30",
+    "CountryName": "Greece",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "GD",
+    "Alpha3": "GRD",
+    "CountryCode": "1",
+    "CountryName": "Grenada",
+    "MobileBeginWith": [
+      "473"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "GL",
+    "Alpha3": "GRL",
+    "CountryCode": "299",
+    "CountryName": "Greenland",
+    "MobileBeginWith": [
+      "4",
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "GT",
+    "Alpha3": "GTM",
+    "CountryCode": "502",
+    "CountryName": "Guatemala",
+    "MobileBeginWith": [
+      "3",
+      "4",
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "GF",
+    "Alpha3": "GUF",
+    "CountryCode": "594",
+    "CountryName": "French Guiana",
+    "MobileBeginWith": [
+      "694"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "GU",
+    "Alpha3": "GUM",
+    "CountryCode": "1",
+    "CountryName": "Guam",
+    "MobileBeginWith": [
+      "671"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "GY",
+    "Alpha3": "GUY",
+    "CountryCode": "592",
+    "CountryName": "Guyana",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "HK",
+    "Alpha3": "HKG",
+    "CountryCode": "852",
+    "CountryName": "Hong Kong",
+    "MobileBeginWith": [
+      "5",
+      "6",
+      "9",
+      "7",
+      "4",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "HN",
+    "Alpha3": "HND",
+    "CountryCode": "504",
+    "CountryName": "Honduras",
+    "MobileBeginWith": [
+      "3",
+      "7",
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "HR",
+    "Alpha3": "HRV",
+    "CountryCode": "385",
+    "CountryName": "Croatia",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "HT",
+    "Alpha3": "HTI",
+    "CountryCode": "509",
+    "CountryName": "Haiti",
+    "MobileBeginWith": [
+      "3",
+      "4"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "HU",
+    "Alpha3": "HUN",
+    "CountryCode": "36",
+    "CountryName": "Hungary",
+    "MobileBeginWith": [
+      "20",
+      "30",
+      "31",
+      "70"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "ID",
+    "Alpha3": "IDN",
+    "CountryCode": "62",
+    "CountryName": "Indonesia",
+    "MobileBeginWith": [
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "Alpha2": "IN",
+    "Alpha3": "IND",
+    "CountryCode": "91",
+    "CountryName": "India",
+    "MobileBeginWith": [
+      "7",
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "IE",
+    "Alpha3": "IRL",
+    "CountryCode": "353",
+    "CountryName": "Ireland",
+    "MobileBeginWith": [
+      "82",
+      "83",
+      "84",
+      "85",
+      "86",
+      "87",
+      "88",
+      "89"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "IR",
+    "Alpha3": "IRN",
+    "CountryCode": "98",
+    "CountryName": "Iran, Islamic Republic Of",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "IQ",
+    "Alpha3": "IRQ",
+    "CountryCode": "964",
+    "CountryName": "Iraq",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "IS",
+    "Alpha3": "ISL",
+    "CountryCode": "354",
+    "CountryName": "Iceland",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "IL",
+    "Alpha3": "ISR",
+    "CountryCode": "972",
+    "CountryName": "Israel",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "IT",
+    "Alpha3": "ITA",
+    "CountryCode": "39",
+    "CountryName": "Italy",
+    "MobileBeginWith": [
+      "3"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "JM",
+    "Alpha3": "JAM",
+    "CountryCode": "1",
+    "CountryName": "Jamaica",
+    "MobileBeginWith": [
+      "876"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "JO",
+    "Alpha3": "JOR",
+    "CountryCode": "962",
+    "CountryName": "Jordan",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "JP",
+    "Alpha3": "JPN",
+    "CountryCode": "81",
+    "CountryName": "Japan",
+    "MobileBeginWith": [
+      "70",
+      "80",
+      "90"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "KZ",
+    "Alpha3": "KAZ",
+    "CountryCode": "7",
+    "CountryName": "Kazakhstan",
+    "MobileBeginWith": [
+      "70",
+      "77"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "KE",
+    "Alpha3": "KEN",
+    "CountryCode": "254",
+    "CountryName": "Kenya",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "KG",
+    "Alpha3": "KGZ",
+    "CountryCode": "996",
+    "CountryName": "Kyrgyzstan",
+    "MobileBeginWith": [
+      "5",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "KH",
+    "Alpha3": "KHM",
+    "CountryCode": "855",
+    "CountryName": "Cambodia",
+    "MobileBeginWith": [
+      "1",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "KI",
+    "Alpha3": "KIR",
+    "CountryCode": "686",
+    "CountryName": "Kiribati",
+    "MobileBeginWith": [
+      "9",
+      "30"
+    ],
+    "PhoneNumberLengths": [
+      5
+    ]
+  },
+  {
+    "Alpha2": "KN",
+    "Alpha3": "KNA",
+    "CountryCode": "1",
+    "CountryName": "Saint Kitts And Nevis",
+    "MobileBeginWith": [
+      "869"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "KR",
+    "Alpha3": "KOR",
+    "CountryCode": "82",
+    "CountryName": "Korea, Republic of",
+    "MobileBeginWith": [
+      "1"
+    ],
+    "PhoneNumberLengths": [
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "KW",
+    "Alpha3": "KWT",
+    "CountryCode": "965",
+    "CountryName": "Kuwait",
+    "MobileBeginWith": [
+      "5",
+      "6",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "LA",
+    "Alpha3": "LAO",
+    "CountryCode": "856",
+    "CountryName": "Lao People's Democratic Republic",
+    "MobileBeginWith": [
+      "20"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "LB",
+    "Alpha3": "LBN",
+    "CountryCode": "961",
+    "CountryName": "Lebanon",
+    "MobileBeginWith": [
+      "3",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      7,
+      8
+    ]
+  },
+  {
+    "Alpha2": "LR",
+    "Alpha3": "LBR",
+    "CountryCode": "231",
+    "CountryName": "Liberia",
+    "MobileBeginWith": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      7,
+      8
+    ]
+  },
+  {
+    "Alpha2": "LY",
+    "Alpha3": "LBY",
+    "CountryCode": "218",
+    "CountryName": "Libyan Arab Jamahiriya",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "LC",
+    "Alpha3": "LCA",
+    "CountryCode": "1",
+    "CountryName": "Saint Lucia",
+    "MobileBeginWith": [
+      "758"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "LI",
+    "Alpha3": "LIE",
+    "CountryCode": "423",
+    "CountryName": "Liechtenstein",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "LK",
+    "Alpha3": "LKA",
+    "CountryCode": "94",
+    "CountryName": "Sri Lanka",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "LS",
+    "Alpha3": "LSO",
+    "CountryCode": "266",
+    "CountryName": "Lesotho",
+    "MobileBeginWith": [
+      "5",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "LT",
+    "Alpha3": "LTU",
+    "CountryCode": "370",
+    "CountryName": "Lithuania",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "LU",
+    "Alpha3": "LUX",
+    "CountryCode": "352",
+    "CountryName": "Luxembourg",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "LV",
+    "Alpha3": "LVA",
+    "CountryCode": "371",
+    "CountryName": "Latvia",
+    "MobileBeginWith": [
+      "2"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MO",
+    "Alpha3": "MAC",
+    "CountryCode": "853",
+    "CountryName": "Macao",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MA",
+    "Alpha3": "MAR",
+    "CountryCode": "212",
+    "CountryName": "Morocco",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "MC",
+    "Alpha3": "MCO",
+    "CountryCode": "377",
+    "CountryName": "Monaco",
+    "MobileBeginWith": [
+      "4",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "MD",
+    "Alpha3": "MDA",
+    "CountryCode": "373",
+    "CountryName": "Moldova, Republic of",
+    "MobileBeginWith": [
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MG",
+    "Alpha3": "MDG",
+    "CountryCode": "261",
+    "CountryName": "Madagascar",
+    "MobileBeginWith": [
+      "3"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "MV",
+    "Alpha3": "MDV",
+    "CountryCode": "960",
+    "CountryName": "Maldives",
+    "MobileBeginWith": [
+      "7",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "MX",
+    "Alpha3": "MEX",
+    "CountryCode": "52",
+    "CountryName": "Mexico",
+    "MobileBeginWith": [
+      ""
+    ],
+    "PhoneNumberLengths": [
+      10,
+      11
+    ]
+  },
+  {
+    "Alpha2": "MH",
+    "Alpha3": "MHL",
+    "CountryCode": "692",
+    "CountryName": "Marshall Islands",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "MK",
+    "Alpha3": "MKD",
+    "CountryCode": "389",
+    "CountryName": "Macedonia, the Former Yugoslav Republic Of",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "ML",
+    "Alpha3": "MLI",
+    "CountryCode": "223",
+    "CountryName": "Mali",
+    "MobileBeginWith": [
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MT",
+    "Alpha3": "MLT",
+    "CountryCode": "356",
+    "CountryName": "Malta",
+    "MobileBeginWith": [
+      "79",
+      "99"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MM",
+    "Alpha3": "MMR",
+    "CountryCode": "95",
+    "CountryName": "Myanmar",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "ME",
+    "Alpha3": "MNE",
+    "CountryCode": "382",
+    "CountryName": "Montenegro",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MN",
+    "Alpha3": "MNG",
+    "CountryCode": "976",
+    "CountryName": "Mongolia",
+    "MobileBeginWith": [
+      "5",
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MP",
+    "Alpha3": "MNP",
+    "CountryCode": "1",
+    "CountryName": "Northern Mariana Islands",
+    "MobileBeginWith": [
+      "670"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "MZ",
+    "Alpha3": "MOZ",
+    "CountryCode": "258",
+    "CountryName": "Mozambique",
+    "MobileBeginWith": [
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "MR",
+    "Alpha3": "MRT",
+    "CountryCode": "222",
+    "CountryName": "Mauritania",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "MS",
+    "Alpha3": "MSR",
+    "CountryCode": "1",
+    "CountryName": "Montserrat",
+    "MobileBeginWith": [
+      "664"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "MQ",
+    "Alpha3": "MTQ",
+    "CountryCode": "596",
+    "CountryName": "Martinique",
+    "MobileBeginWith": [
+      "696"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "MU",
+    "Alpha3": "MUS",
+    "CountryCode": "230",
+    "CountryName": "Mauritius",
+    "MobileBeginWith": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      7,
+      8
+    ]
+  },
+  {
+    "Alpha2": "MW",
+    "Alpha3": "MWI",
+    "CountryCode": "265",
+    "CountryName": "Malawi",
+    "MobileBeginWith": [
+      "77",
+      "88",
+      "99"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "MY",
+    "Alpha3": "MYS",
+    "CountryCode": "60",
+    "CountryName": "Malaysia",
+    "MobileBeginWith": [
+      "1"
+    ],
+    "PhoneNumberLengths": [
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "YT",
+    "Alpha3": "MYT",
+    "CountryCode": "269",
+    "CountryName": "Mayotte",
+    "MobileBeginWith": [
+      "639"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "NA",
+    "Alpha3": "NAM",
+    "CountryCode": "264",
+    "CountryName": "Namibia",
+    "MobileBeginWith": [
+      "60",
+      "81",
+      "82",
+      "85"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "NC",
+    "Alpha3": "NCL",
+    "CountryCode": "687",
+    "CountryName": "New Caledonia",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "NE",
+    "Alpha3": "NER",
+    "CountryCode": "227",
+    "CountryName": "Niger",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "NF",
+    "Alpha3": "NFK",
+    "CountryCode": "672",
+    "CountryName": "Norfolk Island",
+    "MobileBeginWith": [
+      "5",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      5
+    ]
+  },
+  {
+    "Alpha2": "NG",
+    "Alpha3": "NGA",
+    "CountryCode": "234",
+    "CountryName": "Nigeria",
+    "MobileBeginWith": [
+      "70",
+      "80",
+      "81",
+      "90"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "NI",
+    "Alpha3": "NIC",
+    "CountryCode": "505",
+    "CountryName": "Nicaragua",
+    "MobileBeginWith": [
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "NU",
+    "Alpha3": "NIU",
+    "CountryCode": "683",
+    "CountryName": "Niue",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      4
+    ]
+  },
+  {
+    "Alpha2": "NL",
+    "Alpha3": "NLD",
+    "CountryCode": "31",
+    "CountryName": "Netherlands",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "NO",
+    "Alpha3": "NOR",
+    "CountryCode": "47",
+    "CountryName": "Norway",
+    "MobileBeginWith": [
+      "4",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "NP",
+    "Alpha3": "NPL",
+    "CountryCode": "977",
+    "CountryName": "Nepal",
+    "MobileBeginWith": [
+      "97",
+      "98"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "NR",
+    "Alpha3": "NRU",
+    "CountryCode": "674",
+    "CountryName": "Nauru",
+    "MobileBeginWith": [
+      "555"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "NZ",
+    "Alpha3": "NZL",
+    "CountryCode": "64",
+    "CountryName": "New Zealand",
+    "MobileBeginWith": [
+      "2"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "OM",
+    "Alpha3": "OMN",
+    "CountryCode": "968",
+    "CountryName": "Oman",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "PK",
+    "Alpha3": "PAK",
+    "CountryCode": "92",
+    "CountryName": "Pakistan",
+    "MobileBeginWith": [
+      "3"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "PA",
+    "Alpha3": "PAN",
+    "CountryCode": "507",
+    "CountryName": "Panama",
+    "MobileBeginWith": [
+      "5",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "PE",
+    "Alpha3": "PER",
+    "CountryCode": "51",
+    "CountryName": "Peru",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "PH",
+    "Alpha3": "PHL",
+    "CountryCode": "63",
+    "CountryName": "Philippines",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "PW",
+    "Alpha3": "PLW",
+    "CountryCode": "680",
+    "CountryName": "Palau",
+    "MobileBeginWith": [
+      ""
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "PG",
+    "Alpha3": "PNG",
+    "CountryCode": "675",
+    "CountryName": "Papua New Guinea",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "PL",
+    "Alpha3": "POL",
+    "CountryCode": "48",
+    "CountryName": "Poland",
+    "MobileBeginWith": [
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "PR",
+    "Alpha3": "PRI",
+    "CountryCode": "1",
+    "CountryName": "Puerto Rico",
+    "MobileBeginWith": [
+      "787",
+      "939"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "PT",
+    "Alpha3": "PRT",
+    "CountryCode": "351",
+    "CountryName": "Portugal",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "PY",
+    "Alpha3": "PRY",
+    "CountryCode": "595",
+    "CountryName": "Paraguay",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "PS",
+    "Alpha3": "PSE",
+    "CountryCode": "970",
+    "CountryName": "Palestinian Territory, Occupied",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "PF",
+    "Alpha3": "PYF",
+    "CountryCode": "689",
+    "CountryName": "French Polynesia",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "QA",
+    "Alpha3": "QAT",
+    "CountryCode": "974",
+    "CountryName": "Qatar",
+    "MobileBeginWith": [
+      "3",
+      "5",
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "RE",
+    "Alpha3": "REU",
+    "CountryCode": "262",
+    "CountryName": "Réunion",
+    "MobileBeginWith": [
+      "692",
+      "693"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "RO",
+    "Alpha3": "ROU",
+    "CountryCode": "40",
+    "CountryName": "Romania",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "RU",
+    "Alpha3": "RUS",
+    "CountryCode": "7",
+    "CountryName": "Russian Federation",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "RW",
+    "Alpha3": "RWA",
+    "CountryCode": "250",
+    "CountryName": "Rwanda",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "SA",
+    "Alpha3": "SAU",
+    "CountryCode": "966",
+    "CountryName": "Saudi Arabia",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "SD",
+    "Alpha3": "SDN",
+    "CountryCode": "249",
+    "CountryName": "Sudan",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "SN",
+    "Alpha3": "SEN",
+    "CountryCode": "221",
+    "CountryName": "Senegal",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "SG",
+    "Alpha3": "SGP",
+    "CountryCode": "65",
+    "CountryName": "Singapore",
+    "MobileBeginWith": [
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "SH",
+    "Alpha3": "SHN",
+    "CountryCode": "290",
+    "CountryName": "Saint Helena",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      4
+    ]
+  },
+  {
+    "Alpha2": "SJ",
+    "Alpha3": "SJM",
+    "CountryCode": "47",
+    "CountryName": "Svalbard And Jan Mayen",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "SB",
+    "Alpha3": "SLB",
+    "CountryCode": "677",
+    "CountryName": "Solomon Islands",
+    "MobileBeginWith": [
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "SL",
+    "Alpha3": "SLE",
+    "CountryCode": "232",
+    "CountryName": "Sierra Leone",
+    "MobileBeginWith": [
+      "21",
+      "25",
+      "30",
+      "33",
+      "34",
+      "40",
+      "44",
+      "50",
+      "55",
+      "76",
+      "77",
+      "78",
+      "79",
+      "88"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "SV",
+    "Alpha3": "SLV",
+    "CountryCode": "503",
+    "CountryName": "El Salvador",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "SM",
+    "Alpha3": "SMR",
+    "CountryCode": "378",
+    "CountryName": "San Marino",
+    "MobileBeginWith": [
+      "3",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "SO",
+    "Alpha3": "SOM",
+    "CountryCode": "252",
+    "CountryName": "Somalia",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "SX",
+    "Alpha3": "SXM",
+    "CountryCode": "1",
+    "CountryName": "Sint Maarten",
+    "MobileBeginWith": [
+      "721"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "PM",
+    "Alpha3": "SPM",
+    "CountryCode": "508",
+    "CountryName": "Saint Pierre And Miquelon",
+    "MobileBeginWith": [
+      "55"
+    ],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "RS",
+    "Alpha3": "SRB",
+    "CountryCode": "381",
+    "CountryName": "Serbia",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8,
+      9
+    ]
+  },
+  {
+    "Alpha2": "ST",
+    "Alpha3": "STP",
+    "CountryCode": "239",
+    "CountryName": "Sao Tome and Principe",
+    "MobileBeginWith": [
+      "98",
+      "99"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "SR",
+    "Alpha3": "SUR",
+    "CountryCode": "597",
+    "CountryName": "Suriname",
+    "MobileBeginWith": [
+      "6",
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "SK",
+    "Alpha3": "SVK",
+    "CountryCode": "421",
+    "CountryName": "Slovakia",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "SI",
+    "Alpha3": "SVN",
+    "CountryCode": "386",
+    "CountryName": "Slovenia",
+    "MobileBeginWith": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "SE",
+    "Alpha3": "SWE",
+    "CountryCode": "46",
+    "CountryName": "Sweden",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "SC",
+    "Alpha3": "SYC",
+    "CountryCode": "248",
+    "CountryName": "Seychelles",
+    "MobileBeginWith": [
+      "2"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "SY",
+    "Alpha3": "SYR",
+    "CountryCode": "963",
+    "CountryName": "Syrian Arab Republic",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "TC",
+    "Alpha3": "TCA",
+    "CountryCode": "1",
+    "CountryName": "Turks and Caicos Islands",
+    "MobileBeginWith": [
+      "6492",
+      "6493",
+      "6494"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "TD",
+    "Alpha3": "TCD",
+    "CountryCode": "235",
+    "CountryName": "Chad",
+    "MobileBeginWith": [
+      "6",
+      "7",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "TG",
+    "Alpha3": "TGO",
+    "CountryCode": "228",
+    "CountryName": "Togo",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "TH",
+    "Alpha3": "THA",
+    "CountryCode": "66",
+    "CountryName": "Thailand",
+    "MobileBeginWith": [
+      "6",
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "TJ",
+    "Alpha3": "TJK",
+    "CountryCode": "992",
+    "CountryName": "Tajikistan",
+    "MobileBeginWith": [
+      "8",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "TK",
+    "Alpha3": "TKL",
+    "CountryCode": "690",
+    "CountryName": "Tokelau",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      4
+    ]
+  },
+  {
+    "Alpha2": "TM",
+    "Alpha3": "TKM",
+    "CountryCode": "993",
+    "CountryName": "Turkmenistan",
+    "MobileBeginWith": [
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "TL",
+    "Alpha3": "TLS",
+    "CountryCode": "670",
+    "CountryName": "Timor-Leste",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "TO",
+    "Alpha3": "TON",
+    "CountryCode": "676",
+    "CountryName": "Tonga",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      5
+    ]
+  },
+  {
+    "Alpha2": "TT",
+    "Alpha3": "TTO",
+    "CountryCode": "1",
+    "CountryName": "Trinidad and Tobago",
+    "MobileBeginWith": [
+      "868"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "TN",
+    "Alpha3": "TUN",
+    "CountryCode": "216",
+    "CountryName": "Tunisia",
+    "MobileBeginWith": [
+      "2",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "TR",
+    "Alpha3": "TUR",
+    "CountryCode": "90",
+    "CountryName": "Turkey",
+    "MobileBeginWith": [
+      "5"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "TV",
+    "Alpha3": "TUV",
+    "CountryCode": "688",
+    "CountryName": "Tuvalu",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      5
+    ]
+  },
+  {
+    "Alpha2": "TW",
+    "Alpha3": "TWN",
+    "CountryCode": "886",
+    "CountryName": "Taiwan, Province Of China",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "TZ",
+    "Alpha3": "TZA",
+    "CountryCode": "255",
+    "CountryName": "Tanzania, United Republic of",
+    "MobileBeginWith": [
+      "7",
+      "6"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "UG",
+    "Alpha3": "UGA",
+    "CountryCode": "256",
+    "CountryName": "Uganda",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "UA",
+    "Alpha3": "UKR",
+    "CountryCode": "380",
+    "CountryName": "Ukraine",
+    "MobileBeginWith": [
+      "39",
+      "50",
+      "63",
+      "66",
+      "67",
+      "68",
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "UY",
+    "Alpha3": "URY",
+    "CountryCode": "598",
+    "CountryName": "Uruguay",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      8
+    ]
+  },
+  {
+    "Alpha2": "UZ",
+    "Alpha3": "UZB",
+    "CountryCode": "998",
+    "CountryName": "Uzbekistan",
+    "MobileBeginWith": [
+      "9"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "VC",
+    "Alpha3": "VCT",
+    "CountryCode": "1",
+    "CountryName": "Saint Vincent And The Grenedines",
+    "MobileBeginWith": [
+      "784"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "VE",
+    "Alpha3": "VEN",
+    "CountryCode": "58",
+    "CountryName": "Venezuela, Bolivarian Republic of",
+    "MobileBeginWith": [
+      "4"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "VG",
+    "Alpha3": "VGB",
+    "CountryCode": "1",
+    "CountryName": "Virgin Islands, British",
+    "MobileBeginWith": [
+      "284"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "VI",
+    "Alpha3": "VIR",
+    "CountryCode": "1",
+    "CountryName": "Virgin Islands, U.S.",
+    "MobileBeginWith": [
+      "340"
+    ],
+    "PhoneNumberLengths": [
+      10
+    ]
+  },
+  {
+    "Alpha2": "VN",
+    "Alpha3": "VNM",
+    "CountryCode": "84",
+    "CountryName": "Viet Nam",
+    "MobileBeginWith": [
+      "9",
+      "1",
+      "8",
+      "3",
+      "5",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9,
+      10
+    ]
+  },
+  {
+    "Alpha2": "VU",
+    "Alpha3": "VUT",
+    "CountryCode": "678",
+    "CountryName": "Vanuatu",
+    "MobileBeginWith": [
+      "5",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "WF",
+    "Alpha3": "WLF",
+    "CountryCode": "681",
+    "CountryName": "Wallis and Futuna",
+    "MobileBeginWith": [],
+    "PhoneNumberLengths": [
+      6
+    ]
+  },
+  {
+    "Alpha2": "WS",
+    "Alpha3": "WSM",
+    "CountryCode": "685",
+    "CountryName": "Samoa",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      7
+    ]
+  },
+  {
+    "Alpha2": "YE",
+    "Alpha3": "YEM",
+    "CountryCode": "967",
+    "CountryName": "Yemen",
+    "MobileBeginWith": [
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "ZA",
+    "Alpha3": "ZAF",
+    "CountryCode": "27",
+    "CountryName": "South Africa",
+    "MobileBeginWith": [
+      "6",
+      "7",
+      "8"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "ZM",
+    "Alpha3": "ZMB",
+    "CountryCode": "260",
+    "CountryName": "Zambia",
+    "MobileBeginWith": [
+      "9",
+      "7"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  },
+  {
+    "Alpha2": "ZW",
+    "Alpha3": "ZWE",
+    "CountryCode": "263",
+    "CountryName": "Zimbabwe",
+    "MobileBeginWith": [
+      "71",
+      "73",
+      "77",
+      "78"
+    ],
+    "PhoneNumberLengths": [
+      9
+    ]
+  }
+]
+
+}

@@ -32,6 +32,7 @@
 #import "CLBroadcastViewController.h"
 #import "CLInputPasswordViewController.h"
 #import "CLDrawImageController.h"
+#import "CLPhoneNumberVerificationController.h"
 
 @interface CLMyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -102,6 +103,7 @@
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"广播轮播", nil)];
         [_arrayDS addObject:NSLocalizedString(@"折线图", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"手机号码验证", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义转场动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"模态交互式转场", nil)];
         [_arrayDS addObject:NSLocalizedString(@"Cell倒计时", nil)];
@@ -137,6 +139,7 @@
         [_controllerArray addObject:[CLLayoutController class]];
         [_controllerArray addObject:[CLBroadcastViewController class]];
         [_controllerArray addObject:[CLLineChartViewController class]];
+        [_controllerArray addObject:[CLPhoneNumberVerificationController class]];
         [_controllerArray addObject:[CLCustomTransitionViewController class]];
         [_controllerArray addObject:[CLTransitionController class]];
         [_controllerArray addObject:[CLCountdownController class]];
