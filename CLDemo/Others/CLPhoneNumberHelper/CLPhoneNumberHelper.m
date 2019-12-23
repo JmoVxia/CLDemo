@@ -29,15 +29,21 @@
     }
     return self;
 }
-- (BOOL)verifyWithCountryCode:(NSString *)countryCode phoneNumber:(NSString *)phoneNumber {
+- (BOOL)verifyCountryCode:(NSString *)countryCode phoneNumber:(NSString *)phoneNumber {
     NSPredicate *countryCodePredicate = [NSPredicate predicateWithFormat:@"countryCode = %@", countryCode];
     NSArray<CLPhoneNumberInfoModel *> *countryCodeInfoModelArray = [self.phoneNumberModel.phoneNumberInfoArray filteredArrayUsingPredicate:countryCodePredicate];
     if (countryCodeInfoModelArray.count > 0) {
         NSPredicate *phoneNumberLengthsPredicate = [NSPredicate predicateWithFormat:@"phoneNumberLengths CONTAINS %ld", phoneNumber.length];
         NSArray<CLPhoneNumberInfoModel *> *phoneNumberLengthsInfoModelArray = [countryCodeInfoModelArray filteredArrayUsingPredicate:phoneNumberLengthsPredicate];
         if (phoneNumberLengthsInfoModelArray.count > 0) {
-            NSPredicate *mobileBeginPredicate = [NSPredicate predicateWithBlock:^BOOL(CLPhoneNumberInfoModel  *evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+            NSPredicate *mobileBeginPredicate = [NSPredicate predicateWithBlock:^BOOL(CLPhoneNumberInfoModel  *evaluatedObject, NSDictionary<NSString *,id> * __unused bindings) {
+                if (evaluatedObject.mobileBegin.count == 0) {
+                    return YES;
+                }
                 for (NSString *mobileBegin in evaluatedObject.mobileBegin) {
+                    if ([mobileBegin isEqualToString:@""]) {
+                        return YES;
+                    }
                     BOOL hasPrefix =  [phoneNumber hasPrefix:mobileBegin];
                     if (hasPrefix) {
                         return YES;

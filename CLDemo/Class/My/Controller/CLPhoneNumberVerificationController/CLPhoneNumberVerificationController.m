@@ -63,7 +63,7 @@
     
 }
 - (void) textChangeAction:(UITextField *) sender {
-    self.label.text = [self.helper verifyWithCountryCode:self.countryField.text phoneNumber:self.phoneField.text] ? @"YES" : @"NO";
+    self.label.text = [self.helper verifyCountryCode:self.countryField.text phoneNumber:self.phoneField.text] ? @"YES" : @"NO";
     [self.label sizeToFit];
 }
 

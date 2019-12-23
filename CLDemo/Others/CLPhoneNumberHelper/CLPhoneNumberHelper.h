@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 根据国家码和电话号码验证是否合法
 /// @param countryCode 国际码
 /// @param phoneNumber 电话号码
-- (BOOL)verifyWithCountryCode:(NSString *)countryCode phoneNumber:(NSString *)phoneNumber;
+- (BOOL)verifyCountryCode:(NSString *)countryCode phoneNumber:(NSString *)phoneNumber;
 
 @end
 
