@@ -9,8 +9,27 @@
 import UIKit
 
 class PopupViewController: UIViewController {
+    ///状态栏颜色
+    var statusBarStyle: UIStatusBarStyle = UIApplication.shared.statusBarStyle {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    ///是否自动旋转
+    var autorotate: Bool = false
+    ///支持方向
+    var interfaceOrientationMask: UIInterfaceOrientationMask = .portrait
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIApplication.shared.statusBarStyle
+        return statusBarStyle
+    }
+    override var shouldAutorotate: Bool {
+        return autorotate
+    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return interfaceOrientationMask
+    }
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return UIInterfaceOrientation.portrait
     }
 }
 
@@ -63,8 +82,11 @@ extension PopupViewManager {
         makeKeyAndVisible(controller)
     }
     ///显示翻牌
-    class func showFlop(clickCallBack: (() -> ())? = nil) {
+    class func showFlop(statusBarStyle: UIStatusBarStyle = .lightContent, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .portrait, clickCallBack: (() -> ())? = nil) {
         let rootViewController = FlopController()
+        rootViewController.statusBarStyle = statusBarStyle
+        rootViewController.autorotate = true
+        rootViewController.interfaceOrientationMask = interfaceOrientationMask
         makeKeyAndVisible(rootViewController)
     }
     ///隐藏

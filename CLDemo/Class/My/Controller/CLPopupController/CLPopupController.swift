@@ -12,13 +12,17 @@ class CLPopupController: CLBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let button = UIButton()
+        view.addSubview(button)
+        button.backgroundColor = UIColor.randomColor
+        button.setTitle("点我翻牌", for: .normal)
+        button.addTarget(self, action: #selector(showFlop), for: .touchUpInside)
+        button.snp.makeConstraints { (make) in
+            make.size.equalTo(120)
+            make.center.equalToSuperview()
+        }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
+    @objc func showFlop() {
         PopupViewManager.showFlop()
     }
-
 }

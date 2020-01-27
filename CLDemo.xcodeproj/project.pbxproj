@@ -143,7 +143,6 @@
 		5B28650E21EE428200334E6C /* CLCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B28650D21EE428200334E6C /* CLCoreTextView.m */; };
 		5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */; };
 		5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */; };
-		5B49566123B4FCA200212772 /* CLIntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49566023B4FCA200212772 /* CLIntrinsicTableView.swift */; };
 		5B49566423B4FF4800212772 /* CLFlipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49566323B4FF4800212772 /* CLFlipController.swift */; };
 		5B49566623B507A700212772 /* CLFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49566523B507A700212772 /* CLFlipView.swift */; };
 		5B49566823B50ED700212772 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49566723B50ED700212772 /* UIColor+Extension.swift */; };
@@ -425,7 +424,6 @@
 		5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartNameToolBar.m; sourceTree = "<group>"; };
 		5B39CECF1DE2BE6800C7DD5C /* CLTitleControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTitleControllerView.h; sourceTree = "<group>"; };
 		5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTitleControllerView.m; sourceTree = "<group>"; };
-		5B49566023B4FCA200212772 /* CLIntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIntrinsicTableView.swift; sourceTree = "<group>"; };
 		5B49566323B4FF4800212772 /* CLFlipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFlipController.swift; sourceTree = "<group>"; };
 		5B49566523B507A700212772 /* CLFlipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFlipView.swift; sourceTree = "<group>"; };
 		5B49566723B50ED700212772 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -1276,9 +1274,9 @@
 		5B190E6323B66811005A2474 /* FlopController */ = {
 			isa = PBXGroup;
 			children = (
+				5B190E6723B66811005A2474 /* FlopController.swift */,
 				5B190E6423B66811005A2474 /* FlopPrizeView.swift */,
 				B550057323C5FFE600114312 /* FlopBottomView.swift */,
-				5B190E6723B66811005A2474 /* FlopController.swift */,
 			);
 			path = FlopController;
 			sourceTree = "<group>";
@@ -1624,7 +1622,6 @@
 			isa = PBXGroup;
 			children = (
 				5B8A4D4223B118CC00360631 /* CLChatLayoutController.swift */,
-				5B49566023B4FCA200212772 /* CLIntrinsicTableView.swift */,
 			);
 			path = CLChatLayoutController;
 			sourceTree = "<group>";
@@ -1954,7 +1951,6 @@
 				0CF79B012196792700DD0BF1 /* Aspects.m in Sources */,
 				0CF6B84423865AF600F10986 /* CLVerticalLayout.m in Sources */,
 				5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */,
-				5B49566123B4FCA200212772 /* CLIntrinsicTableView.swift in Sources */,
 				0CCDA40322D9D1C5007B41C4 /* CLPhotoBrowser.m in Sources */,
 				0C52EF6721928C5C0079A0E7 /* CLLanguageManager.m in Sources */,
 				0CF5680D2215049600926A4C /* UIView+CLEvents.m in Sources */,

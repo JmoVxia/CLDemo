@@ -27,7 +27,7 @@ class FlopPrizeView: UIView {
     }()
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.text = "商品需要8人助力即可免费获得"
+        titleLabel.text = "商品需要2人助力即可免费获得"
         titleLabel.font = UIFont.systemFont(ofSize: 14.5)
         titleLabel.textColor = hexColor("#FFFFFF")
         return titleLabel

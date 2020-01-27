@@ -101,7 +101,7 @@
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
         [_arrayDS addObject:NSLocalizedString(@"绘制头像", nil)];
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"自定义弹窗", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"自定义翻牌弹窗", nil)];
         [_arrayDS addObject:NSLocalizedString(@"翻转动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"聊天布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"广播轮播", nil)];

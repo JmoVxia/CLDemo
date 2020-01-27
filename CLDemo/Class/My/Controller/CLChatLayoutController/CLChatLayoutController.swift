@@ -10,8 +10,8 @@ import UIKit
 
 class CLChatLayoutController: CLBaseViewController {
     private var dataSource = [String]()
-    private lazy var tableView: CLIntrinsicTableView = {
-        let tableView = CLIntrinsicTableView()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
         tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "UITableViewCell")
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
@@ -44,9 +44,20 @@ class CLChatLayoutController: CLBaseViewController {
         reloadDataScrollToBottom()
     }
     func reloadDataScrollToBottom() {
-        tableView.reloadData()
-        let item = max(dataSource.count - 1, 0)
-        tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: false)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            let contentHeight = self.tableView.sizeThatFits(CGSize(width: self.view.frame.width, height: CGFloat(INT64_MAX))).height
+            let insetsTop = max(self.tableView.frame.height - contentHeight, 0.0)
+            let oldHeight = self.tableView.contentInset.top
+            if oldHeight != insetsTop {
+                self.tableView.contentInset = UIEdgeInsets(top: insetsTop, left: 0, bottom: 0, right: 0)
+                if self.tableView.frame.height - contentHeight > 0 {
+                    self.tableView.contentSize = CGSize(width: self.tableView.frame.width, height: 0)
+                }
+            }
+            let item = max(self.dataSource.count - 1, 0)
+            self.tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: false)
+        }
     }
 }
 extension CLChatLayoutController: UITableViewDataSource {
@@ -57,6 +68,8 @@ extension CLChatLayoutController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         cell.textLabel?.text = dataSource[indexPath.row]
+        cell.textLabel?.textAlignment = .center
+        cell.backgroundColor = UIColor.randomColor
         return cell
     }
     
