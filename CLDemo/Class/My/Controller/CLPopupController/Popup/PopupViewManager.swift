@@ -32,7 +32,15 @@ class PopupViewController: UIViewController {
         return UIInterfaceOrientation.portrait
     }
 }
-
+class PopupViewWindow: UIWindow {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, with: event)
+        if view == rootViewController?.view {
+            return nil
+        }
+        return view
+    }
+}
 class PopupViewManager: NSObject {
     private static var manager: PopupViewManager?
     private class var share: PopupViewManager {
@@ -45,13 +53,14 @@ class PopupViewManager: NSObject {
         }
     }
     
-    private var showWindow: UIWindow?
-    private class var window: UIWindow {
+    private var showWindow: PopupViewWindow?
+    private class var window: PopupViewWindow {
         get {
             guard let window = PopupViewManager.share.showWindow else {
-                PopupViewManager.share.showWindow = UIWindow(frame: UIScreen.main.bounds)
+                PopupViewManager.share.showWindow = PopupViewWindow(frame: UIScreen.main.bounds)
                 PopupViewManager.share.showWindow!.windowLevel = UIWindow.Level.statusBar
                 PopupViewManager.share.showWindow!.isUserInteractionEnabled = true
+                PopupViewManager.share.showWindow?.rootViewController = PopupViewController()
                 return PopupViewManager.share.showWindow!
             }
             return window
@@ -65,32 +74,63 @@ class PopupViewManager: NSObject {
     }
 }
 extension PopupViewManager {
-    private class func makeKeyAndVisible(_ rootViewController: UIViewController) {
-        PopupViewManager.window.rootViewController = rootViewController
+    private class func makeKeyAndVisible(controller: UIViewController, only: Bool) {
+        let rootViewController = PopupViewManager.window.rootViewController
+        if let children = rootViewController?.children, only {
+            for childrenController in children {
+                childrenController.willMove(toParent: nil)
+                childrenController.view.removeFromSuperview()
+                childrenController.removeFromParent()
+            }
+        }
+        controller.modalPresentationStyle = .custom
+        rootViewController?.addChild(controller)
+        rootViewController?.view.addSubview(controller.view)
+        controller.didMove(toParent: rootViewController)
         PopupViewManager.window.makeKeyAndVisible()
     }
-    private class func destroy() {
-        PopupViewManager.window.resignKey()
-        PopupViewManager.window.isHidden = true
-        PopupViewManager.share.showWindow = nil
-        manager = nil
+    private class func destroy(all: Bool = false) {
+        guard let childrenController = PopupViewManager.window.rootViewController?.children else {
+            return
+        }
+        let controller = childrenController.last
+        controller?.willMove(toParent: nil)
+        controller?.view.removeFromSuperview()
+        controller?.removeFromParent()
+        if childrenController.count == 1 || all {
+            PopupViewManager.window.resignKey()
+            PopupViewManager.window.isHidden = true
+            PopupViewManager.share.showWindow = nil
+            manager = nil
+        }
     }
 }
 extension PopupViewManager {
-    ///显示自定义弹窗
-    class func showCustom(controller: UIViewController) {
-        makeKeyAndVisible(controller)
+    
+    /// 显示自定义弹窗
+    /// - Parameters:
+    ///   - controller: 自动有弹窗控制器
+    ///   - only: 唯一弹窗
+    class func showCustom(controller: UIViewController, only: Bool = false) {
+        makeKeyAndVisible(controller: controller, only: only)
     }
-    ///显示翻牌
-    class func showFlop(statusBarStyle: UIStatusBarStyle = .lightContent, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .portrait, clickCallBack: (() -> ())? = nil) {
-        let rootViewController = FlopController()
-        rootViewController.statusBarStyle = statusBarStyle
-        rootViewController.autorotate = true
-        rootViewController.interfaceOrientationMask = interfaceOrientationMask
-        makeKeyAndVisible(rootViewController)
+    
+    /// 显示翻牌弹窗
+    /// - Parameters:
+    ///   - statusBarStyle: 状态栏样式
+    ///   - autorotate: 自动旋转
+    ///   - interfaceOrientationMask: 旋转支持方向
+    ///   - only: 唯一弹窗
+    class func showFlop(statusBarStyle: UIStatusBarStyle = .lightContent, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .portrait, only: Bool = false) {
+        let controller = FlopController()
+        controller.statusBarStyle = statusBarStyle
+        controller.autorotate = true
+        controller.interfaceOrientationMask = interfaceOrientationMask
+        showCustom(controller: controller, only: only)
     }
-    ///隐藏
-    class func dismiss() {
-        PopupViewManager.destroy()
+    /// 隐藏弹窗
+    /// - Parameter all: 全部弹窗
+    class func dismiss(all: Bool = false) {
+        PopupViewManager.destroy(all: all)
     }
 }

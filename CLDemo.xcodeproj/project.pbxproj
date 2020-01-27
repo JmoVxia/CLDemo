@@ -142,6 +142,11 @@
 		5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C74251E78F120000AB534 /* CLChartXLabel.m */; };
 		5B28650E21EE428200334E6C /* CLCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B28650D21EE428200334E6C /* CLCoreTextView.m */; };
 		5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */; };
+		5B3327E123DF352900CA315C /* CLConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3327E023DF352800CA315C /* CLConst.swift */; };
+		5B3327E323DF366600CA315C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3327E223DF366600CA315C /* UIImage+Extension.swift */; };
+		5B3327E523DF384800CA315C /* NSString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3327E423DF384800CA315C /* NSString+Extension.swift */; };
+		5B3327E823DF3E0A00CA315C /* recoredWave_dk.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B3327E723DF3E0A00CA315C /* recoredWave_dk.json */; };
+		5B3327EA23DF41E800CA315C /* CLChatRecordTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3327E923DF41E800CA315C /* CLChatRecordTimeView.swift */; };
 		5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */; };
 		5B49566423B4FF4800212772 /* CLFlipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49566323B4FF4800212772 /* CLFlipController.swift */; };
 		5B49566623B507A700212772 /* CLFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49566523B507A700212772 /* CLFlipView.swift */; };
@@ -172,16 +177,38 @@
 		5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA511DDD9BBE00A20E34 /* CLBaseViewController.m */; };
 		5B80DA551DDD9BD500A20E34 /* CLBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA541DDD9BD500A20E34 /* CLBaseNavigationController.m */; };
 		5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80DA571DDD9C3A00A20E34 /* CLTabbarController.m */; };
-		5B8A4D4323B118CC00360631 /* CLChatLayoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8A4D4223B118CC00360631 /* CLChatLayoutController.swift */; };
+		5B8A4D4323B118CC00360631 /* CLChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8A4D4223B118CC00360631 /* CLChatController.swift */; };
 		5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB848251E00237900BB266D /* CLEssenceListController.m */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
 		5BC3FB8921CE96A400B7FF82 /* CLRotatingPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC3FB8821CE96A400B7FF82 /* CLRotatingPictureViewController.swift */; };
 		5BE0FA3C1E03C2C400914DFF /* NSString+CLCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3B1E03C2C400914DFF /* NSString+CLCalculateSize.m */; };
 		5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */; };
+		B51EE6C723DF092400146862 /* CLChatLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6C623DF092400146862 /* CLChatLayoutCell.swift */; };
+		B51EE6C923DF093E00146862 /* CLChatLayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6C823DF093E00146862 /* CLChatLayoutItem.swift */; };
+		B51EE6CC23DF104800146862 /* CLGradientLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6CB23DF104800146862 /* CLGradientLayerView.swift */; };
+		B51EE6E223DF138200146862 /* CLChatInputToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6CE23DF138100146862 /* CLChatInputToolBar.swift */; };
+		B51EE6E323DF138200146862 /* CLChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D023DF138100146862 /* CLChatTextView.swift */; };
+		B51EE6E423DF138200146862 /* CLChatEmojiItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D323DF138100146862 /* CLChatEmojiItemProtocol.swift */; };
+		B51EE6E523DF138200146862 /* CLChatEmojiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D423DF138100146862 /* CLChatEmojiItem.swift */; };
+		B51EE6E623DF138200146862 /* CLChatEmojiDeleteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D523DF138100146862 /* CLChatEmojiDeleteItem.swift */; };
+		B51EE6E723DF138200146862 /* CLChatEmojTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D623DF138100146862 /* CLChatEmojTextItem.swift */; };
+		B51EE6E823DF138200146862 /* CLChatEmojiCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D823DF138100146862 /* CLChatEmojiCellProtocol.swift */; };
+		B51EE6E923DF138200146862 /* CLChatEmojiTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6D923DF138100146862 /* CLChatEmojiTextCell.swift */; };
+		B51EE6EA23DF138200146862 /* CLChatEmojiDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6DA23DF138100146862 /* CLChatEmojiDelegateCell.swift */; };
+		B51EE6EB23DF138200146862 /* CLChatEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6DB23DF138100146862 /* CLChatEmojiView.swift */; };
+		B51EE6EC23DF138200146862 /* CLChatEmojiFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6DC23DF138100146862 /* CLChatEmojiFlowLayout.swift */; };
+		B51EE6ED23DF138200146862 /* CLChatPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6DE23DF138100146862 /* CLChatPhotoView.swift */; };
+		B51EE6EE23DF138200146862 /* CLChatPhotoCellBotton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6DF23DF138100146862 /* CLChatPhotoCellBotton.swift */; };
+		B51EE6EF23DF138200146862 /* CLChatRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EE6E123DF138100146862 /* CLChatRecordView.swift */; };
 		B5498C7823DE93910082D4E5 /* CLPhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5498C7123DE93910082D4E5 /* CLPhoneNumberModel.m */; };
 		B5498C7923DE93910082D4E5 /* CLPhoneNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5498C7323DE93910082D4E5 /* CLPhoneNumberHelper.m */; };
 		B5498C7A23DE93910082D4E5 /* CLPhoneNumberInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5498C7423DE93910082D4E5 /* CLPhoneNumberInfoModel.m */; };
 		B5498C7B23DE93910082D4E5 /* iso3166.json in Resources */ = {isa = PBXBuildFile; fileRef = B5498C7523DE93910082D4E5 /* iso3166.json */; };
+		B5498C7D23DED4220082D4E5 /* CLChatLayoutTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5498C7C23DED4220082D4E5 /* CLChatLayoutTextCell.swift */; };
+		B5498C7F23DED4BA0082D4E5 /* CLChatLayoutItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5498C7E23DED4BA0082D4E5 /* CLChatLayoutItemProtocol.swift */; };
+		B5498C8123DED4F60082D4E5 /* CLChatLayoutTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5498C8023DED4F60082D4E5 /* CLChatLayoutTextItem.swift */; };
+		B5498C8323DED6760082D4E5 /* CLChatLayoutCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5498C8223DED6760082D4E5 /* CLChatLayoutCellProtocol.swift */; };
+		B5498C8523DEE0C70082D4E5 /* CLIntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5498C8423DEE0C70082D4E5 /* CLIntrinsicTableView.swift */; };
 		B550057423C5FFE600114312 /* FlopBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550057323C5FFE600114312 /* FlopBottomView.swift */; };
 /* End PBXBuildFile section */
 
@@ -422,6 +449,11 @@
 		5B28650D21EE428200334E6C /* CLCoreTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCoreTextView.m; sourceTree = "<group>"; };
 		5B32C81A1E7A4AF8000C1749 /* CLChartNameToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartNameToolBar.h; sourceTree = "<group>"; };
 		5B32C81B1E7A4AF8000C1749 /* CLChartNameToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartNameToolBar.m; sourceTree = "<group>"; };
+		5B3327E023DF352800CA315C /* CLConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLConst.swift; sourceTree = "<group>"; };
+		5B3327E223DF366600CA315C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		5B3327E423DF384800CA315C /* NSString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+Extension.swift"; sourceTree = "<group>"; };
+		5B3327E723DF3E0A00CA315C /* recoredWave_dk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recoredWave_dk.json; sourceTree = "<group>"; };
+		5B3327E923DF41E800CA315C /* CLChatRecordTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatRecordTimeView.swift; sourceTree = "<group>"; };
 		5B39CECF1DE2BE6800C7DD5C /* CLTitleControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTitleControllerView.h; sourceTree = "<group>"; };
 		5B39CED01DE2BE6800C7DD5C /* CLTitleControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTitleControllerView.m; sourceTree = "<group>"; };
 		5B49566323B4FF4800212772 /* CLFlipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFlipController.swift; sourceTree = "<group>"; };
@@ -480,7 +512,7 @@
 		5B80DA541DDD9BD500A20E34 /* CLBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBaseNavigationController.m; sourceTree = "<group>"; };
 		5B80DA561DDD9C3A00A20E34 /* CLTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTabbarController.h; sourceTree = "<group>"; };
 		5B80DA571DDD9C3A00A20E34 /* CLTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTabbarController.m; sourceTree = "<group>"; };
-		5B8A4D4223B118CC00360631 /* CLChatLayoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutController.swift; sourceTree = "<group>"; };
+		5B8A4D4223B118CC00360631 /* CLChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatController.swift; sourceTree = "<group>"; };
 		5BB848241E00237900BB266D /* CLEssenceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEssenceListController.h; sourceTree = "<group>"; };
 		5BB848251E00237900BB266D /* CLEssenceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEssenceListController.m; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
@@ -494,6 +526,23 @@
 		5BE0FA3E1E03E03900914DFF /* CLSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchBar.m; sourceTree = "<group>"; };
 		7F29D2D63E4FCF727DAB90EE /* Pods-CLDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLDemo/Pods-CLDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		AFF9BFDE81DC6F568D3C9863 /* Pods-CLDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLDemo/Pods-CLDemo.release.xcconfig"; sourceTree = "<group>"; };
+		B51EE6C623DF092400146862 /* CLChatLayoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutCell.swift; sourceTree = "<group>"; };
+		B51EE6C823DF093E00146862 /* CLChatLayoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutItem.swift; sourceTree = "<group>"; };
+		B51EE6CB23DF104800146862 /* CLGradientLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGradientLayerView.swift; sourceTree = "<group>"; };
+		B51EE6CE23DF138100146862 /* CLChatInputToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatInputToolBar.swift; sourceTree = "<group>"; };
+		B51EE6D023DF138100146862 /* CLChatTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatTextView.swift; sourceTree = "<group>"; };
+		B51EE6D323DF138100146862 /* CLChatEmojiItemProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiItemProtocol.swift; sourceTree = "<group>"; };
+		B51EE6D423DF138100146862 /* CLChatEmojiItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiItem.swift; sourceTree = "<group>"; };
+		B51EE6D523DF138100146862 /* CLChatEmojiDeleteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiDeleteItem.swift; sourceTree = "<group>"; };
+		B51EE6D623DF138100146862 /* CLChatEmojTextItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojTextItem.swift; sourceTree = "<group>"; };
+		B51EE6D823DF138100146862 /* CLChatEmojiCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiCellProtocol.swift; sourceTree = "<group>"; };
+		B51EE6D923DF138100146862 /* CLChatEmojiTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiTextCell.swift; sourceTree = "<group>"; };
+		B51EE6DA23DF138100146862 /* CLChatEmojiDelegateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiDelegateCell.swift; sourceTree = "<group>"; };
+		B51EE6DB23DF138100146862 /* CLChatEmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiView.swift; sourceTree = "<group>"; };
+		B51EE6DC23DF138100146862 /* CLChatEmojiFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatEmojiFlowLayout.swift; sourceTree = "<group>"; };
+		B51EE6DE23DF138100146862 /* CLChatPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatPhotoView.swift; sourceTree = "<group>"; };
+		B51EE6DF23DF138100146862 /* CLChatPhotoCellBotton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatPhotoCellBotton.swift; sourceTree = "<group>"; };
+		B51EE6E123DF138100146862 /* CLChatRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLChatRecordView.swift; sourceTree = "<group>"; };
 		B5498C7123DE93910082D4E5 /* CLPhoneNumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhoneNumberModel.m; sourceTree = "<group>"; };
 		B5498C7223DE93910082D4E5 /* CLPhoneNumberInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhoneNumberInfoModel.h; sourceTree = "<group>"; };
 		B5498C7323DE93910082D4E5 /* CLPhoneNumberHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhoneNumberHelper.m; sourceTree = "<group>"; };
@@ -501,6 +550,11 @@
 		B5498C7523DE93910082D4E5 /* iso3166.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso3166.json; sourceTree = "<group>"; };
 		B5498C7623DE93910082D4E5 /* CLPhoneNumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhoneNumberModel.h; sourceTree = "<group>"; };
 		B5498C7723DE93910082D4E5 /* CLPhoneNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhoneNumberHelper.h; sourceTree = "<group>"; };
+		B5498C7C23DED4220082D4E5 /* CLChatLayoutTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutTextCell.swift; sourceTree = "<group>"; };
+		B5498C7E23DED4BA0082D4E5 /* CLChatLayoutItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutItemProtocol.swift; sourceTree = "<group>"; };
+		B5498C8023DED4F60082D4E5 /* CLChatLayoutTextItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutTextItem.swift; sourceTree = "<group>"; };
+		B5498C8223DED6760082D4E5 /* CLChatLayoutCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChatLayoutCellProtocol.swift; sourceTree = "<group>"; };
+		B5498C8423DEE0C70082D4E5 /* CLIntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIntrinsicTableView.swift; sourceTree = "<group>"; };
 		B550057323C5FFE600114312 /* FlopBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlopBottomView.swift; sourceTree = "<group>"; };
 		D98F87B6C8541D0FE80F2362 /* Pods_CLDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1281,6 +1335,22 @@
 			path = FlopController;
 			sourceTree = "<group>";
 		};
+		5B3327DF23DF352100CA315C /* CLConst */ = {
+			isa = PBXGroup;
+			children = (
+				5B3327E023DF352800CA315C /* CLConst.swift */,
+			);
+			path = CLConst;
+			sourceTree = "<group>";
+		};
+		5B3327E623DF3E0000CA315C /* json */ = {
+			isa = PBXGroup;
+			children = (
+				5B3327E723DF3E0A00CA315C /* recoredWave_dk.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		5B49566223B4FE3D00212772 /* CLFlipController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1384,6 +1454,7 @@
 		5B80D9E71DDD976A00A20E34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B3327E623DF3E0000CA315C /* json */,
 				0C6392C222DAC3AB00AFD7EB /* LocalFiles */,
 				5BC3FB8521CE966A00B7FF82 /* CLDemo-Bridging-Header.h */,
 				5B80D9F31DDD976A00A20E34 /* Assets.xcassets */,
@@ -1501,7 +1572,7 @@
 				5B80DA301DDD993F00A20E34 /* CLMyController.m */,
 				5B190E5A23B667DD005A2474 /* CLPopupController */,
 				5B49566223B4FE3D00212772 /* CLFlipController */,
-				5B8A4D4123B1189C00360631 /* CLChatLayoutController */,
+				5B8A4D4123B1189C00360631 /* CLChatController */,
 				0CFA5897237FE8ED007B8231 /* CLDrawImageController */,
 				0C1CFA7423744AA5004B59CB /* CLInputToolbarController */,
 				0C1CFA7323744A42004B59CB /* CLLogViewController */,
@@ -1557,6 +1628,7 @@
 		5B80DA391DDD993F00A20E34 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				5B3327DF23DF352100CA315C /* CLConst */,
 				B5498C7023DE93910082D4E5 /* CLPhoneNumberHelper */,
 				0CCDA3F222D9D178007B41C4 /* FPSDisplay */,
 				0CCDA3F122D9D161007B41C4 /* CLPhotoBrowser */,
@@ -1605,6 +1677,8 @@
 				0CCBFB7022AB89FE0078547B /* NSDate+CLExtension.h */,
 				0CCBFB7122AB89FE0078547B /* NSDate+CLExtension.m */,
 				5B49566723B50ED700212772 /* UIColor+Extension.swift */,
+				5B3327E223DF366600CA315C /* UIImage+Extension.swift */,
+				5B3327E423DF384800CA315C /* NSString+Extension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1618,12 +1692,95 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		5B8A4D4123B1189C00360631 /* CLChatLayoutController */ = {
+		5B8A4D4123B1189C00360631 /* CLChatController */ = {
 			isa = PBXGroup;
 			children = (
-				5B8A4D4223B118CC00360631 /* CLChatLayoutController.swift */,
+				B51EE6CA23DF102900146862 /* View */,
+				5B8A4D4223B118CC00360631 /* CLChatController.swift */,
 			);
-			path = CLChatLayoutController;
+			path = CLChatController;
+			sourceTree = "<group>";
+		};
+		B51EE6CA23DF102900146862 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6CB23DF104800146862 /* CLGradientLayerView.swift */,
+				B51EE6CD23DF138100146862 /* CLChatInputToolBar */,
+				B5498C8823DEE2A10082D4E5 /* Tableview */,
+				B5498C8723DEE2920082D4E5 /* Item */,
+				B5498C8623DEE2820082D4E5 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B51EE6CD23DF138100146862 /* CLChatInputToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6CE23DF138100146862 /* CLChatInputToolBar.swift */,
+				B51EE6CF23DF138100146862 /* CLChatTextView */,
+				B51EE6D123DF138100146862 /* CLChatEmojiView */,
+				B51EE6DD23DF138100146862 /* CLChatPhotoView */,
+				B51EE6E023DF138100146862 /* CLChatRecordView */,
+			);
+			path = CLChatInputToolBar;
+			sourceTree = "<group>";
+		};
+		B51EE6CF23DF138100146862 /* CLChatTextView */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6D023DF138100146862 /* CLChatTextView.swift */,
+			);
+			path = CLChatTextView;
+			sourceTree = "<group>";
+		};
+		B51EE6D123DF138100146862 /* CLChatEmojiView */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6D223DF138100146862 /* CLChatEmojiItem */,
+				B51EE6D723DF138100146862 /* CLChatCell */,
+				B51EE6DB23DF138100146862 /* CLChatEmojiView.swift */,
+				B51EE6DC23DF138100146862 /* CLChatEmojiFlowLayout.swift */,
+			);
+			path = CLChatEmojiView;
+			sourceTree = "<group>";
+		};
+		B51EE6D223DF138100146862 /* CLChatEmojiItem */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6D323DF138100146862 /* CLChatEmojiItemProtocol.swift */,
+				B51EE6D423DF138100146862 /* CLChatEmojiItem.swift */,
+				B51EE6D523DF138100146862 /* CLChatEmojiDeleteItem.swift */,
+				B51EE6D623DF138100146862 /* CLChatEmojTextItem.swift */,
+			);
+			path = CLChatEmojiItem;
+			sourceTree = "<group>";
+		};
+		B51EE6D723DF138100146862 /* CLChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6D823DF138100146862 /* CLChatEmojiCellProtocol.swift */,
+				B51EE6D923DF138100146862 /* CLChatEmojiTextCell.swift */,
+				B51EE6DA23DF138100146862 /* CLChatEmojiDelegateCell.swift */,
+			);
+			path = CLChatCell;
+			sourceTree = "<group>";
+		};
+		B51EE6DD23DF138100146862 /* CLChatPhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6DE23DF138100146862 /* CLChatPhotoView.swift */,
+				B51EE6DF23DF138100146862 /* CLChatPhotoCellBotton.swift */,
+			);
+			path = CLChatPhotoView;
+			sourceTree = "<group>";
+		};
+		B51EE6E023DF138100146862 /* CLChatRecordView */ = {
+			isa = PBXGroup;
+			children = (
+				B51EE6E123DF138100146862 /* CLChatRecordView.swift */,
+				5B3327E923DF41E800CA315C /* CLChatRecordTimeView.swift */,
+			);
+			path = CLChatRecordView;
 			sourceTree = "<group>";
 		};
 		B5498C7023DE93910082D4E5 /* CLPhoneNumberHelper */ = {
@@ -1640,6 +1797,34 @@
 			path = CLPhoneNumberHelper;
 			sourceTree = "<group>";
 		};
+		B5498C8623DEE2820082D4E5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B5498C8223DED6760082D4E5 /* CLChatLayoutCellProtocol.swift */,
+				B51EE6C623DF092400146862 /* CLChatLayoutCell.swift */,
+				B5498C7C23DED4220082D4E5 /* CLChatLayoutTextCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		B5498C8723DEE2920082D4E5 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				B5498C7E23DED4BA0082D4E5 /* CLChatLayoutItemProtocol.swift */,
+				B51EE6C823DF093E00146862 /* CLChatLayoutItem.swift */,
+				B5498C8023DED4F60082D4E5 /* CLChatLayoutTextItem.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		B5498C8823DEE2A10082D4E5 /* Tableview */ = {
+			isa = PBXGroup;
+			children = (
+				B5498C8423DEE0C70082D4E5 /* CLIntrinsicTableView.swift */,
+			);
+			path = Tableview;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1651,8 +1836,8 @@
 				5B80D9E01DDD976A00A20E34 /* Sources */,
 				5B80D9E11DDD976A00A20E34 /* Frameworks */,
 				5B80D9E21DDD976A00A20E34 /* Resources */,
-				38075095E192ED84624940F7 /* [CP] Embed Pods Frameworks */,
 				0C2BEA6722BE522B0030CB94 /* ShellScript */,
+				66B0C77060B5F17D4CA7DD77 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1728,6 +1913,7 @@
 				B5498C7B23DE93910082D4E5 /* iso3166.json in Resources */,
 				0C7DE94E22DECC0D00FA9040 /* localImage5.jpeg in Resources */,
 				0C7DE94822DECC0D00FA9040 /* localGifImage1.gif in Resources */,
+				5B3327E823DF3E0A00CA315C /* recoredWave_dk.json in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
 				0C7DE94722DECC0D00FA9040 /* localImage8.jpeg in Resources */,
 				0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */,
@@ -1754,12 +1940,10 @@
 			shellPath = /bin/sh;
 			shellScript = "REVEAL_APP_PATH=$(mdfind kMDItemCFBundleIdentifier=\"com.ittybittyapps.Reveal2\" | head -n 1)\nBUILD_SCRIPT_PATH=\"${REVEAL_APP_PATH}/Contents/SharedSupport/Scripts/reveal_server_build_phase.sh\"\nif [ \"${REVEAL_APP_PATH}\" -a -e \"${BUILD_SCRIPT_PATH}\" ]; then\n\"${BUILD_SCRIPT_PATH}\"\nelse\necho \"Reveal Server not loaded: Cannot find a compatible Reveal app.\"\nfi\n";
 		};
-		38075095E192ED84624940F7 /* [CP] Embed Pods Frameworks */ = {
+		66B0C77060B5F17D4CA7DD77 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CLDemo/Pods-CLDemo-frameworks.sh",
@@ -1771,10 +1955,9 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
@@ -1784,6 +1967,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1822,8 +2006,10 @@
 				0C1075F322E1AE8A005E5843 /* CLAnimatedTransitioning.m in Sources */,
 				5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */,
 				0CE7333F2191CB9D00270851 /* Tools.m in Sources */,
+				B51EE6C923DF093E00146862 /* CLChatLayoutItem.swift in Sources */,
 				0C9FF01622E0A2C100BA0B6E /* CLPhotoBrowserImageScaleHelper.m in Sources */,
 				0C4947A92382951200EAF6AF /* CLLineChartConfigure.m in Sources */,
+				B51EE6EC23DF138200146862 /* CLChatEmojiFlowLayout.swift in Sources */,
 				0C628C1C2230BC65005922A0 /* CLRoundAnimationView.m in Sources */,
 				0C6D47F6226C391F00699FBD /* CLPopArrowViewController.m in Sources */,
 				0CF79AFD219678FB00DD0BF1 /* UITableView+IndexTip.m in Sources */,
@@ -1850,12 +2036,15 @@
 				0CB2769522E1A76800AFCB8C /* CLPresentTransitionController.m in Sources */,
 				0C903002224774430064088E /* CLRotateAnimationView.swift in Sources */,
 				0C9235A722F5584300EA3E9F /* CLMailboxAutoCompletionViewController.m in Sources */,
+				B5498C8523DEE0C70082D4E5 /* CLIntrinsicTableView.swift in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
 				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
-				5B8A4D4323B118CC00360631 /* CLChatLayoutController.swift in Sources */,
+				5B8A4D4323B118CC00360631 /* CLChatController.swift in Sources */,
+				B51EE6ED23DF138200146862 /* CLChatPhotoView.swift in Sources */,
 				5BE0FA3F1E03E03900914DFF /* CLSearchBar.m in Sources */,
 				5B49566423B4FF4800212772 /* CLFlipController.swift in Sources */,
+				B51EE6EE23DF138200146862 /* CLChatPhotoCellBotton.swift in Sources */,
 				5BB848261E00237900BB266D /* CLEssenceListController.m in Sources */,
 				0C2AE874223F48DE007D5DC5 /* CLBubbleViewViewController.m in Sources */,
 				0C03D7FB236D4F3800F15067 /* CLLayoutController.m in Sources */,
@@ -1863,22 +2052,30 @@
 				5B39CED11DE2BE6800C7DD5C /* CLTitleControllerView.m in Sources */,
 				0CF4EF952330848B00D8B95E /* CLInputPasswordToolBar.m in Sources */,
 				0CF79AFC219678FB00DD0BF1 /* NSString+PinYin.m in Sources */,
+				B51EE6E523DF138200146862 /* CLChatEmojiItem.swift in Sources */,
 				5B32C81C1E7A4AF8000C1749 /* CLChartNameToolBar.m in Sources */,
 				B5498C7823DE93910082D4E5 /* CLPhoneNumberModel.m in Sources */,
 				0C6D47E9226C37EC00699FBD /* CLPopArrowView.m in Sources */,
+				B5498C8123DED4F60082D4E5 /* CLChatLayoutTextItem.swift in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				5B809618221870BD000F72F3 /* CLBankCardSearch.m in Sources */,
 				0CCDA40422D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m in Sources */,
 				0CB2769922E1A85F00AFCB8C /* CLTransitionController.m in Sources */,
 				0CF64300222FECBD00227361 /* CLWaveViewController.m in Sources */,
+				5B3327E523DF384800CA315C /* NSString+Extension.swift in Sources */,
 				5B190E7323B66811005A2474 /* PopupViewManager.swift in Sources */,
+				B5498C8323DED6760082D4E5 /* CLChatLayoutCellProtocol.swift in Sources */,
 				0C547345239E2C7000F48BFA /* CLPhoneNumberVerificationController.m in Sources */,
 				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
+				B51EE6E923DF138200146862 /* CLChatEmojiTextCell.swift in Sources */,
+				B51EE6E223DF138200146862 /* CLChatInputToolBar.swift in Sources */,
 				0C9235AB22F5589100EA3E9F /* CLMailBoxTextView.m in Sources */,
 				B5498C7A23DE93910082D4E5 /* CLPhoneNumberInfoModel.m in Sources */,
+				B51EE6EA23DF138200146862 /* CLChatEmojiDelegateCell.swift in Sources */,
 				0C108EA122A92B3A009EA457 /* CLCountdownController.m in Sources */,
+				B5498C7F23DED4BA0082D4E5 /* CLChatLayoutItemProtocol.swift in Sources */,
 				0CFA589A237FE935007B8231 /* CLDrawImageController.m in Sources */,
 				0C777A482217A71200BC8AFB /* CLInputToolbar.m in Sources */,
 				0C6B40E421ECFC7100360FAD /* UITextField+CLDelegate.m in Sources */,
@@ -1887,8 +2084,11 @@
 				0C4947A72382951200EAF6AF /* CLLineChartView.m in Sources */,
 				0C4947A82382951200EAF6AF /* CLLineChartPoint.m in Sources */,
 				0CEE94872204395B007FA31B /* CLPasswordInputView.swift in Sources */,
+				B51EE6E623DF138200146862 /* CLChatEmojiDeleteItem.swift in Sources */,
+				B51EE6EB23DF138200146862 /* CLChatEmojiView.swift in Sources */,
 				0C5854E2235416920036DBC2 /* CLBroadcastMainCell.m in Sources */,
 				0CF642FD222FECA800227361 /* CLWaveView.m in Sources */,
+				B51EE6C723DF092400146862 /* CLChatLayoutCell.swift in Sources */,
 				0CF2B6EC231A6C2A0071AEC3 /* CLCustomTransitionViewController.m in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */,
@@ -1897,6 +2097,7 @@
 				5B190E6F23B66811005A2474 /* FlopPrizeView.swift in Sources */,
 				5B80961B221870BD000F72F3 /* CLBankCardModel.m in Sources */,
 				5B80DA4A1DDD993F00A20E34 /* CLMyController.m in Sources */,
+				5B3327E323DF366600CA315C /* UIImage+Extension.swift in Sources */,
 				0CF6B84E2386626800F10986 /* CLVerticalItem.m in Sources */,
 				5B809619221870BD000F72F3 /* UIImage+Extend.m in Sources */,
 				5B49566823B50ED700212772 /* UIColor+Extension.swift in Sources */,
@@ -1906,21 +2107,28 @@
 				0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */,
 				5B80DA4C1DDD993F00A20E34 /* UIImage+CLScaleToSize.m in Sources */,
 				0CF79AF7219678D100DD0BF1 /* CLSearchViewController.m in Sources */,
+				B51EE6EF23DF138200146862 /* CLChatRecordView.swift in Sources */,
+				5B3327EA23DF41E800CA315C /* CLChatRecordTimeView.swift in Sources */,
+				B51EE6CC23DF104800146862 /* CLGradientLayerView.swift in Sources */,
 				0C777A4B2217A8B900BC8AFB /* CLInputToolbarController.m in Sources */,
 				5B80961A221870BD000F72F3 /* CLDesign.m in Sources */,
 				5B80D9EC1DDD976A00A20E34 /* AppDelegate.m in Sources */,
 				0CCD1DCA231F60D200AFCE1F /* CLBroadcastView.m in Sources */,
 				0CCDA40222D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m in Sources */,
+				B51EE6E423DF138200146862 /* CLChatEmojiItemProtocol.swift in Sources */,
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
 				0CCDA3FF22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.m in Sources */,
 				0C77C4B92248C85C007D0FFC /* CLGCDTimerManager.swift in Sources */,
 				0C33BC79219AF71000583B4C /* CLLogManager.m in Sources */,
 				0C7A1EA0231A7129002D75F2 /* CLCustomTransitionDelegate.m in Sources */,
 				0CACA4AD224CC1F80084ECC8 /* CLTextViewViewController.swift in Sources */,
+				B51EE6E723DF138200146862 /* CLChatEmojTextItem.swift in Sources */,
 				5B190E5C23B66803005A2474 /* CLPopupController.swift in Sources */,
 				0CC7796622D9D7E10027B310 /* CLPhotoBrowserViewController.m in Sources */,
 				0CB60B14237EC51100D10317 /* CLHorizontalCell.m in Sources */,
 				0CC171422248B4D2005B0F0A /* CLGCDTimerManager.m in Sources */,
+				B51EE6E323DF138200146862 /* CLChatTextView.swift in Sources */,
+				B5498C7D23DED4220082D4E5 /* CLChatLayoutTextCell.swift in Sources */,
 				0CCDA31C219922680057BA14 /* CLChangeFontSizeSlider.m in Sources */,
 				0CF4EF912330834400D8B95E /* CLInputPasswordViewController.m in Sources */,
 				0CA1236F22255A6F007DDE6D /* CLCardView.m in Sources */,
@@ -1929,9 +2137,11 @@
 				5B49566D23B5DD0100212772 /* CLTwoSidedView.swift in Sources */,
 				B550057423C5FFE600114312 /* FlopBottomView.swift in Sources */,
 				5B809615221870BD000F72F3 /* CLBankCardView.m in Sources */,
+				B51EE6E823DF138200146862 /* CLChatEmojiCellProtocol.swift in Sources */,
 				5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */,
 				5B80D9E91DDD976A00A20E34 /* main.m in Sources */,
 				0C30ED4C231E48FC00364327 /* CLLineChartViewController.m in Sources */,
+				5B3327E123DF352900CA315C /* CLConst.swift in Sources */,
 				0CCDA30B219850EF0057BA14 /* CLChangeFontSizeController.m in Sources */,
 				5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */,
 				0CE733422191CBC700270851 /* UIView+CLSetRect.m in Sources */,
@@ -2039,7 +2249,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2093,7 +2303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -2113,7 +2323,7 @@
 				ENABLE_TESTABILITY = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = CLDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2138,7 +2348,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = CLDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -10,7 +10,7 @@
 /**
  * 随机色
  */
-#define cl_RandomColor [UIColor colorWithHue:(arc4random() % (256) / (256.0)) saturation:(arc4random() % (128) / (256.0)) + (0.5) brightness:(arc4random() % (128) / (256.0)) + (0.5) alpha:(0.8)]
+#define cl_RandomColor [UIColor colorWithHue:(arc4random() % (256) / (256.0)) saturation:(arc4random() % (128) / (256.0)) + (0.5) brightness:(arc4random() % (128) / (256.0)) + (0.5) alpha:(1.0)]
 /**
  *  UIScreen width.
  */

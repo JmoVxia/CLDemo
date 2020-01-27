@@ -1,4 +1,4 @@
-platform :ios, '8.0'
+platform :ios, '10.0'
 use_frameworks!
 
 target 'CLDemo' do
@@ -11,5 +11,6 @@ pod 'Then'
 pod 'SnapKit'
 pod 'SDWebImage'
 pod 'SDWebImageWebPCoder'
+pod 'lottie-ios'
 
 end

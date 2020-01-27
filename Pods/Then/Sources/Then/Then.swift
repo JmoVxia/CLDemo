@@ -77,6 +77,9 @@ extension CGPoint: Then {}
 extension CGRect: Then {}
 extension CGSize: Then {}
 extension CGVector: Then {}
+extension Array: Then {}
+extension Dictionary: Then {}
+extension Set: Then {}
 
 #if os(iOS) || os(tvOS)
   extension UIEdgeInsets: Then {}

@@ -38,14 +38,14 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(present) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor grayColor];
-    button.layer.cornerRadius = 20;
+    button.layer.cornerRadius = 40;
     button.layer.masksToBounds = YES;
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(CGPointMake(0, 0)).priorityLow();
-        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.size.mas_equalTo(CGSizeMake(80, 80));
         make.left.greaterThanOrEqualTo(self.view);
-        make.top.greaterThanOrEqualTo(self.view).offset(64);
+        make.top.greaterThanOrEqualTo(self.view).offset(84);
         make.bottom.right.lessThanOrEqualTo(self.view);
     }];
     

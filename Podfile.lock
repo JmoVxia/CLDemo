@@ -1,42 +1,29 @@
 PODS:
   - DateTools (2.0.0)
-  - libwebp (1.0.2):
-    - libwebp/core (= 1.0.2)
-    - libwebp/dec (= 1.0.2)
-    - libwebp/demux (= 1.0.2)
-    - libwebp/dsp (= 1.0.2)
-    - libwebp/enc (= 1.0.2)
-    - libwebp/mux (= 1.0.2)
-    - libwebp/utils (= 1.0.2)
-    - libwebp/webp (= 1.0.2)
-  - libwebp/core (1.0.2):
+  - libwebp (1.1.0):
+    - libwebp/demux (= 1.1.0)
+    - libwebp/mux (= 1.1.0)
+    - libwebp/webp (= 1.1.0)
+  - libwebp/demux (1.1.0):
     - libwebp/webp
-  - libwebp/dec (1.0.2):
-    - libwebp/core
-  - libwebp/demux (1.0.2):
-    - libwebp/core
-  - libwebp/dsp (1.0.2):
-    - libwebp/core
-  - libwebp/enc (1.0.2):
-    - libwebp/core
-  - libwebp/mux (1.0.2):
-    - libwebp/core
-  - libwebp/utils (1.0.2):
-    - libwebp/core
-  - libwebp/webp (1.0.2)
+  - libwebp/mux (1.1.0):
+    - libwebp/demux
+  - libwebp/webp (1.1.0)
+  - lottie-ios (3.1.6)
   - Masonry (1.1.0)
-  - MJExtension (3.1.0)
-  - SDWebImage (5.0.6):
-    - SDWebImage/Core (= 5.0.6)
-  - SDWebImage/Core (5.0.6)
-  - SDWebImageWebPCoder (0.2.3):
+  - MJExtension (3.2.1)
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
+  - SDWebImageWebPCoder (0.5.0):
     - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.0)
-  - SnapKit (4.2.0)
-  - Then (2.5.0)
+    - SDWebImage/Core (~> 5.5)
+  - SnapKit (5.0.1)
+  - Then (2.6.0)
 
 DEPENDENCIES:
   - DateTools
+  - lottie-ios
   - Masonry
   - MJExtension
   - SDWebImage
@@ -45,9 +32,10 @@ DEPENDENCIES:
   - Then
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - DateTools
     - libwebp
+    - lottie-ios
     - Masonry
     - MJExtension
     - SDWebImage
@@ -57,14 +45,15 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  libwebp: b068a3bd7c45f7460f6715be7bed1a18fd5d6b48
+  libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
+  lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MJExtension: 6b69b3bef2864fd550ce1a184eda219e321209d2
-  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
-  SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
-  Then: 0157115e883545c77967b452fe74a1d25fb796e1
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
+  SDWebImageWebPCoder: e7ae855f058e3dcae99696920b6a5d134e9dcddf
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 9fba1321aa12390a7f76cfeda0b0ab056cfbcce1
+PODFILE CHECKSUM: 7ec83b9762fcd0f08c28b99afa92233fb040ac27
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.8.3

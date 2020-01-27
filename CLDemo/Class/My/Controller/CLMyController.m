@@ -103,7 +103,7 @@
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义翻牌弹窗", nil)];
         [_arrayDS addObject:NSLocalizedString(@"翻转动画", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"聊天布局", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"聊天框架", nil)];
         [_arrayDS addObject:NSLocalizedString(@"广播轮播", nil)];
         [_arrayDS addObject:NSLocalizedString(@"折线图", nil)];
         [_arrayDS addObject:NSLocalizedString(@"手机号码验证", nil)];
@@ -142,7 +142,7 @@
         [_controllerArray addObject:[CLLayoutController class]];
         [_controllerArray addObject:[CLPopupController class]];
         [_controllerArray addObject:[CLFlipController class]];
-        [_controllerArray addObject:[CLChatLayoutController class]];
+        [_controllerArray addObject:[CLChatController class]];
         [_controllerArray addObject:[CLBroadcastViewController class]];
         [_controllerArray addObject:[CLLineChartViewController class]];
         [_controllerArray addObject:[CLPhoneNumberVerificationController class]];

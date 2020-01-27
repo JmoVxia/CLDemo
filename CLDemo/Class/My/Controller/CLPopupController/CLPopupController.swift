@@ -24,5 +24,8 @@ class CLPopupController: CLBaseViewController {
     }
     @objc func showFlop() {
         PopupViewManager.showFlop()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            PopupViewManager.showFlop(only: true)
+        }
     }
 }
