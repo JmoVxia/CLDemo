@@ -8,8 +8,7 @@
 
 import UIKit
 
-class CLPopupController: CLBaseViewController {
-
+class CLPopupFlopController: CLBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let button = UIButton()
@@ -23,9 +22,15 @@ class CLPopupController: CLBaseViewController {
         }
     }
     @objc func showFlop() {
-        PopupViewManager.showFlop()
+        CLPopupManager.showFlop()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            PopupViewManager.showFlop(only: true)
+            CLPopupManager.showFlop(statusBarHidden: true)
         }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+            CLPopupManager.showFlop(statusBarStyle: .default, statusBarHidden: false)
+        }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
+//            CLPopupManager.showFlop(statusBarStyle: .default)
+//        }
     }
 }

@@ -140,7 +140,7 @@
         [_controllerArray addObject:[CLChangeFontSizeController class]];
         [_controllerArray addObject:[CLDrawImageController class]];
         [_controllerArray addObject:[CLLayoutController class]];
-        [_controllerArray addObject:[CLPopupController class]];
+        [_controllerArray addObject:[CLPopupFlopController class]];
         [_controllerArray addObject:[CLFlipController class]];
         [_controllerArray addObject:[CLChatController class]];
         [_controllerArray addObject:[CLBroadcastViewController class]];

@@ -47,7 +47,7 @@ class CLFlipView: UIView {
         imageView.frame = bounds
     }
     deinit {
-        print("+++++++++++++++++++++")
+        print("+++++++++ CLFlipView deinit ++++++++++++")
     }
 }
 extension CLFlipView {

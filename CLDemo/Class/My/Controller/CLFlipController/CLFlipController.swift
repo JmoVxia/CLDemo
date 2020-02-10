@@ -90,7 +90,7 @@ class CLFlipController: CLBaseViewController {
     }
     deinit {
         flipView.stopAnimation()
-        print("=======================")
+        print("=========== CLFlipController deinit ============")
     }
 }
 extension CLFlipController {

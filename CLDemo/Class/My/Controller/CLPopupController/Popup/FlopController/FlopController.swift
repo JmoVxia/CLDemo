@@ -8,8 +8,9 @@
 
 import UIKit
 
-class FlopController: PopupViewController {
+class FlopController: CLPopupManagerBaseController {
     var clickWantCallBack: (() -> ())?
+    private var isFlop: Bool = false
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.isUserInteractionEnabled = true
@@ -118,7 +119,7 @@ class FlopController: PopupViewController {
     }
     @objc func bottomButtonAction() {
         dismiss { (_) in
-            PopupViewManager.dismiss()
+            CLPopupManager.dismissAll(false)
             self.clickWantCallBack?()
         }
     }
@@ -135,13 +136,14 @@ class FlopController: PopupViewController {
     
     @objc func closeButtonAction() {
         dismiss { (_) in
-            PopupViewManager.dismiss()
+            CLPopupManager.dismissAll(false)
         }
     }
     @objc func flopButtonAction(tap: UITapGestureRecognizer) {
-        guard let view = tap.view as? CLTwoSidedView else {
+        guard let view = tap.view as? CLTwoSidedView, !isFlop else {
             return
         }
+        isFlop = true
         UIView.animate(withDuration: 0.5) {
             self.topImageView.alpha = 0.0
             self.leftFlopButton.alpha = self.leftFlopButton != view ? 0.0 : 1.0
