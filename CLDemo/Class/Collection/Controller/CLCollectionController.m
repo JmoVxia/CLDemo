@@ -31,6 +31,7 @@
         __typeof(&*weakSelf) strongSelf = weakSelf;
         CLLog(@"----点击搜索按钮----");
         CLSearchViewController *searchController = [[CLSearchViewController alloc] init];
+        searchController.modalPresentationStyle = UIModalPresentationFullScreen;
         searchController.tapAction = ^(NSString * _Nonnull name, NSString * _Nonnull bankCode) {
             [button setTitle:name forState:UIControlStateNormal];
             [button sizeToFit];

@@ -13,4 +13,6 @@
 
 @interface CLCustomTabbar : UITabBar
 
+@property(nonatomic, copy) void (^bulgeCallBack) (void);
+
 @end

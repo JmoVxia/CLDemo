@@ -6,6 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/SDWebImageWebPCoder.svg?style=flat)](http://cocoapods.org/pods/SDWebImageWebPCoder)
 [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/SDWebImage/SDWebImageWebPCoder)
+[![codecov](https://codecov.io/gh/SDWebImage/SDWebImageWebPCoder/branch/master/graph/badge.svg)](https://codecov.io/gh/SDWebImage/SDWebImageWebPCoder)
 
 Starting with the SDWebImage 5.0 version, we moved the WebP support code and [libwebp](https://github.com/webmproject/libwebp) from the Core Repo to this stand-alone repo.
 
@@ -174,6 +175,10 @@ let image = SDImageWebPCoder.shared.decodedImage(with: data, options: [.decodeTh
 // WebP image encoding
 UIImage *image;
 NSData *webpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:nil];
+// Encode Quality
+NSData *lossyWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeCompressionQuality : @(0.1)}]; // [0, 1] compression quality
+NSData *limitedWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeMaxFileSize : @(1024 * 10)}]; // v0.6.0 feature, limit output file size <= 10KB
+NSData *thumbnailWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeMaxPixelSize : @(CGSizeMake(200, 200)}]; // v0.6.1 feature, encoding max pixel size
 ```
 
 + Swift
@@ -182,15 +187,18 @@ NSData *webpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image fo
 // WebP image encoding
 let image: UIImage
 let webpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: nil)
+let lossyWebpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: [.encodeCompressionQuality: 0.1]) // [0, 1] compression quality
+let limitedWebpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: [.encodeMaxFileSize: 1024 * 10]) // v0.6.0 feature, limit output file size <= 10KB
+let thumbnailWebpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: [.encodeMaxPixelSize: CGSize(width: 200, height: 200)]) // v0.6.1 feature, encoding max pixel size
 ```
 
 See more documentation in [SDWebImage Wiki - Coders](https://github.com/SDWebImage/SDWebImage/wiki/Advanced-Usage#custom-coder-420)
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo, and run `pod install` from the root directory first. Then open `SDWebImageWebPCoder.xcworkspace`.
 
-This is a demo to show how to use `WebP` and animated `WebP` images via `SDWebImage`.
+This is a demo to show how to use `WebP` and animated `WebP` images via `SDWebImageWebPCoderExample` target.
 
 ## Screenshot
 

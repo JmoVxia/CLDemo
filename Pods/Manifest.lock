@@ -1,5 +1,7 @@
 PODS:
   - DateTools (2.0.0)
+  - DateToolsSwift (5.0.0)
+  - HandyJSON (5.0.1)
   - libwebp (1.1.0):
     - libwebp/demux (= 1.1.0)
     - libwebp/mux (= 1.1.0)
@@ -12,28 +14,34 @@ PODS:
   - lottie-ios (3.1.6)
   - Masonry (1.1.0)
   - MJExtension (3.2.1)
-  - SDWebImage (5.5.2):
-    - SDWebImage/Core (= 5.5.2)
-  - SDWebImage/Core (5.5.2)
-  - SDWebImageWebPCoder (0.5.0):
+  - SDWebImage (5.7.2):
+    - SDWebImage/Core (= 5.7.2)
+  - SDWebImage/Core (5.7.2)
+  - SDWebImageWebPCoder (0.6.1):
     - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.5)
+    - SDWebImage/Core (~> 5.7)
   - SnapKit (5.0.1)
+  - SwiftyJSON (5.0.0)
   - Then (2.6.0)
 
 DEPENDENCIES:
   - DateTools
+  - DateToolsSwift
+  - HandyJSON (~> 5.0.1)
   - lottie-ios
   - Masonry
   - MJExtension
   - SDWebImage
   - SDWebImageWebPCoder
   - SnapKit
+  - SwiftyJSON
   - Then
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - DateTools
+    - DateToolsSwift
+    - HandyJSON
     - libwebp
     - lottie-ios
     - Masonry
@@ -41,19 +49,23 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageWebPCoder
     - SnapKit
+    - SwiftyJSON
     - Then
 
 SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
+  HandyJSON: d45b8415c501e3affc59ca9762c1197ff0feb646
   libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
-  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
-  SDWebImageWebPCoder: e7ae855f058e3dcae99696920b6a5d134e9dcddf
+  SDWebImage: d9ea4959d99c52276dfada481987018fcaea3d58
+  SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 7ec83b9762fcd0f08c28b99afa92233fb040ac27
+PODFILE CHECKSUM: 7aff911d42f6e3efbe65c8d3b573651f054b257d
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.1

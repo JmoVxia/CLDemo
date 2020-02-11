@@ -8,21 +8,17 @@
 
 #import "CLCustomTabbar.h"
 #import "UIImage+CLScaleToSize.h"
-#import <objc/runtime.h>
 
 @interface CLCustomTabbar ()
 
-@property (nonatomic,weak) UIButton *button;
+@property (nonatomic,weak) UIButton *bulgeButton;
 
 @end
 
 @implementation CLCustomTabbar
 
-- (UIButton *) button
-{
-    if (_button == nil)
-    {
-        
+- (UIButton *) bulgeButton {
+    if (_bulgeButton == nil) {
         UIImage *normalImage = [UIImage originImage:[UIImage imageNamed:@"tabBar_publish_icon"] scaleToSize:CGSizeMake(80, 80)];
         UIImage *selectedImage = [UIImage originImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] scaleToSize:CGSizeMake(80, 80)];
         UIButton * button = [[UIButton alloc] init];
@@ -31,16 +27,15 @@
         __weak __typeof(self) weakSelf = self;
         [button addActionBlock:^(UIButton *button) {
             __typeof(&*weakSelf) strongSelf = weakSelf;
-            [strongSelf publishButton:button];
+            [strongSelf bulgeButtonAction:button];
         }];
         [self addSubview:button];
-        _button = button;
+        _bulgeButton = button;
     }
-    return _button;
+    return _bulgeButton;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setTranslucent:NO];
@@ -48,35 +43,27 @@
     return self;
 }
 
-
--(void)layoutSubviews
-{
+-(void)layoutSubviews {
     [super layoutSubviews];
-   
     int index = 0;
     CGFloat itemW = self.cl_width/5.0;
 
-    for (UIView *subviews in self.subviews)
-    {
+    for (UIView *subviews in self.subviews) {
         //取到系统tabbar的Item方法
-        if ([@"UITabBarButton" isEqualToString:NSStringFromClass(subviews.class)])
-        {
-            subviews.cl_left = index * itemW;
-            subviews.cl_width = itemW;
-            if (index >= 2)
-            {
-                subviews.cl_left +=itemW;
+        if ([@"UITabBarButton" isEqualToString:NSStringFromClass(subviews.class)]) {
+            if (index == 2) {
+                subviews.hidden = YES;
             }
             index++;
         }
     }
-    self.button.frame = CGRectMake(0, 0, itemW, itemW);
-    self.button.center = CGPointMake(self.cl_width/2.0, (self.cl_height - 30 - cl_safeBottomMargin)/2.0);
+    self.bulgeButton.frame = CGRectMake(0, 0, itemW, itemW);
+    self.bulgeButton.center = CGPointMake(self.cl_width/2.0, (self.cl_height - 30 - cl_safeBottomMargin)/2.0);
 }
 //判断点是否在响应范围
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     if (self.isHidden == NO) {
-        UIBezierPath *circle  = [UIBezierPath bezierPathWithArcCenter:self.button.center radius:35 startAngle:0 endAngle:2* M_PI clockwise:YES];
+        UIBezierPath *circle  = [UIBezierPath bezierPathWithArcCenter:self.bulgeButton.center radius:35 startAngle:0 endAngle:2* M_PI clockwise:YES];
         UIBezierPath *tabbar  = [UIBezierPath bezierPathWithRect:self.bounds];
         if ( [circle containsPoint:point] || [tabbar containsPoint:point]) {
             return YES;
@@ -87,7 +74,10 @@
     }
 }
 
-- (void)publishButton:(UIButton *)button {
+- (void)bulgeButtonAction:(UIButton *)button {
+    if (self.bulgeCallBack) {
+        self.bulgeCallBack();
+    }
     CLLog(@"-------->>凸起按钮被点击了");
 }
 

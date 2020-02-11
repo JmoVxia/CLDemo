@@ -311,7 +311,6 @@
         _searchBar.tintColor = [UIColor blackColor];
         _searchBar.backgroundImage = [[UIImage alloc] init];
         _searchBar.backgroundColor = [UIColor colorWithRed:247.1/255.0 green:247.3/255.0 blue:247.2/255.0 alpha:255.0/255.0];
-        [_searchBar setValue:@"取消" forKey:@"_cancelButtonText"];
         [_searchBar sizeToFit];
     }
     return _searchBar;

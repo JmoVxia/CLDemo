@@ -8,7 +8,8 @@
 
 import UIKit
 
-func hexColor(_ hexString: String)  -> UIColor {
+
+func hexColor(_ hexString: String, alpha: CGFloat = 1.0)  -> UIColor {
     let hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
     let scanner = Scanner(string: hexString)
      
@@ -27,10 +28,36 @@ func hexColor(_ hexString: String)  -> UIColor {
     let red   = CGFloat(r) / 255.0
     let green = CGFloat(g) / 255.0
     let blue  = CGFloat(b) / 255.0
-    return UIColor.init(red: red, green: green, blue: blue, alpha: 1)
+    return UIColor.init(red: red, green: green, blue: blue, alpha: alpha)
 }
+
 extension UIColor {
-///返回随机颜色
+    ///16进制颜色
+    @objc class func hexColor(with string: String, alpha: CGFloat = 1.0) -> UIColor {
+        let hexString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+         
+        if hexString.hasPrefix("#") {
+            scanner.scanLocation = 1
+        }
+        if hexString.hasPrefix("0x") {
+            scanner.scanLocation = 2
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+         
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+         
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+         
+        return self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    ///返回随机颜色
     class var randomColor:UIColor {
         get {
             let red = CGFloat(arc4random()%256)/255.0
@@ -71,3 +98,4 @@ extension UIColor {
         }
     }
 }
+
