@@ -15,7 +15,7 @@ class CLPopupTipsController: CLPopupManagerBaseController {
         }
     }
     var dismissInterval: TimeInterval = 1.0
-    
+    var dissmissCallBack: (() -> ())?
     private lazy var label: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
@@ -67,7 +67,8 @@ extension CLPopupTipsController {
         }, completion: { (_) in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.dismissInterval) {
                 self.dismissAnimation { (_) in
-                    CLPopupManager.dismissAll(false)
+                    CLPopupManager.dismiss(self.configure.identifier)
+                    self.dissmissCallBack?()
                 }
             }
         })

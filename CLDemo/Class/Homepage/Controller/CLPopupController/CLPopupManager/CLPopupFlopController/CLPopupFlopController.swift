@@ -117,12 +117,6 @@ class CLPopupFlopController: CLPopupManagerBaseController {
             self.view.layoutIfNeeded()
         }
     }
-    @objc func bottomButtonAction() {
-        dismiss { (_) in
-            CLPopupManager.dismissAll(false)
-            self.clickWantCallBack?()
-        }
-    }
     func dismiss(completion: ((Bool) -> Void)? = nil) {
         UIView.animate(withDuration: 0.35, animations: {
            self.contentView.snp.updateConstraints { (make) in
@@ -136,7 +130,7 @@ class CLPopupFlopController: CLPopupManagerBaseController {
     
     @objc func closeButtonAction() {
         dismiss { (_) in
-            CLPopupManager.dismissAll(false)
+            CLPopupManager.dismiss(self.configure.identifier)
         }
     }
     @objc func flopButtonAction(tap: UITapGestureRecognizer) {
@@ -167,8 +161,5 @@ class CLPopupFlopController: CLPopupManagerBaseController {
             self.view.layoutIfNeeded()
         }
         view.transition(withDuration: 1, completion: nil)
-    }
-    deinit {
-        print("============== FlopController deinit ==================")
     }
 }

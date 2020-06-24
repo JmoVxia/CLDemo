@@ -10,6 +10,7 @@ import UIKit
 
 struct CLPopupFoodPickerContentModel {
     var title: String?
+    var foodId: String?
 }
 
 class CLPopupFoodPickerContentView: UIView {
@@ -59,7 +60,7 @@ extension CLPopupFoodPickerContentView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CLPopupFoodPickerContentCell", for: indexPath) as! CLPopupFoodPickerContentCell
         let model = dataArray[indexPath.row]
         cell.titleLabel.text = model.title
-        cell.titleLabel.textColor = model.title == selectedTitle ? hexColor("#40B5AA") : hexColor("666666")
+        cell.titleLabel.textColor = model.title == selectedTitle ? .themeColor : .hexColor(with: "666666")
         return cell
     }
 }

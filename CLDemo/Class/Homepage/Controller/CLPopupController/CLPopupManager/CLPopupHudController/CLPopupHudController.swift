@@ -55,7 +55,7 @@ class CLPopupHudController: CLPopupManagerBaseController {
     }()
     lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = hexColor("0x000000", alpha: 0.8)
+        contentView.backgroundColor = .hexColor(with: "0x000000", alpha: 0.8)
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
         return contentView
@@ -266,8 +266,9 @@ extension CLPopupHudController {
                  self.contentView.alpha = 0.0
                  self.contentView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
              }) { (_) in
-                 self.dismissCallback?()
-                 CLPopupManager.dismissAll(false)
+                 
+            CLPopupManager.dismiss(self.configure.identifier)
+                self.dismissCallback?()
              }
          }
      }

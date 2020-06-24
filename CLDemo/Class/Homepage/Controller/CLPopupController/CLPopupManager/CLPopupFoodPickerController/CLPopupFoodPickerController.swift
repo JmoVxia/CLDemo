@@ -9,10 +9,10 @@
 import UIKit
 
 class CLPopupFoodPickerController: CLPopupManagerBaseController {
-    var selectedCallback: ((String, String, String)->())?
+    var selectedCallback: ((String, String, String, String)->())?
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()
-        topToolBar.backgroundColor = hexColor("#F8F6F9")
+        topToolBar.backgroundColor = .hexColor(with: "#F8F6F9")
         return topToolBar
     }()
     lazy var cancelButton: UIButton = {
@@ -21,9 +21,9 @@ class CLPopupFoodPickerController: CLPopupManagerBaseController {
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.setTitle("取消", for: .selected)
         cancelButton.setTitle("取消", for: .highlighted)
-        cancelButton.setTitleColor(hexColor("#666666"), for: .normal)
-        cancelButton.setTitleColor(hexColor("#666666"), for: .selected)
-        cancelButton.setTitleColor(hexColor("#666666"), for: .highlighted)
+        cancelButton.setTitleColor(.hexColor( with: "#666666"), for: .normal)
+        cancelButton.setTitleColor(.hexColor(with: "#666666"), for: .selected)
+        cancelButton.setTitleColor(.hexColor(with: "#666666"), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return cancelButton
     }()
@@ -31,14 +31,14 @@ class CLPopupFoodPickerController: CLPopupManagerBaseController {
         let view = UILabel()
         view.text = "选择饮食"
         view.font = PingFangSCBold(16)
-        view.textColor = hexColor("#666666")
+        view.textColor = .hexColor(with: "#666666")
         return view
     }()
     lazy var foodPicker: CLPopupFoodPickerView = {
         let view = CLPopupFoodPickerView(frame: CGRect(x: 0, y: 50, width: cl_screenWidth(), height: 302.5))
         view.backgroundColor = .white
-        view.selectedCallback = {[weak self] (value1, value2, value3)in
-            self?.selectedCallback?(value1, value2, value3)
+        view.selectedCallback = {[weak self] (value1, value2, value3, foodId)in
+            self?.selectedCallback?(value1, value2, value3, foodId)
             self?.dismissAnimation()
         }
         return view
@@ -47,9 +47,6 @@ class CLPopupFoodPickerController: CLPopupManagerBaseController {
         super.viewDidLoad()
         initUI()
         showAnimation()
-    }
-    deinit {
-        print("============CLPopupFoodPickerController deinit============")
     }
 }
 extension CLPopupFoodPickerController {
@@ -104,7 +101,8 @@ extension CLPopupFoodPickerController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
         }
     }
 }

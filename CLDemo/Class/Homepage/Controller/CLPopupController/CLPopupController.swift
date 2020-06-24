@@ -162,33 +162,49 @@ extension CLPopupController {
     func showFlop() {
         CLPopupManager.showFlop()
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                    CLPopupManager.showFlop(statusBarHidden: true)
+                    CLPopupManager.showFlop { (configure) in
+                        configure.isHiddenStatusBar = true
+                    }
                 }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-                    CLPopupManager.showFlop(statusBarStyle: .default, statusBarHidden: false)
+                    CLPopupManager.showFlop { (configure) in
+                        configure.isHiddenStatusBar = false
+                        configure.statusBarStyle = .default
+                    }
                 }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
-                    CLPopupManager.showFlop(statusBarStyle: .default, displacement: true)
+                    CLPopupManager.showFlop { (configure) in
+                        configure.isHiddenStatusBar = true
+                    }
                 }
     }
     func showOneAlert() {
-        CLPopupManager.showOneAlert(autorotate: true, title: "我是一个按钮", message: "我有一个按钮")
+        CLPopupManager.showOneAlert(configureCallback: { (configure) in
+            configure.isAutorotate = true
+            configure.interfaceOrientationMask = .all
+        }, title: "我是一个按钮", message: "我有一个按钮")
     }
     func showTwoAlert() {
-        CLPopupManager.showTwoAlert(autorotate: true, title: "我是两个按钮", message: "我有两个按钮")
+        CLPopupManager.showTwoAlert(configureCallback: { (configure) in
+            configure.isAutorotate = true
+            configure.interfaceOrientationMask = .all
+        }, title: "我是两个按钮", message: "我有两个按钮")
     }
     func showSuccess() {
-        CLPopupManager.showSuccess(autorotate: true, interfaceOrientationMask: .all, text: "显示成功", dismissCallback: {
+        CLPopupManager.showSuccess(configureCallback: { (configure) in
+            configure.isAutorotate = true
+            configure.interfaceOrientationMask = .all
+        }, text: "显示成功", dismissCallback: {
             print("success animation dismiss")
         })
     }
     func showError() {
-        CLPopupManager.showError(autorotate: true, interfaceOrientationMask: .all, text: "显示错误", dismissCallback: {
+        CLPopupManager.showError(text: "显示错误", dismissCallback: {
             print("error animation dismiss")
         })
     }
     func showLoading() {
-        CLPopupManager.showLoading(autorotate: true, interfaceOrientationMask: .all, text: nil)
+        CLPopupManager.showLoading()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
             CLPopupManager.dismissAll()
         }
@@ -222,13 +238,13 @@ extension CLPopupController {
         }
     }
     func showTwoInput() {
-        CLPopupManager.showTwoInput(autorotate: false, interfaceOrientationMask: .portrait, displacement: false, type: .bloodSugar) { (value1, value2) in
+        CLPopupManager.showTwoInput(type: .bloodPressure) { (value1, value2) in
             print("-----\(String(describing: value1))----------\(String(describing: value2))")
         }
     }
     func showFoodPicker() {
-        CLPopupManager.showFoodPicker { (value1, value2, value3) in
-            print("-----\(String(describing: value1))----------\(String(describing: value2))-------\(value3)")
+        CLPopupManager.showFoodPicker { (value1, value2, value3, value4) in
+            print("-----\(value1)----------\(value2)-------\(value3)-------\(value4)")
         }
     }
 }

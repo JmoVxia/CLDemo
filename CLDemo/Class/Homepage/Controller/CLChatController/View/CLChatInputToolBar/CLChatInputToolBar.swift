@@ -7,30 +7,31 @@
 
 import UIKit
 import SnapKit
+import Photos
 
 protocol CLChatInputToolBarDelegate: class {
     ///键盘发送文字
     func inputBarWillSendText(text: String)
+    ///键盘发送图片
+    func inputBarWillSendImage(images: [(image: UIImage, asset: PHAsset)])
     ///键盘将要显示
     func inputBarWillShowKeyboard()
     ///键盘将要隐藏
     func inputBarWillHiddenKeyboard()
-    ///点击相机按钮
-    func inputBarClickCamera()
-    ///点击录音按钮
-    func inputBarClickRecord()
     ///开始录音
     func inputBarStartRecord()
-    ///录音定时器调用
-    func inputBarRecordTime() -> TimeInterval?
     ///取消录音
     func inputBarCancelRecord()
     ///结束录音
-    func inputBarFinishRecord()
+    func inputBarFinishRecord(duration: TimeInterval, path: String)
 }
 extension CLChatInputToolBarDelegate {
     ///键盘发送文字
     func inputBarWillSendText(text: String) {
+        
+    }
+    ///键盘发送图片
+    func inputBarWillSendImage(images: [(image: UIImage, asset: PHAsset)]) {
         
     }
     ///键盘将要显示
@@ -41,28 +42,16 @@ extension CLChatInputToolBarDelegate {
     func inputBarWillHiddenKeyboard() {
         
     }
-    ///点击相机按钮
-    func inputBarClickCamera() {
-        
-    }
-    ///点击录音按钮
-    func inputBarClickRecord() {
-        
-    }
     ///开始录音
     func inputBarStartRecord() {
         
-    }
-    ///录音定时器调用
-    func inputBarRecordTime() -> TimeInterval? {
-        return nil
     }
     ///取消录音
     func inputBarCancelRecord() {
         
     }
     ///结束录音
-    func inputBarFinishRecord() {
+    func inputBarFinishRecord(duration: TimeInterval, path: String) {
         
     }
 }
@@ -76,99 +65,94 @@ class CLChatInputToolBar: UIView {
     ///顶部线条
     private lazy var topLineView: UIView = {
         let topLineView = UIView()
-        topLineView.backgroundColor = hexColor("0x22222D")
+        topLineView.backgroundColor = .hexColor(with: "#DADADA")
         return topLineView
     }()
     ///顶部工具条
     private lazy var topToolBar: UIView = {
         let topToolBar = UIView()
-        topToolBar.backgroundColor = hexColor("0x31313F")
+        topToolBar.backgroundColor = .hexColor(with: "#F6F6F6")
         return topToolBar
     }()
     ///中间内容视图
     private lazy var middleSpaceView: UIView = {
         let middleSpaceView = UIView()
-        middleSpaceView.backgroundColor = hexColor("0x31313F")
+        middleSpaceView.backgroundColor = .hexColor(with: "#F6F6F6")
         return middleSpaceView
     }()
     ///底部安全区域
     private lazy var bottomSafeView: UIView = {
         let bottomSafeView = UIView()
-        bottomSafeView.backgroundColor = hexColor("0x31313F")
+        bottomSafeView.backgroundColor = .hexColor(with: "#F6F6F6")
         return bottomSafeView
     }()
     ///图片按钮
-    private lazy var photoButton: UIButton = {
-        let photoButton = UIButton()
-        photoButton.adjustsImageWhenHighlighted = false
-        photoButton.setImage(UIImage.init(named: "btn_knocktalk_photo"), for: .normal)
-        photoButton.setImage(UIImage.init(named: "btn_knocktalk_photo"), for: .selected)
-        photoButton.addTarget(self, action: #selector(photoButtonAction), for: .touchUpInside)
-        return photoButton
+    private lazy var moreButton: UIButton = {
+        let view = UIButton()
+        view.adjustsImageWhenHighlighted = false
+        view.setBackgroundImage(UIImage.init(named: "addIcon"), for: .normal)
+        view.setBackgroundImage(UIImage.init(named: "addIcon"), for: .selected)
+        view.addTarget(self, action: #selector(photoButtonAction), for: .touchUpInside)
+        return view
     }()
     ///表情按钮
     private lazy var emojiButton: UIButton = {
-        let emojiButton = UIButton()
-        emojiButton.adjustsImageWhenHighlighted = false
-        emojiButton.setImage(UIImage.init(named: "btn_knocktalk_expression"), for: .normal)
-        emojiButton.setImage(UIImage.init(named: "btn_knocktalk_expression"), for: .selected)
-        emojiButton.addTarget(self, action: #selector(emojiButtonAction), for: .touchUpInside)
-        return emojiButton
+        let view = UIButton()
+        view.adjustsImageWhenHighlighted = false
+        view.setBackgroundImage(UIImage.init(named: "facialIcon"), for: .normal)
+        view.setBackgroundImage(UIImage.init(named: "facialIcon"), for: .selected)
+        view.addTarget(self, action: #selector(emojiButtonAction), for: .touchUpInside)
+        return view
     }()
     ///录音按钮
     private lazy var recordButton: UIButton = {
-        let recordButton = UIButton()
-        recordButton.adjustsImageWhenHighlighted = false
-        recordButton.setImage(UIImage.init(named: "btn_knocktalk_voice"), for: .normal)
-        recordButton.setImage(UIImage.init(named: "btn_knocktalk_voice"), for: .selected)
-        recordButton.addTarget(self, action: #selector(recordButtonAction), for: .touchUpInside)
-        return recordButton
+        let view = UIButton()
+        view.adjustsImageWhenHighlighted = false
+        view.setBackgroundImage(UIImage.init(named: "voiceIcon"), for: .normal)
+        view.setBackgroundImage(UIImage.init(named: "voiceIcon"), for: .selected)
+        view.addTarget(self, action: #selector(recordButtonAction), for: .touchUpInside)
+        return view
     }()
     ///发送按钮
     private lazy var sendButton: UIButton = {
-        let sendButton = UIButton()
-        sendButton.isHidden = true
-        sendButton.adjustsImageWhenHighlighted = false
-        sendButton.setImage(UIImage.init(named: "btn_knocktalk_send"), for: .normal)
-        sendButton.setImage(UIImage.init(named: "btn_knocktalk_send"), for: .selected)
-        sendButton.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
-        return sendButton
+        let view = UIButton()
+        view.isHidden = true
+        view.adjustsImageWhenHighlighted = false
+        view.setBackgroundImage(UIImage.init(named: "sendIcon"), for: .normal)
+        view.setBackgroundImage(UIImage.init(named: "sendIcon"), for: .selected)
+        view.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
+        return view
     }()
     ///输入框
     private lazy var textView: CLChatTextView = {
-        let textView = CLChatTextView()
-        textView.backgroundColor = UIColor.clear
-        textView.autocapitalizationType = .none
-        textView.enablesReturnKeyAutomatically = true
-        textView.layoutManager.allowsNonContiguousLayout = false
-        textView.scrollsToTop = false
-        textView.delegate = self
-        textView.returnKeyType = .send
-        textView.autocorrectionType = .no
-        textView.textColor = hexColor("0xBABAE2")
-        textView.keyboardAppearance = .dark
-        textView.textContainerInset = UIEdgeInsets.zero
-        textView.textContainer.lineFragmentPadding = 0
-        textView.textViewHeightChangeCallBack = {[weak self] (height) in
+        let view = CLChatTextView()
+        view.layer.cornerRadius = 5
+        view.clipsToBounds = true
+        view.backgroundColor = .white
+        view.autocapitalizationType = .none
+        view.enablesReturnKeyAutomatically = true
+        view.layoutManager.allowsNonContiguousLayout = false
+        view.scrollsToTop = false
+        view.delegate = self
+        view.returnKeyType = .send
+        view.autocorrectionType = .no
+        view.textColor = .black
+        view.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom:8, right: 8)
+        view.textContainer.lineFragmentPadding = 0
+        view.textViewHeightChangeCallBack = {[weak self] (height) in
             self?.textViewHeightChange(height: height)
         }
-        textView.textDidChangeCallBack = {[weak self](text) in
+        view.textDidChangeCallBack = {[weak self](text) in
             self?.isHiddenSend = text.isEmpty || (text).isValidAllEmpty()
         }
-        return textView
-    }()
-    ///线条
-    private lazy var lineView: UIView = {
-        let lineView = UIView()
-        lineView.backgroundColor = hexColor("0x4A4A6A")
-        return lineView
+        return view
     }()
     ///表情view
     private lazy var emojiView: CLChatEmojiView = {
-        let emojiView = CLChatEmojiView()
-        emojiView.autoresizesSubviews = false
-        emojiView.backgroundColor = hexColor("0x31313F")
-        emojiView.didSelectEmojiCallBack = {[weak self] (emoji) in
+        let view = CLChatEmojiView()
+        view.backgroundColor = .hexColor(with: "EEEEED")
+        view.autoresizesSubviews = false
+        view.didSelectEmojiCallBack = {[weak self] (emoji) in
             guard let strongSelf = self else {
                 return
             }
@@ -176,7 +160,7 @@ class CLChatInputToolBar: UIView {
                 strongSelf.textView .replace(selectedTextRange, withText: emoji)
             }
         }
-        emojiView.didSelectDeleteCallBack = {[weak self] in
+        view.didSelectDeleteCallBack = {[weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -184,37 +168,34 @@ class CLChatInputToolBar: UIView {
                 strongSelf.textView.deleteBackward()
             }
         }
-        return emojiView
+        return view
     }()
     ///图片view
     private lazy var photoView: CLChatPhotoView = {
-        let photoView = CLChatPhotoView()
-        photoView.backgroundColor = hexColor("0x31313F")
-        photoView.cameraButtonCallback = {[weak self] in
-            self?.delegate?.inputBarClickCamera()
+        let view = CLChatPhotoView()
+        view.backgroundColor = .hexColor(with: "EEEEED")
+        view.sendImageCallBack = {[weak self] (images) in
+            self?.delegate?.inputBarWillSendImage(images: images)
         }
-        return photoView
+        return view
     }()
     ///录音
     private lazy var recordView: CLChatRecordView = {
-        let recordView = CLChatRecordView()
-        recordView.backgroundColor = hexColor("0x31313F")
-        recordView.startRecorderCallBack = {[weak self] in
+        let view = CLChatRecordView()
+        view.backgroundColor = .hexColor(with: "#EEEEED")
+        view.startRecorderCallBack = {[weak self] in
             self?.delegate?.inputBarStartRecord()
         }
-        recordView.recorderTimeCallBack = {[weak self] in
-            return self?.delegate?.inputBarRecordTime()
-        }
-        recordView.cancelRecorderCallBack = {[weak self] in
+        view.cancelRecorderCallBack = {[weak self] in
             self?.delegate?.inputBarCancelRecord()
         }
-        recordView.finishRecorderCallBack = {[weak self] in
-            self?.delegate?.inputBarFinishRecord()
+        view.finishRecorderCallBack = {[weak self] (duration, path) in
+            self?.delegate?.inputBarFinishRecord(duration: duration, path: path)
         }
-        return recordView
+        return view
     }()
     ///是否弹出键盘
-    private var isShowKeyboard: Bool = false {
+    private (set) var isShowKeyboard: Bool = false {
         willSet {
             if isShowKeyboard != newValue {
                 if newValue == true {
@@ -280,11 +261,11 @@ class CLChatInputToolBar: UIView {
     ///初始高度
     var toolBarDefaultHeight: CGFloat {
         get {
-            return textViewDefaultHeight + 10 + 10 + cl_safeAreaInsets().bottom
+            return textViewDefaultHeight + 15 + 15 + cl_safeAreaInsets().bottom
         }
     }
     ///文字大小
-    var textFont: UIFont = UIFont.systemFont(ofSize: 13) {
+    var textFont: UIFont = UIFont.systemFont(ofSize: 15) {
         didSet {
             textView.font = textFont
         }
@@ -302,7 +283,7 @@ class CLChatInputToolBar: UIView {
         }
     }
     ///占位文字颜色
-    var placeholderColor: UIColor = hexColor("0x5C5C71") {
+    var placeholderColor: UIColor = .hexColor(with: "0x5C5C71") {
         didSet {
             textView.textColor = placeholderColor
         }
@@ -326,19 +307,18 @@ class CLChatInputToolBar: UIView {
 //MARK: - JmoVxia---初始化
 extension CLChatInputToolBar {
     private func initUI() {
-        backgroundColor = hexColor("0x31313F")
+        backgroundColor = .hexColor(with: "#F6F6F6")
         addSubview(contentView)
         addSubview(topLineView)
         contentView.addSubview(topToolBar)
         contentView.addSubview(middleSpaceView)
         contentView.addSubview(bottomSafeView)
         
-        topToolBar.addSubview(photoButton)
+        topToolBar.addSubview(moreButton)
         topToolBar.addSubview(emojiButton)
         topToolBar.addSubview(recordButton)
         topToolBar.addSubview(sendButton)
         topToolBar.addSubview(textView)
-        topToolBar.addSubview(lineView)
     }
     private func makeConstraints() {
         contentView.snp.makeConstraints { (make) in
@@ -368,20 +348,20 @@ extension CLChatInputToolBar {
             make.left.right.bottom.equalTo(contentView)
             make.height.equalTo(cl_safeAreaInsets().bottom)
         }
-        photoButton.snp.makeConstraints { (make) in
+        moreButton.snp.makeConstraints { (make) in
             make.left.equalTo(12)
-            make.width.height.equalTo(textViewHeight + 10)
-            make.bottom.equalTo(lineView.snp.bottom)
+            make.width.height.equalTo(textViewHeight - 8)
+            make.bottom.equalTo(textView.snp.bottom).offset(-4)
         }
         emojiButton.snp.makeConstraints { (make) in
-            make.left.equalTo(photoButton.snp.right).offset(12)
-            make.width.height.equalTo(textViewHeight + 10)
-            make.bottom.equalTo(lineView.snp.bottom)
+            make.left.equalTo(moreButton.snp.right).offset(12)
+            make.width.height.equalTo(textViewHeight - 8)
+            make.bottom.equalTo(textView.snp.bottom).offset(-4)
         }
         recordButton.snp.makeConstraints { (make) in
             make.right.equalTo(-12)
-            make.width.height.equalTo(textViewHeight + 10)
-            make.bottom.equalTo(lineView.snp.bottom)
+            make.width.height.equalTo(textViewHeight - 8)
+            make.bottom.equalTo(textView.snp.bottom).offset(-4)
         }
         sendButton.snp.makeConstraints { (make) in
             make.edges.equalTo(recordButton)
@@ -392,11 +372,6 @@ extension CLChatInputToolBar {
             make.height.equalTo(textViewHeight)
             make.top.equalTo(15)
             make.bottom.equalTo(topToolBar.snp.bottom).offset(-15)
-        }
-        lineView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(textView)
-            make.height.equalTo(0.5)
-            make.top.equalTo(textView.snp.bottom).offset(5)
         }
     }
     private func addNotification() {
@@ -413,10 +388,10 @@ extension CLChatInputToolBar {
             keyboardHeight = emojiView.height - cl_safeAreaInsets().bottom
         }
         if isShowPhotoKeyboard {
-            keyboardHeight = photoView.height
+            keyboardHeight = photoView.height - cl_safeAreaInsets().bottom
         }
         if isShowVoiceKeyboard {
-            keyboardHeight = recordView.height
+            keyboardHeight = recordView.height  - cl_safeAreaInsets().bottom
         }
         middleSpaceView.snp.updateConstraints { (make) in
             make.height.equalTo(keyboardHeight)
@@ -474,7 +449,6 @@ extension CLChatInputToolBar {
         isShowPhotoKeyboard = false
         contentView.addSubview(recordView)
         if isShowVoiceKeyboard == false {
-            delegate?.inputBarClickRecord()
             isShowVoiceKeyboard = true
             textViewResignFirstResponder()
             textView.inputView = nil
@@ -527,10 +501,10 @@ extension CLChatInputToolBar {
                 self.photoView.snp.remakeConstraints { (make) in
                     make.left.right.equalTo(self.contentView)
                     make.height.equalTo(self.photoView.height)
-                    make.top.equalTo(self.contentView.snp.bottom).offset(-self.photoView.height - cl_safeAreaInsets().bottom)
+                    make.top.equalTo(self.contentView.snp.bottom).offset(-self.photoView.height)
                 }
                 self.middleSpaceView.snp.updateConstraints { (make) in
-                    make.height.equalTo(self.photoView.height)
+                    make.height.equalTo(self.photoView.height - cl_safeAreaInsets().bottom)
                 }
                 self.superview?.setNeedsLayout()
                 self.superview?.layoutIfNeeded()
@@ -559,10 +533,10 @@ extension CLChatInputToolBar {
                 self.recordView.snp.remakeConstraints { (make) in
                     make.left.right.equalTo(self.contentView)
                     make.height.equalTo(self.recordView.height)
-                    make.top.equalTo(self.contentView.snp.bottom).offset(-self.recordView.height - cl_safeAreaInsets().bottom)
+                    make.top.equalTo(self.contentView.snp.bottom).offset(-self.recordView.height)
                 }
                 self.middleSpaceView.snp.updateConstraints { (make) in
-                    make.height.equalTo(self.recordView.height)
+                    make.height.equalTo(self.recordView.height - cl_safeAreaInsets().bottom)
                 }
                 self.superview?.setNeedsLayout()
                 self.superview?.layoutIfNeeded()
@@ -612,7 +586,7 @@ extension CLChatInputToolBar {
             self.superview?.setNeedsLayout()
             self.superview?.layoutIfNeeded()
         }) { (_) in
-            self.photoView.reset()
+            self.photoView.hiddenAlbumContentView()
         }
         textViewResignFirstResponder()
     }

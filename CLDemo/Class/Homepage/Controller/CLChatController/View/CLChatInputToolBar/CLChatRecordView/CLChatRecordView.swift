@@ -10,14 +10,20 @@ import SnapKit
 import Lottie
 
 class CLChatRecordView: UIView {
-    ///定时器
-    private var timer: CLGCDTimer?
+    ///开始录音
+    var startRecorderCallBack: (() -> ())?
+    ///取消录音
+    var cancelRecorderCallBack: (() -> ())?
+    ///结束录音
+    var finishRecorderCallBack: ((TimeInterval, String) -> ())?
     ///高度
-    private (set) var height: CGFloat = 250
+    private (set) var height: CGFloat = 250 + cl_safeAreaInsets().bottom
+    ///是否正在录制
+    private (set) var isRecording: Bool = false
     ///红圈
     private lazy var redcircle: UIView = {
         let redcircle = UIView()
-        redcircle.layer.borderColor = hexColor("0xff3b30").cgColor
+        redcircle.layer.borderColor = UIColor.hexColor(with: "0xff3b30").cgColor
         redcircle.layer.borderWidth = 1
         redcircle.layer.opacity = 0.45
         redcircle.layer.cornerRadius  = 90
@@ -27,15 +33,16 @@ class CLChatRecordView: UIView {
     }()
     ///波纹动画
     private lazy var waveView: AnimationView = {
-        let waveView = AnimationView.init(name: "recoredWave_dk")
-        waveView.loopMode = .loop
-        waveView.isHidden = true
-        return waveView
+        let view = AnimationView.init(name: "recoredWave_dk")
+        view.loopMode = .loop
+        view.isHidden = true
+        view.backgroundBehavior = .pauseAndRestore
+        return view
     }()
     ///圆圈
     private lazy var circleView: UIView = {
         let circleView = UIView()
-        circleView.backgroundColor = hexColor("0x707094")
+        circleView.backgroundColor = .hexColor(with: "#2DD178")
         circleView.isUserInteractionEnabled = true
         circleView.layer.cornerRadius = 55
         circleView.layer.masksToBounds = true
@@ -59,6 +66,21 @@ class CLChatRecordView: UIView {
         let timeView = CLChatRecordTimeView()
         return timeView
     }()
+    ///录音器
+    private lazy var recorder: CLRecorder = {
+        let recorder = CLRecorder()
+        recorder.durationCallback = {[weak self] (second) in
+            guard let `self` = self else { return }
+            if second >= 60 {
+                self.endLongPress()
+            }
+            self.timeView.time = self.transToHourMinSec(time: Int(second))
+        }
+        recorder.finishCallBack = {[weak self] (duration, path) in
+            self?.finishRecorderCallBack?(TimeInterval(duration), path)
+        }
+        return recorder
+    }()
     ///长按手势
     private lazy var longPress: UILongPressGestureRecognizer = {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
@@ -80,15 +102,6 @@ class CLChatRecordView: UIView {
             }
         }
     }
-    ///开始录音
-    var startRecorderCallBack: (() -> ())?
-    ///录音计时
-    var recorderTimeCallBack: (() -> (TimeInterval?))?
-    ///取消录音
-    var cancelRecorderCallBack: (() -> ())?
-    ///结束录音
-    var finishRecorderCallBack: (() -> ())?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
@@ -150,17 +163,17 @@ extension CLChatRecordView {
     }
     private func zoomOut() {
         let animation = CAKeyframeAnimation(keyPath: "transform.scale")
-        animation.values = [1.0,0.9,0.85]
-        animation.duration = 0.35
+        animation.values = [1.0,0.9]
+        animation.duration = 0.5
         animation.isRemovedOnCompletion = false
         animation.fillMode = .forwards
         circleView.layer.add(animation, forKey: "zoomOut")
     }
     private func zoomIn() {
         let animation = CAKeyframeAnimation(keyPath: "transform.scale")
-        animation.values = [0.85,0.9,1.0]
+        animation.values = [0.9,1.0]
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        animation.duration = 0.35
+        animation.duration = 0.5
         animation.isRemovedOnCompletion = false
         animation.fillMode = .forwards
         circleView.layer.add(animation, forKey: "zoomIn")
@@ -174,32 +187,35 @@ extension CLChatRecordView {
         }
         isOut = !redcircle.frame.contains(point)
         if longPress.state == .began {
-            playWave()
-            zoomOut()
-            timeView.show()
-            startRecorderCallBack?()
-            timer = CLGCDTimer.init(interval: 1, delaySecs: 1, queue: DispatchQueue.main, action: {[weak self] (action) in
-                guard let strongSelf = self else {return}
-                let second = Int(action)
-                strongSelf.timeView.time = strongSelf.transToHourMinSec(time: second)
-                if second >= 60 {
-                    strongSelf.endLongPress()
-                }
-            })
-            timer?.start()
+            beganLongPress()
         }else if longPress.state == .changed {
             redcircle.isHidden = !isOut
         }else if longPress.state == .ended || longPress.state == .cancelled || longPress.state == .failed {
             endLongPress()
         }
     }
+    private func beganLongPress() {
+        if isRecording == false {
+            isRecording = true
+            playWave()
+            zoomOut()
+            timeView.show()
+            startRecord()
+        }
+    }
     private func endLongPress() {
-        stopWave()
-        zoomIn()
-        redcircle.isHidden = true
-        timeView.dismiss()
-        isOut ? cancelRecorderCallBack?() : finishRecorderCallBack?()
-        timer?.cancel()
+        if isRecording {
+            isRecording = false
+            stopWave()
+            zoomIn()
+            redcircle.isHidden = true
+            timeView.dismiss()
+            if isOut || recorder.audioDuration < 1.0 {
+                cancelRecord()
+            }else {
+                endRecord()
+            }
+        }
     }
     private func transToHourMinSec(time: Int) -> String {
         var minutes = 0
@@ -211,5 +227,26 @@ extension CLChatRecordView {
         seconds = time % 3600 % 60
         secondsText = seconds > 9 ? "\(seconds)" : "0\(seconds)"
         return "\(minutesText):\(secondsText)"
+    }
+}
+extension CLChatRecordView {
+    private func startRecord() {
+        CLPermissions.request(.microphone) {[weak self] (status) in
+            if status.isNoSupport {
+                CLLog("当前设备不支持")
+            }else if status.isAuthorized {
+                self?.recorder.start()
+                self?.startRecorderCallBack?()
+            }else {
+                CLLog("没有麦克风权限 状态 \(status)")
+            }
+        }
+    }
+    private func cancelRecord() {
+        recorder.cancel()
+        cancelRecorderCallBack?()
+    }
+    private func endRecord() {
+        recorder.stop()
     }
 }

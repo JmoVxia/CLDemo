@@ -29,7 +29,6 @@
 "自定义密码框" = "CustomPassword";
 "日志" = "Log";
 "自定义输入工具条" = "CustomInputToolBar";
-"银行卡识别" = "BankCard Scan";
 "卡片视图" = "Card View";
 "波浪视图" = "Wave View";
 "气泡拖拽" = "Dragging Bubble";
@@ -53,3 +52,4 @@
 "自定义弹窗" = "Custom Popup View";
 "标签动态排布" = "Tags Layout View";
 "游标卡尺" = "Vernier Caliper";
+"录音转码" = "Recorde Encode";

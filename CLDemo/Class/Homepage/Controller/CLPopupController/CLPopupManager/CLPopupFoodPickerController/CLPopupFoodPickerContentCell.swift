@@ -12,12 +12,13 @@ class CLPopupFoodPickerContentCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
        let label = UILabel()
         label.font = PingFangSCMedium(16)
-        label.textColor = hexColor("#666666")
+        label.textColor = .hexColor(with: "#666666")
         return label
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        isExclusiveTouch = true
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(30)

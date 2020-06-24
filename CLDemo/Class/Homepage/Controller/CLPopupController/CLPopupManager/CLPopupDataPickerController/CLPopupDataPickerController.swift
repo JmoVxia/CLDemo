@@ -7,20 +7,30 @@
 //
 
 import UIKit
+import DateToolsSwift
 
 enum CLDataPickerType {
     case yearMonthDay
     case hourMinute
     case yearMonthDayHourMinute
+    case one
+    case duration
 }
 class CLPopupDataPickerController: CLPopupManagerBaseController {
     var yearMonthDayCallback: ((Int, Int, Int) -> ())?
     var hourMinuteCallback: ((Int, Int) -> ())?
     var yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> ())?
+    var durationCallback: ((String, String) -> ())?
+    var selectedCallback: ((String) -> ())? = nil
     var type: CLDataPickerType = .yearMonthDay
+    var unit: String?
+    var space: CGFloat = -10
+    var dataSource: [String]?
+    var minDate: Date = Date().subtract(TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 10))
+    var maxDate: Date = Date()
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()
-        topToolBar.backgroundColor = hexColor("#F8F6F9")
+        topToolBar.backgroundColor = UIColor.hexColor(with: "#F8F6F9")
         return topToolBar
     }()
     lazy var cancelButton: UIButton = {
@@ -28,9 +38,9 @@ class CLPopupDataPickerController: CLPopupManagerBaseController {
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.setTitle("取消", for: .selected)
         cancelButton.setTitle("取消", for: .highlighted)
-        cancelButton.setTitleColor(hexColor("#666666"), for: .normal)
-        cancelButton.setTitleColor(hexColor("#666666"), for: .selected)
-        cancelButton.setTitleColor(hexColor("#666666"), for: .highlighted)
+        cancelButton.setTitleColor(UIColor.hexColor(with: "#666666"), for: .normal)
+        cancelButton.setTitleColor(UIColor.hexColor(with: "#666666"), for: .selected)
+        cancelButton.setTitleColor(UIColor.hexColor(with: "#666666"), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return cancelButton
     }()
@@ -39,9 +49,9 @@ class CLPopupDataPickerController: CLPopupManagerBaseController {
         sureButton.setTitle("确定", for: .normal)
         sureButton.setTitle("确定", for: .selected)
         sureButton.setTitle("确定", for: .highlighted)
-        sureButton.setTitleColor(hexColor("#40B5AA"), for: .normal)
-        sureButton.setTitleColor(hexColor("#40B5AA"), for: .selected)
-        sureButton.setTitleColor(hexColor("#40B5AA"), for: .highlighted)
+        sureButton.setTitleColor(.themeColor, for: .normal)
+        sureButton.setTitleColor(.themeColor, for: .selected)
+        sureButton.setTitleColor(.themeColor, for: .highlighted)
         sureButton.addTarget(self, action: #selector(sureAction), for: .touchUpInside)
         return sureButton
     }()
@@ -50,10 +60,18 @@ class CLPopupDataPickerController: CLPopupManagerBaseController {
         switch type {
         case .yearMonthDay:
             dataPick = CLYearMonthDayDataPickerView()
+            (dataPick as? CLYearMonthDayDataPickerView)?.set(minDate: minDate, maxDate: maxDate)
         case .hourMinute:
             dataPick = CLHourMinuteDataPickerView()
         case .yearMonthDayHourMinute:
             dataPick = CLYearMonthDayHourMinuteDataPickerView()
+        case .one:
+            dataPick = CLOnePickerView()
+            (dataPick as? CLOnePickerView)?.space = space
+            (dataPick as? CLOnePickerView)?.unit = unit
+            (dataPick as? CLOnePickerView)?.dataSource = dataSource!
+        case .duration:
+            dataPick = CLDurationDataPickerView()
         }
         return dataPick
     }()
@@ -61,9 +79,6 @@ class CLPopupDataPickerController: CLPopupManagerBaseController {
         super.viewDidLoad()
         initUI()
         showAnimation()
-    }
-    deinit {
-        print("============CLPopupDataPickerController deinit============")
     }
 }
 extension CLPopupDataPickerController {
@@ -123,7 +138,8 @@ extension CLPopupDataPickerController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
         }
     }
 }
@@ -138,6 +154,10 @@ extension CLPopupDataPickerController {
             hourMinuteCallback?(picker.hour, picker.minute)
         }else if let picker = dataPicker as? CLYearMonthDayHourMinuteDataPickerView {
             yearMonthDayHourMinuteCallback?(picker.year, picker.month, picker.day, picker.hour, picker.minute)
+        }else if let picker = dataPicker as? CLOnePickerView {
+            selectedCallback?(picker.seletedString)
+        }else if let picker = dataPicker as? CLDurationDataPickerView {
+            durationCallback?(String(format: "%02d", picker.duration), picker.unit)
         }
         dismissAnimation()
     }

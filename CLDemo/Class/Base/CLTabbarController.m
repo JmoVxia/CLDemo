@@ -15,7 +15,10 @@
 #import "CLDemo-Swift.h"
 
 @interface CLTabbarController ()
-
+{
+    NSTimeInterval _lastSameIndexTapTime;
+    int _tapsInSuccession;
+}
 @end
 
 @implementation CLTabbarController
@@ -60,6 +63,31 @@
     [Tools setControllerTabBarItem:nc5 Title:NSLocalizedString(@"我的", nil) andFoneSize:13 withFoneName:nil selectedImage:@"tabBar_essence_click_icon" withTitleColor:[UIColor blackColor] unselectedImage:@"tabBar_essence_icon" withTitleColor:[UIColor lightGrayColor]];
     self.viewControllers = @[nc1,nc2,nc3,nc4,nc5];
 }
+- (void)pushToDebug {
+    CKDDebugController *controller = [CKDDebugController new];
+    CLBaseNavigationController *navigationController = [[CLBaseNavigationController alloc] initWithRootViewController:controller];
+    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];
+}
+
+-(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    if (self.selectedIndex == 0) {
+        NSTimeInterval t = CACurrentMediaTime();
+        if (_lastSameIndexTapTime < DBL_EPSILON || t < _lastSameIndexTapTime + 0.5) {
+            _lastSameIndexTapTime = t;
+            _tapsInSuccession++;
+            if (_tapsInSuccession == 10) {
+                _tapsInSuccession = 0;
+                _lastSameIndexTapTime = 0.0;
+                [self pushToDebug];
+            }
+        } else {
+            _lastSameIndexTapTime = 0.0;
+            _tapsInSuccession = 0;
+        }
+    }
+}
+
 -(void)dealloc {
     CLLog(@"Tabbar页面销毁了");
 }

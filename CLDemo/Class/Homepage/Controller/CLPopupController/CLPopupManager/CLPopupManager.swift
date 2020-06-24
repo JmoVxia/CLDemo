@@ -7,30 +7,44 @@
 //
 
 import UIKit
-//MARK: - 弹窗父类控制器
+import DateToolsSwift
 
-@objcMembers class CLPopupManagerBaseController: UIViewController {
-    ///状态栏颜色
-    var statusBarStyle: UIStatusBarStyle = UIApplication.shared.statusBarStyle
+//MARK: - 弹窗配置
+@objcMembers class CLPopupManagerConfigure: NSObject {
+    ///唯一标识符
+    fileprivate (set) var identifier: String = ""
+    ///顶掉前面弹窗弹窗
+    var isDisplacement: Bool = false
+    ///向下传递手势
+    var isPassedDown: Bool = false
     ///是否自动旋转
-    var autorotate: Bool = false
+    var isAutorotate: Bool = false
+    ///是否隐藏状态栏
+    var isHiddenStatusBar: Bool = false
+    ///状态栏颜色
+    var statusBarStyle: UIStatusBarStyle = UIApplication.shared.keyWindow?.rootViewController?.preferredStatusBarStyle ?? .default
     ///支持方向
     var interfaceOrientationMask: UIInterfaceOrientationMask = .portrait
-    ///是否隐藏状态栏
-    var statusBarHidden: Bool = false
+}
+//MARK: - 弹窗父类控制器
+@objcMembers class CLPopupManagerBaseController: UIViewController {
+    ///配置
+    var configure: CLPopupManagerConfigure = CLPopupManagerConfigure()
+    deinit {
+    }
 }
 extension CLPopupManagerBaseController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
+        return configure.statusBarStyle
     }
     override var shouldAutorotate: Bool {
-        return autorotate
+        return configure.isAutorotate
     }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return interfaceOrientationMask
+        return configure.interfaceOrientationMask
     }
     override var prefersStatusBarHidden: Bool {
-        return statusBarHidden
+        return configure.isHiddenStatusBar
     }
 }
 //MARK: - 弹窗Window
@@ -57,231 +71,286 @@ extension CLPopupManagerBaseController {
             return shareManager
         }
     }
-    private var windowsArray = [CLPopupManagerWindow]()
+    private var windowsDictionary = [String : CLPopupManagerWindow]()
     private override init() {
         super.init()
     }
     deinit {
-        print("============== PopupViewManager deinit ==================")
-    }
-}
-extension CLPopupManager {
-    /// 显示弹窗
-    /// - Parameters:
-    ///   - controller: 弹窗控制器
-    ///   - displacement: 顶掉前面弹窗
-    private class func makeKeyAndVisible(with controller: UIViewController, displacement: Bool, passedDown: Bool) {
-        if displacement {
-            share.windowsArray.removeAll()
-        }
-        let popupManagerWindow = CLPopupManagerWindow(frame: UIScreen.main.bounds)
-        popupManagerWindow.isPassedDown = passedDown
-        popupManagerWindow.windowLevel = UIWindow.Level.statusBar
-        popupManagerWindow.isUserInteractionEnabled = true
-        popupManagerWindow.rootViewController = controller
-        popupManagerWindow.makeKeyAndVisible()
-        share.windowsArray.append(popupManagerWindow)
-    }
-    /// 销毁弹窗
-    /// - Parameter all: 是否销毁所有弹窗
-    private class func destroyAll(_ all: Bool = true) {
-        if all {
-            share.windowsArray.removeAll()
-        }else {
-            share.windowsArray.removeLast()
-        }
-        if share.windowsArray.count == 0 {
-            manager = nil
-        }
     }
 }
 extension CLPopupManager {
     /// 显示自定义弹窗
-    /// - Parameters:
-    ///   - controller: 自定义弹窗控制器
-    ///   - displacement: 顶掉前面弹窗弹窗
-    class func showCustom(with controller: UIViewController, displacement: Bool = false, passedDown: Bool = false) {
+    private class func showController(_ controller: CLPopupManagerBaseController) {
+        if controller.configure.isDisplacement {
+            share.windowsDictionary.removeAll()
+        }
+        let window = CLPopupManagerWindow(frame: UIScreen.main.bounds)
+        window.isPassedDown = controller.configure.isPassedDown
+        window.windowLevel = UIWindow.Level.statusBar
+        window.isUserInteractionEnabled = true
+        window.rootViewController = controller
+        window.makeKeyAndVisible()
+        share.windowsDictionary[controller.configure.identifier] = window
+    }
+    /// 隐藏所有弹窗
+    class func dismissAll() {
         DispatchQueue.main.async {
-            makeKeyAndVisible(with: controller, displacement: displacement, passedDown: passedDown)
+            share.windowsDictionary.removeAll()
+            manager = nil
         }
     }
-    /// 隐藏弹窗
-    /// - Parameter all: 全部弹窗
-    class func dismissAll(_ all: Bool = true) {
+    ///隐藏指定弹窗
+    class func dismiss(_ identifier : String) {
         DispatchQueue.main.async {
-            destroyAll(all)
+            share.windowsDictionary.removeValue(forKey: identifier)
+            if share.windowsDictionary.isEmpty {
+                manager = nil
+            }
         }
     }
+}
+extension CLPopupManager {
     /// 显示翻牌弹窗
-    class func showFlop(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false) {
-        let controller = CLPopupFlopController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showFlop(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil) -> String{
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupFlopController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            showController(controller)
+        }
+        return identifier
     }
     ///显示提示弹窗
-    class func showTips(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, text: String, dismissInterval: TimeInterval = 1.0) {
-        let controller = CLPopupTipsController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.text = text
-        controller.dismissInterval = dismissInterval
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showTips(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, text: String, dismissInterval: TimeInterval = 1.0, dissmissCallBack: (() -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupTipsController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.text = text
+            controller.dismissInterval = dismissInterval
+            controller.dissmissCallBack = dissmissCallBack
+            showController(controller)
+        }
+        return identifier
     }
     ///显示一个消息弹窗
-    class func showOneAlert(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, title: String? = nil, message: String? = nil, sure: String = "确定", sureCallBack: (() -> ())? = nil) {
-        let controller = CLPopupMessageController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = .one
-        controller.titleLabel.text = title
-        controller.messageLabel.text = message
-        controller.sureButton.setTitle(sure, for: .normal)
-        controller.sureButton.setTitle(sure, for: .selected)
-        controller.sureButton.setTitle(sure, for: .highlighted)
-        controller.sureCallBack = sureCallBack
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showOneAlert(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, title: String? = nil, message: String? = nil, sure: String = "确定", sureCallBack: (() -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupMessageController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .one
+            controller.titleLabel.text = title
+            controller.messageLabel.text = message
+            controller.sureButton.setTitle(sure, for: .normal)
+            controller.sureButton.setTitle(sure, for: .selected)
+            controller.sureButton.setTitle(sure, for: .highlighted)
+            controller.sureCallBack = sureCallBack
+            showController(controller)
+        }
+        return identifier
     }
     ///显示两个消息弹窗
-    class func showTwoAlert(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, title: String? = nil, message: String? = nil, left: String = "取消", right: String = "确定", leftCallBack: (() -> ())? = nil, rightCallBack: (() -> ())? = nil) {
-        let controller = CLPopupMessageController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = .two
-        controller.titleLabel.text = title
-        controller.messageLabel.text = message
-        controller.leftButton.setTitle(left, for: .normal)
-        controller.leftButton.setTitle(left, for: .selected)
-        controller.leftButton.setTitle(left, for: .highlighted)
-        controller.rightButton.setTitle(right, for: .normal)
-        controller.rightButton.setTitle(right, for: .selected)
-        controller.rightButton.setTitle(right, for: .highlighted)
-        controller.leftCallBack = leftCallBack
-        controller.rightCallBack = rightCallBack
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showTwoAlert(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, title: String? = nil, message: String? = nil, left: String = "取消", right: String = "确定", leftCallBack: (() -> ())? = nil, rightCallBack: (() -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupMessageController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .two
+            controller.titleLabel.text = title
+            controller.messageLabel.text = message
+            controller.leftButton.setTitle(left, for: .normal)
+            controller.leftButton.setTitle(left, for: .selected)
+            controller.leftButton.setTitle(left, for: .highlighted)
+            controller.rightButton.setTitle(right, for: .normal)
+            controller.rightButton.setTitle(right, for: .selected)
+            controller.rightButton.setTitle(right, for: .highlighted)
+            controller.leftCallBack = leftCallBack
+            controller.rightCallBack = rightCallBack
+            showController(controller)
+        }
+        return identifier
     }
     ///显示成功
-    class func showSuccess(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, strokeColor: UIColor = UIColor.red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> ())? = nil) {
-        let controller = CLPopupHudController()
-        controller.animationType = .success
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.strokeColor = strokeColor
-        controller.text = text
-        controller.dismissDuration = dismissDuration
-        controller.dismissCallback = dismissCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showSuccess(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, strokeColor: UIColor = UIColor.red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupHudController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.animationType = .success
+            controller.strokeColor = strokeColor
+            controller.text = text
+            controller.dismissDuration = dismissDuration
+            controller.dismissCallback = dismissCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示错误
-    class func showError(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, strokeColor: UIColor = UIColor.red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> ())? = nil) {
-        let controller = CLPopupHudController()
-        controller.animationType = .error
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.strokeColor = strokeColor
-        controller.text = text
-        controller.dismissDuration = dismissDuration
-        controller.dismissCallback = dismissCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showError(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, strokeColor: UIColor = .red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupHudController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.animationType = .error
+            controller.strokeColor = strokeColor
+            controller.text = text
+            controller.dismissDuration = dismissDuration
+            controller.dismissCallback = dismissCallback
+            showController(controller)
+        }
+        return identifier
     }
-    ///显示加载
-    class func showLoading(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, strokeColor: UIColor = UIColor.red, text: String? = nil) {
-        let controller = CLPopupHudController()
-        controller.animationType = .loading
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.strokeColor = strokeColor
-        controller.text = text
-        controller.animationSize = CGSize(width: 80, height: 80)
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    ///显示加载动画
+    @discardableResult class func showHudLoading(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, strokeColor: UIColor = .red, text: String? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupHudController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.animationType = .loading
+            controller.strokeColor = strokeColor
+            controller.text = text
+            controller.animationSize = CGSize(width: 80, height: 80)
+            showController(controller)
+        }
+        return identifier
     }
     ///显示年月日选择器
-    class func showYearMonthDayDataPicker(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = true, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, yearMonthDayCallback: ((Int, Int, Int) -> ())? = nil) {
-        let controller = CLPopupDataPickerController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = .yearMonthDay
-        controller.yearMonthDayCallback = yearMonthDayCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showYearMonthDayDataPicker(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, minDate: Date = Date().subtract(TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 10)), maxDate: Date = Date(), yearMonthDayCallback: ((Int, Int, Int) -> ())? = nil) -> String{
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupDataPickerController()
+            controller.minDate = minDate
+            controller.maxDate = maxDate
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .yearMonthDay
+            controller.yearMonthDayCallback = yearMonthDayCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示时分选择器
-    class func showHourMinuteDataPicker(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = true, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, hourMinuteCallback: ((Int, Int) -> ())? = nil) {
-        let controller = CLPopupDataPickerController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = .hourMinute
-        controller.hourMinuteCallback = hourMinuteCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showHourMinuteDataPicker(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, hourMinuteCallback: ((Int, Int) -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupDataPickerController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .hourMinute
+            controller.hourMinuteCallback = hourMinuteCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示年月日时分选择器
-    class func showYearMonthDayHourMinuteDataPicker(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = true, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> ())? = nil) {
-        let controller = CLPopupDataPickerController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = .yearMonthDayHourMinute
-        controller.yearMonthDayHourMinuteCallback = yearMonthDayHourMinuteCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showYearMonthDayHourMinuteDataPicker(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupDataPickerController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .yearMonthDayHourMinute
+            controller.yearMonthDayHourMinuteCallback = yearMonthDayHourMinuteCallback
+            showController(controller)
+        }
+        return identifier
+    }
+    ///显示时长选择器
+    @discardableResult class func showDurationDataPicker(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, durationCallback: ((String, String) -> ())? = nil)  -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupDataPickerController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .duration
+            controller.durationCallback = durationCallback
+            showController(controller)
+        }
+        return identifier
+    }
+    ///显示一个选择器
+    @discardableResult class func showOnePicker(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, dataSource: [String], unit: String? = nil, space: CGFloat = -10, selectedCallback: ((String) -> ())? = nil)  -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupDataPickerController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = .one
+            controller.unit = unit
+            controller.space = space
+            controller.dataSource = dataSource
+            controller.selectedCallback = selectedCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示BMI输入弹窗
-    class func showBMIInput(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = true, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, bmiCallback: ((CGFloat) -> ())? = nil) {
-        let controller = CLPopupBMIInputController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.bmiCallback = bmiCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showBMIInput(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, bmiCallback: ((CGFloat) -> ())? = nil)  -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupBMIInputController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.bmiCallback = bmiCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示一个输入框弹窗
-    class func showOneInput(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = true, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, type: CLPopupOneInputType, sureCallback: ((String?) -> ())? = nil) {
-        let controller = CLPopupOneInputController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = type
-        controller.sureCallback = sureCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showOneInput(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, type: CLPopupOneInputType, sureCallback: ((String?) -> ())? = nil)  -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupOneInputController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = type
+            controller.sureCallback = sureCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示两个输入框弹窗
-    class func showTwoInput(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, autorotate: Bool = false, interfaceOrientationMask: UIInterfaceOrientationMask = .all, displacement: Bool = false, passedDown: Bool = false, type: CLPopupTwoInputType, sureCallback: ((String?, String?) -> ())? = nil) {
-        let controller = CLPopupTwoInputController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = autorotate
-        controller.interfaceOrientationMask = interfaceOrientationMask
-        controller.type = type
-        controller.sureCallback = sureCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showTwoInput(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, type: CLPopupTwoInputType, sureCallback: ((String?, String?) -> ())? = nil)  -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupTwoInputController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.type = type
+            controller.sureCallback = sureCallback
+            showController(controller)
+        }
+        return identifier
     }
     ///显示食物选择器
-    class func showFoodPicker(statusBarStyle: UIStatusBarStyle = .default, statusBarHidden: Bool = false, displacement: Bool = false, passedDown: Bool = false, selectedCallback: ((String, String, String)->())?) {
-        let controller = CLPopupFoodPickerController()
-        controller.statusBarStyle = statusBarStyle
-        controller.statusBarHidden = statusBarHidden
-        controller.autorotate = false
-        controller.interfaceOrientationMask = .portrait
-        controller.selectedCallback = selectedCallback
-        showCustom(with: controller, displacement: displacement, passedDown: passedDown)
+    @discardableResult class func showFoodPicker(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil, selectedCallback: ((String, String, String, String)->())?)  -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupFoodPickerController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            controller.selectedCallback = selectedCallback
+            showController(controller)
+        }
+        return identifier
+    }
+    ///显示加载动画
+    @discardableResult class func showLoading(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil) -> String {
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupLoadingController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            showController(controller)
+        }
+        return identifier
     }
 }

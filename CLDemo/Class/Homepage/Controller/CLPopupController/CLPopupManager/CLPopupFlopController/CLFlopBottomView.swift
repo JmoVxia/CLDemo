@@ -18,7 +18,7 @@ class CLFlopBottomView: UIView {
         let titleLabel = UILabel()
         titleLabel.text = "想要"
         titleLabel.font = UIFont.systemFont(ofSize: 15)
-        titleLabel.textColor = hexColor("#FFFFFF")
+        titleLabel.textColor = .hexColor(with: "#FFFFFF")
         return titleLabel
     }()
     override init(frame: CGRect) {

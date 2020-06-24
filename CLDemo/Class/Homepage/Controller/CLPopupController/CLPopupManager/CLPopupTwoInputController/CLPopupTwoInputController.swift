@@ -25,21 +25,21 @@ class CLPopupTwoInputController: CLPopupManagerBaseController {
             case .temperature:
                 titleLabel.text = "体温"
                 fristTextField.keyboardType = .default
-                fristTextField.setPlaceholder("请输入测量部位", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+                fristTextField.setPlaceholder("请输入测量部位", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
                 secondTextField.keyboardType = .decimalPad
-                secondTextField.setPlaceholder("请输入录入体温", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+                secondTextField.setPlaceholder("请输入录入体温", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
             case .bloodPressure:
                 titleLabel.text = "血压"
                 fristTextField.keyboardType = .decimalPad
-                fristTextField.setPlaceholder("请输入收缩压(高压)", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+                fristTextField.setPlaceholder("请输入收缩压(高压)", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
                 secondTextField.keyboardType = .decimalPad
-                secondTextField.setPlaceholder("请输入舒张压(低压)", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+                secondTextField.setPlaceholder("请输入舒张压(低压)", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
             case .bloodSugar:
                 titleLabel.text = "血糖"
                 fristTextField.isUserInteractionEnabled = false
-                fristTextField.setPlaceholder("请选择测量时间", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+                fristTextField.setPlaceholder("请选择测量时间", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
                 secondTextField.keyboardType = .decimalPad
-                secondTextField.setPlaceholder("请输入血糖值", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+                secondTextField.setPlaceholder("请输入血糖值", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
             }
         }
     }
@@ -56,7 +56,7 @@ class CLPopupTwoInputController: CLPopupManagerBaseController {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textColor = hexColor("#40B5AA")
+        titleLabel.textColor = .themeColor
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
@@ -68,7 +68,7 @@ class CLPopupTwoInputController: CLPopupManagerBaseController {
     }()
     private lazy var fristLineView: UIView = {
         let fristLineView = UIView()
-        fristLineView.backgroundColor = hexColor("#F0F0F0")
+        fristLineView.backgroundColor = .hexColor(with: "#F0F0F0")
         return fristLineView
     }()
     private lazy var fristTapView: UIControl = {
@@ -84,7 +84,7 @@ class CLPopupTwoInputController: CLPopupManagerBaseController {
     }()
     private lazy var secondLineView: UIView = {
         let secondLineView = UIView()
-        secondLineView.backgroundColor = hexColor("#F0F0F0")
+        secondLineView.backgroundColor = .hexColor(with: "#F0F0F0")
         return secondLineView
     }()
     private lazy var secondTapView: UIControl = {
@@ -101,7 +101,7 @@ class CLPopupTwoInputController: CLPopupManagerBaseController {
         sureButton.setTitleColor(.white, for: .selected)
         sureButton.setTitleColor(.white, for: .highlighted)
         sureButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        sureButton.backgroundColor = hexColor("#40B5AA")
+        sureButton.backgroundColor = .themeColor
         sureButton.layer.cornerRadius = 20
         sureButton.clipsToBounds = true
         sureButton.addTarget(self, action: #selector(sureAction), for: .touchUpInside)
@@ -117,7 +117,6 @@ class CLPopupTwoInputController: CLPopupManagerBaseController {
     }()
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("============CLPopupTwoInputController deinit============")
     }
 }
 extension CLPopupTwoInputController {
@@ -280,7 +279,7 @@ extension CLPopupTwoInputController {
             if self.type == .bloodSugar {
                 self.view.endEditing(true)
                 CLPopupManager.showYearMonthDayHourMinuteDataPicker() {[weak self] (year, month, day, hour, minute) in
-                    self?.fristTextField.text = String(format: "%02d年%02d月%02d日%02d时%02d分", year,month,day,hour,minute)
+                    self?.fristTextField.text = "\(year)年\(month)月\(day)日\(hour)时\(minute)分"
                 }
             }else {
                 self.fristTextField.becomeFirstResponder()
@@ -303,7 +302,8 @@ extension CLPopupTwoInputController {
             self.view.endEditing(true)
         }
         dismissAnimation { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
         }
     }
 }

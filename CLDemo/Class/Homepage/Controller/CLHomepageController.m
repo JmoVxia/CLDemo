@@ -16,7 +16,6 @@
 #import "CLPasswordViewController.h"
 #import "CLLogViewController.h"
 #import "CLInputToolbarController.h"
-#import "CLBankCardScanController.h"
 #import "CLCardController.h"
 #import "CLWaveViewController.h"
 #import "CLBubbleViewViewController.h"
@@ -33,6 +32,7 @@
 #import "CLInputPasswordViewController.h"
 #import "CLDrawImageController.h"
 #import "CLPhoneNumberVerificationController.h"
+#import "CLRecordeEncodeController.h"
 
 @interface CLHomepageController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -99,6 +99,7 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"录音转码", nil)];
         [_arrayDS addObject:NSLocalizedString(@"绘制头像", nil)];
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"标签动态排布", nil)];
@@ -121,7 +122,6 @@
         [_arrayDS addObject:NSLocalizedString(@"键盘密码工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入工具条", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义输入框-限制字数", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"银行卡识别", nil)];
         [_arrayDS addObject:NSLocalizedString(@"卡片视图", nil)];
         [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-OC"]];
         [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-Swift"]];
@@ -140,6 +140,7 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLRecordeEncodeController class]];
         [_controllerArray addObject:[CLDrawImageController class]];
         [_controllerArray addObject:[CLLayoutController class]];
         [_controllerArray addObject:[CLTagsController class]];
@@ -162,7 +163,6 @@
         [_controllerArray addObject:[CLInputPasswordViewController class]];
         [_controllerArray addObject:[CLInputToolbarController class]];
         [_controllerArray addObject:[CLTextViewViewController class]];
-        [_controllerArray addObject:[CLBankCardScanController class]];
         [_controllerArray addObject:[CLCardController class]];
         [_controllerArray addObject:[CLWaveViewController class]];
         [_controllerArray addObject:[CLWaveSwiftViewController class]];

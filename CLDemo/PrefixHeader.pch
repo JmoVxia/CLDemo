@@ -28,8 +28,7 @@
 #import "Tools.h"
 #import "Define.h"
 #import "DateTools.h"
-#import "CLLogManager.h"
-
+#import "CLLogForOC.h"
 
 #endif
 

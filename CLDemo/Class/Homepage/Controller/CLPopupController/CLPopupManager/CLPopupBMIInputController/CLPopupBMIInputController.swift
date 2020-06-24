@@ -25,7 +25,7 @@ class CLPopupBMIInputController: CLPopupManagerBaseController {
         titleLabel.text = "BMI"
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textColor = hexColor("#40B5AA")
+        titleLabel.textColor = .themeColor
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
@@ -33,13 +33,13 @@ class CLPopupBMIInputController: CLPopupManagerBaseController {
         let fristTextField = UITextField()
         fristTextField.keyboardType = .decimalPad
         fristTextField.delegate = self
-        fristTextField.setPlaceholder("请输入体重(kg)", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+        fristTextField.setPlaceholder("请输入体重(kg)", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
         fristTextField.textAlignment = .center
         return fristTextField
     }()
     private lazy var fristLineView: UIView = {
         let fristLineView = UIView()
-        fristLineView.backgroundColor = hexColor("#F0F0F0")
+        fristLineView.backgroundColor = .hexColor(with: "#F0F0F0")
         return fristLineView
     }()
     private lazy var fristTapView: UIControl = {
@@ -51,13 +51,13 @@ class CLPopupBMIInputController: CLPopupManagerBaseController {
         let secondTextField = UITextField()
         secondTextField.keyboardType = .decimalPad
         secondTextField.delegate = self
-        secondTextField.setPlaceholder("请输入身高(cm)", color: hexColor("#999999"), font: UIFont.systemFont(ofSize: 16))
+        secondTextField.setPlaceholder("请输入身高(cm)", color: .hexColor(with: "#999999"), font: UIFont.systemFont(ofSize: 16))
         secondTextField.textAlignment = .center
         return secondTextField
     }()
     private lazy var secondLineView: UIView = {
         let secondLineView = UIView()
-        secondLineView.backgroundColor = hexColor("#F0F0F0")
+        secondLineView.backgroundColor = .hexColor(with: "#F0F0F0")
         return secondLineView
     }()
     private lazy var secondTapView: UIControl = {
@@ -70,7 +70,7 @@ class CLPopupBMIInputController: CLPopupManagerBaseController {
         subTitleLabel.text = "您的BMI：--"
         subTitleLabel.textAlignment = .center
         subTitleLabel.font = UIFont.systemFont(ofSize: 16)
-        subTitleLabel.textColor = hexColor("#666666")
+        subTitleLabel.textColor = UIColor.hexColor(with: "#666666")
         subTitleLabel.numberOfLines = 0
         return subTitleLabel
     }()
@@ -83,7 +83,7 @@ class CLPopupBMIInputController: CLPopupManagerBaseController {
         sureButton.setTitleColor(.white, for: .selected)
         sureButton.setTitleColor(.white, for: .highlighted)
         sureButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        sureButton.backgroundColor = hexColor("#40B5AA")
+        sureButton.backgroundColor = .themeColor
         sureButton.layer.cornerRadius = 20
         sureButton.clipsToBounds = true
         sureButton.addTarget(self, action: #selector(sureAction), for: .touchUpInside)
@@ -298,7 +298,8 @@ extension CLPopupBMIInputController {
             self.view.endEditing(true)
         }
         dismissAnimation { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
         }
     }
 }

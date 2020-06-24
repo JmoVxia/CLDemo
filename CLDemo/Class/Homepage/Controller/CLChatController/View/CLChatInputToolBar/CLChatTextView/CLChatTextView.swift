@@ -70,7 +70,7 @@ extension CLChatTextView {
     private func initUI() {
         addSubview(placeholderLabel)
         placeholderLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(3)
+            make.left.equalTo(12)
             make.centerY.equalToSuperview()
             make.width.equalToSuperview().offset(-6)
             make.height.lessThanOrEqualToSuperview()

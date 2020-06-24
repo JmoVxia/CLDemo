@@ -29,14 +29,14 @@ class CLFlopPrizeView: UIView {
         let titleLabel = UILabel()
         titleLabel.text = "商品需要2人助力即可免费获得"
         titleLabel.font = UIFont.systemFont(ofSize: 14.5)
-        titleLabel.textColor = hexColor("#FFFFFF")
+        titleLabel.textColor = .hexColor(with: "#FFFFFF")
         return titleLabel
     }()
     private lazy var flopBottomView: CLFlopBottomView = {
         let flopBottomView = CLFlopBottomView()
         flopBottomView.iconImageView.image = UIImage.init(named: "share")
         flopBottomView.titleLabel.text = "邀请好友助力"
-        flopBottomView.titleLabel.textColor = hexColor("#F90815")
+        flopBottomView.titleLabel.textColor = .hexColor(with: "#F90815")
         flopBottomView.titleLabel.font = UIFont.systemFont(ofSize: 13)
         flopBottomView.isUserInteractionEnabled = false
         return flopBottomView

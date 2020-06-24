@@ -1,5 +1,5 @@
 //
-//  PTKnockMessagePopupController.swift
+//  CLMessagePopupController.swift
 //  Potato
 //
 //  Created by Emma on 2020/1/9.
@@ -23,7 +23,7 @@ class CLPopupMessageController: CLPopupManagerBaseController {
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = hexColor("0xc3c3c8")
+        contentView.backgroundColor = .hexColor(with: "0xc3c3c8")
         contentView.alpha = 0.0
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
@@ -59,33 +59,33 @@ class CLPopupMessageController: CLPopupManagerBaseController {
     }()
     lazy var sureButton: UIButton = {
         let sureButton = UIButton()
-        sureButton.setBackgroundImage(imageWithColor(UIColor.white), for: .normal)
-        sureButton.setBackgroundImage(imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
-        sureButton.setTitleColor(hexColor("0x007ee5"), for: .normal)
-        sureButton.setTitleColor(hexColor("0x007ee5"), for: .selected)
-        sureButton.setTitleColor(hexColor("0x007ee5"), for: .highlighted)
+        sureButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
+        sureButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
+        sureButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .normal)
+        sureButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .selected)
+        sureButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .highlighted)
         sureButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         sureButton.addTarget(self, action: #selector(sureButtonAction), for: .touchUpInside)
         return sureButton
     }()
     lazy var leftButton: UIButton = {
         let leftButton = UIButton()
-        leftButton.setBackgroundImage(imageWithColor(UIColor.white), for: .normal)
-        leftButton.setBackgroundImage(imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
-        leftButton.setTitleColor(hexColor("0x007ee5"), for: .normal)
-        leftButton.setTitleColor(hexColor("0x007ee5"), for: .selected)
-        leftButton.setTitleColor(hexColor("0x007ee5"), for: .highlighted)
+        leftButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
+        leftButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
+        leftButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .normal)
+        leftButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .selected)
+        leftButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .highlighted)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         leftButton.addTarget(self, action: #selector(leftButtonAction), for: .touchUpInside)
         return leftButton
     }()
     lazy var rightButton: UIButton = {
         let rightButton = UIButton()
-        rightButton.setBackgroundImage(imageWithColor(UIColor.white), for: .normal)
-        rightButton.setBackgroundImage(imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
-        rightButton.setTitleColor(hexColor("0x007ee5"), for: .normal)
-        rightButton.setTitleColor(hexColor("0x007ee5"), for: .selected)
-        rightButton.setTitleColor(hexColor("0x007ee5"), for: .highlighted)
+        rightButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
+        rightButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
+        rightButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .normal)
+        rightButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .selected)
+        rightButton.setTitleColor(UIColor.hexColor(with: "0x007ee5"), for: .highlighted)
         rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         rightButton.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
         return rightButton
@@ -180,21 +180,24 @@ extension CLPopupMessageController {
 extension CLPopupMessageController {
     @objc func sureButtonAction() {
         dismissAnimation { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
             self.sureCallBack?()
             self.sureCallBack = nil
         }
     }
     @objc func leftButtonAction() {
         dismissAnimation { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
             self.leftCallBack?()
             self.leftCallBack = nil;
         }
     }
     @objc func rightButtonAction() {
         dismissAnimation { (_) in
-            CLPopupManager.dismissAll(false)
+            
+            CLPopupManager.dismiss(self.configure.identifier)
             self.rightCallBack?()
             self.rightCallBack = nil;
         }

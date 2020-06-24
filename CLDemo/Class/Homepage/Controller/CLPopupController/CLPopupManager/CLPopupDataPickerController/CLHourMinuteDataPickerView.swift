@@ -30,7 +30,7 @@ class CLHourMinuteDataPickerView: UIView {
     private lazy var lineView: UILabel = {
         let lineView = UILabel()
         lineView.text = ":"
-        lineView.textColor = hexColor("#40B5AA")
+        lineView.textColor = .themeColor
         return lineView
     }()
     private lazy var pickerView: UIPickerView = {
@@ -90,8 +90,8 @@ extension CLHourMinuteDataPickerView: UIPickerViewDelegate {
         let label: UILabel = (view as? UILabel) ?? UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 18)
-        var textColor = hexColor("#333333")
-        let currentColor = hexColor("#40B5AA")
+        var textColor = UIColor.hexColor(with: "#333333")
+        let currentColor = UIColor.themeColor
         if component == 0 {
             textColor  = hourIndex == row ? currentColor : textColor
             label.text =  String(format: "%02d", hourArray[row])

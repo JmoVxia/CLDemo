@@ -69,7 +69,7 @@
     if ([application.keyWindow isKindOfClass:[CLPopupManagerWindow class]]) {
         return application.keyWindow.rootViewController.supportedInterfaceOrientations;
     }
-    return UIInterfaceOrientationMaskAllButUpsideDown;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 

@@ -7,17 +7,12 @@
 //
 
 import UIKit
+import Photos
 
 class CLChatController: CLBaseViewController {
-    private var dataSource = [CLChatLayoutItemProtocol]()
-    ///渐变色
-    private lazy var gradientLayerView: CLGradientLayerView = {
-        let gradientLayerView = CLGradientLayerView()
-        gradientLayerView.colors = [hexColor("0x373747").cgColor, hexColor("0x22222D").cgColor]
-        gradientLayerView.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayerView.endPoint = CGPoint(x: 0, y: 1)
-        return gradientLayerView
-    }()
+    ///图片上传路径
+    private let imageUploadPath: String = pathDocuments + "/CLChatImageUpload"
+    private var dataSource = [CLChatItemProtocol]()
     private lazy var tableView: CLIntrinsicTableView = {
         let tableView = CLIntrinsicTableView()
         tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "UITableViewCell")
@@ -27,9 +22,14 @@ class CLChatController: CLBaseViewController {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
-        let panGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         panGestureRecognizer.delegate = self
+        panGestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(panGestureRecognizer)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.delegate = self
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGestureRecognizer)
         return tableView
     }()
     ///输入工具条
@@ -44,13 +44,9 @@ class CLChatController: CLBaseViewController {
 extension CLChatController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.tintColor = UIColor.black
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -61,31 +57,29 @@ extension CLChatController {
         super.viewDidLoad()
         initUI()
         makeConstraints()
+        addTipsMessages(["欢迎来到本Demo"])
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         inputToolBar.viewWillTransition(to: size, with: coordinator)
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
 }
 extension CLChatController {
     private func initUI() {
-        view.addSubview(gradientLayerView)
+        view.backgroundColor = .hexColor(with: "#EEEEED")
         view.addSubview(tableView)
         view.addSubview(inputToolBar)
     }
     private func makeConstraints() {
-        gradientLayerView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
         inputToolBar.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
         }
         tableView.snp.makeConstraints { (make) in
-            make.height.equalToSuperview().offset(-(navigationController?.navigationBar.frame.height ?? 0.0) - cl_statusBarHeight() - inputToolBar.toolBarDefaultHeight)
             make.left.right.equalTo(view)
             make.bottom.equalTo(inputToolBar.snp.top)
+            make.height.equalToSuperview().offset(-(navigationController?.navigationBar.frame.height ?? 0.0) - cl_statusBarHeight() - inputToolBar.toolBarDefaultHeight)
         }
     }
     private func reloadData() {
@@ -93,24 +87,101 @@ extension CLChatController {
             self.tableView.reloadData()
             if self.dataSource.count >= 1 {
                 let item = max(self.dataSource.count - 1, 0)
-                self.tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: false)
+                self.tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: true)
             }
         }
     }
 }
 extension CLChatController {
-    private func addTextMessage(_ text: String) {
-        let item = CLChatLayoutTextItem()
-        item.position = .right
-        item.text = text
-        dataSource.append(item)
-        
-        let item1 = CLChatLayoutTextItem()
-        item1.position = .left
-        item1.text = text
-        dataSource.append(item1)
-        
-        reloadData()
+    private func addTipsMessages(_ messages: [String]) {
+        DispatchQueue.global().async {
+            for text in messages {
+                let item = CLChatTipsItem()
+                item.text = text
+                self.dataSource.append(item)
+            }
+            self.reloadData()
+        }
+    }
+    private func addTextMessages(_ messages: [String]) {
+        DispatchQueue.global().async {
+            do {
+                for text in messages {
+                    let item = CLChatTextItem()
+                    item.position = .right
+                    item.text = text
+                    self.dataSource.append(item)
+                }
+            }
+            do {
+                for text in messages {
+                    let item = CLChatTextItem()
+                    item.position = .left
+                    item.text = text
+                    self.dataSource.append(item)
+                }
+            }
+            self.reloadData()
+        }
+    }
+    private func addImageMessages(_ messages: [(image: UIImage, asset: PHAsset)]) {
+        DispatchQueue.global().async {
+            do {
+                for imageInfo in messages {
+                    guard let previewImageData = imageInfo.image.pngData() else {
+                        return
+                    }
+                    let imageItem = CLChatImageItem.init()
+                    imageItem.imagePath = self.saveUploadImage(imageData: previewImageData, messageId: (imageItem.messageId + "previewImage"))
+                    imageItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
+                    imageItem.position = .right
+                    self.dataSource.append(imageItem)
+                }
+            }
+            do {
+                for imageInfo in messages {
+                    guard let previewImageData = imageInfo.image.pngData() else {
+                        return
+                    }
+                    let imageItem = CLChatImageItem.init()
+                    imageItem.imagePath = self.saveUploadImage(imageData: previewImageData, messageId: (imageItem.messageId + "previewImage"))
+                    imageItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
+                    imageItem.position = .left
+                    self.dataSource.append(imageItem)
+                }
+            }
+            self.reloadData()
+        }
+    }
+    private func addVoiceMessages(duration: TimeInterval, path: String) {
+        DispatchQueue.global().async {
+            do {
+                let item = CLChatVoiceItem()
+                item.duration = duration
+                item.path = path
+                self.dataSource.append(item)
+            }
+            do {
+                let item = CLChatVoiceItem()
+                item.position = .left
+                item.duration = duration
+                item.path = path
+                self.dataSource.append(item)
+            }
+            self.reloadData()
+        }
+    }
+}
+extension CLChatController {
+    func saveUploadImage(imageData: Data, messageId: String) -> String? {
+        let path = imageUploadPath + "/\(messageId)"
+        if !FileManager.default.fileExists(atPath: imageUploadPath) {
+            try? FileManager.default.createDirectory(atPath: imageUploadPath, withIntermediateDirectories: true, attributes: nil)
+        }
+        if (imageData as NSData).write(toFile: path, atomically: true) {
+            return path
+        }
+        return nil
     }
 }
 extension CLChatController {
@@ -124,16 +195,19 @@ extension CLChatController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = dataSource[indexPath.row]
-        let cell = item.dequeueReusableCell(tableView: tableView)
-        if let tableViewCell = cell as? CLChatLayoutCellProtocol {
-            tableViewCell.setItem(item)
-        }
-        return cell
+        return item.dequeueReusableCell(tableView: tableView)
     }
 }
 extension CLChatController: CLChatInputToolBarDelegate {
     func inputBarWillSendText(text: String) {
-        addTextMessage(text)
+        addTextMessages([text])
+    }
+    func inputBarWillSendImage(images: [(image: UIImage, asset: PHAsset)]) {
+        addImageMessages(images)
+    }
+    func inputBarFinishRecord(duration: TimeInterval, path: String) {
+        print("duration = \(duration), path = \(path)")
+        addVoiceMessages(duration: duration, path: path)
     }
 }
 extension CLChatController: UIGestureRecognizerDelegate {
@@ -142,7 +216,7 @@ extension CLChatController: UIGestureRecognizerDelegate {
             return false
         }
         let touchFrame = view.convert(touchView.frame, from: touchView.superview)
-        if inputToolBar.frame.contains(touchFrame) {
+        if inputToolBar.frame.contains(touchFrame) || !inputToolBar.isShowKeyboard {
             return false
         }
         return true

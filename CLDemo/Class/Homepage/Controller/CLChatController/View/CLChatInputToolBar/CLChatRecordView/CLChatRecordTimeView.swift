@@ -18,13 +18,13 @@ class CLChatRecordTimeView: UIView {
        let timeLabel = UILabel()
         timeLabel.textAlignment = .center
         timeLabel.textColor = UIColor.white
-        timeLabel.font = UIFont.systemFont(ofSize: 13)
+        timeLabel.font = .monospacedDigitSystemFont(ofSize: 13, weight: .medium)
         timeLabel.text = "00:00"
         return timeLabel
     }()
     private lazy var backgroundImageView: UIImageView = {
        let backgroundImageView = UIImageView()
-        backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(hexColor("0x5C5C71"))
+        backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "#34B46F"))
         return backgroundImageView
     }()
     private (set) var isAnimationing: Bool = false
@@ -32,11 +32,11 @@ class CLChatRecordTimeView: UIView {
         didSet {
             if isOut != oldValue {
                 if isOut {
-                    timeLabel.textColor = hexColor("0xff3b30")
-                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(hexColor("ffffff"))
+                    timeLabel.textColor = .hexColor(with: "0xff3b30")
+                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "ffffff"))
                 } else {
                     timeLabel.textColor = UIColor.white
-                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(hexColor("0x5C5C71"))
+                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "#34B46F"))
                 }
             }
         }
@@ -95,7 +95,7 @@ extension CLChatRecordTimeView {
         }) { finished in
             self.contentView.alpha = 1
             self.contentView.isHidden = true
-            self.backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(hexColor("0x5C5C71"))
+            self.backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "34B46F"))
             self.timeLabel.textColor = UIColor.white
             self.isAnimationing = false
             self.timeLabel.text = "00:00"
