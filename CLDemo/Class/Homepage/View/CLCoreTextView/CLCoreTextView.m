@@ -107,7 +107,7 @@ static CGFloat widthCallBacks(void *ref)
     CTFrameDraw(frame, context);
     
     //6.添加图片并绘制
-    UIImage *image = [UIImage imageNamed:@"2"];
+    UIImage *image = [UIImage imageNamed:@"222"];
     CGRect imgFrm = [self calculateImageRectWithFrame:frame];
     self.imgFrm = imgFrm;
     CGContextDrawImage(context, imgFrm, image.CGImage);

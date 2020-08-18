@@ -44,7 +44,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self.view addSubview:self.horizontalLayoutLabel];
     [self.view addSubview:self.horizontalLayoutView];

@@ -77,13 +77,13 @@
     if (_arrayDS == nil){
         _arrayDS = [[NSMutableArray alloc] init];
         
-        ChangeFontSizeModel *model1 = [[ChangeFontSizeModel alloc] initWithHeadImage:[UIImage imageNamed:@"1"] contentString:@"预览字体大小" fromMe:YES];
+        ChangeFontSizeModel *model1 = [[ChangeFontSizeModel alloc] initWithHeadImage:[UIImage imageNamed:@"111"] contentString:@"预览字体大小" fromMe:YES];
         [_arrayDS addObject:model1];
         
-        ChangeFontSizeModel *model2 = [[ChangeFontSizeModel alloc] initWithHeadImage:[UIImage imageNamed:@"2"] contentString:@"拖拽或者点击下面的滑块，可设置字体大小" fromMe:NO];
+        ChangeFontSizeModel *model2 = [[ChangeFontSizeModel alloc] initWithHeadImage:[UIImage imageNamed:@"222"] contentString:@"拖拽或者点击下面的滑块，可设置字体大小" fromMe:NO];
         [_arrayDS addObject:model2];
         
-        ChangeFontSizeModel *model3 = [[ChangeFontSizeModel alloc] initWithHeadImage:[UIImage imageNamed:@"2"] contentString:@"设置后，可改变聊天菜单中的字体大小。如果在使用过程中存在问题或意见，可反馈给我们团队" fromMe:NO];
+        ChangeFontSizeModel *model3 = [[ChangeFontSizeModel alloc] initWithHeadImage:[UIImage imageNamed:@"222"] contentString:@"设置后，可改变聊天菜单中的字体大小。如果在使用过程中存在问题或意见，可反馈给我们团队" fromMe:NO];
         [_arrayDS addObject:model3];
 
     }

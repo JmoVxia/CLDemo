@@ -25,7 +25,7 @@ class CLChatTextCell: CLChatCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 15)
         label.numberOfLines = 0
-        label.preferredMaxLayoutWidth = cl_scale_iphone6_width(275)
+        label.preferredMaxLayoutWidth = 275.autoWidth()
     }
     ///左侧气泡
     private lazy var leftBubbleImage: UIImage = {

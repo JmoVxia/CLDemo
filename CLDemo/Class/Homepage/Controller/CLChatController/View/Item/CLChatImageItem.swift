@@ -11,7 +11,7 @@ class CLChatImageItem: CLChatItem {
     ///图片原始大小
     var imageOriginalSize = CGSize.zero {
         didSet {
-            let width = cl_screenWidth() * 0.45
+            let width = screenWidth() * 0.45
             size = calculateScaleFrame(imageSize: imageOriginalSize, maxSize: CGSize(width: width, height: width), minSize: CGSize(width: width * 0.75, height: width * 0.75))
         }
     }

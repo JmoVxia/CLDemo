@@ -15,7 +15,7 @@ enum CLPopupMessageType {
     case two
 }
 
-class CLPopupMessageController: CLPopupManagerBaseController {
+class CLPopupMessageController: CLPopupManagerController {
     var type: CLPopupMessageType = .one
     var sureCallBack: (() -> ())?
     var leftCallBack: (() -> ())?

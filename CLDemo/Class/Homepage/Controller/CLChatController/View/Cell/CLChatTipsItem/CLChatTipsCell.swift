@@ -19,7 +19,7 @@ class CLChatTipsCell: CLChatCell {
         label.textColor = .white
         label.font = PingFangSCMedium(14)
         label.numberOfLines = 0
-        label.preferredMaxLayoutWidth = cl_screenWidth() - 80
+        label.preferredMaxLayoutWidth = screenWidth() - 80
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

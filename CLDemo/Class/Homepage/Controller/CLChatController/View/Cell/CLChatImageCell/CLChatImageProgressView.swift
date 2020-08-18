@@ -65,7 +65,7 @@ extension CLChatImageProgressView {
         label = UILabel.init(frame: bounds)
         label?.text = ""
         addSubview(label!)
-        label?.font = UIFont.init(name: "Helvetica Neue", size: 12)
+        label?.font = PingFangSCMedium(12)
         label?.textColor = UIColor.white
         label?.textAlignment = NSTextAlignment.center
         updateProgress(value: 0.0)

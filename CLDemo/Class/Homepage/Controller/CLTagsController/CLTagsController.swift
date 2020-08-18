@@ -31,14 +31,14 @@ class CLTagsController: CLBaseViewController {
     }
     func initDate() {
         let array = ["风格","童年","紫府东风放夜时","步莲秾李伴人归","东风吹碧草，年华换、行客老沧洲", "书","偷影子的人","见梅吐旧英","儒家学派的经典著","道德观念","挪威的森林","书中故事","了不起的盖茨比","孤独","受益匪浅","回忆都淡了","谁知道","呵呵","历史","谁","世家","谁到人归途","上吞巴汉控潇湘，怒似连山静镜光","步莲秾李伴人归","东风吹碧草，年华换、行客老沧洲","见梅吐旧英","儒家学派的经典著","道德观念","挪威的森林","书中故事","了不起的盖茨比","孤独","受益匪浅","回忆都淡了","谁知道","呵呵","历史","谁","世家","谁到人归途","山有木兮木有枝，心悦君兮君不知","极目楚天空，云雨无踪，漫留遗恨锁眉峰。自是荷花开较晚，孤负东风"]
-        let maxWidth: CGFloat = cl_screenWidth() - cl_safeAreaInsets().left - cl_safeAreaInsets().right
+        let maxWidth: CGFloat = screenWidth() - safeAreaEdgeInsets().left - safeAreaEdgeInsets().right
         DispatchQueue.global().async {
             self.arrayDS.removeAll()
             for _ in array {
                 guard let date = array.sample(size: max(Int(arc4random_uniform(UInt32(array.count))), 1)) else {
                     return
                 }
-                let item = CLTagsItem(with: date, maxWidth: maxWidth, tagsMinPadding: 10)
+                let item = CLTagsItem(with: date, maxWidth: maxWidth, tagsMinPadding: 10, isAlignment: date.count % 2 == 0)
                 self.arrayDS.append(item)
             }
             DispatchQueue.main.async {

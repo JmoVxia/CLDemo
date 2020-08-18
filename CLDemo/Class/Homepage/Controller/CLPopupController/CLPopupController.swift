@@ -42,103 +42,126 @@ class CLPopupController: CLBaseViewController {
 }
 extension CLPopupController {
     func initData() {
-        let model1 = CLPopupModel()
-        model1.title = "翻牌弹窗"
-        model1.callback = {[weak self] in
-            self?.showFlop()
+        do{
+            let model = CLPopupModel()
+            model.title = "翻牌弹窗"
+            model.callback = {[weak self] in
+                self?.showFlop()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model1)
-        
-        let model2 = CLPopupModel()
-        model2.title = "一个按钮"
-        model2.callback = {[weak self] in
-            self?.showOneAlert()
+        do{
+            let model = CLPopupModel()
+            model.title = "可拖拽弹窗"
+            model.callback = {[weak self] in
+                self?.showDragView()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model2)
-        
-        let model3 = CLPopupModel()
-        model3.title = "两个按钮"
-        model3.callback = {[weak self] in
-            self?.showTwoAlert()
+        do{
+            let model = CLPopupModel()
+            model.title = "一个按钮"
+            model.callback = {[weak self] in
+                self?.showOneAlert()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model3)
-        
-        let model4 = CLPopupModel()
-        model4.title = "成功弹窗"
-        model4.callback = {[weak self] in
-            self?.showSuccess()
+        do{
+            let model = CLPopupModel()
+            model.title = "两个按钮"
+            model.callback = {[weak self] in
+                self?.showTwoAlert()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model4)
-        
-        let model5 = CLPopupModel()
-        model5.title = "错误弹窗"
-        model5.callback = {[weak self] in
-            self?.showError()
+        do{
+            let model = CLPopupModel()
+            model.title = "成功弹窗"
+            model.callback = {[weak self] in
+                self?.showSuccess()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model5)
-        
-        let model6 = CLPopupModel()
-        model6.title = "加载弹窗"
-        model6.callback = {[weak self] in
-            self?.showLoading()
+        do{
+            let model = CLPopupModel()
+            model.title = "错误弹窗"
+            model.callback = {[weak self] in
+                self?.showError()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model6)
-        
-        let model7 = CLPopupModel()
-        model7.title = "提示弹窗"
-        model7.callback = {[weak self] in
-            self?.showTips()
+        do{
+            let model = CLPopupModel()
+            model.title = "加载弹窗"
+            model.callback = {[weak self] in
+                self?.showLoading()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model7)
-        
-        let model8 = CLPopupModel()
-        model8.title = "年月日选择"
-        model8.callback = {[weak self] in
-            self?.showYearMonthDayDataPicker()
+        do{
+            let model = CLPopupModel()
+            model.title = "提示弹窗"
+            model.callback = {[weak self] in
+                self?.showTips()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model8)
-        
-        let model9 = CLPopupModel()
-        model9.title = "时分选择"
-        model9.callback = {[weak self] in
-            self?.showHourMinuteDataPicker()
+        do{
+            let model = CLPopupModel()
+            model.title = "年月日选择"
+            model.callback = {[weak self] in
+                self?.showYearMonthDayDataPicker()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model9)
-
-        let model10 = CLPopupModel()
-        model10.title = "年月日时分选择"
-        model10.callback = {[weak self] in
-            self?.showYearMonthDayHourMinuteDataPicker()
+        do{
+            let model = CLPopupModel()
+            model.title = "时分选择"
+            model.callback = {[weak self] in
+                self?.showHourMinuteDataPicker()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model10)
-        
-        let model11 = CLPopupModel()
-        model11.title = "BMI计算"
-        model11.callback = {[weak self] in
-            self?.showBMIInput()
+        do{
+            let model = CLPopupModel()
+            model.title = "年月日时分选择"
+            model.callback = {[weak self] in
+                self?.showYearMonthDayHourMinuteDataPicker()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model11)
-        
-        let model12 = CLPopupModel()
-        model12.title = "一个输入框"
-        model12.callback = {[weak self] in
-            self?.showOneInput()
+        do{
+            let model = CLPopupModel()
+            model.title = "BMI计算"
+            model.callback = {[weak self] in
+                self?.showBMIInput()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model12)
-        
-        let model13 = CLPopupModel()
-        model13.title = "两个输入框"
-        model13.callback = {[weak self] in
-            self?.showTwoInput()
+        do{
+            let model = CLPopupModel()
+            model.title = "一个输入框"
+            model.callback = {[weak self] in
+                self?.showOneInput()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model13)
-        
-        let model14 = CLPopupModel()
-        model14.title = "食物选择"
-        model14.callback = {[weak self] in
-            self?.showFoodPicker()
+        do{
+            let model = CLPopupModel()
+            model.title = "两个输入框"
+            model.callback = {[weak self] in
+                self?.showTwoInput()
+            }
+            arrayDS.append(model)
         }
-        arrayDS.append(model14)
+        do{
+            let model = CLPopupModel()
+            model.title = "食物选择"
+            model.callback = {[weak self] in
+                self?.showFoodPicker()
+            }
+            arrayDS.append(model)
+        }
     }
 }
 extension CLPopupController: UITableViewDataSource {
@@ -161,22 +184,12 @@ extension CLPopupController: UITableViewDelegate {
 extension CLPopupController {
     func showFlop() {
         CLPopupManager.showFlop()
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                    CLPopupManager.showFlop { (configure) in
-                        configure.isHiddenStatusBar = true
-                    }
-                }
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-                    CLPopupManager.showFlop { (configure) in
-                        configure.isHiddenStatusBar = false
-                        configure.statusBarStyle = .default
-                    }
-                }
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
-                    CLPopupManager.showFlop { (configure) in
-                        configure.isHiddenStatusBar = true
-                    }
-                }
+    }
+    func showDragView() {
+        CLPopupManager.showDrag { (configure) in
+            configure.isAutorotate = true
+            configure.interfaceOrientationMask = .all
+        }
     }
     func showOneAlert() {
         CLPopupManager.showOneAlert(configureCallback: { (configure) in
@@ -213,24 +226,24 @@ extension CLPopupController {
         CLPopupManager.showTips(text: "AAAAAAAAAAAAAAAAAAAA")
     }
     func showYearMonthDayDataPicker() {
-        CLPopupManager.showYearMonthDayDataPicker { (year, month, day) in
+        CLPopupManager.showYearMonthDayDataPicker(yearMonthDayCallback:  { (year, month, day) in
             print("选中-----\(year)年\(month)月\(day)日")
-        }
+        })
     }
     func showHourMinuteDataPicker() {
-        CLPopupManager.showHourMinuteDataPicker { (hour, minute) in
+        CLPopupManager.showHourMinuteDataPicker(hourMinuteCallback:  { (hour, minute) in
             print("选中-----\(hour)时\(minute)分")
-        }
+        })
     }
     func showYearMonthDayHourMinuteDataPicker()  {
-        CLPopupManager.showYearMonthDayHourMinuteDataPicker { (year, month, day, hour, minute) in
+        CLPopupManager.showYearMonthDayHourMinuteDataPicker(yearMonthDayHourMinuteCallback:  { (year, month, day, hour, minute) in
             print("选中-----\(year)年\(month)月\(day)日\(hour)时\(minute)分")
-        }
+        })
     }
     func showBMIInput() {
-        CLPopupManager.showBMIInput { (bmi) in
+        CLPopupManager.showBMIInput(bmiCallback:  { (bmi) in
             print("BMI-----\(bmi)")
-        }
+        })
     }
     func showOneInput() {
         CLPopupManager.showOneInput(type: .UrineVolume) { (value) in

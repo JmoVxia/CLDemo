@@ -1,4 +1,4 @@
-framework module MJExtension {
+module MJExtension {
   umbrella header "MJExtension-umbrella.h"
 
   export *

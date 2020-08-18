@@ -29,8 +29,8 @@
     [self.view addSubview:self.chart];
     [self.chart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(0);
-        make.width.mas_equalTo(80);
-        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(250);
+        make.height.mas_equalTo(200);
     }];
     
     self.arrayDS = [NSMutableArray array];
@@ -109,7 +109,7 @@
 }
 ///图表宽高
 - (CGSize)lineChartViewChartSize {
-    return CGSizeMake(80, 40);
+    return CGSizeMake(250, 200);
 }
 - (void)dealloc
 {

@@ -55,9 +55,9 @@ class CLChatCell: UITableViewCell {
 }
 extension CLChatCell {
     @objc private func reSendMessage() {
-        guard let chatItem = item  else {
-            return
-        }
+//        guard let chatItem = item  else {
+//            return
+//        }
 //        presenter?.reSendMessageWithItem(chatItem)
     }
 }

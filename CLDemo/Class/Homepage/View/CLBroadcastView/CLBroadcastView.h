@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///广播个数
 - (NSInteger)broadcastViewRows:(CLBroadcastView *)broadcast;
 ///创建cell
-- (CLBroadcastCell *)broadcastView:(CLBroadcastView *)broadcast cellForRowAtIndexIndex:(NSInteger)index;
+- (CLBroadcastCell *)broadcastView:(CLBroadcastView *)broadcast cellForRowAtIndex:(NSInteger)index;
 
 @end
 
@@ -49,12 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///代理
 @property (nonatomic, weak) id<CLBroadcastViewDelegate> delegate;
 
-///轮播时间
-@property (nonatomic, assign) NSTimeInterval rotationTime;
-
-
 ///注册cell
 - (void)registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier;
+
+///滑动到下一个
+- (void)scrollToNext;
 
 ///加载方法
 - (void)reloadData;

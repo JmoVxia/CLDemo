@@ -59,9 +59,6 @@ extension CLChatController {
         makeConstraints()
         addTipsMessages(["欢迎来到本Demo"])
     }
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        inputToolBar.viewWillTransition(to: size, with: coordinator)
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -79,7 +76,7 @@ extension CLChatController {
         tableView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
             make.bottom.equalTo(inputToolBar.snp.top)
-            make.height.equalToSuperview().offset(-(navigationController?.navigationBar.frame.height ?? 0.0) - cl_statusBarHeight() - inputToolBar.toolBarDefaultHeight)
+            make.height.equalToSuperview().offset(-(navigationController?.navigationBar.frame.height ?? 0.0) - statusBarHeight() - inputToolBar.toolBarDefaultHeight)
         }
     }
     private func reloadData() {
@@ -205,9 +202,8 @@ extension CLChatController: CLChatInputToolBarDelegate {
     func inputBarWillSendImage(images: [(image: UIImage, asset: PHAsset)]) {
         addImageMessages(images)
     }
-    func inputBarFinishRecord(duration: TimeInterval, path: String) {
-        print("duration = \(duration), path = \(path)")
-        addVoiceMessages(duration: duration, path: path)
+    func inputBarFinishRecord(duration: TimeInterval, file: Data) {
+        addVoiceMessages(duration: duration, path: "")
     }
 }
 extension CLChatController: UIGestureRecognizerDelegate {

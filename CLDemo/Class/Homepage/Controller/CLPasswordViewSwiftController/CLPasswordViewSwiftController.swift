@@ -20,7 +20,7 @@ class CLPasswordViewSwiftController: CLBaseViewController {
         label1 = UILabel().then { (label) in
             view.addSubview(label)
             label.snp.makeConstraints({ (make) in
-                make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(30)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(30)
                 make.centerX.equalToSuperview()
             })
         }

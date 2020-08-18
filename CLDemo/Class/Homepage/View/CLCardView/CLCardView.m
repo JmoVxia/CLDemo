@@ -7,7 +7,7 @@
 //
 
 #import "CLCardView.h"
-#import "CLGCDTimerManager.h"
+#import "CLGCDTimerManagerOC.h"
 
 @interface CLCardViewCell ()
 
@@ -67,7 +67,7 @@
 ///原始frame数组
 @property (nonatomic, strong) NSMutableArray<NSValue *> *frameArray;
 ///定时器
-@property (nonatomic, strong) CLGCDTimer *timer;
+@property (nonatomic, strong) CLGCDTimerOC *timer;
 ///自身的宽度
 @property (nonatomic, assign) CGFloat width;
 ///自身的高度
@@ -257,9 +257,9 @@
     self.isAnimation = NO;
 }
 //MARK:JmoVxia---定时器
-- (CLGCDTimer *) timer {
+- (CLGCDTimerOC *) timer {
     if (_timer == nil) {
-        _timer = [[CLGCDTimer alloc] initWithInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
+        _timer = [[CLGCDTimerOC alloc] initWithInterval:0.002 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:nil];
     }
     return _timer;
 }

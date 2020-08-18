@@ -10,16 +10,36 @@ import SnapKit
 import Lottie
 
 class CLChatRecordView: UIView {
+    ///时候可以发送录音
+    var isCanSendCallBack: ((Bool) -> ())?
     ///开始录音
     var startRecorderCallBack: (() -> ())?
     ///取消录音
     var cancelRecorderCallBack: (() -> ())?
     ///结束录音
-    var finishRecorderCallBack: ((TimeInterval, String) -> ())?
-    ///高度
-    private (set) var height: CGFloat = 250 + cl_safeAreaInsets().bottom
+    var finishRecorderCallBack: ((TimeInterval, Data) -> ())?
     ///是否正在录制
     private (set) var isRecording: Bool = false
+    ///是否可以发送
+    private var isCanSend: Bool = true {
+        didSet {
+            if isCanSend != oldValue {
+                isCanSendCallBack?(isCanSend)
+            }
+        }
+    }
+    ///底部背景
+    private lazy var bottomBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    ///底部安全区域
+    private lazy var bottomSafeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
     ///红圈
     private lazy var redcircle: UIView = {
         let redcircle = UIView()
@@ -58,7 +78,7 @@ class CLChatRecordView: UIView {
         let tipsLabel = UILabel()
         tipsLabel.text = "按住说话"
         tipsLabel.textColor = UIColor.white
-        tipsLabel.font = UIFont.systemFont(ofSize: 12)
+        tipsLabel.font = PingFangSCMedium(12)
         return tipsLabel
     }()
     ///时间
@@ -84,7 +104,7 @@ class CLChatRecordView: UIView {
     ///长按手势
     private lazy var longPress: UILongPressGestureRecognizer = {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        longPress.minimumPressDuration = 0.3
+        longPress.minimumPressDuration = 0.05
         return longPress
     }()
     ///是否超出范围
@@ -113,41 +133,51 @@ class CLChatRecordView: UIView {
 }
 extension CLChatRecordView {
     private func initUI() {
-        addSubview(redcircle)
-        addSubview(waveView)
-        addSubview(circleView)
-        addSubview(iconImageView)
-        addSubview(tipsLabel)
-        addSubview(timeView)
+        addSubview(bottomBackgroundView)
+        addSubview(bottomSafeView)
+        bottomBackgroundView.addSubview(redcircle)
+        bottomBackgroundView.addSubview(waveView)
+        bottomBackgroundView.addSubview(circleView)
+        bottomBackgroundView.addSubview(iconImageView)
+        bottomBackgroundView.addSubview(tipsLabel)
+        bottomBackgroundView.addSubview(timeView)
         circleView.addGestureRecognizer(longPress)
     }
     private func makeConstraints() {
+        bottomBackgroundView.snp.makeConstraints { (make) in
+            make.left.top.right.equalToSuperview()
+            make.bottom.equalTo(bottomSafeView.snp.top)
+        }
+        bottomSafeView.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(safeAreaEdgeInsets().bottom)
+        }
         redcircle.snp.makeConstraints { (make) in
             make.width.height.equalTo(180)
-            make.center.equalTo(self)
+            make.center.equalToSuperview()
         }
         circleView.snp.makeConstraints { (make) in
             make.width.height.equalTo(110)
-            make.center.equalTo(self)
+            make.center.equalToSuperview()
         }
         iconImageView.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self).offset(-6)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-6)
             make.width.equalTo(17)
             make.height.equalTo(25)
         }
         waveView.snp.makeConstraints { (make) in
             make.width.height.equalTo(164)
-            make.center.equalTo(self)
+            make.center.equalToSuperview()
         }
         timeView.snp.makeConstraints { (make) in
             make.width.equalTo(87)
             make.height.equalTo(56)
-            make.centerX.equalTo(self)
+            make.centerX.equalToSuperview()
             make.bottom.equalTo(circleView.snp.top)
         }
         tipsLabel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self);
+            make.centerX.equalToSuperview()
             make.top.equalTo(iconImageView.snp.bottom).offset(6)
         }
     }
@@ -189,6 +219,7 @@ extension CLChatRecordView {
         if longPress.state == .began {
             beganLongPress()
         }else if longPress.state == .changed {
+            isCanSend = !isOut
             redcircle.isHidden = !isOut
         }else if longPress.state == .ended || longPress.state == .cancelled || longPress.state == .failed {
             endLongPress()
@@ -210,8 +241,13 @@ extension CLChatRecordView {
             zoomIn()
             redcircle.isHidden = true
             timeView.dismiss()
-            if isOut || recorder.audioDuration < 1.0 {
+            if isOut {
                 cancelRecord()
+            }else if recorder.audioDuration < 1.0 {
+                cancelRecord()
+                if CLPermissions.isAllowed(.microphone) {
+                    CLPopupManager.showTips(text: "录音时间过短")
+                }
             }else {
                 endRecord()
             }
@@ -231,14 +267,19 @@ extension CLChatRecordView {
 }
 extension CLChatRecordView {
     private func startRecord() {
-        CLPermissions.request(.microphone) {[weak self] (status) in
-            if status.isNoSupport {
-                CLLog("当前设备不支持")
-            }else if status.isAuthorized {
-                self?.recorder.start()
-                self?.startRecorderCallBack?()
-            }else {
-                CLLog("没有麦克风权限 状态 \(status)")
+        if CLPermissions.isAllowed(.microphone) {
+            self.recorder.start()
+            self.startRecorderCallBack?()
+        }else {
+            CLPermissions.request(.microphone) { (status) in
+                if status.isNoSupport {
+                    CLPopupManager.showOneAlert(title: "当前设备不支持")
+                }else if status.isAuthorized {
+                }else {
+                    CLPopupManager.showTwoAlert(title: "APP 需要访问麦克风才能录制语音消息\n\n请前往「设置—隐私—麦克风」中打开开关。", right: "设置", rightCallBack:  {
+                        openSettings()
+                    })
+                }
             }
         }
     }

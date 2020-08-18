@@ -1,6 +1,6 @@
 //
 //  UIView+CLExtension.swift
-//  CKD
+//  CL
 //
 //  Created by JmoVxia on 2020/3/12.
 //  Copyright © 2020 JmoVxia. All rights reserved.
@@ -36,7 +36,7 @@ extension UIView {
     }
 }
 ///圆角
-struct CKDCornerRadius {
+struct CLCornerRadius {
     var topLeft: CGFloat = 0
     var topRight: CGFloat = 0
     var bottomLeft: CGFloat = 0
@@ -44,7 +44,7 @@ struct CKDCornerRadius {
 }
 extension UIView {
     ///设置圆角
-    func setCornerRadius(with radius: CKDCornerRadius, borderLayerCallback: (() -> (CAShapeLayer))? = nil) {
+    func setCornerRadius(with radius: CLCornerRadius, borderLayerCallback: (() -> (CAShapeLayer))? = nil) {
         let maskBezierPath = UIBezierPath()
         maskBezierPath.addArc(withCenter: CGPoint(x: bounds.minX + radius.topLeft, y: bounds.minY + radius.topLeft), radius: radius.topLeft, startAngle: .pi, endAngle: .pi * 1.5, clockwise: true)
         maskBezierPath.addArc(withCenter: CGPoint(x: bounds.maxX - radius.topRight, y: bounds.minY + radius.topRight), radius: radius.topRight, startAngle: .pi * 1.5, endAngle: 0, clockwise: true)

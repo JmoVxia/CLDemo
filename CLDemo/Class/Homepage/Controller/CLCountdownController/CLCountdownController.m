@@ -9,7 +9,7 @@
 #import "CLCountdownController.h"
 #import "CLCountdownModel.h"
 #import "CLCountdownCell.h"
-#import "CLGCDTimerManager.h"
+#import "CLGCDTimerManagerOC.h"
 #import "NSDate+CLExtension.h"
 
 @interface CLCountdownController ()<UITableViewDelegate,UITableViewDataSource>
@@ -19,7 +19,7 @@
 ///数据源
 @property (nonatomic, strong) NSMutableArray<CLCountdownModel *> *arrayDS;
 ///定时器
-@property (nonatomic, strong) CLGCDTimer *timer;
+@property (nonatomic, strong) CLGCDTimerOC *timer;
 ///定时器响应次数
 @property (nonatomic, assign) NSInteger actionTimes;
 ///离开的时间
@@ -73,7 +73,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             __weak __typeof(self) weakSelf = self;
-            self.timer = [[CLGCDTimer alloc] initWithInterval:1 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:^(NSInteger actionTimes) {
+            self.timer = [[CLGCDTimerOC alloc] initWithInterval:1 delaySecs:0 queue:dispatch_get_main_queue() repeats:YES action:^(NSInteger actionTimes) {
                 __typeof(&*weakSelf) strongSelf = weakSelf;
                 strongSelf.actionTimes = actionTimes;
                 [strongSelf reloadVisibleCells];

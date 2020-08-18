@@ -12,19 +12,8 @@ import Photos
 class CLChatPhotoView: UIView {
     ///发送图片回调
     var sendImageCallBack: (([(UIImage, PHAsset)]) -> ())?
-    ///控件宽度
-    private var width: CGFloat {
-        return cl_screenWidth()
-    }
-    ///控件高度
-    private (set) var height: CGFloat {
-        set {
-            
-        }
-        get {
-            return 250 + cl_safeAreaInsets().bottom
-        }
-    }
+    ///是否显示快速相册
+    private var isShowAlbumContentView: Bool = false
     ///相册按钮
     private lazy var albumButton: CLChatPhotoCellButton = {
         let albumButton = CLChatPhotoCellButton()
@@ -54,7 +43,6 @@ class CLChatPhotoView: UIView {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.frame = CGRect(x: 0, y: 0, width: width, height: height)
         initUI()
         makeConstraints()
     }
@@ -80,18 +68,22 @@ extension CLChatPhotoView {
 }
 extension CLChatPhotoView {
     func showAlbumContentView() {
+        if isShowAlbumContentView {
+            return
+        }
+        isShowAlbumContentView = true
         addSubview(albumContentView)
         albumContentView.snp.remakeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.height.equalTo(height)
-            make.top.equalTo(height)
+            make.height.equalTo(frame.height)
+            make.top.equalTo(frame.height)
         }
         setNeedsLayout()
         layoutIfNeeded()
         UIView.animate(withDuration: 0.25) {
             self.albumContentView.snp.remakeConstraints { (make) in
                 make.left.right.equalToSuperview()
-                make.height.equalTo(self.height)
+                make.height.equalTo(self.frame.height)
                 make.top.equalTo(0)
             }
             self.setNeedsLayout()
@@ -99,12 +91,16 @@ extension CLChatPhotoView {
         }
     }
     func hiddenAlbumContentView() {
+        if !isShowAlbumContentView {
+            return
+        }
+        isShowAlbumContentView = false
         addSubview(albumContentView)
         UIView.animate(withDuration: 0.25, animations: {
             self.albumContentView.snp.remakeConstraints { (make) in
                 make.left.right.equalToSuperview()
-                make.height.equalTo(self.height)
-                make.top.equalTo(self.height)
+                make.height.equalTo(self.frame.height)
+                make.top.equalTo(self.frame.height)
             }
             self.setNeedsLayout()
             self.layoutIfNeeded()
@@ -115,25 +111,28 @@ extension CLChatPhotoView {
 }
 extension CLChatPhotoView {
     @objc private func albumButtonAction() {
-        CLPermissions.request(.photoLibrary) {[weak self] (status) in
+        CLPermissions.request(.photoLibrary) { (status) in
             if status.isNoSupport {
-                CLLog("当前设备不支持")
+                CLPopupManager.showOneAlert(title: "当前设备不支持")
             }else if status.isAuthorized {
-                self?.showAlbumContentView()
+                self.showAlbumContentView()
             }else {
-                CLLog("没有相册权限 状态 \(status)")
+                CLPopupManager.showTwoAlert(title: "APP 需要访问照片才能发送图片消息\n\n请前往「设置—隐私—照片」中打开开关。", right: "设置", rightCallBack:  {
+                    openSettings()
+                })
             }
         }
     }
     @objc private func cameraButtonButtonAction() {
         CLPermissions.request(.camera) {(status) in
             if status.isNoSupport {
-                CLLog("当前设备不支持")
-                
+                CLPopupManager.showOneAlert(title: "当前设备不支持")
             }else if status.isAuthorized {
                 showCameraPicker()
             }else {
-                CLLog("没有相机权限 状态 \(status)")
+                CLPopupManager.showTwoAlert(title: "APP 无法访问相机才能发送图片消息\n\n请前往「设置—隐私—相机」中打开开关。", right: "设置", rightCallBack:  {
+                    openSettings()
+                })
             }
         }
         func showCameraPicker() {
@@ -147,7 +146,7 @@ extension CLChatPhotoView {
 }
 extension CLChatPhotoView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = (info[.originalImage] as? UIImage)?.fixOrientation() {
+        if let image = (info[.originalImage] as? UIImage)?.fixOrientationImage {
             let options = PHFetchOptions()
             options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             var localIdentifier: String = ""

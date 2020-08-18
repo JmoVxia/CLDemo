@@ -20,7 +20,7 @@ enum CLHudType {
 }
 
 
-class CLPopupHudController: CLPopupManagerBaseController {
+class CLPopupHudController: CLPopupManagerController {
     var animationType: CLHudType = .success
     var dismissCallback: (() -> ())?
     var text: String? {

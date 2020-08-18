@@ -22,18 +22,28 @@ import DateToolsSwift
     ///是否隐藏状态栏
     var isHiddenStatusBar: Bool = false
     ///状态栏颜色
-    var statusBarStyle: UIStatusBarStyle = UIApplication.shared.keyWindow?.rootViewController?.preferredStatusBarStyle ?? .default
+    var statusBarStyle: UIStatusBarStyle = .lightContent
     ///支持方向
     var interfaceOrientationMask: UIInterfaceOrientationMask = .portrait
 }
 //MARK: - 弹窗父类控制器
-@objcMembers class CLPopupManagerBaseController: UIViewController {
+@objcMembers class CLPopupManagerController: UIViewController {
     ///配置
     var configure: CLPopupManagerConfigure = CLPopupManagerConfigure()
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        if let statusBarStyle = UIApplication.shared.keyWindow?.rootViewController?.preferredStatusBarStyle {
+            configure.statusBarStyle = statusBarStyle
+        }
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     deinit {
+//        CLLog("=====  \(self.classForCoder) deinit  =====")
     }
 }
-extension CLPopupManagerBaseController {
+extension CLPopupManagerController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return configure.statusBarStyle
     }
@@ -58,6 +68,9 @@ extension CLPopupManagerBaseController {
         }
         return view
     }
+    deinit {
+//        CLLog("=====  \(self.classForCoder) deinit  =====")
+    }
 }
 //MARK: - 弹窗管理者
 @objcMembers class CLPopupManager: NSObject {
@@ -76,21 +89,24 @@ extension CLPopupManagerBaseController {
         super.init()
     }
     deinit {
+//        CLLog("=====  \(self.classForCoder) deinit  =====")
     }
 }
 extension CLPopupManager {
     /// 显示自定义弹窗
-    private class func showController(_ controller: CLPopupManagerBaseController) {
-        if controller.configure.isDisplacement {
-            share.windowsDictionary.removeAll()
+    private class func showController(_ controller: CLPopupManagerController) {
+        DispatchQueue.main.async {
+            if controller.configure.isDisplacement {
+                share.windowsDictionary.removeAll()
+            }
+            let window = CLPopupManagerWindow(frame: UIScreen.main.bounds)
+            window.isPassedDown = controller.configure.isPassedDown
+            window.windowLevel = UIWindow.Level.statusBar
+            window.isUserInteractionEnabled = true
+            window.rootViewController = controller
+            window.makeKeyAndVisible()
+            share.windowsDictionary[controller.configure.identifier] = window
         }
-        let window = CLPopupManagerWindow(frame: UIScreen.main.bounds)
-        window.isPassedDown = controller.configure.isPassedDown
-        window.windowLevel = UIWindow.Level.statusBar
-        window.isUserInteractionEnabled = true
-        window.rootViewController = controller
-        window.makeKeyAndVisible()
-        share.windowsDictionary[controller.configure.identifier] = window
     }
     /// 隐藏所有弹窗
     class func dismissAll() {
@@ -104,7 +120,7 @@ extension CLPopupManager {
         DispatchQueue.main.async {
             share.windowsDictionary.removeValue(forKey: identifier)
             if share.windowsDictionary.isEmpty {
-                manager = nil
+                dismissAll()
             }
         }
     }
@@ -115,6 +131,17 @@ extension CLPopupManager {
         let identifier: String = dateRandomString
         DispatchQueue.main.async {
             let controller = CLPopupFlopController()
+            controller.configure.identifier = identifier
+            configureCallback?(controller.configure)
+            showController(controller)
+        }
+        return identifier
+    }
+    /// 显示可拖拽弹窗
+    @discardableResult class func showDrag(configureCallback: ((CLPopupManagerConfigure) -> ())? = nil) -> String{
+        let identifier: String = dateRandomString
+        DispatchQueue.main.async {
+            let controller = CLPopupMomentumController()
             controller.configure.identifier = identifier
             configureCallback?(controller.configure)
             showController(controller)

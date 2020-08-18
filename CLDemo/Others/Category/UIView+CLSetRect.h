@@ -39,7 +39,7 @@
 /**
  *  Status bar height.
  */
-#define  cl_statusBarHeight      [[UIApplication sharedApplication] statusBarFrame].size.height
+#define  statusBarHeight      [[UIApplication sharedApplication] statusBarFrame].size.height
 
 /**
  *  Navigation bar height.
@@ -49,7 +49,7 @@
 /**
  *  Status bar & navigation bar height.
  */
-#define  cl_statusBarAndNavigationBarHeight   (cl_statusBarHeight + 44.f)
+#define  cl_statusBarAndNavigationBarHeight   (statusBarHeight + 44.f)
 
 /**
  tabbar高度

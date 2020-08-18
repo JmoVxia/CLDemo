@@ -1,4 +1,4 @@
-framework module DateToolsSwift {
+module DateToolsSwift {
   umbrella header "DateToolsSwift-umbrella.h"
 
   export *

@@ -57,7 +57,6 @@
         CLLog(@"%@",self.recorder.mp3Path);
     }else {
         [self.recorder stopRecorder];
-        CLLog(@"%f", self.recorder.audioDuration);
     }
     self.startButton.selected = !self.startButton.selected;
 }
@@ -115,6 +114,10 @@
 - (CLRecorder *)recorder {
     if (!_recorder) {
         _recorder = [[CLRecorder alloc] init];
+        _recorder.finishCallBack = ^(CGFloat audioDuration, NSData * _Nonnull fileData) {
+            CLLog(@"%f", audioDuration);
+
+        };
     }
     return _recorder;
 }

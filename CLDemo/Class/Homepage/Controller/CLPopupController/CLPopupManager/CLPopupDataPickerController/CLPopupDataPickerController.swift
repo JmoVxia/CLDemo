@@ -16,7 +16,7 @@ enum CLDataPickerType {
     case one
     case duration
 }
-class CLPopupDataPickerController: CLPopupManagerBaseController {
+class CLPopupDataPickerController: CLPopupManagerController {
     var yearMonthDayCallback: ((Int, Int, Int) -> ())?
     var hourMinuteCallback: ((Int, Int) -> ())?
     var yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> ())?

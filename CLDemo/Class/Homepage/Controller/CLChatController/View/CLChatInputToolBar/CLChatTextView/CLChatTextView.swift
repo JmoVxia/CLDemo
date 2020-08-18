@@ -12,7 +12,7 @@ class CLChatTextView: UITextView {
     ///最大高度
     private var maxTextHeight: CGFloat {
         get {
-            let textFont = font ?? UIFont.systemFont(ofSize: 15)
+            let textFont = font ?? PingFangSCMedium(15)
             return CGFloat(ceilf(Float(textFont.lineHeight * CGFloat(maxNumberOfLines) + textContainerInset.top + textContainerInset.bottom)))
         }
     }
@@ -75,7 +75,7 @@ extension CLChatTextView {
             make.width.equalToSuperview().offset(-6)
             make.height.lessThanOrEqualToSuperview()
         }
-        font = UIFont.systemFont(ofSize: 15)
+        font = PingFangSCMedium(15)
         isScrollEnabled = false
         scrollsToTop = false
         showsHorizontalScrollIndicator = false;

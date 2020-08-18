@@ -7,7 +7,7 @@
 //
 
 #import "CLChangeFontSizeSlider.h"
-#import "CLChangeFontSizeManager.h"
+#import "CLChangeFontSizeHelper.h"
 #import "UIView+CLEvents.h"
 
 @interface CLChangeFontSizeSlider ()<UIGestureRecognizerDelegate>
@@ -50,7 +50,7 @@
     _slider.maximumValue = 6;
     _slider.minimumTrackTintColor = [UIColor clearColor];
     _slider.maximumTrackTintColor = [UIColor clearColor];
-    _lastScrollValue = _lastTapValue = [CLChangeFontSizeManager fontSizeCoefficient];
+    _lastScrollValue = _lastTapValue = [CLChangeFontSizeHelper fontSizeCoefficient];
     [_slider setValue:_lastScrollValue];
     //添加点击手势和滑块滑动事件响应
     [_slider addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -131,7 +131,7 @@
     if (_lastTapValue == coefficient) {
         return;
     }
-    [CLChangeFontSizeManager setFontSizeCoefficient:coefficient];
+    [CLChangeFontSizeHelper setFontSizeCoefficient:coefficient];
     if (self.endChangeBlock) {
         self.endChangeBlock(coefficient);
     }
@@ -142,7 +142,7 @@
     if (_lastScrollValue == coefficient) {
         return;
     }
-    [CLChangeFontSizeManager setFontSizeCoefficient:coefficient];
+    [CLChangeFontSizeHelper setFontSizeCoefficient:coefficient];
     if (self.valueChangeBlock) {
         self.valueChangeBlock(coefficient);
     }

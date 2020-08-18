@@ -1,6 +1,6 @@
 //
 //  swift
-//  CKD
+//  CL
 //
 //  Created by JmoVxia on 2020/2/25.
 //  Copyright © 2020 JmoVxia. All rights reserved.
@@ -9,27 +9,19 @@
 import UIKit
 
 ///屏幕宽
-func cl_screenWidth() -> CGFloat {
+func screenWidth() -> CGFloat {
     return UIScreen.main.bounds.size.width
 }
 ///屏幕高
-func cl_screenHeight() -> CGFloat {
+func screenHeight() -> CGFloat {
     return UIScreen.main.bounds.size.height
 }
 ///状态栏高度
-func cl_statusBarHeight() -> CGFloat {
+func statusBarHeight() -> CGFloat {
     return UIApplication.shared.statusBarFrame.size.height
 }
-///按照iPhone6宽度等比例缩放
-func cl_scale_iphone6_width(_ width: CGFloat, pt:Bool = true) -> CGFloat {
-    return width / 750 * cl_screenWidth() * (pt ? 2.0 : 1.0)
-}
-///按照iPhone6高度等比例缩放
-func cl_scale_iphone6_height(_ height: CGFloat, pt:Bool = true) -> CGFloat {
-    return height / 1334 * cl_screenHeight() * (pt ? 2.0 : 1.0)
-}
 ///安全区域
-func cl_safeAreaInsets() -> UIEdgeInsets {
+func safeAreaEdgeInsets() -> UIEdgeInsets {
     if #available(iOS 11.0, *) {
         return UIApplication.shared.delegate?.window??.safeAreaInsets ?? UIEdgeInsets.zero
     }else {
@@ -37,43 +29,43 @@ func cl_safeAreaInsets() -> UIEdgeInsets {
     }
 }
 ///是否是ipad
-func cl_iPad() -> Bool {
+func isIPad() -> Bool {
     return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
 }
 ///判断iPhone4
-func cl_iPhone4() -> Bool {
+func isIPhone4() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 640, height: 960).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断iPhone5系列
-func cl_iPhone5() -> Bool {
+func isIPhone5() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 640, height: 1136).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断iPhone6系列
-func cl_iPhone6() -> Bool {
+func isIPhone6() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 750, height: 1334).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断iPhone6Plus
-func cl_iPhone6Plus() -> Bool {
+func isIPhone6Plus() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 1242, height: 2208).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断cl_iPhoneXScreen
-func cl_iPhoneX() -> Bool {
+func isIPhoneX() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 1125, height: 2436).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断iPhoneXr
-func cl_iPhoneXr() -> Bool {
+func isIPhoneXr() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 828, height: 1792).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断iPhoneXs
-func cl_iPhoneXs() -> Bool {
+func isIPhoneXs() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 1125, height: 2436).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
 ///判断iPhoneXsMax
-func cl_iPhoneXsMax() -> Bool {
+func isIPhoneXsMax() -> Bool {
     return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.main.currentMode)) ? CGSize(width: 1242, height: 2688).equalTo((UIScreen.main.currentMode?.size)!) : false)
 }
-///判断cl_iPhoneXScreen系列
-func cl_iPhoneXScreen() -> Bool {
+///判断iPhoneXScreen系列
+func isIPhoneXScreen() -> Bool {
     var iPhoneXScreen: Bool = false
     if #available(iOS 11.0, *), let safeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets {
         iPhoneXScreen = safeAreaInsets.bottom > 0.0
@@ -90,24 +82,31 @@ func PingFangSCMedium(_ size: CGFloat) -> UIFont {
     return UIFont(name: "HelveticaNeue", size: size) ?? UIFont.systemFont(ofSize: size)
 }
 
-///时间戳格式化
+///秒级时间戳格式化
 func timeStampFormat(with timeStamp:String, format: String) -> String {
-    let timeInterval:TimeInterval = TimeInterval(timeStamp) ?? TimeInterval(0)
+    let timeInterval: TimeInterval = TimeInterval(timeStamp.int)
+    let date = Date(timeIntervalSince1970: timeInterval)
+    return date.format(with: format, locale: Locale(identifier: "zh_CN"))
+}
+///毫秒级时间戳格式化
+func milliStampFormat(with timeStamp:String, format: String) -> String {
+    let timeInterval: TimeInterval = TimeInterval(timeStamp.int) / 1000.0
     let date = Date(timeIntervalSince1970: timeInterval)
     return date.format(with: format, locale: Locale(identifier: "zh_CN"))
 }
 
+
 ///秒级时间戳
-func timeStamp() -> Int {
-    return Date().timeStamp
+func timeStamp() -> Int64 {
+    return Int64(Date().timeStamp)
 }
 ///毫秒级时间戳
-func milliStamp() -> Int {
-    return Date().milliStamp
+func milliStamp() -> Int64 {
+    return Int64(Date().milliStamp)
 }
 ///纳秒级时间戳
-func nanosecondStamp() -> Int {
-    return Date().nanosecondStamp
+func nanosecondStamp() -> Int64 {
+    return Int64(Date().nanosecondStamp)
 }
 ///秒级时间戳
 func timeStampString() -> String {
@@ -191,7 +190,6 @@ func deleteAllEmptyFolderWithPath(path: String) -> Bool {
     }
     return isSuccess
 }
-
 ///沙盒路径
 var pathDocuments: String {
     return NSHomeDirectory() + "/Documents"
@@ -201,4 +199,88 @@ var dateRandomString: String {
     let date = Date()
     let dateString: String = date.format(with: "yyyyMMddHHmmss") + date.nanosecondStampString
     return (dateString + UUID().uuidString).md5ForUpper32Bate
+}
+
+///消息毫秒级时间戳格式化
+func messageTimeFormat(with timeStamp:Int64) -> String {
+    let timeInterval: TimeInterval = TimeInterval(Double(timeStamp) / 1000.0)
+    let date = Date(timeIntervalSince1970: timeInterval)
+    var time = date.format(with: "yyyy-MM-dd HH:mm", locale: Locale(identifier: "zh_CN"))
+    if date.isToday {
+        time = date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+    }else if date.isYesterday {
+        time = "昨天" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+    }else if date.weeksAgo == 0 {
+        switch date.weekday {
+        case 1:
+            time = "星期日" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        case 2:
+            time = "星期一" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        case 3:
+            time = "星期二" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        case 4:
+            time = "星期三" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        case 5:
+            time = "星期四" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        case 6:
+            time = "星期五" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        case 7:
+            time = "星期六" + date.format(with: "HH:mm", locale: Locale(identifier: "zh_CN"))
+            break
+        default:
+            break
+        }
+    }
+    return time
+}
+
+/// 计算缩放后的大小
+/// - Parameters:
+///   - imageSize: 图片原始大小
+///   - maxSize: 最大范围
+///   - minSize: 最小范围
+/// - Returns: 缩放后的大小
+func calculateScaleSize(imageSize: CGSize, maxSize: CGSize = CGSize(width: UIScreen.main.bounds.size.width * 0.45, height: UIScreen.main.bounds.size.width * 0.45), minSize: CGSize = CGSize(width: 90, height: 90)) -> CGSize {
+    let maxWidth = maxSize.width
+    let maxHeight = maxSize.height
+    let minWidth = minSize.width
+    let minHeight = minSize.height
+    
+    let imageWidth = imageSize.width
+    let imageHeight = imageSize.height
+    
+    let imageRatio = imageHeight / imageWidth
+    let minRatio = minHeight / maxWidth
+    let maxRatio = maxHeight / minWidth
+    
+    if imageRatio >= maxRatio {
+        return CGSize(width: minWidth, height: maxHeight)
+    }else if imageRatio <= minRatio {
+        return CGSize(width: maxWidth, height: minHeight)
+    }else {
+        let maxRatio = maxHeight / maxWidth
+        let minRatio = minHeight / minWidth
+        if imageRatio >= minRatio && imageHeight > maxHeight {
+            return CGSize(width: imageWidth / imageHeight * maxHeight, height: maxHeight)
+        }else if imageRatio < maxRatio && imageWidth > maxWidth {
+            return CGSize(width: maxWidth, height: imageHeight / imageWidth * maxWidth)
+        }else if imageRatio >= maxRatio && imageWidth < minWidth {
+            return CGSize(width: minWidth, height: imageHeight / imageWidth * minWidth)
+        }else if imageRatio < maxRatio && imageHeight < minHeight {
+            return CGSize(width: imageWidth / imageHeight * minHeight, height: minHeight)
+        }else {
+            return imageSize
+        }
+    }
+}
+/// 打开APP权限设置
+func openSettings() {
+    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+    UIApplication.shared.open(url, options: [:])
 }

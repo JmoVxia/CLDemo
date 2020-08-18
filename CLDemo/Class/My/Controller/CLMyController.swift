@@ -10,7 +10,7 @@ import UIKit
 
 class CLMyController: CLBaseViewController {
     lazy var titleView: CLTitleControllerView = {
-        let view: CLTitleControllerView = CLTitleControllerView(frame: CGRect(x: 0, y: cl_safeAreaInsets().top + cl_statusBarHeight(), width: self.view.bounds.width, height: self.view.bounds.height - cl_safeAreaInsets().top - cl_statusBarHeight() - (self.tabBarController?.tabBar.bounds.height ?? 0.0)), dataSource: self)
+        let view: CLTitleControllerView = CLTitleControllerView(frame: CGRect(x: 0, y: safeAreaEdgeInsets().top + statusBarHeight(), width: self.view.bounds.width, height: self.view.bounds.height - safeAreaEdgeInsets().top - statusBarHeight() - (self.tabBarController?.tabBar.bounds.height ?? 0.0)), dataSource: self)
         return view
     }()
 

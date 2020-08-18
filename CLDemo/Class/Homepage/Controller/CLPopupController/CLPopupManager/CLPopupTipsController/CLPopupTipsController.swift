@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CLPopupTipsController: CLPopupManagerBaseController {
+class CLPopupTipsController: CLPopupManagerController {
     var text: String? {
         didSet {
             label.text = text

@@ -110,7 +110,7 @@ extension CLChatVoiceCell: CLChatCellProtocol {
         durationLabel.textColor = isFromMyself ? .white : .black
         var width: CGFloat = 5
         width = duration * width + 65
-        width = max(min(width, cl_screenWidth() * 0.45), 70)
+        width = max(min(width, screenWidth() * 0.45), 70)
         bubbleImageView.snp.updateConstraints { (make) in
             make.width.equalTo(width)
         }

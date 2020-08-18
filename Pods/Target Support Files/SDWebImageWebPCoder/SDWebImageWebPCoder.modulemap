@@ -1,4 +1,4 @@
-framework module SDWebImageWebPCoder {
+module SDWebImageWebPCoder {
   umbrella header "SDWebImageWebPCoder.h"
 
   export *

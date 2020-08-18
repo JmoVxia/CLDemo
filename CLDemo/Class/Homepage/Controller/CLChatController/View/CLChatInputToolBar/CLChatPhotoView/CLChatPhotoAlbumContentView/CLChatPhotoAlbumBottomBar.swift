@@ -46,17 +46,17 @@ class CLChatPhotoAlbumBottomBar: UIView {
         view.setTitleColor(.hexColor(with: "#666666"), for: .selected)
         view.setTitleColor(.hexColor(with: "#666666"), for: .highlighted)
         view.backgroundColor = .hexColor(with: "#EEEEED")
-        view.titleLabel?.font = PingFangSCMedium(14)
+        view.titleLabel?.font = PingFangSCMedium(16)
         view.clipsToBounds = true
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 3
         view.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         view.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
         return view
     }()
-    ///相册按钮
+    ///关闭按钮
     private lazy var closeButton: UIButton = {
         let view = UIButton()
-        view.titleLabel?.font = PingFangSCMedium(14)
+        view.titleLabel?.font = PingFangSCMedium(16)
         view.setTitleColor(.hexColor(with: "#333333"), for: .normal)
         view.setTitleColor(.hexColor(with: "#333333"), for: .selected)
         view.setTitleColor(.hexColor(with: "#333333"), for: .highlighted)
@@ -85,11 +85,11 @@ extension CLChatPhotoAlbumBottomBar {
     private func makeConstraints() {
         closeButton.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.left.equalTo(12)
+            make.left.equalTo(15)
         }
         sendButton.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.right.equalTo(-12)
+            make.right.equalTo(-15)
             make.height.equalTo(30)
         }
     }

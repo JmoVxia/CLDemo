@@ -28,7 +28,6 @@
 #import "CLMailboxAutoCompletionViewController.h"
 #import "CLCustomTransitionViewController.h"
 #import "CLLineChartViewController.h"
-#import "CLBroadcastViewController.h"
 #import "CLInputPasswordViewController.h"
 #import "CLDrawImageController.h"
 #import "CLPhoneNumberVerificationController.h"
@@ -81,6 +80,7 @@
     Class class = [self.controllerArray objectAtIndex:indexPath.row];
     UIViewController *controller =  (UIViewController *)[[class alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
+    CLLog(@"%@", NSStringFromClass(class));
 }
 
 - (UITableView *) tableView{
@@ -99,9 +99,11 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"滑动动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"录音转码", nil)];
         [_arrayDS addObject:NSLocalizedString(@"绘制头像", nil)];
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"跑马灯", nil)];
         [_arrayDS addObject:NSLocalizedString(@"标签动态排布", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义弹窗", nil)];
         [_arrayDS addObject:NSLocalizedString(@"游标卡尺", nil)];
@@ -140,9 +142,11 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLScrollAnimationController class]];
         [_controllerArray addObject:[CLRecordeEncodeController class]];
         [_controllerArray addObject:[CLDrawImageController class]];
         [_controllerArray addObject:[CLLayoutController class]];
+        [_controllerArray addObject:[CLDrawMarqueeController class]];
         [_controllerArray addObject:[CLTagsController class]];
         [_controllerArray addObject:[CLPopupController class]];
         [_controllerArray addObject:[CLVernierCaliperController class]];

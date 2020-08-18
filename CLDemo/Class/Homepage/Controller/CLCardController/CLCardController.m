@@ -12,6 +12,7 @@
 @interface CLCardController ()<CLCardViewDataSource>
 ///卡片视图
 @property (nonatomic, strong) CLCardView *cardView;
+
 @end
 
 @implementation CLCardController

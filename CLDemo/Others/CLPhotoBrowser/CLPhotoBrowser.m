@@ -217,7 +217,6 @@
         if (@available(iOS 11.0, *)) {
             _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
-            self.automaticallyAdjustsScrollViewInsets = NO;
         }
     }
     return _collectionView;

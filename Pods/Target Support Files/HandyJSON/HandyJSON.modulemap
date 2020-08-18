@@ -1,4 +1,4 @@
-framework module HandyJSON {
+module HandyJSON {
   umbrella header "HandyJSON-umbrella.h"
 
   export *

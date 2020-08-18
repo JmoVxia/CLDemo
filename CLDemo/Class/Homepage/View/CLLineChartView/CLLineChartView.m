@@ -80,7 +80,7 @@
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGPoint fristPoint = CGPointZero;
-    CGPoint lastPoint = CGPointZero;
+    CGPoint endPoint = CGPointZero;
     for (NSInteger i = 0; i < (NSInteger)self.pointArray.count; i++) {
         CLLineChartPoint *point = [self.pointArray objectAtIndex:i];
         CGFloat x = (point.x - self.xMin) * self.width / xSpace;
@@ -89,7 +89,7 @@
             fristPoint = CGPointMake(x, y);
             [path moveToPoint:CGPointMake(x, y)];
         }else {
-            lastPoint = CGPointMake(x, y);
+            endPoint = CGPointMake(x, y);
             [path addLineToPoint:CGPointMake(x, y)];
         }
     }
@@ -97,7 +97,7 @@
     self.lineLayer.frame = CGRectMake(0, 0, self.width, self.height);
     
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
-    [maskPath addLineToPoint:CGPointMake(lastPoint.x, self.height)];
+    [maskPath addLineToPoint:CGPointMake(endPoint.x, self.height)];
     [maskPath addLineToPoint:CGPointMake(fristPoint.x, self.height)];
     [maskPath closePath];
     

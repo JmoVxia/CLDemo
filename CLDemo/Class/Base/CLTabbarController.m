@@ -64,7 +64,7 @@
     self.viewControllers = @[nc1,nc2,nc3,nc4,nc5];
 }
 - (void)pushToDebug {
-    CKDDebugController *controller = [CKDDebugController new];
+    CLDebugController *controller = [CLDebugController new];
     CLBaseNavigationController *navigationController = [[CLBaseNavigationController alloc] initWithRootViewController:controller];
     navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];

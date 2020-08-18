@@ -19,7 +19,7 @@ class CLRotatingPictureViewController: CLBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        image = UIImage.init(named: "4")
+        image = UIImage.init(named: "444")
         imageView = UIImageView().then({ (imageView) in
             view.addSubview(imageView)
             imageView.image = image

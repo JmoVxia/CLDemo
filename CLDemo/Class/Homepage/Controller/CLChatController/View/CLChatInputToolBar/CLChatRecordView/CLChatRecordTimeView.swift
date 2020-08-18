@@ -24,7 +24,7 @@ class CLChatRecordTimeView: UIView {
     }()
     private lazy var backgroundImageView: UIImageView = {
        let backgroundImageView = UIImageView()
-        backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "#34B46F"))
+        backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .themeColor)
         return backgroundImageView
     }()
     private (set) var isAnimationing: Bool = false
@@ -36,7 +36,7 @@ class CLChatRecordTimeView: UIView {
                     backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "ffffff"))
                 } else {
                     timeLabel.textColor = UIColor.white
-                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "#34B46F"))
+                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .themeColor)
                 }
             }
         }
@@ -95,7 +95,7 @@ extension CLChatRecordTimeView {
         }) { finished in
             self.contentView.alpha = 1
             self.contentView.isHidden = true
-            self.backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .hexColor(with: "34B46F"))
+            self.backgroundImageView.image = UIImage.init(named: "img_time")?.tintedImage(color: .themeColor)
             self.timeLabel.textColor = UIColor.white
             self.isAnimationing = false
             self.timeLabel.text = "00:00"

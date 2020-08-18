@@ -136,6 +136,7 @@
 @implementation CLInputPasswordToolBar
 
 - (void)showToolbar {
+    
     if (self.keyboardIsShow) {
         return;
     }

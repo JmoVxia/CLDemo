@@ -19,7 +19,7 @@ enum CLPopupOneInputType {
     case pulse
 }
 
-class CLPopupOneInputController: CLPopupManagerBaseController {
+class CLPopupOneInputController: CLPopupManagerController {
     var sureCallback: ((String?) -> ())?
     var type: CLPopupOneInputType = .respiratoryFrequency {
         didSet {

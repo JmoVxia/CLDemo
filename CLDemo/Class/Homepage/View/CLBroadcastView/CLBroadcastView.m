@@ -8,7 +8,6 @@
 
 #import "CLBroadcastView.h"
 #import <Masonry/Masonry.h>
-#import "CLGCDTimerManager.h"
 
 @interface CLBroadcastCell ()
 
@@ -40,8 +39,6 @@
 @property (nonatomic, assign) NSInteger totalRow;
 ///当前的下标
 @property (nonatomic, assign) NSInteger currentIndex;
-///定时器
-@property (nonatomic, strong) CLGCDTimer *timer;
 ///正在进行动画
 @property (nonatomic, assign) BOOL isAnimtion;
 
@@ -55,7 +52,6 @@
         self.cellIdentifierCaches = [NSMutableDictionary dictionary];
         self.cellCaches = [NSMutableArray array];
         self.clipsToBounds = YES;
-        self.rotationTime = 2;
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCell)];
         [self addGestureRecognizer:tapGestureRecognizer];
     }
@@ -85,68 +81,46 @@
 }
 ///加载方法
 - (void)reloadData {
-    if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(broadcastView:cellForRowAtIndexIndex:)] || ![self.dataSource respondsToSelector:@selector(broadcastViewRows:)]) {
+    if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(broadcastView:cellForRowAtIndex:)] || ![self.dataSource respondsToSelector:@selector(broadcastViewRows:)]) {
         return;
     }
     if ([self isNeedAddToCache:self.removedCell] && self.removedCell) {
         [self.cellCaches addObject:self.removedCell];
     }
     self.totalRow = [self.dataSource broadcastViewRows:self];
-    if (self.totalRow > 1) {
-        __weak __typeof(self) weakSelf = self;
-        self.timer = [[CLGCDTimer alloc] initWithInterval:self.rotationTime delaySecs:self.rotationTime queue:dispatch_get_main_queue() repeats:YES action:^(NSInteger __unused actionTimes) {
-            __typeof(&*weakSelf) strongSelf = weakSelf;
-            [strongSelf scrollToNext];
-        }];
-        [self.timer start];
-    }else {
-        self.timer = nil;
-    }
-    if (self.totalRow > 0) {
-        if (!self.currentCell) {
-            CLBroadcastCell *cell = [self.dataSource broadcastView:self cellForRowAtIndexIndex:self.currentIndex];
-            [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.top.mas_equalTo(self);
-                make.width.mas_equalTo(self.mas_width);
-                make.height.mas_equalTo(self.mas_height);
-            }];
-            self.currentCell = cell;
+    if (self.totalRow == 0) {
+        if (self.currentCell) {
+            [self.currentCell removeFromSuperview];
+            self.currentCell = nil;
         }
+        if (self.removedCell) {
+            [self.removedCell removeFromSuperview];
+            self.removedCell = nil;
+        }
+    }
+    if (self.totalRow > 0 && !self.currentCell) {
+        CLBroadcastCell *cell = [self.dataSource broadcastView:self cellForRowAtIndex:self.currentIndex];
+        cell.transform = CGAffineTransformIdentity;
+        [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self);
+        }];
+        self.currentCell = cell;
     }
 }
 - (void)scrollToNext {
-    if (self.isAnimtion) {
-        return;
-    }
-    if (!self.dataSource || ![self.dataSource respondsToSelector:@selector(broadcastView:cellForRowAtIndexIndex:)] || ![self.dataSource respondsToSelector:@selector(broadcastViewRows:)]) {
+    if (self.isAnimtion || !self.dataSource || ![self.dataSource respondsToSelector:@selector(broadcastView:cellForRowAtIndex:)] || ![self.dataSource respondsToSelector:@selector(broadcastViewRows:)]) {
         return;
     }
     self.isAnimtion = YES;
-    ((self.currentIndex + 1) < self.totalRow) ? (self.currentIndex ++) : (self.currentIndex = 0);
-    CLBroadcastCell *nextCell = [self.dataSource broadcastView:self cellForRowAtIndexIndex:self.currentIndex];
+    self.currentIndex = (self.currentIndex + 1) % self.totalRow;
+    CLBroadcastCell *nextCell = [self.dataSource broadcastView:self cellForRowAtIndex:self.currentIndex];
     [nextCell mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self);
-        make.top.mas_equalTo(self.mas_bottom);
-        make.width.mas_equalTo(self.mas_width);
-        make.height.mas_equalTo(self.mas_height);
+        make.edges.mas_equalTo(self);
     }];
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-    
+    nextCell.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
     [UIView animateWithDuration:0.5 animations:^{
-        [self.currentCell mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self);
-            make.width.mas_equalTo(self.mas_width);
-            make.height.mas_equalTo(self.mas_height);
-            make.bottom.mas_equalTo(self.mas_top);
-        }];
-        [nextCell mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.mas_equalTo(self);
-            make.width.mas_equalTo(self.mas_width);
-            make.height.mas_equalTo(self.mas_height);
-        }];
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
+        self.currentCell.transform = CGAffineTransformMakeTranslation(0, -self.bounds.size.height);
+        nextCell.transform = CGAffineTransformIdentity;
     }completion:^(BOOL __unused finished) {
         self.removedCell = self.currentCell;
         self.currentCell = nextCell;
@@ -157,8 +131,8 @@
     }];
 }
 - (BOOL)isNeedAddToCache:(CLBroadcastCell *)cell {
-    for (CLBroadcastCell *cellIn in self.cellCaches) {
-        if ([cellIn.reuseIdentifier isEqualToString:cell.reuseIdentifier]) {
+    for (CLBroadcastCell *cacheCell in self.cellCaches) {
+        if ([cacheCell.reuseIdentifier isEqualToString:cell.reuseIdentifier]) {
             return NO;
         }
     }
@@ -168,8 +142,5 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(broadcastView:didSelectIndex:)]) {
         [self.delegate broadcastView:self didSelectIndex:self.currentIndex];
     }
-}
-- (void)setRotationTime:(NSTimeInterval)rotationTime {
-    _rotationTime = MAX(rotationTime, 0);
 }
 @end

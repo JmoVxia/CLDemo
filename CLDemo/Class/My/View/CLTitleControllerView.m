@@ -57,8 +57,6 @@
 
 - (void)initUI
 {
-    //关掉自动上移
-    _fatherController.automaticallyAdjustsScrollViewInsets = NO;
     //调用懒加载
     self.titlesView.backgroundColor = [UIColor clearColor];
     self.scrollView.backgroundColor = [UIColor clearColor];

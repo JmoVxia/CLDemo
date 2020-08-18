@@ -17,7 +17,7 @@ enum CLPopupTwoInputType {
     case bloodSugar
 }
 
-class CLPopupTwoInputController: CLPopupManagerBaseController {
+class CLPopupTwoInputController: CLPopupManagerController {
     var sureCallback: ((String?, String?) -> ())?
     var type: CLPopupTwoInputType = .temperature {
         didSet {
@@ -278,9 +278,9 @@ extension CLPopupTwoInputController {
         DispatchQueue.main.async {
             if self.type == .bloodSugar {
                 self.view.endEditing(true)
-                CLPopupManager.showYearMonthDayHourMinuteDataPicker() {[weak self] (year, month, day, hour, minute) in
+                CLPopupManager.showYearMonthDayHourMinuteDataPicker(yearMonthDayHourMinuteCallback:  {[weak self] (year, month, day, hour, minute) in
                     self?.fristTextField.text = "\(year)年\(month)月\(day)日\(hour)时\(minute)分"
-                }
+                })
             }else {
                 self.fristTextField.becomeFirstResponder()
             }

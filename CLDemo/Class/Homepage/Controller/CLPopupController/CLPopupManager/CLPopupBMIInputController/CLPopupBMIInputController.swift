@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLPopupBMIInputController: CLPopupManagerBaseController {
+class CLPopupBMIInputController: CLPopupManagerController {
     var bmiCallback: ((CGFloat) -> ())?
     private var bmiValue: CGFloat = 0.0
     private var isMoveUp: Bool = false

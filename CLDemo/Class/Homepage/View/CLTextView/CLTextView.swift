@@ -108,45 +108,45 @@ enum Encoding: Int {
     }
     ///输入框
     private lazy var textView: UITextView = {
-        let textView = UITextView()
-        textView.delegate = self
-        textView.backgroundColor = .clear
-        textView.textColor = configure.textColor
-        textView.tintColor = configure.cursorColor
-        textView.keyboardAppearance = configure.keyboardAppearance
-        textView.font = configure.textFont
-        textView.textContainerInset = UIEdgeInsets.zero
-        textView.textContainer.lineFragmentPadding = 0
-        textView.layoutManager.allowsNonContiguousLayout = false
-        textView.scrollsToTop = false
+        let view = UITextView()
+        view.delegate = self
+        view.backgroundColor = .clear
+        view.textColor = configure.textColor
+        view.tintColor = configure.cursorColor
+        view.keyboardAppearance = configure.keyboardAppearance
+        view.font = configure.textFont
+        view.textContainerInset = UIEdgeInsets.zero
+        view.textContainer.lineFragmentPadding = 0
+        view.layoutManager.allowsNonContiguousLayout = false
+        view.scrollsToTop = false
         if #available(iOS 11.0, *) {
-            textView.pasteDelegate = self
+            view.pasteDelegate = self
         }
-        addSubview(textView)
-        return textView
+        addSubview(view)
+        return view
     }()
     ///占位文字laebl
     private lazy var placeholderLabel: UILabel = {
-        let placeholderLabel = UILabel()
-        placeholderLabel.backgroundColor = UIColor.clear
-        placeholderLabel.textColor = configure.placeholderTextColor
-        placeholderLabel.font = configure.textFont
-        placeholderLabel.numberOfLines = 0
-        placeholderLabel.text = configure.placeholder
-        addSubview(placeholderLabel)
-        return placeholderLabel
+        let view = UILabel()
+        view.backgroundColor = UIColor.clear
+        view.textColor = configure.placeholderTextColor
+        view.font = configure.textFont
+        view.numberOfLines = 0
+        view.text = configure.placeholder
+        addSubview(view)
+        return view
     }()
     ///计数label
     private lazy var lengthLabel: UILabel = {
-        let lengthLabel = UILabel()
-        lengthLabel.font = configure.lengthFont
+        let view = UILabel()
+        view.font = configure.lengthFont
         if configure.statistics == .bytesLength {
-            lengthLabel.text = String.init(format: "0/%ld", configure.maxBytesLength)
+            view.text = String.init(format: "0/%ld", configure.maxBytesLength)
         }else {
-            lengthLabel.text = String.init(format: "0/%ld", configure.maxCount)
+            view.text = String.init(format: "0/%ld", configure.maxCount)
         }
-        addSubview(lengthLabel)
-        return lengthLabel
+        addSubview(view)
+        return view
     }()
     ///默认配置
     private let configure: CLTextViewConfigure = CLTextViewConfigure.defaultConfigure()
@@ -202,11 +202,6 @@ enum Encoding: Int {
             }
             self.textView.scrollRangeToVisible(NSRange(location: self.textView.selectedRange.location, length: 1))
         }
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        remakeConstraints()
-        frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: height)
     }
 }
 //MARK:JmoVxia---更新相关
@@ -265,7 +260,7 @@ extension CLTextView: UITextViewDelegate {
                     return
                 }
             }
-            //超过限制,恢复上一次文字
+//            超过限制,恢复上一次文字
             if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength) || (self.bytesLength(text: textView.text) == 0 && textView.text.count > 0) {
                 textView.text = self.lastText;
             }else {

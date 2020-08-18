@@ -37,7 +37,7 @@ enum CLChatMessagePosition {
 
 class CLChatItem: NSObject {
     ///消息发送状态
-    var messageSendState: CLChatMessageSendState = .sending
+    var messageSendState: CLChatMessageSendState = .sendSucess
     ///消息接收状态
     var messageReceiveState: CLChatMessageReceiveState = .downloading
     ///本地消息ID

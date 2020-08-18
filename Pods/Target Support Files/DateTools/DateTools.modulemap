@@ -1,4 +1,4 @@
-framework module DateTools {
+module DateTools {
   umbrella header "DateTools-umbrella.h"
 
   export *

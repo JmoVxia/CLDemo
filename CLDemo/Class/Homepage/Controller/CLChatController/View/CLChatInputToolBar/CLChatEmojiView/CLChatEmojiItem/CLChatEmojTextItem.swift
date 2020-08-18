@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CLChatEmojTextItem: CLChatEmojiItem {
+class CLChatEmojTextItem: NSObject {
     ///emoji文字
     var emoji: String?
 }

@@ -65,19 +65,20 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.textAlignment = .center
         view.backgroundColor = UIColor.clear
         view.textColor = UIColor.white
-        view.font = UIFont.systemFont(ofSize: 15)
+        view.font = PingFangSCMedium(15)
         view.text = "松手发送"
         return view
     }()
     private lazy var seletedNumberButton: UIButton = {
         let view = UIButton()
+        view.isUserInteractionEnabled = false
         view.setBackgroundImage(UIImage(named: "advNsel"), for: .normal)
         view.setBackgroundImage(UIImage(named: "advSel"), for: .selected)
         view.setTitleColor(.white, for: .normal)
         view.setTitleColor(.white, for: .selected)
         view.setTitleColor(.white, for: .highlighted)
-        view.titleLabel?.font = .systemFont(ofSize: 15)
-        view.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        view.titleLabel?.font = PingFangSCMedium(12)
+        view.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom:5, right: 5)
         return view
     }()
     private lazy var imageView: UIImageView = {
@@ -99,6 +100,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         tipsBackgroundView.layer.cornerRadius = tipsBackgroundView.bounds.height * 0.5
+        updateSeletedNumberOffset()
     }
 }
 extension CLChatPhotoAlbumCell {
@@ -114,7 +116,7 @@ extension CLChatPhotoAlbumCell {
         }
         seletedNumberButton.snp.makeConstraints { (make) in
             make.top.equalTo(5)
-            make.right.equalTo(-5)
+            make.left.equalTo(5)
             make.width.equalTo(seletedNumberButton.snp.height)
         }
         tipsBackgroundView.snp.makeConstraints { (make) in
@@ -126,6 +128,24 @@ extension CLChatPhotoAlbumCell {
             make.right.equalTo(-12)
             make.top.equalTo(8)
             make.bottom.equalTo(-8)
+        }
+    }
+}
+extension CLChatPhotoAlbumCell {
+    func updateSeletedNumberOffset() {
+        guard let supperView = superview else {
+            return
+        }
+        var offset: CGFloat = 0
+        let rect = supperView.convert(frame, to: supperView.superview)
+        if rect.minX < 0 {
+            offset = -rect.minX
+        }else if rect.maxX > supperView.frame.width {
+            offset = supperView.frame.width - rect.maxX
+        }
+        let left = max(5, min(bounds.width - seletedNumberButton.frame.width, bounds.width - seletedNumberButton.frame.width + offset) - 5);
+        seletedNumberButton.snp.updateConstraints { (make) in
+            make.left.equalTo(left)
         }
     }
 }
