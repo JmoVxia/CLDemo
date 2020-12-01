@@ -35,16 +35,17 @@ extension UIView {
         }
     }
 }
-///圆角
-struct CLCornerRadius {
-    var topLeft: CGFloat = 0
-    var topRight: CGFloat = 0
-    var bottomLeft: CGFloat = 0
-    var bottomRight: CGFloat = 0
-}
+
 extension UIView {
+    ///圆角
+    struct ViewCornerRadius {
+        var topLeft: CGFloat = 0
+        var topRight: CGFloat = 0
+        var bottomLeft: CGFloat = 0
+        var bottomRight: CGFloat = 0
+    }
     ///设置圆角
-    func setCornerRadius(with radius: CLCornerRadius, borderLayerCallback: (() -> (CAShapeLayer))? = nil) {
+    func setCornerRadius(with radius: ViewCornerRadius, borderLayerCallback: (() -> (CAShapeLayer))? = nil) {
         let maskBezierPath = UIBezierPath()
         maskBezierPath.addArc(withCenter: CGPoint(x: bounds.minX + radius.topLeft, y: bounds.minY + radius.topLeft), radius: radius.topLeft, startAngle: .pi, endAngle: .pi * 1.5, clockwise: true)
         maskBezierPath.addArc(withCenter: CGPoint(x: bounds.maxX - radius.topRight, y: bounds.minY + radius.topRight), radius: radius.topRight, startAngle: .pi * 1.5, endAngle: 0, clockwise: true)

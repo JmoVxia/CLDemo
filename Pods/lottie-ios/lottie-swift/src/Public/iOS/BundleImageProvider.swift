@@ -39,8 +39,8 @@ public class BundleImageProvider: AnimationImageProvider {
     if asset.name.hasPrefix("data:"),
       let url = URL(string: asset.name),
       let data = try? Data(contentsOf: url),
-      let image = UIImage(data: data) {
-      return image.cgImage
+      let normalImage = UIImage(data: data) {
+      return normalImage.cgImage
     }
     
     let imagePath: String?
@@ -69,11 +69,11 @@ public class BundleImageProvider: AnimationImageProvider {
       }
     }
     
-    guard let foundPath = imagePath, let image = UIImage(contentsOfFile: foundPath) else {
+    guard let foundPath = imagePath, let normalImage = UIImage(contentsOfFile: foundPath) else {
       /// No image found.
       return nil
     }
-    return image.cgImage
+    return normalImage.cgImage
   }
   
 }

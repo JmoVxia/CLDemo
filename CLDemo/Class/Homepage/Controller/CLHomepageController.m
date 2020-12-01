@@ -20,7 +20,6 @@
 #import "CLWaveViewController.h"
 #import "CLBubbleViewViewController.h"
 #import "CLCustomQRCodeViewController.h"
-#import "CLPopArrowViewController.h"
 #import "CLCountdownController.h"
 #import "CLLayoutController.h"
 #import "CLPhotoBrowserTableViewController.h"
@@ -99,11 +98,15 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"动画渐变", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"柱状图", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"转盘菜单", nil)];
         [_arrayDS addObject:NSLocalizedString(@"滑动动画", nil)];
         [_arrayDS addObject:NSLocalizedString(@"录音转码", nil)];
         [_arrayDS addObject:NSLocalizedString(@"绘制头像", nil)];
         [_arrayDS addObject:NSLocalizedString(@"水平布局", nil)];
         [_arrayDS addObject:NSLocalizedString(@"跑马灯", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"评分控件", nil)];
         [_arrayDS addObject:NSLocalizedString(@"标签动态排布", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义弹窗", nil)];
         [_arrayDS addObject:NSLocalizedString(@"游标卡尺", nil)];
@@ -129,7 +132,7 @@
         [_arrayDS addObject:[NSLocalizedString(@"波浪视图", nil) stringByAppendingString:@"-Swift"]];
         [_arrayDS addObject:NSLocalizedString(@"气泡拖拽", nil)];
         [_arrayDS addObject:NSLocalizedString(@"自定义二维码", nil)];
-        [_arrayDS addObject:NSLocalizedString(@"箭头弹出框", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"气泡弹框", nil)];
         [_arrayDS addObject:NSLocalizedString(@"旋转图片", nil)];
         [_arrayDS addObject:NSLocalizedString(@"日志", nil)];
         [_arrayDS addObject:NSLocalizedString(@"过渡动画", nil)];
@@ -142,11 +145,15 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLAnimatedGradientController class]];
+        [_controllerArray addObject:[CLHistogramConroller class]];
+        [_controllerArray addObject:[CLWheelMenuController class]];
         [_controllerArray addObject:[CLScrollAnimationController class]];
         [_controllerArray addObject:[CLRecordeEncodeController class]];
         [_controllerArray addObject:[CLDrawImageController class]];
         [_controllerArray addObject:[CLLayoutController class]];
         [_controllerArray addObject:[CLDrawMarqueeController class]];
+        [_controllerArray addObject:[CLStartsController class]];
         [_controllerArray addObject:[CLTagsController class]];
         [_controllerArray addObject:[CLPopupController class]];
         [_controllerArray addObject:[CLVernierCaliperController class]];
@@ -172,7 +179,7 @@
         [_controllerArray addObject:[CLWaveSwiftViewController class]];
         [_controllerArray addObject:[CLBubbleViewViewController class]];
         [_controllerArray addObject:[CLCustomQRCodeViewController class]];
-        [_controllerArray addObject:[CLPopArrowViewController class]];
+        [_controllerArray addObject:[CLPopoverController class]];
         [_controllerArray addObject:[CLRotatingPictureViewController class]];
         [_controllerArray addObject:[CLLogViewController class]];
         [_controllerArray addObject:[CLTransitionViewController class]];

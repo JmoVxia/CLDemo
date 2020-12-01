@@ -66,3 +66,11 @@ extension NSDecimalNumber {
         return string
     }
 }
+extension NSDecimalNumber {
+    func moreThen(_ decimalsNumber: NSDecimalNumber) -> Bool {
+        return compare(decimalsNumber) == .orderedDescending
+    }
+    func lessThen(_ decimalsNumber: NSDecimalNumber) -> Bool {        
+        return compare(decimalsNumber) == .orderedAscending
+    }
+}

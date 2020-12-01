@@ -35,7 +35,7 @@ class CLTwoSidedView: UIView {
 }
 extension CLTwoSidedView {
     func transition(withDuration duration: TimeInterval, completion: (() -> Void)?) {
-        guard isTurning, let top = topView, let bottom = bottomView else {
+        guard !isTurning, let top = topView, let bottom = bottomView else {
             return
         }
         isTurning = true

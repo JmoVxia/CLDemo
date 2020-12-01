@@ -294,27 +294,27 @@ extension KingfisherWrapper where Base: KFCrossPlatformImage {
         return image
         #else
         
-        var image: KFCrossPlatformImage?
+        var normalImage: KFCrossPlatformImage?
         if options.preloadAll || options.onlyFirstFrame {
             // Use `images` image if you want to preload all animated data
             guard let animatedImage = GIFAnimatedImage(from: imageSource, for: info, options: options) else {
                 return nil
             }
             if options.onlyFirstFrame {
-                image = animatedImage.images.first
+                normalImage = animatedImage.images.first
             } else {
                 let duration = options.duration <= 0.0 ? animatedImage.duration : options.duration
-                image = .animatedImage(with: animatedImage.images, duration: duration)
+                normalImage = .animatedImage(with: animatedImage.images, duration: duration)
             }
-            image?.kf.animatedImageData = data
+            normalImage?.kf.animatedImageData = data
         } else {
-            image = KFCrossPlatformImage(data: data, scale: options.scale)
-            var kf = image?.kf
+            normalImage = KFCrossPlatformImage(data: data, scale: options.scale)
+            var kf = normalImage?.kf
             kf?.imageSource = imageSource
             kf?.animatedImageData = data
         }
         
-        return image
+        return normalImage
         #endif
     }
 

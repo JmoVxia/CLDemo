@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, CLQRCodeCorrectionLevel) {
 @interface UIImage (CLQRCode)
 
 /**
- 根据model生成二维码
+ 根据配置生成二维码
 
  @param configure 配置
  @return 二维码图片

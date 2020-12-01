@@ -34,7 +34,7 @@
 "气泡拖拽" = "Dragging Bubble";
 "自定义输入框-限制字数" = "CustomTextView-Limit Word Count";
 "自定义二维码" = "CustomQRCode";
-"箭头弹出框" = "ArrowView";
+"气泡弹框" = "Popover View";
 "Cell倒计时" = "Cell Countdown";
 "水平布局" = "Horizontal layout";
 "过渡动画" = "TransitionAnimation";
@@ -55,3 +55,7 @@
 "录音转码" = "Recorde Encode";
 "滑动动画" = "Scroll Animation";
 "跑马灯" = "Marquee";
+"转盘菜单" = "Wheel Menu";
+"柱状图" = "Histogram View";
+"评分控件" = "Starts View";
+"动画渐变" = "Animated Gradient";

@@ -80,8 +80,8 @@ public struct RenderingModeImageModifier: ImageModifier {
     }
 
     /// Modify an input `Image`. See `ImageModifier` protocol for more.
-    public func modify(_ image: KFCrossPlatformImage) -> KFCrossPlatformImage {
-        return image.withRenderingMode(renderingMode)
+    public func modify(_ normalImage: KFCrossPlatformImage) -> KFCrossPlatformImage {
+        return normalImage.withRenderingMode(renderingMode)
     }
 }
 
@@ -92,8 +92,8 @@ public struct FlipsForRightToLeftLayoutDirectionImageModifier: ImageModifier {
     public init() {}
 
     /// Modify an input `Image`. See `ImageModifier` protocol for more.
-    public func modify(_ image: KFCrossPlatformImage) -> KFCrossPlatformImage {
-        return image.imageFlippedForRightToLeftLayoutDirection()
+    public func modify(_ normalImage: KFCrossPlatformImage) -> KFCrossPlatformImage {
+        return normalImage.imageFlippedForRightToLeftLayoutDirection()
     }
 }
 
@@ -109,8 +109,8 @@ public struct AlignmentRectInsetsImageModifier: ImageModifier {
     }
 
     /// Modify an input `Image`. See `ImageModifier` protocol for more.
-    public func modify(_ image: KFCrossPlatformImage) -> KFCrossPlatformImage {
-        return image.withAlignmentRectInsets(alignmentInsets)
+    public func modify(_ normalImage: KFCrossPlatformImage) -> KFCrossPlatformImage {
+        return normalImage.withAlignmentRectInsets(alignmentInsets)
     }
 }
 #endif

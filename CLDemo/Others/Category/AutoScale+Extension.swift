@@ -1,6 +1,6 @@
 //
 //  AutoScale+Extension.swift
-//  CL
+//  CKD
 //
 //  Created by JmoVxia on 2020/4/24.
 //  Copyright © 2020 JmoVxia. All rights reserved.
