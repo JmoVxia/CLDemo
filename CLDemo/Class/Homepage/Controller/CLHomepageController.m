@@ -98,6 +98,7 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject:NSLocalizedString(@"切换语言", nil)];
         [_arrayDS addObject:NSLocalizedString(@"修改字号", nil)];
+        [_arrayDS addObject:NSLocalizedString(@"动画按钮", nil)];
         [_arrayDS addObject:NSLocalizedString(@"动画渐变", nil)];
         [_arrayDS addObject:NSLocalizedString(@"柱状图", nil)];
         [_arrayDS addObject:NSLocalizedString(@"转盘菜单", nil)];
@@ -145,6 +146,7 @@
         _controllerArray = [[NSMutableArray alloc] init];
         [_controllerArray addObject:[CLChangeLanguageController class]];
         [_controllerArray addObject:[CLChangeFontSizeController class]];
+        [_controllerArray addObject:[CLAnimationButtonController class]];
         [_controllerArray addObject:[CLAnimatedGradientController class]];
         [_controllerArray addObject:[CLHistogramConroller class]];
         [_controllerArray addObject:[CLWheelMenuController class]];
