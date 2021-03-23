@@ -72,8 +72,8 @@ extension CLDebugCell {
         contentBackgroundView.layer.cornerRadius = contentBackgroundView.bounds.height * 0.5
     }
 }
-extension CLDebugCell: CLChatCellProtocol {
-    func setItem(_ item: CLChatItemProtocol) {
+extension CLDebugCell: CLCellProtocol {
+    func setItem(_ item: CLCellItemProtocol) {
         guard let item = item as? CLDebugItem else {
             return
         }

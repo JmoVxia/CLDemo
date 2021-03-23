@@ -12,8 +12,8 @@ class CLDebugItem: NSObject {
     var isSelected: Bool = false
     var path: String = ""
 }
-extension CLDebugItem: CLChatItemProtocol {
-    func tableviewCellClass() -> UITableViewCell.Type {
+extension CLDebugItem: CLCellItemProtocol {
+    func bindCell() -> UITableViewCell.Type {
         return CLDebugCell.self
     }
 }

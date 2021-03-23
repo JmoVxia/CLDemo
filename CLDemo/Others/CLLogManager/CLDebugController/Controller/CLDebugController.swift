@@ -27,8 +27,8 @@ class CLDebugController: CLBaseViewController {
         view.addTarget(self, action: #selector(backItemAction), for: .touchUpInside)
        return view
     }()
-    private lazy var dataSource: [CLChatItemProtocol] = {
-        let dataSource = [CLChatItemProtocol]()
+    private lazy var dataSource: [CLCellItemProtocol] = {
+        let dataSource = [CLCellItemProtocol]()
         return dataSource
     }()
     private lazy var contentView: UIView = {
@@ -150,6 +150,6 @@ extension CLDebugController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = dataSource[indexPath.row]
-        return item.dequeueReusableCell(tableView: tableView)
+        return item.dequeueReusableCell(tableView: tableView, indexPath: indexPath)
     }
 }

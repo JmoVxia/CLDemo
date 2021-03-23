@@ -12,8 +12,8 @@ import UIKit
 class CLChatTextItem: CLChatItem {
     var text: String?
 }
-extension CLChatTextItem: CLChatItemProtocol {
-    func tableviewCellClass() -> UITableViewCell.Type {
+extension CLChatTextItem: CLCellItemProtocol {
+    func bindCell() -> UITableViewCell.Type {
         return CLChatTextCell.self
     }
 }

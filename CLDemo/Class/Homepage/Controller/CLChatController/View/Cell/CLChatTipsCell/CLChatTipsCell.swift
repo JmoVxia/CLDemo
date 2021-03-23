@@ -13,6 +13,7 @@ class CLChatTipsCell: CLChatCell {
     var textBackgroundView = UIView().then { (view) in
         view.backgroundColor = .hexColor(with: "#D9D9D9")
         view.clipsToBounds = true
+        view.layer.cornerRadius = 10
     }
     ///文字label
     var titleLabel = UILabel().then { (label) in
@@ -59,15 +60,13 @@ extension CLChatTipsCell {
         }
     }
 }
-extension CLChatTipsCell: CLChatCellProtocol {
-    func setItem(_ item: CLChatItemProtocol) {
+extension CLChatTipsCell: CLCellProtocol {
+    func setItem(_ item: CLCellItemProtocol) {
         guard let tipsItem = item as? CLChatTipsItem else {
             return
         }
         self.item = nil
         self.item = tipsItem
         titleLabel.text = tipsItem.text
-        titleLabel.sizeToFit()
-        textBackgroundView.layer.cornerRadius = textBackgroundView.bounds.height * 0.5
     }
 }

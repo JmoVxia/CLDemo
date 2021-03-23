@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 
-//MARK: - JmoVxia---类-属性
 class CLAnimationButton: UIControl {
     private var lineLayers: [CAShapeLayer]!
     private lazy var imageShapeLayer: CAShapeLayer = {

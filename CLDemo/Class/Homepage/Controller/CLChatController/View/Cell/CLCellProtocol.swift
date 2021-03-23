@@ -1,5 +1,5 @@
 //
-//  CLChatCellProtocol.swift
+//  CLCellProtocol.swift
 //  CLDemo
 //
 //  Created by Emma on 2020/1/27.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol CLChatCellProtocol {
+protocol CLCellProtocol {
     ///设置item
-    func setItem(_ item: CLChatItemProtocol)
+    func setItem(_ item: CLCellItemProtocol)
 }
 

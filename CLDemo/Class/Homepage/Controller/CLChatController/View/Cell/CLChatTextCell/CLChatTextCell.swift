@@ -73,8 +73,8 @@ extension CLChatTextCell {
         }
     }
 }
-extension CLChatTextCell: CLChatCellProtocol {
-    func setItem(_ item: CLChatItemProtocol) {
+extension CLChatTextCell: CLCellProtocol {
+    func setItem(_ item: CLCellItemProtocol) {
         guard let textItem = item as? CLChatTextItem else {
             return
         }

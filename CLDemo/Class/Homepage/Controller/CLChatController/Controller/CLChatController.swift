@@ -12,11 +12,14 @@ import Photos
 class CLChatController: CLBaseViewController {
     ///图片上传路径
     private let imageUploadPath: String = pathDocuments + "/CLChatImageUpload"
-    private var dataSource = [CLChatItemProtocol]()
+    private lazy var tableViewHepler: CLTableViewHepler = {
+        let hepler = CLTableViewHepler()
+        return hepler
+    }()
     private lazy var tableView: CLIntrinsicTableView = {
         let tableView = CLIntrinsicTableView()
-        tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "UITableViewCell")
-        tableView.dataSource = self
+        tableView.dataSource = tableViewHepler
+        tableView.delegate = tableViewHepler
         tableView.backgroundColor = UIColor.clear
         tableView.separatorStyle = .none
         if #available(iOS 11.0, *) {
@@ -42,25 +45,11 @@ class CLChatController: CLBaseViewController {
     }()
 }
 extension CLChatController {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.shadowImage = nil
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         makeConstraints()
         addTipsMessages(["欢迎来到本Demo"])
-    }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
     }
 }
 extension CLChatController {
@@ -80,93 +69,70 @@ extension CLChatController {
         }
     }
     private func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            if self.dataSource.count >= 1 {
-                let item = max(self.dataSource.count - 1, 0)
-                self.tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: true)
-            }
+        tableView.reloadData()
+        if tableViewHepler.dataSource.count >= 1 {
+            let item = max(tableViewHepler.dataSource.count - 1, 0)
+            tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: true)
         }
     }
 }
 extension CLChatController {
     private func addTipsMessages(_ messages: [String]) {
-        DispatchQueue.global().async {
-            for text in messages {
-                let item = CLChatTipsItem()
-                item.text = text
-                self.dataSource.append(item)
-            }
-            self.reloadData()
+        messages.forEach { (text) in
+            let item = CLChatTipsItem()
+            item.text = text
+            tableViewHepler.dataSource.append(item)
         }
+        reloadData()
     }
     private func addTextMessages(_ messages: [String]) {
-        DispatchQueue.global().async {
-            do {
-                for text in messages {
-                    let item = CLChatTextItem()
-                    item.position = .right
-                    item.text = text
-                    self.dataSource.append(item)
-                }
-            }
-            do {
-                for text in messages {
-                    let item = CLChatTextItem()
-                    item.position = .left
-                    item.text = text
-                    self.dataSource.append(item)
-                }
-            }
-            self.reloadData()
+        messages.forEach { (text) in
+            let rightItem = CLChatTextItem()
+            rightItem.position = .right
+            rightItem.text = text
+            tableViewHepler.dataSource.append(rightItem)
+            
+            let leftItem = CLChatTextItem()
+            leftItem.position = .left
+            leftItem.text = text
+            tableViewHepler.dataSource.append(leftItem)
         }
+        reloadData()
     }
     private func addImageMessages(_ messages: [(image: UIImage, asset: PHAsset)]) {
-        DispatchQueue.global().async {
-            do {
-                for imageInfo in messages {
-                    guard let previewImageData = imageInfo.image.pngData() else {
-                        return
-                    }
-                    let imageItem = CLChatImageItem.init()
-                    imageItem.imagePath = self.saveUploadImage(imageData: previewImageData, messageId: (imageItem.messageId + "previewImage"))
-                    imageItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
-                    imageItem.position = .right
-                    self.dataSource.append(imageItem)
-                }
+        messages.forEach { (imageInfo) in
+            guard let previewImageData = imageInfo.image.pngData() else {
+                return
             }
-            do {
-                for imageInfo in messages {
-                    guard let previewImageData = imageInfo.image.pngData() else {
-                        return
-                    }
-                    let imageItem = CLChatImageItem.init()
-                    imageItem.imagePath = self.saveUploadImage(imageData: previewImageData, messageId: (imageItem.messageId + "previewImage"))
-                    imageItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
-                    imageItem.position = .left
-                    self.dataSource.append(imageItem)
-                }
-            }
-            self.reloadData()
+            let rightItem = CLChatImageItem()
+            rightItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: (rightItem.messageId + "previewImage"))
+            rightItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
+            rightItem.position = .right
+            tableViewHepler.dataSource.append(rightItem)
+            
+            let leftItem = CLChatImageItem()
+            leftItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: (leftItem.messageId + "previewImage"))
+            leftItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
+            leftItem.position = .left
+            tableViewHepler.dataSource.append(leftItem)
         }
+        reloadData()
     }
     private func addVoiceMessages(duration: TimeInterval, path: String) {
-        DispatchQueue.global().async {
-            do {
-                let item = CLChatVoiceItem()
-                item.duration = duration
-                item.path = path
-                self.dataSource.append(item)
-            }
-            do {
-                let item = CLChatVoiceItem()
-                item.position = .left
-                item.duration = duration
-                item.path = path
-                self.dataSource.append(item)
-            }
-            self.reloadData()
+        do {
+            let item = CLChatVoiceItem()
+            item.duration = duration
+            item.path = path
+            tableViewHepler.dataSource.append(item)
         }
+        do {
+            let item = CLChatVoiceItem()
+            item.position = .left
+            item.duration = duration
+            item.path = path
+            tableViewHepler.dataSource.append(item)
+        }
+        reloadData()
     }
 }
 extension CLChatController {
@@ -184,15 +150,6 @@ extension CLChatController {
 extension CLChatController {
     @objc func dismissKeyboard() {
         inputToolBar.dismissKeyboard()
-    }
-}
-extension CLChatController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = dataSource[indexPath.row]
-        return item.dequeueReusableCell(tableView: tableView)
     }
 }
 extension CLChatController: CLChatInputToolBarDelegate {

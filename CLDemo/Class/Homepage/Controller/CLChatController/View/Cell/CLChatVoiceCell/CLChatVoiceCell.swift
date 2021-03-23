@@ -70,8 +70,6 @@ extension CLChatVoiceCell {
 extension CLChatVoiceCell {
     private func remakeConstraints(isFromMyself: Bool) {
         bubbleImageView.snp.remakeConstraints { (make) in
-            make.top.equalTo(contentView.snp.top).offset(10)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-10).priority(.high)
             if isFromMyself {
                 make.right.equalTo(contentView.snp.right).offset(-10)
             }else {
@@ -79,6 +77,7 @@ extension CLChatVoiceCell {
             }
             make.height.equalTo(40)
             make.width.equalTo(0)
+            make.centerY.equalToSuperview()
         }
         durationLabel.snp.remakeConstraints { (make) in
             make.centerY.equalToSuperview()
@@ -93,8 +92,8 @@ extension CLChatVoiceCell {
         }
     }
 }
-extension CLChatVoiceCell: CLChatCellProtocol {
-    func setItem(_ item: CLChatItemProtocol) {
+extension CLChatVoiceCell: CLCellProtocol {
+    func setItem(_ item: CLCellItemProtocol) {
         guard let item = item as? CLChatVoiceItem else {
             return
         }
