@@ -74,7 +74,7 @@ extension CLChatTextCell {
     }
 }
 extension CLChatTextCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
+    func setItem(_ item: CLCellItemProtocol, tableView: UITableView, indexPath: IndexPath) {
         guard let textItem = item as? CLChatTextItem else {
             return
         }

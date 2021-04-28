@@ -55,9 +55,7 @@ extension CLCellItemProtocol {
         }else {
             tableViewCell = cellClass.init(style: .default, reuseIdentifier: identifier)
         }
-        if let cell = tableViewCell as? CLCellProtocol {
-            cell.setItem(self)
-        }
+        (tableViewCell as? CLCellProtocol)?.setItem(self, tableView: tableView, indexPath: indexPath)
         return tableViewCell
     }
     ///高度

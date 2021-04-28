@@ -23,7 +23,6 @@
     if (self.viewControllers.count > 0) { // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
         viewController.hidesBottomBarWhenPushed = YES;
     }
-    // 修改tabBra的frame
     [super pushViewController:viewController animated:animated];
 }
 - (BOOL)shouldAutorotate {

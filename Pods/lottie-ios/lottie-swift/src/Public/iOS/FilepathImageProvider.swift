@@ -6,7 +6,7 @@
 //
 
 import Foundation
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
 import UIKit
 
 /**
@@ -35,8 +35,8 @@ public class FilepathImageProvider: AnimationImageProvider {
     if asset.name.hasPrefix("data:"),
       let url = URL(string: asset.name),
       let data = try? Data(contentsOf: url),
-      let normalImage = UIImage(data: data) {
-      return normalImage.cgImage
+      let image = UIImage(data: data) {
+      return image.cgImage
     }
     
     let directPath = filepath.appendingPathComponent(asset.name).path

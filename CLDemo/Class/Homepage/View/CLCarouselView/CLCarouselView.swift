@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol CLCarouselViewDataSource: class {
+protocol CLCarouselViewDataSource: AnyObject {
     ///轮播总个数
     func carouselViewRows() -> Int
     ///数据源改变
     func carouselViewDidChange(cell: CLCarouselCell, index: Int)
 }
-protocol CLCarouselViewDelegate: class {
+protocol CLCarouselViewDelegate: AnyObject {
     ///点击cell
     func carouselViewDidSelect(cell: CLCarouselCell, index: Int)
 }

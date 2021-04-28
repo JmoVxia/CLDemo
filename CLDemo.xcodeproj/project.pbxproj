@@ -130,6 +130,9 @@
 		0CFA589A237FE935007B8231 /* CLDrawImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFA5899237FE935007B8231 /* CLDrawImageController.m */; };
 		5B12FC751E7157BF0091A0E2 /* CLChartMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */; };
 		5B12FC761E7157BF0091A0E2 /* CLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12FC741E7157BF0091A0E2 /* CLChartView.m */; };
+		5B133F37264689B500893448 /* CLVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B133F36264689B500893448 /* CLVideoPlayer.swift */; };
+		5B133F3926468D1400893448 /* CLVideoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B133F3826468D1400893448 /* CLVideoOperation.swift */; };
+		5B13E41E2646E9B5006D0FCA /* UITableVIew+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13E41D2646E9B5006D0FCA /* UITableVIew+Extension.swift */; };
 		5B190E5C23B66803005A2474 /* CLPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B190E5B23B66803005A2474 /* CLPopupController.swift */; };
 		5B1C74261E78F120000AB534 /* CLChartXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C74251E78F120000AB534 /* CLChartXLabel.m */; };
 		5B1CC1C424AC93F500C35523 /* CLChatVoiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1CC1C324AC93F500C35523 /* CLChatVoiceItem.swift */; };
@@ -168,6 +171,10 @@
 		5B49622425760CC9009463B1 /* CLWheelMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49622325760CC9009463B1 /* CLWheelMenuView.swift */; };
 		5B49622925760D5E009463B1 /* CLWheelMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49622825760D5E009463B1 /* CLWheelMenuCell.swift */; };
 		5B49622C25761064009463B1 /* CLWheelMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49622B25761064009463B1 /* CLWheelMenuItem.swift */; };
+		5B4A1BD2263960A2004A71CB /* CLHomepageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1BD1263960A2004A71CB /* CLHomepageModel.m */; };
+		5B4A1BD5263968F4004A71CB /* CLPlayVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1BD4263968F4004A71CB /* CLPlayVideoController.swift */; };
+		5B4A1BD726396A98004A71CB /* CLPlayVideoitem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1BD626396A98004A71CB /* CLPlayVideoitem.swift */; };
+		5B4A1BD926396C71004A71CB /* CLPlayVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1BD826396C71004A71CB /* CLPlayVideoCell.swift */; };
 		5B4D40A22580CAE40065D17F /* CLHistogramIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D40A12580CAE40065D17F /* CLHistogramIndexView.swift */; };
 		5B4D40A52580CB020065D17F /* CLHistogramCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D40A42580CB010065D17F /* CLHistogramCell.swift */; };
 		5B55F9BD26147CDD00D27CAB /* CLTableViewHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B55F9BC26147CDD00D27CAB /* CLTableViewHepler.swift */; };
@@ -263,6 +270,21 @@
 		5BB29F342609E71000A119FE /* CLDrawerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29F332609E71000A119FE /* CLDrawerPresentationController.swift */; };
 		5BB29F372609E73B00A119FE /* CLDrawerTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29F362609E73B00A119FE /* CLDrawerTestController.swift */; };
 		5BB328B0244498230049ADE8 /* UIView+CLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB328AF244498230049ADE8 /* UIView+CLExtension.swift */; };
+		5BB70B5126520A4400963FA3 /* 8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4126520A4200963FA3 /* 8.mp4 */; };
+		5BB70B5226520A4400963FA3 /* 9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4226520A4200963FA3 /* 9.mp4 */; };
+		5BB70B5326520A4400963FA3 /* 13.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4326520A4300963FA3 /* 13.mp4 */; };
+		5BB70B5426520A4400963FA3 /* 10.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4426520A4300963FA3 /* 10.mp4 */; };
+		5BB70B5526520A4400963FA3 /* 4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4526520A4300963FA3 /* 4.mp4 */; };
+		5BB70B5626520A4400963FA3 /* 7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4626520A4300963FA3 /* 7.mp4 */; };
+		5BB70B5726520A4400963FA3 /* 14.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4726520A4300963FA3 /* 14.mp4 */; };
+		5BB70B5826520A4400963FA3 /* 15.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4826520A4300963FA3 /* 15.mp4 */; };
+		5BB70B5926520A4400963FA3 /* 3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4926520A4300963FA3 /* 3.mp4 */; };
+		5BB70B5B26520A4400963FA3 /* 11.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4B26520A4300963FA3 /* 11.mp4 */; };
+		5BB70B5C26520A4400963FA3 /* 6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4C26520A4300963FA3 /* 6.mp4 */; };
+		5BB70B5D26520A4400963FA3 /* 12.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4D26520A4400963FA3 /* 12.mp4 */; };
+		5BB70B5E26520A4400963FA3 /* 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4E26520A4400963FA3 /* 2.mp4 */; };
+		5BB70B5F26520A4400963FA3 /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B4F26520A4400963FA3 /* 1.mp4 */; };
+		5BB70B6026520A4400963FA3 /* 5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BB70B5026520A4400963FA3 /* 5.mp4 */; };
 		5BBA6709255930EE0070FC99 /* CLDrawMarqueeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA6708255930EE0070FC99 /* CLDrawMarqueeController.swift */; };
 		5BBA670D255931850070FC99 /* CLDrawMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA670C255931850070FC99 /* CLDrawMarqueeView.swift */; };
 		5BBB62921E7444A100B28FC3 /* CLChartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB62911E7444A100B28FC3 /* CLChartToolBar.m */; };
@@ -521,6 +543,9 @@
 		5B12FC721E7157BF0091A0E2 /* CLChartMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartMaskView.m; sourceTree = "<group>"; };
 		5B12FC731E7157BF0091A0E2 /* CLChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartView.h; sourceTree = "<group>"; };
 		5B12FC741E7157BF0091A0E2 /* CLChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartView.m; sourceTree = "<group>"; };
+		5B133F36264689B500893448 /* CLVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLVideoPlayer.swift; sourceTree = "<group>"; };
+		5B133F3826468D1400893448 /* CLVideoOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLVideoOperation.swift; sourceTree = "<group>"; };
+		5B13E41D2646E9B5006D0FCA /* UITableVIew+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableVIew+Extension.swift"; sourceTree = "<group>"; };
 		5B190E5B23B66803005A2474 /* CLPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupController.swift; sourceTree = "<group>"; };
 		5B1C74241E78F120000AB534 /* CLChartXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLChartXLabel.h; sourceTree = "<group>"; };
 		5B1C74251E78F120000AB534 /* CLChartXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLChartXLabel.m; sourceTree = "<group>"; };
@@ -563,6 +588,11 @@
 		5B49622325760CC9009463B1 /* CLWheelMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWheelMenuView.swift; sourceTree = "<group>"; };
 		5B49622825760D5E009463B1 /* CLWheelMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWheelMenuCell.swift; sourceTree = "<group>"; };
 		5B49622B25761064009463B1 /* CLWheelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWheelMenuItem.swift; sourceTree = "<group>"; };
+		5B4A1BD0263960A2004A71CB /* CLHomepageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLHomepageModel.h; sourceTree = "<group>"; };
+		5B4A1BD1263960A2004A71CB /* CLHomepageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLHomepageModel.m; sourceTree = "<group>"; };
+		5B4A1BD4263968F4004A71CB /* CLPlayVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayVideoController.swift; sourceTree = "<group>"; };
+		5B4A1BD626396A98004A71CB /* CLPlayVideoitem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayVideoitem.swift; sourceTree = "<group>"; };
+		5B4A1BD826396C71004A71CB /* CLPlayVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayVideoCell.swift; sourceTree = "<group>"; };
 		5B4D40A12580CAE40065D17F /* CLHistogramIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHistogramIndexView.swift; sourceTree = "<group>"; };
 		5B4D40A42580CB010065D17F /* CLHistogramCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHistogramCell.swift; sourceTree = "<group>"; };
 		5B55F9BC26147CDD00D27CAB /* CLTableViewHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewHepler.swift; sourceTree = "<group>"; };
@@ -673,6 +703,21 @@
 		5BB29F332609E71000A119FE /* CLDrawerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLDrawerPresentationController.swift; sourceTree = "<group>"; };
 		5BB29F362609E73B00A119FE /* CLDrawerTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLDrawerTestController.swift; sourceTree = "<group>"; };
 		5BB328AF244498230049ADE8 /* UIView+CLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CLExtension.swift"; sourceTree = "<group>"; };
+		5BB70B4126520A4200963FA3 /* 8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8.mp4; sourceTree = "<group>"; };
+		5BB70B4226520A4200963FA3 /* 9.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 9.mp4; sourceTree = "<group>"; };
+		5BB70B4326520A4300963FA3 /* 13.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 13.mp4; sourceTree = "<group>"; };
+		5BB70B4426520A4300963FA3 /* 10.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 10.mp4; sourceTree = "<group>"; };
+		5BB70B4526520A4300963FA3 /* 4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.mp4; sourceTree = "<group>"; };
+		5BB70B4626520A4300963FA3 /* 7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 7.mp4; sourceTree = "<group>"; };
+		5BB70B4726520A4300963FA3 /* 14.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 14.mp4; sourceTree = "<group>"; };
+		5BB70B4826520A4300963FA3 /* 15.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 15.mp4; sourceTree = "<group>"; };
+		5BB70B4926520A4300963FA3 /* 3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.mp4; sourceTree = "<group>"; };
+		5BB70B4B26520A4300963FA3 /* 11.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 11.mp4; sourceTree = "<group>"; };
+		5BB70B4C26520A4300963FA3 /* 6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 6.mp4; sourceTree = "<group>"; };
+		5BB70B4D26520A4400963FA3 /* 12.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 12.mp4; sourceTree = "<group>"; };
+		5BB70B4E26520A4400963FA3 /* 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.mp4; sourceTree = "<group>"; };
+		5BB70B4F26520A4400963FA3 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
+		5BB70B5026520A4400963FA3 /* 5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 5.mp4; sourceTree = "<group>"; };
 		5BB848271E002C5000BB266D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		5BBA6708255930EE0070FC99 /* CLDrawMarqueeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLDrawMarqueeController.swift; sourceTree = "<group>"; };
 		5BBA670C255931850070FC99 /* CLDrawMarqueeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLDrawMarqueeView.swift; sourceTree = "<group>"; };
@@ -1452,6 +1497,28 @@
 			path = VIew;
 			sourceTree = "<group>";
 		};
+		5B133EF92646781E00893448 /* video */ = {
+			isa = PBXGroup;
+			children = (
+				5BB70B4F26520A4400963FA3 /* 1.mp4 */,
+				5BB70B4E26520A4400963FA3 /* 2.mp4 */,
+				5BB70B4926520A4300963FA3 /* 3.mp4 */,
+				5BB70B4526520A4300963FA3 /* 4.mp4 */,
+				5BB70B5026520A4400963FA3 /* 5.mp4 */,
+				5BB70B4C26520A4300963FA3 /* 6.mp4 */,
+				5BB70B4626520A4300963FA3 /* 7.mp4 */,
+				5BB70B4126520A4200963FA3 /* 8.mp4 */,
+				5BB70B4226520A4200963FA3 /* 9.mp4 */,
+				5BB70B4426520A4300963FA3 /* 10.mp4 */,
+				5BB70B4B26520A4300963FA3 /* 11.mp4 */,
+				5BB70B4D26520A4400963FA3 /* 12.mp4 */,
+				5BB70B4326520A4300963FA3 /* 13.mp4 */,
+				5BB70B4726520A4300963FA3 /* 14.mp4 */,
+				5BB70B4826520A4300963FA3 /* 15.mp4 */,
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
 		5B190E5A23B667DD005A2474 /* CLPopupController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1593,6 +1660,19 @@
 				5B49622825760D5E009463B1 /* CLWheelMenuCell.swift */,
 			);
 			path = CLWheelMenuView;
+			sourceTree = "<group>";
+		};
+		5B4A1BD3263968D3004A71CB /* CLPlayVideoController */ = {
+			isa = PBXGroup;
+			children = (
+				5B133EF92646781E00893448 /* video */,
+				5B4A1BD4263968F4004A71CB /* CLPlayVideoController.swift */,
+				5B133F36264689B500893448 /* CLVideoPlayer.swift */,
+				5B133F3826468D1400893448 /* CLVideoOperation.swift */,
+				5B4A1BD626396A98004A71CB /* CLPlayVideoitem.swift */,
+				5B4A1BD826396C71004A71CB /* CLPlayVideoCell.swift */,
+			);
+			path = CLPlayVideoController;
 			sourceTree = "<group>";
 		};
 		5B55F9BB26147CB300D27CAB /* CLTableViewHepler */ = {
@@ -1857,6 +1937,9 @@
 			children = (
 				5B80DA2F1DDD993F00A20E34 /* CLHomepageController.h */,
 				5B80DA301DDD993F00A20E34 /* CLHomepageController.m */,
+				5B4A1BD0263960A2004A71CB /* CLHomepageModel.h */,
+				5B4A1BD1263960A2004A71CB /* CLHomepageModel.m */,
+				5B4A1BD3263968D3004A71CB /* CLPlayVideoController */,
 				5BB29F272609E62D00A119FE /* CLDrawerController */,
 				5B3B772F2601EAF30052C379 /* CLAnimationButtonController */,
 				5B34B5C825D0E07B00C2907C /* CLAnimatedGradientController */,
@@ -1985,6 +2068,7 @@
 				5BCCEC6E245C292E0049AC70 /* NSDecimalNumber+Extension.swift */,
 				5BA4826A253192150072F9BD /* UISpringTimingParameters+Extension.swift */,
 				5B5C6FB625809A270008B09D /* UIBezierPath+Extension.swift */,
+				5B13E41D2646E9B5006D0FCA /* UITableVIew+Extension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2444,6 +2528,7 @@
 			files = (
 				5B9F17FE24AECCF40094A3FD /* recoredWave_dk.json in Resources */,
 				0CF79B1621967AE600DD0BF1 /* 一月.json in Resources */,
+				5BB70B5B26520A4400963FA3 /* 11.mp4 in Resources */,
 				5B63581924ADC50D00D768A4 /* data-right.json in Resources */,
 				5BA7BF7524AC3D180072B94C /* food.json in Resources */,
 				0C7DE94D22DECC0D00FA9040 /* localLongImage1.jpg in Resources */,
@@ -2452,17 +2537,28 @@
 				0CF79B0B2196799C00DD0BF1 /* bank.json in Resources */,
 				5B63581A24ADC50D00D768A4 /* data-left.json in Resources */,
 				5B5F093E24B2B7CA00E69256 /* send_timeout.json in Resources */,
+				5BB70B5726520A4400963FA3 /* 14.mp4 in Resources */,
 				5BA7BF8924AC3D180072B94C /* loading.json in Resources */,
 				5B80D9F71DDD976A00A20E34 /* LaunchScreen.storyboard in Resources */,
 				0C7DE94F22DECC0D00FA9040 /* localImage6.jpeg in Resources */,
+				5BB70B5426520A4400963FA3 /* 10.mp4 in Resources */,
+				5BB70B5326520A4400963FA3 /* 13.mp4 in Resources */,
 				5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */,
 				0C7DE94A22DECC0D00FA9040 /* localImage3.jpeg in Resources */,
 				0C7DE95022DECC0D00FA9040 /* localLongImage0.jpg in Resources */,
+				5BB70B5F26520A4400963FA3 /* 1.mp4 in Resources */,
+				5BB70B5126520A4400963FA3 /* 8.mp4 in Resources */,
 				0CF79B1521967AE600DD0BF1 /* 一年.json in Resources */,
 				0CF79B1421967AE600DD0BF1 /* 三月.json in Resources */,
 				0C7DE94B22DECC0D00FA9040 /* localBigImage0.jpeg in Resources */,
+				5BB70B5826520A4400963FA3 /* 15.mp4 in Resources */,
 				0C7DE95122DECC0D00FA9040 /* localImage7.jpeg in Resources */,
+				5BB70B5C26520A4400963FA3 /* 6.mp4 in Resources */,
 				0CF79B1321967AE600DD0BF1 /* 一周.json in Resources */,
+				5BB70B5626520A4400963FA3 /* 7.mp4 in Resources */,
+				5BB70B5E26520A4400963FA3 /* 2.mp4 in Resources */,
+				5BB70B5926520A4400963FA3 /* 3.mp4 in Resources */,
+				5BB70B6026520A4400963FA3 /* 5.mp4 in Resources */,
 				0C5DDAB6232539B6001745B2 /* localImage9.jpeg in Resources */,
 				0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */,
 				5B63115C257DFCC9005841C0 /* CLPopoverController.xib in Resources */,
@@ -2470,8 +2566,11 @@
 				0C7DE94922DECC0D00FA9040 /* localImage0.jpeg in Resources */,
 				0C7DE95422DECC0D00FA9040 /* localImage1.jpeg in Resources */,
 				B5498C7B23DE93910082D4E5 /* iso3166.json in Resources */,
+				5BB70B5D26520A4400963FA3 /* 12.mp4 in Resources */,
 				0C7DE94E22DECC0D00FA9040 /* localImage5.jpeg in Resources */,
 				0C7DE94822DECC0D00FA9040 /* localGifImage1.gif in Resources */,
+				5BB70B5226520A4400963FA3 /* 9.mp4 in Resources */,
+				5BB70B5526520A4400963FA3 /* 4.mp4 in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
 				0C7DE94722DECC0D00FA9040 /* localImage8.jpeg in Resources */,
 				0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */,
@@ -2589,6 +2688,7 @@
 				B5498C8523DEE0C70082D4E5 /* CLIntrinsicTableView.swift in Sources */,
 				5B80DA521DDD9BBE00A20E34 /* CLBaseViewController.m in Sources */,
 				0CAE2E4F2209855E00003E81 /* CLPasswordViewSwiftController.swift in Sources */,
+				5B133F3926468D1400893448 /* CLVideoOperation.swift in Sources */,
 				0CCDA319219855B90057BA14 /* ChangeFontSizeModel.m in Sources */,
 				5B8A4D4323B118CC00360631 /* CLChatController.swift in Sources */,
 				5BBA670D255931850070FC99 /* CLDrawMarqueeView.swift in Sources */,
@@ -2644,6 +2744,7 @@
 				5B1CC1C924AC95AE00C35523 /* TimeInterval+Extension.swift in Sources */,
 				5BA7BF7324AC3D180072B94C /* CLPopupFoodPickerController.swift in Sources */,
 				0CF79AE72195B1C800DD0BF1 /* UIButton+CLBlockAction.m in Sources */,
+				5B4A1BD2263960A2004A71CB /* CLHomepageModel.m in Sources */,
 				5B24119A243B1BB100B2E0DC /* CLTagsView.swift in Sources */,
 				0C9235AB22F5589100EA3E9F /* CLMailBoxTextView.m in Sources */,
 				B5498C7A23DE93910082D4E5 /* CLPhoneNumberInfoModel.m in Sources */,
@@ -2667,6 +2768,7 @@
 				5B20D6AB255273300046D110 /* CLInfiniteView.swift in Sources */,
 				0CF2B6EC231A6C2A0071AEC3 /* CLCustomTransitionViewController.m in Sources */,
 				5BA48263253179A80072F9BD /* CLPopupMomentumController.swift in Sources */,
+				5B13E41E2646E9B5006D0FCA /* UITableVIew+Extension.swift in Sources */,
 				0CCDA316219855A20057BA14 /* CLChangeFontSizeCell.m in Sources */,
 				0C6CE0C022ACD71200B4EECF /* FPSDisplay.m in Sources */,
 				5B49622425760CC9009463B1 /* CLWheelMenuView.swift in Sources */,
@@ -2709,6 +2811,7 @@
 				0CCD1DCA231F60D200AFCE1F /* CLBroadcastView.m in Sources */,
 				5B723152254FAFB200DA1FE9 /* CLChatTextView.swift in Sources */,
 				5BA7BF8E24AC3E790072B94C /* CLPopupFlopController.swift in Sources */,
+				5B4A1BD5263968F4004A71CB /* CLPlayVideoController.swift in Sources */,
 				5B72314C254FAFB200DA1FE9 /* CLChatPhotoCellButton.swift in Sources */,
 				0CCDA40222D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m in Sources */,
 				5B44D12C2435C6F10059476D /* CLTagsFrameHelper.swift in Sources */,
@@ -2716,8 +2819,10 @@
 				0CF79B092196798400DD0BF1 /* BankDataModel.m in Sources */,
 				5BA7BF7224AC3D180072B94C /* CLPopupManager.swift in Sources */,
 				5B42F09024A3918D006861BF /* CLRecordeEncodeController.m in Sources */,
+				5B4A1BD926396C71004A71CB /* CLPlayVideoCell.swift in Sources */,
 				5B55F9BD26147CDD00D27CAB /* CLTableViewHepler.swift in Sources */,
 				5BCCEC68245BFC890049AC70 /* CLVernierCaliperMiddleCell.swift in Sources */,
+				5B4A1BD726396A98004A71CB /* CLPlayVideoitem.swift in Sources */,
 				5BF1ACE6245C850A0083BE70 /* CLTitleControllerView.m in Sources */,
 				0CCDA3FF22D9D1C5007B41C4 /* CLPhotoBrowserPresentationController.m in Sources */,
 				5BAD165B24EBD7FC00001E01 /* CLScrollAnimationController.swift in Sources */,
@@ -2726,6 +2831,7 @@
 				5B6CABED2534473E0076C873 /* CLCarouselCell.swift in Sources */,
 				5B3B773A2601EBF00052C379 /* CLAnimationButton.swift in Sources */,
 				0C7A1EA0231A7129002D75F2 /* CLCustomTransitionDelegate.m in Sources */,
+				5B133F37264689B500893448 /* CLVideoPlayer.swift in Sources */,
 				0CACA4AD224CC1F80084ECC8 /* CLTextViewViewController.swift in Sources */,
 				5B190E5C23B66803005A2474 /* CLPopupController.swift in Sources */,
 				0CC7796622D9D7E10027B310 /* CLPhotoBrowserViewController.m in Sources */,
@@ -2964,7 +3070,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo/Class/Homepage/Controller/CLRecordeEncodeController/CLRecorder/LAME",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ccc.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = Demo.ccc.vip00;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";
@@ -2992,7 +3098,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo/Class/Homepage/Controller/CLRecordeEncodeController/CLRecorder/LAME",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ccc.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = Demo.ccc.vip00;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo/CLDemo-Bridging-Header.h";

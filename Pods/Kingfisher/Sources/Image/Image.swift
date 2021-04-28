@@ -43,12 +43,18 @@ import CoreGraphics
 import ImageIO
 
 private var animatedImageDataKey: Void?
+private var imageFrameCountKey: Void?
 
 // MARK: - Image Properties
 extension KingfisherWrapper where Base: KFCrossPlatformImage {
     private(set) var animatedImageData: Data? {
         get { return getAssociatedObject(base, &animatedImageDataKey) }
         set { setRetainedAssociatedObject(base, &animatedImageDataKey, newValue) }
+    }
+    
+    public var imageFrameCount: Int? {
+        get { return getAssociatedObject(base, &imageFrameCountKey) }
+        set { setRetainedAssociatedObject(base, &imageFrameCountKey, newValue) }
     }
     
     #if os(macOS)
@@ -195,11 +201,7 @@ extension KingfisherWrapper where Base: KFCrossPlatformImage {
             let rep = NSBitmapImageRep(cgImage: cgImage)
             return rep.representation(using: .png, properties: [:])
         #else
-            #if swift(>=4.2)
             return base.pngData()
-            #else
-            return UIImagePNGRepresentation(base)
-            #endif
         #endif
     }
 
@@ -215,11 +217,7 @@ extension KingfisherWrapper where Base: KFCrossPlatformImage {
             let rep = NSBitmapImageRep(cgImage: cgImage)
             return rep.representation(using:.jpeg, properties: [.compressionFactor: compressionQuality])
         #else
-            #if swift(>=4.2)
             return base.jpegData(compressionQuality: compressionQuality)
-            #else
-            return UIImageJPEGRepresentation(base, compressionQuality)
-            #endif
         #endif
     }
 
@@ -291,30 +289,32 @@ extension KingfisherWrapper where Base: KFCrossPlatformImage {
             kf?.duration = animatedImage.duration
         }
         image?.kf.animatedImageData = data
+        image?.kf.imageFrameCount = Int(CGImageSourceGetCount(imageSource))
         return image
         #else
         
-        var normalImage: KFCrossPlatformImage?
+        var image: KFCrossPlatformImage?
         if options.preloadAll || options.onlyFirstFrame {
             // Use `images` image if you want to preload all animated data
             guard let animatedImage = GIFAnimatedImage(from: imageSource, for: info, options: options) else {
                 return nil
             }
             if options.onlyFirstFrame {
-                normalImage = animatedImage.images.first
+                image = animatedImage.images.first
             } else {
                 let duration = options.duration <= 0.0 ? animatedImage.duration : options.duration
-                normalImage = .animatedImage(with: animatedImage.images, duration: duration)
+                image = .animatedImage(with: animatedImage.images, duration: duration)
             }
-            normalImage?.kf.animatedImageData = data
+            image?.kf.animatedImageData = data
         } else {
-            normalImage = KFCrossPlatformImage(data: data, scale: options.scale)
-            var kf = normalImage?.kf
+            image = KFCrossPlatformImage(data: data, scale: options.scale)
+            var kf = image?.kf
             kf?.imageSource = imageSource
             kf?.animatedImageData = data
         }
         
-        return normalImage
+        image?.kf.imageFrameCount = Int(CGImageSourceGetCount(imageSource))
+        return image
         #endif
     }
 

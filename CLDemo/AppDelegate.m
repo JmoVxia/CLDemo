@@ -17,13 +17,11 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
     CLTabbarController *tbc = [[CLTabbarController alloc] init];
     self.window.rootViewController = tbc;
     [self.window makeKeyAndVisible];
-//    [FPSDisplay shareFPSDisplay];
+    [FPSDisplay shareFPSDisplay];
     return YES;
 }
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -35,6 +33,5 @@
         return UIInterfaceOrientationMaskAllButUpsideDown;
     }
 }
-
 
 @end

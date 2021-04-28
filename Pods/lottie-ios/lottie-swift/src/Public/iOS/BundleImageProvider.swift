@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreGraphics
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
 import UIKit
 
 /**
@@ -39,8 +39,8 @@ public class BundleImageProvider: AnimationImageProvider {
     if asset.name.hasPrefix("data:"),
       let url = URL(string: asset.name),
       let data = try? Data(contentsOf: url),
-      let normalImage = UIImage(data: data) {
-      return normalImage.cgImage
+      let image = UIImage(data: data) {
+      return image.cgImage
     }
     
     let imagePath: String?
@@ -69,11 +69,18 @@ public class BundleImageProvider: AnimationImageProvider {
       }
     }
     
-    guard let foundPath = imagePath, let normalImage = UIImage(contentsOfFile: foundPath) else {
+    if imagePath == nil {
+        guard let image = UIImage(named: asset.name, in: bundle, compatibleWith: nil) else {
+            return nil
+        }
+        return image.cgImage
+    }
+    
+    guard let foundPath = imagePath, let image = UIImage(contentsOfFile: foundPath) else {
       /// No image found.
       return nil
     }
-    return normalImage.cgImage
+    return image.cgImage
   }
   
 }

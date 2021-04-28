@@ -61,7 +61,7 @@ extension CLChatTipsCell {
     }
 }
 extension CLChatTipsCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
+    func setItem(_ item: CLCellItemProtocol, tableView: UITableView, indexPath: IndexPath) {
         guard let tipsItem = item as? CLChatTipsItem else {
             return
         }

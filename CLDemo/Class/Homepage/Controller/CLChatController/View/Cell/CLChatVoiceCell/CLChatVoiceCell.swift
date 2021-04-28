@@ -93,7 +93,7 @@ extension CLChatVoiceCell {
     }
 }
 extension CLChatVoiceCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
+    func setItem(_ item: CLCellItemProtocol, tableView: UITableView, indexPath: IndexPath) {
         guard let item = item as? CLChatVoiceItem else {
             return
         }

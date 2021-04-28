@@ -1,7 +1,1 @@
-# OSX
 .DS_Store
-
-# Xcode
-xcuserdata
-*.xccheckout
-DerivedData/

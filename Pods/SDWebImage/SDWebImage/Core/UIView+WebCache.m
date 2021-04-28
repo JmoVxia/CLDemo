@@ -141,7 +141,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
             BOOL shouldCallCompletedBlock = finished || (options & SDWebImageAvoidAutoSetImage);
             BOOL shouldNotSetImage = ((image && (options & SDWebImageAvoidAutoSetImage)) ||
                                       (!image && !(options & SDWebImageDelayPlaceholder)));
-            SDWebImageNoParamsBlock callCompletedBlockClojure = ^{
+            SDWebImageNoParamsBlock callCompletedBlockClosure = ^{
                 if (!self) { return; }
                 if (!shouldNotSetImage) {
                     [self sd_setNeedsLayout];
@@ -155,7 +155,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
             // OR
             // case 1b: we got no image and the SDWebImageDelayPlaceholder is not set
             if (shouldNotSetImage) {
-                dispatch_main_async_safe(callCompletedBlockClojure);
+                dispatch_main_async_safe(callCompletedBlockClosure);
                 return;
             }
             
@@ -206,7 +206,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 #else
                 [self sd_setImage:targetImage imageData:targetData basedOnClassOrViaCustomSetImageBlock:setImageBlock cacheType:cacheType imageURL:imageURL];
 #endif
-                callCompletedBlockClojure();
+                callCompletedBlockClosure();
             });
         }];
         [self sd_setImageLoadOperation:operation forKey:validOperationKey];
@@ -272,9 +272,11 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 #endif
     
     if (transition) {
+        NSString *originalOperationKey = view.sd_latestOperationKey;
+
 #if SD_UIKIT
         [UIView transitionWithView:view duration:0 options:0 animations:^{
-            if (!view.sd_latestOperationKey) {
+            if (!view.sd_latestOperationKey || ![originalOperationKey isEqualToString:view.sd_latestOperationKey]) {
                 return;
             }
             // 0 duration to let UIKit render placeholder and prepares block
@@ -283,7 +285,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
             }
         } completion:^(BOOL finished) {
             [UIView transitionWithView:view duration:transition.duration options:transition.animationOptions animations:^{
-                if (!view.sd_latestOperationKey) {
+                if (!view.sd_latestOperationKey || ![originalOperationKey isEqualToString:view.sd_latestOperationKey]) {
                     return;
                 }
                 if (finalSetImageBlock && !transition.avoidAutoSetImage) {
@@ -293,7 +295,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
                     transition.animations(view, image);
                 }
             } completion:^(BOOL finished) {
-                if (!view.sd_latestOperationKey) {
+                if (!view.sd_latestOperationKey || ![originalOperationKey isEqualToString:view.sd_latestOperationKey]) {
                     return;
                 }
                 if (transition.completion) {
@@ -303,7 +305,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
         }];
 #elif SD_MAC
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull prepareContext) {
-            if (!view.sd_latestOperationKey) {
+            if (!view.sd_latestOperationKey || ![originalOperationKey isEqualToString:view.sd_latestOperationKey]) {
                 return;
             }
             // 0 duration to let AppKit render placeholder and prepares block
@@ -313,7 +315,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
             }
         } completionHandler:^{
             [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
-                if (!view.sd_latestOperationKey) {
+                if (!view.sd_latestOperationKey || ![originalOperationKey isEqualToString:view.sd_latestOperationKey]) {
                     return;
                 }
                 context.duration = transition.duration;
@@ -337,7 +339,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
                     transition.animations(view, image);
                 }
             } completionHandler:^{
-                if (!view.sd_latestOperationKey) {
+                if (!view.sd_latestOperationKey || ![originalOperationKey isEqualToString:view.sd_latestOperationKey]) {
                     return;
                 }
                 if (transition.completion) {

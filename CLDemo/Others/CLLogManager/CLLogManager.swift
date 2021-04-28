@@ -10,7 +10,7 @@ import UIKit
 
 @objcMembers class CLLogManager: NSObject {
     static let shared = CLLogManager()
-    private (set) var folderPath: String = String(format: "%@/%@", pathDocuments, "CLLogManager.folderPath".md5ForUpper32Bate)
+    private (set) var folderPath: String = String(format: "%@", pathDocuments)
     private var logQueue: DispatchQueue = DispatchQueue(label: "CLLogManager.logQueue")
     private lazy var logFileHandle: FileHandle? = {
         let fileManager = FileManager.default
@@ -52,7 +52,7 @@ import UIKit
 extension CLLogManager {
     class func CLLogMessage(_ message: String) {
         let time = Date().format(with: "yyyy-MM-dd HH:mm:ss.SSS")
-        let logMessage = "\(time)\n" + message + "\n\n"
+        let logMessage = "\(time)\n" + message + "\n"
         print("\(logMessage)")
         shared.logQueue.async {
             guard let output = shared.logFileHandle else {return}
@@ -65,7 +65,7 @@ extension CLLogManager {
     class func CLLog(_ message: String, file:String = #file, function:String = #function,
     line:Int = #line) {
         let time = Date().format(with: "yyyy-MM-dd HH:mm:ss.SSS")
-        let logMessage = "\(time)\n" + "\(file.lastPathComponent) " + "\(function) " + "\(line)\n" + message + "\n\n"
+        let logMessage = "\(time)\n" + "\(file.lastPathComponent) " + "\(function) " + "\(line)\n" + message + "\n"
         print("\(logMessage)")
         shared.logQueue.async {
             guard let output = shared.logFileHandle else {return}

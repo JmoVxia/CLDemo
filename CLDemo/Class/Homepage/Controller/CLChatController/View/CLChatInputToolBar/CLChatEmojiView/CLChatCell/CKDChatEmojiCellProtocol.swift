@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CLChatEmojiCellProtocol: class {
+protocol CLChatEmojiCellProtocol: AnyObject {
     ///cell复用标识符
     static func cellReuseIdentifier() -> String
     ///更新数据

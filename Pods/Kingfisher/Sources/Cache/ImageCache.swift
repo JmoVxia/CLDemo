@@ -147,6 +147,7 @@ open class ImageCache {
     /// for any of your customize cache.
     public static let `default` = ImageCache(name: "default")
 
+
     // MARK: Public Properties
     /// The `MemoryStorage.Backend` object used in this cache. This storage holds loaded images in memory with a
     /// reasonable expire duration and a maximum memory usage. To modify the configuration of a storage, just set
@@ -181,19 +182,11 @@ open class ImageCache {
 
         let notifications: [(Notification.Name, Selector)]
         #if !os(macOS) && !os(watchOS)
-        #if swift(>=4.2)
         notifications = [
             (UIApplication.didReceiveMemoryWarningNotification, #selector(clearMemoryCache)),
             (UIApplication.willTerminateNotification, #selector(cleanExpiredDiskCache)),
             (UIApplication.didEnterBackgroundNotification, #selector(backgroundCleanExpiredDiskCache))
         ]
-        #else
-        notifications = [
-            (NSNotification.Name.UIApplicationDidReceiveMemoryWarning, #selector(clearMemoryCache)),
-            (NSNotification.Name.UIApplicationWillTerminate, #selector(cleanExpiredDiskCache)),
-            (NSNotification.Name.UIApplicationDidEnterBackground, #selector(backgroundCleanExpiredDiskCache))
-        ]
-        #endif
         #elseif os(macOS)
         notifications = [
             (NSApplication.willResignActiveNotification, #selector(cleanExpiredDiskCache)),
@@ -213,7 +206,7 @@ open class ImageCache {
     ///                   You should not use the same `name` for different caches, otherwise, the disk storage would
     ///                   be conflicting to each other. The `name` should not be an empty string.
     public convenience init(name: String) {
-        try! self.init(name: name, cacheDirectoryURL: nil, diskCachePathClosure: nil)
+        self.init(noThrowName: name, cacheDirectoryURL: nil, diskCachePathClosure: nil)
     }
 
     /// Creates an `ImageCache` with a given `name`, cache directory `path`
@@ -233,17 +226,55 @@ open class ImageCache {
     public convenience init(
         name: String,
         cacheDirectoryURL: URL?,
-        diskCachePathClosure: DiskCachePathClosure? = nil) throws
+        diskCachePathClosure: DiskCachePathClosure? = nil
+    ) throws
     {
         if name.isEmpty {
             fatalError("[Kingfisher] You should specify a name for the cache. A cache with empty name is not permitted.")
         }
 
+        let memoryStorage = ImageCache.createMemoryStorage()
+
+        let config = ImageCache.createConfig(
+            name: name, cacheDirectoryURL: cacheDirectoryURL, diskCachePathClosure: diskCachePathClosure
+        )
+        let diskStorage = try DiskStorage.Backend<Data>(config: config)
+        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage)
+    }
+
+    convenience init(
+        noThrowName name: String,
+        cacheDirectoryURL: URL?,
+        diskCachePathClosure: DiskCachePathClosure?
+    )
+    {
+        if name.isEmpty {
+            fatalError("[Kingfisher] You should specify a name for the cache. A cache with empty name is not permitted.")
+        }
+
+        let memoryStorage = ImageCache.createMemoryStorage()
+
+        let config = ImageCache.createConfig(
+            name: name, cacheDirectoryURL: cacheDirectoryURL, diskCachePathClosure: diskCachePathClosure
+        )
+        let diskStorage = DiskStorage.Backend<Data>(noThrowConfig: config, creatingDirectory: true)
+        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage)
+    }
+
+    private static func createMemoryStorage() -> MemoryStorage.Backend<KFCrossPlatformImage> {
         let totalMemory = ProcessInfo.processInfo.physicalMemory
         let costLimit = totalMemory / 4
         let memoryStorage = MemoryStorage.Backend<KFCrossPlatformImage>(config:
             .init(totalCostLimit: (costLimit > Int.max) ? Int.max : Int(costLimit)))
+        return memoryStorage
+    }
 
+    private static func createConfig(
+        name: String,
+        cacheDirectoryURL: URL?,
+        diskCachePathClosure: DiskCachePathClosure? = nil
+    ) -> DiskStorage.Config
+    {
         var diskConfig = DiskStorage.Config(
             name: name,
             sizeLimit: 0,
@@ -252,10 +283,7 @@ open class ImageCache {
         if let closure = diskCachePathClosure {
             diskConfig.cachePathBlock = closure
         }
-        let diskStorage = try DiskStorage.Backend<Data>(config: diskConfig)
-        diskConfig.cachePathBlock = nil
-
-        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage)
+        return diskConfig
     }
     
     deinit {
@@ -429,7 +457,7 @@ open class ImageCache {
         let computedKey = key.computedKey(with: identifier)
 
         if fromMemory {
-            try? memoryStorage.remove(forKey: computedKey)
+            memoryStorage.remove(forKey: computedKey)
         }
         
         if fromDisk {
@@ -456,7 +484,6 @@ open class ImageCache {
 
         // Try to check the image from memory cache first.
         if let image = retrieveImageInMemoryCache(forKey: key, options: options) {
-            let image = options.imageModifier?.modify(image) ?? image
             callbackQueue.execute { completionHandler(.success(.memory(image))) }
         } else if options.fromMemoryCacheOrRefresh {
             callbackQueue.execute { completionHandler(.success(.none)) }
@@ -474,20 +501,19 @@ open class ImageCache {
                         return
                     }
 
-                    let finalImage = options.imageModifier?.modify(image) ?? image
                     // Cache the disk image to memory.
                     // We are passing `false` to `toDisk`, the memory cache does not change
                     // callback queue, we can call `completionHandler` without another dispatch.
                     var cacheOptions = options
                     cacheOptions.callbackQueue = .untouch
                     self.store(
-                        finalImage,
+                        image,
                         forKey: key,
                         options: cacheOptions,
                         toDisk: false)
                     {
                         _ in
-                        callbackQueue.execute { completionHandler(.success(.disk(finalImage))) }
+                        callbackQueue.execute { completionHandler(.success(.disk(image))) }
                     }
                 case .failure(let error):
                     callbackQueue.execute { completionHandler(.failure(error)) }
@@ -599,7 +625,7 @@ open class ImageCache {
     
     /// Clears the memory storage of this cache.
     @objc public func clearMemoryCache() {
-        try? memoryStorage.removeAll()
+        memoryStorage.removeAll()
     }
     
     /// Clears the disk storage of this cache. This is an async operation.
@@ -674,11 +700,7 @@ open class ImageCache {
 
         func endBackgroundTask(_ task: inout UIBackgroundTaskIdentifier) {
             sharedApplication.endBackgroundTask(task)
-            #if swift(>=4.2)
             task = UIBackgroundTaskIdentifier.invalid
-            #else
-            task = UIBackgroundTaskInvalid
-            #endif
         }
         
         var backgroundTask: UIBackgroundTaskIdentifier!
@@ -823,32 +845,5 @@ extension String {
         } else {
             return appending("@\(identifier)")
         }
-    }
-}
-
-extension ImageCache {
-
-    /// Creates an `ImageCache` with a given `name`, cache directory `path`
-    /// and a closure to modify the cache directory.
-    ///
-    /// - Parameters:
-    ///   - name: The name of cache object. It is used to setup disk cache directories and IO queue.
-    ///           You should not use the same `name` for different caches, otherwise, the disk storage would
-    ///           be conflicting to each other.
-    ///   - path: Location of cache URL on disk. It will be internally pass to the initializer of `DiskStorage` as the
-    ///           disk cache directory.
-    ///   - diskCachePathClosure: Closure that takes in an optional initial path string and generates
-    ///                           the final disk cache path. You could use it to fully customize your cache path.
-    /// - Throws: An error that happens during image cache creating, such as unable to create a directory at the given
-    ///           path.
-    @available(*, deprecated, message: "Use `init(name:cacheDirectoryURL:diskCachePathClosure:)` instead",
-    renamed: "init(name:cacheDirectoryURL:diskCachePathClosure:)")
-    public convenience init(
-        name: String,
-        path: String?,
-        diskCachePathClosure: DiskCachePathClosure? = nil) throws
-    {
-        let directoryURL = path.flatMap { URL(string: $0) }
-        try self.init(name: name, cacheDirectoryURL: directoryURL, diskCachePathClosure: diskCachePathClosure)
     }
 }

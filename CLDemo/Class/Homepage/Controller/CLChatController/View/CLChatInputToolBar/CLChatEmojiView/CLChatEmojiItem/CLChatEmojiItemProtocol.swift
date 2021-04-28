@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CLChatEmojiItemProtocol:class {
+protocol CLChatEmojiItemProtocol:AnyObject {
     ///创建cell
     func dequeueReusableCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell
     ///cell类型

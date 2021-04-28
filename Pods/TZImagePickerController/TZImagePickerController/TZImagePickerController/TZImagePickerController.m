@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 3.4.3 - 2020.09.24
+//  version 3.6.0 - 2021.04.02
 //  更多信息，请前往项目的github地址：https://github.com/banchichen/TZImagePickerController
 
 #import "TZImagePickerController.h"
@@ -12,7 +12,7 @@
 #import "TZPhotoPreviewController.h"
 #import "TZAssetModel.h"
 #import "TZAssetCell.h"
-#import "UIView+Layout.h"
+#import "UIView+TZLayout.h"
 #import "TZImageManager.h"
 
 @interface TZImagePickerController () {
@@ -268,7 +268,7 @@
 
 - (void)configDefaultSetting {
     self.autoSelectCurrentWhenDone = YES;
-    self.timeout = 15;
+    self.timeout = 30;
     self.photoWidth = 828.0;
     self.photoPreviewMaxWidth = 600;
     self.naviTitleColor = [UIColor whiteColor];
@@ -404,7 +404,7 @@
         TZPhotoPickerController *photoPickerVc = [[TZPhotoPickerController alloc] init];
         photoPickerVc.isFirstAppear = YES;
         photoPickerVc.columnNumber = self.columnNumber;
-        [[TZImageManager manager] getCameraRollAlbum:self.allowPickingVideo allowPickingImage:self.allowPickingImage needFetchAssets:NO completion:^(TZAlbumModel *model) {
+        [[TZImageManager manager] getCameraRollAlbumWithFetchAssets:NO completion:^(TZAlbumModel *model) {
             photoPickerVc.model = model;
             [self pushViewController:photoPickerVc animated:YES];
             self->_didPushPhotoPickerVc = YES;
@@ -417,11 +417,6 @@
     [alertController addAction:[UIAlertAction actionWithTitle:[NSBundle tz_localizedStringForKey:@"OK"] style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
     return alertController;
-}
-
-- (void)hideAlertView:(UIAlertController *)alertView {
-    [alertView dismissViewControllerAnimated:YES completion:nil];
-    alertView = nil;
 }
 
 - (void)showProgressHUD {
@@ -762,14 +757,13 @@
         return;
     }
 
+    TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
     if (self.isFirstAppear) {
-        TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
         [imagePickerVc showProgressHUD];
     }
 
-    TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [[TZImageManager manager] getAllAlbums:imagePickerVc.allowPickingVideo allowPickingImage:imagePickerVc.allowPickingImage needFetchAssets:!self.isFirstAppear completion:^(NSArray<TZAlbumModel *> *models) {
+        [[TZImageManager manager] getAllAlbumsWithFetchAssets:!self.isFirstAppear completion:^(NSArray<TZAlbumModel *> *models) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self->_albumArr = [NSMutableArray arrayWithArray:models];
                 for (TZAlbumModel *albumModel in self->_albumArr) {
@@ -905,15 +899,40 @@
 
 @implementation TZCommonTools
 
++ (UIEdgeInsets)tz_safeAreaInsets {
+    UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
+    if (![window isKeyWindow]) {
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        if (CGRectEqualToRect(keyWindow.bounds, [UIScreen mainScreen].bounds)) {
+            window = keyWindow;
+        }
+    }
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets insets = [window safeAreaInsets];
+        return insets;
+    }
+    return UIEdgeInsetsZero;
+}
+
 + (BOOL)tz_isIPhoneX {
+    if ([UIWindow instancesRespondToSelector:@selector(safeAreaInsets)]) {
+        return [self tz_safeAreaInsets].bottom > 0;
+    }
     return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||
             CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)) ||
             CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(414, 896)) ||
-            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(896, 414)));
+            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(896, 414)) ||
+            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(390, 844)) ||
+            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(844, 390)) ||
+            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(428, 926)) ||
+            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(926, 428)));
 }
 
 + (CGFloat)tz_statusBarHeight {
-    return [self tz_isIPhoneX] ? 44 : 20;
+    if ([UIWindow instancesRespondToSelector:@selector(safeAreaInsets)]) {
+        return [self tz_safeAreaInsets].top ?: 20;
+    }
+    return 20;
 }
 
 // 获得Info.plist数据字典

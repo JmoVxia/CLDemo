@@ -34,15 +34,9 @@ extension KingfisherWrapper where Base == String {
             return base
         }
 
-        #if swift(>=5.0)
         let message = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
             return [UInt8](bytes)
         }
-        #else
-        let message = data.withUnsafeBytes { bytes in
-            return [UInt8](UnsafeBufferPointer(start: bytes, count: data.count))
-        }
-        #endif
 
         let MD5Calculator = MD5(message)
         let MD5Data = MD5Calculator.calculate()
@@ -52,6 +46,18 @@ extension KingfisherWrapper where Base == String {
             MD5String += String(format: "%02x", c)
         }
         return MD5String
+    }
+
+    var ext: String? {
+        var ext = ""
+        if let index  = base.lastIndex(of: ".") {
+            let extRange = base.index(index, offsetBy: 1)..<base.endIndex
+            ext = String(base[extRange])
+        }
+        guard let firstSeg = ext.split(separator: "@").first else {
+            return nil
+        }
+        return firstSeg.count > 0 ? String(firstSeg) : nil
     }
 }
 
@@ -69,14 +75,9 @@ func arrayOfBytes<T>(_ value: T, length: Int? = nil) -> [UInt8] {
         }
         return bytes
     }
-
-    #if swift(>=4.1)
+    
     valuePointer.deinitialize(count: 1)
     valuePointer.deallocate()
-    #else
-    valuePointer.deinitialize()
-    valuePointer.deallocate(capacity: 1)
-    #endif
 
     return bytes
 }

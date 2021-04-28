@@ -6,9 +6,11 @@
  A clone of UIImagePickerController, support picking multiple photos、original photo、video, also allow preview photo and video, support iOS6+.   
  一个支持多选、选原图和视频的图片选择器，同时有预览功能，支持iOS6+。
  
- ## 重要提示1：提issue前，请先对照Demo、常见问题自查！Demo正常说明你可以升级下新版试试。          
+## 重要提示1：提issue前，请先对照Demo、常见问题自查！Demo正常说明你可以升级下新版试试。          
  
- ## 重要提示2：3.4.2版本适配了iOS14，修复2个严重问题，强烈建议尽快更新            
+## 重要提示2：3.5.2版本适配了iOS14、iPhone12，修复2个严重问题，强烈建议尽快更新  
+     关于iOS14模拟器的问题
+ PHAuthorizationStatusLimited授权模式下，iOS14模拟器有bug，未授权照片无法显示，真机正常，暂可忽略：https://github.com/banchichen/TZImagePickerController/issues/1347 
  
      关于升级iOS10和Xcdoe8的提示:    
  在Xcode8环境下将项目运行在iOS10的设备/模拟器中，访问相册和相机需要额外配置info.plist文件。分别是Privacy - Photo Library Usage Description和Privacy - Camera Usage Description字段，详见Demo中info.plist中的设置。
@@ -85,7 +87,8 @@ A：请参考 https://github.com/banchichen/TZImagePickerController/issues/443 �
 A：3.0.1版本已支持，需新接一个库：[TZImagePreviewController](https://github.com/banchichen/TZImagePreviewController)，请参考里面的Demo使用。       
 
 **Q：设置可选视频的最大/最小时长？照片的最小/最大尺寸？不符合要求的不显示**       
-A：可以的，参照Demo的isAssetCanSelect方法实现。我会返回asset出来，显示与否你来决定，注意这个是一个同步方法，对于需要根据asset去异步获取的信息如视频的大小、视频是否存在iCloud里来过滤的，无法做到。如果真要这样做，相册打开速度会变慢，你需要改我源码。
+A：可以的，参照Demo的isAssetCanBeDisplayed方法实现。我会返回asset出来，显示与否你来决定，注意这个是一个同步方法，对于需要根据asset去异步获取的信息如视频的大小、视频是否存在iCloud里来过滤的，无法做到。如果真要这样做，相册打开速度会变慢，你需要改我源码。       
+如果需要显示，选择时才提醒用户不可选，则实现isAssetCanBeSelected，用户选择时会调用它        
 
 **Q：预览页面出现了导航栏？**        
 A：https://github.com/banchichen/TZImagePickerController/issues/652         
@@ -122,7 +125,9 @@ A：不要去拿PHImageFileURLKey，没用的，只有通过Photos框架才能�
 
 ## 六. Release Notes 最近更新     
 
-3.4.3 支持Dark Mode      
+3.6.0 修复iOS14下iCloud视频导出失败问题        
+**3.5.2 适配iPhone12系列设备**        
+3.4.4 支持Dark Mode      
 **3.4.2 适配iOS14，若干问题修复**                  
 3.3.2 适配iOS13，若干问题修复                 
 3.2.1 新增裁剪用scaleAspectFillCrop属性，设置为YES后，照片尺寸小于裁剪框时会自动放大撑满                

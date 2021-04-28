@@ -59,8 +59,8 @@ extension CLChatImageCell {
 //        }
     }
 }
-extension CLChatImageCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
+extension CLChatImageCell: CLCellProtocol {    
+    func setItem(_ item: CLCellItemProtocol, tableView: UITableView, indexPath: IndexPath) {
         guard let item = item as? CLChatImageItem else {
             return
         }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Photos
 
-protocol CLChatInputToolBarDelegate: class {
+protocol CLChatInputToolBarDelegate: AnyObject {
     ///键盘发送文字
     func inputBarWillSendText(text: String)
     ///键盘发送图片

@@ -73,7 +73,7 @@ extension CLDebugCell {
     }
 }
 extension CLDebugCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
+    func setItem(_ item: CLCellItemProtocol, tableView: UITableView, indexPath: IndexPath) {
         guard let item = item as? CLDebugItem else {
             return
         }

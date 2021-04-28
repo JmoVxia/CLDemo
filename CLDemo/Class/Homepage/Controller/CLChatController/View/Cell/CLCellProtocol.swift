@@ -10,6 +10,6 @@ import Foundation
 
 protocol CLCellProtocol {
     ///设置item
-    func setItem(_ item: CLCellItemProtocol)
+    func setItem(_ item: CLCellItemProtocol, tableView: UITableView, indexPath: IndexPath)
 }
 

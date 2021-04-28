@@ -34,7 +34,7 @@ class CLPasswordInputViewConfigure: NSObject {
     }
 }
 
-protocol CLPasswordInputViewDelegate: class {
+protocol CLPasswordInputViewDelegate: AnyObject {
     ///输入改变
     func passwordInputViewDidChange(passwordInputView:CLPasswordInputView) -> Void
     ///点击删除

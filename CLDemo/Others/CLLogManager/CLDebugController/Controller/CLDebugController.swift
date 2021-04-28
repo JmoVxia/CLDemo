@@ -31,16 +31,6 @@ class CLDebugController: CLBaseViewController {
         let dataSource = [CLCellItemProtocol]()
         return dataSource
     }()
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
-    private lazy var textField: UITextField = {
-        let view = UITextField()
-        view.keyboardType = .numberPad
-        return view
-    }()
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero)
         view.backgroundColor = UIColor.hexColor(with: "#FFFFFF")
@@ -52,9 +42,6 @@ class CLDebugController: CLBaseViewController {
         }
         return view
     }()
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 extension CLDebugController {
     override func viewWillAppear(_ animated: Bool) {
@@ -66,41 +53,16 @@ extension CLDebugController {
         initUI()
         makeConstraints()
         initData()
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
-    }
-}
-extension CLDebugController {
-    @objc func textDidChange(notification: Notification) {
-        if let textField = notification.object as? UITextField, textField.text == "123456789" {
-            DispatchQueue.main.async {
-                self.contentView.isHidden = true
-                self.view.endEditing(true)
-            }
-        }
     }
 }
 extension CLDebugController {
     private func initUI() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backItem)
         view.addSubview(tableView)
-        view.addSubview(contentView)
-        contentView.addSubview(textField)
     }
     private func makeConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
-        }
-        contentView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        textField.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(50)
-            make.centerY.equalToSuperview()
         }
     }
     private func initData() {
@@ -126,10 +88,6 @@ extension CLDebugController {
         }
         if !fileArray.isEmpty {
             let activity = UIActivityViewController(activityItems: fileArray, applicationActivities: nil)
-            activity.completionWithItemsHandler = {[weak self, weak activity] (activityType, completed, returnedItems, activityError) in
-                activity?.completionWithItemsHandler = nil
-                self?.dismiss(animated: true)
-            }
             present(activity, animated: true)
         }
     }

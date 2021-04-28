@@ -91,7 +91,7 @@ enum Encoding: Int {
     }
 }
 
-@objc protocol CLTextViewDelegate: class {
+@objc protocol CLTextViewDelegate: AnyObject {
     ///输入改变
     @objc optional func textViewDidChange(textView:CLTextView) -> Void
     ///开始输入
