@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) CLRecorder *recorder;
 @property (nonatomic, strong) CLVoicePlayer *player;
+@property (nonatomic, strong) CLWaveformView *waveformView;
+
 
 @end
 
@@ -32,9 +34,10 @@
       __typeof(&*weakSelf) strongSelf = weakSelf;
         strongSelf.timeLabel.text = [strongSelf getMMSSFromSS: seconds];
     };
-    [self.view addSubview:self.startButton];
-    [self.view addSubview:self.playButton];
-    [self.view addSubview:self.timeLabel];
+    [self.view addSubview: self.startButton];
+    [self.view addSubview: self.playButton];
+    [self.view addSubview: self.waveformView];
+    [self.view addSubview: self.timeLabel];
     [self.startButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(90);
         make.top.mas_equalTo(200);
@@ -43,11 +46,17 @@
         make.top.mas_equalTo(200);
         make.right.mas_equalTo(-90);
     }];
+    [self.waveformView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(-20);
+        make.height.mas_equalTo(50);
+        make.centerY.mas_equalTo(self.view);
+    }];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(self.view);
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.waveformView.mas_bottom).offset(30);
     }];
 }
-
 - (void)startAction {
     if (!self.startButton.selected) {
         NSTimeInterval start = [[NSDate date] timeIntervalSince1970];
@@ -81,7 +90,9 @@
     NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
     return format_time;
 }
-
+- (void)showWaveform {
+    self.waveformView.asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath: self.recorder.mp3Path] options:nil];
+}
 - (UIButton *)startButton {
     if (!_startButton) {
         _startButton = [[UIButton alloc] init];
@@ -111,12 +122,19 @@
     }
     return _timeLabel;
 }
+- (CLWaveformView *)waveformView {
+    if (!_waveformView) {
+        _waveformView = [[CLWaveformView alloc] init];
+    }
+    return  _waveformView;
+}
 - (CLRecorder *)recorder {
     if (!_recorder) {
         _recorder = [[CLRecorder alloc] init];
+        __weak typeof(self) weakSelf = self;
         _recorder.finishCallBack = ^(CGFloat audioDuration, NSData * _Nonnull fileData) {
-            CLLog(@"%f", audioDuration);
-
+            __strong typeof(self) strongSelf = weakSelf;
+            [strongSelf showWaveform];
         };
     }
     return _recorder;

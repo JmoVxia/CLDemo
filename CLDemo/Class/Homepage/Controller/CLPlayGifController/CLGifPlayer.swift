@@ -25,14 +25,14 @@ class CLGifPlayer: NSObject {
         queue.maxConcurrentOperationCount = 10
         return queue
     }()
-    private override init() {
-        
-    }
     private lazy var operationSemap: DispatchSemaphore = {
         let semap = DispatchSemaphore(value: 0)
         semap.signal()
         return semap
     }()
+    private override init() {
+        
+    }
     deinit {
         CLLog("CLGifPlayer deinit")
     }
@@ -42,16 +42,14 @@ extension CLGifPlayer {
         cancel(path)
         let gifOperation = CLGifOperation(path: path, imageCallback: imageCallback)
         gifOperation.completionBlock = {
-            shared.operationSemap.wait()
-            shared.operationDictionary.removeValue(forKey: path)
-            shared.operationSemap.signal()
+            removeValue(path)
             startPlay(path, imageCallback: imageCallback)
         }
-        shared.operationDictionary[path] = gifOperation
+        setOperation(gifOperation, for: path)
         shared.operationQueue.addOperation(gifOperation)
     }
     static func cancel(_ path: String) {
-        guard let operation = shared.operationDictionary[path],
+        guard let operation = operation(path),
               !operation.isCancelled
         else {
             return
@@ -59,9 +57,7 @@ extension CLGifPlayer {
         operation.imageCallback = nil
         operation.completionBlock = nil
         operation.cancel()
-        shared.operationSemap.wait()
-        shared.operationDictionary.removeValue(forKey: path)
-        shared.operationSemap.signal()
+        removeValue(path)
     }
     static func cacanAll() {
         shared.operationDictionary.keys.forEach { key in
@@ -72,5 +68,23 @@ extension CLGifPlayer {
     static func destroy() {
         cacanAll()
         manager = nil
+    }
+}
+private extension CLGifPlayer {
+    static func operation(_ value: String) -> CLGifOperation? {
+        shared.operationSemap.wait()
+        let operation = shared.operationDictionary[value]
+        shared.operationSemap.signal()
+        return operation
+    }
+    static func setOperation(_ value: CLGifOperation, for key: String) {
+        shared.operationSemap.wait()
+        shared.operationDictionary[key] = value
+        shared.operationSemap.signal()
+    }
+    static func removeValue(_ value: String) {
+        shared.operationSemap.wait()
+        shared.operationDictionary.removeValue(forKey: value)
+        shared.operationSemap.signal()
     }
 }

@@ -236,6 +236,9 @@
 		5BA48263253179A80072F9BD /* CLPopupMomentumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA48262253179A80072F9BD /* CLPopupMomentumController.swift */; };
 		5BA4826725317D260072F9BD /* CLMomentumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA4826625317D260072F9BD /* CLMomentumView.swift */; };
 		5BA4826B253192150072F9BD /* UISpringTimingParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA4826A253192150072F9BD /* UISpringTimingParameters+Extension.swift */; };
+		5BA6DFDF2667241C00FE6C50 /* CLWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA6DFDE2667241C00FE6C50 /* CLWaveformView.swift */; };
+		5BA6DFE12667250D00FE6C50 /* CLSampleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA6DFE02667250D00FE6C50 /* CLSampleDataProvider.swift */; };
+		5BA6DFE32667258800FE6C50 /* CLSampleDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA6DFE22667258800FE6C50 /* CLSampleDataFilter.swift */; };
 		5BA7BF7124AC3D180072B94C /* CLPopupTipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7BF4524AC3D180072B94C /* CLPopupTipsController.swift */; };
 		5BA7BF7224AC3D180072B94C /* CLPopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7BF4624AC3D180072B94C /* CLPopupManager.swift */; };
 		5BA7BF7324AC3D180072B94C /* CLPopupFoodPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7BF4824AC3D180072B94C /* CLPopupFoodPickerController.swift */; };
@@ -688,6 +691,9 @@
 		5BA48262253179A80072F9BD /* CLPopupMomentumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupMomentumController.swift; sourceTree = "<group>"; };
 		5BA4826625317D260072F9BD /* CLMomentumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMomentumView.swift; sourceTree = "<group>"; };
 		5BA4826A253192150072F9BD /* UISpringTimingParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISpringTimingParameters+Extension.swift"; sourceTree = "<group>"; };
+		5BA6DFDE2667241C00FE6C50 /* CLWaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLWaveformView.swift; sourceTree = "<group>"; };
+		5BA6DFE02667250D00FE6C50 /* CLSampleDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSampleDataProvider.swift; sourceTree = "<group>"; };
+		5BA6DFE22667258800FE6C50 /* CLSampleDataFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSampleDataFilter.swift; sourceTree = "<group>"; };
 		5BA7BF4524AC3D180072B94C /* CLPopupTipsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupTipsController.swift; sourceTree = "<group>"; };
 		5BA7BF4624AC3D180072B94C /* CLPopupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupManager.swift; sourceTree = "<group>"; };
 		5BA7BF4824AC3D180072B94C /* CLPopupFoodPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFoodPickerController.swift; sourceTree = "<group>"; };
@@ -2213,6 +2219,16 @@
 			path = CLPopupMomentumController;
 			sourceTree = "<group>";
 		};
+		5BA6DFDD2667240400FE6C50 /* CLWaveformView */ = {
+			isa = PBXGroup;
+			children = (
+				5BA6DFDE2667241C00FE6C50 /* CLWaveformView.swift */,
+				5BA6DFE02667250D00FE6C50 /* CLSampleDataProvider.swift */,
+				5BA6DFE22667258800FE6C50 /* CLSampleDataFilter.swift */,
+			);
+			path = CLWaveformView;
+			sourceTree = "<group>";
+		};
 		5BA7BF4124AC3D180072B94C /* CLPopupManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2363,6 +2379,7 @@
 		5BAB9F2B24A3011900BAC6B5 /* CLRecordeEncodeController */ = {
 			isa = PBXGroup;
 			children = (
+				5BA6DFDD2667240400FE6C50 /* CLWaveformView */,
 				5BFB19B924ECFDB90074007A /* CLRecorder */,
 				5B42F08E24A3918D006861BF /* CLRecordeEncodeController.h */,
 				5B42F08F24A3918D006861BF /* CLRecordeEncodeController.m */,
@@ -2758,6 +2775,7 @@
 				0C223C772243811200E319E2 /* CLRotateAnimationSwiftController.swift in Sources */,
 				0CCDA40022D9D1C5007B41C4 /* CLPhotoBrowserTransitioningDelegate.m in Sources */,
 				0C558A9521ED956700C2C096 /* CLPasswordInputView.m in Sources */,
+				5BA6DFE32667258800FE6C50 /* CLSampleDataFilter.swift in Sources */,
 				0C52EF6D2192949A0079A0E7 /* NSBundle+CLLanguage.m in Sources */,
 				0C558AE421EDA2E800C2C096 /* UIColor+CLHex.m in Sources */,
 				0C61577822BE1241009AABAC /* CLSectorAnimationView.swift in Sources */,
@@ -2903,6 +2921,7 @@
 				5B723152254FAFB200DA1FE9 /* CLChatTextView.swift in Sources */,
 				5BA7BF8E24AC3E790072B94C /* CLPopupFlopController.swift in Sources */,
 				5B4A1BD5263968F4004A71CB /* CLPlayVideoController.swift in Sources */,
+				5BA6DFDF2667241C00FE6C50 /* CLWaveformView.swift in Sources */,
 				5B72314C254FAFB200DA1FE9 /* CLChatPhotoCellButton.swift in Sources */,
 				0CCDA40222D9D1C5007B41C4 /* CLPhotoBrowserAnimatedTransitioning.m in Sources */,
 				5B44D12C2435C6F10059476D /* CLTagsFrameHelper.swift in Sources */,
@@ -2996,6 +3015,7 @@
 				5B80DA581DDD9C3A00A20E34 /* CLTabbarController.m in Sources */,
 				5B28650E21EE428200334E6C /* CLCoreTextView.m in Sources */,
 				5B8AFC5D24A8829A00FAF996 /* CLVoicePlayer.m in Sources */,
+				5BA6DFE12667250D00FE6C50 /* CLSampleDataProvider.swift in Sources */,
 				5BB29F312609E6E900A119FE /* CLDrawerSlideAnimation.swift in Sources */,
 				5B723153254FAFB200DA1FE9 /* CLChatRecordView.swift in Sources */,
 				5B9A13042599D03A00A95209 /* CLStartsView.swift in Sources */,

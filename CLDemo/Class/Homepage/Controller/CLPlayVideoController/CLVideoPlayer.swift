@@ -25,6 +25,11 @@ class CLVideoPlayer: NSObject {
         queue.maxConcurrentOperationCount = 10
         return queue
     }()
+    private lazy var operationSemap: DispatchSemaphore = {
+        let semap = DispatchSemaphore(value: 0)
+        semap.signal()
+        return semap
+    }()
     private override init() {
         
     }
@@ -37,14 +42,14 @@ extension CLVideoPlayer {
         cancel(path)
         let videoOperation = CLVideoOperation(path: path, imageCallback: imageCallback)
         videoOperation.completionBlock = {
-            shared.operationDictionary.removeValue(forKey: path)
+            removeValue(path)
             startPlay(path, imageCallback: imageCallback)
         }
-        shared.operationDictionary[path] = videoOperation
+        setOperation(videoOperation, for: path)
         shared.operationQueue.addOperation(videoOperation)
     }
     static func cancel(_ path: String) {
-        guard let operation = shared.operationDictionary[path],
+        guard let operation = operation(path),
               !operation.isCancelled
         else {
             return
@@ -52,7 +57,7 @@ extension CLVideoPlayer {
         operation.imageCallback = nil
         operation.completionBlock = nil
         operation.cancel()
-        shared.operationDictionary.removeValue(forKey: path)
+        removeValue(path)
     }
     static func cacanAll() {
         shared.operationDictionary.keys.forEach { key in
@@ -63,5 +68,23 @@ extension CLVideoPlayer {
     static func destroy() {
         cacanAll()
         manager = nil
+    }
+}
+private extension CLVideoPlayer {
+    static func operation(_ value: String) -> CLVideoOperation? {
+        shared.operationSemap.wait()
+        let operation = shared.operationDictionary[value]
+        shared.operationSemap.signal()
+        return operation
+    }
+    static func setOperation(_ value: CLVideoOperation, for key: String) {
+        shared.operationSemap.wait()
+        shared.operationDictionary[key] = value
+        shared.operationSemap.signal()
+    }
+    static func removeValue(_ value: String) {
+        shared.operationSemap.wait()
+        shared.operationDictionary.removeValue(forKey: value)
+        shared.operationSemap.signal()
     }
 }
