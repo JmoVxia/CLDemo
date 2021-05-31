@@ -262,6 +262,25 @@
 		5BA7BF9124AC3E910072B94C /* CLFlopPrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7BF8F24AC3E900072B94C /* CLFlopPrizeView.swift */; };
 		5BA7BF9224AC3E910072B94C /* CLFlopBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7BF9024AC3E910072B94C /* CLFlopBottomView.swift */; };
 		5BA7BF9424AC40F20072B94C /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7BF9324AC40F20072B94C /* UILabel+Extension.swift */; };
+		5BA7F5B12664AE2900E82BF8 /* CLPlayGifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7F5B02664AE2900E82BF8 /* CLPlayGifController.swift */; };
+		5BA7F5B32664AEA800E82BF8 /* CLGifPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7F5B22664AEA800E82BF8 /* CLGifPlayer.swift */; };
+		5BA7F5B52664AEE200E82BF8 /* CLGifOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7F5B42664AEE200E82BF8 /* CLGifOperation.swift */; };
+		5BA7F5B72664B3D300E82BF8 /* CLPlayGifItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7F5B62664B3D300E82BF8 /* CLPlayGifItem.swift */; };
+		5BA7F5B92664B88200E82BF8 /* CLPlayGifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7F5B82664B88200E82BF8 /* CLPlayGifCell.swift */; };
+		5BA7F5C92664E33F00E82BF8 /* 14.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5BB2664E33D00E82BF8 /* 14.gif */; };
+		5BA7F5CA2664E33F00E82BF8 /* 13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5BC2664E33D00E82BF8 /* 13.gif */; };
+		5BA7F5CB2664E33F00E82BF8 /* 6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5BD2664E33D00E82BF8 /* 6.gif */; };
+		5BA7F5CC2664E33F00E82BF8 /* 9.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5BE2664E33D00E82BF8 /* 9.gif */; };
+		5BA7F5CD2664E33F00E82BF8 /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5BF2664E33D00E82BF8 /* 1.gif */; };
+		5BA7F5CE2664E33F00E82BF8 /* 5.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C02664E33D00E82BF8 /* 5.gif */; };
+		5BA7F5CF2664E33F00E82BF8 /* 7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C12664E33E00E82BF8 /* 7.gif */; };
+		5BA7F5D02664E33F00E82BF8 /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C22664E33E00E82BF8 /* 3.gif */; };
+		5BA7F5D12664E33F00E82BF8 /* 12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C32664E33E00E82BF8 /* 12.gif */; };
+		5BA7F5D22664E33F00E82BF8 /* 8.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C42664E33E00E82BF8 /* 8.gif */; };
+		5BA7F5D32664E33F00E82BF8 /* 11.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C52664E33E00E82BF8 /* 11.gif */; };
+		5BA7F5D42664E33F00E82BF8 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C62664E33E00E82BF8 /* 4.gif */; };
+		5BA7F5D52664E33F00E82BF8 /* 10.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C72664E33E00E82BF8 /* 10.gif */; };
+		5BA7F5D62664E33F00E82BF8 /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7F5C82664E33F00E82BF8 /* 2.gif */; };
 		5BAD165B24EBD7FC00001E01 /* CLScrollAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD165A24EBD7FC00001E01 /* CLScrollAnimationController.swift */; };
 		5BAD165D24EBD85300001E01 /* CLScrollComputingValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD165C24EBD85300001E01 /* CLScrollComputingValue.swift */; };
 		5BB29F2A2609E65900A119FE /* CLDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB29F292609E65900A119FE /* CLDrawerController.swift */; };
@@ -695,6 +714,25 @@
 		5BA7BF8F24AC3E900072B94C /* CLFlopPrizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLFlopPrizeView.swift; sourceTree = "<group>"; };
 		5BA7BF9024AC3E910072B94C /* CLFlopBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLFlopBottomView.swift; sourceTree = "<group>"; };
 		5BA7BF9324AC40F20072B94C /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		5BA7F5B02664AE2900E82BF8 /* CLPlayGifController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayGifController.swift; sourceTree = "<group>"; };
+		5BA7F5B22664AEA800E82BF8 /* CLGifPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGifPlayer.swift; sourceTree = "<group>"; };
+		5BA7F5B42664AEE200E82BF8 /* CLGifOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGifOperation.swift; sourceTree = "<group>"; };
+		5BA7F5B62664B3D300E82BF8 /* CLPlayGifItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayGifItem.swift; sourceTree = "<group>"; };
+		5BA7F5B82664B88200E82BF8 /* CLPlayGifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayGifCell.swift; sourceTree = "<group>"; };
+		5BA7F5BB2664E33D00E82BF8 /* 14.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 14.gif; sourceTree = "<group>"; };
+		5BA7F5BC2664E33D00E82BF8 /* 13.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 13.gif; sourceTree = "<group>"; };
+		5BA7F5BD2664E33D00E82BF8 /* 6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 6.gif; sourceTree = "<group>"; };
+		5BA7F5BE2664E33D00E82BF8 /* 9.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 9.gif; sourceTree = "<group>"; };
+		5BA7F5BF2664E33D00E82BF8 /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
+		5BA7F5C02664E33D00E82BF8 /* 5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 5.gif; sourceTree = "<group>"; };
+		5BA7F5C12664E33E00E82BF8 /* 7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 7.gif; sourceTree = "<group>"; };
+		5BA7F5C22664E33E00E82BF8 /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
+		5BA7F5C32664E33E00E82BF8 /* 12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 12.gif; sourceTree = "<group>"; };
+		5BA7F5C42664E33E00E82BF8 /* 8.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 8.gif; sourceTree = "<group>"; };
+		5BA7F5C52664E33E00E82BF8 /* 11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 11.gif; sourceTree = "<group>"; };
+		5BA7F5C62664E33E00E82BF8 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
+		5BA7F5C72664E33E00E82BF8 /* 10.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 10.gif; sourceTree = "<group>"; };
+		5BA7F5C82664E33F00E82BF8 /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
 		5BAD165A24EBD7FC00001E01 /* CLScrollAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLScrollAnimationController.swift; sourceTree = "<group>"; };
 		5BAD165C24EBD85300001E01 /* CLScrollComputingValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLScrollComputingValue.swift; sourceTree = "<group>"; };
 		5BB29F292609E65900A119FE /* CLDrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLDrawerController.swift; sourceTree = "<group>"; };
@@ -1939,6 +1977,7 @@
 				5B80DA301DDD993F00A20E34 /* CLHomepageController.m */,
 				5B4A1BD0263960A2004A71CB /* CLHomepageModel.h */,
 				5B4A1BD1263960A2004A71CB /* CLHomepageModel.m */,
+				5BA7F5AF2664AE0300E82BF8 /* CLPlayGifController */,
 				5B4A1BD3263968D3004A71CB /* CLPlayVideoController */,
 				5BB29F272609E62D00A119FE /* CLDrawerController */,
 				5B3B772F2601EAF30052C379 /* CLAnimationButtonController */,
@@ -2287,6 +2326,40 @@
 			path = CLPopupBMIInputController;
 			sourceTree = "<group>";
 		};
+		5BA7F5AF2664AE0300E82BF8 /* CLPlayGifController */ = {
+			isa = PBXGroup;
+			children = (
+				5BA7F5BA2664E33200E82BF8 /* gif */,
+				5BA7F5B02664AE2900E82BF8 /* CLPlayGifController.swift */,
+				5BA7F5B22664AEA800E82BF8 /* CLGifPlayer.swift */,
+				5BA7F5B42664AEE200E82BF8 /* CLGifOperation.swift */,
+				5BA7F5B62664B3D300E82BF8 /* CLPlayGifItem.swift */,
+				5BA7F5B82664B88200E82BF8 /* CLPlayGifCell.swift */,
+			);
+			path = CLPlayGifController;
+			sourceTree = "<group>";
+		};
+		5BA7F5BA2664E33200E82BF8 /* gif */ = {
+			isa = PBXGroup;
+			children = (
+				5BA7F5BF2664E33D00E82BF8 /* 1.gif */,
+				5BA7F5C82664E33F00E82BF8 /* 2.gif */,
+				5BA7F5C22664E33E00E82BF8 /* 3.gif */,
+				5BA7F5C62664E33E00E82BF8 /* 4.gif */,
+				5BA7F5C02664E33D00E82BF8 /* 5.gif */,
+				5BA7F5BD2664E33D00E82BF8 /* 6.gif */,
+				5BA7F5C12664E33E00E82BF8 /* 7.gif */,
+				5BA7F5C42664E33E00E82BF8 /* 8.gif */,
+				5BA7F5BE2664E33D00E82BF8 /* 9.gif */,
+				5BA7F5C72664E33E00E82BF8 /* 10.gif */,
+				5BA7F5C52664E33E00E82BF8 /* 11.gif */,
+				5BA7F5C32664E33E00E82BF8 /* 12.gif */,
+				5BA7F5BC2664E33D00E82BF8 /* 13.gif */,
+				5BA7F5BB2664E33D00E82BF8 /* 14.gif */,
+			);
+			path = gif;
+			sourceTree = "<group>";
+		};
 		5BAB9F2B24A3011900BAC6B5 /* CLRecordeEncodeController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2537,11 +2610,15 @@
 				0CF79B0B2196799C00DD0BF1 /* bank.json in Resources */,
 				5B63581A24ADC50D00D768A4 /* data-left.json in Resources */,
 				5B5F093E24B2B7CA00E69256 /* send_timeout.json in Resources */,
+				5BA7F5CF2664E33F00E82BF8 /* 7.gif in Resources */,
 				5BB70B5726520A4400963FA3 /* 14.mp4 in Resources */,
+				5BA7F5CE2664E33F00E82BF8 /* 5.gif in Resources */,
+				5BA7F5C92664E33F00E82BF8 /* 14.gif in Resources */,
 				5BA7BF8924AC3D180072B94C /* loading.json in Resources */,
 				5B80D9F71DDD976A00A20E34 /* LaunchScreen.storyboard in Resources */,
 				0C7DE94F22DECC0D00FA9040 /* localImage6.jpeg in Resources */,
 				5BB70B5426520A4400963FA3 /* 10.mp4 in Resources */,
+				5BA7F5D32664E33F00E82BF8 /* 11.gif in Resources */,
 				5BB70B5326520A4400963FA3 /* 13.mp4 in Resources */,
 				5B80D9F41DDD976A00A20E34 /* Assets.xcassets in Resources */,
 				0C7DE94A22DECC0D00FA9040 /* localImage3.jpeg in Resources */,
@@ -2552,26 +2629,36 @@
 				0CF79B1421967AE600DD0BF1 /* 三月.json in Resources */,
 				0C7DE94B22DECC0D00FA9040 /* localBigImage0.jpeg in Resources */,
 				5BB70B5826520A4400963FA3 /* 15.mp4 in Resources */,
+				5BA7F5D12664E33F00E82BF8 /* 12.gif in Resources */,
 				0C7DE95122DECC0D00FA9040 /* localImage7.jpeg in Resources */,
 				5BB70B5C26520A4400963FA3 /* 6.mp4 in Resources */,
 				0CF79B1321967AE600DD0BF1 /* 一周.json in Resources */,
 				5BB70B5626520A4400963FA3 /* 7.mp4 in Resources */,
+				5BA7F5CD2664E33F00E82BF8 /* 1.gif in Resources */,
 				5BB70B5E26520A4400963FA3 /* 2.mp4 in Resources */,
 				5BB70B5926520A4400963FA3 /* 3.mp4 in Resources */,
 				5BB70B6026520A4400963FA3 /* 5.mp4 in Resources */,
+				5BA7F5D62664E33F00E82BF8 /* 2.gif in Resources */,
 				0C5DDAB6232539B6001745B2 /* localImage9.jpeg in Resources */,
 				0CF79B1221967AE600DD0BF1 /* 六月.json in Resources */,
+				5BA7F5CB2664E33F00E82BF8 /* 6.gif in Resources */,
 				5B63115C257DFCC9005841C0 /* CLPopoverController.xib in Resources */,
 				0C7DE94C22DECC0D00FA9040 /* localImage4.jpeg in Resources */,
 				0C7DE94922DECC0D00FA9040 /* localImage0.jpeg in Resources */,
 				0C7DE95422DECC0D00FA9040 /* localImage1.jpeg in Resources */,
+				5BA7F5CA2664E33F00E82BF8 /* 13.gif in Resources */,
+				5BA7F5CC2664E33F00E82BF8 /* 9.gif in Resources */,
 				B5498C7B23DE93910082D4E5 /* iso3166.json in Resources */,
 				5BB70B5D26520A4400963FA3 /* 12.mp4 in Resources */,
+				5BA7F5D22664E33F00E82BF8 /* 8.gif in Resources */,
 				0C7DE94E22DECC0D00FA9040 /* localImage5.jpeg in Resources */,
 				0C7DE94822DECC0D00FA9040 /* localGifImage1.gif in Resources */,
 				5BB70B5226520A4400963FA3 /* 9.mp4 in Resources */,
 				5BB70B5526520A4400963FA3 /* 4.mp4 in Resources */,
+				5BA7F5D02664E33F00E82BF8 /* 3.gif in Resources */,
 				0C52EF70219298B00079A0E7 /* Localizable.strings in Resources */,
+				5BA7F5D42664E33F00E82BF8 /* 4.gif in Resources */,
+				5BA7F5D52664E33F00E82BF8 /* 10.gif in Resources */,
 				0C7DE94722DECC0D00FA9040 /* localImage8.jpeg in Resources */,
 				0C2AE871223F48C0007D5DC5 /* CLBubbleView.bundle in Resources */,
 			);
@@ -2719,6 +2806,7 @@
 				B5498C8123DED4F60082D4E5 /* CLChatTextItem.swift in Sources */,
 				0C31C38521994CCF001860C2 /* UIFont+CLFont.m in Sources */,
 				0CCDA40422D9D1C5007B41C4 /* CLPhotoBrowserCollectionViewFlowLayout.m in Sources */,
+				5BA7F5B32664AEA800E82BF8 /* CLGifPlayer.swift in Sources */,
 				0CB2769922E1A85F00AFCB8C /* CLTransitionController.m in Sources */,
 				0CF64300222FECBD00227361 /* CLWaveViewController.m in Sources */,
 				5B3327E523DF384800CA315C /* NSString+Extension.swift in Sources */,
@@ -2740,6 +2828,7 @@
 				0CA1237522255B81007DDE6D /* CLCardController.m in Sources */,
 				0C3CAA5521AF89BD00A352F0 /* CLRotateAnimationController.m in Sources */,
 				5B5C6FB725809A270008B09D /* UIBezierPath+Extension.swift in Sources */,
+				5BA7F5B12664AE2900E82BF8 /* CLPlayGifController.swift in Sources */,
 				5B72314D254FAFB200DA1FE9 /* CLChatPhotoView.swift in Sources */,
 				5B1CC1C924AC95AE00C35523 /* TimeInterval+Extension.swift in Sources */,
 				5BA7BF7324AC3D180072B94C /* CLPopupFoodPickerController.swift in Sources */,
@@ -2782,6 +2871,7 @@
 				5B3327E323DF366600CA315C /* UIImage+Extension.swift in Sources */,
 				5B399E2624AB0E7F00A14FE7 /* CLChatTipsItem.swift in Sources */,
 				5B399E4A24AB14F700A14FE7 /* CLChatImageProgressView.swift in Sources */,
+				5BA7F5B72664B3D300E82BF8 /* CLPlayGifItem.swift in Sources */,
 				5B399E4B24AB14F700A14FE7 /* CLChatImageCell.swift in Sources */,
 				5B9A12FE2599CFB200A95209 /* CLStartsController.swift in Sources */,
 				5B723157254FAFB200DA1FE9 /* CLChatEmojiFlowLayout.swift in Sources */,
@@ -2793,6 +2883,7 @@
 				5BF1ACE3245C82B70083BE70 /* CLMyController.swift in Sources */,
 				5BA7BF8424AC3D180072B94C /* CLYearMonthDayDataPickerView.swift in Sources */,
 				5B80DA4B1DDD993F00A20E34 /* CLCurriculumController.m in Sources */,
+				5BA7F5B92664B88200E82BF8 /* CLPlayGifCell.swift in Sources */,
 				5B3C5C4C24AB3FF100A1561F /* CLPermissions.swift in Sources */,
 				0C108EA622A93108009EA457 /* CLCountdownModel.m in Sources */,
 				0C52EF61219287280079A0E7 /* CLChangeLanguageController.m in Sources */,
@@ -2898,6 +2989,7 @@
 				0C2AE86D223F488D007D5DC5 /* CLBubbleView.m in Sources */,
 				5BFB19B824ECFD800074007A /* UIControl+Extension.swift in Sources */,
 				0C7A1E9A231A6F57002D75F2 /* CLCustomTransitionAnimationViewController.m in Sources */,
+				5BA7F5B52664AEE200E82BF8 /* CLGifOperation.swift in Sources */,
 				0C0E36A42257838F00478B69 /* UIImage+CLQRCode.m in Sources */,
 				0CCDA326219927370057BA14 /* CLChangeFontSizeHelper.m in Sources */,
 				5BA7BF7724AC3D180072B94C /* CLPopupFoodPickerContentCell.swift in Sources */,
