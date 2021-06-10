@@ -97,6 +97,7 @@
         _arrayDS = [[NSMutableArray alloc] init];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"切换语言", nil) controllerClass:[CLChangeLanguageController class]]];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"修改字号", nil) controllerClass:[CLChangeFontSizeController class]]];
+        [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"断点续传", nil) controllerClass:[CLBreakPointResumeController class]]];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"UITableView 多视频播放", nil) controllerClass:[CLPlayVideoController class]]];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"UITableView 播放Gif", nil) controllerClass:[CLPlayGifController class]]];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"抽屉效果", nil) controllerClass:[CLDrawerController class]]];

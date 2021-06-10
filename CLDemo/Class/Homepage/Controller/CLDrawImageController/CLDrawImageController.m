@@ -8,6 +8,7 @@
 
 #import "CLDrawImageController.h"
 
+
 @interface CLDrawImageController ()
 
 ///imageView
@@ -39,7 +40,7 @@
 }
 - (UIImage *)clipImageWithImage:(UIImage *)image rect:(CGRect)rect startAngle:(CGFloat)startAngle endAngle:(CGFloat )endAngle {
     CGSize size = rect.size;
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(size.width * 0.5, size.height * 0.5) radius:size.width * 0.5 startAngle:(M_PI * (startAngle) / 180.0) endAngle:(M_PI * (endAngle) / 180.0) clockwise:YES];
     [path1 addLineToPoint:CGPointMake(size.width * 0.5, size.height * 0.5)];
     [path1 addClip];
@@ -49,7 +50,7 @@
     return clipImage;
 }
 - (UIImage *)mergeImgaeWithImageArray:(NSArray<UIImage *> *)imageArray size:(CGSize)size {
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     for (UIImage *image in imageArray) {
         [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     }

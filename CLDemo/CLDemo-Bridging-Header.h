@@ -5,6 +5,6 @@
 #import "CLBaseViewController.h"
 #import "TZImagePickerController.h"
 #import "CLRecorder.h"
-#import "AppDelegate.h"
 #import "CLBroadcastView.h"
 #import "CLBroadcastMainCell.h"
+#import "CLTabbarController.h"
