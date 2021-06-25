@@ -2,7 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:CLDemo.xcodeproj">
+      location = "group:CLDemo-Swift/CLDemo-Swift.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CLDemo-OC/CLDemo-OC.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

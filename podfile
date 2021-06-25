@@ -1,21 +1,32 @@
-platform :ios, '12.0'
 source 'https://gitee.com/mirrors/CocoaPods-Specs.git'
+# source 'https://cdn.cocoapods.org/'
+
+platform :ios, '12.0'
+
 #use_frameworks!
 use_modular_headers!
 
 install! 'cocoapods', :deterministic_uuids => false
 
+inhibit_all_warnings!
 
-target 'CLDemo' do
-  
-  inhibit_all_warnings!         #Prohibit all warnings
+workspace 'CLDemo.xcworkspace' 
+
+target 'CLDemo-OC' do
+project 'CLDemo-OC/CLDemo-OC.xcodeproj'
+
 pod 'Masonry'
 pod 'DateTools'
 pod 'MJExtension'
-pod 'Then'
-pod 'SnapKit'
 pod 'SDWebImage'
 pod 'SDWebImageWebPCoder'
+
+end
+
+target 'CLDemo-Swift' do
+project 'CLDemo-Swift/CLDemo-Swift.xcodeproj'
+
+pod 'SnapKit'
 pod 'lottie-ios'
 pod 'DateToolsSwift'
 pod 'SwiftyJSON'

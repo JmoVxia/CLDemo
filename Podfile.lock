@@ -14,7 +14,7 @@ PODS:
   - libwebp/webp (1.2.0)
   - lottie-ios (3.2.3)
   - Masonry (1.1.0)
-  - MJExtension (3.2.4)
+  - MJExtension (3.3.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -23,7 +23,6 @@ PODS:
     - SDWebImage/Core (~> 5.10)
   - SnapKit (5.0.1)
   - SwiftyJSON (5.0.1)
-  - Then (2.7.0)
   - TZImagePickerController (3.6.0)
 
 DEPENDENCIES:
@@ -38,7 +37,6 @@ DEPENDENCIES:
   - SDWebImageWebPCoder
   - SnapKit
   - SwiftyJSON
-  - Then
   - TZImagePickerController
 
 SPEC REPOS:
@@ -55,7 +53,6 @@ SPEC REPOS:
     - SDWebImageWebPCoder
     - SnapKit
     - SwiftyJSON
-    - Then
     - TZImagePickerController
 
 SPEC CHECKSUMS:
@@ -66,14 +63,13 @@ SPEC CHECKSUMS:
   libwebp: e90b9c01d99205d03b6bb8f2c8c415e5a4ef66f0
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MJExtension: 88e0900751b6cac8de1cf724ca9838a0b28d5acb
+  MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
-  Then: acfe0be7e98221c6204e12f8161459606d5d822d
   TZImagePickerController: a37d7eec87c54436e896a67947033ad2178d498b
 
-PODFILE CHECKSUM: fb1771c6a0a4a757670f73fca98b2c0b658e8631
+PODFILE CHECKSUM: 66e860dbf219c2929577ee4358c50fab87e73c05
 
 COCOAPODS: 1.10.1
