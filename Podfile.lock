@@ -1,5 +1,5 @@
 PODS:
-  - CryptoSwift (1.4.0)
+  - CryptoSwift (1.4.1)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
   - Kingfisher (6.3.0)
@@ -23,7 +23,7 @@ PODS:
     - SDWebImage/Core (~> 5.10)
   - SnapKit (5.0.1)
   - SwiftyJSON (5.0.1)
-  - TZImagePickerController (3.6.0)
+  - TZImagePickerController (3.6.2)
 
 DEPENDENCIES:
   - CryptoSwift
@@ -56,7 +56,7 @@ SPEC REPOS:
     - TZImagePickerController
 
 SPEC CHECKSUMS:
-  CryptoSwift: 7cc902df1784de3b389a387756c7d710f197730c
+  CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
@@ -68,7 +68,7 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
-  TZImagePickerController: a37d7eec87c54436e896a67947033ad2178d498b
+  TZImagePickerController: e1775fedb4058b78000fb00d9f6eeaedb445a1ed
 
 PODFILE CHECKSUM: 66e860dbf219c2929577ee4358c50fab87e73c05
 

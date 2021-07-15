@@ -1,5 +1,5 @@
 //
-//  CLCustomTransitionController.swift
+//  CLBubbleTransitionPresentController.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2021/7/14.
@@ -7,19 +7,24 @@
 
 import UIKit
 
+
 //MARK: - JmoVxia---类-属性
-class CLCustomTransitionController: CLController {
+class CLBubbleTransitionPresentController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        transitioningDelegate = bubbleDelegate
+        modalPresentationStyle = .custom
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     deinit {
     }
+    var startCenter: CGPoint = .zero
     private lazy var bottomButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = .hex("#FF6666")
+        view.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 4)
+        view.backgroundColor = .orange.withAlphaComponent(0.5)
         view.setImage(UIImage(named: "add"), for: .normal)
         view.setImage(UIImage(named: "add"), for: .selected)
         view.setImage(UIImage(named: "add"), for: .highlighted)
@@ -28,9 +33,20 @@ class CLCustomTransitionController: CLController {
         view.layer.cornerRadius = 30
         return view
     }()
+    lazy var bubbleDelegate: CLBubbleTransitionDelegate = {
+        let delegate = CLBubbleTransitionDelegate {[weak self] in
+            guard let self = self else { return (.zero , .white) }
+            return (self.startCenter, .hex("#FF6666"))
+        } endCallback: {[weak self] in
+            guard let self = self else { return (.zero , .white) }
+            return (self.bottomButton.center, .hex("#FF6666"))
+        }
+        delegate.interactiveTransition.attach(to: self)
+        return delegate
+    }()
 }
 //MARK: - JmoVxia---生命周期
-extension CLCustomTransitionController {
+extension CLBubbleTransitionPresentController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -54,9 +70,10 @@ extension CLCustomTransitionController {
     }
 }
 //MARK: - JmoVxia---布局
-private extension CLCustomTransitionController {
+private extension CLBubbleTransitionPresentController {
     func initUI() {
-        modalPresentationStyle = .custom
+        transitioningDelegate = bubbleDelegate
+        view.backgroundColor = .hex("#FF6666")
         view.addSubview(bottomButton)
     }
     func makeConstraints() {
@@ -68,24 +85,23 @@ private extension CLCustomTransitionController {
     }
 }
 //MARK: - JmoVxia---数据
-private extension CLCustomTransitionController {
+private extension CLBubbleTransitionPresentController {
     func initData() {
     }
 }
 //MARK: - JmoVxia---override
-extension CLCustomTransitionController {
+extension CLBubbleTransitionPresentController {
 }
 //MARK: - JmoVxia---objc
-@objc private extension CLCustomTransitionController {
+@objc private extension CLBubbleTransitionPresentController {
     func buttonAction() {
-        let controller = CLCustomTransitionPresentController()
-        controller.startCenter = self.bottomButton.center
-        present(controller, animated: true)
+        dismiss(animated: true)
+        bubbleDelegate.interactiveTransition.finish()
     }
 }
 //MARK: - JmoVxia---私有方法
-private extension CLCustomTransitionController {
+private extension CLBubbleTransitionPresentController {
 }
 //MARK: - JmoVxia---公共方法
-extension CLCustomTransitionController {
+extension CLBubbleTransitionPresentController {
 }

@@ -96,6 +96,15 @@ private extension CLHomePageController {
             tableViewHepler.dataSource.append(item)
         }
         do{
+            let item = CLTitleCellItem(title: "夜间模式".localized, type: CLDarkModeController.self)
+            item.accessoryType = .disclosureIndicator
+            item.didSelectCellCallback = {[weak self, weak item] (value) in
+                guard let self = self, let item = item else { return }
+                self.push(item.type, title: item.title)
+            }
+            tableViewHepler.dataSource.append(item)
+        }
+        do{
             let item = CLTitleCellItem(title: "断点续传".localized, type: CLBreakPointResumeController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = {[weak self, weak item] (value) in

@@ -71,7 +71,7 @@ extension CLChangeFontSizeController {
 private extension CLChangeFontSizeController {
     func initUI() {
         updateTitleLabel { (label) in
-            label.text = "字体大小"
+            label.text = "夜间模式".localized
         }
         view.backgroundColor = UIColor.white
         view.addSubview(slider)

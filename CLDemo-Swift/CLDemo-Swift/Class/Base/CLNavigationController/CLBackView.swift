@@ -29,7 +29,7 @@ class CLBackView: UIControl {
     }
     var themeColor: UIColor = .black {
         didSet {
-            backimageView.image = UIImage(named: "navigationBack")
+            backimageView.image = .image(light: UIImage(named: "navigationBack")!, dark: (UIImage(named: "navigationBack")?.tintImage(.white))!)
             textLabel.textColor = themeColor;
         }
     }
@@ -41,7 +41,7 @@ class CLBackView: UIControl {
     }()
     private lazy var backimageView: UIImageView = {
        let view = UIImageView()
-        view.image = UIImage(named: "navigationBack")?.tintImage(themeColor)
+        view.image = .image(light: UIImage(named: "navigationBack")!, dark: (UIImage(named: "navigationBack")?.tintImage(.white))!)
         return view
     }()
 }

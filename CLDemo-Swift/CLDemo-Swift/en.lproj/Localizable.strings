@@ -18,6 +18,7 @@
 "课程" = "Curriculum";
 "搜索" = "Search";
 "修改字号" = "Change Font Size";
+"夜间模式" = "Dark Mode";
 "推荐" = "Recommended";
 "精华" = "Essence";
 "图片" = "Picture";
@@ -64,3 +65,4 @@
 "UITableView 多视频播放" = "UITableView Play Video";
 "UITableView 播放Gif" = "UITableView Play Gif";
 "断点续传" = "BreakPoint Resume";
+"气泡" = "Bubble";
