@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5B08E44D2681E6A7001C271A /* CLLanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08E44C2681E6A7001C271A /* CLLanguageManager.swift */; };
+		5B0CDAFD26B7938000B45AD1 /* CLHexagonalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDAFC26B7938000B45AD1 /* CLHexagonalController.swift */; };
+		5B0CDB0626B7940100B45AD1 /* HexagonalItemViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0126B7940100B45AD1 /* HexagonalItemViewAppearance.swift */; };
+		5B0CDB0726B7940100B45AD1 /* HexagonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0226B7940100B45AD1 /* HexagonalView.swift */; };
+		5B0CDB0826B7940100B45AD1 /* HexagonalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0326B7940100B45AD1 /* HexagonalDirection.swift */; };
+		5B0CDB0926B7940100B45AD1 /* HexagonalPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0426B7940100B45AD1 /* HexagonalPattern.swift */; };
+		5B0CDB0A26B7940100B45AD1 /* HexagonalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0526B7940100B45AD1 /* HexagonalItemView.swift */; };
 		5B1C366F26841FAF00D777EB /* CLPermissionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */; };
 		5B1C367026841FAF00D777EB /* CLPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366E26841FAF00D777EB /* CLPermissions.swift */; };
 		5B4895F6268097510046AF31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4895F5268097510046AF31 /* AppDelegate.swift */; };
@@ -90,6 +96,7 @@
 		5B83980826A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980726A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift */; };
 		5B83980B26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */; };
 		5B83980D26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */; };
+		5B9756A226C64FFA006C0841 /* HomePage.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B9756A126C64FFA006C0841 /* HomePage.json */; };
 		5BAABFF92681B36800C2F609 /* CLTitleCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAABFF82681B36800C2F609 /* CLTitleCellItem.swift */; };
 		5BAABFFC2681B3B200C2F609 /* CLTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAABFFB2681B3B200C2F609 /* CLTitleCell.swift */; };
 		5BAAC0012681B65200C2F609 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BAAC0032681B65200C2F609 /* Localizable.strings */; };
@@ -99,6 +106,7 @@
 		5BC1352D269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1352C269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift */; };
 		5BC1352F269EBA1C00D1CCB5 /* CLBubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1352E269EBA1C00D1CCB5 /* CLBubbleTransition.swift */; };
 		5BC13531269EBA9B00D1CCB5 /* CLBubbleInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC13530269EBA9B00D1CCB5 /* CLBubbleInteractiveTransition.swift */; };
+		5BC9911726C658150026B6FF /* CLHomePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC9911626C658150026B6FF /* CLHomePageModel.swift */; };
 		5BD0434326832D3F0054F2B4 /* CLBreakPointResumeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0433E26832D3F0054F2B4 /* CLBreakPointResumeOperation.swift */; };
 		5BD0434426832D3F0054F2B4 /* CLBreakPointResumeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0433F26832D3F0054F2B4 /* CLBreakPointResumeManager.swift */; };
 		5BD0434526832D3F0054F2B4 /* CLBreakPointResumeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0434026832D3F0054F2B4 /* CLBreakPointResumeItem.swift */; };
@@ -255,6 +263,12 @@
 		3B3CD2B2D686C071F5172431 /* Pods-CLDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		5B04E8862684657C006DE091 /* CLDemo-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLDemo-Bridge.h"; sourceTree = "<group>"; };
 		5B08E44C2681E6A7001C271A /* CLLanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLanguageManager.swift; sourceTree = "<group>"; };
+		5B0CDAFC26B7938000B45AD1 /* CLHexagonalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHexagonalController.swift; sourceTree = "<group>"; };
+		5B0CDB0126B7940100B45AD1 /* HexagonalItemViewAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalItemViewAppearance.swift; sourceTree = "<group>"; };
+		5B0CDB0226B7940100B45AD1 /* HexagonalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalView.swift; sourceTree = "<group>"; };
+		5B0CDB0326B7940100B45AD1 /* HexagonalDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalDirection.swift; sourceTree = "<group>"; };
+		5B0CDB0426B7940100B45AD1 /* HexagonalPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalPattern.swift; sourceTree = "<group>"; };
+		5B0CDB0526B7940100B45AD1 /* HexagonalItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalItemView.swift; sourceTree = "<group>"; };
 		5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissionInterface.swift; sourceTree = "<group>"; };
 		5B1C366E26841FAF00D777EB /* CLPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissions.swift; sourceTree = "<group>"; };
 		5B4895F2268097510046AF31 /* CLDemo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CLDemo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +356,7 @@
 		5B83980726A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroTransitionController.swift; sourceTree = "<group>"; };
 		5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroTransition.swift; sourceTree = "<group>"; };
 		5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroPushTransitionController.swift; sourceTree = "<group>"; };
+		5B9756A126C64FFA006C0841 /* HomePage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HomePage.json; sourceTree = "<group>"; };
 		5BAABFF82681B36800C2F609 /* CLTitleCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTitleCellItem.swift; sourceTree = "<group>"; };
 		5BAABFFB2681B3B200C2F609 /* CLTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTitleCell.swift; sourceTree = "<group>"; };
 		5BAABFFD2681B5C000C2F609 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -354,6 +369,7 @@
 		5BC1352C269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBubbleTransitionDelegate.swift; sourceTree = "<group>"; };
 		5BC1352E269EBA1C00D1CCB5 /* CLBubbleTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBubbleTransition.swift; sourceTree = "<group>"; };
 		5BC13530269EBA9B00D1CCB5 /* CLBubbleInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBubbleInteractiveTransition.swift; sourceTree = "<group>"; };
+		5BC9911626C658150026B6FF /* CLHomePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHomePageModel.swift; sourceTree = "<group>"; };
 		5BD0433E26832D3F0054F2B4 /* CLBreakPointResumeOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBreakPointResumeOperation.swift; sourceTree = "<group>"; };
 		5BD0433F26832D3F0054F2B4 /* CLBreakPointResumeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBreakPointResumeManager.swift; sourceTree = "<group>"; };
 		5BD0434026832D3F0054F2B4 /* CLBreakPointResumeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBreakPointResumeItem.swift; sourceTree = "<group>"; };
@@ -535,6 +551,27 @@
 				5B08E44C2681E6A7001C271A /* CLLanguageManager.swift */,
 			);
 			path = CLLanguageManager;
+			sourceTree = "<group>";
+		};
+		5B0CDAFB26B792DB00B45AD1 /* CLHexagonalController */ = {
+			isa = PBXGroup;
+			children = (
+				5B0CDB0026B7940100B45AD1 /* Hexacon */,
+				5B0CDAFC26B7938000B45AD1 /* CLHexagonalController.swift */,
+			);
+			path = CLHexagonalController;
+			sourceTree = "<group>";
+		};
+		5B0CDB0026B7940100B45AD1 /* Hexacon */ = {
+			isa = PBXGroup;
+			children = (
+				5B0CDB0126B7940100B45AD1 /* HexagonalItemViewAppearance.swift */,
+				5B0CDB0226B7940100B45AD1 /* HexagonalView.swift */,
+				5B0CDB0326B7940100B45AD1 /* HexagonalDirection.swift */,
+				5B0CDB0426B7940100B45AD1 /* HexagonalPattern.swift */,
+				5B0CDB0526B7940100B45AD1 /* HexagonalItemView.swift */,
+			);
+			path = Hexacon;
 			sourceTree = "<group>";
 		};
 		5B1C366C26841FAF00D777EB /* CLPermissions */ = {
@@ -950,6 +987,7 @@
 			children = (
 				5BD4EAF7268183E700B5284F /* Base */,
 				5B800435268194B1000E39AC /* CLHomePageController */,
+				5B0CDAFB26B792DB00B45AD1 /* CLHexagonalController */,
 				5B7982A226A01EAE004A6473 /* CLDarkModeController */,
 				5B79829A26A00A0A004A6473 /* CLChangeFontSizeController */,
 				5B8004422681AD7E000E39AC /* CLChatContactController */,
@@ -989,6 +1027,7 @@
 			isa = PBXGroup;
 			children = (
 				5B800436268194CC000E39AC /* CLHomePageController.swift */,
+				5BC9911826C6581B0026B6FF /* CLHomePagemodel */,
 				5B0003002681B30300F612ED /* View */,
 			);
 			path = CLHomePageController;
@@ -1159,6 +1198,15 @@
 				5B8397F626A159E100FD1D3C /* Controller */,
 			);
 			path = CLCustomTransitionController;
+			sourceTree = "<group>";
+		};
+		5BC9911826C6581B0026B6FF /* CLHomePagemodel */ = {
+			isa = PBXGroup;
+			children = (
+				5B9756A126C64FFA006C0841 /* HomePage.json */,
+				5BC9911626C658150026B6FF /* CLHomePageModel.swift */,
+			);
+			path = CLHomePagemodel;
 			sourceTree = "<group>";
 		};
 		5BD0433D26832D3F0054F2B4 /* CLBreakPointResumeController */ = {
@@ -1806,6 +1854,7 @@
 				5BD0439026832F980054F2B4 /* 3.gif in Resources */,
 				5BD0439226832F980054F2B4 /* 8.gif in Resources */,
 				5BD0436926832EAB0054F2B4 /* 10.mp4 in Resources */,
+				5B9756A226C64FFA006C0841 /* HomePage.json in Resources */,
 				5BD0435F26832EAB0054F2B4 /* 7.mp4 in Resources */,
 				5BD0436126832EAB0054F2B4 /* 4.mp4 in Resources */,
 				5BD0436A26832EAB0054F2B4 /* 12.mp4 in Resources */,
@@ -1870,10 +1919,13 @@
 				5B76932A26841C70008BB92B /* CLChatImageCell.swift in Sources */,
 				5BD043A32683302E0054F2B4 /* CLDrawerTransitionDelegate.swift in Sources */,
 				5B7692C026841566008BB92B /* CLVernierCaliperHeaderCell.swift in Sources */,
+				5B0CDB0626B7940100B45AD1 /* HexagonalItemViewAppearance.swift in Sources */,
 				5BD4EB18268184AB00B5284F /* UILabel+Extension.swift in Sources */,
 				5BE6681F268475C90095F82E /* CLInfiniteView.swift in Sources */,
 				5BD043A52683302E0054F2B4 /* CLDrawerPresentationController.swift in Sources */,
 				5BE6692726848D000095F82E /* CLWaveView.swift in Sources */,
+				5BC9911726C658150026B6FF /* CLHomePageModel.swift in Sources */,
+				5B0CDAFD26B7938000B45AD1 /* CLHexagonalController.swift in Sources */,
 				5BD043B8268332BF0054F2B4 /* CLHistogramIndexView.swift in Sources */,
 				5B83980326A15C3600FD1D3C /* CLCircleRetroPushTransitionController.swift in Sources */,
 				5BE6681A268475940095F82E /* CLCarouselCell.swift in Sources */,
@@ -1889,8 +1941,10 @@
 				5B80043F268194FD000E39AC /* CLCellItemProtocol.swift in Sources */,
 				5BD4EB702681872D00B5284F /* CLDataPickerTitleView.swift in Sources */,
 				5BD0437026832EAB0054F2B4 /* CLVideoOperation.swift in Sources */,
+				5B0CDB0A26B7940100B45AD1 /* HexagonalItemView.swift in Sources */,
 				5BD0438826832F980054F2B4 /* CLPlayGifItem.swift in Sources */,
 				5BE668E22684889C0095F82E /* CLRotateAnimationView.swift in Sources */,
+				5B0CDB0726B7940100B45AD1 /* HexagonalView.swift in Sources */,
 				5BD4EB5F2681872D00B5284F /* CLPopupFoodPickerController.swift in Sources */,
 				5BE668F8268489940095F82E /* CLPasswordController.swift in Sources */,
 				5BD043B7268332BF0054F2B4 /* CLHistogramCell.swift in Sources */,
@@ -1928,6 +1982,7 @@
 				5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
 				5B76933626841E11008BB92B /* CLGCDTimer.swift in Sources */,
+				5B0CDB0926B7940100B45AD1 /* HexagonalPattern.swift in Sources */,
 				5BD4EB1E268184AB00B5284F /* URL+Extension.swift in Sources */,
 				5B76932326841C70008BB92B /* CLChatEmojiFlowLayout.swift in Sources */,
 				5B76931B26841C70008BB92B /* CLChatPhotoAlbumContentView.swift in Sources */,
@@ -1957,6 +2012,7 @@
 				5B76932D26841C70008BB92B /* CLChatTextCell.swift in Sources */,
 				5BD043A22683302E0054F2B4 /* CLDrawerController.swift in Sources */,
 				5BD4EB8026818AF100B5284F /* Regex.swift in Sources */,
+				5B0CDB0826B7940100B45AD1 /* HexagonalDirection.swift in Sources */,
 				5BD0434326832D3F0054F2B4 /* CLBreakPointResumeOperation.swift in Sources */,
 				5B800441268194FD000E39AC /* CLTableViewHepler.swift in Sources */,
 				5BD043C1268333AC0054F2B4 /* CLWheelMenuCell.swift in Sources */,

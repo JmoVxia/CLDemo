@@ -1,0 +1,118 @@
+[
+  {
+    "title": "切换语言",
+    "class": "CLChangeLanguageController"
+  },
+  {
+    "title": "修改字号",
+    "class": "CLChangeFontSizeController"
+  },
+  {
+    "title": "夜间模式",
+    "class": "CLDarkModeController"
+  },
+  {
+    "title": "iWatch动画",
+    "class": "CLHexagonalController"
+  },
+  {
+    "title": "断点续传",
+    "class": "CLBreakPointResumeController"
+  },
+  {
+    "title": "聊天框架",
+    "class": "CLChatController"
+  },
+  {
+    "title": "UITableView 多视频播放",
+    "class": "CLPlayVideoController"
+  },
+  {
+    "title": "UITableView 播放Gif",
+    "class": "CLPlayGifController"
+  },
+  {
+    "title": "抽屉效果",
+    "class": "CLDrawerController"
+  },
+  {
+    "title": "自定义转场动画",
+    "class": "CLCustomTransitionController"
+  },
+  {
+    "title": "动画按钮",
+    "class": "CLAnimationButtonController"
+  },
+  {
+    "title": "动画渐变",
+    "class": "CLAnimatedGradientController"
+  },
+  {
+    "title": "柱状图",
+    "class": "CLHistogramConroller"
+  },
+  {
+    "title": "转盘菜单",
+    "class": "CLWheelMenuController"
+  },
+  {
+    "title": "滑动动画",
+    "class": "CLScrollAnimationController"
+  },
+  {
+    "title": "跑马灯",
+    "class": "CLDrawMarqueeController"
+  },
+  {
+    "title": "评分控件",
+    "class": "CLStartsController"
+  },
+  {
+    "title": "标签动态排布",
+    "class": "CLTagsController"
+  },
+  {
+    "title": "自定义弹窗",
+    "class": "CLPopupController"
+  },
+  {
+    "title": "游标卡尺",
+    "class": "CLVernierCaliperController"
+  },
+  {
+    "title": "翻转动画",
+    "class": "CLFlipController"
+  },
+  {
+    "title": "广播轮播",
+    "class": "CLBroadcastViewController"
+  },
+  {
+    "title": "转子动画",
+    "class": "CLRotateAnimationSwiftController"
+  },
+  {
+    "title": "自定义密码框",
+    "class": "CLPasswordController"
+  },
+  {
+    "title": "自定义输入框-限制字数",
+    "class": "CLTextViewViewController"
+  },
+  {
+    "title": "波浪视图",
+    "class": "CLWaveController"
+  },
+  {
+    "title": "气泡弹框",
+    "class": "CLPopoverController"
+  },
+  {
+    "title": "旋转图片",
+    "class": "CLRotatingPictureViewController"
+  },
+  {
+    "title": "过渡动画",
+    "class": "CLTransitionViewController"
+  },
+]

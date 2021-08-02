@@ -122,3 +122,22 @@ extension UIView {
         return img
     }
 }
+extension UIView {
+    func setupHexagonMask(lineWidth: CGFloat, color: UIColor, cornerRadius: CGFloat) {
+        let path = UIBezierPath(roundedPolygonPathInRect: bounds, lineWidth: lineWidth, sides: 6, cornerRadius: cornerRadius, rotationOffset: CGFloat.pi / 2.0).cgPath
+
+        let mask = CAShapeLayer()
+        mask.path = path
+        mask.lineWidth = lineWidth
+        mask.strokeColor = UIColor.clear.cgColor
+        mask.fillColor = UIColor.white.cgColor
+        layer.mask = mask
+
+        let border = CAShapeLayer()
+        border.path = path
+        border.lineWidth = lineWidth
+        border.strokeColor = color.cgColor
+        border.fillColor = UIColor.clear.cgColor
+        layer.addSublayer(border)
+    }
+}

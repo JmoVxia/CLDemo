@@ -2989,8 +2989,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E000036B0 /* DateTools-umbrella.h in Headers */,
 				46EB2E000035E0 /* DateTools.h in Headers */,
+				46EB2E000036B0 /* DateTools-umbrella.h in Headers */,
 				46EB2E000035F0 /* DTConstants.h in Headers */,
 				46EB2E00003600 /* DTError.h in Headers */,
 				46EB2E00003610 /* DTTimePeriod.h in Headers */,
@@ -3021,8 +3021,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00003FC0 /* MJExtension-umbrella.h in Headers */,
 				46EB2E00003EC0 /* MJExtension.h in Headers */,
+				46EB2E00003FC0 /* MJExtension-umbrella.h in Headers */,
 				46EB2E00003ED0 /* MJExtensionConst.h in Headers */,
 				46EB2E00003EE0 /* MJFoundation.h in Headers */,
 				46EB2E00003EF0 /* MJProperty.h in Headers */,
@@ -3041,12 +3041,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				46EB2E00004120 /* MASCompositeConstraint.h in Headers */,
-				46EB2E00004130 /* MASConstraint+Private.h in Headers */,
 				46EB2E00004140 /* MASConstraint.h in Headers */,
+				46EB2E00004130 /* MASConstraint+Private.h in Headers */,
 				46EB2E00004150 /* MASConstraintMaker.h in Headers */,
 				46EB2E00004160 /* MASLayoutConstraint.h in Headers */,
-				46EB2E00004260 /* Masonry-umbrella.h in Headers */,
 				46EB2E00004170 /* Masonry.h in Headers */,
+				46EB2E00004260 /* Masonry-umbrella.h in Headers */,
 				46EB2E00004180 /* MASUtilities.h in Headers */,
 				46EB2E00004190 /* MASViewAttribute.h in Headers */,
 				46EB2E000041A0 /* MASViewConstraint.h in Headers */,
@@ -3070,8 +3070,8 @@
 				46EB2E000047A0 /* SDAnimatedImage.h in Headers */,
 				46EB2E000047B0 /* SDAnimatedImagePlayer.h in Headers */,
 				46EB2E000047C0 /* SDAnimatedImageRep.h in Headers */,
-				46EB2E000047D0 /* SDAnimatedImageView+WebCache.h in Headers */,
 				46EB2E000047E0 /* SDAnimatedImageView.h in Headers */,
+				46EB2E000047D0 /* SDAnimatedImageView+WebCache.h in Headers */,
 				46EB2E00004B30 /* SDAssociatedObject.h in Headers */,
 				46EB2E00004B40 /* SDAsyncBlockOperation.h in Headers */,
 				46EB2E00004B50 /* SDDeviceHelper.h in Headers */,
@@ -3104,8 +3104,8 @@
 				46EB2E00004930 /* SDMemoryCache.h in Headers */,
 				46EB2E00004BC0 /* SDmetamacros.h in Headers */,
 				46EB2E00004BD0 /* SDWeakProxy.h in Headers */,
-				46EB2E00004C50 /* SDWebImage-umbrella.h in Headers */,
 				46EB2E00004B10 /* SDWebImage.h in Headers */,
+				46EB2E00004C50 /* SDWebImage-umbrella.h in Headers */,
 				46EB2E00004940 /* SDWebImageCacheKeyFilter.h in Headers */,
 				46EB2E00004950 /* SDWebImageCacheSerializer.h in Headers */,
 				46EB2E00004960 /* SDWebImageCompat.h in Headers */,
@@ -3177,8 +3177,8 @@
 				46EB2E00005440 /* TZGifPhotoPreviewController.h in Headers */,
 				46EB2E00005450 /* TZImageCropManager.h in Headers */,
 				46EB2E00005460 /* TZImageManager.h in Headers */,
-				46EB2E00005570 /* TZImagePickerController-umbrella.h in Headers */,
 				46EB2E00005470 /* TZImagePickerController.h in Headers */,
+				46EB2E00005570 /* TZImagePickerController-umbrella.h in Headers */,
 				46EB2E00005480 /* TZImageRequestOperation.h in Headers */,
 				46EB2E00005490 /* TZLocationManager.h in Headers */,
 				46EB2E000054A0 /* TZPhotoPickerController.h in Headers */,
@@ -3552,8 +3552,8 @@
 		46EB2E00000000 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 46EB2E00000030 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -3741,9 +3741,9 @@
 			files = (
 				46EB2E00002F80 /* AEAD.swift in Sources */,
 				46EB2E00002F90 /* AEADChaCha20Poly1305.swift in Sources */,
+				46EB2E00002FB0 /* AES.swift in Sources */,
 				46EB2E000031B0 /* AES+Foundation.swift in Sources */,
 				46EB2E00002FA0 /* AES.Cryptors.swift in Sources */,
-				46EB2E00002FB0 /* AES.swift in Sources */,
 				46EB2E00002FC0 /* Array+Extension.swift in Sources */,
 				46EB2E000031C0 /* Array+Foundation.swift in Sources */,
 				46EB2E00002FD0 /* Authenticator.swift in Sources */,
@@ -3754,14 +3754,14 @@
 				46EB2E00003020 /* BlockEncryptor.swift in Sources */,
 				46EB2E00003030 /* BlockMode.swift in Sources */,
 				46EB2E00003040 /* BlockModeOptions.swift in Sources */,
-				46EB2E000031D0 /* Blowfish+Foundation.swift in Sources */,
 				46EB2E000030F0 /* Blowfish.swift in Sources */,
+				46EB2E000031D0 /* Blowfish+Foundation.swift in Sources */,
 				46EB2E00003050 /* CBC.swift in Sources */,
 				46EB2E00003100 /* CBCMAC.swift in Sources */,
 				46EB2E00003060 /* CCM.swift in Sources */,
 				46EB2E00003070 /* CFB.swift in Sources */,
-				46EB2E000031E0 /* ChaCha20+Foundation.swift in Sources */,
 				46EB2E00003110 /* ChaCha20.swift in Sources */,
+				46EB2E000031E0 /* ChaCha20+Foundation.swift in Sources */,
 				46EB2E00003120 /* Checksum.swift in Sources */,
 				46EB2E00003130 /* Cipher.swift in Sources */,
 				46EB2E00003080 /* CipherModeWorker.swift in Sources */,
@@ -3779,8 +3779,8 @@
 				46EB2E000030B0 /* GCM.swift in Sources */,
 				46EB2E00003240 /* Generics.swift in Sources */,
 				46EB2E00003250 /* HKDF.swift in Sources */,
-				46EB2E00003200 /* HMAC+Foundation.swift in Sources */,
 				46EB2E00003260 /* HMAC.swift in Sources */,
+				46EB2E00003200 /* HMAC+Foundation.swift in Sources */,
 				46EB2E00003270 /* Int+Extension.swift in Sources */,
 				46EB2E00003280 /* ISO10126Padding.swift in Sources */,
 				46EB2E00003290 /* ISO78164Padding.swift in Sources */,
@@ -3797,8 +3797,8 @@
 				46EB2E00003310 /* PKCS7.swift in Sources */,
 				46EB2E00003320 /* PKCS7Padding.swift in Sources */,
 				46EB2E00003330 /* Poly1305.swift in Sources */,
-				46EB2E00003210 /* Rabbit+Foundation.swift in Sources */,
 				46EB2E00003340 /* Rabbit.swift in Sources */,
+				46EB2E00003210 /* Rabbit+Foundation.swift in Sources */,
 				46EB2E00003350 /* Scrypt.swift in Sources */,
 				46EB2E00003360 /* SecureBytes.swift in Sources */,
 				46EB2E00003370 /* SHA1.swift in Sources */,
@@ -3814,8 +3814,8 @@
 				46EB2E00003400 /* UInt64+Extension.swift in Sources */,
 				46EB2E00003410 /* UInt8+Extension.swift in Sources */,
 				46EB2E00003420 /* Updatable.swift in Sources */,
-				46EB2E00003230 /* Utils+Foundation.swift in Sources */,
 				46EB2E00003430 /* Utils.swift in Sources */,
+				46EB2E00003230 /* Utils+Foundation.swift in Sources */,
 				46EB2E00003440 /* ZeroPadding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3895,8 +3895,8 @@
 				46EB2E00003C40 /* KFImage.swift in Sources */,
 				46EB2E00003C50 /* KFImageOptions.swift in Sources */,
 				46EB2E00003A90 /* KFOptionsSetter.swift in Sources */,
-				46EB2E00003D90 /* Kingfisher-dummy.m in Sources */,
 				46EB2E00003AA0 /* Kingfisher.swift in Sources */,
+				46EB2E00003D90 /* Kingfisher-dummy.m in Sources */,
 				46EB2E00003AB0 /* KingfisherError.swift in Sources */,
 				46EB2E00003AC0 /* KingfisherManager.swift in Sources */,
 				46EB2E00003AD0 /* KingfisherOptionsInfo.swift in Sources */,
@@ -3969,8 +3969,8 @@
 				46EB2E00004350 /* SDAnimatedImage.m in Sources */,
 				46EB2E00004360 /* SDAnimatedImagePlayer.m in Sources */,
 				46EB2E00004370 /* SDAnimatedImageRep.m in Sources */,
-				46EB2E00004380 /* SDAnimatedImageView+WebCache.m in Sources */,
 				46EB2E00004390 /* SDAnimatedImageView.m in Sources */,
+				46EB2E00004380 /* SDAnimatedImageView+WebCache.m in Sources */,
 				46EB2E000046D0 /* SDAssociatedObject.m in Sources */,
 				46EB2E000046E0 /* SDAsyncBlockOperation.m in Sources */,
 				46EB2E000046F0 /* SDDeviceHelper.m in Sources */,
@@ -4061,8 +4061,8 @@
 				46EB2E00004EF0 /* ConstraintInsets.swift in Sources */,
 				46EB2E00004F00 /* ConstraintInsetTarget.swift in Sources */,
 				46EB2E00004F10 /* ConstraintItem.swift in Sources */,
-				46EB2E00004F20 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				46EB2E00004F30 /* ConstraintLayoutGuide.swift in Sources */,
+				46EB2E00004F20 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				46EB2E00004F40 /* ConstraintLayoutGuideDSL.swift in Sources */,
 				46EB2E00004F50 /* ConstraintLayoutSupport.swift in Sources */,
 				46EB2E00004F60 /* ConstraintLayoutSupportDSL.swift in Sources */,
@@ -4078,8 +4078,8 @@
 				46EB2E00005000 /* ConstraintPriorityTarget.swift in Sources */,
 				46EB2E00005010 /* ConstraintRelatableTarget.swift in Sources */,
 				46EB2E00005020 /* ConstraintRelation.swift in Sources */,
-				46EB2E00005030 /* ConstraintView+Extensions.swift in Sources */,
 				46EB2E00005040 /* ConstraintView.swift in Sources */,
+				46EB2E00005030 /* ConstraintView+Extensions.swift in Sources */,
 				46EB2E00005050 /* ConstraintViewDSL.swift in Sources */,
 				46EB2E00005060 /* Debugging.swift in Sources */,
 				46EB2E00005070 /* LayoutConstraint.swift in Sources */,
@@ -4094,8 +4094,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00005270 /* SwiftyJSON-dummy.m in Sources */,
 				46EB2E000051D0 /* SwiftyJSON.swift in Sources */,
+				46EB2E00005270 /* SwiftyJSON-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4109,8 +4109,8 @@
 				46EB2E00005330 /* TZGifPhotoPreviewController.m in Sources */,
 				46EB2E00005340 /* TZImageCropManager.m in Sources */,
 				46EB2E00005350 /* TZImageManager.m in Sources */,
-				46EB2E000055A0 /* TZImagePickerController-dummy.m in Sources */,
 				46EB2E00005360 /* TZImagePickerController.m in Sources */,
+				46EB2E000055A0 /* TZImagePickerController-dummy.m in Sources */,
 				46EB2E00005370 /* TZImageRequestOperation.m in Sources */,
 				46EB2E00005380 /* TZLocationManager.m in Sources */,
 				46EB2E00005390 /* TZPhotoPickerController.m in Sources */,
