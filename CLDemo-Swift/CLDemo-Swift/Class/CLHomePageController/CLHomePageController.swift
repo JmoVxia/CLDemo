@@ -100,6 +100,7 @@ private extension CLHomePageController {
 //MARK: - JmoVxia---私有方法
 private extension CLHomePageController {
     func push(_ type: CLController.Type, title: String) {
+        CLLog("\(title)---->\(type)")
         let controller = type.init()
         controller.updateTitleLabel { label in
             label.text = title

@@ -12,8 +12,12 @@
     "class": "CLDarkModeController"
   },
   {
+    "title": "蜂窝布局",
+    "class": "CLHoneycombLayoutController"
+  },
+  {
     "title": "iWatch动画",
-    "class": "CLHexagonalController"
+    "class": "CLiWatchAnimationController"
   },
   {
     "title": "断点续传",

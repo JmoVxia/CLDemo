@@ -1,5 +1,5 @@
 //
-//  CLHexagonalController.swift
+//  CLiWatchAnimationController.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2021/8/2.
@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 //MARK: - JmoVxia---枚举
-extension CLHexagonalController {
+extension CLiWatchAnimationController {
 }
 //MARK: - JmoVxia---类-属性
-class CLHexagonalController: CLController {
+class CLiWatchAnimationController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -31,7 +31,7 @@ class CLHexagonalController: CLController {
     var dataArray = [UIImage]()
 }
 //MARK: - JmoVxia---生命周期
-extension CLHexagonalController {
+extension CLiWatchAnimationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -54,7 +54,7 @@ extension CLHexagonalController {
     }
 }
 //MARK: - JmoVxia---布局
-private extension CLHexagonalController {
+private extension CLiWatchAnimationController {
     func initUI() {
         view.backgroundColor = UIColor(red: 18/255, green: 52/255, blue: 86/255, alpha: 1)
         for _ in 0...28 {
@@ -66,7 +66,7 @@ private extension CLHexagonalController {
     func makeConstraints() {
     }
 }
-extension CLHexagonalController: HexagonalViewDataSource {
+extension CLiWatchAnimationController: HexagonalViewDataSource {
     func hexagonalView(_ hexagonalView: HexagonalView, imageForIndex index: Int) -> UIImage? {
         return dataArray[index]
     }
@@ -75,7 +75,7 @@ extension CLHexagonalController: HexagonalViewDataSource {
     }
 }
 
-extension CLHexagonalController: HexagonalViewDelegate {
+extension CLiWatchAnimationController: HexagonalViewDelegate {
     func hexagonalView(_ hexagonalView: HexagonalView, didSelectItemAtIndex index: Int) {
         print("didSelectItemAtIndex: \(index)")
     }

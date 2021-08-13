@@ -61,7 +61,7 @@ extension UIColor {
         let red = CGFloat(arc4random()%256)/255.0
         let green = CGFloat(arc4random()%256)/255.0
         let blue = CGFloat(arc4random()%256)/255.0
-        return UIColor(red: red, green: green, blue: blue, alpha: 0.35)
+        return UIColor(red: red, green: green, blue: blue, alpha: 0.5)
     }
     //获取反色(补色)
     var invertColor: UIColor {

@@ -27,9 +27,9 @@ extension UIBezierPath {
         self.init()
 
         let theta: CGFloat = 2.0 * CGFloat.pi / CGFloat(sides) // How much to turn at every corner
-        let width = min(rect.size.width, rect.size.height)        // Width of the square
+        let width = max(rect.size.width, rect.size.height)        // Width of the square
 
-        let center = CGPoint(x: rect.origin.x + width / 2.0, y: rect.origin.y + width / 2.0)
+        let center = CGPoint(x: rect.origin.x + rect.size.width / 2.0, y: rect.origin.y + rect.size.height / 2.0)
 
         // Radius of the circle that encircles the polygon
         // Notice that the radius is adjusted for the corners, that way the largest outer
