@@ -1,5 +1,5 @@
 //
-//  CLHoneycombLayoutController.swift
+//  CLHoneycombCollectionViewController.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2021/8/13.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 //MARK: - JmoVxia---类-属性
-class CLHoneycombLayoutController: CLController {
+class CLHoneycombCollectionViewController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -33,7 +33,7 @@ class CLHoneycombLayoutController: CLController {
     }()
 }
 //MARK: - JmoVxia---生命周期
-extension CLHoneycombLayoutController {
+extension CLHoneycombCollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -56,8 +56,11 @@ extension CLHoneycombLayoutController {
     }
 }
 //MARK: - JmoVxia---布局
-private extension CLHoneycombLayoutController {
+private extension CLHoneycombCollectionViewController {
     func initUI() {
+        updateTitleLabel { label in
+            label.text = "UICollectionView"
+        }
         view.backgroundColor = .hex("#93DAAE")
         view.addSubview(collectionView)
     }
@@ -67,17 +70,17 @@ private extension CLHoneycombLayoutController {
         }
     }
 }
-extension CLHoneycombLayoutController: UICollectionViewDataSource {
+extension CLHoneycombCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CLHoneycombCollectionViewCell", for: indexPath)
         (cell as? CLHoneycombCollectionViewCell)?.imageView.image = UIImage(named: "Hexagon-\(indexPath.row % 30 + 1)")
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 420
+        return 210
     }
 }
-extension CLHoneycombLayoutController: UICollectionViewDelegate {
+extension CLHoneycombCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? CLHoneycombCollectionViewCell)?.animation()
     }

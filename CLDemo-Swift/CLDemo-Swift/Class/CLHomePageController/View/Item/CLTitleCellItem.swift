@@ -22,6 +22,6 @@ extension CLTitleCellItem: CLCellItemProtocol {
         return CLTitleCell.self
     }
     func cellHeight() -> CGFloat {
-        return PingFangSCMedium(18).lineHeight + 20
+        return PingFangSCMedium(18).lineHeight + 30
     }
 }

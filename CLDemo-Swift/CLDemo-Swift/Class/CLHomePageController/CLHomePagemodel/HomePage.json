@@ -13,7 +13,7 @@
   },
   {
     "title": "蜂窝布局",
-    "class": "CLHoneycombLayoutController"
+    "class": "CLHoneycombController"
   },
   {
     "title": "iWatch动画",

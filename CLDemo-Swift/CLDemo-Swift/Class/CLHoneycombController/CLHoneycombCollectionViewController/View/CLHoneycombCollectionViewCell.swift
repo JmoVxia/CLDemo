@@ -21,15 +21,8 @@ class CLHoneycombCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        backgroundColor = .clear
-        contentView.addSubview(contentBackgroundView)
-        contentView.addSubview(imageView)
-        contentBackgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        initUI()
+        makeConstraints()
         DispatchQueue.main.async {
             self.contentBackgroundView.setupHexagonMask(lineWidth: 0, color: .clear, cornerRadius: 0)
             self.imageView.setupHexagonMask(lineWidth: 10, color: .randomColor, cornerRadius: 0)
@@ -37,6 +30,22 @@ class CLHoneycombCollectionViewCell: UICollectionViewCell {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+//MARK: - JmoVxia---布局
+private extension CLHoneycombCollectionViewCell {
+    func initUI() {
+        backgroundColor = .clear
+        contentView.addSubview(contentBackgroundView)
+        contentView.addSubview(imageView)
+    }
+    func makeConstraints() {
+        contentBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 extension CLHoneycombCollectionViewCell {
