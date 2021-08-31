@@ -14,13 +14,15 @@ import DateToolsSwift
     ///唯一标识符
     fileprivate (set) var identifier: String = ""
     ///顶掉前面弹窗弹窗
-    var isDisplacement: Bool = false
+    var isDissmissBefore: Bool = false
     ///向下传递手势
     var isPassedDown: Bool = false
     ///是否自动旋转
     var isAutorotate: Bool = false
     ///是否隐藏状态栏
     var isHiddenStatusBar: Bool = false
+    ///是否等待
+    var isWait: Bool = true
     ///状态栏颜色
     var statusBarStyle: UIStatusBarStyle = .lightContent
     ///支持方向
@@ -32,8 +34,14 @@ import DateToolsSwift
     var configure: CLPopupManagerConfigure = CLPopupManagerConfigure()
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        if let statusBarStyle = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController?.preferredStatusBarStyle {
+        if let isHiddenStatusBar = UIApplication.shared.keyWindow?.rootViewController?.prefersStatusBarHidden {
+            configure.isHiddenStatusBar = isHiddenStatusBar
+        }
+        if let statusBarStyle = UIApplication.shared.keyWindow?.rootViewController?.preferredStatusBarStyle {
             configure.statusBarStyle = statusBarStyle
+        }
+        if let interfaceOrientationMask = UIApplication.shared.keyWindow?.rootViewController?.supportedInterfaceOrientations {
+            configure.interfaceOrientationMask = interfaceOrientationMask
         }
     }
     required init?(coder: NSCoder) {
@@ -41,6 +49,35 @@ import DateToolsSwift
     }
     deinit {
 //        CLLog("=====  \(self.classForCoder) deinit  =====")
+    }
+    @available(iOS 13.0, *)
+    override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
+        set {
+            super.overrideUserInterfaceStyle = newValue
+        }
+        get {
+            return .light
+        }
+    }
+}
+extension CLPopupManagerController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 }
 extension CLPopupManagerController {
@@ -79,12 +116,23 @@ extension CLPopupManagerController {
         get {
             guard let shareManager = manager else {
                 manager = CLPopupManager()
+                manager!.semaphore.signal()
                 return manager!
             }
             return shareManager
         }
     }
-    private var windowsDictionary = [String : CLPopupManagerWindow]()
+    private var removedArray = [String]()
+    private var windowDictionary = [String : CLPopupManagerWindow]()
+    private var semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+    private var currentWait: Int = 0 {
+        didSet {
+            if oldValue != currentWait, currentWait == 0 {
+                CLPopupManager.manager = nil
+            }
+        }
+    }
+    private var queue: DispatchQueue = DispatchQueue(label: "CLPopupManager.queue", attributes: .concurrent)
     private override init() {
         super.init()
     }
@@ -95,32 +143,67 @@ extension CLPopupManagerController {
 extension CLPopupManager {
     /// 显示自定义弹窗
     private class func showController(_ controller: CLPopupManagerController) {
-        DispatchQueue.main.async {
-            if controller.configure.isDisplacement {
-                share.windowsDictionary.removeAll()
+        share.queue.async {
+            if share.windowDictionary.isEmpty,
+               !controller.configure.isWait {
+                share.semaphore.wait()
             }
-            let window = CLPopupManagerWindow(frame: UIScreen.main.bounds)
-            window.isPassedDown = controller.configure.isPassedDown
-            window.windowLevel = UIWindow.Level.statusBar
-            window.isUserInteractionEnabled = true
-            window.rootViewController = controller
-            window.makeKeyAndVisible()
-            share.windowsDictionary[controller.configure.identifier] = window
+            if controller.configure.isDissmissBefore {
+                share.windowDictionary.removeAll()
+                share.removedArray.removeAll()
+                share.semaphore = DispatchSemaphore(value: 0)
+                share.semaphore.signal()
+                share.currentWait = 1
+            }else if controller.configure.isWait {
+                share.currentWait += 1
+            }
+            if controller.configure.isWait || controller.configure.isDissmissBefore {
+                share.semaphore.wait()
+            }
+            DispatchQueue.main.async {
+                if share.removedArray.contains(controller.configure.identifier) {
+                    share.removedArray.removeAll(where: {$0 == controller.configure.identifier})
+                    share.semaphore.signal()
+                    share.currentWait -= 1
+                }else {
+                    let window = CLPopupManagerWindow(frame: UIScreen.main.bounds)
+                    window.isPassedDown = controller.configure.isPassedDown
+                    window.windowLevel = .statusBar
+                    window.isUserInteractionEnabled = true
+                    window.rootViewController = controller
+                    window.makeKeyAndVisible()
+                    share.windowDictionary[controller.configure.identifier] = window
+                }
+            }
         }
     }
     /// 隐藏所有弹窗
     class func dismissAll() {
-        DispatchQueue.main.async {
-            share.windowsDictionary.removeAll()
-            manager = nil
+        share.queue.async {
+            share.windowDictionary.removeAll()
+            share.removedArray.removeAll()
+            share.semaphore = DispatchSemaphore(value: 0)
+            share.semaphore.signal()
+            share.currentWait = 0
         }
     }
     ///隐藏指定弹窗
     class func dismiss(_ identifier : String) {
         DispatchQueue.main.async {
-            share.windowsDictionary.removeValue(forKey: identifier)
-            if share.windowsDictionary.isEmpty {
-                dismissAll()
+            if let controller = share.windowDictionary[identifier]?.rootViewController as? CLPopupManagerController {
+                share.windowDictionary.removeValue(forKey: identifier)
+                share.queue.async {
+                    if controller.configure.isWait || controller.configure.isDissmissBefore {
+                        share.semaphore.signal()
+                        share.currentWait -= 1
+                    }
+                    if share.windowDictionary.isEmpty,
+                       !controller.configure.isWait {
+                        share.semaphore.signal()
+                    }
+                }
+            }else {
+                share.removedArray.append(identifier)
             }
         }
     }
