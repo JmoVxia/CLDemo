@@ -21,12 +21,12 @@ class CLTextViewViewController: CLController {
                 make.left.right.equalTo(0)
             }
         })
-        textView.updateWithConfigure({ (configure) in
-            configure.statistics = .bytesLength
-            configure.showLengthLabel = true
-            configure.maxBytesLength = 2000
-            configure.maxCount = NSIntegerMax
-            configure.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10)
+        textView.updateWithConfig({ (config) in
+            config.statistics = .bytesLength
+            config.showLengthLabel = true
+            config.maxBytesLength = 2000
+            config.maxCount = NSIntegerMax
+            config.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10)
         })
         return textView
     }()

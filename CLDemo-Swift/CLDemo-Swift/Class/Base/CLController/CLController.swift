@@ -97,6 +97,16 @@ private extension CLController {
 }
 //MARK: - JmoVxia---override
 extension CLController {
+    @available(iOS 13.0, *) override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
+        set {
+            
+        }
+        get {
+            return CLTheme.mode.style
+        }
+    }
+}
+extension CLController {
     override var shouldAutorotate: Bool {
         return false
     }
@@ -111,14 +121,6 @@ extension CLController {
     }
     override var prefersStatusBarHidden: Bool {
         return isHiddenStatusBar
-    }
-    @available(iOS 13.0, *) override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
-        set {
-            
-        }
-        get {
-            return CLTheme.mode.style
-        }
     }
 }
 //MARK: - JmoVxia---公共方法

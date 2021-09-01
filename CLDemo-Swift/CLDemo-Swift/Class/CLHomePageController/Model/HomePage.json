@@ -12,6 +12,10 @@
     "class": "CLDarkModeController"
   },
   {
+    "title": "三级联动+模糊搜索",
+    "class": "CLIngredientController"
+  },
+  {
     "title": "蜂窝布局",
     "class": "CLHoneycombController"
   },

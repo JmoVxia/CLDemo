@@ -75,6 +75,17 @@ extension CLNavigationController {
         }
         super.setViewControllers(viewControllers, animated: animated)
     }
+    @available(iOS 13.0, *)
+    override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
+        set {
+            
+        }
+        get {
+            return topViewController?.overrideUserInterfaceStyle ?? .light
+        }
+    }
+}
+extension CLNavigationController {
     // 是否支持自动转屏
     override var shouldAutorotate: Bool {
         return topViewController?.shouldAutorotate ?? false
@@ -94,15 +105,6 @@ extension CLNavigationController {
     ///是否隐藏状态栏
     override var prefersStatusBarHidden: Bool {
         return topViewController?.prefersStatusBarHidden ?? false
-    }
-    @available(iOS 13.0, *)
-    override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
-        set {
-            
-        }
-        get {
-            return topViewController?.overrideUserInterfaceStyle ?? .light
-        }
     }
 }
 //MARK: - JmoVxia---objc

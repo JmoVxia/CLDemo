@@ -9,6 +9,12 @@
 import UIKit
 
 extension NSDecimalNumber {
+    var isNan: Bool {
+        return self == NSDecimalNumber.notANumber
+    }
+}
+
+extension NSDecimalNumber {
     /// 根据范例小数点位数格式化
     func formatter(withExample example: NSDecimalNumber) -> NSDecimalNumber {
         let number = example.stringValue.components(separatedBy: ".").last?.count ?? 0
@@ -66,11 +72,21 @@ extension NSDecimalNumber {
         return string
     }
 }
+
 extension NSDecimalNumber {
-    func moreThen(_ decimalsNumber: NSDecimalNumber) -> Bool {
-        return compare(decimalsNumber) == .orderedDescending
+    func moreThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
+        return compare(decimalsNumber) == .orderedDescending && !isNan && !decimalsNumber.isNan
     }
-    func lessThen(_ decimalsNumber: NSDecimalNumber) -> Bool {
-        return compare(decimalsNumber) == .orderedAscending
+
+    func moreOrEqualThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
+        return compare(decimalsNumber) != .orderedAscending && !isNan && !decimalsNumber.isNan
+    }
+
+    func lessThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
+        return compare(decimalsNumber) == .orderedAscending && !isNan && !decimalsNumber.isNan
+    }
+
+    func lessOrEqualThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
+        return compare(decimalsNumber) != .orderedDescending && !isNan && !decimalsNumber.isNan
     }
 }

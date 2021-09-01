@@ -18,16 +18,16 @@ class CLHistogramCell: UITableViewCell {
             return morning.adding(noon).adding(night).adding(additional)
         }
         var isMorningNomal: Bool {
-            return morning.lessThen(1.0)
+            return morning.lessThan(1.0)
         }
         var isNoonNomal: Bool {
-            return morning.adding(noon).lessThen(1.0)
+            return morning.adding(noon).lessThan(1.0)
         }
         var isNightNomal: Bool {
-            return morning.adding(noon).adding(night).lessThen(1.0)
+            return morning.adding(noon).adding(night).lessThan(1.0)
         }
         var isAdditionalNomal: Bool {
-            return morning.adding(noon).adding(night).adding(additional).lessThen(1.0)
+            return morning.adding(noon).adding(night).adding(additional).lessThan(1.0)
         }
     }
     var item: CLHistogramItem = CLHistogramItem() {
@@ -190,27 +190,27 @@ private extension CLHistogramCell {
     func drawLayer() {
         let width = (bounds.width - (leftRightEdge + middleSpace) * 2) * 1.0 / maxValue
         
-        let morningRadius: CGFloat = (item.isMorningNomal && item.morning.moreThen(0.0) && (item.noon.adding(item.night).adding(item.additional)) == 0.0) ? cornerRadius : 0
+        let morningRadius: CGFloat = (item.isMorningNomal && item.morning.moreThan(0.0) && (item.noon.adding(item.night).adding(item.additional)) == 0.0) ? cornerRadius : 0
         let morningWidth = width * CGFloat(min(item.morning.floatValue, 1.0))
         morningLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: morningRadius, bottomLeft: 0, bottomRight: morningRadius), width: morningWidth, height: layerHeight).cgPath
         
-        let noonRadius: CGFloat = (item.isNoonNomal && item.noon.moreThen(0.0) && (item.night.adding(item.additional)) == 0.0) ? cornerRadius : 0
+        let noonRadius: CGFloat = (item.isNoonNomal && item.noon.moreThan(0.0) && (item.night.adding(item.additional)) == 0.0) ? cornerRadius : 0
         let noonWidth = width * CGFloat(min(item.morning.adding(item.noon).floatValue, 1.0))
         noonLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: noonRadius, bottomLeft: 0, bottomRight: noonRadius), edgeInsets: UIEdgeInsets(top: 0, left: morningWidth, bottom: 0, right: 0), width: noonWidth, height: layerHeight).cgPath
 
-        let nightRadius: CGFloat = (item.isNightNomal && item.night.moreThen(0.0) && item.additional == 0.0) ? cornerRadius : 0
+        let nightRadius: CGFloat = (item.isNightNomal && item.night.moreThan(0.0) && item.additional == 0.0) ? cornerRadius : 0
         let nightWidth = width * CGFloat(min(item.morning.adding(item.noon).adding(item.night).floatValue, 1.0))
         nightLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: nightRadius, bottomLeft: 0, bottomRight: nightRadius), edgeInsets: UIEdgeInsets(top: 0, left: noonWidth, bottom: 0, right: 0), width: nightWidth, height: layerHeight).cgPath
 
-        let additionalRadius: CGFloat = (item.isAdditionalNomal && item.additional.moreThen(0.0)) ? cornerRadius : 0
+        let additionalRadius: CGFloat = (item.isAdditionalNomal && item.additional.moreThan(0.0)) ? cornerRadius : 0
         let additionalWidth = width * CGFloat(min(item.total.floatValue, 1.0))
         additionalLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: additionalRadius, bottomLeft: 0, bottomRight: additionalRadius), edgeInsets: UIEdgeInsets(top: 0, left: nightWidth, bottom: 0, right: 0), width: additionalWidth, height: layerHeight).cgPath
         
-        let exceedRadius: CGFloat = (item.total.lessThen(1.5) && item.total.moreThen(1.0)) ? cornerRadius : 0
+        let exceedRadius: CGFloat = (item.total.lessThan(1.5) && item.total.moreThan(1.0)) ? cornerRadius : 0
         let exceedWidth = width * CGFloat(min(item.total.floatValue, 1.5))
         exceedLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: exceedRadius, bottomLeft: 0, bottomRight: exceedRadius), edgeInsets: UIEdgeInsets(top: 0, left: additionalWidth, bottom: 0, right: 0), width: exceedWidth, height: layerHeight).cgPath
 
-        let seriousExceedRadius: CGFloat = item.total.moreThen(1.5) ? cornerRadius : 0
+        let seriousExceedRadius: CGFloat = item.total.moreThan(1.5) ? cornerRadius : 0
         let seriousExceedWidth = width * CGFloat(min(item.total.floatValue, 1.8))
         seriousExceedLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: seriousExceedRadius, bottomLeft: 0, bottomRight: seriousExceedRadius), edgeInsets: UIEdgeInsets(top: 0, left: exceedWidth, bottom: 0, right: 0), width: seriousExceedWidth, height: layerHeight).cgPath
         

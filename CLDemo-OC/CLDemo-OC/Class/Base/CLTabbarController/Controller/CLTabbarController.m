@@ -14,7 +14,7 @@
 #import "CLCustomTabbar.h"
 #import "Tools.h"
 #import "CLMyController.h"
-
+#import "UIColor+CLHex.h"
 @interface CLTabbarController ()
 {
     NSTimeInterval _lastSameIndexTapTime;
@@ -40,6 +40,12 @@
         strongSelf.selectedIndex = 2;
     }];
     [self setValue:tabbar forKeyPath:@"tabBar"];
+    
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    [UITabBar appearance].unselectedItemTintColor = [UIColor colorWithHex:@"999999"];
+    [UITabBar appearance].tintColor = [UIColor colorWithHex:@"24C065"];
+
     
     CLHomepageController *mc = [[CLHomepageController alloc] init];
     CLNavigationController *nc1 = [[CLNavigationController alloc] initWithRootViewController:mc];

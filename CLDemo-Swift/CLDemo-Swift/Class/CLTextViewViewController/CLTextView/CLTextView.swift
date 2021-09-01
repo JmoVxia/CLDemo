@@ -9,47 +9,22 @@
 import UIKit
 import SnapKit
 
-/// 统计类型
-///
-/// - count: 字数
-/// - bytesLength: 字节
-@objc
-enum Statistics: Int {
-    case count
-    case bytesLength
+extension CLTextViewConfig {
+    /// 统计类型
+    ///
+    /// - count: 字数
+    /// - bytesLength: 字节
+    enum Statistics: Int {
+        case count
+        case bytesLength
+    }
+    /// 字符编码格式
+    enum Encoding {
+        case gbk
+        case bytesLength(using: String.Encoding)
+    }
 }
-
-/// 字符编码格式
-///
-@objc
-enum Encoding: Int {
-    case gbk
-    case ascii
-    case nextstep
-    case japaneseEUC
-    case utf8
-    case isoLatin1
-    case symbol
-    case nonLossyASCII
-    case shiftJIS
-    case isoLatin2
-    case unicode
-    case windowsCP1251
-    case windowsCP1252
-    case windowsCP1253
-    case windowsCP1254
-    case windowsCP1250
-    case iso2022JP
-    case macOSRoman
-    case utf16
-    case utf16BigEndian
-    case utf16LittleEndian
-    case utf32
-    case utf32BigEndian
-    case utf32LittleEndian
-}
-
-@objcMembers class CLTextViewConfigure: NSObject {
+class CLTextViewConfig: NSObject {
     ///背景颜色
     var backgroundColor: UIColor = UIColor.white
     ///显示计数
@@ -85,36 +60,37 @@ enum Encoding: Int {
     ///编码格式
     var encoding: Encoding = .gbk
     
-    fileprivate class func defaultConfigure() -> CLTextViewConfigure {
-        let configure = CLTextViewConfigure()
+    fileprivate class func defaultConfigure() -> CLTextViewConfig {
+        let configure = CLTextViewConfig()
         return configure
     }
 }
 
-@objc protocol CLTextViewDelegate: AnyObject {
+protocol CLTextViewDelegate: AnyObject {
     ///输入改变
-    @objc optional func textViewDidChange(textView:CLTextView) -> Void
+    func textViewDidChange(textView:CLTextView) -> Void
     ///开始输入
-    @objc optional func textViewBeginEditing(textView:CLTextView) -> Void
+    func textViewBeginEditing(textView:CLTextView) -> Void
     ///结束输入
-    @objc optional func textViewEndEditing(textView:CLTextView) -> Void
+    func textViewEndEditing(textView:CLTextView) -> Void
 }
-@objcMembers class CLTextView: UIView {
+
+class CLTextView: UIView {
     ///代理
     weak var delegate: CLTextViewDelegate?
     ///高度
     var height: CGFloat {
-        return textViewHeight() + configure.edgeInsets.top - configure.edgeInsets.bottom + (configure.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - configure.edgeInsets.bottom) : 0)
+        return textViewHeight() + config.edgeInsets.top - config.edgeInsets.bottom + (config.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - config.edgeInsets.bottom) : 0)
     }
     ///输入框
     private lazy var textView: UITextView = {
         let view = UITextView()
         view.delegate = self
         view.backgroundColor = .clear
-        view.textColor = configure.textColor
-        view.tintColor = configure.cursorColor
-        view.keyboardAppearance = configure.keyboardAppearance
-        view.font = configure.textFont
+        view.textColor = config.textColor
+        view.tintColor = config.cursorColor
+        view.keyboardAppearance = config.keyboardAppearance
+        view.font = config.textFont
         view.textContainerInset = UIEdgeInsets.zero
         view.textContainer.lineFragmentPadding = 0
         view.layoutManager.allowsNonContiguousLayout = false
@@ -129,27 +105,27 @@ enum Encoding: Int {
     private lazy var placeholderLabel: UILabel = {
         let view = UILabel()
         view.backgroundColor = UIColor.clear
-        view.textColor = configure.placeholderTextColor
-        view.font = configure.textFont
+        view.textColor = config.placeholderTextColor
+        view.font = config.textFont
         view.numberOfLines = 0
-        view.text = configure.placeholder
+        view.text = config.placeholder
         addSubview(view)
         return view
     }()
     ///计数label
     private lazy var lengthLabel: UILabel = {
         let view = UILabel()
-        view.font = configure.lengthFont
-        if configure.statistics == .bytesLength {
-            view.text = String.init(format: "0/%ld", configure.maxBytesLength)
+        view.font = config.lengthFont
+        if config.statistics == .bytesLength {
+            view.text = String(format: "0/%ld", config.maxBytesLength)
         }else {
-            view.text = String.init(format: "0/%ld", configure.maxCount)
+            view.text = String(format: "0/%ld", config.maxCount)
         }
         addSubview(view)
         return view
     }()
     ///默认配置
-    private let configure: CLTextViewConfigure = CLTextViewConfigure.defaultConfigure()
+    private let config: CLTextViewConfig = CLTextViewConfig.defaultConfigure()
     ///上一次输入的文字
     private var lastText: String = ""
     ///当前输入的文字
@@ -157,7 +133,7 @@ enum Encoding: Int {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = configure.backgroundColor
+        backgroundColor = config.backgroundColor
         remakeConstraints()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder))
         addGestureRecognizer(tapGestureRecognizer)
@@ -167,31 +143,31 @@ enum Encoding: Int {
     }
     ///textView高度
     private func textViewHeight() -> CGFloat {
-        let lineH: CGFloat = configure.textFont.lineHeight
-        let contentSize = textView.sizeThatFits(CGSize(width: self.frame.size.width - self.configure.edgeInsets.left + self.configure.edgeInsets.right, height: 0))
-        let contentSizeH: CGFloat = max(ceil(lineH * CGFloat(configure.defaultLine)), contentSize.height)
-        let maxTextViewHeight: CGFloat = ceil(lineH * CGFloat(configure.textViewMaxLine))
+        let lineH: CGFloat = config.textFont.lineHeight
+        let contentSize = textView.sizeThatFits(CGSize(width: bounds.size.width - config.edgeInsets.left + config.edgeInsets.right, height: 0))
+        let contentSizeH: CGFloat = max(ceil(lineH * CGFloat(config.defaultLine)), contentSize.height)
+        let maxTextViewHeight: CGFloat = ceil(lineH * CGFloat(config.textViewMaxLine))
         return min(contentSizeH, maxTextViewHeight)
     }
     ///更新约束
     private func remakeConstraints() {
         DispatchQueue.main.async {
-            self.lengthLabel.isHidden = !self.configure.showLengthLabel
-            if self.configure.showLengthLabel {
+            self.lengthLabel.isHidden = !self.config.showLengthLabel
+            if self.config.showLengthLabel {
                 self.lengthLabel.snp.remakeConstraints { (make) in
-                    make.bottom.equalTo(self.snp.bottom).offset(self.configure.edgeInsets.bottom)
-                    make.right.equalTo(self.configure.edgeInsets.right)
+                    make.bottom.equalTo(self.snp.bottom).offset(self.config.edgeInsets.bottom)
+                    make.right.equalTo(self.config.edgeInsets.right)
                 }
             }
             self.textView.snp.remakeConstraints { (make) in
-                make.top.equalTo(self.configure.edgeInsets.top)
-                make.left.equalTo(self.configure.edgeInsets.left)
-                make.right.equalTo(self.configure.edgeInsets.right)
+                make.top.equalTo(self.config.edgeInsets.top)
+                make.left.equalTo(self.config.edgeInsets.left)
+                make.right.equalTo(self.config.edgeInsets.right)
                 make.height.equalTo(self.textViewHeight())
-                if self.configure.showLengthLabel {
-                    make.bottom.equalTo(self.lengthLabel.snp.top).offset(self.configure.edgeInsets.bottom)
+                if self.config.showLengthLabel {
+                    make.bottom.equalTo(self.lengthLabel.snp.top).offset(self.config.edgeInsets.bottom)
                 }else {
-                    make.bottom.equalTo(self.snp.bottom).offset(self.configure.edgeInsets.bottom)
+                    make.bottom.equalTo(self.snp.bottom).offset(self.config.edgeInsets.bottom)
                 }
             }
             self.placeholderLabel.snp.remakeConstraints { (make) in
@@ -207,22 +183,22 @@ enum Encoding: Int {
 //MARK:JmoVxia---更新相关
 extension CLTextView {
     ///更新默认配置
-    func updateWithConfigure(_ configure: ((CLTextViewConfigure) -> Void)?) {
-        configure?(self.configure)
+    func updateWithConfig(_ config: ((CLTextViewConfig) -> Void)?) {
+        config?(self.config)
         
-        backgroundColor = self.configure.backgroundColor
+        backgroundColor = self.config.backgroundColor
         
-        textView.textColor = self.configure.textColor
-        textView.font = self.configure.textFont
-        textView.tintColor = self.configure.cursorColor
-        textView.keyboardAppearance = self.configure.keyboardAppearance
+        textView.textColor = self.config.textColor
+        textView.font = self.config.textFont
+        textView.tintColor = self.config.cursorColor
+        textView.keyboardAppearance = self.config.keyboardAppearance
         
-        placeholderLabel.text = self.configure.placeholder
-        placeholderLabel.textColor = self.configure.placeholderTextColor
-        placeholderLabel.font = self.configure.textFont
+        placeholderLabel.text = self.config.placeholder
+        placeholderLabel.textColor = self.config.placeholderTextColor
+        placeholderLabel.font = self.config.textFont
         
-        lengthLabel.font = self.configure.lengthFont
-        lengthLabel.textColor = self.configure.lengthColor
+        lengthLabel.font = self.config.lengthFont
+        lengthLabel.textColor = self.config.lengthColor
         
         remakeConstraints()
     }
@@ -234,19 +210,17 @@ extension CLTextView {
 }
 //MARK:JmoVxia---UITextViewDelegate
 extension CLTextView: UITextViewDelegate {
-    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "" {
+        guard !text.isEmpty else { return true }
+        
+        if let rang = textView.markedTextRange,
+           textView.position(from: rang.start, offset: 0) != nil {
             return true
         }
-        if let rang = textView.markedTextRange {
-            if let _ = textView.position(from: rang.start, offset: 0) {
-                return true
-            }
-        }
+
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        if (newText.count > self.configure.maxCount) || (self.bytesLength(text: newText) > self.configure.maxBytesLength) || (self.bytesLength(text: newText) == 0 && newText.count > 0) {
-            return false;
+        if (newText.count > self.config.maxCount) || (self.bytesLength(text: newText) > self.config.maxBytesLength) || (self.bytesLength(text: newText) == 0 && newText.count > 0) {
+            return false
         }
         return true
     }
@@ -255,38 +229,39 @@ extension CLTextView: UITextViewDelegate {
         DispatchQueue.main.async {
             //输入状态不计算
             self.placeholderLabel.isHidden = textView.text.count > 0 ? true : false
-            if let rang = textView.markedTextRange {
-                if let _ = textView.position(from: rang.start, offset: 0) {
-                    return
+            
+            if let rang = textView.markedTextRange,
+               textView.position(from: rang.start, offset: 0) != nil {
+                return
+            }
+            //超过限制,恢复上一次文字
+            if (textView.text.count > self.config.maxCount) || (self.bytesLength(text: textView.text) > self.config.maxBytesLength) || (self.bytesLength(text: textView.text) == 0 && textView.text.count > 0) {
+                textView.text = self.lastText
+            }else {
+                self.lastText = textView.text
+            }
+            let lengthText: String = {
+                if self.config.statistics == .bytesLength {
+                    return String(format: "%ld/%ld",  self.bytesLength(text: textView.text), self.config.maxBytesLength)
+                }else {
+                    return String(format: "%ld/%ld", textView.text.count, self.config.maxCount)
                 }
-            }
-//            超过限制,恢复上一次文字
-            if (textView.text.count > self.configure.maxCount) || (self.bytesLength(text: textView.text) > self.configure.maxBytesLength) || (self.bytesLength(text: textView.text) == 0 && textView.text.count > 0) {
-                textView.text = self.lastText;
-            }else {
-                self.lastText = textView.text;
-            }
-            var lengthText: String
-            if self.configure.statistics == .bytesLength {
-                lengthText = String.init(format: "%ld/%ld",  self.bytesLength(text: textView.text), self.configure.maxBytesLength)
-            }else {
-                lengthText = String.init(format: "%ld/%ld", textView.text.count, self.configure.maxCount)
-            }
+            }()
             self.lengthLabel.text = lengthText
             self.remakeConstraints()
             if self.lastText != self.text {
                 self.text = textView.text
-                self.delegate?.textViewDidChange?(textView: self)
+                self.delegate?.textViewDidChange(textView: self)
             }
         }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        delegate?.textViewBeginEditing?(textView: self)
+        delegate?.textViewBeginEditing(textView: self)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        delegate?.textViewEndEditing?(textView: self)
+        delegate?.textViewEndEditing(textView: self)
     }
 }
 //MARK:JmoVxia---键盘相关
@@ -303,64 +278,20 @@ extension CLTextView {
     }
     ///可以成为第一响应者
     override var canBecomeFirstResponder: Bool {
-        return true
+        return textView.canBecomeFirstResponder
     }
     ///可以注销第一响应者
     override var canResignFirstResponder: Bool {
-        return true
+        return textView.canResignFirstResponder
     }
 }
 extension CLTextView {
     func bytesLength(text: String) -> Int {
-        switch configure.encoding {
+        switch config.encoding {
         case .gbk:
             return text.gbkLength()
-        case .ascii:
-            return text.bytesLength(using: .ascii)
-        case .nextstep:
-            return text.bytesLength(using: .nextstep)
-        case .japaneseEUC:
-            return text.bytesLength(using: .japaneseEUC)
-        case .utf8:
-            return text.bytesLength(using: .utf8)
-        case .isoLatin1:
-            return text.bytesLength(using: .isoLatin1)
-        case .symbol:
-            return text.bytesLength(using: .symbol)
-        case .nonLossyASCII:
-            return text.bytesLength(using: .nonLossyASCII)
-        case .shiftJIS:
-            return text.bytesLength(using: .shiftJIS)
-        case .isoLatin2:
-            return text.bytesLength(using: .isoLatin2)
-        case .unicode:
-            return text.bytesLength(using: .unicode)
-        case .windowsCP1251:
-            return text.bytesLength(using: .windowsCP1251)
-        case .windowsCP1252:
-            return text.bytesLength(using: .windowsCP1252)
-        case .windowsCP1253:
-            return text.bytesLength(using: .windowsCP1253)
-        case .windowsCP1254:
-            return text.bytesLength(using: .windowsCP1254)
-        case .windowsCP1250:
-            return text.bytesLength(using: .windowsCP1250)
-        case .iso2022JP:
-            return text.bytesLength(using: .iso2022JP)
-        case .macOSRoman:
-            return text.bytesLength(using: .macOSRoman)
-        case .utf16:
-            return text.bytesLength(using: .utf16)
-        case .utf16BigEndian:
-            return text.bytesLength(using: .utf16BigEndian)
-        case .utf16LittleEndian:
-            return text.bytesLength(using: .utf16LittleEndian)
-        case .utf32:
-            return text.bytesLength(using: .utf32)
-        case .utf32BigEndian:
-            return text.bytesLength(using: .utf32BigEndian)
-        case .utf32LittleEndian:
-            return text.bytesLength(using: .utf32LittleEndian)
+        case .bytesLength(using: let encoding):
+            return text.bytesLength(using: encoding)
         }
     }
 }

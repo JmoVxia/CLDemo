@@ -213,3 +213,23 @@ extension String {
         return NSLocalizedString(self, tableName: "", bundle: CLLanguageManager.shared.bundle, value: "", comment: "")
     }
 }
+extension String {
+    /// 模糊搜索，大海捞针算法
+    func fuzzySearch(needle: String) -> (Bool, Int) {
+        guard needle != self else { return (true, 3) }
+        guard !localizedCaseInsensitiveContains(needle) else { return (true, 2) }
+        guard needle.count <= count else { return (false, -1) }
+
+        var needleIndex = needle.startIndex
+        var haystackIndex = startIndex
+
+        while needleIndex != needle.endIndex {
+            guard haystackIndex != endIndex else { return (false, -1) }
+            if needle[needleIndex].uppercased() == self[haystackIndex].uppercased() {
+                needleIndex = needle.index(after: needleIndex)
+            }
+            haystackIndex = index(after: haystackIndex)
+        }
+        return (true, 1)
+    }
+}

@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pic1.jpg"]];
     [self.view addSubview:imageView];
     imageView.frame = self.view.frame;

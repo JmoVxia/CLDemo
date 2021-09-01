@@ -41,6 +41,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setTranslucent:NO];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }

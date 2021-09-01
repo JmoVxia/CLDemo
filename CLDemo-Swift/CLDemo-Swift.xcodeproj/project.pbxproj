@@ -24,6 +24,19 @@
 		5B0DC71E26CA4AE400909BF2 /* CLHoneycombCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0DC71D26CA4AE400909BF2 /* CLHoneycombCustomCell.swift */; };
 		5B1C366F26841FAF00D777EB /* CLPermissionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */; };
 		5B1C367026841FAF00D777EB /* CLPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366E26841FAF00D777EB /* CLPermissions.swift */; };
+		5B39ECBB27574748000FCF67 /* CLIngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECBA27574748000FCF67 /* CLIngredientController.swift */; };
+		5B39ECC6275747DE000FCF67 /* CLIngredientSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECBF275747DE000FCF67 /* CLIngredientSearchView.swift */; };
+		5B39ECC7275747DE000FCF67 /* CLIngredientRightTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECC1275747DE000FCF67 /* CLIngredientRightTitleCell.swift */; };
+		5B39ECC8275747DE000FCF67 /* CLIngredientRightTitleHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECC2275747DE000FCF67 /* CLIngredientRightTitleHead.swift */; };
+		5B39ECC9275747DE000FCF67 /* CLIngredientLeftTitleHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECC3275747DE000FCF67 /* CLIngredientLeftTitleHead.swift */; };
+		5B39ECCA275747DE000FCF67 /* CLIngredientSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECC4275747DE000FCF67 /* CLIngredientSearchCell.swift */; };
+		5B39ECCB275747DE000FCF67 /* CLIngredientLeftTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECC5275747DE000FCF67 /* CLIngredientLeftTitleCell.swift */; };
+		5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECCC27574A2B000FCF67 /* NSMutableAttributedString+Extension.swift */; };
+		5B39ECD027574AC0000FCF67 /* CLIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECCF27574AC0000FCF67 /* CLIngredients.swift */; };
+		5B39ECD527574B18000FCF67 /* CLHanziToPinyin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECD227574B18000FCF67 /* CLHanziToPinyin.swift */; };
+		5B39ECD627574B18000FCF67 /* unicode_to_hanyu_pinyin in Resources */ = {isa = PBXBuildFile; fileRef = 5B39ECD327574B18000FCF67 /* unicode_to_hanyu_pinyin */; };
+		5B39ECD727574B18000FCF67 /* unicode_to_sentence_pinyin in Resources */ = {isa = PBXBuildFile; fileRef = 5B39ECD427574B18000FCF67 /* unicode_to_sentence_pinyin */; };
+		5B39ECD927574D69000FCF67 /* CLIngredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B39ECD827574D69000FCF67 /* CLIngredients.json */; };
 		5B4895F6268097510046AF31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4895F5268097510046AF31 /* AppDelegate.swift */; };
 		5B4895FD268097510046AF31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B4895FB268097510046AF31 /* Main.storyboard */; };
 		5B4895FF268097520046AF31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4895FE268097520046AF31 /* Assets.xcassets */; };
@@ -291,6 +304,19 @@
 		5B0DC71D26CA4AE400909BF2 /* CLHoneycombCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHoneycombCustomCell.swift; sourceTree = "<group>"; };
 		5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissionInterface.swift; sourceTree = "<group>"; };
 		5B1C366E26841FAF00D777EB /* CLPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissions.swift; sourceTree = "<group>"; };
+		5B39ECBA27574748000FCF67 /* CLIngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIngredientController.swift; sourceTree = "<group>"; };
+		5B39ECBF275747DE000FCF67 /* CLIngredientSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIngredientSearchView.swift; sourceTree = "<group>"; };
+		5B39ECC1275747DE000FCF67 /* CLIngredientRightTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIngredientRightTitleCell.swift; sourceTree = "<group>"; };
+		5B39ECC2275747DE000FCF67 /* CLIngredientRightTitleHead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIngredientRightTitleHead.swift; sourceTree = "<group>"; };
+		5B39ECC3275747DE000FCF67 /* CLIngredientLeftTitleHead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIngredientLeftTitleHead.swift; sourceTree = "<group>"; };
+		5B39ECC4275747DE000FCF67 /* CLIngredientSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIngredientSearchCell.swift; sourceTree = "<group>"; };
+		5B39ECC5275747DE000FCF67 /* CLIngredientLeftTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIngredientLeftTitleCell.swift; sourceTree = "<group>"; };
+		5B39ECCC27574A2B000FCF67 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		5B39ECCF27574AC0000FCF67 /* CLIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIngredients.swift; sourceTree = "<group>"; };
+		5B39ECD227574B18000FCF67 /* CLHanziToPinyin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLHanziToPinyin.swift; sourceTree = "<group>"; };
+		5B39ECD327574B18000FCF67 /* unicode_to_hanyu_pinyin */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = unicode_to_hanyu_pinyin; sourceTree = "<group>"; };
+		5B39ECD427574B18000FCF67 /* unicode_to_sentence_pinyin */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = unicode_to_sentence_pinyin; sourceTree = "<group>"; };
+		5B39ECD827574D69000FCF67 /* CLIngredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CLIngredients.json; sourceTree = "<group>"; };
 		5B4895F2268097510046AF31 /* CLDemo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CLDemo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4895F5268097510046AF31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B4895FC268097510046AF31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -655,6 +681,72 @@
 			path = CLPermissions;
 			sourceTree = "<group>";
 		};
+		5B39ECB92757471C000FCF67 /* CLIngredientController */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECBD275747B0000FCF67 /* Controller */,
+				5B39ECCE27574AAC000FCF67 /* Model */,
+				5B39ECBC275747AA000FCF67 /* View */,
+			);
+			path = CLIngredientController;
+			sourceTree = "<group>";
+		};
+		5B39ECBC275747AA000FCF67 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECBE275747DE000FCF67 /* CLSearchView */,
+				5B39ECC0275747DE000FCF67 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5B39ECBD275747B0000FCF67 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECBA27574748000FCF67 /* CLIngredientController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5B39ECBE275747DE000FCF67 /* CLSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECBF275747DE000FCF67 /* CLIngredientSearchView.swift */,
+			);
+			path = CLSearchView;
+			sourceTree = "<group>";
+		};
+		5B39ECC0275747DE000FCF67 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECC1275747DE000FCF67 /* CLIngredientRightTitleCell.swift */,
+				5B39ECC2275747DE000FCF67 /* CLIngredientRightTitleHead.swift */,
+				5B39ECC3275747DE000FCF67 /* CLIngredientLeftTitleHead.swift */,
+				5B39ECC4275747DE000FCF67 /* CLIngredientSearchCell.swift */,
+				5B39ECC5275747DE000FCF67 /* CLIngredientLeftTitleCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5B39ECCE27574AAC000FCF67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECD827574D69000FCF67 /* CLIngredients.json */,
+				5B39ECCF27574AC0000FCF67 /* CLIngredients.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5B39ECD127574B18000FCF67 /* CLHanziToPinyin */ = {
+			isa = PBXGroup;
+			children = (
+				5B39ECD227574B18000FCF67 /* CLHanziToPinyin.swift */,
+				5B39ECD327574B18000FCF67 /* unicode_to_hanyu_pinyin */,
+				5B39ECD427574B18000FCF67 /* unicode_to_sentence_pinyin */,
+			);
+			path = CLHanziToPinyin;
+			sourceTree = "<group>";
+		};
 		5B4895E9268097510046AF31 = {
 			isa = PBXGroup;
 			children = (
@@ -678,7 +770,8 @@
 			children = (
 				5B4895F5268097510046AF31 /* AppDelegate.swift */,
 				5B80042A268192D6000E39AC /* Tools */,
-				5BD4EAFA268184AB00B5284F /* Gategory */,
+				5BD4EAFA268184AB00B5284F /* Extension */,
+				5B39ECD127574B18000FCF67 /* CLHanziToPinyin */,
 				5B58C56A26846B34001736D7 /* CLRecorder */,
 				5B1C366C26841FAF00D777EB /* CLPermissions */,
 				5B76933726841E14008BB92B /* CLGCDTimer */,
@@ -1064,6 +1157,7 @@
 				5B7982A226A01EAE004A6473 /* CLDarkModeController */,
 				5B79829A26A00A0A004A6473 /* CLChangeFontSizeController */,
 				5B8004422681AD7E000E39AC /* CLChatContactController */,
+				5B39ECB92757471C000FCF67 /* CLIngredientController */,
 				5BC13527269E95B800D1CCB5 /* CLCustomTransitionController */,
 				5B8004452681ADE9000E39AC /* CLRecordController */,
 				5B8004482681ADFA000E39AC /* CLMealController */,
@@ -1100,7 +1194,7 @@
 			isa = PBXGroup;
 			children = (
 				5B800436268194CC000E39AC /* CLHomePageController.swift */,
-				5BC9911826C6581B0026B6FF /* CLHomePagemodel */,
+				5BC9911826C6581B0026B6FF /* Model */,
 				5B0003002681B30300F612ED /* View */,
 			);
 			path = CLHomePageController;
@@ -1273,13 +1367,13 @@
 			path = CLCustomTransitionController;
 			sourceTree = "<group>";
 		};
-		5BC9911826C6581B0026B6FF /* CLHomePagemodel */ = {
+		5BC9911826C6581B0026B6FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				5B9756A126C64FFA006C0841 /* HomePage.json */,
 				5BC9911626C658150026B6FF /* CLHomePageModel.swift */,
 			);
-			path = CLHomePagemodel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5BC9911926C65D780026B6FF /* CLHoneycombController */ = {
@@ -1557,9 +1651,10 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		5BD4EAFA268184AB00B5284F /* Gategory */ = {
+		5BD4EAFA268184AB00B5284F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5B39ECCC27574A2B000FCF67 /* NSMutableAttributedString+Extension.swift */,
 				5B80042226818C79000E39AC /* UISpringTimingParameters+Extension.swift */,
 				5BD4EAFB268184AB00B5284F /* UIColor+Extension.swift */,
 				5BD4EAFC268184AB00B5284F /* Int+Extension.swift */,
@@ -1583,7 +1678,7 @@
 				5BD4EB13268184AB00B5284F /* Array+Extension.swift */,
 				5B0DC71926CA39FE00909BF2 /* CGRect+Extension.swift */,
 			);
-			path = Gategory;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		5BD4EB2F268185A900B5284F /* CLFontManager */ = {
@@ -1942,6 +2037,7 @@
 				5B76931326841C70008BB92B /* data-left.json in Resources */,
 				5BD0439626832F980054F2B4 /* 13.gif in Resources */,
 				5BD0438B26832F980054F2B4 /* 4.gif in Resources */,
+				5B39ECD927574D69000FCF67 /* CLIngredients.json in Resources */,
 				5BD0436526832EAB0054F2B4 /* 3.mp4 in Resources */,
 				5BE6693926848DB90095F82E /* CLPopoverController.xib in Resources */,
 				5B4895FF268097520046AF31 /* Assets.xcassets in Resources */,
@@ -1955,12 +2051,14 @@
 				5BD0439226832F980054F2B4 /* 8.gif in Resources */,
 				5BD0436926832EAB0054F2B4 /* 10.mp4 in Resources */,
 				5B9756A226C64FFA006C0841 /* HomePage.json in Resources */,
+				5B39ECD727574B18000FCF67 /* unicode_to_sentence_pinyin in Resources */,
 				5BD0435F26832EAB0054F2B4 /* 7.mp4 in Resources */,
 				5BD0436126832EAB0054F2B4 /* 4.mp4 in Resources */,
 				5BD0436A26832EAB0054F2B4 /* 12.mp4 in Resources */,
 				5B4895FD268097510046AF31 /* Main.storyboard in Resources */,
 				5BD4EB752681872D00B5284F /* loading.json in Resources */,
 				5BD0436226832EAB0054F2B4 /* 5.mp4 in Resources */,
+				5B39ECD627574B18000FCF67 /* unicode_to_hanyu_pinyin in Resources */,
 				5BD0438F26832F980054F2B4 /* 2.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2040,6 +2138,7 @@
 				5B76932026841C70008BB92B /* CKDChatEmojiTextCell.swift in Sources */,
 				5BD4EB15268184AB00B5284F /* Int+Extension.swift in Sources */,
 				5BC9912126C65E3A0026B6FF /* CLHoneycombCollectionViewCell.swift in Sources */,
+				5B39ECCA275747DE000FCF67 /* CLIngredientSearchCell.swift in Sources */,
 				5B80043F268194FD000E39AC /* CLCellItemProtocol.swift in Sources */,
 				5BD4EB702681872D00B5284F /* CLDataPickerTitleView.swift in Sources */,
 				5BD0437026832EAB0054F2B4 /* CLVideoOperation.swift in Sources */,
@@ -2062,6 +2161,7 @@
 				5BD4EB19268184AB00B5284F /* UIView+Extension.swift in Sources */,
 				5B1C367026841FAF00D777EB /* CLPermissions.swift in Sources */,
 				5B76932226841C70008BB92B /* CLChatEmojiView.swift in Sources */,
+				5B39ECD027574AC0000FCF67 /* CLIngredients.swift in Sources */,
 				5BD0442626833C7C0054F2B4 /* CLStartsView.swift in Sources */,
 				5B0DC70A26CA34C600909BF2 /* CLHoneycombController.swift in Sources */,
 				5B0DC71626CA378900909BF2 /* CLHoneycombDelegate.swift in Sources */,
@@ -2087,6 +2187,7 @@
 				5BD0442026833B6C0054F2B4 /* CLMarqueeView.swift in Sources */,
 				5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
+				5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5B76933626841E11008BB92B /* CLGCDTimer.swift in Sources */,
 				5B0CDB0926B7940100B45AD1 /* HexagonalPattern.swift in Sources */,
 				5BD4EB1E268184AB00B5284F /* URL+Extension.swift in Sources */,
@@ -2105,6 +2206,7 @@
 				5BD4EB25268184AB00B5284F /* Data+Extension.swift in Sources */,
 				5BD0434526832D3F0054F2B4 /* CLBreakPointResumeItem.swift in Sources */,
 				5B7982A426A01ECA004A6473 /* CLDarkModeController.swift in Sources */,
+				5B39ECD527574B18000FCF67 /* CLHanziToPinyin.swift in Sources */,
 				5BD4EB662681872D00B5284F /* CLFlopPrizeView.swift in Sources */,
 				5B76932526841C70008BB92B /* CLChatEmojTextItem.swift in Sources */,
 				5B80042726818E05000E39AC /* CLNavigationController.swift in Sources */,
@@ -2133,6 +2235,7 @@
 				5BD4EB722681872D00B5284F /* CLOnePickerView.swift in Sources */,
 				5B76931926841C70008BB92B /* CLChatInputToolBar.swift in Sources */,
 				5BE6694026848E280095F82E /* CLRotatingPictureViewController.swift in Sources */,
+				5B39ECC8275747DE000FCF67 /* CLIngredientRightTitleHead.swift in Sources */,
 				5B80043026819307000E39AC /* CLTabBarController.swift in Sources */,
 				5B76933126841C70008BB92B /* CLChatTipsItem.swift in Sources */,
 				5B8004472681ADF0000E39AC /* CLRecordController.swift in Sources */,
@@ -2164,12 +2267,14 @@
 				5BD043A42683302E0054F2B4 /* CLDrawerSlideAnimation.swift in Sources */,
 				5BD4EB31268185A900B5284F /* CLFontManager.swift in Sources */,
 				5B0DC71426CA377300909BF2 /* CLHoneycombDataSource.swift in Sources */,
+				5B39ECC7275747DE000FCF67 /* CLIngredientRightTitleCell.swift in Sources */,
 				5BD4EB732681872D00B5284F /* CLPopupOneInputController.swift in Sources */,
 				5BD4EB1A268184AB00B5284F /* UIImage+Extension.swift in Sources */,
 				5BD4EB6D2681872D00B5284F /* CLPopupDataPickerController.swift in Sources */,
 				5BD0447826833D240054F2B4 /* CLPopupController.swift in Sources */,
 				5BD4EB6A2681872D00B5284F /* CLPopupMomentumController.swift in Sources */,
 				5BD4EB1D268184AB00B5284F /* NSDecimalNumber+Extension.swift in Sources */,
+				5B39ECC6275747DE000FCF67 /* CLIngredientSearchView.swift in Sources */,
 				5BE6691026848BFF0095F82E /* CLTextView.swift in Sources */,
 				5BE6692526848CEC0095F82E /* CLWaveController.swift in Sources */,
 				5BD4EB6C2681872D00B5284F /* CLYearMonthDayHourMinuteDataPickerView.swift in Sources */,
@@ -2213,15 +2318,18 @@
 				5B76933326841C70008BB92B /* CLChatItem.swift in Sources */,
 				5B8004442681ADD9000E39AC /* CLChatContactController.swift in Sources */,
 				5BA719B626CA608F00368316 /* CLHoneycombContentView.swift in Sources */,
+				5B39ECC9275747DE000FCF67 /* CLIngredientLeftTitleHead.swift in Sources */,
 				5B4895F6268097510046AF31 /* AppDelegate.swift in Sources */,
 				5BD4EB632681872D00B5284F /* CLPopupFoodPickerContentCell.swift in Sources */,
 				5B76931726841C70008BB92B /* CLChatRecordTimeView.swift in Sources */,
+				5B39ECBB27574748000FCF67 /* CLIngredientController.swift in Sources */,
 				5BD4EB5D2681872D00B5284F /* CLPopupTipsController.swift in Sources */,
 				5BD0434626832D3F0054F2B4 /* CLBreakPointResumeController.swift in Sources */,
 				5BD0442F26833CD60054F2B4 /* CLTagsItem.swift in Sources */,
 				5B8397F826A15A0D00FD1D3C /* CLBubbleTransitionController.swift in Sources */,
 				5BD0442326833C670054F2B4 /* CLStartsController.swift in Sources */,
 				5B76931E26841C70008BB92B /* CLChatPhotoCellButton.swift in Sources */,
+				5B39ECCB275747DE000FCF67 /* CLIngredientLeftTitleCell.swift in Sources */,
 				5BD4EAF9268183FE00B5284F /* CLController.swift in Sources */,
 				5B80042526818DD0000E39AC /* CLTwoSidedView.swift in Sources */,
 				5BE66821268475C90095F82E /* CLFlowLayout.swift in Sources */,

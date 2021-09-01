@@ -92,7 +92,6 @@
     
     //创建CAShapeLayer进行遮盖
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.path = endCycle.CGPath;
     //将maskLayer作为toView的遮盖
     toView.layer.mask = maskLayer;
     //创建路径动画
