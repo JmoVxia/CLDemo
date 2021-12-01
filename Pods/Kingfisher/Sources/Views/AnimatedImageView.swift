@@ -68,7 +68,6 @@ let KFRunLoopModeCommon = RunLoop.Mode.common
 /// Kingfisher supports setting GIF animated data to either `UIImageView` and `AnimatedImageView` out of box. So
 /// it would be fairly easy to switch between them.
 open class AnimatedImageView: UIImageView {
-    
     /// Proxy object for preventing a reference cycle between the `CADDisplayLink` and `AnimatedImageView`.
     class TargetProxy {
         private weak var target: AnimatedImageView?
@@ -228,11 +227,7 @@ open class AnimatedImageView: UIImageView {
     }
     
     override open func display(_ layer: CALayer) {
-        if let currentFrame = animator?.currentFrameImage {
-            layer.contents = currentFrame.cgImage
-        } else {
-            layer.contents = image?.cgImage
-        }
+        layer.contents = animator?.currentFrameImage?.cgImage ?? image?.cgImage
     }
     
     override open func didMoveToWindow() {
@@ -574,12 +569,19 @@ extension AnimatedImageView {
         }
 
         private func incrementCurrentFrameIndex() {
+            let wasLastFrame = isLastFrame
             currentFrameIndex = increment(frameIndex: currentFrameIndex)
             if isLastFrame {
                 currentRepeatCount += 1
                 if isReachMaxRepeatCount {
                     isFinished = true
+
+                    // Notify the delegate here because the animation is stopping.
+                    delegate?.animator(self, didPlayAnimationLoops: currentRepeatCount)
                 }
+            } else if wasLastFrame {
+
+                // Notify the delegate that the loop completed
                 delegate?.animator(self, didPlayAnimationLoops: currentRepeatCount)
             }
         }

@@ -8,7 +8,30 @@
 
 import UIKit
 
-protocol CLCellProtocol {
-    ///设置item
-    func setItem(_ item: CLCellItemProtocol)
+
+
+protocol CLCellBaseProtocol {
+    func setCellItem(_ item: CLCellItemProtocol, indexPath: IndexPath)
+}
+
+protocol CLCellProtocol: CLCellBaseProtocol where Self: UITableViewCell {
+    associatedtype T: CLCellItemProtocol
+
+    var item: T? { set get }
+    
+    func setItem(_ item: T, indexPath: IndexPath)
+}
+extension CLCellProtocol {
+    var item: T? {
+        set {
+        }
+        get {
+            return nil
+        }
+    }
+    func setCellItem(_ item: CLCellItemProtocol, indexPath: IndexPath) {
+        guard let item = item as? Self.T else { return }
+        self.item = item
+        setItem(item, indexPath: indexPath)
+    }
 }

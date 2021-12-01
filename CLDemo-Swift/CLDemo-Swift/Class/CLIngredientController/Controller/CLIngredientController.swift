@@ -22,7 +22,7 @@ class CLIngredientController: CLController {
     }
 
     deinit {}
-
+    
     private lazy var leftTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.scrollsToTop = false

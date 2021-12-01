@@ -28,8 +28,7 @@ private extension CLTitleCell {
     }
 }
 extension CLTitleCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let item = item as? CLTitleCellItem else { return }
+    func setItem(_ item: CLTitleCellItem, indexPath: IndexPath) {
         textLabel?.text = item.title
         accessoryType = item.accessoryType
     }

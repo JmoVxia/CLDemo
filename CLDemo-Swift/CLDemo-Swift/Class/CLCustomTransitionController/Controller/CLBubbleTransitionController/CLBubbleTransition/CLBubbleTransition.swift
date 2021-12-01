@@ -53,7 +53,7 @@ extension CLBubbleTransition: UIViewControllerAnimatedTransitioning {
             
             UIView.animate(withDuration: duration, animations: {
                 bubble.transform = .identity
-                toControllerView.transform = CGAffineTransform.identity
+                toControllerView.transform = .identity
                 toControllerView.alpha = 1
                 toControllerView.center = originalCenter
             }, completion: { (_) in

@@ -207,6 +207,9 @@
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.contentOffset = CGPointMake(0, 0);
     _collectionView.contentSize = CGSizeMake(self.models.count * (self.view.tz_width + 20), 0);
+    if (@available(iOS 11, *)) {
+        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[TZPhotoPreviewCell class] forCellWithReuseIdentifier:@"TZPhotoPreviewCell"];
     [_collectionView registerClass:[TZVideoPreviewCell class] forCellWithReuseIdentifier:@"TZVideoPreviewCell"];
@@ -308,6 +311,10 @@
 #pragma mark - Click Event
 
 - (void)select:(UIButton *)selectButton {
+    [self select:selectButton refreshCount:YES];
+}
+
+- (void)select:(UIButton *)selectButton refreshCount:(BOOL)refreshCount {
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     TZAssetModel *model = _models[self.currentIndex];
     if (!selectButton.isSelected) {
@@ -364,7 +371,9 @@
         }
     }
     model.isSelected = !selectButton.isSelected;
-    [self refreshNaviBarAndBottomBarState];
+    if (refreshCount) {
+        [self refreshNaviBarAndBottomBarState];
+    }
     if (model.isSelected) {
         [UIView showOscillatoryAnimationWithLayer:selectButton.imageView.layer type:TZOscillatoryAnimationToBigger];
     }
@@ -402,7 +411,7 @@
         if ([[TZImageManager manager] isAssetCannotBeSelected:model.asset]) {
             return;
         }
-        [self select:_selectButton];
+        [self select:_selectButton refreshCount:NO];
     }
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.currentIndex inSection:0];
     TZPhotoPreviewCell *cell = (TZPhotoPreviewCell *)[_collectionView cellForItemAtIndexPath:indexPath];

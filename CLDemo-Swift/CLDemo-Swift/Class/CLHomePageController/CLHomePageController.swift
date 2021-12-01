@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 //MARK: - JmoVxia---类-属性
 class CLHomePageController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

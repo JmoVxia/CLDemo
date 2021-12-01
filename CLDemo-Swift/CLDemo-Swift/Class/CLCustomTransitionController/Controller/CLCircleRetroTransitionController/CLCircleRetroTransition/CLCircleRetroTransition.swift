@@ -22,14 +22,14 @@ extension CLCircleRetroTransition: UIViewControllerAnimatedTransitioning {
         containerView.addSubview(to.view)
         containerView.addSubview(from.view)
         
-        let radius = sqrt(pow(from.view.bounds.size.height / 2, 2) + pow(from.view.bounds.size.width / 2, 2))
-        let circlePathStart = UIBezierPath(arcCenter: CGPoint(x: from.view.bounds.size.width / 2,y: from.view.bounds.size.height / 2), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
-        let circlePathEnd = UIBezierPath(arcCenter: CGPoint(x: from.view.bounds.size.width / 2,y: from.view.bounds.size.height / 2), radius: CGFloat(1), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        let radius = sqrt(pow(from.view.bounds.height / 2, 2) + pow(from.view.bounds.width / 2, 2))
+        let circlePathStart = UIBezierPath(arcCenter: CGPoint(x: from.view.bounds.width / 2,y: from.view.bounds.height / 2), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        let circlePathEnd = UIBezierPath(arcCenter: CGPoint(x: from.view.bounds.width / 2,y: from.view.bounds.height / 2), radius: CGFloat(1), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePathStart.cgPath
-        shapeLayer.bounds = CGRect.init(x: 0, y: 0, width: from.view.bounds.size.width, height: from.view.bounds.size.height)
-        shapeLayer.position = CGPoint(x: from.view.bounds.size.width / 2, y: from.view.bounds.size.height / 2)
+        shapeLayer.bounds = CGRect.init(x: 0, y: 0, width: from.view.bounds.width, height: from.view.bounds.height)
+        shapeLayer.position = CGPoint(x: from.view.bounds.width / 2, y: from.view.bounds.height / 2)
         
         from.view.layer.mask = shapeLayer
         

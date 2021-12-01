@@ -65,12 +65,7 @@ extension CLChatTipsCell {
     }
 }
 extension CLChatTipsCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let tipsItem = item as? CLChatTipsItem else {
-            return
-        }
-        self.item = nil
-        self.item = tipsItem
-        titleLabel.text = tipsItem.text
+    func setItem(_ item: CLChatTipsItem, indexPath: IndexPath) {
+        titleLabel.text = item.text
     }
 }

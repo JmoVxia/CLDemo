@@ -34,8 +34,6 @@
 		5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECCC27574A2B000FCF67 /* NSMutableAttributedString+Extension.swift */; };
 		5B39ECD027574AC0000FCF67 /* CLIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECCF27574AC0000FCF67 /* CLIngredients.swift */; };
 		5B39ECD527574B18000FCF67 /* CLHanziToPinyin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39ECD227574B18000FCF67 /* CLHanziToPinyin.swift */; };
-		5B39ECD627574B18000FCF67 /* unicode_to_hanyu_pinyin in Resources */ = {isa = PBXBuildFile; fileRef = 5B39ECD327574B18000FCF67 /* unicode_to_hanyu_pinyin */; };
-		5B39ECD727574B18000FCF67 /* unicode_to_sentence_pinyin in Resources */ = {isa = PBXBuildFile; fileRef = 5B39ECD427574B18000FCF67 /* unicode_to_sentence_pinyin */; };
 		5B39ECD927574D69000FCF67 /* CLIngredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B39ECD827574D69000FCF67 /* CLIngredients.json */; };
 		5B4895F6268097510046AF31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4895F5268097510046AF31 /* AppDelegate.swift */; };
 		5B4895FD268097510046AF31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B4895FB268097510046AF31 /* Main.storyboard */; };
@@ -109,6 +107,13 @@
 		5B8004472681ADF0000E39AC /* CLRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8004462681ADF0000E39AC /* CLRecordController.swift */; };
 		5B80044A2681AE02000E39AC /* CLMealController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8004492681AE02000E39AC /* CLMealController.swift */; };
 		5B80044D2681AE28000E39AC /* CLMeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B80044C2681AE28000E39AC /* CLMeController.swift */; };
+		5B81E9A127575D0A009DCB3E /* CLHanziPinyinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81E99F27575D0A009DCB3E /* CLHanziPinyinController.swift */; };
+		5B81E9A227575D0A009DCB3E /* CLHanziPinyinController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B81E9A027575D0A009DCB3E /* CLHanziPinyinController.xib */; };
+		5B81E9A92757618B009DCB3E /* CLActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81E9A82757618B009DCB3E /* CLActivityButton.swift */; };
+		5B81E9C02758589D009DCB3E /* sentencepinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B81E9BE2758589D009DCB3E /* sentencepinyin.txt */; };
+		5B81E9C12758589D009DCB3E /* hanyupinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B81E9BF2758589D009DCB3E /* hanyupinyin.txt */; };
+		5B81E9CF27585FDC009DCB3E /* sentencepinyin in Resources */ = {isa = PBXBuildFile; fileRef = 5B81E9CD27585FDC009DCB3E /* sentencepinyin */; };
+		5B81E9D327586A02009DCB3E /* hanyupinyin in Resources */ = {isa = PBXBuildFile; fileRef = 5B81E9D227586A02009DCB3E /* hanyupinyin */; };
 		5B8397F826A15A0D00FD1D3C /* CLBubbleTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8397F726A15A0D00FD1D3C /* CLBubbleTransitionController.swift */; };
 		5B8397FC26A15BAC00FD1D3C /* CLCircleRetroTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8397FB26A15BAC00FD1D3C /* CLCircleRetroTransitionController.swift */; };
 		5B8397FF26A15BEA00FD1D3C /* CLCircleRetroTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8397FE26A15BEA00FD1D3C /* CLCircleRetroTransition.swift */; };
@@ -314,8 +319,6 @@
 		5B39ECCC27574A2B000FCF67 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		5B39ECCF27574AC0000FCF67 /* CLIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIngredients.swift; sourceTree = "<group>"; };
 		5B39ECD227574B18000FCF67 /* CLHanziToPinyin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLHanziToPinyin.swift; sourceTree = "<group>"; };
-		5B39ECD327574B18000FCF67 /* unicode_to_hanyu_pinyin */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = unicode_to_hanyu_pinyin; sourceTree = "<group>"; };
-		5B39ECD427574B18000FCF67 /* unicode_to_sentence_pinyin */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = unicode_to_sentence_pinyin; sourceTree = "<group>"; };
 		5B39ECD827574D69000FCF67 /* CLIngredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CLIngredients.json; sourceTree = "<group>"; };
 		5B4895F2268097510046AF31 /* CLDemo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CLDemo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4895F5268097510046AF31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -394,6 +397,13 @@
 		5B8004462681ADF0000E39AC /* CLRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRecordController.swift; sourceTree = "<group>"; };
 		5B8004492681AE02000E39AC /* CLMealController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMealController.swift; sourceTree = "<group>"; };
 		5B80044C2681AE28000E39AC /* CLMeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMeController.swift; sourceTree = "<group>"; };
+		5B81E99F27575D0A009DCB3E /* CLHanziPinyinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHanziPinyinController.swift; sourceTree = "<group>"; };
+		5B81E9A027575D0A009DCB3E /* CLHanziPinyinController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLHanziPinyinController.xib; sourceTree = "<group>"; };
+		5B81E9A82757618B009DCB3E /* CLActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLActivityButton.swift; sourceTree = "<group>"; };
+		5B81E9BE2758589D009DCB3E /* sentencepinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sentencepinyin.txt; sourceTree = "<group>"; };
+		5B81E9BF2758589D009DCB3E /* hanyupinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hanyupinyin.txt; sourceTree = "<group>"; };
+		5B81E9CD27585FDC009DCB3E /* sentencepinyin */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sentencepinyin; sourceTree = "<group>"; };
+		5B81E9D227586A02009DCB3E /* hanyupinyin */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = hanyupinyin; sourceTree = "<group>"; };
 		5B8397F726A15A0D00FD1D3C /* CLBubbleTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBubbleTransitionController.swift; sourceTree = "<group>"; };
 		5B8397FB26A15BAC00FD1D3C /* CLCircleRetroTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCircleRetroTransitionController.swift; sourceTree = "<group>"; };
 		5B8397FE26A15BEA00FD1D3C /* CLCircleRetroTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCircleRetroTransition.swift; sourceTree = "<group>"; };
@@ -740,9 +750,9 @@
 		5B39ECD127574B18000FCF67 /* CLHanziToPinyin */ = {
 			isa = PBXGroup;
 			children = (
+				5B81E9C7275858F4009DCB3E /* ArchivedData */,
+				5B81E9C6275858EA009DCB3E /* TXT */,
 				5B39ECD227574B18000FCF67 /* CLHanziToPinyin.swift */,
-				5B39ECD327574B18000FCF67 /* unicode_to_hanyu_pinyin */,
-				5B39ECD427574B18000FCF67 /* unicode_to_sentence_pinyin */,
 			);
 			path = CLHanziToPinyin;
 			sourceTree = "<group>";
@@ -899,7 +909,6 @@
 		5B7692DF26841C70008BB92B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5BE6680C268470D60095F82E /* CLBroadcastViewController */,
 				5B7692E026841C70008BB92B /* Tableview */,
 				5B7692E226841C70008BB92B /* CLChatInputToolBar */,
 				5B7692FB26841C70008BB92B /* Cell */,
@@ -1155,6 +1164,7 @@
 				5BC9911926C65D780026B6FF /* CLHoneycombController */,
 				5B0CDAFB26B792DB00B45AD1 /* CLiWatchAnimationController */,
 				5B7982A226A01EAE004A6473 /* CLDarkModeController */,
+				5B81E99A27575B0E009DCB3E /* CLHanziPinyinController */,
 				5B79829A26A00A0A004A6473 /* CLChangeFontSizeController */,
 				5B8004422681AD7E000E39AC /* CLChatContactController */,
 				5B39ECB92757471C000FCF67 /* CLIngredientController */,
@@ -1169,6 +1179,7 @@
 				5BE6690B26848BE10095F82E /* CLTextViewViewController */,
 				5BE668F6268489940095F82E /* CLPasswordController */,
 				5BE668DE268488740095F82E /* CLRotateAnimationSwiftController */,
+				5BE6680C268470D60095F82E /* CLBroadcastViewController */,
 				5B7692D726841C70008BB92B /* CLChatController */,
 				5B7692D226841ABD008BB92B /* CLFlipController */,
 				5B7692AC26841445008BB92B /* CLVernierCaliperController */,
@@ -1264,6 +1275,42 @@
 				5B80044C2681AE28000E39AC /* CLMeController.swift */,
 			);
 			path = CLMeController;
+			sourceTree = "<group>";
+		};
+		5B81E99A27575B0E009DCB3E /* CLHanziPinyinController */ = {
+			isa = PBXGroup;
+			children = (
+				5B81E9A72757617F009DCB3E /* View */,
+				5B81E99F27575D0A009DCB3E /* CLHanziPinyinController.swift */,
+				5B81E9A027575D0A009DCB3E /* CLHanziPinyinController.xib */,
+			);
+			path = CLHanziPinyinController;
+			sourceTree = "<group>";
+		};
+		5B81E9A72757617F009DCB3E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5B81E9A82757618B009DCB3E /* CLActivityButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5B81E9C6275858EA009DCB3E /* TXT */ = {
+			isa = PBXGroup;
+			children = (
+				5B81E9BF2758589D009DCB3E /* hanyupinyin.txt */,
+				5B81E9BE2758589D009DCB3E /* sentencepinyin.txt */,
+			);
+			path = TXT;
+			sourceTree = "<group>";
+		};
+		5B81E9C7275858F4009DCB3E /* ArchivedData */ = {
+			isa = PBXGroup;
+			children = (
+				5B81E9D227586A02009DCB3E /* hanyupinyin */,
+				5B81E9CD27585FDC009DCB3E /* sentencepinyin */,
+			);
+			path = ArchivedData;
 			sourceTree = "<group>";
 		};
 		5B8397F526A159C700FD1D3C /* CLBubbleTransition */ = {
@@ -2022,10 +2069,12 @@
 				5BD0438E26832F980054F2B4 /* 6.gif in Resources */,
 				5BD0436B26832EAB0054F2B4 /* 13.mp4 in Resources */,
 				5BD0436D26832EAB0054F2B4 /* 9.mp4 in Resources */,
+				5B81E9A227575D0A009DCB3E /* CLHanziPinyinController.xib in Resources */,
 				5BD0436626832EAB0054F2B4 /* 14.mp4 in Resources */,
 				5BAAC0012681B65200C2F609 /* Localizable.strings in Resources */,
 				5BD0436026832EAB0054F2B4 /* 6.mp4 in Resources */,
 				5BD0436726832EAB0054F2B4 /* 15.mp4 in Resources */,
+				5B81E9D327586A02009DCB3E /* hanyupinyin in Resources */,
 				5BD0439826832F980054F2B4 /* 10.gif in Resources */,
 				5BD0438C26832F980054F2B4 /* 5.gif in Resources */,
 				5BD4EB612681872D00B5284F /* food.json in Resources */,
@@ -2036,6 +2085,7 @@
 				5BD0436826832EAB0054F2B4 /* 11.mp4 in Resources */,
 				5B76931326841C70008BB92B /* data-left.json in Resources */,
 				5BD0439626832F980054F2B4 /* 13.gif in Resources */,
+				5B81E9CF27585FDC009DCB3E /* sentencepinyin in Resources */,
 				5BD0438B26832F980054F2B4 /* 4.gif in Resources */,
 				5B39ECD927574D69000FCF67 /* CLIngredients.json in Resources */,
 				5BD0436526832EAB0054F2B4 /* 3.mp4 in Resources */,
@@ -2046,19 +2096,19 @@
 				5B76931126841C70008BB92B /* recoredWave_dk.json in Resources */,
 				5B76931426841C70008BB92B /* data-right.json in Resources */,
 				5BD0439426832F980054F2B4 /* 14.gif in Resources */,
+				5B81E9C02758589D009DCB3E /* sentencepinyin.txt in Resources */,
 				5B76931226841C70008BB92B /* send_timeout.json in Resources */,
 				5BD0439026832F980054F2B4 /* 3.gif in Resources */,
 				5BD0439226832F980054F2B4 /* 8.gif in Resources */,
 				5BD0436926832EAB0054F2B4 /* 10.mp4 in Resources */,
 				5B9756A226C64FFA006C0841 /* HomePage.json in Resources */,
-				5B39ECD727574B18000FCF67 /* unicode_to_sentence_pinyin in Resources */,
 				5BD0435F26832EAB0054F2B4 /* 7.mp4 in Resources */,
 				5BD0436126832EAB0054F2B4 /* 4.mp4 in Resources */,
+				5B81E9C12758589D009DCB3E /* hanyupinyin.txt in Resources */,
 				5BD0436A26832EAB0054F2B4 /* 12.mp4 in Resources */,
 				5B4895FD268097510046AF31 /* Main.storyboard in Resources */,
 				5BD4EB752681872D00B5284F /* loading.json in Resources */,
 				5BD0436226832EAB0054F2B4 /* 5.mp4 in Resources */,
-				5B39ECD627574B18000FCF67 /* unicode_to_hanyu_pinyin in Resources */,
 				5BD0438F26832F980054F2B4 /* 2.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2240,6 +2290,7 @@
 				5B76933126841C70008BB92B /* CLChatTipsItem.swift in Sources */,
 				5B8004472681ADF0000E39AC /* CLRecordController.swift in Sources */,
 				5BD0438A26832F980054F2B4 /* CLGifPlayer.swift in Sources */,
+				5B81E9A127575D0A009DCB3E /* CLHanziPinyinController.swift in Sources */,
 				5BD4EB672681872D00B5284F /* CLPopupFlopController.swift in Sources */,
 				5BC9911B26C65DBD0026B6FF /* CLHoneycombCollectionViewController.swift in Sources */,
 				5BD4EB602681872D00B5284F /* CLPopupFoodPickerModel.swift in Sources */,
@@ -2302,6 +2353,7 @@
 				5B83980126A15C0900FD1D3C /* CLCABasicAnimation.swift in Sources */,
 				5B7692CC26841641008BB92B /* CLRecordVernierCaliperCell.swift in Sources */,
 				5BD4EB1F268184AB00B5284F /* AutoScale+Extension.swift in Sources */,
+				5B81E9A92757618B009DCB3E /* CLActivityButton.swift in Sources */,
 				5B7692D126841797008BB92B /* CLVernierCaliperController.swift in Sources */,
 				5B79829F26A00B34004A6473 /* CLSubsectionSlider.swift in Sources */,
 				5B0DC71826CA37B600909BF2 /* CLHoneycombCell.swift in Sources */,

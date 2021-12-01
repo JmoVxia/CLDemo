@@ -514,10 +514,11 @@
 		5BD04286268324C10054F2B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5BD04287268324C10054F2B4 /* BankDataModel.m */,
-				5BD04288268324C10054F2B4 /* BankModel.m */,
+				5BD0433226832CA00054F2B4 /* bank.json */,
 				5BD04289268324C10054F2B4 /* BankDataModel.h */,
+				5BD04287268324C10054F2B4 /* BankDataModel.m */,
 				5BD0428A268324C10054F2B4 /* BankModel.h */,
+				5BD04288268324C10054F2B4 /* BankModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -699,7 +700,6 @@
 			isa = PBXGroup;
 			children = (
 				5BD0433126832CA00054F2B4 /* 一年.json */,
-				5BD0433226832CA00054F2B4 /* bank.json */,
 				5BD0433326832CA00054F2B4 /* 一月.json */,
 				5BD0433426832CA00054F2B4 /* 一周.json */,
 				5BD0433526832CA00054F2B4 /* 三月.json */,

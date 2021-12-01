@@ -42,8 +42,7 @@ class CLPlayVideoCell: UITableViewCell {
     }
 }
 extension CLPlayVideoCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let item = item as? CLPlayVideoitem else { return }
+    func setItem(_ item: CLPlayVideoitem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)

@@ -9,7 +9,6 @@
 import UIKit
 
 class CLRecordVernierCaliperCell: UITableViewCell {
-    private var item: CLRecordVernierCaliperItem?
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(16)
@@ -93,11 +92,7 @@ extension CLRecordVernierCaliperCell {
     }
 }
 extension CLRecordVernierCaliperCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let item = item as? CLRecordVernierCaliperItem else {
-            return
-        }
-        self.item = item
+    func setItem(_ item: CLRecordVernierCaliperItem, indexPath: IndexPath) {
         nameLabel.text = item.title
         unitLabel.text = "(\(item.unit))"
         valueBackgroundView.snp.updateConstraints { (make) in

@@ -26,8 +26,6 @@
     
     self.navigationItem.title = NSLocalizedString(@"课程", nil);
     
-    
-    
     _chartView = [[CLChartView alloc] initWithFrame:CGRectMake(0, 99, self.view.cl_width, 250)];
     [self.view addSubview:_chartView];
     _chartView.delegate = self;

@@ -28,7 +28,6 @@ extension CLCellItemProtocol {
             return nil
         }
         set {
-            
         }
     }
     var willDisplayCallback: ((IndexPath) -> ())? {
@@ -36,7 +35,6 @@ extension CLCellItemProtocol {
             return nil
         }
         set {
-            
         }
     }
     var didSelectCellCallback: ((IndexPath) -> ())? {
@@ -44,7 +42,6 @@ extension CLCellItemProtocol {
             return nil
         }
         set {
-            
         }
     }
     func dequeueReusableCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
@@ -56,7 +53,7 @@ extension CLCellItemProtocol {
         }else {
             tableViewCell = cellClass.init(style: .default, reuseIdentifier: identifier)
         }
-        (tableViewCell as? CLCellProtocol)?.setItem(self)
+        (tableViewCell as? CLCellBaseProtocol)?.setCellItem(self, indexPath: indexPath)
         return tableViewCell
     }
     ///高度

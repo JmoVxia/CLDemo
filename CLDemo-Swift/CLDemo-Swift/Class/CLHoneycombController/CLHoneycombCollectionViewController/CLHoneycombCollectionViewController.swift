@@ -84,4 +84,7 @@ extension CLHoneycombCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? CLHoneycombCollectionViewCell)?.animation()
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("===== \(indexPath.row) =====")
+    }
 }

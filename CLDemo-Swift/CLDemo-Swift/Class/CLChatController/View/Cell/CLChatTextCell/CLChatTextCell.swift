@@ -73,18 +73,13 @@ extension CLChatTextCell {
     }
 }
 extension CLChatTextCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let textItem = item as? CLChatTextItem else {
-            return
-        }
-        self.item = nil
-        self.item = textItem
-        titleLabel.textColor = textItem.isFromMyself ? .white : .black
-        titleLabel.attributedText = textItem.attributedText
+    func setItem(_ item: CLChatTextItem, indexPath: IndexPath) {
+        titleLabel.textColor = item.isFromMyself ? .white : .black
+        titleLabel.attributedText = item.attributedText
         titleLabel.sizeToFit()
         
-        bubbleImageView.image = textItem.isFromMyself ? rightBubbleImage : leftBubbleImage
-        remakeConstraints(isFromMyself: textItem.isFromMyself)
+        bubbleImageView.image = item.isFromMyself ? rightBubbleImage : leftBubbleImage
+        remakeConstraints(isFromMyself: item.isFromMyself)
     }
 }
 

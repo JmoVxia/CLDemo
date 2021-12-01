@@ -93,12 +93,7 @@ extension CLChatVoiceCell {
     }
 }
 extension CLChatVoiceCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let item = item as? CLChatVoiceItem else {
-            return
-        }
-        self.item = item
-        
+    func setItem(_ item: CLChatVoiceItem, indexPath: IndexPath) {
         leftPlayAnimation.isHidden = item.isFromMyself
         rightPlayAnimation.isHidden = !item.isFromMyself
         bubbleImageView.image = item.isFromMyself ? rightBubbleImage : leftBubbleImage

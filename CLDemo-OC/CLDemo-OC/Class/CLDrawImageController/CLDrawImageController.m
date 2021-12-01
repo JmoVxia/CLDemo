@@ -21,9 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"绘制头像", nil);
-    CGFloat width = 100;
-    CGFloat height = 100;
-    self.imageView.frame = CGRectMake(199, 199, width, height);
+    CGFloat width = 300;
+    CGFloat height = 300;
+    self.imageView.frame = CGRectMake(0, 0, width, height);
+    self.imageView.center = self.view.center;
     [self.view addSubview:self.imageView];
     
     // 异步子线程

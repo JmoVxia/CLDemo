@@ -99,8 +99,10 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        tipsBackgroundView.layer.cornerRadius = tipsBackgroundView.bounds.height * 0.5
-        updateSeletedNumberOffset()
+        DispatchQueue.main.async {
+            self.tipsBackgroundView.layer.cornerRadius = self.tipsBackgroundView.bounds.height * 0.5
+            self.updateSeletedNumberOffset()
+        }
     }
 }
 extension CLChatPhotoAlbumCell {

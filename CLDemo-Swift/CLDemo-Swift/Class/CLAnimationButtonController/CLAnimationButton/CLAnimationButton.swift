@@ -211,7 +211,7 @@ class CLAnimationButton: UIControl {
             }
         }
     }
-    var duration: Double = 1.0 {
+    var duration: Double = 1.5 {
         didSet {
             circleTransformAnimation.duration = 0.333 * duration // 0.0333 * 10
             circleMaskTransformAnimation.duration = 0.333 * duration // 0.0333 * 10

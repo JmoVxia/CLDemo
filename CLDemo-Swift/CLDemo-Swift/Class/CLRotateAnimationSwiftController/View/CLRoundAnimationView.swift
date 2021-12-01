@@ -69,7 +69,7 @@ extension CLRoundAnimationView {
     func startAnimation() -> Void {
         animation()
         layer.addSublayer(backgroundLayer)
-        layer.addSublayer(animationLayer)
+        backgroundLayer.addSublayer(animationLayer)
     }
     ///停止动画
     func stopAnimation() -> Void {
@@ -118,7 +118,6 @@ extension CLRoundAnimationView {
         animationLayer.frame = layer.bounds
         animationLayer.mask = shapeLayer(lineWidth: configure.inLineWidth, start: configure.strokeStart, end: configure.strokeEnd, outLayer: false)
         animationLayer.backgroundColor = configure.inBackgroundColor.cgColor
-        backgroundLayer.addSublayer(animationLayer)
         
         rotationAnimation.fromValue = 0
         rotationAnimation.toValue = Double.pi * 2
@@ -142,17 +141,17 @@ extension CLRoundAnimationView {
             offset = outLayer ? 0 : (configure.outLineWidth - configure.inLineWidth) * 2;
             break;
         }
-        let radius: CGFloat = (height - lineWidth - offset) * 0.5;
+        let radius: CGFloat = (height - lineWidth - offset) * 0.5
         let bezierPath = UIBezierPath(arcCenter: CGPoint(x: width * 0.5, y: height * 0.5), radius: radius, startAngle: 0, endAngle: .pi * 2.0, clockwise: true)
         let shapeLayer = CAShapeLayer()
-        shapeLayer.fillColor = UIColor.clear.cgColor;
-        shapeLayer.strokeColor = UIColor.white.cgColor;
-        shapeLayer.lineWidth = lineWidth;
-        shapeLayer.strokeStart = start;
-        shapeLayer.strokeEnd = end;
-        shapeLayer.lineCap = .round;
-        shapeLayer.lineDashPhase = 0.8;
-        shapeLayer.path = bezierPath.cgPath;
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = UIColor.white.cgColor
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.strokeStart = start
+        shapeLayer.strokeEnd = end
+        shapeLayer.lineCap = .round
+        shapeLayer.lineDashPhase = 0.8
+        shapeLayer.path = bezierPath.cgPath
         return shapeLayer;
     }
 }

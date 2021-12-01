@@ -12,8 +12,7 @@ import SnapKit
 class CLAnimationButtonController: CLController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let starButton = CLAnimationButton(frame: CGRect(x: (view.bounds.maxX - 40) * 0.5, y: 250, width: 40, height: 40), image: UIImage(named: "star")!)
-        starButton.isSelected = true
+        let starButton = CLAnimationButton(frame: CGRect(x: (view.bounds.maxX - 100) * 0.5, y: 160, width: 100, height: 100), image: UIImage(named: "star")!)
         starButton.addTarget(self, action: #selector(tappedButtonAction), for: .touchUpInside)
         view.addSubview(starButton)
 
@@ -21,7 +20,7 @@ class CLAnimationButtonController: CLController {
         likeButton.addTarget(self, action: #selector(tappedButtonAction), for: .touchUpInside)
         view.addSubview(likeButton)
         likeButton.snp.makeConstraints { (make) in
-            make.size.equalTo(40)
+            make.size.equalTo(100)
             make.center.equalToSuperview()
         }
         let smileButton = CLAnimationButton(frame: .zero, image: UIImage(named: "smile")!)
@@ -29,7 +28,7 @@ class CLAnimationButtonController: CLController {
         view.addSubview(smileButton)
         smileButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.size.equalTo(40)
+            make.size.equalTo(100)
             make.top.equalTo(likeButton.snp.bottom).offset(40)
         }
         let heartButton = CLAnimationButton(frame: .zero, image: UIImage(named: "heart")!)
@@ -37,7 +36,7 @@ class CLAnimationButtonController: CLController {
         view.addSubview(heartButton)
         heartButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.size.equalTo(40)
+            make.size.equalTo(100)
             make.bottom.equalTo(likeButton.snp.top).offset(-40)
         }
     }

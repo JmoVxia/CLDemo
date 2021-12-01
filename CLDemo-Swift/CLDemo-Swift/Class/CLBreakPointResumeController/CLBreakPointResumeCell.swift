@@ -10,7 +10,6 @@ import UIKit
 
 //MARK: - JmoVxia---类-属性
 class CLBreakPointResumeCell: UITableViewCell {
-    private var item: CLBreakPointResumeItem?
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(16)
@@ -149,9 +148,7 @@ private extension CLBreakPointResumeCell {
     }
 }
 extension CLBreakPointResumeCell: CLCellProtocol {
-    func setItem(_ item: CLCellItemProtocol) {
-        guard let item = item as? CLBreakPointResumeItem else { return }
-        self.item = item
+    func setItem(_ item: CLBreakPointResumeItem, indexPath: IndexPath) {
         nameLabel.text = item.url.lastPathComponent
         progressView.progress = Float(item.progress)
         progressLabel.text = String(format: "%.2f", item.progress * 100) + "%"

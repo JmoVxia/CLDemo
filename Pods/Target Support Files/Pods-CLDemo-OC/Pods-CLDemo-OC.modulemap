@@ -1,0 +1,6 @@
+module Pods_CLDemo_OC {
+  umbrella header "Pods-CLDemo-OC-umbrella.h"
+
+  export *
+  module * { export * }
+}
