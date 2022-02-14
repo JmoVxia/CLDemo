@@ -39,7 +39,7 @@ class CLOnePickerView: UIView {
     private lazy var unitLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(14)
-        view.textColor = .themeColor
+        view.textColor = .theme
         return view
     }()
     override init(frame: CGRect) {
@@ -92,7 +92,7 @@ extension CLOnePickerView: UIPickerViewDelegate {
         let label: UILabel = (view as? UILabel) ?? UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = .hex("#333333")
+        label.textColor = .init("#333333")
         label.text = dataSource[row]
         return label
     }

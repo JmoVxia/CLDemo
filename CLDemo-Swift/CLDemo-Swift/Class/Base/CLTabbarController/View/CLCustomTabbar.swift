@@ -20,7 +20,7 @@ class CLCustomTabbar: UITabBar {
     }()
     private lazy var lineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("EEEEEE")
+        view.backgroundColor = .init("EEEEEE")
         return view
     }()
     override init(frame: CGRect) {
@@ -28,7 +28,7 @@ class CLCustomTabbar: UITabBar {
         backgroundColor = .white
         backgroundImage = UIImage()
         shadowImage = UIImage()
-        tintColor = .hex("#666666")
+        tintColor = .init("#666666")
         isTranslucent = false
         addSubview(lineView)
         addSubview(bulgeButton)

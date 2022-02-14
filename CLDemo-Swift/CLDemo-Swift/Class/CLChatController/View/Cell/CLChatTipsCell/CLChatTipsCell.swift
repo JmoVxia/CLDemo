@@ -12,7 +12,7 @@ class CLChatTipsCell: CLChatCell {
     ///背景
     lazy var textBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("#D9D9D9")
+        view.backgroundColor = .init("#D9D9D9")
         view.clipsToBounds = true
         view.layer.cornerRadius = 10
         return view

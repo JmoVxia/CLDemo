@@ -30,7 +30,7 @@ class CLPopupDataPickerController: CLPopupManagerController {
     var maxDate: Date = Date()
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()
-        topToolBar.backgroundColor = UIColor.hex("#F8F6F9")
+        topToolBar.backgroundColor = UIColor("#F8F6F9")
         return topToolBar
     }()
     lazy var cancelButton: UIButton = {
@@ -38,9 +38,9 @@ class CLPopupDataPickerController: CLPopupManagerController {
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.setTitle("取消", for: .selected)
         cancelButton.setTitle("取消", for: .highlighted)
-        cancelButton.setTitleColor(UIColor.hex("#666666"), for: .normal)
-        cancelButton.setTitleColor(UIColor.hex("#666666"), for: .selected)
-        cancelButton.setTitleColor(UIColor.hex("#666666"), for: .highlighted)
+        cancelButton.setTitleColor(UIColor("#666666"), for: .normal)
+        cancelButton.setTitleColor(UIColor("#666666"), for: .selected)
+        cancelButton.setTitleColor(UIColor("#666666"), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return cancelButton
     }()
@@ -49,9 +49,9 @@ class CLPopupDataPickerController: CLPopupManagerController {
         sureButton.setTitle("确定", for: .normal)
         sureButton.setTitle("确定", for: .selected)
         sureButton.setTitle("确定", for: .highlighted)
-        sureButton.setTitleColor(.themeColor, for: .normal)
-        sureButton.setTitleColor(.themeColor, for: .selected)
-        sureButton.setTitleColor(.themeColor, for: .highlighted)
+        sureButton.setTitleColor(.theme, for: .normal)
+        sureButton.setTitleColor(.theme, for: .selected)
+        sureButton.setTitleColor(.theme, for: .highlighted)
         sureButton.addTarget(self, action: #selector(sureAction), for: .touchUpInside)
         return sureButton
     }()

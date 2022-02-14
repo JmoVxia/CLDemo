@@ -84,7 +84,7 @@ class CLWheelMenuController: CLController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .hex("f4ea2a")
+        view.backgroundColor = .init("f4ea2a")
         view.addSubview(wheelMenuView)
         view.addSubview(wheelMenuView1)
         wheelMenuView.snp.makeConstraints { (make) in

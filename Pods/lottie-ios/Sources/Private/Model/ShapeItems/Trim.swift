@@ -16,30 +16,44 @@ enum TrimType: Int, Codable {
 
 // MARK: - Trim
 
-/// An item that define an ellipse shape
 final class Trim: ShapeItem {
 
   // MARK: Lifecycle
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Trim.CodingKeys.self)
-    start = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .start)
-    end = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .end)
-    offset = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .offset)
+    start = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .start)
+    end = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .end)
+    offset = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .offset)
     trimType = try container.decode(TrimType.self, forKey: .trimType)
     try super.init(from: decoder)
+  }
+
+  required init(dictionary: [String: Any]) throws {
+    let startDictionary: [String: Any] = try dictionary.value(for: CodingKeys.start)
+    start = try KeyframeGroup<LottieVector1D>(dictionary: startDictionary)
+    let endDictionary: [String: Any] = try dictionary.value(for: CodingKeys.end)
+    end = try KeyframeGroup<LottieVector1D>(dictionary: endDictionary)
+    let offsetDictionary: [String: Any] = try dictionary.value(for: CodingKeys.offset)
+    offset = try KeyframeGroup<LottieVector1D>(dictionary: offsetDictionary)
+    let trimTypeRawValue: Int = try dictionary.value(for: CodingKeys.trimType)
+    guard let trimType = TrimType(rawValue: trimTypeRawValue) else {
+      throw InitializableError.invalidInput
+    }
+    self.trimType = trimType
+    try super.init(dictionary: dictionary)
   }
 
   // MARK: Internal
 
   /// The start of the trim
-  let start: KeyframeGroup<Vector1D>
+  let start: KeyframeGroup<LottieVector1D>
 
   /// The end of the trim
-  let end: KeyframeGroup<Vector1D>
+  let end: KeyframeGroup<LottieVector1D>
 
   /// The offset of the trim
-  let offset: KeyframeGroup<Vector1D>
+  let offset: KeyframeGroup<LottieVector1D>
 
   let trimType: TrimType
 

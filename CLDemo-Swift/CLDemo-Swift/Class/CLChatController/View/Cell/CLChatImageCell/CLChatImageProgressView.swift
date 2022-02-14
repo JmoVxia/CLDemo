@@ -35,7 +35,7 @@ extension CLChatImageProgressView {
         shapeLayer.frame = CGRect.init(x: 0, y: 0, width: rect.size.width, height: rect.size.height)
         shapeLayer.lineWidth = lineWidth
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = UIColor.hex("#373747").cgColor
+        shapeLayer.strokeColor = UIColor("#373747").cgColor
 
         let center: CGPoint = CGPoint.init(x: rect.size.width/2, y: rect.size.height/2)
         // 画出曲线（贝塞尔曲线）
@@ -46,7 +46,7 @@ extension CLChatImageProgressView {
         // 渐变色 加蒙版 显示蒙版区域
         let gradientLayer: CAGradientLayer = CAGradientLayer.init()
         gradientLayer.frame = bounds
-        gradientLayer.colors = NSArray.init(array: [UIColor.hex("#5F98FC").cgColor, UIColor.hex("#47BF00").cgColor]) as? [Any]
+        gradientLayer.colors = NSArray.init(array: [UIColor("#5F98FC").cgColor, UIColor("#47BF00").cgColor]) as? [Any]
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint.init(x: 0, y: 1)
         layer.addSublayer(gradientLayer)

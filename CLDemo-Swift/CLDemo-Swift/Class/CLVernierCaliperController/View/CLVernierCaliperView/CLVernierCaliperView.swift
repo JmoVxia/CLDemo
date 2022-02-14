@@ -45,7 +45,7 @@ class CLVernierCaliperView: UIView {
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = .zero
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor    = UIColor.hex("#F7F7F7")
+        collectionView.backgroundColor    = UIColor("#F7F7F7")
         collectionView.bounces            = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator   = false
@@ -58,7 +58,7 @@ class CLVernierCaliperView: UIView {
     }()
     private lazy var indexView: CLIndexView = {
         let view = CLIndexView()
-        view.triangleColor = .themeColor
+        view.triangleColor = .theme
         view.backgroundColor = UIColor.clear
         view.lineHeight = configure.long
         return view

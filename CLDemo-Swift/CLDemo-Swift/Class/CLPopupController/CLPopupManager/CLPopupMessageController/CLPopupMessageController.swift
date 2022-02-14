@@ -23,7 +23,7 @@ class CLPopupMessageController: CLPopupManagerController {
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .hex("0xc3c3c8")
+        contentView.backgroundColor = .init("0xc3c3c8")
         contentView.alpha = 0.0
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
@@ -61,9 +61,9 @@ class CLPopupMessageController: CLPopupManagerController {
         let sureButton = UIButton()
         sureButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
         sureButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
-        sureButton.setTitleColor(UIColor.hex("0x007ee5"), for: .normal)
-        sureButton.setTitleColor(UIColor.hex("0x007ee5"), for: .selected)
-        sureButton.setTitleColor(UIColor.hex("0x007ee5"), for: .highlighted)
+        sureButton.setTitleColor(UIColor("0x007ee5"), for: .normal)
+        sureButton.setTitleColor(UIColor("0x007ee5"), for: .selected)
+        sureButton.setTitleColor(UIColor("0x007ee5"), for: .highlighted)
         sureButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         sureButton.addTarget(self, action: #selector(sureButtonAction), for: .touchUpInside)
         return sureButton
@@ -72,9 +72,9 @@ class CLPopupMessageController: CLPopupManagerController {
         let leftButton = UIButton()
         leftButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
         leftButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
-        leftButton.setTitleColor(UIColor.hex("0x007ee5"), for: .normal)
-        leftButton.setTitleColor(UIColor.hex("0x007ee5"), for: .selected)
-        leftButton.setTitleColor(UIColor.hex("0x007ee5"), for: .highlighted)
+        leftButton.setTitleColor(UIColor("0x007ee5"), for: .normal)
+        leftButton.setTitleColor(UIColor("0x007ee5"), for: .selected)
+        leftButton.setTitleColor(UIColor("0x007ee5"), for: .highlighted)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         leftButton.addTarget(self, action: #selector(leftButtonAction), for: .touchUpInside)
         return leftButton
@@ -83,9 +83,9 @@ class CLPopupMessageController: CLPopupManagerController {
         let rightButton = UIButton()
         rightButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
         rightButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
-        rightButton.setTitleColor(UIColor.hex("0x007ee5"), for: .normal)
-        rightButton.setTitleColor(UIColor.hex("0x007ee5"), for: .selected)
-        rightButton.setTitleColor(UIColor.hex("0x007ee5"), for: .highlighted)
+        rightButton.setTitleColor(UIColor("0x007ee5"), for: .normal)
+        rightButton.setTitleColor(UIColor("0x007ee5"), for: .selected)
+        rightButton.setTitleColor(UIColor("0x007ee5"), for: .highlighted)
         rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         rightButton.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
         return rightButton

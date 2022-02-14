@@ -24,7 +24,7 @@ class CLFlipController: CLController {
     }()
     lazy var startButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = UIColor.randomColor
+        view.backgroundColor = .random
         view.setTitle("开始动画", for: .normal)
         view.setTitle("开始动画", for: .selected)
         view.setTitle("开始动画", for: .highlighted)
@@ -33,7 +33,7 @@ class CLFlipController: CLController {
     }()
     lazy var stopButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = UIColor.randomColor
+        view.backgroundColor = .random
         view.setTitle("停止动画", for: .normal)
         view.setTitle("停止动画", for: .selected)
         view.setTitle("停止动画", for: .highlighted)
@@ -42,7 +42,7 @@ class CLFlipController: CLController {
     }()
     lazy var pauseButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = UIColor.randomColor
+        view.backgroundColor = .random
         view.setTitle("暂停动画", for: .normal)
         view.setTitle("暂停动画", for: .selected)
         view.setTitle("暂停动画", for: .highlighted)
@@ -51,7 +51,7 @@ class CLFlipController: CLController {
     }()
     lazy var resumeButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = UIColor.randomColor
+        view.backgroundColor = .random
         view.setTitle("恢复动画", for: .normal)
         view.setTitle("恢复动画", for: .selected)
         view.setTitle("恢复动画", for: .highlighted)

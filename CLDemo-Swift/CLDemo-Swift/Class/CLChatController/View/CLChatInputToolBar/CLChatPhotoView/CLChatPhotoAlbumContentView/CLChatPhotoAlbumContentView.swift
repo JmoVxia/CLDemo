@@ -40,7 +40,7 @@ class CLChatPhotoAlbumContentView: UIView {
         layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         view.register(CLChatPhotoAlbumCell.classForCoder(), forCellWithReuseIdentifier: "CLChatPhotoAlbumCell")
         view.delegate = self
         view.dataSource = self

@@ -36,7 +36,7 @@ class CLChangeFontSizeController: CLController {
         let view = UITableView(frame: .zero, style: .plain)
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         view.separatorStyle = .none
         view.dataSource = tableViewHepler
         view.delegate = tableViewHepler

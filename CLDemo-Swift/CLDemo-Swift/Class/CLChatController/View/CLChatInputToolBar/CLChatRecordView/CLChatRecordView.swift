@@ -43,7 +43,7 @@ class CLChatRecordView: UIView {
     ///红圈
     private lazy var redcircle: UIView = {
         let redcircle = UIView()
-        redcircle.layer.borderColor = UIColor.hex("0xff3b30").cgColor
+        redcircle.layer.borderColor = UIColor("0xff3b30").cgColor
         redcircle.layer.borderWidth = 1
         redcircle.layer.opacity = 0.45
         redcircle.layer.cornerRadius  = 90
@@ -62,7 +62,7 @@ class CLChatRecordView: UIView {
     ///圆圈
     private lazy var circleView: UIView = {
         let circleView = UIView()
-        circleView.backgroundColor = .hex("#2DD178")
+        circleView.backgroundColor = .init("#2DD178")
         circleView.isUserInteractionEnabled = true
         circleView.layer.cornerRadius = 55
         circleView.layer.masksToBounds = true

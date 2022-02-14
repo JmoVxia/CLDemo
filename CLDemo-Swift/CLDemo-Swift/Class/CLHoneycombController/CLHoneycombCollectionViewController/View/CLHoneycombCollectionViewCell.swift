@@ -10,7 +10,7 @@ import UIKit
 class CLHoneycombCollectionViewCell: UICollectionViewCell {
     private lazy var contentBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("#7CB88D")
+        view.backgroundColor = .init("#7CB88D")
         return view
     }()
     lazy var imageView: UIImageView = {
@@ -25,7 +25,7 @@ class CLHoneycombCollectionViewCell: UICollectionViewCell {
         makeConstraints()
         DispatchQueue.main.async {
             self.contentBackgroundView.setupHexagonMask(lineWidth: 0, color: .clear, cornerRadius: 0)
-            self.imageView.setupHexagonMask(lineWidth: 10, color: .randomColor, cornerRadius: 0)
+            self.imageView.setupHexagonMask(lineWidth: 10, color: .random, cornerRadius: 0)
         }
     }
     required init?(coder: NSCoder) {

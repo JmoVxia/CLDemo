@@ -55,7 +55,7 @@ class CLPopupHudController: CLPopupManagerController {
     }()
     lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .hex("0x000000", alpha: 0.8)
+        contentView.backgroundColor = .init("0x000000", alpha: 0.8)
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
         return contentView

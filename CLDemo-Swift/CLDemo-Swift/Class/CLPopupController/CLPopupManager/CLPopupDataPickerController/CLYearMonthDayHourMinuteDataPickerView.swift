@@ -172,8 +172,8 @@ extension CLYearMonthDayHourMinuteDataPickerView: UIPickerViewDelegate {
         let label: UILabel = (view as? UILabel) ?? UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 18)
-        var textColor = UIColor.hex("#333333")
-        let currentColor = UIColor.hex("#333333")
+        var textColor = UIColor("#333333")
+        let currentColor = UIColor("#333333")
         if component == 0 {
             textColor  = yearIndex == row ? currentColor : textColor
             label.text =  String(format: "%02d", yearArray[row])

@@ -54,7 +54,7 @@ class CLController: UIViewController {
     private lazy var titleLabel: UILabel = {
        let view = UILabel()
         view.font = PingFangSCBold(18)
-        view.textColor = .color(light: .hex("333333"), dark: .white)
+        view.textColor = .color(light: .init("333333"), dark: .white)
         return view
     }()
 }
@@ -84,7 +84,7 @@ extension CLController {
 //MARK: - JmoVxia---布局
 private extension CLController {
     func initUI() {
-        view.backgroundColor = .color(light: .white, dark: .hex("#666666"))
+        view.backgroundColor = .color(light: .white, dark: .init("#666666"))
         navigationItem.titleView = titleLabel
         let target = navigationController?.interactivePopGestureRecognizer?.delegate
         let pan = UIPanGestureRecognizer.init(target: target, action: Selector(("handleNavigationTransition:")))

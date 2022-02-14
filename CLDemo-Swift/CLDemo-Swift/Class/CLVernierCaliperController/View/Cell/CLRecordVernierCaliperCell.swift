@@ -12,13 +12,13 @@ class CLRecordVernierCaliperCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(16)
-        view.textColor = UIColor.hex("#333333")
+        view.textColor = UIColor("#333333")
         return view
     }()
     private lazy var unitLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(16)
-        view.textColor = UIColor.hex("#999999")
+        view.textColor = UIColor("#999999")
         return view
     }()
     private lazy var valueBackgroundView: UIView = {
@@ -116,70 +116,70 @@ extension CLRecordVernierCaliperCell {
         switch (type) {
         case .sbp:
             if (value > 160 || value < 75) {
-                return ("危险", .hex("#FF5757"))
+                return ("危险", .init("#FF5757"))
             } else if (value > 140 || value < 90) {
-                return ("超标", .hex("#FFD118"))
+                return ("超标", .init("#FFD118"))
             } else {
-                return ("正常", .themeColor)
+                return ("正常", .theme)
             }
         case .dbp:
             if (value > 110 || value < 50) {
-                return ("危险", .hex("#FF5757"))
+                return ("危险", .init("#FF5757"))
             } else if (value > 90 || value < 60) {
-                return ("超标", .hex("FFD118"))
+                return ("超标", .init("FFD118"))
             } else {
-                return ("正常", .themeColor)
+                return ("正常", .theme)
             }
         case .glucose:
             if (value > 11.1) {
-                return ("偏高", .hex("#FF7474"))
+                return ("偏高", .init("#FF7474"))
             } else if (value >= 8) {
-                return ("一般", .hex("#65AAFF"))
+                return ("一般", .init("#65AAFF"))
             } else if (value >= 6.1) {
-                return ("理想", .hex("#33D27C"))
+                return ("理想", .init("#33D27C"))
             } else if (value >= 3.9) {
-                return ("良好", .hex("#45DEC0"))
+                return ("良好", .init("#45DEC0"))
             } else {
-                return ("偏低", .hex("#FFB81E"))
+                return ("偏低", .init("#FFB81E"))
             }
         case .height:
-            return ("cm", .themeColor)
+            return ("cm", .theme)
         case .weight:
-            return ("kg", .themeColor)
+            return ("kg", .theme)
         case .pulse, .heartRate:
             if (value > 100) {
-                return ("偏高", .hex("#FF6060"))
+                return ("偏高", .init("#FF6060"))
             } else if (value >= 60) {
-                return ("正常", .themeColor)
+                return ("正常", .theme)
             } else {
-                return ("偏低", .hex("#FFB618"))
+                return ("偏低", .init("#FFB618"))
             }
         case .temperature:
             if (value > 37.2) {
-                return ("偏高", .hex("#FF6060"))
+                return ("偏高", .init("#FF6060"))
             } else if (value >= 36) {
-                return ("正常", .themeColor)
+                return ("正常", .theme)
             } else {
-                return ("偏低", .hex("#FFB618"))
+                return ("偏低", .init("#FFB618"))
             }
         case .urine:
             if (value > 2000) {
-                return ("偏高", .hex("#FF6060"))
+                return ("偏高", .init("#FF6060"))
             } else if (value >= 800) {
-                return ("正常", .themeColor)
+                return ("正常", .theme)
             } else {
-                return ("偏低", .hex("#FFB618"))
+                return ("偏低", .init("#FFB618"))
             }
         case .respirationRate:
             if (value > 85) {
-                return ("偏高", .hex("#FF6060"))
+                return ("偏高", .init("#FF6060"))
             } else if (value >= 67) {
-                return ("正常", .themeColor)
+                return ("正常", .theme)
             } else {
-                return ("偏低", .hex("#FFB618"))
+                return ("偏低", .init("#FFB618"))
             }
         case .unKnown:
-            return ("正常", .themeColor)
+            return ("正常", .theme)
         }
     }
 }

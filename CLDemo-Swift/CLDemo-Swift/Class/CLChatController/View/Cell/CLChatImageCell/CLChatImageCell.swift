@@ -13,7 +13,7 @@ class CLChatImageCell: CLChatCell {
     private (set) lazy var photoView: UIImageView = {
         let photoView = UIImageView()
         photoView.image = nil
-        photoView.backgroundColor = .hex("0x4A4A6A")
+        photoView.backgroundColor = .init("0x4A4A6A")
         photoView.isUserInteractionEnabled = true
         photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 6

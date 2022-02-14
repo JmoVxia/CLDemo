@@ -12,7 +12,7 @@ import Lottie
 class CLPopupLoadingController: CLPopupManagerController {
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("#000000", alpha: 0.15)
+        view.backgroundColor = .init("#000000", alpha: 0.15)
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
         return view

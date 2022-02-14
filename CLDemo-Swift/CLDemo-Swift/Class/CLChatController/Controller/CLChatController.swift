@@ -54,7 +54,7 @@ extension CLChatController {
 }
 extension CLChatController {
     private func initUI() {
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         view.addSubview(tableView)
         view.addSubview(inputToolBar)
     }

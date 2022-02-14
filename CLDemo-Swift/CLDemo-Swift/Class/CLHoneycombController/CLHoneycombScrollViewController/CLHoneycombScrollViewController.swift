@@ -72,7 +72,7 @@ private extension CLHoneycombScrollViewController {
         updateTitleLabel { label in
             label.text = "UIScrollView"
         }
-        view.backgroundColor = .hex("#93DAAE")
+        view.backgroundColor = .init("#93DAAE")
         view.addSubview(honeycombView)
     }
     func makeConstraints() {

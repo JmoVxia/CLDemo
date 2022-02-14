@@ -23,7 +23,7 @@ class CLCircleRetroTransitionController: CLController {
     }
     private lazy var bottomButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = .hex("#FF6666")
+        view.backgroundColor = .init("#FF6666")
         view.setImage(UIImage(named: "add"), for: .normal)
         view.setImage(UIImage(named: "add"), for: .selected)
         view.setImage(UIImage(named: "add"), for: .highlighted)
@@ -61,7 +61,7 @@ extension CLCircleRetroTransitionController {
 //MARK: - JmoVxia---布局
 private extension CLCircleRetroTransitionController {
     func initUI() {
-        view.backgroundColor = .hex("#FF9966")
+        view.backgroundColor = .init("#FF9966")
         view.addSubview(bottomButton)
     }
     func makeConstraints() {

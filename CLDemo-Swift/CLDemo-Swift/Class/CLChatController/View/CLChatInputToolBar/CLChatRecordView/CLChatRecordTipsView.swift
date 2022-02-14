@@ -11,7 +11,7 @@ import UIKit
 class CLChatRecordTipsView: UIView {
     var isCanSend: Bool = false {
         didSet {
-            tipsLabel.textColor = isCanSend ? .themeColor : .hex("#ff3b30")
+            tipsLabel.textColor = isCanSend ? .theme : .init("#ff3b30")
             tipsLabel.text = isCanSend ? "松手发送 滑动取消" : "松手取消"
         }
     }
@@ -19,7 +19,7 @@ class CLChatRecordTipsView: UIView {
         let view = UILabel()
         view.font = PingFangSCMedium(15)
         view.text = "松手发送 滑动取消"
-        view.textColor = .themeColor
+        view.textColor = .theme
         view.textAlignment = .center
         return view
     }()

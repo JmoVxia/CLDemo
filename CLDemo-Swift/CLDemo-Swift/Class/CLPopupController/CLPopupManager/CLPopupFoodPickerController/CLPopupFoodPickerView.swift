@@ -24,7 +24,7 @@ class CLPopupFoodPickerView: UIView {
     }()
     private lazy var lineView: UIView = {
         let lineView = UIView()
-        lineView.backgroundColor = .themeColor
+        lineView.backgroundColor = .theme
         return lineView
     }()
     private lazy var showView: UIView = {
@@ -77,7 +77,7 @@ extension CLPopupFoodPickerView {
         let height: CGFloat = 40;
         var lastButton: UIButton?
         for i in 0...2 {
-            let button = creatButton(title: "请选择", titleColor: .hex("#333333"))
+            let button = creatButton(title: "请选择", titleColor: .init("#333333"))
             button.isHidden = i > 0
             button.addTarget(self, action: #selector(buttonClickAction(_:)), for: .touchUpInside)
             addSubview(button)
@@ -86,7 +86,7 @@ extension CLPopupFoodPickerView {
             lastButton = button
             buttonArray.append(button)
             
-            let topButton = creatButton(title: "请选择", titleColor: .themeColor)
+            let topButton = creatButton(title: "请选择", titleColor: .theme)
             topButton.isHidden = button.isHidden
             topButton.isUserInteractionEnabled = false
             topButton.setNewFrame(button.frame)

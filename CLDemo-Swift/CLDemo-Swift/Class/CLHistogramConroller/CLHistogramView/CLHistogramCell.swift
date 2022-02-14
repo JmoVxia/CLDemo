@@ -78,37 +78,37 @@ class CLHistogramCell: UITableViewCell {
     }()
     private lazy var morningLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.fillColor = UIColor.hex("#ADE1D0").cgColor
+        layer.fillColor = UIColor("#ADE1D0").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
     private lazy var noonLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.fillColor = UIColor.hex("#79C9AE").cgColor
+        layer.fillColor = UIColor("#79C9AE").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
     private lazy var nightLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.fillColor = UIColor.hex("#3B9778").cgColor
+        layer.fillColor = UIColor("#3B9778").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
     private lazy var additionalLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.fillColor = UIColor.hex("#20BC88").cgColor
+        layer.fillColor = UIColor("#20BC88").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
     private lazy var exceedLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.fillColor = UIColor.hex("#F57629").cgColor
+        layer.fillColor = UIColor("#F57629").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
     private lazy var seriousExceedLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.fillColor = UIColor.hex("#BE0909").cgColor
+        layer.fillColor = UIColor("#BE0909").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()

@@ -15,10 +15,22 @@ final class PreCompLayerModel: LayerModel {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: PreCompLayerModel.CodingKeys.self)
     referenceID = try container.decode(String.self, forKey: .referenceID)
-    timeRemapping = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .timeRemapping)
+    timeRemapping = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .timeRemapping)
     width = try container.decode(Double.self, forKey: .width)
     height = try container.decode(Double.self, forKey: .height)
     try super.init(from: decoder)
+  }
+
+  required init(dictionary: [String: Any]) throws {
+    referenceID = try dictionary.value(for: CodingKeys.referenceID)
+    if let timeRemappingDictionary = dictionary[CodingKeys.timeRemapping.rawValue] as? [String: Any] {
+      timeRemapping = try KeyframeGroup<LottieVector1D>(dictionary: timeRemappingDictionary)
+    } else {
+      timeRemapping = nil
+    }
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
+    try super.init(dictionary: dictionary)
   }
 
   // MARK: Internal
@@ -27,7 +39,7 @@ final class PreCompLayerModel: LayerModel {
   let referenceID: String
 
   /// A value that remaps time over time.
-  let timeRemapping: KeyframeGroup<Vector1D>?
+  let timeRemapping: KeyframeGroup<LottieVector1D>?
 
   /// Precomp Width
   let width: Double

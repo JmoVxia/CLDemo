@@ -60,7 +60,7 @@ extension CLPopupFoodPickerContentView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CLPopupFoodPickerContentCell", for: indexPath) as! CLPopupFoodPickerContentCell
         let model = dataArray[indexPath.row]
         cell.titleLabel.text = model.title
-        cell.titleLabel.textColor = model.title == selectedTitle ? .themeColor : .hex("666666")
+        cell.titleLabel.textColor = model.title == selectedTitle ? .theme : .init("666666")
         return cell
     }
 }

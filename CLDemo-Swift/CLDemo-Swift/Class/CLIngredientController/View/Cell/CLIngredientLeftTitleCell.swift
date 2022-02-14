@@ -32,22 +32,22 @@ class CLIngredientLeftTitleCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(14)
-        view.textColor = .hex("#666666")
+        view.textColor = .init("#666666")
         view.textAlignment = .left
         return view
     }()
 
     override var isSelected: Bool {
         didSet {
-            backgroundColorView.backgroundColor = isSelected ? .hex("#EDFBF3") : .white
-            titleLabel.textColor = isSelected ? .hex("#24C065") : .hex("#666666")
+            backgroundColorView.backgroundColor = isSelected ? .init("#EDFBF3") : .white
+            titleLabel.textColor = isSelected ? .init("#24C065") : .init("#666666")
         }
     }
 
     var isBottom: Bool = false {
         didSet {
             backgroundColorView.layer.cornerRadius = isBottom ? 10 : 0
-            backgroundColorView.layer.applySketchShadow(color: isBottom ? .hex("#000000", alpha: 0.05) : .hex("#FFFFFF", alpha: 0.05), x: 0, y: 2, blur: 4)
+            backgroundColorView.layer.applySketchShadow(color: isBottom ? .init("#000000", alpha: 0.05) : .init("#FFFFFF", alpha: 0.05), x: 0, y: 2, blur: 4)
             backgroundColorView.snp.updateConstraints { make in
                 make.bottom.equalTo(isBottom ? -4 : 0).priority(100)
             }
@@ -59,7 +59,7 @@ class CLIngredientLeftTitleCell: UITableViewCell {
 
 private extension CLIngredientLeftTitleCell {
     func initUI() {
-        backgroundColor = .hex("#F4F4F4")
+        backgroundColor = .init("#F4F4F4")
         selectionStyle = .none
         contentView.addSubview(backgroundColorView)
         contentView.addSubview(titleLabel)

@@ -12,7 +12,7 @@ class CLPopupFoodPickerContentCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
        let label = UILabel()
         label.font = PingFangSCMedium(16)
-        label.textColor = .hex("#666666")
+        label.textColor = .init("#666666")
         return label
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -65,25 +65,25 @@ class CLChatInputToolBar: UIView {
     ///顶部线条
     private lazy var topLineView: UIView = {
         let topLineView = UIView()
-        topLineView.backgroundColor = .hex("#DADADA")
+        topLineView.backgroundColor = .init("#DADADA")
         return topLineView
     }()
     ///顶部工具条
     private lazy var topToolBar: UIView = {
         let topToolBar = UIView()
-        topToolBar.backgroundColor = .hex("#F6F6F6")
+        topToolBar.backgroundColor = .init("#F6F6F6")
         return topToolBar
     }()
     ///中间内容视图
     private lazy var middleSpaceView: UIView = {
         let middleSpaceView = UIView()
-        middleSpaceView.backgroundColor = .hex("#F6F6F6")
+        middleSpaceView.backgroundColor = .init("#F6F6F6")
         return middleSpaceView
     }()
     ///底部安全区域
     private lazy var bottomSafeView: UIView = {
         let bottomSafeView = UIView()
-        bottomSafeView.backgroundColor = .hex("#F6F6F6")
+        bottomSafeView.backgroundColor = .init("#F6F6F6")
         return bottomSafeView
     }()
     ///更多按钮
@@ -189,7 +189,7 @@ class CLChatInputToolBar: UIView {
     ///表情view
     private lazy var emojiView: CLChatEmojiView = {
         let view = CLChatEmojiView()
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         view.autoresizesSubviews = false
         view.didSelectEmojiCallBack = {[weak self] (emoji) in
             guard let strongSelf = self else { return }
@@ -212,7 +212,7 @@ class CLChatInputToolBar: UIView {
     ///图片view
     private lazy var photoView: CLChatPhotoView = {
         let view = CLChatPhotoView()
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         view.sendImageCallBack = {[weak self] (images) in
             self?.delegate?.inputBarWillSendImage(images: images)
         }
@@ -221,7 +221,7 @@ class CLChatInputToolBar: UIView {
     ///录音提示view
     private lazy var recordTipsView: CLChatRecordTipsView = {
         let view = CLChatRecordTipsView()
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         return view
     }()
     ///是否显示提示
@@ -229,7 +229,7 @@ class CLChatInputToolBar: UIView {
     ///录音
     private lazy var recordView: CLChatRecordView = {
         let view = CLChatRecordView()
-        view.backgroundColor = .hex("#EEEEED")
+        view.backgroundColor = .init("#EEEEED")
         view.startRecorderCallBack = {[weak self] in
             self?.delegate?.inputBarStartRecord()
             self?.showRecordTips()
@@ -356,7 +356,7 @@ class CLChatInputToolBar: UIView {
         }
     }
     ///占位文字颜色
-    var placeholderColor: UIColor = .hex("0x5C5C71") {
+    var placeholderColor: UIColor = .init("0x5C5C71") {
         didSet {
             textView.textColor = placeholderColor
         }
@@ -380,7 +380,7 @@ class CLChatInputToolBar: UIView {
 //MARK: - JmoVxia---初始化
 extension CLChatInputToolBar {
     private func initUI() {
-        backgroundColor = .hex("#F6F6F6")
+        backgroundColor = .init("#F6F6F6")
         addSubview(contentView)
         addSubview(topLineView)
         contentView.addSubview(topToolBar)

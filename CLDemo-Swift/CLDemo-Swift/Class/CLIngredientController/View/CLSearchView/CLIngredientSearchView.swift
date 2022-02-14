@@ -33,7 +33,7 @@ class CLIngredientSearchView: UIView {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 18
-        view.backgroundColor = .hex("#F4F4F4")
+        view.backgroundColor = .init("#F4F4F4")
         return view
     }()
 
@@ -46,10 +46,10 @@ class CLIngredientSearchView: UIView {
     lazy var searchTextField: UITextField = {
         let view = UITextField()
         view.delegate = self
-        view.tintColor = .themeColor
+        view.tintColor = .theme
         view.returnKeyType = .search
         view.enablesReturnKeyAutomatically = true
-        view.setPlaceholder("请输入关键字", color: .hex("#D4D4D4"), font: PingFangSCMedium(14))
+        view.setPlaceholder("请输入关键字", color: .init("#D4D4D4"), font: PingFangSCMedium(14))
         view.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         return view
     }()
@@ -71,9 +71,9 @@ class CLIngredientSearchView: UIView {
         view.setTitle("取消", for: .normal)
         view.setTitle("取消", for: .selected)
         view.setTitle("取消", for: .highlighted)
-        view.setTitleColor(.hex("333333"), for: .normal)
-        view.setTitleColor(.hex("333333"), for: .selected)
-        view.setTitleColor(.hex("333333"), for: .highlighted)
+        view.setTitleColor(.init("333333"), for: .normal)
+        view.setTitleColor(.init("333333"), for: .selected)
+        view.setTitleColor(.init("333333"), for: .highlighted)
         view.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         view.setContentCompressionResistancePriority(.required, for: .horizontal)
         view.setContentHuggingPriority(.required, for: .horizontal)

@@ -30,21 +30,21 @@ class CLIngredientLeftTitleHead: UITableViewHeaderFooterView {
 
     private lazy var backgroundShadowView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("#F4F4F4")
+        view.backgroundColor = .init("#F4F4F4")
         view.layer.maskedCorners = [.layerMaxXMinYCorner]
         return view
     }()
 
     private lazy var backgroundColorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("#F4F4F4")
+        view.backgroundColor = .init("#F4F4F4")
         return view
     }()
 
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.font = PingFangSCMedium(16)
-        view.textColor = .hex("#666666")
+        view.textColor = .init("#666666")
         view.textAlignment = .left
         view.setContentHuggingPriority(.required, for: .horizontal)
         view.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -53,17 +53,17 @@ class CLIngredientLeftTitleHead: UITableViewHeaderFooterView {
 
     var isTop: Bool = false {
         didSet {
-            backgroundColorView.backgroundColor = isTop ? .white : .hex("#F4F4F4")
+            backgroundColorView.backgroundColor = isTop ? .white : .init("#F4F4F4")
         }
     }
 
     var isOpen: Bool = false {
         didSet {
-            backgroundShadowView.backgroundColor = isOpen ? .hex("#FFFFFF") : .hex("#F4F4F4")
+            backgroundShadowView.backgroundColor = isOpen ? .init("#FFFFFF") : .init("#F4F4F4")
             titleLabel.font = isOpen ? PingFangSCBold(16) : PingFangSCMedium(16)
-            titleLabel.textColor = isOpen ? .hex("#333333") : .hex("#666666")
+            titleLabel.textColor = isOpen ? .init("#333333") : .init("#666666")
             backgroundShadowView.layer.cornerRadius = isOpen ? 10 : 0
-            backgroundShadowView.layer.applySketchShadow(color: isOpen ? .hex("#000000", alpha: 0.05) : .hex("#FFFFFF"), x: 0, y: -2, blur: 4)
+            backgroundShadowView.layer.applySketchShadow(color: isOpen ? .init("#000000", alpha: 0.05) : .init("#FFFFFF"), x: 0, y: -2, blur: 4)
             backgroundShadowView.snp.updateConstraints { make in
                 make.top.equalTo(isOpen ? 4 : 0)
             }

@@ -24,7 +24,7 @@ class CLDataPickerTitleView: UIView {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .right
-        titleLabel.textColor = .themeColor
+        titleLabel.textColor = .theme
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         return titleLabel
     }()

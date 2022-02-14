@@ -135,8 +135,8 @@ class CLChatEmojiView: UIView {
     var isCanSend: Bool = true {
         didSet {
             if isCanSend != oldValue {
-                let textColor: UIColor = isCanSend ? .white : .hex("#CCCCCC")
-                let backgroundColor: UIColor = isCanSend ? .themeColor : .white
+                let textColor: UIColor = isCanSend ? .white : .init("#CCCCCC")
+                let backgroundColor: UIColor = isCanSend ? .theme : .white
                 sendButton.isUserInteractionEnabled = isCanSend
                 sendButton.setTitleColor(textColor, for: .normal)
                 sendButton.setTitleColor(textColor, for: .selected)

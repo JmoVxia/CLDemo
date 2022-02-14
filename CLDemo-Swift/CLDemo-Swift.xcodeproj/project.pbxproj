@@ -265,6 +265,7 @@
 		5BD4EB782681872D00B5284F /* CLPopupBMIInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB5C2681872D00B5284F /* CLPopupBMIInputController.swift */; };
 		5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB7B26818A1300B5284F /* CLLogManager.swift */; };
 		5BD4EB8026818AF100B5284F /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB7F26818AF100B5284F /* Regex.swift */; };
+		5BD9C21C27BA2E00003B948D /* CLGrayscaleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD9C21B27BA2E00003B948D /* CLGrayscaleController.swift */; };
 		5BE6680E268470D60095F82E /* CLBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6680D268470D60095F82E /* CLBroadcastViewController.swift */; };
 		5BE66819268475940095F82E /* CLCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE66817268475940095F82E /* CLCarouselView.swift */; };
 		5BE6681A268475940095F82E /* CLCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE66818268475940095F82E /* CLCarouselCell.swift */; };
@@ -286,6 +287,9 @@
 		5BE6693D26848DCD0095F82E /* CLPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6693C26848DCD0095F82E /* CLPopoverView.swift */; };
 		5BE6694026848E280095F82E /* CLRotatingPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6693F26848E280095F82E /* CLRotatingPictureViewController.swift */; };
 		5BE6694326848F140095F82E /* CLTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6694226848F140095F82E /* CLTransitionViewController.swift */; };
+		5BEF4CFC2881013100A15433 /* CLTruncationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4CFB2881013100A15433 /* CLTruncationController.swift */; };
+		5BEF4CFE2881028D00A15433 /* CLTruncationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4CFD2881028D00A15433 /* CLTruncationLabel.swift */; };
+		5BEF4D002881047D00A15433 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4CFF2881047D00A15433 /* NSAttributedString+Extension.swift */; };
 		C010E9D2E10B3C83DC2DFA27 /* libPods-CLDemo-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */; };
 /* End PBXBuildFile section */
 
@@ -558,6 +562,7 @@
 		5BD4EB5C2681872D00B5284F /* CLPopupBMIInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupBMIInputController.swift; sourceTree = "<group>"; };
 		5BD4EB7B26818A1300B5284F /* CLLogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLogManager.swift; sourceTree = "<group>"; };
 		5BD4EB7F26818AF100B5284F /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		5BD9C21B27BA2E00003B948D /* CLGrayscaleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGrayscaleController.swift; sourceTree = "<group>"; };
 		5BE6680D268470D60095F82E /* CLBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBroadcastViewController.swift; sourceTree = "<group>"; };
 		5BE66817268475940095F82E /* CLCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCarouselView.swift; sourceTree = "<group>"; };
 		5BE66818268475940095F82E /* CLCarouselCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCarouselCell.swift; sourceTree = "<group>"; };
@@ -579,6 +584,9 @@
 		5BE6693C26848DCD0095F82E /* CLPopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverView.swift; sourceTree = "<group>"; };
 		5BE6693F26848E280095F82E /* CLRotatingPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLRotatingPictureViewController.swift; sourceTree = "<group>"; };
 		5BE6694226848F140095F82E /* CLTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLTransitionViewController.swift; sourceTree = "<group>"; };
+		5BEF4CFB2881013100A15433 /* CLTruncationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTruncationController.swift; sourceTree = "<group>"; };
+		5BEF4CFD2881028D00A15433 /* CLTruncationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTruncationLabel.swift; sourceTree = "<group>"; };
+		5BEF4CFF2881047D00A15433 /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		6B6549039237527F047D3A8E /* Pods-CLDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-Swift.release.xcconfig"; path = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLDemo-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1162,10 +1170,12 @@
 				5BD4EAF7268183E700B5284F /* Base */,
 				5B800435268194B1000E39AC /* CLHomePageController */,
 				5BC9911926C65D780026B6FF /* CLHoneycombController */,
+				5BEF4CFA2881011A00A15433 /* CLTruncationController */,
 				5B0CDAFB26B792DB00B45AD1 /* CLiWatchAnimationController */,
 				5B7982A226A01EAE004A6473 /* CLDarkModeController */,
 				5B81E99A27575B0E009DCB3E /* CLHanziPinyinController */,
 				5B79829A26A00A0A004A6473 /* CLChangeFontSizeController */,
+				5BD9C21A27BA2DCD003B948D /* CLGrayscaleController */,
 				5B8004422681AD7E000E39AC /* CLChatContactController */,
 				5B39ECB92757471C000FCF67 /* CLIngredientController */,
 				5BC13527269E95B800D1CCB5 /* CLCustomTransitionController */,
@@ -1702,6 +1712,7 @@
 			isa = PBXGroup;
 			children = (
 				5B39ECCC27574A2B000FCF67 /* NSMutableAttributedString+Extension.swift */,
+				5BEF4CFF2881047D00A15433 /* NSAttributedString+Extension.swift */,
 				5B80042226818C79000E39AC /* UISpringTimingParameters+Extension.swift */,
 				5BD4EAFB268184AB00B5284F /* UIColor+Extension.swift */,
 				5BD4EAFC268184AB00B5284F /* Int+Extension.swift */,
@@ -1868,6 +1879,14 @@
 			path = CLLogManager;
 			sourceTree = "<group>";
 		};
+		5BD9C21A27BA2DCD003B948D /* CLGrayscaleController */ = {
+			isa = PBXGroup;
+			children = (
+				5BD9C21B27BA2E00003B948D /* CLGrayscaleController.swift */,
+			);
+			path = CLGrayscaleController;
+			sourceTree = "<group>";
+		};
 		5BE6680C268470D60095F82E /* CLBroadcastViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1983,6 +2002,15 @@
 				5BE6694226848F140095F82E /* CLTransitionViewController.swift */,
 			);
 			path = CLTransitionViewController;
+			sourceTree = "<group>";
+		};
+		5BEF4CFA2881011A00A15433 /* CLTruncationController */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF4CFB2881013100A15433 /* CLTruncationController.swift */,
+				5BEF4CFD2881028D00A15433 /* CLTruncationLabel.swift */,
+			);
+			path = CLTruncationController;
 			sourceTree = "<group>";
 		};
 		6B688C6DBA40FB3A51DC8FA1 /* Frameworks */ = {
@@ -2190,6 +2218,7 @@
 				5BC9912126C65E3A0026B6FF /* CLHoneycombCollectionViewCell.swift in Sources */,
 				5B39ECCA275747DE000FCF67 /* CLIngredientSearchCell.swift in Sources */,
 				5B80043F268194FD000E39AC /* CLCellItemProtocol.swift in Sources */,
+				5BD9C21C27BA2E00003B948D /* CLGrayscaleController.swift in Sources */,
 				5BD4EB702681872D00B5284F /* CLDataPickerTitleView.swift in Sources */,
 				5BD0437026832EAB0054F2B4 /* CLVideoOperation.swift in Sources */,
 				5B0CDB0A26B7940100B45AD1 /* HexagonalItemView.swift in Sources */,
@@ -2318,6 +2347,7 @@
 				5BD043A42683302E0054F2B4 /* CLDrawerSlideAnimation.swift in Sources */,
 				5BD4EB31268185A900B5284F /* CLFontManager.swift in Sources */,
 				5B0DC71426CA377300909BF2 /* CLHoneycombDataSource.swift in Sources */,
+				5BEF4D002881047D00A15433 /* NSAttributedString+Extension.swift in Sources */,
 				5B39ECC7275747DE000FCF67 /* CLIngredientRightTitleCell.swift in Sources */,
 				5BD4EB732681872D00B5284F /* CLPopupOneInputController.swift in Sources */,
 				5BD4EB1A268184AB00B5284F /* UIImage+Extension.swift in Sources */,
@@ -2347,6 +2377,7 @@
 				5BD4EB2E2681850000B5284F /* CLConst.swift in Sources */,
 				5BD4EB24268184AB00B5284F /* Result+Extension.swift in Sources */,
 				5BD0438726832F980054F2B4 /* CLGifOperation.swift in Sources */,
+				5BEF4CFE2881028D00A15433 /* CLTruncationLabel.swift in Sources */,
 				5BD0441E26833B6C0054F2B4 /* CLMarqueeVerticalCell.swift in Sources */,
 				5BD0439926832F980054F2B4 /* CLPlayGifController.swift in Sources */,
 				5B7692C226841566008BB92B /* CLIndexView.swift in Sources */,
@@ -2364,6 +2395,7 @@
 				5BD4EB742681872D00B5284F /* CLPopupHudController.swift in Sources */,
 				5B80042326818C79000E39AC /* UISpringTimingParameters+Extension.swift in Sources */,
 				5B76931C26841C70008BB92B /* CLChatPhotoAlbumBottomBar.swift in Sources */,
+				5BEF4CFC2881013100A15433 /* CLTruncationController.swift in Sources */,
 				5BE668FA268489BD0095F82E /* CLPasswordInputView.swift in Sources */,
 				5B7692D526841ABD008BB92B /* CLFlipView.swift in Sources */,
 				5B76932926841C70008BB92B /* CLChatImageProgressView.swift in Sources */,

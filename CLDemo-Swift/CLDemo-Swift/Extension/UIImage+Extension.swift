@@ -183,3 +183,118 @@ extension UIImage {
         }
     }
 }
+
+extension UIImage {
+    ///灰度算法
+    enum GrayscaleAlgorithm {
+        ///平均值
+        case average
+        ///rec601标准
+        case rec601
+        ///rec709标准
+        case rec709
+        ///rec2100标准
+        case rec2100
+        ///最大值
+        case max
+        ///最小值
+        case min
+        ///分量法—红
+        case red
+        ///分量法—绿
+        case green
+        ///分量法—蓝
+        case blue
+    }
+    /// 灰度图
+    func grayscale(_ type: GrayscaleAlgorithm) -> UIImage? {
+        guard let cgImage = cgImage else {
+            return nil
+        }
+
+        let imageWidth = Int(size.width * scale)
+        let imageHeight = Int(size.height * scale)
+        
+        guard let pixelBuffer: CVPixelBuffer = {
+            let pixelBufferAttributes = [
+                kCVPixelFormatCGImageCompatibility: true,
+                kCVPixelBufferCGBitmapContextCompatibilityKey: true,
+                kCVPixelBufferIOSurfacePropertiesKey: [String: Any](),
+            ] as CFDictionary
+            
+            var pixelBuffer: CVPixelBuffer?
+            CVPixelBufferCreate(kCFAllocatorDefault,
+                                imageWidth,
+                                imageHeight,
+                                kCVPixelFormatType_32ARGB,
+                                pixelBufferAttributes,
+                                &pixelBuffer)
+            return pixelBuffer
+        }() else {
+            return nil
+        }
+        
+        CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        
+        let pixelBufferData = CVPixelBufferGetBaseAddress(pixelBuffer)
+        
+        guard let context = CGContext(data: pixelBufferData,
+                                width: imageWidth,
+                                height: imageHeight,
+                                bitsPerComponent: 8,
+                                bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
+                                space: CGColorSpaceCreateDeviceRGB(),
+                                bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+        else {
+            return nil
+        }
+        context.draw(cgImage, in: CGRect(origin: .zero, size: size.applying(CGAffineTransform(scaleX: scale, y: scale))))
+        
+        let data = unsafeBitCast(pixelBufferData, to: UnsafeMutablePointer<UInt8>.self)
+        
+        let row = CVPixelBufferGetBytesPerRow(pixelBuffer) / 4
+        let height = CVPixelBufferGetHeight(pixelBuffer)
+        
+        for y in 0..<height {
+            for x in 0..<row {
+                let offset = 4 * (y * row + x)
+    
+                let gray: UInt8 = {
+                    let red = CGFloat(data[offset + 1])
+                    let green = CGFloat(data[offset + 2])
+                    let blue = CGFloat(data[offset + 3])
+
+                    switch type {
+                    case .average:
+                        let value = 1.0 / 3.0
+                        return UInt8(red * value + green * value + blue * value)
+                    case .rec601:
+                        return UInt8(red * 0.299 + green * 0.587 + blue * 0.114)
+                    case .rec709:
+                        return UInt8(red * 0.2126 + green * 0.7152 + blue * 0.0722)
+                    case .rec2100:
+                        return UInt8(red * 0.2627 + green * 0.6780 + blue * 0.0593)
+                    case .max:
+                        return UInt8(max(max(red, green), blue))
+                    case .min:
+                        return UInt8(min(min(red, green), blue))
+                    case .red:
+                        return UInt8(red)
+                    case .green:
+                        return UInt8(green)
+                    case .blue:
+                        return UInt8(blue)
+                    }
+                }()
+                data[offset + 1] = gray
+                data[offset + 2] = gray
+                data[offset + 3] = gray
+            }
+        }
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        guard let cgImage = context.makeImage() else {
+            return nil
+        }
+        return UIImage(cgImage: cgImage)
+    }
+}

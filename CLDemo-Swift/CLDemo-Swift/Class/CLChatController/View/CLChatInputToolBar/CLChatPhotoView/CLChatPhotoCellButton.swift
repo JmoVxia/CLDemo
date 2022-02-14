@@ -29,7 +29,7 @@ class CLChatPhotoCellButton: UIControl {
     private var textLabel: UILabel = {
        let textLabel = UILabel()
         textLabel.font = PingFangSCMedium(14)
-        textLabel.textColor = .hex("#666666")
+        textLabel.textColor = .init("#666666")
         return textLabel
     }()
     override init(frame: CGRect) {

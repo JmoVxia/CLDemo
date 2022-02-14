@@ -27,7 +27,7 @@ class CLDurationDataPickerView: UIView {
     private lazy var lineView: UILabel = {
         let lineView = UILabel()
         lineView.text = ":"
-        lineView.textColor = .themeColor
+        lineView.textColor = .theme
         return lineView
     }()
     private lazy var pickerView: UIPickerView = {
@@ -86,8 +86,8 @@ extension CLDurationDataPickerView: UIPickerViewDelegate {
         let label: UILabel = (view as? UILabel) ?? UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 18)
-        var textColor = UIColor.hex("#333333")
-        let currentColor = UIColor.themeColor
+        var textColor = UIColor("#333333")
+        let currentColor = UIColor.theme
         if component == 0 {
             textColor  = durationIndex == row ? currentColor : textColor
             label.text =  String(format: "%02d", durationArray[row])

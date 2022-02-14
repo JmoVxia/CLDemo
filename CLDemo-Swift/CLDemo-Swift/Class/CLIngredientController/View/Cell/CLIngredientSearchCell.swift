@@ -30,7 +30,7 @@ class CLIngredientSearchCell: UITableViewCell {
 
     lazy var lineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("#F0F0F0")
+        view.backgroundColor = .init("#F0F0F0")
         return view
     }()
 }

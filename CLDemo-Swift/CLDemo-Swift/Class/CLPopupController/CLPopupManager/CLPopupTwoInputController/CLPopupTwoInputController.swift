@@ -25,21 +25,21 @@ class CLPopupTwoInputController: CLPopupManagerController {
             case .temperature:
                 titleLabel.text = "体温"
                 fristTextField.keyboardType = .default
-                fristTextField.setPlaceholder("请输入测量部位", color: .hex("#999999"), font: UIFont.systemFont(ofSize: 16))
+                fristTextField.setPlaceholder("请输入测量部位", color: .init("#999999"), font: UIFont.systemFont(ofSize: 16))
                 secondTextField.keyboardType = .decimalPad
-                secondTextField.setPlaceholder("请输入录入体温", color: .hex("#999999"), font: UIFont.systemFont(ofSize: 16))
+                secondTextField.setPlaceholder("请输入录入体温", color: .init("#999999"), font: UIFont.systemFont(ofSize: 16))
             case .bloodPressure:
                 titleLabel.text = "血压"
                 fristTextField.keyboardType = .decimalPad
-                fristTextField.setPlaceholder("请输入收缩压(高压)", color: .hex("#999999"), font: UIFont.systemFont(ofSize: 16))
+                fristTextField.setPlaceholder("请输入收缩压(高压)", color: .init("#999999"), font: UIFont.systemFont(ofSize: 16))
                 secondTextField.keyboardType = .decimalPad
-                secondTextField.setPlaceholder("请输入舒张压(低压)", color: .hex("#999999"), font: UIFont.systemFont(ofSize: 16))
+                secondTextField.setPlaceholder("请输入舒张压(低压)", color: .init("#999999"), font: UIFont.systemFont(ofSize: 16))
             case .bloodSugar:
                 titleLabel.text = "血糖"
                 fristTextField.isUserInteractionEnabled = false
-                fristTextField.setPlaceholder("请选择测量时间", color: .hex("#999999"), font: UIFont.systemFont(ofSize: 16))
+                fristTextField.setPlaceholder("请选择测量时间", color: .init("#999999"), font: UIFont.systemFont(ofSize: 16))
                 secondTextField.keyboardType = .decimalPad
-                secondTextField.setPlaceholder("请输入血糖值", color: .hex("#999999"), font: UIFont.systemFont(ofSize: 16))
+                secondTextField.setPlaceholder("请输入血糖值", color: .init("#999999"), font: UIFont.systemFont(ofSize: 16))
             }
         }
     }
@@ -56,7 +56,7 @@ class CLPopupTwoInputController: CLPopupManagerController {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textColor = .themeColor
+        titleLabel.textColor = .theme
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
@@ -68,7 +68,7 @@ class CLPopupTwoInputController: CLPopupManagerController {
     }()
     private lazy var fristLineView: UIView = {
         let fristLineView = UIView()
-        fristLineView.backgroundColor = .hex("#F0F0F0")
+        fristLineView.backgroundColor = .init("#F0F0F0")
         return fristLineView
     }()
     private lazy var fristTapView: UIControl = {
@@ -84,7 +84,7 @@ class CLPopupTwoInputController: CLPopupManagerController {
     }()
     private lazy var secondLineView: UIView = {
         let secondLineView = UIView()
-        secondLineView.backgroundColor = .hex("#F0F0F0")
+        secondLineView.backgroundColor = .init("#F0F0F0")
         return secondLineView
     }()
     private lazy var secondTapView: UIControl = {
@@ -101,7 +101,7 @@ class CLPopupTwoInputController: CLPopupManagerController {
         sureButton.setTitleColor(.white, for: .selected)
         sureButton.setTitleColor(.white, for: .highlighted)
         sureButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        sureButton.backgroundColor = .themeColor
+        sureButton.backgroundColor = .theme
         sureButton.layer.cornerRadius = 20
         sureButton.clipsToBounds = true
         sureButton.addTarget(self, action: #selector(sureAction), for: .touchUpInside)

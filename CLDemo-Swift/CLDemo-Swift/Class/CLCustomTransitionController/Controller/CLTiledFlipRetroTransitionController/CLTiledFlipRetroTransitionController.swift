@@ -24,7 +24,7 @@ class CLTiledFlipRetroTransitionController: CLController {
     }()
     private lazy var bottomButton: UIButton = {
         let view = UIButton()
-        view.backgroundColor = .hex("#FF6666")
+        view.backgroundColor = .init("#FF6666")
         view.setImage(UIImage(named: "add"), for: .normal)
         view.setImage(UIImage(named: "add"), for: .selected)
         view.setImage(UIImage(named: "add"), for: .highlighted)

@@ -308,17 +308,17 @@ private extension CLIngredientController {
         let success = NSMutableAttributedString("与", attributes: { $0
                 .font(PingFangSCBold(16))
                 .alignment(.left)
-                .foregroundColor(.hex("#333333"))
+                .foregroundColor(.init("#333333"))
                 .lineSpacing(8)
         }).addText("“\(text)”", attributes: { $0
                 .font(PingFangSCBold(16))
                 .alignment(.left)
-                .foregroundColor(.hex("#24C065"))
+                .foregroundColor(.init("#24C065"))
                 .lineSpacing(8)
         }).addText("相关", attributes: { $0
                 .font(PingFangSCBold(16))
                 .alignment(.left)
-                .foregroundColor(.hex("#333333"))
+                .foregroundColor(.init("#333333"))
                 .lineSpacing(8)
         })
         searchResultAttributedString = searchDataSource.isEmpty ? fail : success
@@ -427,7 +427,7 @@ extension CLIngredientController: UITableViewDataSource {
             cell.titleLabel.attributedText = NSMutableAttributedString(rightDataSource[indexPath.section][indexPath.row].tertiaryName, attributes: { $0
                     .font(PingFangSCMedium(14))
                     .alignment(.left)
-                    .foregroundColor(.hex("#666666"))
+                    .foregroundColor(.init("#666666"))
                     .lineSpacing(8)
             })
             return cell
@@ -437,7 +437,7 @@ extension CLIngredientController: UITableViewDataSource {
             cell.titleLabel.attributedText = indexPath.row == 0 ? searchResultAttributedString : NSMutableAttributedString(searchDataSource[indexPath.row - 1].tertiaryName, attributes: { $0
                     .font(PingFangSCMedium(14))
                     .alignment(.left)
-                    .foregroundColor(.hex("#666666"))
+                    .foregroundColor(.init("#666666"))
                     .lineSpacing(8)
             })
             cell.lineView.isHidden = indexPath.row != 0

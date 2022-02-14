@@ -91,7 +91,6 @@ open class SessionDelegate: NSObject {
 
     func append(
         _ task: SessionDataTask,
-        url: URL,
         callback: SessionDataTask.TaskCallback) -> DownloadTask
     {
         let token = task.addCallback(callback)
@@ -105,6 +104,7 @@ open class SessionDelegate: NSObject {
         guard let url = task.originalURL else {
             return
         }
+        task.removeAllCallbacks()
         tasks[url] = nil
     }
 
@@ -256,7 +256,7 @@ extension SessionDelegate: URLSessionDataDelegate {
         guard let sessionTask = self.task(for: task) else {
             return
         }
-        remove(sessionTask)
         sessionTask.onTaskDone.call((result, sessionTask.callbacks))
+        remove(sessionTask)
     }
 }

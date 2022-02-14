@@ -45,7 +45,7 @@ extension CLCircleRetroPushTransitionController {
 //MARK: - JmoVxia---布局
 private extension CLCircleRetroPushTransitionController {
     func initUI() {
-        view.backgroundColor = .hex("#996699")
+        view.backgroundColor = .init("#996699")
     }
     func makeConstraints() {
     }

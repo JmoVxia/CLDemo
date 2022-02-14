@@ -92,7 +92,7 @@ public enum MemoryStorage {
                     keys.remove(key)
                     continue
                 }
-                if object.estimatedExpiration.isPast {
+                if object.isExpired {
                     storage.removeObject(forKey: nsKey)
                     keys.remove(key)
                 }
@@ -126,7 +126,12 @@ public enum MemoryStorage {
             // The expiration indicates that already expired, no need to store.
             guard !expiration.isExpired else { return }
             
-            let object = StorageObject(value, key: key, expiration: expiration)
+            let object: StorageObject<T>
+            if config.keepWhenEnteringBackground {
+                object = BackgroundKeepingStorageObject(value, expiration: expiration)
+            } else {
+                object = StorageObject(value, expiration: expiration)
+            }
             storage.setObject(object, forKey: key as NSString, cost: value.cacheCost)
             keys.insert(key)
         }
@@ -141,7 +146,7 @@ public enum MemoryStorage {
             guard let object = storage.object(forKey: key as NSString) else {
                 return nil
             }
-            if object.expired {
+            if object.isExpired {
                 return nil
             }
             object.extendExpiration(extendingExpiration)
@@ -192,7 +197,18 @@ extension MemoryStorage {
         public var expiration: StorageExpiration = .seconds(300)
 
         /// The time interval between the storage do clean work for swiping expired items.
-        public let cleanInterval: TimeInterval
+        public var cleanInterval: TimeInterval
+        
+        /// Whether the newly added items to memory cache should be purged when the app goes to background.
+        ///
+        /// By default, the cached items in memory will be purged as soon as the app goes to background to ensure
+        /// least memory footprint. Enabling this would prevent this behavior and keep the items alive in cache even
+        /// when your app is not in foreground anymore.
+        ///
+        /// Default is `false`. After setting `true`, only the newly added cache objects are affected. Existing
+        /// objects which are already in the cache while this value was `false` will be still be purged when entering
+        /// background.
+        public var keepWhenEnteringBackground: Bool = false
 
         /// Creates a config from a given `totalCostLimit` value.
         ///
@@ -211,16 +227,39 @@ extension MemoryStorage {
 }
 
 extension MemoryStorage {
+    
+    class BackgroundKeepingStorageObject<T>: StorageObject<T>, NSDiscardableContent {
+        var accessing = true
+        func beginContentAccess() -> Bool {
+            if value != nil {
+                accessing = true
+            } else {
+                accessing = false
+            }
+            return accessing
+        }
+        
+        func endContentAccess() {
+            accessing = false
+        }
+        
+        func discardContentIfPossible() {
+            value = nil
+        }
+        
+        func isContentDiscarded() -> Bool {
+            return value == nil
+        }
+    }
+    
     class StorageObject<T> {
-        let value: T
+        var value: T?
         let expiration: StorageExpiration
-        let key: String
         
         private(set) var estimatedExpiration: Date
         
-        init(_ value: T, key: String, expiration: StorageExpiration) {
+        init(_ value: T, expiration: StorageExpiration) {
             self.value = value
-            self.key = key
             self.expiration = expiration
             
             self.estimatedExpiration = expiration.estimatedExpirationSinceNow
@@ -237,7 +276,7 @@ extension MemoryStorage {
             }
         }
         
-        var expired: Bool {
+        var isExpired: Bool {
             return estimatedExpiration.isPast
         }
     }

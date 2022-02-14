@@ -42,7 +42,7 @@ extension CLChatTextItem {
         attributedString.addAttributes([.paragraphStyle: style, .font: font, .foregroundColor: color], range: NSRange(location: 0, length: attributedString.length))
         
         for match in linkRanges + phoneRanges {
-            attributedString.addAttributes([.foregroundColor : UIColor.hex("#2658D9"), .underlineColor : UIColor.hex("#2658D9"), .underlineStyle : NSNumber(value: NSUnderlineStyle.single.rawValue)], range: match.result.range)
+            attributedString.addAttributes([.foregroundColor : UIColor("#2658D9"), .underlineColor : UIColor("#2658D9"), .underlineStyle : NSNumber(value: NSUnderlineStyle.single.rawValue)], range: match.result.range)
         }
         return attributedString
     }

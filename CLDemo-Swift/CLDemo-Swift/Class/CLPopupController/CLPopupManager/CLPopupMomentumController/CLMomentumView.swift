@@ -39,7 +39,7 @@ class CLMomentumView: CLGradientLayerView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addGestureRecognizer(panRecognier)
-        colors = [UIColor.hex("#fdbb2d").cgColor, UIColor.hex("#22c1c3").cgColor]
+        colors = [UIColor("#fdbb2d").cgColor, UIColor("#22c1c3").cgColor]
         addSubview(handleView)
         handleView.snp.makeConstraints { (make) in
             make.top.equalTo(10)

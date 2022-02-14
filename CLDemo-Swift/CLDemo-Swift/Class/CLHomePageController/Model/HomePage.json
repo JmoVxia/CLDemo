@@ -12,6 +12,10 @@
     "class": "CLDarkModeController"
   },
   {
+    "title": "UILabel 截断",
+    "class": "CLTruncationController"
+  },
+  {
     "title": "汉字转拼音",
     "class": "CLHanziPinyinController"
   },
@@ -34,6 +38,10 @@
   {
     "title": "聊天框架",
     "class": "CLChatController"
+  },
+  {
+    "title": "灰度图",
+    "class": "CLGrayscaleController"
   },
   {
     "title": "UITableView 多视频播放",

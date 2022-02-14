@@ -61,7 +61,7 @@ private extension CLHoneycombCollectionViewController {
         updateTitleLabel { label in
             label.text = "UICollectionView"
         }
-        view.backgroundColor = .hex("#93DAAE")
+        view.backgroundColor = .init("#93DAAE")
         view.addSubview(collectionView)
     }
     func makeConstraints() {

@@ -24,13 +24,13 @@ class CLChatPhotoAlbumBottomBar: UIView {
                     sendButton.setTitleColor(.white, for: .normal)
                     sendButton.setTitleColor(.white, for: .selected)
                     sendButton.setTitleColor(.white, for: .highlighted)
-                    sendButton.backgroundColor = .hex("#2DD178")
+                    sendButton.backgroundColor = .init("#2DD178")
                 }else {
                     sendButton.isUserInteractionEnabled = false
-                    sendButton.setTitleColor(.hex("#666666"), for: .normal)
-                    sendButton.setTitleColor(.hex("#666666"), for: .selected)
-                    sendButton.setTitleColor(.hex("#666666"), for: .highlighted)
-                    sendButton.backgroundColor = .hex("#EEEEED")
+                    sendButton.setTitleColor(.init("#666666"), for: .normal)
+                    sendButton.setTitleColor(.init("#666666"), for: .selected)
+                    sendButton.setTitleColor(.init("#666666"), for: .highlighted)
+                    sendButton.backgroundColor = .init("#EEEEED")
                 }
             }
         }
@@ -42,10 +42,10 @@ class CLChatPhotoAlbumBottomBar: UIView {
         view.setTitle("  发送  ", for: .normal)
         view.setTitle("  发送  ", for: .selected)
         view.setTitle("  发送  ", for: .highlighted)
-        view.setTitleColor(.hex("#666666"), for: .normal)
-        view.setTitleColor(.hex("#666666"), for: .selected)
-        view.setTitleColor(.hex("#666666"), for: .highlighted)
-        view.backgroundColor = .hex("#EEEEED")
+        view.setTitleColor(.init("#666666"), for: .normal)
+        view.setTitleColor(.init("#666666"), for: .selected)
+        view.setTitleColor(.init("#666666"), for: .highlighted)
+        view.backgroundColor = .init("#EEEEED")
         view.titleLabel?.font = PingFangSCMedium(16)
         view.clipsToBounds = true
         view.layer.cornerRadius = 3
@@ -57,9 +57,9 @@ class CLChatPhotoAlbumBottomBar: UIView {
     private lazy var closeButton: UIButton = {
         let view = UIButton()
         view.titleLabel?.font = PingFangSCMedium(16)
-        view.setTitleColor(.hex("#333333"), for: .normal)
-        view.setTitleColor(.hex("#333333"), for: .selected)
-        view.setTitleColor(.hex("#333333"), for: .highlighted)
+        view.setTitleColor(.init("#333333"), for: .normal)
+        view.setTitleColor(.init("#333333"), for: .selected)
+        view.setTitleColor(.init("#333333"), for: .highlighted)
         view.setTitle("关闭", for: .normal)
         view.setTitle("关闭", for: .selected)
         view.setTitle("关闭", for: .highlighted)

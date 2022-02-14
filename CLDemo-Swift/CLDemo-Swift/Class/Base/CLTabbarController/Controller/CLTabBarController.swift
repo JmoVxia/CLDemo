@@ -116,8 +116,8 @@ extension CLTabBarController {
 private extension CLTabBarController {
     func addChild(_ child: UIViewController, title: String, image: UIImage?, selectedImage: UIImage?) {
         child.title = title
-        child.tabBarItem.setTitleTextAttributes([.font : PingFangSCBold(11), .foregroundColor : UIColor.hex("333333")], for: .normal)
-        child.tabBarItem.setTitleTextAttributes([.font : PingFangSCBold(11), .foregroundColor : UIColor.hex("666666")], for: .selected)
+        child.tabBarItem.setTitleTextAttributes([.font : PingFangSCBold(11), .foregroundColor : UIColor("333333")], for: .normal)
+        child.tabBarItem.setTitleTextAttributes([.font : PingFangSCBold(11), .foregroundColor : UIColor("666666")], for: .selected)
         child.tabBarItem.image = image?.withRenderingMode(.alwaysOriginal)
         child.tabBarItem.selectedImage = selectedImage?.withRenderingMode(.alwaysOriginal)
         let navController = CLNavigationController(rootViewController: child)

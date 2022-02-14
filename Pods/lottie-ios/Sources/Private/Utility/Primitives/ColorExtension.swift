@@ -1,5 +1,5 @@
 //
-//  Color.swift
+//  LottieColor.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/14/19.
@@ -8,9 +8,9 @@
 import CoreGraphics
 import Foundation
 
-// MARK: - Color + Codable
+// MARK: - LottieColor + Codable
 
-extension Color: Codable {
+extension LottieColor: Codable {
 
   // MARK: Lifecycle
 
@@ -68,7 +68,33 @@ extension Color: Codable {
 
 }
 
-extension Color {
+// MARK: - LottieColor + AnyInitializable
+
+extension LottieColor: AnyInitializable {
+
+  init(value: Any) throws {
+    guard var array = value as? [Double] else {
+      throw InitializableError.invalidInput
+    }
+    var r: Double = array.count > 0 ? array.removeFirst() : 0
+    var g: Double = array.count > 0 ? array.removeFirst() : 0
+    var b: Double = array.count > 0 ? array.removeFirst() : 0
+    var a: Double = array.count > 0 ? array.removeFirst() : 1
+    if r > 1, g > 1, b > 1, a > 1 {
+      r /= 255
+      g /= 255
+      b /= 255
+      a /= 255
+    }
+    self.r = r
+    self.g = g
+    self.b = b
+    self.a = a
+  }
+
+}
+
+extension LottieColor {
 
   static var clearColor: CGColor {
     CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 0, 0, 0])!
@@ -77,6 +103,6 @@ extension Color {
   var cgColorValue: CGColor {
     // TODO: Fix color spaces
     let colorspace = CGColorSpaceCreateDeviceRGB()
-    return CGColor(colorSpace: colorspace, components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? Color.clearColor
+    return CGColor(colorSpace: colorspace, components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? LottieColor.clearColor
   }
 }

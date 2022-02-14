@@ -1,29 +1,33 @@
 PODS:
-  - CryptoSwift (1.4.2)
+  - CryptoSwift (1.6.0)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
-  - Kingfisher (7.1.2)
-  - libwebp (1.2.1):
-    - libwebp/demux (= 1.2.1)
-    - libwebp/mux (= 1.2.1)
-    - libwebp/webp (= 1.2.1)
-  - libwebp/demux (1.2.1):
+  - Kingfisher (7.4.0)
+  - libwebp (1.2.3):
+    - libwebp/demux (= 1.2.3)
+    - libwebp/mux (= 1.2.3)
+    - libwebp/webp (= 1.2.3)
+  - libwebp/demux (1.2.3):
     - libwebp/webp
-  - libwebp/mux (1.2.1):
+  - libwebp/mux (1.2.3):
     - libwebp/demux
-  - libwebp/webp (1.2.1)
-  - lottie-ios (3.3.0)
+  - libwebp/webp (1.2.3)
+  - lottie-ios (3.5.0)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
-  - SDWebImage (5.12.2):
-    - SDWebImage/Core (= 5.12.2)
-  - SDWebImage/Core (5.12.2)
-  - SDWebImageWebPCoder (0.8.4):
+  - SDWebImage (5.13.4):
+    - SDWebImage/Core (= 5.13.4)
+  - SDWebImage/Core (5.13.4)
+  - SDWebImageWebPCoder (0.9.1):
     - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.10)
-  - SnapKit (5.0.1)
+    - SDWebImage/Core (~> 5.13)
+  - SnapKit (5.6.0)
   - SwiftyJSON (5.0.1)
-  - TZImagePickerController (3.7.2)
+  - TZImagePickerController (3.8.3):
+    - TZImagePickerController/Basic (= 3.8.3)
+    - TZImagePickerController/Location (= 3.8.3)
+  - TZImagePickerController/Basic (3.8.3)
+  - TZImagePickerController/Location (3.8.3)
 
 DEPENDENCIES:
   - CryptoSwift
@@ -56,20 +60,20 @@ SPEC REPOS:
     - TZImagePickerController
 
 SPEC CHECKSUMS:
-  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
+  CryptoSwift: 562f8eceb40e80796fffc668b0cad9313284cfa6
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
-  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
-  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
+  Kingfisher: 596b207973051aae5e4c54a1c1cb39837ea10d36
+  libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
+  lottie-ios: c55158d67d0629a260625cc2ded2052b829e3c3e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
-  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
-  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
+  SDWebImageWebPCoder: 18503de6621dd2c420d680e33d46bf8e1d5169b0
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
-  TZImagePickerController: 0f926234c46362d3c4ed128832b6da59b2d9917e
+  TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
 
 PODFILE CHECKSUM: e26ada5dd4d938e88a325870738daf29383c4546
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

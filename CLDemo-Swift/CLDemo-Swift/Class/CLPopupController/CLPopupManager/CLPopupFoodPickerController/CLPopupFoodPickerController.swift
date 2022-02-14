@@ -12,7 +12,7 @@ class CLPopupFoodPickerController: CLPopupManagerController {
     var selectedCallback: ((String, String, String, String)->())?
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()
-        topToolBar.backgroundColor = .hex("#F8F6F9")
+        topToolBar.backgroundColor = .init("#F8F6F9")
         return topToolBar
     }()
     lazy var cancelButton: UIButton = {
@@ -21,9 +21,9 @@ class CLPopupFoodPickerController: CLPopupManagerController {
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.setTitle("取消", for: .selected)
         cancelButton.setTitle("取消", for: .highlighted)
-        cancelButton.setTitleColor(.hex("#666666"), for: .normal)
-        cancelButton.setTitleColor(.hex("#666666"), for: .selected)
-        cancelButton.setTitleColor(.hex("#666666"), for: .highlighted)
+        cancelButton.setTitleColor(.init("#666666"), for: .normal)
+        cancelButton.setTitleColor(.init("#666666"), for: .selected)
+        cancelButton.setTitleColor(.init("#666666"), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return cancelButton
     }()
@@ -31,7 +31,7 @@ class CLPopupFoodPickerController: CLPopupManagerController {
         let view = UILabel()
         view.text = "选择饮食"
         view.font = PingFangSCBold(16)
-        view.textColor = .hex("#666666")
+        view.textColor = .init("#666666")
         return view
     }()
     lazy var foodPicker: CLPopupFoodPickerView = {

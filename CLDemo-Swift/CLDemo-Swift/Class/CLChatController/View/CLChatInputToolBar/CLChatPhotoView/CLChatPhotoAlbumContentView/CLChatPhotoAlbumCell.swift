@@ -55,7 +55,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
     private var gestureMinimumTranslation: CGFloat = 10.0
     private lazy var tipsBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .hex("0x323232", alpha: 0.85)
+        view.backgroundColor = .init("0x323232", alpha: 0.85)
         view.isHidden = true
         view.clipsToBounds = true
         return view

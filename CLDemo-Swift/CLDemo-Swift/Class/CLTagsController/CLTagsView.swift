@@ -20,7 +20,7 @@ class CLTagsView: UIView {
     lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = UIColor.randomColor
+        label.textColor = .random
         label.backgroundColor = UIColor.white
         return label
     }()

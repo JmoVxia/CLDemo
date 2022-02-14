@@ -36,10 +36,10 @@ class CLBubbleTransitionPresentController: CLController {
     lazy var bubbleDelegate: CLBubbleTransitionDelegate = {
         let delegate = CLBubbleTransitionDelegate {[weak self] in
             guard let self = self else { return (.zero , .white) }
-            return (self.startCenter, .hex("#FF6666"))
+            return (self.startCenter, .init("#FF6666"))
         } endCallback: {[weak self] in
             guard let self = self else { return (.zero , .white) }
-            return (self.bottomButton.center, .hex("#FF6666"))
+            return (self.bottomButton.center, .init("#FF6666"))
         }
         delegate.interactiveTransition.attach(to: self)
         return delegate
@@ -73,7 +73,7 @@ extension CLBubbleTransitionPresentController {
 private extension CLBubbleTransitionPresentController {
     func initUI() {
         transitioningDelegate = bubbleDelegate
-        view.backgroundColor = .hex("#FF6666")
+        view.backgroundColor = .init("#FF6666")
         view.addSubview(bottomButton)
     }
     func makeConstraints() {
