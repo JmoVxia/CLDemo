@@ -27,8 +27,8 @@ class CLChatCell: UITableViewCell {
         return bottomContentView
     }()
     ///发送中动画view
-    lazy var sendingAnimation: AnimationView = {
-        let view = AnimationView.init(animation: Animation.named("send_timeout"))
+    lazy var sendingAnimation: LottieAnimationView = {
+        let view = LottieAnimationView.init(animation: LottieAnimation.named("send_timeout"))
         view.loopMode = .loop
         view.isHidden = true
         view.backgroundBehavior = .pauseAndRestore

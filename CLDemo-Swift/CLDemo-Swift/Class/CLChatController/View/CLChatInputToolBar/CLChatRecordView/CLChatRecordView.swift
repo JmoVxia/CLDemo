@@ -52,8 +52,8 @@ class CLChatRecordView: UIView {
         return redcircle
     }()
     ///波纹动画
-    private lazy var waveView: AnimationView = {
-        let view = AnimationView.init(name: "recoredWave_dk")
+    private lazy var waveView: LottieAnimationView = {
+        let view = LottieAnimationView.init(name: "recoredWave_dk")
         view.loopMode = .loop
         view.isHidden = true
         view.backgroundBehavior = .pauseAndRestore

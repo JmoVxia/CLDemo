@@ -19,15 +19,15 @@ class CLChatVoiceCell: CLChatCell {
         return view
     }()
     ///左侧播放动画
-    private lazy var leftPlayAnimation: AnimationView = {
-        let view = AnimationView.init(animation: Animation.named("data-left"))
+    private lazy var leftPlayAnimation: LottieAnimationView = {
+        let view = LottieAnimationView.init(animation: LottieAnimation.named("data-left"))
         view.loopMode = .loop
         view.backgroundBehavior = .pauseAndRestore
         return view
     }()
     ///左侧播放动画
-    private lazy var rightPlayAnimation: AnimationView = {
-        let view = AnimationView.init(animation: Animation.named("data-right"))
+    private lazy var rightPlayAnimation: LottieAnimationView = {
+        let view = LottieAnimationView.init(animation: LottieAnimation.named("data-right"))
         view.loopMode = .loop
         view.backgroundBehavior = .pauseAndRestore
         return view

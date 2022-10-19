@@ -16,6 +16,10 @@
     "class": "CLTruncationController"
   },
   {
+    "title": "自定义日历",
+    "class": "CLCalendarController"
+  },
+  {
     "title": "汉字转拼音",
     "class": "CLHanziPinyinController"
   },

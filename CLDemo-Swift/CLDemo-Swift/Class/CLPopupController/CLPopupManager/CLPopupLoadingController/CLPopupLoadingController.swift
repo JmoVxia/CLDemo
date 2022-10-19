@@ -17,8 +17,8 @@ class CLPopupLoadingController: CLPopupManagerController {
         view.clipsToBounds = true
         return view
     }()
-    private lazy var loadingView: AnimationView = {
-        let view = AnimationView.init(name: "loading")
+    private lazy var loadingView: LottieAnimationView = {
+        let view = LottieAnimationView.init(name: "loading")
         view.backgroundBehavior = .pauseAndRestore
         view.loopMode = .loop
         view.play()
