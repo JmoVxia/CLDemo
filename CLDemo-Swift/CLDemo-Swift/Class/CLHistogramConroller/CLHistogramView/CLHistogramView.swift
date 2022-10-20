@@ -46,7 +46,7 @@ class CLHistogramView: UIView {
     private lazy var lessLabel: UILabel = {
         let view = UILabel()
         view.textColor = .green
-        view.font = PingFangSCMedium(10)
+        view.font = .mediumPingFangSC(10)
         view.textAlignment = .center
         view.text = "80%"
         return view
@@ -54,7 +54,7 @@ class CLHistogramView: UIView {
     private lazy var nomalLabel: UILabel = {
         let view = UILabel()
         view.textColor = .orange
-        view.font = PingFangSCMedium(10)
+        view.font = .mediumPingFangSC(10)
         view.textAlignment = .center
         view.text = "100%"
         return view
@@ -62,7 +62,7 @@ class CLHistogramView: UIView {
     private lazy var exceedLabel: UILabel = {
         let view = UILabel()
         view.textColor = .red
-        view.font = PingFangSCMedium(10)
+        view.font = .mediumPingFangSC(10)
         view.textAlignment = .center
         view.text = "150%"
         return view
@@ -70,7 +70,7 @@ class CLHistogramView: UIView {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.textColor = .black
-        view.font = PingFangSCMedium(14)
+        view.font = .mediumPingFangSC(14)
         view.textAlignment = .right
         view.text = "名称"
         return view
@@ -78,7 +78,7 @@ class CLHistogramView: UIView {
     private lazy var totalLabel: UILabel = {
         let view = UILabel()
         view.textColor = .black
-        view.font = PingFangSCMedium(14)
+        view.font = .mediumPingFangSC(14)
         view.textAlignment = .left
         view.text = "总计"
         return view

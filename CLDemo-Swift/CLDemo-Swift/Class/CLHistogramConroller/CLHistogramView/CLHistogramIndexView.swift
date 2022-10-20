@@ -17,7 +17,7 @@ class CLHistogramIndexView: UIView {
     }()
     lazy var indexLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(10)
+        view.font = .mediumPingFangSC(10)
         view.textColor = UIColor.orange.withAlphaComponent(0.5)
         return view
     }()

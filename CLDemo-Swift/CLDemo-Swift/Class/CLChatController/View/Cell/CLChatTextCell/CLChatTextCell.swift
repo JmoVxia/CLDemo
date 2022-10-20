@@ -24,7 +24,7 @@ class CLChatTextCell: CLChatCell {
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.textColor = .white
-        view.font = PingFangSCMedium(15)
+        view.font = .mediumPingFangSC(15)
         view.numberOfLines = 0
         view.preferredMaxLayoutWidth = 200.autoWidth()
         return view
@@ -72,7 +72,7 @@ extension CLChatTextCell {
         }
     }
 }
-extension CLChatTextCell: CLCellProtocol {
+extension CLChatTextCell: CLRowProtocol {
     func setItem(_ item: CLChatTextItem, indexPath: IndexPath) {
         titleLabel.textColor = item.isFromMyself ? .white : .black
         titleLabel.attributedText = item.attributedText

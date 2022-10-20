@@ -13,7 +13,7 @@ class CLChatTextItem: CLChatItem {
     var text: String = "" {
         didSet {
             height = nil
-            attributedText = attributedString(with: text, lineSpacing: 2, paragraphSpacing: 0, alignment: .left, font: PingFangSCMedium(15), color: isFromMyself ? .white : .black)
+            attributedText = attributedString(with: text, lineSpacing: 2, paragraphSpacing: 0, alignment: .left, font: .mediumPingFangSC(15), color: isFromMyself ? .white : .black)
         }
     }
     var willDisplayCallback: ((IndexPath) -> ())?
@@ -47,8 +47,8 @@ extension CLChatTextItem {
         return attributedString
     }
 }
-extension CLChatTextItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLChatTextItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLChatTextCell.self
     }
     func cellHeight() -> CGFloat {

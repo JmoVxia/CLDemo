@@ -28,7 +28,7 @@ class CLDarkModeController: CLController {
     private lazy var followButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .color(light: .gray, dark: .black)
-        view.titleLabel?.font = PingFangSCMedium(18)
+        view.titleLabel?.font = .mediumPingFangSC(18)
         view.setTitle("Follow", for: .normal)
         view.setTitle("Follow", for: .selected)
         view.setTitle("Follow", for: .highlighted)
@@ -41,7 +41,7 @@ class CLDarkModeController: CLController {
     private lazy var lightButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .color(light: .gray, dark: .black)
-        view.titleLabel?.font = PingFangSCMedium(18)
+        view.titleLabel?.font = .mediumPingFangSC(18)
         view.setTitle("light", for: .normal)
         view.setTitle("light", for: .selected)
         view.setTitle("light", for: .highlighted)
@@ -54,7 +54,7 @@ class CLDarkModeController: CLController {
     private lazy var darkButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .color(light: .gray, dark: .black)
-        view.titleLabel?.font = PingFangSCMedium(18)
+        view.titleLabel?.font = .mediumPingFangSC(18)
         view.setTitle("Dark", for: .normal)
         view.setTitle("Dark", for: .selected)
         view.setTitle("Dark", for: .highlighted)

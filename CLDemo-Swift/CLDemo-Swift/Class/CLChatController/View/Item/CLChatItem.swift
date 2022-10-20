@@ -20,11 +20,11 @@ enum CLChatMessageSendState: String {
 class CLChatItem: NSObject {
     ///名字高度
     var nameHeight: CGFloat {
-        return ceil(PingFangSCMedium(12).lineHeight)
+        return ceil(UIFont.mediumPingFangSC(12).lineHeight)
     }
     ///时间高度
     var timeHeight: CGFloat {
-        return ceil(PingFangSCMedium(12).lineHeight)
+        return ceil(UIFont.mediumPingFangSC(12).lineHeight)
     }
     ///cell高度
     var height: CGFloat?

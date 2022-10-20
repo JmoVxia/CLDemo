@@ -118,10 +118,6 @@
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"波浪视图", nil) controllerClass:[CLWaveViewController class]]];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"气泡拖拽", nil) controllerClass:[CLBubbleViewController class]]];
         [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"自定义二维码", nil) controllerClass:[CLCustomQRCodeController class]]];
-//        [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"气泡弹框", nil) controllerClass:[CLPopoverController class]]];
-//        [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"旋转图片", nil) controllerClass:[CLRotatingPictureViewController class]]];
-//        [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"日志", nil) controllerClass:[NSLogViewController class]]];
-//        [_arrayDS addObject: [[CLHomepageModel alloc] initName:NSLocalizedString(@"过渡动画", nil) controllerClass:[CLTransitionViewController class]]];
     }
     return _arrayDS;
 }

@@ -17,7 +17,7 @@ class CLPopupFoodPickerController: CLPopupManagerController {
     }()
     lazy var cancelButton: UIButton = {
         let cancelButton = UIButton()
-        cancelButton.titleLabel?.font = PingFangSCMedium(14)
+        cancelButton.titleLabel?.font = .mediumPingFangSC(14)
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.setTitle("取消", for: .selected)
         cancelButton.setTitle("取消", for: .highlighted)
@@ -30,7 +30,7 @@ class CLPopupFoodPickerController: CLPopupManagerController {
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "选择饮食"
-        view.font = PingFangSCBold(16)
+        view.font = .boldPingFangSC(16)
         view.textColor = .init("#666666")
         return view
     }()

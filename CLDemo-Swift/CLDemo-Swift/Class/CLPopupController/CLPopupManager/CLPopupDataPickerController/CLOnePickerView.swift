@@ -38,7 +38,7 @@ class CLOnePickerView: UIView {
     }()
     private lazy var unitLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(14)
+        view.font = .mediumPingFangSC(14)
         view.textColor = .theme
         return view
     }()

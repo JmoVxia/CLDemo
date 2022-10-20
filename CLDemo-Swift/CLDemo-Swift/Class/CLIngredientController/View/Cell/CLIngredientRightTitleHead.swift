@@ -36,7 +36,7 @@ class CLIngredientRightTitleHead: UITableViewHeaderFooterView {
 
     lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCBold(16)
+        view.font = .boldPingFangSC(16)
         view.textColor = .init("#333333")
         view.textAlignment = .left
         view.setContentHuggingPriority(.required, for: .horizontal)

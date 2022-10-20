@@ -53,7 +53,7 @@ class CLController: UIViewController {
     private var identifier: String?
     private lazy var titleLabel: UILabel = {
        let view = UILabel()
-        view.font = PingFangSCBold(18)
+        view.font = .boldPingFangSC(18)
         view.textColor = .color(light: .init("333333"), dark: .white)
         return view
     }()

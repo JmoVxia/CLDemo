@@ -15,7 +15,7 @@ class CLCalendarBackgroundView: UICollectionReusableView {
     private lazy var textLabel: UILabel = {
         let view = UILabel()
         view.backgroundColor = .clear
-        view.font = PingFangSCBold(80)
+        view.font = .boldPingFangSC(80)
         view.textAlignment = .center
         view.isUserInteractionEnabled = false
         return view

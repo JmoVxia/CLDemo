@@ -23,6 +23,7 @@ extension NSAttributedString {
         self.init(attachment: attch)
     }
 }
+
 extension NSAttributedString {
     class AttributesItem {
         private(set) var attributes = [NSAttributedString.Key: Any]()
@@ -155,7 +156,6 @@ extension NSAttributedString {
     }
 }
 
-
 extension NSAttributedString {
     /// 计算行数
     func calculateLines(_ width: CGFloat) -> Int {
@@ -178,7 +178,7 @@ extension NSAttributedString {
     func lines(_ width: CGFloat) -> [CTLine] {
         let framesetter = CTFramesetterCreateWithAttributedString(self)
         let path = CGMutablePath(rect: CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude), transform: nil)
-        let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, length), path, nil)
+        let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
         return CTFrameGetLines(frame) as? [CTLine] ?? []
     }
 }

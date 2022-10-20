@@ -57,7 +57,7 @@ class CLHistogramCell: UITableViewCell {
     private var cornerRadius: CGFloat = 3
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(10)
+        view.font = .mediumPingFangSC(10)
         view.textColor = .lightGray
         view.textAlignment = .right
         return view

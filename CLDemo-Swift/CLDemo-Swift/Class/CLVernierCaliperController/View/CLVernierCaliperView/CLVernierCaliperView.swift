@@ -10,7 +10,7 @@ import UIKit
 
 class CLVernierCaliperConfigure {
     ///文字字体
-    var textFont: UIFont = PingFangSCMedium(14)
+    var textFont: UIFont = .mediumPingFangSC(14)
     ///间隔值，每两条相隔多少值
     var gap: Int = 12
     ///长线条

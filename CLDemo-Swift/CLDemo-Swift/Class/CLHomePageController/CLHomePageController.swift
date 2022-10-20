@@ -91,7 +91,7 @@ private extension CLHomePageController {
                 guard let self = self, let item = item else { return }
                 self.push(item.type, title: item.title)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         tableView.reloadData()
     }

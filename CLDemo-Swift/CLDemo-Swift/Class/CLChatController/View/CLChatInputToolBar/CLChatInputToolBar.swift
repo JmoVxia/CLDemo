@@ -338,7 +338,7 @@ class CLChatInputToolBar: UIView {
         }
     }
     ///文字大小
-    var textFont: UIFont = PingFangSCMedium(15) {
+    var textFont: UIFont = .mediumPingFangSC(15) {
         didSet {
             textView.font = textFont
         }

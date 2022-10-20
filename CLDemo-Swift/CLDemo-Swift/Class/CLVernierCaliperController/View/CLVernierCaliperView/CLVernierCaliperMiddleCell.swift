@@ -17,7 +17,7 @@ class CLVernierCaliperMiddleCell: UICollectionViewCell {
     var gap: Int = 0
     var long: CGFloat = 0.0
     var short: CGFloat = 0.0
-    var textFont: UIFont = PingFangSCMedium(14)
+    var textFont: UIFont = .mediumPingFangSC(14)
     var limitDecimal: NSDecimalNumber = NSDecimalNumber(0)
 }
 extension CLVernierCaliperMiddleCell {

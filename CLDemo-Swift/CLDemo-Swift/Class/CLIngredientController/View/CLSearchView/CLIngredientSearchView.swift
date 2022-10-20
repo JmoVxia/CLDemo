@@ -49,7 +49,7 @@ class CLIngredientSearchView: UIView {
         view.tintColor = .theme
         view.returnKeyType = .search
         view.enablesReturnKeyAutomatically = true
-        view.setPlaceholder("请输入关键字", color: .init("#D4D4D4"), font: PingFangSCMedium(14))
+        view.setPlaceholder("请输入关键字", color: .init("#D4D4D4"), font: .mediumPingFangSC(14))
         view.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         return view
     }()
@@ -67,7 +67,7 @@ class CLIngredientSearchView: UIView {
     private lazy var cancelButton: UIButton = {
         let view = UIButton()
         view.alpha = 0.0
-        view.titleLabel?.font = PingFangSCMedium(14)
+        view.titleLabel?.font = .mediumPingFangSC(14)
         view.setTitle("取消", for: .normal)
         view.setTitle("取消", for: .selected)
         view.setTitle("取消", for: .highlighted)

@@ -11,13 +11,13 @@ import UIKit
 class CLRecordVernierCaliperCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         view.textColor = UIColor("#333333")
         return view
     }()
     private lazy var unitLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         view.textColor = UIColor("#999999")
         return view
     }()
@@ -91,7 +91,7 @@ extension CLRecordVernierCaliperCell {
         }
     }
 }
-extension CLRecordVernierCaliperCell: CLCellProtocol {
+extension CLRecordVernierCaliperCell: CLRowProtocol {
     func setItem(_ item: CLRecordVernierCaliperItem, indexPath: IndexPath) {
         nameLabel.text = item.title
         unitLabel.text = "(\(item.unit))"

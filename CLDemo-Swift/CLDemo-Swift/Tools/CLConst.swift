@@ -41,16 +41,6 @@ var safeAreaEdgeInsets: UIEdgeInsets {
 var isIPhoneXScreen: Bool {
     return safeAreaEdgeInsets.bottom > 0
 }
-///PingFang-SC-Bold字体
-func PingFangSCBold(_ size: CGFloat, scale: Bool = true) -> UIFont {
-    let fontSize: CGFloat = scale ? size * CLFontManager.scaleCoefficient : size
-    return UIFont(name: "HelveticaNeue-Medium", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize)
-}
-///PingFang-SC-Medium字体
-func PingFangSCMedium(_ size: CGFloat, scale: Bool = true) -> UIFont {
-    let fontSize: CGFloat = scale ? size * CLFontManager.scaleCoefficient : size
-    return UIFont(name: "HelveticaNeue", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
-}
 
 ///秒级时间戳格式化
 func timeStampFormat(with timeStamp:String, format: String) -> String {

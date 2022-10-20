@@ -22,8 +22,8 @@ class CLPlayVideoitem: NSObject {
         size = calculateScaleSize(imageSize: CGSize(width: oneRef.width, height: oneRef.height))
     }
 }
-extension CLPlayVideoitem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLPlayVideoitem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLPlayVideoCell.self
     }
     func cellHeight() -> CGFloat {

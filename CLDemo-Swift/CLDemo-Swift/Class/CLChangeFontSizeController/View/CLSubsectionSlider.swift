@@ -50,7 +50,7 @@ class CLSubsectionSlider: UIView {
     private lazy var leftLabel: UILabel = {
         let view = UILabel()
         view.textColor = .black
-        view.font = PingFangSCMedium(13, scale: false)
+        view.font = .mediumPingFangSC(13, scale: false)
         view.text = "A"
         return view
     }()
@@ -58,7 +58,7 @@ class CLSubsectionSlider: UIView {
     private lazy var standardLabel: UILabel = {
         let view = UILabel()
         view.textColor = .gray
-        view.font = PingFangSCMedium(15.5, scale: false)
+        view.font = .mediumPingFangSC(15.5, scale: false)
         view.text = "标准"
         return view
     }()
@@ -66,7 +66,7 @@ class CLSubsectionSlider: UIView {
     private lazy var rightLabel: UILabel = {
         let view = UILabel()
         view.textColor = .black
-        view.font = PingFangSCMedium(24, scale: false)
+        view.font = .mediumPingFangSC(24, scale: false)
         view.text = "A"
         return view
     }()

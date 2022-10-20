@@ -17,7 +17,7 @@ class CLChatRecordTipsView: UIView {
     }
     private lazy var tipsLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(15)
+        view.font = .mediumPingFangSC(15)
         view.text = "松手发送 滑动取消"
         view.textColor = .theme
         view.textAlignment = .center

@@ -200,7 +200,7 @@ extension CLPopupFoodPickerView {
         button.setTitle(title, for: .selected)
         button.setTitleColor(titleColor, for: .selected)
         button.setTitleColor(titleColor, for: .normal)
-        button.titleLabel?.font = PingFangSCBold(16)
+        button.titleLabel?.font = .boldPingFangSC(16)
         return button
     }
 }

@@ -11,7 +11,7 @@ class CLChatEmojiTextCell: UICollectionViewCell {
     private lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = PingFangSCMedium(200)
+        label.font = .mediumPingFangSC(200)
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
         return label

@@ -39,7 +39,7 @@ class CLChatController: CLController {
     private lazy var inputToolBar: CLChatInputToolBar = {
         let inputToolBar = CLChatInputToolBar()
         inputToolBar.delegate = self
-        inputToolBar.textFont = PingFangSCMedium(15)
+        inputToolBar.textFont = .mediumPingFangSC(15)
         inputToolBar.placeholder = "请输入文字..."
         return inputToolBar
     }()
@@ -70,8 +70,8 @@ extension CLChatController {
     }
     private func reloadData() {
         tableView.reloadData()
-        if tableViewHepler.dataSource.count >= 1 {
-            let item = max(tableViewHepler.dataSource.count - 1, 0)
+        if tableViewHepler.rows.count >= 1 {
+            let item = max(tableViewHepler.rows.count - 1, 0)
             tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: true)
         }
     }
@@ -81,7 +81,7 @@ extension CLChatController {
         messages.forEach { (text) in
             let item = CLChatTipsItem()
             item.text = text
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         reloadData()
     }
@@ -90,12 +90,12 @@ extension CLChatController {
             let rightItem = CLChatTextItem()
             rightItem.isFromMyself = true
             rightItem.text = text
-            tableViewHepler.dataSource.append(rightItem)
+            tableViewHepler.rows.append(rightItem)
             
             let leftItem = CLChatTextItem()
             leftItem.isFromMyself = false
             leftItem.text = text
-            tableViewHepler.dataSource.append(leftItem)
+            tableViewHepler.rows.append(leftItem)
         }
         reloadData()
     }
@@ -108,13 +108,13 @@ extension CLChatController {
             rightItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: (rightItem.messageId + "previewImage"))
             rightItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
             rightItem.isFromMyself = true
-            tableViewHepler.dataSource.append(rightItem)
+            tableViewHepler.rows.append(rightItem)
             
             let leftItem = CLChatImageItem()
             leftItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: (leftItem.messageId + "previewImage"))
             leftItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
             leftItem.isFromMyself = false
-            tableViewHepler.dataSource.append(leftItem)
+            tableViewHepler.rows.append(leftItem)
         }
         reloadData()
     }
@@ -123,14 +123,14 @@ extension CLChatController {
             let item = CLChatVoiceItem()
             item.duration = duration
             item.path = path
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do {
             let item = CLChatVoiceItem()
             item.isFromMyself = false
             item.duration = duration
             item.path = path
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         reloadData()
     }

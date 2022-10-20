@@ -12,7 +12,7 @@ import UIKit
 class CLPlayGifCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         view.textColor = .black
         view.textAlignment = .left
         return view
@@ -41,7 +41,7 @@ class CLPlayGifCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension CLPlayGifCell: CLCellProtocol {
+extension CLPlayGifCell: CLRowProtocol {
     func setItem(_ item: CLPlayGifItem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in

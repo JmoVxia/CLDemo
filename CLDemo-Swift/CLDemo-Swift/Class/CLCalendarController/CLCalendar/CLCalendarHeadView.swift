@@ -18,7 +18,7 @@ class CLCalendarHeadView: UICollectionReusableView {
         view.textAlignment = .center
         view.backgroundColor = .clear
         view.textColor = "#333333".uiColor
-        view.font = PingFangSCBold(14)
+        view.font = .boldPingFangSC(14)
         return view
     }()
 

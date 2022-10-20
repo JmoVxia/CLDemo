@@ -18,8 +18,8 @@ class CLBreakPointResumeItem: NSObject {
         progress = fileAttribute.totalBytes <= 0 ? 0 : min(max(0, CGFloat(fileAttribute.currentBytes) / CGFloat(fileAttribute.totalBytes)), 1)
     }
 }
-extension CLBreakPointResumeItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLBreakPointResumeItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLBreakPointResumeCell.self
     }
     func cellHeight() -> CGFloat {

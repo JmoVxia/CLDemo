@@ -299,24 +299,24 @@ private extension CLIngredientController {
         CLLog("耗时：\(CGFloat(end - start) / 1000)，数组个数：\(dataSource.count)，筛选后个数：\(searchDataSource.count)")
 
         let fail = NSMutableAttributedString("未找到关于“\(text)”相关信息", attributes: { $0
-                .font(PingFangSCBold(16))
+                .font(.boldPingFangSC(16))
                 .alignment(.left)
                 .foregroundColor(.red)
                 .lineSpacing(8)
         })
 
         let success = NSMutableAttributedString("与", attributes: { $0
-                .font(PingFangSCBold(16))
+                .font(.boldPingFangSC(16))
                 .alignment(.left)
                 .foregroundColor(.init("#333333"))
                 .lineSpacing(8)
         }).addText("“\(text)”", attributes: { $0
-                .font(PingFangSCBold(16))
+                .font(.boldPingFangSC(16))
                 .alignment(.left)
                 .foregroundColor(.init("#24C065"))
                 .lineSpacing(8)
         }).addText("相关", attributes: { $0
-                .font(PingFangSCBold(16))
+                .font(.boldPingFangSC(16))
                 .alignment(.left)
                 .foregroundColor(.init("#333333"))
                 .lineSpacing(8)
@@ -425,7 +425,7 @@ extension CLIngredientController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CLIngredientRightTitleCell", for: indexPath)
             guard let cell = cell as? CLIngredientRightTitleCell else { return cell }
             cell.titleLabel.attributedText = NSMutableAttributedString(rightDataSource[indexPath.section][indexPath.row].tertiaryName, attributes: { $0
-                    .font(PingFangSCMedium(14))
+                    .font(.mediumPingFangSC(14))
                     .alignment(.left)
                     .foregroundColor(.init("#666666"))
                     .lineSpacing(8)
@@ -435,7 +435,7 @@ extension CLIngredientController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CLIngredientSearchCell", for: indexPath)
             guard let cell = cell as? CLIngredientSearchCell else { return cell }
             cell.titleLabel.attributedText = indexPath.row == 0 ? searchResultAttributedString : NSMutableAttributedString(searchDataSource[indexPath.row - 1].tertiaryName, attributes: { $0
-                    .font(PingFangSCMedium(14))
+                    .font(.mediumPingFangSC(14))
                     .alignment(.left)
                     .foregroundColor(.init("#666666"))
                     .lineSpacing(8)

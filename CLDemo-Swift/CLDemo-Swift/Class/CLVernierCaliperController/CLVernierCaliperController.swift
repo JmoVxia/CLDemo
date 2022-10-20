@@ -92,7 +92,7 @@ private extension CLVernierCaliperController {
             item.valueChangeCallback = { (value) in
                 CLLog("血糖\(value)")
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLRecordVernierCaliperItem()
@@ -108,7 +108,7 @@ private extension CLVernierCaliperController {
             item.valueChangeCallback = { (value) in
                 CLLog("心率次数\(value)")
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLRecordVernierCaliperItem()
@@ -124,7 +124,7 @@ private extension CLVernierCaliperController {
             item.valueChangeCallback = { (value) in
                 CLLog("体温\(value)")
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         tableView.reloadData()
     }

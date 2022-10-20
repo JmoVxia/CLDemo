@@ -84,7 +84,7 @@ private extension CLCustomTransitionController {
                 guard let self = self, let item = item else { return }
                 self.push(item.type, title: item.title)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLTitleCellItem(title: "圆形".localized, type: CLCircleRetroTransitionController.self)
@@ -93,7 +93,7 @@ private extension CLCustomTransitionController {
                 guard let self = self, let item = item else { return }
                 self.push(item.type, title: item.title)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLTitleCellItem(title: "翻盖".localized, type: CLTiledFlipRetroTransitionController.self)
@@ -102,7 +102,7 @@ private extension CLCustomTransitionController {
                 guard let self = self, let item = item else { return }
                 self.push(item.type, title: item.title)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
     }
 }

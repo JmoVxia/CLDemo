@@ -46,7 +46,7 @@ class CLChatPhotoAlbumBottomBar: UIView {
         view.setTitleColor(.init("#666666"), for: .selected)
         view.setTitleColor(.init("#666666"), for: .highlighted)
         view.backgroundColor = .init("#EEEEED")
-        view.titleLabel?.font = PingFangSCMedium(16)
+        view.titleLabel?.font = .mediumPingFangSC(16)
         view.clipsToBounds = true
         view.layer.cornerRadius = 3
         view.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
@@ -56,7 +56,7 @@ class CLChatPhotoAlbumBottomBar: UIView {
     ///关闭按钮
     private lazy var closeButton: UIButton = {
         let view = UIButton()
-        view.titleLabel?.font = PingFangSCMedium(16)
+        view.titleLabel?.font = .mediumPingFangSC(16)
         view.setTitleColor(.init("#333333"), for: .normal)
         view.setTitleColor(.init("#333333"), for: .selected)
         view.setTitleColor(.init("#333333"), for: .highlighted)

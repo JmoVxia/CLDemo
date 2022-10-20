@@ -21,13 +21,13 @@ class CLTitleCell: UITableViewCell {
 //MARK: - JmoVxia---布局
 private extension CLTitleCell {
     func initUI() {
-        textLabel?.font = PingFangSCMedium(18)
+        textLabel?.font = .mediumPingFangSC(18)
         selectionStyle = .none
     }
     func makeConstraints() {
     }
 }
-extension CLTitleCell: CLCellProtocol {
+extension CLTitleCell: CLRowProtocol {
     func setItem(_ item: CLTitleCellItem, indexPath: IndexPath) {
         textLabel?.text = item.title
         accessoryType = item.accessoryType

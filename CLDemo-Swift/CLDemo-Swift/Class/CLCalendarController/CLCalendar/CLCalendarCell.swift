@@ -28,14 +28,14 @@ class CLCalendarCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
-        view.font = PingFangSCMedium(13)
+        view.font = .mediumPingFangSC(13)
         return view
     }()
 
     private lazy var subtitleLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
-        view.font = PingFangSCMedium(10)
+        view.font = .mediumPingFangSC(10)
         return view
     }()
 

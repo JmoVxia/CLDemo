@@ -12,14 +12,14 @@ import UIKit
 class CLBreakPointResumeCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         view.textColor = .black
         view.textAlignment = .left
         return view
     }()
     private lazy var progressLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(12)
+        view.font = .mediumPingFangSC(12)
         view.textColor = .orange
         view.textAlignment = .left
         return view
@@ -30,7 +30,7 @@ class CLBreakPointResumeCell: UITableViewCell {
     }()
     private lazy var downloadButton: UIButton = {
         let view = UIButton()
-        view.titleLabel?.font = PingFangSCMedium(16)
+        view.titleLabel?.font = .mediumPingFangSC(16)
         view.setTitle("下载", for: .normal)
         view.setTitle("下载", for: .selected)
         view.setTitle("下载", for: .highlighted)
@@ -42,7 +42,7 @@ class CLBreakPointResumeCell: UITableViewCell {
     }()
     private lazy var cancelButton: UIButton = {
         let view = UIButton()
-        view.titleLabel?.font = PingFangSCMedium(16)
+        view.titleLabel?.font = .mediumPingFangSC(16)
         view.setTitle("取消", for: .normal)
         view.setTitle("取消", for: .selected)
         view.setTitle("取消", for: .highlighted)
@@ -54,7 +54,7 @@ class CLBreakPointResumeCell: UITableViewCell {
     }()
     private lazy var deleteButton: UIButton = {
         let view = UIButton()
-        view.titleLabel?.font = PingFangSCMedium(16)
+        view.titleLabel?.font = .mediumPingFangSC(16)
         view.setTitle("删除", for: .normal)
         view.setTitle("删除", for: .selected)
         view.setTitle("删除", for: .highlighted)
@@ -147,7 +147,7 @@ private extension CLBreakPointResumeCell {
         }
     }
 }
-extension CLBreakPointResumeCell: CLCellProtocol {
+extension CLBreakPointResumeCell: CLRowProtocol {
     func setItem(_ item: CLBreakPointResumeItem, indexPath: IndexPath) {
         nameLabel.text = item.url.lastPathComponent
         progressView.progress = Float(item.progress)

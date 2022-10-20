@@ -45,7 +45,7 @@ struct CLCalendarConfig {
         var selectSubtitleText = "#ffffff".uiColor
         var failureTitleText = "#a9a9a9".uiColor
         var failureSubtitleText = "#a9a9a9".uiColor
-        var failureBackground = "#dcdcdc4c".uiColor
+        var failureBackground = "#dcdcdc32".uiColor
     }
 
     var color = CLColor()

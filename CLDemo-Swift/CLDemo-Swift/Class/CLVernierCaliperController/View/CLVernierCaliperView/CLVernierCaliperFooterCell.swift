@@ -12,7 +12,7 @@ class CLVernierCaliperFooterCell: UICollectionViewCell {
     var maxValue: CGFloat = 0.0
     var unit: String = ""
     var long : CGFloat = 0.0
-    var textFont : UIFont = PingFangSCMedium(14)
+    var textFont : UIFont = .mediumPingFangSC(14)
     var limitDecimal: NSDecimalNumber = NSDecimalNumber(0)
 }
 extension CLVernierCaliperFooterCell {

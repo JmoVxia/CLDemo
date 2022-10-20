@@ -11,7 +11,7 @@ import UIKit
 class CLPopupFoodPickerContentCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
        let label = UILabel()
-        label.font = PingFangSCMedium(16)
+        label.font = .mediumPingFangSC(16)
         label.textColor = .init("#666666")
         return label
     }()

@@ -92,7 +92,7 @@ extension CLChatVoiceCell {
         }
     }
 }
-extension CLChatVoiceCell: CLCellProtocol {
+extension CLChatVoiceCell: CLRowProtocol {
     func setItem(_ item: CLChatVoiceItem, indexPath: IndexPath) {
         leftPlayAnimation.isHidden = item.isFromMyself
         rightPlayAnimation.isHidden = !item.isFromMyself

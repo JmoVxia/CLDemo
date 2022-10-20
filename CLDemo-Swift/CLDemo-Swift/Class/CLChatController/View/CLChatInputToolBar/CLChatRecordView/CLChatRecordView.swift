@@ -78,7 +78,7 @@ class CLChatRecordView: UIView {
         let tipsLabel = UILabel()
         tipsLabel.text = "按住说话"
         tipsLabel.textColor = UIColor.white
-        tipsLabel.font = PingFangSCMedium(12)
+        tipsLabel.font = .mediumPingFangSC(12)
         return tipsLabel
     }()
     ///时间

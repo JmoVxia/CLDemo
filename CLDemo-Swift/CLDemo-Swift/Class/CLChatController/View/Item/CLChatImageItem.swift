@@ -24,8 +24,8 @@ class CLChatImageItem: CLChatItem {
     ///文件大小
     var fileSize: Int32 = 0
 }
-extension CLChatImageItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLChatImageItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLChatImageCell.self
     }
 }

@@ -43,7 +43,7 @@ class CLIngredientLeftTitleHead: UITableViewHeaderFooterView {
 
     lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         view.textColor = .init("#666666")
         view.textAlignment = .left
         view.setContentHuggingPriority(.required, for: .horizontal)
@@ -60,7 +60,7 @@ class CLIngredientLeftTitleHead: UITableViewHeaderFooterView {
     var isOpen: Bool = false {
         didSet {
             backgroundShadowView.backgroundColor = isOpen ? .init("#FFFFFF") : .init("#F4F4F4")
-            titleLabel.font = isOpen ? PingFangSCBold(16) : PingFangSCMedium(16)
+            titleLabel.font = isOpen ? .boldPingFangSC(16) : .mediumPingFangSC(16)
             titleLabel.textColor = isOpen ? .init("#333333") : .init("#666666")
             backgroundShadowView.layer.cornerRadius = isOpen ? 10 : 0
             backgroundShadowView.layer.applySketchShadow(color: isOpen ? .init("#000000", alpha: 0.05) : .init("#FFFFFF"), x: 0, y: -2, blur: 4)

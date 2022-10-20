@@ -20,7 +20,7 @@ class CLTagsFrameConfigure: NSObject {
     /// 标签最小内边距
     var tagsMinPadding: CGFloat = 10.0
     /// 标签内部字体大小
-    var tagsTitleFont: UIFont = PingFangSCMedium(15)
+    var tagsTitleFont: UIFont = .mediumPingFangSC(15)
     /// 是否对齐
     var isAlignment: Bool = true
     /// 默认配置

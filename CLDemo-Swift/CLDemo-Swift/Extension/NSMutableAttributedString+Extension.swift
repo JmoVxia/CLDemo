@@ -1,13 +1,12 @@
 //
 //  NSMutableAttributedString+Extension.swift
-//  CKD
+//  CL
 //
 //  Created by Chen JmoVxia on 2021/3/26.
 //  Copyright © 2021 JmoVxia. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
 
 extension NSMutableAttributedString {
     /// 添加字符串并为此段添加对应的Attribute
@@ -37,6 +36,7 @@ extension NSMutableAttributedString {
     /// 添加图片
     @discardableResult
     func addImage(_ image: UIImage?, _ bounds: CGRect) -> NSMutableAttributedString {
+        guard let image = image else { return self }
         let attch = NSTextAttachment()
         attch.image = image
         attch.bounds = bounds
@@ -70,5 +70,28 @@ extension NSMutableAttributedString {
             addAttributes(attributes, rang: match.result.range, replace: true)
         }
         return (phoneRanges, self)
+    }
+
+    /// 正则富文本链接和电话号码
+    func replace(_ linkAttributes: (_ item: AttributesItem) -> Void, phoneAttributes: (_ item: AttributesItem) -> Void) -> NSMutableAttributedString {
+        let linkPattern = """
+        (((ht|f)tps?):\\/\\/)?[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?
+        """
+        let phonePattern = """
+        ((?:\\+?86)?1(?:3\\d{3}|5[^4\\D]\\d{2}|8\\d{3}|7(?:[235-8]\\d{2}|4(?:0\\d|1[0-2]|9\\d))|9[0-35-9]\\d{2}|66\\d{2})\\d{6})|([+]?[(（]?[+]?(?<!\\d)(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)[)）—-]?\\d{5,14}(?!\\d))|((?<!\\d)([2-8]\\d{6,7})(?!\\d)|((?<!\\d)[(（]?010[)）—-]?\\d{7,8}(?!\\d))|((?<!\\d)[(（]?0[2-9]\\d{1,2}[)）—-]?\\d{7,8}(?!\\d)))
+        """
+        let regex = try! Regex("\(linkPattern)|\(phonePattern)")
+        for match in regex.matches(in: string) {
+            if match.string.matches(linkPattern),
+               let url = match.string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            {
+                addAttributes(linkAttributes, rang: match.result.range, replace: true)
+                addAttributes([.link: "Link://\(url)"], range: match.result.range)
+            } else if match.string.matches(phonePattern) {
+                addAttributes(phoneAttributes, rang: match.result.range, replace: true)
+                addAttributes([.link: "Phone://\(match.string)"], range: match.result.range)
+            }
+        }
+        return self
     }
 }

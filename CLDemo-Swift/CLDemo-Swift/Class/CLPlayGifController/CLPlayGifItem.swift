@@ -22,8 +22,8 @@ class CLPlayGifItem: NSObject {
         size = calculateScaleSize(imageSize: CGSize(width: image.width, height: image.height))
     }
 }
-extension CLPlayGifItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLPlayGifItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLPlayGifCell.self
     }
     func cellHeight() -> CGFloat {

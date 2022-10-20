@@ -12,7 +12,7 @@ import SnapKit
 class CLPlayVideoCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         view.textColor = .black
         view.textAlignment = .left
         return view
@@ -41,7 +41,7 @@ class CLPlayVideoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension CLPlayVideoCell: CLCellProtocol {
+extension CLPlayVideoCell: CLRowProtocol {
     func setItem(_ item: CLPlayVideoitem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in

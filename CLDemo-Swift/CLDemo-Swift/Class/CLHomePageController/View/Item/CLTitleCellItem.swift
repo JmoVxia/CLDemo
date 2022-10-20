@@ -17,11 +17,11 @@ class CLTitleCellItem: NSObject {
         self.type = type
     }
 }
-extension CLTitleCellItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLTitleCellItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLTitleCell.self
     }
     func cellHeight() -> CGFloat {
-        return PingFangSCMedium(18).lineHeight + 30
+        return UIFont.mediumPingFangSC(18).lineHeight + 30
     }
 }

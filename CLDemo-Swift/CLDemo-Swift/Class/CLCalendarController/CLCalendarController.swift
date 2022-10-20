@@ -77,7 +77,7 @@ extension CLCalendarController {
 @objc private extension CLCalendarController {
     func calendarClick() {
         let controller = CLCalendarViewController()
-        controller.modalPresentationStyle = .fullScreen
+//        controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true)
     }
 }

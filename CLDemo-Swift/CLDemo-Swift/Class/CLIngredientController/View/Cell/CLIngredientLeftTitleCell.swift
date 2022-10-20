@@ -31,7 +31,7 @@ class CLIngredientLeftTitleCell: UITableViewCell {
 
     lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.font = PingFangSCMedium(14)
+        view.font = .mediumPingFangSC(14)
         view.textColor = .init("#666666")
         view.textAlignment = .left
         return view

@@ -47,8 +47,8 @@ class CLRecordVernierCaliperItem: NSObject {
     var valueBackgroundViewSize: CGSize = CGSize(width: 110, height: 40)
     var valueChangeCallback: ((String) -> ())?
 }
-extension CLRecordVernierCaliperItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLRecordVernierCaliperItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLRecordVernierCaliperCell.self
     }
 }

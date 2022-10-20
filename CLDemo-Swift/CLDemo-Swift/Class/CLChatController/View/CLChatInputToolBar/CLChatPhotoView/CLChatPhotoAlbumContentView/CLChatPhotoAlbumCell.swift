@@ -65,7 +65,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.textAlignment = .center
         view.backgroundColor = UIColor.clear
         view.textColor = UIColor.white
-        view.font = PingFangSCMedium(15)
+        view.font = .mediumPingFangSC(15)
         view.text = "松手发送"
         return view
     }()
@@ -77,7 +77,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.setTitleColor(.white, for: .normal)
         view.setTitleColor(.white, for: .selected)
         view.setTitleColor(.white, for: .highlighted)
-        view.titleLabel?.font = PingFangSCMedium(12)
+        view.titleLabel?.font = .mediumPingFangSC(12)
         view.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom:5, right: 5)
         return view
     }()

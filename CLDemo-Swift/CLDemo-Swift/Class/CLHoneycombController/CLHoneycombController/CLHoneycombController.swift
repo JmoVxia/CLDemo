@@ -85,7 +85,7 @@ private extension CLHoneycombController {
                 guard let self = self, let item = item else { return }
                 self.push(item.type, title: item.title)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do {
             let item = CLTitleCellItem(title: "UIScrollView 实现".localized, type: CLHoneycombScrollViewController.self)
@@ -94,7 +94,7 @@ private extension CLHoneycombController {
                 guard let self = self, let item = item else { return }
                 self.push(item.type, title: item.title)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         tableView.reloadData()
     }

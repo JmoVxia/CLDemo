@@ -34,7 +34,7 @@ class CLPlayVideoController: CLController {
         }
         DispatchQueue.global().async {
             Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil).forEach { path in
-                self.tableViewHepler.dataSource.append(CLPlayVideoitem(path: path))
+                self.tableViewHepler.rows.append(CLPlayVideoitem(path: path))
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -48,7 +48,7 @@ class CLPlayVideoController: CLController {
 }
 extension CLPlayVideoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let path = (tableViewHepler.dataSource[indexPath.row] as? CLPlayVideoitem)?.path else { return }
+        guard let path = (tableViewHepler.rows[indexPath.row] as? CLPlayVideoitem)?.path else { return }
         CLVideoPlayer.cancel(path)
     }
 }

@@ -21,7 +21,7 @@ class CLChatTipsCell: CLChatCell {
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.textColor = .white
-        view.font = PingFangSCMedium(14)
+        view.font = .mediumPingFangSC(14)
         view.numberOfLines = 0
         view.preferredMaxLayoutWidth = screenWidth - 80
         return view
@@ -64,7 +64,7 @@ extension CLChatTipsCell {
         }
     }
 }
-extension CLChatTipsCell: CLCellProtocol {
+extension CLChatTipsCell: CLRowProtocol {
     func setItem(_ item: CLChatTipsItem, indexPath: IndexPath) {
         titleLabel.text = item.text
     }

@@ -93,9 +93,9 @@ private extension CLChangeFontSizeController {
 private extension CLChangeFontSizeController {
     func refresh() {
         updateTitleLabel { (label) in
-            label.font = PingFangSCBold(18)
+            label.font = .boldPingFangSC(18)
         }
-        for item in tableViewHepler.dataSource {
+        for item in tableViewHepler.rows {
             if let cellItem = item as? CLChatTextItem {
                 let text = cellItem.text
                 cellItem.text = text
@@ -128,21 +128,21 @@ private extension CLChangeFontSizeController {
             item.isFromMyself = false
             item.text = "预览字体大小"
             item.messageSendState = .sendSucess
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLChatTextItem()
             item.isFromMyself = true
             item.text = "拖拽或者点击下面的滑块，可设置字体大小"
             item.messageSendState = .sendSucess
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLChatTextItem()
             item.isFromMyself = true
             item.text = "设置后，可改变APP中的字体大小。如果在使用过程中存在问题或意见，可反馈给我们团队"
             item.messageSendState = .sendSucess
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         tableView.reloadData()
     }

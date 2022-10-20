@@ -101,7 +101,7 @@ extension CLCalendarView {
             let label = UILabel()
             label.backgroundColor = config.color.topToolBackground
             label.text = weekArray[i]
-            label.font = PingFangSCMedium(14)
+            label.font = .mediumPingFangSC(14)
             label.textAlignment = .center
             label.textColor = i == 0 || i == 6 ? config.color.topToolTextWeekend : config.color.topToolText
             topStackView.addArrangedSubview(label)
@@ -175,7 +175,7 @@ extension CLCalendarView {
                             {
                                 startIndexPath = .init(row: 0, section: section)
                             }
-                            guard newDate.day != tatalDay else { break }
+                            guard (resultArray.count - firstDay) != tatalDay else { break }
                         }
                     }
                 }
@@ -210,12 +210,8 @@ extension CLCalendarView {
             let tempDataArray = month()
             DispatchQueue.main.async {
                 let width = self.collectionView.bounds.width
-                let minimumDifference: Int = {
-                    let value = Int(width) % self.weekArray.count
-                    guard (value + Int(width)) % self.weekArray.count != 0 else { return value }
-                    return self.weekArray.count - value
-                }()
-                let maxWidth = width - CGFloat(minimumDifference)
+                let minimumDifference = width.truncatingRemainder(dividingBy: CGFloat(self.weekArray.count))
+                let maxWidth = width - minimumDifference
                 let cellWidth = maxWidth / CGFloat(self.weekArray.count)
                 self.itemSize = CGSize(width: cellWidth, height: cellWidth)
                 self.mainStackView.layoutMargins = .init(top: 0, left: CGFloat(minimumDifference) * 0.5, bottom: 0, right: CGFloat(minimumDifference) * 0.5)

@@ -101,7 +101,7 @@ class CLChatEmojiView: UIView {
         view.setTitle("发送", for: .normal)
         view.setTitle("发送", for: .selected)
         view.setTitle("发送", for: .highlighted)
-        view.titleLabel?.font = PingFangSCMedium(16)
+        view.titleLabel?.font = .mediumPingFangSC(16)
         view.clipsToBounds = true
         view.layer.cornerRadius = 3
         view.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)

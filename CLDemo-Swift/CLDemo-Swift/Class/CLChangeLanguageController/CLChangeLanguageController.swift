@@ -88,7 +88,7 @@ private extension CLChangeLanguageController {
                 guard let self = self else { return }
                 self.changeLanguage(.system)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLTitleCellItem(title: "中文".localized, type: CLChangeLanguageController.self)
@@ -97,7 +97,7 @@ private extension CLChangeLanguageController {
                 guard let self = self else { return }
                 self.changeLanguage(.chineseSimplified)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         do{
             let item = CLTitleCellItem(title: "英文".localized, type: CLChangeLanguageController.self)
@@ -106,7 +106,7 @@ private extension CLChangeLanguageController {
                 guard let self = self else { return }
                 self.changeLanguage(.english)
             }
-            tableViewHepler.dataSource.append(item)
+            tableViewHepler.rows.append(item)
         }
         tableView.reloadData()
     }

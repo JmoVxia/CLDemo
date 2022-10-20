@@ -15,8 +15,8 @@ class CLChatVoiceItem: CLChatItem {
     ///音频路径
     var path: String = ""
 }
-extension CLChatVoiceItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLChatVoiceItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLChatVoiceCell.self
     }
     func cellHeight() -> CGFloat {

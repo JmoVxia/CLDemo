@@ -11,8 +11,8 @@ class CLChatTipsItem: CLChatItem {
     ///文字
     var text:String?
 }
-extension CLChatTipsItem: CLCellItemProtocol {
-    func bindCell() -> UITableViewCell.Type {
+extension CLChatTipsItem: CLRowItemProtocol {
+    func cellClass() -> UITableViewCell.Type {
         return CLChatTipsCell.self
     }
 }

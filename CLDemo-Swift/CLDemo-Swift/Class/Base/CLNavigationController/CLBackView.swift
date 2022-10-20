@@ -36,7 +36,7 @@ class CLBackView: UIControl {
     private lazy var textLabel: UILabel = {
        let view = UILabel()
         view.textColor = themeColor
-        view.font = PingFangSCMedium(16)
+        view.font = .mediumPingFangSC(16)
         return view
     }()
     private lazy var backimageView: UIImageView = {
