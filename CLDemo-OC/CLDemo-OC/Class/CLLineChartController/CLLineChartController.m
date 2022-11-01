@@ -30,7 +30,7 @@
     [self.chart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(0);
         make.width.mas_equalTo(250);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(100);
     }];
     
     self.arrayDS = [NSMutableArray array];
@@ -41,7 +41,9 @@
         point.y = [self randomBetween:7000 AndBigNum:8000 AndPrecision:100];
         [self.arrayDS addObject:point];
     }
-    [self.chart reload];
+    dispatch_after(0.5, dispatch_get_main_queue(), ^{
+        [self.chart reload];
+    });
 }
 /**
  *   samllNum:  两数中的最小值
@@ -75,11 +77,11 @@
     }
     [self.chart updateWithConfigure:^(CLLineChartConfigure * _Nonnull configure) {
         UIColor *color = [UIColor colorWithHue:(arc4random() % (256) / (256.0)) saturation:(arc4random() % (256) / (256.0)) brightness:(arc4random() % (256) / (256.0)) alpha:(1.0)];
-        configure.lineWidth = 0.5;
+        configure.lineWidth = 1;
         configure.lineColor = color;
-        configure.gradientColors = @[(__bridge id)[color colorWithAlphaComponent:0.5].CGColor,(__bridge id)[color colorWithAlphaComponent:0.0].CGColor];
+        configure.gradientColors = @[(__bridge id)[color colorWithAlphaComponent:0.7].CGColor,(__bridge id)[color colorWithAlphaComponent:0.2].CGColor];
         configure.dottedLineColor = color;
-        configure.dottedLineWidth = 0.5;
+        configure.dottedLineWidth = 1;
     }];
     [self.chart reload];
 }
@@ -109,7 +111,7 @@
 }
 ///图表宽高
 - (CGSize)lineChartViewChartSize {
-    return CGSizeMake(250, 200);
+    return CGSizeMake(250, 100);
 }
 - (void)dealloc
 {

@@ -5,27 +5,12 @@
 //  Created by Chen JmoVxia on 2022/10/19.
 //
 import UIKit
+import DateToolsSwift
 
 struct CLCalendarConfig {
-    enum CLCalendarType {
-        case past
-        case today
-        case future
-    }
-
     enum CLSelectType {
         case single
         case area
-    }
-
-    struct CLTouchType: OptionSet {
-        static let past = CLTouchType(rawValue: 1)
-        static let today = CLTouchType(rawValue: 1 << 1)
-        static let future = CLTouchType(rawValue: 1 << 2)
-        let rawValue: Int64
-        init(rawValue: Int64) {
-            self.rawValue = rawValue
-        }
     }
 
     struct CLColor {
@@ -51,10 +36,12 @@ struct CLCalendarConfig {
     var color = CLColor()
     var selectBegin: Date?
     var selectEnd: Date?
-    var limitMonth = 12
-    var type = CLCalendarType.today
+    var beginDate = Date() - 5.months
+    var endDate = Date() + 5.months
+    var position = Date()
     var selectType = CLSelectType.area
-    var touchType: CLTouchType = [.today, .past]
+    var limitBegin: Date?
+    var limitEnd: Date?
     var isShowLunarCalendar = true
     var insetsLayoutMarginsFromSafeArea = true
     var headerHight = 50.0

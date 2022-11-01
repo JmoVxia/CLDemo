@@ -2,22 +2,22 @@ PODS:
   - CryptoSwift (1.6.0)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
-  - Kingfisher (7.4.0)
-  - libwebp (1.2.3):
-    - libwebp/demux (= 1.2.3)
-    - libwebp/mux (= 1.2.3)
-    - libwebp/webp (= 1.2.3)
-  - libwebp/demux (1.2.3):
+  - Kingfisher (7.4.1)
+  - libwebp (1.2.4):
+    - libwebp/demux (= 1.2.4)
+    - libwebp/mux (= 1.2.4)
+    - libwebp/webp (= 1.2.4)
+  - libwebp/demux (1.2.4):
     - libwebp/webp
-  - libwebp/mux (1.2.3):
+  - libwebp/mux (1.2.4):
     - libwebp/demux
-  - libwebp/webp (1.2.3)
+  - libwebp/webp (1.2.4)
   - lottie-ios (3.5.0)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
-  - SDWebImage (5.13.4):
-    - SDWebImage/Core (= 5.13.4)
-  - SDWebImage/Core (5.13.4)
+  - SDWebImage (5.14.0):
+    - SDWebImage/Core (= 5.14.0)
+  - SDWebImage/Core (5.14.0)
   - SDWebImageWebPCoder (0.9.1):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.13)
@@ -63,12 +63,12 @@ SPEC CHECKSUMS:
   CryptoSwift: 562f8eceb40e80796fffc668b0cad9313284cfa6
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  Kingfisher: 596b207973051aae5e4c54a1c1cb39837ea10d36
-  libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
+  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
   lottie-ios: c55158d67d0629a260625cc2ded2052b829e3c3e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
-  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
+  SDWebImage: 9e391cf38577742f501055dca17e4987f6713fe1
   SDWebImageWebPCoder: 18503de6621dd2c420d680e33d46bf8e1d5169b0
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e

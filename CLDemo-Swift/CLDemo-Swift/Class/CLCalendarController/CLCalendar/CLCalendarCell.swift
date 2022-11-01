@@ -71,7 +71,17 @@ private extension CLCalendarCell {
 
 extension CLCalendarCell {
     func refreshData(_ model: CLCalendarDayModel, config: CLCalendarConfig, startDate: Date?, endDate: Date?) {
-        isUserInteractionEnabled = (config.touchType.contains(.past) && model.type == .future) || (config.touchType.contains(.future) && model.type == .past) || (config.touchType.contains(.today) && model.type == .today)
+        isUserInteractionEnabled = {
+            guard let date = model.date else { return false }
+            if let limitBegin = config.limitBegin,
+               date.isEarlier(than: limitBegin) {
+                return false
+            }else if let limitEnd = config.limitEnd,
+                     date.isLater(than: limitEnd) {
+                return false
+            }
+            return true
+        }()
         backgroundColor = (model.type == .empty || isUserInteractionEnabled) ? .clear : config.color.failureBackground
         layer.cornerRadius = 0
         titleLabel.text = model.title
@@ -84,7 +94,7 @@ extension CLCalendarCell {
             subtitleLabel.textColor = model.type == .today ? config.color.selectTodayText : config.color.selectSubtitleText
             backgroundColor = model.date == startDate ? config.color.selectStartBackground : config.color.selectEndBackground
             layer.cornerRadius = 5
-            let isAllCorners = config.selectType == .single || config.touchType == .today
+            let isAllCorners = config.selectType == .single
             layer.maskedCorners = isAllCorners ? [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner] : (model.date == startDate ? [.layerMinXMinYCorner, .layerMinXMaxYCorner] : [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
         } else if let date = model.date,
                   let start = startDate,

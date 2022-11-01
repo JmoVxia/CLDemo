@@ -105,13 +105,43 @@
     maskLayer.path = maskPath.CGPath;
     self.gradientLayer.mask = maskLayer;
     self.gradientLayer.frame = CGRectMake(0, 0, self.width, self.height);
-    
+
     UIBezierPath *dottedLinePath = [UIBezierPath bezierPath];
     CGFloat dottedLineY = self.height - (self.dottedLineY - self.yMin) * self.height / ySpace;
     [dottedLinePath moveToPoint:CGPointMake(0, dottedLineY)];
     [dottedLinePath addLineToPoint:CGPointMake(self.width, dottedLineY)];
     self.dottedLine.path = dottedLinePath.CGPath;
     self.dottedLine.frame = CGRectMake(0, 0, self.width, self.height);
+    
+    
+    {
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.width, self.height)].CGPath;
+        layer.anchorPoint = CGPointMake(1, 0);
+        self.layer.mask = layer;
+        
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"bounds.size.width"];
+        animation.duration = 2.5;
+        animation.toValue = @0;
+        animation.fromValue = @(self.width);
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        [layer addAnimation:animation forKey:@"strokeEndAnimation"];
+    }
+    
+    {
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        animation.duration = 2.5;
+        animation.fromValue = @0;
+        animation.toValue = @1;
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        [self.lineLayer addAnimation:animation forKey:@"width"];
+    }
+    
+    
 }
 - (void)updateWithConfigure:(void(^)(CLLineChartConfigure *configure))configureBlock {
     if (configureBlock) {

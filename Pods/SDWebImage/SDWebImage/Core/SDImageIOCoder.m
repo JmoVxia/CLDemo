@@ -9,9 +9,11 @@
 #import "SDImageIOCoder.h"
 #import "SDImageCoderHelper.h"
 #import "NSImage+Compatibility.h"
-#import <ImageIO/ImageIO.h>
 #import "UIImage+Metadata.h"
 #import "SDImageIOAnimatedCoderInternal.h"
+
+#import <ImageIO/ImageIO.h>
+#import <CoreServices/CoreServices.h>
 
 // Specify DPI for vector format in CGImageSource, like PDF
 static NSString * kSDCGImageSourceRasterizationDPI = @"kCGImageSourceRasterizationDPI";
@@ -26,6 +28,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
     BOOL _finished;
     BOOL _preserveAspectRatio;
     CGSize _thumbnailSize;
+    BOOL _lazyDecode;
 }
 
 - (void)dealloc {
@@ -110,7 +113,37 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         preserveAspectRatio = preserveAspectRatioValue.boolValue;
     }
     
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    BOOL lazyDecode = YES; // Defaults YES for static image coder
+    NSNumber *lazyDecodeValue = options[SDImageCoderDecodeUseLazyDecoding];
+    if (lazyDecodeValue != nil) {
+        lazyDecode = lazyDecodeValue.boolValue;
+    }
+    
+    NSString *typeIdentifierHint = options[SDImageCoderDecodeTypeIdentifierHint];
+    if (!typeIdentifierHint) {
+        // Check file extension and convert to UTI, from: https://stackoverflow.com/questions/1506251/getting-an-uniform-type-identifier-for-a-given-extension
+        NSString *fileExtensionHint = options[SDImageCoderDecodeFileExtensionHint];
+        if (fileExtensionHint) {
+            typeIdentifierHint = (__bridge_transfer NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)fileExtensionHint, kUTTypeImage);
+            // Ignore dynamic UTI
+            if (UTTypeIsDynamic((__bridge CFStringRef)typeIdentifierHint)) {
+                typeIdentifierHint = nil;
+            }
+        }
+    } else if ([typeIdentifierHint isEqual:NSNull.null]) {
+        // Hack if user don't want to imply file extension
+        typeIdentifierHint = nil;
+    }
+    
+    NSDictionary *creatingOptions = nil;
+    if (typeIdentifierHint) {
+        creatingOptions = @{(__bridge NSString *)kCGImageSourceTypeIdentifierHint : typeIdentifierHint};
+    }
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, (__bridge CFDictionaryRef)creatingOptions);
+    if (!source) {
+        // Try again without UTType hint, the call site from user may provide the wrong UTType
+        source = CGImageSourceCreateWithData((__bridge CFDataRef)data, (__bridge CFDictionaryRef)creatingOptions);
+    }
     if (!source) {
         return nil;
     }
@@ -141,7 +174,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         thumbnailSize = CGSizeZero;
     }
     
-    UIImage *image = [SDImageIOAnimatedCoder createFrameAtIndex:0 source:source scale:scale preserveAspectRatio:preserveAspectRatio thumbnailSize:thumbnailSize forceDecode:NO options:decodingOptions];
+    UIImage *image = [SDImageIOAnimatedCoder createFrameAtIndex:0 source:source scale:scale preserveAspectRatio:preserveAspectRatio thumbnailSize:thumbnailSize lazyDecode:lazyDecode options:decodingOptions];
     CFRelease(source);
     if (!image) {
         return nil;
@@ -183,6 +216,12 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
             preserveAspectRatio = preserveAspectRatioValue.boolValue;
         }
         _preserveAspectRatio = preserveAspectRatio;
+        BOOL lazyDecode = YES; // Defaults YES for static image coder
+        NSNumber *lazyDecodeValue = options[SDImageCoderDecodeUseLazyDecoding];
+        if (lazyDecodeValue != nil) {
+            lazyDecode = lazyDecodeValue.boolValue;
+        }
+        _lazyDecode = lazyDecode;
 #if SD_UIKIT
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 #endif
@@ -233,7 +272,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         if (scaleFactor != nil) {
             scale = MAX([scaleFactor doubleValue], 1);
         }
-        image = [SDImageIOAnimatedCoder createFrameAtIndex:0 source:_imageSource scale:scale preserveAspectRatio:_preserveAspectRatio thumbnailSize:_thumbnailSize forceDecode:NO options:nil];
+        image = [SDImageIOAnimatedCoder createFrameAtIndex:0 source:_imageSource scale:scale preserveAspectRatio:_preserveAspectRatio thumbnailSize:_thumbnailSize lazyDecode:_lazyDecode options:nil];
         if (image) {
             CFStringRef uttype = CGImageSourceGetType(_imageSource);
             image.sd_imageFormat = [NSData sd_imageFormatFromUTType:uttype];

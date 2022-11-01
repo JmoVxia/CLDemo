@@ -73,7 +73,7 @@ class CLRotateAnimationSwiftController: CLController {
         do {
             let sectorAnimationView = CLSectorAnimationView(frame: CGRect(x: 220, y: 220, width: 80, height: 80))
             view.addSubview(sectorAnimationView)
-            sectorAnimationView.updateProgressAnimation(fromValue: 0.5, toValue: 1, duration: 6)
+            sectorAnimationView.updateProgressAnimation(fromValue: 0.5, toValue: 0.8, duration: 6)
         }
         
     }

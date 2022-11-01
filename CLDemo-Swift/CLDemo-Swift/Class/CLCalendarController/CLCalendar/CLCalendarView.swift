@@ -71,9 +71,9 @@ class CLCalendarView: UIView {
 
     private var monthsArray = [CLCalendarMonthModel]()
 
-    private var beginDate: Date?
+    private(set) var beginDate: Date?
 
-    private var endDate: Date?
+    private(set) var endDate: Date?
 
     private var itemSize = CGSize.zero
 
@@ -125,18 +125,8 @@ extension CLCalendarView {
             collectionView.reloadData()
             collectionView.setNeedsLayout()
             collectionView.layoutIfNeeded()
-
-            let indexPath: IndexPath = {
-                if config.type == .past {
-                    return IndexPath(row: 0, section: monthsArray.count - 1)
-                } else if config.type == .today {
-                    return IndexPath(row: 0, section: monthsArray.count / 2)
-                } else {
-                    return IndexPath(row: 0, section: 0)
-                }
-            }()
-
-            collectionView.scrollToItem(at: startIndexPath ?? indexPath, at: .top, animated: false)
+            guard let startIndexPath = startIndexPath else { return }
+            collectionView.scrollToItem(at: startIndexPath, at: .top, animated: false)
             collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentOffset.y - config.headerHight)
         }
 
@@ -169,12 +159,6 @@ extension CLCalendarView {
                             let dayModel = CLCalendarDayModel(title: "\(newDate.day)", date: newDate, subtitle: subtitle, type: type)
                             resultArray.append(dayModel)
                             newDate = newDate + 1.days
-                            if beginDate?.year == dayModel.date?.year,
-                               beginDate?.month == dayModel.date?.month,
-                               beginDate?.day == dayModel.date?.day
-                            {
-                                startIndexPath = .init(row: 0, section: section)
-                            }
                             guard (resultArray.count - firstDay) != tatalDay else { break }
                         }
                     }
@@ -183,22 +167,19 @@ extension CLCalendarView {
             }
 
             var resultArray = [CLCalendarMonthModel]()
-            let month: Int = {
-                var value = 0
-                if config.type == .past {
-                    value = config.limitMonth - 1
-                } else if config.type == .today {
-                    value = config.limitMonth / 2
-                }
-                return value
-            }()
 
-            let start = todayDate - month.months
-            for i in 0 ..< config.limitMonth {
+            let start = config.beginDate
+            let maxMonths = config.endDate.monthsLater(than: config.beginDate)
+            for i in 0 ... maxMonths {
                 let date = start + i.months
                 let headerModel = CLCalendarMonthModel(headerText: date.format(with: "yyyy年MM月"),
                                                        month: date.format(with: "MM"),
                                                        daysArray: day(with: Date(year: date.year, month: date.month, day: 1), section: i))
+                if config.position.year == date.year,
+                   config.position.month == date.month
+                {
+                    startIndexPath = .init(row: 0, section: i)
+                }
                 resultArray.append(headerModel)
             }
             return resultArray
@@ -244,7 +225,7 @@ extension CLCalendarView: CLCalendarDelegateFlowLayout {
         let calendarItem = headerItem.daysArray[indexPath.row]
         guard let date = calendarItem.date else { return }
         func reloadDate() {
-            if config.selectType == .single || config.touchType == .today {
+            if config.selectType == .single {
                 beginDate = date
                 delegate?.didSelectSingle(date: date, in: self)
             } else {
