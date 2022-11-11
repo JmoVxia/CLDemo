@@ -1,5 +1,5 @@
 //
-//  CLPopoverController.swift
+//  CLBubblePopupController.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/12/7.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CLPopoverController: CLController {
+class CLBubblePopupController: CLController {
     @IBAction func top(_ sender: UIButton) {
-        let pop = CLPopoverView { (configure) in
+        let pop = CLBubblePopupView { (configure) in
             configure.arrowDirection = .top
             configure.maskBackgroundColor = UIColor.red.withAlphaComponent(0.4)
         }
@@ -18,7 +18,7 @@ class CLPopoverController: CLController {
         pop.show(contentView, fromView: sender)
     }
     @IBAction func left(_ sender: UIButton) {
-        let pop = CLPopoverView { (configure) in
+        let pop = CLBubblePopupView { (configure) in
             configure.arrowDirection = .left
             configure.arrowPositionRatio = 0.2
         }
@@ -26,7 +26,7 @@ class CLPopoverController: CLController {
         pop.show(contentView, fromView: sender)
     }
     @IBAction func bottom(_ sender: UIButton) {
-        let pop = CLPopoverView { (configure) in
+        let pop = CLBubblePopupView { (configure) in
             configure.arrowDirection = .bottom
             configure.maskBackgroundColor = UIColor.orange.withAlphaComponent(0.2)
             configure.popoverColor = UIColor.green.withAlphaComponent(0.4)
@@ -35,7 +35,7 @@ class CLPopoverController: CLController {
         pop.show(contentView, fromView: sender)
     }
     @IBAction func right(_ sender: UIButton) {
-        let pop = CLPopoverView { (configure) in
+        let pop = CLBubblePopupView { (configure) in
             configure.arrowDirection = .right
             configure.arrowPositionRatio = 0.1
         }
@@ -51,7 +51,7 @@ class CLPopoverController: CLController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
     }
     @objc func rightItem(_ buton: UIButton) {
-        let pop = CLPopoverView { (configure) in
+        let pop = CLBubblePopupView { (configure) in
             configure.arrowDirection = .bottom
             configure.arrowPositionRatio = 0.1
             configure.highlightFromView = true

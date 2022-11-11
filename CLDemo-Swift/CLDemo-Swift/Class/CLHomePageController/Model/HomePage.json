@@ -80,6 +80,10 @@
     "class": "CLWheelMenuController"
   },
   {
+    "title": "折线图",
+    "class": "CLLineChartController"
+  },
+  {
     "title": "滑动动画",
     "class": "CLScrollAnimationController"
   },

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLPopoverViewConfigure {
+class CLBubblePopupViewConfigure {
     ///箭头大小
     var arrowSize: CGSize = CGSize(width: 10, height: 10)
     ///边框圆角
@@ -16,7 +16,7 @@ class CLPopoverViewConfigure {
     ///最小边距
     var sideEdge: CGFloat = 0
     ///箭头方向
-    var arrowDirection: CLPopoverView.popoverDirection = .bottom
+    var arrowDirection: CLBubblePopupView.popoverDirection = .bottom
     ///遮罩颜色
     var maskBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.35)
     ///模糊
@@ -45,7 +45,7 @@ class CLPopoverViewConfigure {
     var initialSpringVelocity: CGFloat = 2
 }
 
-class CLPopoverView: UIView {
+class CLBubblePopupView: UIView {
     enum popoverDirection: Int {
         case top
         case bottom
@@ -58,14 +58,14 @@ class CLPopoverView: UIView {
     var willDismissHandler: (() -> ())?
     var didDismissHandler: (() -> ())?
     
-    private var configure: CLPopoverViewConfigure = CLPopoverViewConfigure()
+    private var configure: CLBubblePopupViewConfigure = CLBubblePopupViewConfigure()
     private var blackOverlay: UIControl = UIControl()
     private var containerView: UIView!
     private var contentView: UIView!
     private var contentViewFrame: CGRect!
     private var arrowShowPoint: CGPoint!
     
-    init(configureCallback: ((CLPopoverViewConfigure) -> ())? = nil) {
+    init(configureCallback: ((CLBubblePopupViewConfigure) -> ())? = nil) {
         super.init(frame: .zero)
         configureCallback?(configure)
         backgroundColor = .clear
@@ -75,7 +75,7 @@ class CLPopoverView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension CLPopoverView {
+extension CLBubblePopupView {
     private var isCornerLeftArrow: Bool {
         return arrowShowPoint.x == frame.origin.x
     }
@@ -83,7 +83,7 @@ extension CLPopoverView {
         return arrowShowPoint.x == frame.origin.x + bounds.width
     }
 }
-extension CLPopoverView {
+extension CLBubblePopupView {
     func show(_ contentView: UIView, fromView: UIView) {
         guard let rootView = UIApplication.shared.keyWindow else {
             return
@@ -106,7 +106,7 @@ extension CLPopoverView {
         }
     }
 }
-extension CLPopoverView {
+extension CLBubblePopupView {
     private func show(_ contentView: UIView, fromView: UIView, inView: UIView) {
         let point: CGPoint
         switch configure.arrowDirection {
@@ -163,7 +163,7 @@ extension CLPopoverView {
                 }
             }
             if configure.dismissOnBlackOverlayTap {
-                blackOverlay.addTarget(self, action: #selector(CLPopoverView.dismiss), for: .touchUpInside)
+                blackOverlay.addTarget(self, action: #selector(CLBubblePopupView.dismiss), for: .touchUpInside)
             }
         }
         containerView = inView
@@ -189,7 +189,7 @@ extension CLPopoverView {
         }
     }
 }
-extension CLPopoverView {
+extension CLBubblePopupView {
     private func radians(_ degrees: CGFloat) -> CGFloat {
         return CGFloat.pi * degrees / 180
     }
@@ -320,7 +320,7 @@ extension CLPopoverView {
         arrow.fill()
     }
 }
-extension CLPopoverView {
+extension CLBubblePopupView {
     private func createHighlightLayer(fromView: UIView, inView: UIView) {
         let path = UIBezierPath(rect: inView.bounds)
         let highlightRect = inView.convert(fromView.frame, from: fromView.superview)
