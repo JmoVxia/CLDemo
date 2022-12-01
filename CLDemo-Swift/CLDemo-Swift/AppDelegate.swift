@@ -22,11 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 extension AppDelegate {
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }), keyWindow.isKind(of: CLPopupManagerWindow.self) {
-            return keyWindow.rootViewController?.supportedInterfaceOrientations ?? .all
-        }else {
-            return .all
-        }
+        return .all
     }
 }
 

@@ -15,7 +15,7 @@ enum CLPopupMessageType {
     case two
 }
 
-class CLPopupMessageController: CLPopupManagerController {
+class CLPopupMessageController: CLPopoverController {
     var type: CLPopupMessageType = .one
     var sureCallBack: (() -> ())?
     var leftCallBack: (() -> ())?
@@ -180,24 +180,21 @@ extension CLPopupMessageController {
 extension CLPopupMessageController {
     @objc func sureButtonAction() {
         dismissAnimation { (_) in
-            
-            CLPopupManager.dismiss(self.configure.identifier)
+            self.hidden()
             self.sureCallBack?()
             self.sureCallBack = nil
         }
     }
     @objc func leftButtonAction() {
         dismissAnimation { (_) in
-            
-            CLPopupManager.dismiss(self.configure.identifier)
+            self.hidden()
             self.leftCallBack?()
             self.leftCallBack = nil;
         }
     }
     @objc func rightButtonAction() {
         dismissAnimation { (_) in
-            
-            CLPopupManager.dismiss(self.configure.identifier)
+            self.hidden()
             self.rightCallBack?()
             self.rightCallBack = nil;
         }

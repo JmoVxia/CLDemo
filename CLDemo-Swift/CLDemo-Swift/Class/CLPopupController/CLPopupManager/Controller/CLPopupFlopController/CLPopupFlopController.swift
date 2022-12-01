@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLPopupFlopController: CLPopupManagerController {
+class CLPopupFlopController: CLPopoverController {
     var clickWantCallBack: (() -> ())?
     private var isFlop: Bool = false
     private lazy var contentView: UIView = {
@@ -128,7 +128,7 @@ class CLPopupFlopController: CLPopupManagerController {
     
     @objc func closeButtonAction() {
         dismiss { (_) in
-            CLPopupManager.dismiss(self.configure.identifier)
+            self.hidden()
         }
     }
     @objc func flopButtonAction(tap: UITapGestureRecognizer) {

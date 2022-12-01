@@ -113,11 +113,11 @@ extension CLChatPhotoView {
     @objc private func albumButtonAction() {
         CLPermissions.request(.photoLibrary) { (status) in
             if status.isNoSupport {
-                CLPopupManager.showOneAlert(title: "当前设备不支持")
+                CLPopoverManager.showOneAlert(title: "当前设备不支持")
             }else if status.isAuthorized {
                 self.showAlbumContentView()
             }else {
-                CLPopupManager.showTwoAlert(title: "APP 需要访问照片才能发送图片消息\n\n请前往「设置—隐私—照片」中打开开关。", right: "设置", rightCallBack:  {
+                CLPopoverManager.showTwoAlert(title: "APP 需要访问照片才能发送图片消息\n\n请前往「设置—隐私—照片」中打开开关。", right: "设置", rightCallBack:  {
                     openSettings()
                 })
             }
@@ -126,11 +126,11 @@ extension CLChatPhotoView {
     @objc private func cameraButtonButtonAction() {
         CLPermissions.request(.camera) {(status) in
             if status.isNoSupport {
-                CLPopupManager.showOneAlert(title: "当前设备不支持")
+                CLPopoverManager.showOneAlert(title: "当前设备不支持")
             }else if status.isAuthorized {
                 showCameraPicker()
             }else {
-                CLPopupManager.showTwoAlert(title: "APP 无法访问相机才能发送图片消息\n\n请前往「设置—隐私—相机」中打开开关。", right: "设置", rightCallBack:  {
+                CLPopoverManager.showTwoAlert(title: "APP 无法访问相机才能发送图片消息\n\n请前往「设置—隐私—相机」中打开开关。", right: "设置", rightCallBack:  {
                     openSettings()
                 })
             }

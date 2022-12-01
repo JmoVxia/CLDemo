@@ -224,7 +224,7 @@ extension CLChatPhotoAlbumContentView: UICollectionViewDelegate {
                 return
             }
             if selectedArray.count >= 9 {
-                CLPopupManager.showTips(text: "您一次最多可以选择9张图片")
+                CLPopoverManager.showTips(text: "您一次最多可以选择9张图片")
                 return
             }
             let item = CLChatPhotoAlbumSelectedItem(image: image, indexPath: indexPath, asset: asset)

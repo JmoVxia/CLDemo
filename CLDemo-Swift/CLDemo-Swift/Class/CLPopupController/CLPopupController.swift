@@ -183,80 +183,80 @@ extension CLPopupController: UITableViewDelegate {
 }
 extension CLPopupController {
     func showFlop() {
-        CLPopupManager.showFlop()
+        CLPopoverManager.showFlop()
     }
     func showDragView() {
-        CLPopupManager.showDrag { (configure) in
+        CLPopoverManager.showDrag { (configure) in
             configure.isAutorotate = true
-            configure.interfaceOrientationMask = .all
+            configure.supportedInterfaceOrientations = .all
         }
     }
     func showOneAlert() {
-        CLPopupManager.showOneAlert(configureCallback: { (configure) in
+        CLPopoverManager.showOneAlert(configCallback: { (configure) in
             configure.isAutorotate = true
-            configure.interfaceOrientationMask = .all
+            configure.supportedInterfaceOrientations = .all
         }, title: "我是一个按钮", message: "我有一个按钮")
     }
     func showTwoAlert() {
-        CLPopupManager.showTwoAlert(configureCallback: { (configure) in
+        CLPopoverManager.showTwoAlert(configCallback: { (configure) in
             configure.isAutorotate = true
-            configure.interfaceOrientationMask = .all
+            configure.supportedInterfaceOrientations = .all
         }, title: "我是两个按钮", message: "我有两个按钮")
     }
     func showSuccess() {
-        CLPopupManager.showSuccess(configureCallback: { (configure) in
+        CLPopoverManager.showSuccess(configCallback: { (configure) in
             configure.isAutorotate = true
-            configure.interfaceOrientationMask = .all
+            configure.supportedInterfaceOrientations = .all
         }, text: "显示成功", dismissCallback: {
             print("success animation dismiss")
         })
     }
     func showError() {
-        CLPopupManager.showError(text: "显示错误", dismissCallback: {
+        CLPopoverManager.showError(text: "显示错误", dismissCallback: {
             print("error animation dismiss")
         })
     }
     func showLoading() {
-        CLPopupManager.showLoading()
+        CLPopoverManager.showLoading()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
-            CLPopupManager.dismissAll()
+            CLPopoverManager.hiddenAll()
         }
     }
     func showTips() {
-        CLPopupManager.showTips(text: "AAAAAAAAAAAAAAAAAAAA")
+        CLPopoverManager.showTips(text: "AAAAAAAAAAAAAAAAAAAA")
     }
     func showYearMonthDayDataPicker() {
-        CLPopupManager.showYearMonthDayDataPicker(yearMonthDayCallback:  { (year, month, day) in
+        CLPopoverManager.showYearMonthDayDataPicker(yearMonthDayCallback:  { (year, month, day) in
             print("选中-----\(year)年\(month)月\(day)日")
         })
     }
     func showHourMinuteDataPicker() {
-        CLPopupManager.showHourMinuteDataPicker(hourMinuteCallback:  { (hour, minute) in
+        CLPopoverManager.showHourMinuteDataPicker(hourMinuteCallback:  { (hour, minute) in
             print("选中-----\(hour)时\(minute)分")
         })
     }
     func showYearMonthDayHourMinuteDataPicker()  {
-        CLPopupManager.showYearMonthDayHourMinuteDataPicker(yearMonthDayHourMinuteCallback:  { (year, month, day, hour, minute) in
+        CLPopoverManager.showYearMonthDayHourMinuteDataPicker(yearMonthDayHourMinuteCallback:  { (year, month, day, hour, minute) in
             print("选中-----\(year)年\(month)月\(day)日\(hour)时\(minute)分")
         })
     }
     func showBMIInput() {
-        CLPopupManager.showBMIInput(bmiCallback:  { (bmi) in
+        CLPopoverManager.showBMIInput(bmiCallback:  { (bmi) in
             print("BMI-----\(bmi)")
         })
     }
     func showOneInput() {
-        CLPopupManager.showOneInput(type: .UrineVolume) { (value) in
+        CLPopoverManager.showOneInput(type: .UrineVolume) { (value) in
             print("-----\(String(describing: value))")
         }
     }
     func showTwoInput() {
-        CLPopupManager.showTwoInput(type: .bloodPressure) { (value1, value2) in
+        CLPopoverManager.showTwoInput(type: .bloodPressure) { (value1, value2) in
             print("-----\(String(describing: value1))----------\(String(describing: value2))")
         }
     }
     func showFoodPicker() {
-        CLPopupManager.showFoodPicker { (value1, value2, value3, value4) in
+        CLPopoverManager.showFoodPicker { (value1, value2, value3, value4) in
             print("-----\(value1)----------\(value2)-------\(value3)-------\(value4)")
         }
     }

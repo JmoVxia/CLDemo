@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLPopupMomentumController: CLPopupManagerController {
+class CLPopupMomentumController: CLPopoverController {
     private lazy var momentumView: CLMomentumView = {
         let view = CLMomentumView()
         view.backgroundColor = .orange
@@ -37,7 +37,7 @@ extension CLPopupMomentumController {
     private func initUI() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
         view.addSubview(momentumView)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hidden))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hiddenAction))
         view.addGestureRecognizer(tap)
     }
     private func makeConstraints() {
@@ -69,9 +69,9 @@ extension CLPopupMomentumController {
             self.momentumView.closedTransform = .init(translationX: 0, y: height)
         }, completion: completion)
     }
-    @objc private func hidden() {
+    @objc private func hiddenAction() {
         dismissAnimation { (_) in
-            CLPopupManager.dismiss(self.configure.identifier)
+            self.hidden()
         }
     }
 }

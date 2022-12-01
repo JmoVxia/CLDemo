@@ -20,7 +20,7 @@ enum CLHudType {
 }
 
 
-class CLPopupHudController: CLPopupManagerController {
+class CLPopupHudController: CLPopoverController {
     var animationType: CLHudType = .success
     var dismissCallback: (() -> ())?
     var text: String? {
@@ -261,15 +261,14 @@ extension CLPopupHudController {
 }
 extension CLPopupHudController {
     private func dismiss(duration: Double) {
-         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration + 0.6) {
-             UIView.animate(withDuration: 0.3, animations: {
-                 self.contentView.alpha = 0.0
-                 self.contentView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-             }) { (_) in
-                 
-            CLPopupManager.dismiss(self.configure.identifier)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration + 0.6) {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.contentView.alpha = 0.0
+                self.contentView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            }) { (_) in
+                self.hidden()
                 self.dismissCallback?()
-             }
-         }
-     }
+            }
+        }
+    }
 }

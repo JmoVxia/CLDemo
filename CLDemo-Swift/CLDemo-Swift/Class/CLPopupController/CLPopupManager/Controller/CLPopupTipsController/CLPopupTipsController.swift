@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CLPopupTipsController: CLPopupManagerController {
+class CLPopupTipsController: CLPopoverController {
     var text: String? {
         didSet {
             label.text = text
@@ -67,7 +67,7 @@ extension CLPopupTipsController {
         }, completion: { (_) in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.dismissInterval) {
                 self.dismissAnimation { (_) in
-                    CLPopupManager.dismiss(self.configure.identifier)
+                    self.hidden()
                     self.dissmissCallBack?()
                 }
             }

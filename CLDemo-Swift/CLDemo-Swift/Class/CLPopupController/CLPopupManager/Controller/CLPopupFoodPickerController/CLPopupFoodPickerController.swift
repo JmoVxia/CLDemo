@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLPopupFoodPickerController: CLPopupManagerController {
+class CLPopupFoodPickerController: CLPopoverController {
     var selectedCallback: ((String, String, String, String)->())?
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()
@@ -101,8 +101,7 @@ extension CLPopupFoodPickerController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { (_) in
-            
-            CLPopupManager.dismiss(self.configure.identifier)
+            self.hidden()
         }
     }
 }

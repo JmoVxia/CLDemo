@@ -134,12 +134,12 @@ extension CLController {
     }
     ///显示加载动画
     func showProgress() {
-        identifier = CLPopupManager.showLoading()
+        identifier = CLPopoverManager.showLoading()
     }
     ///隐藏加载动画
     func hiddenProgress() {
         guard let identifier = identifier else { return }
-        CLPopupManager.dismiss(identifier)
+        CLPopoverManager.hidden(identifier)
     }
     ///返回
     func back() {
