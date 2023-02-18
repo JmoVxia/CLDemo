@@ -21,4 +21,6 @@
  */
 + (UIImage*) originImage:(UIImage*)image scaleToSize:(CGSize)size;
 
+
++ (UIImage *)imageWithColor:(UIColor *)color;
 @end

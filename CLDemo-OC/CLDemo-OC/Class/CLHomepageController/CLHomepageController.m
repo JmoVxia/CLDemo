@@ -48,7 +48,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = NSLocalizedString(@"OC", nil);
+ 
+    self.titleText = NSLocalizedString(@"OC", nil);
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);

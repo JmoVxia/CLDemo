@@ -10,4 +10,6 @@
 
 @interface CLNavigationController : UINavigationController
 
+@property(nonatomic, strong) UIColor *navigationBarBackgroundColor;
+
 @end

@@ -30,9 +30,9 @@
     [self initUI];
     
    }
-- (void)initUI
-{
+- (void)initUI {
     NSLog(@"沙盒路径----->>>%@",Tools.pathDocuments);
+    
     CLCustomTabbar *tabbar = [[CLCustomTabbar alloc] init];
     __weak __typeof(self) weakSelf = self;
     [tabbar setBulgeCallBack:^{
@@ -41,39 +41,95 @@
     }];
     [self setValue:tabbar forKeyPath:@"tabBar"];
     
-    
     self.view.backgroundColor = [UIColor whiteColor];
     [UITabBar appearance].unselectedItemTintColor = [UIColor colorWithHex:@"999999"];
     [UITabBar appearance].tintColor = [UIColor colorWithHex:@"24C065"];
+    
+    [self addChild:[[CLHomepageController alloc] init]
+             title:NSLocalizedString(@"主页", nil)
+             image:[UIImage imageNamed:@"tabBar_friendTrends_icon"]
+     selectedImage:[UIImage imageNamed:@"tabBar_friendTrends_click_icon"]];
+    
+    [self addChild:[[CLCurriculumController alloc] init]
+             title:NSLocalizedString(@"课程", nil)
+             image:[UIImage imageNamed:@"tabBar_new_icon"]
+     selectedImage:[UIImage imageNamed:@"tabBar_new_click_icon"]];
 
-    
-    CLHomepageController *mc = [[CLHomepageController alloc] init];
-    CLNavigationController *nc1 = [[CLNavigationController alloc] initWithRootViewController:mc];
-    [Tools setControllerTabBarItem:nc1 Title:NSLocalizedString(@"主页", nil) andFoneSize:13 withFoneName:nil selectedImage:@"tabBar_friendTrends_click_icon" withTitleColor:[UIColor blackColor] unselectedImage:@"tabBar_friendTrends_icon" withTitleColor:[UIColor lightGrayColor]];
-    
-    CLCurriculumController *nc = [[CLCurriculumController alloc] init];
-    CLNavigationController *nc2 = [[CLNavigationController alloc] initWithRootViewController:nc];
-    [Tools setControllerTabBarItem:nc2 Title:NSLocalizedString(@"课程", nil) andFoneSize:13 withFoneName:nil selectedImage:@"tabBar_new_click_icon" withTitleColor:[UIColor blackColor] unselectedImage:@"tabBar_new_icon" withTitleColor:[UIColor lightGrayColor]];
-    
-    
-    CLController *aaaa = [[CLController alloc] init];
-    aaaa.title = @"凸起";
-    CLNavigationController *nc3 = [[CLNavigationController alloc] initWithRootViewController:aaaa];
-    
-    
-    CLCollectionController *fc = [[CLCollectionController alloc] init];
-    CLNavigationController *nc4 = [[CLNavigationController alloc] initWithRootViewController:fc];
-    [Tools setControllerTabBarItem:nc4 Title:NSLocalizedString(@"收藏", nil) andFoneSize:13 withFoneName:nil selectedImage:@"tabBar_me_click_icon" withTitleColor:[UIColor blackColor] unselectedImage:@"tabBar_me_icon" withTitleColor:[UIColor lightGrayColor]];
+    [self addChild:[[CLController alloc] init]
+             title:NSLocalizedString(@"课程", nil)
+             image:[UIImage imageNamed:@"tabBar_new_icon"]
+     selectedImage:[UIImage imageNamed:@"tabBar_new_click_icon"]];
 
-    CLMyController *my = [[CLMyController alloc] init];
-    CLNavigationController *nc5 = [[CLNavigationController alloc] initWithRootViewController:my];
-    [Tools setControllerTabBarItem:nc5 Title:NSLocalizedString(@"我的", nil) andFoneSize:13 withFoneName:nil selectedImage:@"tabBar_essence_click_icon" withTitleColor:[UIColor blackColor] unselectedImage:@"tabBar_essence_icon" withTitleColor:[UIColor lightGrayColor]];
-    self.viewControllers = @[nc1,nc2,nc3,nc4,nc5];
+    [self addChild:[[CLCollectionController alloc] init]
+             title:NSLocalizedString(@"收藏", nil)
+             image:[UIImage imageNamed:@"tabBar_me_icon"]
+     selectedImage:[UIImage imageNamed:@"tabBar_me_click_icon"]];
+
+    [self addChild:[[CLController alloc] init]
+             title:NSLocalizedString(@"我的", nil)
+             image:[UIImage imageNamed:@"tabBar_essence_icon"]
+     selectedImage:[UIImage imageNamed:@"tabBar_essence_click_icon"]];
 }
 
-
--(void)dealloc {
-    NSLog(@"Tabbar页面销毁了");
+-(void)addChild:(UIViewController *)child title:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage {
+    child.title = title;
+    [child.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]} forState:UIControlStateNormal];
+    [child.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]} forState:UIControlStateSelected];
+    child.tabBarItem.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    child.tabBarItem.selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    CLNavigationController *navController = [[CLNavigationController alloc] initWithRootViewController:child];
+    [self addChildViewController:navController];
 }
 
+-(BOOL)shouldAutorotate {
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+        return [[(UINavigationController *)self.selectedViewController topViewController] shouldAutorotate] ?: NO;
+    } else {
+        return [self.selectedViewController shouldAutorotate] ?: NO;
+    }
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+        return [[(UINavigationController *)self.selectedViewController topViewController] supportedInterfaceOrientations] ?: UIInterfaceOrientationMaskPortrait;
+    } else {
+        return [self.selectedViewController supportedInterfaceOrientations] ?: UIInterfaceOrientationMaskPortrait;
+    }
+}
+
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+        return [[(UINavigationController *)self.selectedViewController topViewController] preferredInterfaceOrientationForPresentation] ?: UIInterfaceOrientationPortrait;
+    } else {
+        return [self.selectedViewController preferredInterfaceOrientationForPresentation] ?: UIInterfaceOrientationPortrait;
+    }
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+        return [[(UINavigationController *)self.selectedViewController topViewController] preferredStatusBarStyle] ?: UIStatusBarStyleDefault;
+    } else {
+        return [self.selectedViewController preferredStatusBarStyle] ?: UIStatusBarStyleDefault;
+    }
+}
+
+-(BOOL)prefersStatusBarHidden {
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+        return [[(UINavigationController *)self.selectedViewController topViewController] prefersStatusBarHidden] ?: NO;
+    } else {
+        return [self.selectedViewController prefersStatusBarHidden] ?: NO;
+    }
+}
+
+-(UIUserInterfaceStyle)overrideUserInterfaceStyle {
+    if (@available(iOS 13.0, *)) {
+        if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+            return [[(UINavigationController *)self.selectedViewController topViewController] overrideUserInterfaceStyle] ?: UIUserInterfaceStyleLight;
+        } else {
+            return [self.selectedViewController overrideUserInterfaceStyle] ?: UIUserInterfaceStyleLight;
+        }
+    }else {
+        return UIUserInterfaceStyleLight;
+    }
+}
 @end

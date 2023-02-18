@@ -10,5 +10,24 @@
 
 @interface CLController : UIViewController
 
+@property(nonatomic, assign, getter = isSideSlipBack) BOOL sideSlipBack;
+
+@property(nonatomic, assign, getter = isHiddenStatusBar) BOOL hiddenStatusBar;
+
+@property(nonatomic, assign, getter = isHiddenNavigationBar) BOOL hiddenNavigationBar;
+
+@property(nonatomic, strong) UIColor *navigationBarBackgroundColor;
+
+@property(nonatomic, assign) UIStatusBarStyle statusBarStyle;
+
+@property(nonatomic, strong) NSString *titleText;
+
+-(void)back;
+
+-(void)updateTitleLabel:(void (^)(UILabel *))viewCallback;
+
+-(CGFloat)navigationBarHeight;
+
+-(CGFloat)tabBarHeight;
 
 @end
