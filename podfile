@@ -30,6 +30,8 @@ pod 'SwiftyJSON'
 pod 'CryptoSwift'
 pod 'Kingfisher'
 pod 'TZImagePickerController'
+pod 'LookinServer', :subspecs => ['Swift'], :configurations => ['Debug']
+
 
 end
 

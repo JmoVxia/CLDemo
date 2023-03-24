@@ -61,7 +61,7 @@
     self.sideSlipBack = YES;
     self.statusBarStyle = UIStatusBarStyleDefault;
     self.navigationBarBackgroundColor = [UIColor whiteColor];
-    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.extendedLayoutIncludesOpaqueBars = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.titleView = self.titleLabel;
     id target = self.navigationController.interactivePopGestureRecognizer.delegate;

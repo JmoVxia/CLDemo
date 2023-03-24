@@ -108,10 +108,10 @@ extension CLController {
 }
 extension CLController {
     override var shouldAutorotate: Bool {
-        return false
+        return true
     }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        return .all
     }
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait

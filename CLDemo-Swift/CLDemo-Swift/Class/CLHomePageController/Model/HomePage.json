@@ -12,6 +12,10 @@
     "class": "CLDarkModeController"
   },
   {
+    "title": "多级列表",
+    "class": "CLMultiValueController"
+  },
+  {
     "title": "UILabel 截断",
     "class": "CLTruncationController"
   },
