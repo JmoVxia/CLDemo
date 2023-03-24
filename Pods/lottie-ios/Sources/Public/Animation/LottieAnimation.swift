@@ -14,14 +14,6 @@ public enum CoordinateSpace: Int, Codable {
   case type3d
 }
 
-// MARK: - Animation
-
-@available(*, deprecated, renamed: "LottieAnimation", message: """
-  `Lottie.Animation` has been renamed to `LottieAnimation`, to prevent conflicts \
-  with the `SwiftUI.Animation` type. This notice will be removed in Lottie 4.0.
-  """)
-public typealias Animation = LottieAnimation
-
 // MARK: - LottieAnimation
 
 /// The `LottieAnimation` model is the top level model object in Lottie.
@@ -76,7 +68,7 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
     let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers)
     layers = try [LayerModel].fromDictionaries(layerDictionaries)
     if let glyphDictionaries = dictionary[CodingKeys.glyphs.rawValue] as? [[String: Any]] {
-      glyphs = try glyphDictionaries.map({ try Glyph(dictionary: $0) })
+      glyphs = try glyphDictionaries.map { try Glyph(dictionary: $0) }
     } else {
       glyphs = nil
     }
@@ -91,7 +83,7 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
       assetLibrary = nil
     }
     if let markerDictionaries = dictionary[CodingKeys.markers.rawValue] as? [[String: Any]] {
-      let markers = try markerDictionaries.map({ try Marker(dictionary: $0) })
+      let markers = try markerDictionaries.map { try Marker(dictionary: $0) }
       var markerMap: [String: Marker] = [:]
       for marker in markers {
         markerMap[marker.name] = marker

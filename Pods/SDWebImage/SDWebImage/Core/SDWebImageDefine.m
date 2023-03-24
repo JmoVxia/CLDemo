@@ -127,6 +127,7 @@ inline UIImage * _Nullable SDScaledImageForScaleFactor(CGFloat scale, UIImage * 
 
 SDWebImageContextOption const SDWebImageContextSetImageOperationKey = @"setImageOperationKey";
 SDWebImageContextOption const SDWebImageContextCustomManager = @"customManager";
+SDWebImageContextOption const SDWebImageContextCallbackQueue = @"callbackQueue";
 SDWebImageContextOption const SDWebImageContextImageCache = @"imageCache";
 SDWebImageContextOption const SDWebImageContextImageLoader = @"imageLoader";
 SDWebImageContextOption const SDWebImageContextImageCoder = @"imageCoder";
@@ -136,6 +137,7 @@ SDWebImageContextOption const SDWebImageContextImageScaleFactor = @"imageScaleFa
 SDWebImageContextOption const SDWebImageContextImagePreserveAspectRatio = @"imagePreserveAspectRatio";
 SDWebImageContextOption const SDWebImageContextImageThumbnailPixelSize = @"imageThumbnailPixelSize";
 SDWebImageContextOption const SDWebImageContextImageTypeIdentifierHint = @"imageTypeIdentifierHint";
+SDWebImageContextOption const SDWebImageContextImageEncodeOptions = @"imageEncodeOptions";
 SDWebImageContextOption const SDWebImageContextQueryCacheType = @"queryCacheType";
 SDWebImageContextOption const SDWebImageContextStoreCacheType = @"storeCacheType";
 SDWebImageContextOption const SDWebImageContextOriginalQueryCacheType = @"originalQueryCacheType";

@@ -48,8 +48,29 @@ final class Stroke: ShapeItem {
     }
     miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)) ?? 4
     let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
-    dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
+    dashPattern = try? dashPatternDictionaries?.map { try DashElement(dictionary: $0) }
     try super.init(dictionary: dictionary)
+  }
+
+  init(
+    name: String,
+    hidden: Bool,
+    opacity: KeyframeGroup<LottieVector1D>,
+    color: KeyframeGroup<LottieColor>,
+    width: KeyframeGroup<LottieVector1D>,
+    lineCap: LineCap,
+    lineJoin: LineJoin,
+    miterLimit: Double,
+    dashPattern: [DashElement]?)
+  {
+    self.opacity = opacity
+    self.color = color
+    self.width = width
+    self.lineCap = lineCap
+    self.lineJoin = lineJoin
+    self.miterLimit = miterLimit
+    self.dashPattern = dashPattern
+    super.init(name: name, type: .stroke, hidden: hidden)
   }
 
   // MARK: Internal
@@ -74,6 +95,20 @@ final class Stroke: ShapeItem {
 
   /// The dash pattern of the stroke
   let dashPattern: [DashElement]?
+
+  /// Creates a copy of this Stroke with the given updated width keyframes
+  func copy(width newWidth: KeyframeGroup<LottieVector1D>) -> Stroke {
+    Stroke(
+      name: name,
+      hidden: hidden,
+      opacity: opacity,
+      color: color,
+      width: newWidth,
+      lineCap: lineCap,
+      lineJoin: lineJoin,
+      miterLimit: miterLimit,
+      dashPattern: dashPattern)
+  }
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)

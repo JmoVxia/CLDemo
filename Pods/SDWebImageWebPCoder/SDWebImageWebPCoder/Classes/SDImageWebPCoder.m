@@ -68,6 +68,26 @@ else OSSpinLockUnlock(&lock##_deprecated);
 #endif
 #endif
 
+/// Used for animated WebP, which need a canvas for decoding (rendering), possible apply a scale transform for thumbnail decoding (avoiding post-rescale using vImage)
+/// See more in #73
+static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canvasSize, CGSize thumbnailSize, BOOL preserveAspectRatio) {
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
+    bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
+    // Check whether we need to use thumbnail
+    CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(canvasSize.width, canvasSize.height) scaleSize:thumbnailSize preserveAspectRatio:preserveAspectRatio shouldScaleUp:NO];
+    CGContextRef canvas = CGBitmapContextCreate(NULL, scaledSize.width, scaledSize.height, 8, 0, [SDImageCoderHelper colorSpaceGetDeviceRGB], bitmapInfo);
+    if (!canvas) {
+        return nil;
+    }
+    // Check whether we need to use thumbnail
+    if (!CGSizeEqualToSize(canvasSize, scaledSize)) {
+        CGFloat sx = scaledSize.width / canvasSize.width;
+        CGFloat sy = scaledSize.height / canvasSize.height;
+        CGContextScaleCTM(canvas, sx, sy);
+    }
+    return canvas;
+}
+
 @interface SDWebPCoderFrame : NSObject
 
 @property (nonatomic, assign) NSUInteger index; // Frame index (zero based)
@@ -218,9 +238,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
     }
     
     BOOL hasAlpha = flags & ALPHA_FLAG;
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
-    bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
-    CGContextRef canvas = CGBitmapContextCreate(NULL, canvasWidth, canvasHeight, 8, 0, [SDImageCoderHelper colorSpaceGetDeviceRGB], bitmapInfo);
+    CGContextRef canvas = CreateWebPCanvas(hasAlpha, CGSizeMake(canvasWidth, canvasHeight), thumbnailSize, preserveAspectRatio);
     if (!canvas) {
         WebPDemuxDelete(demuxer);
         CGColorSpaceRelease(colorSpace);
@@ -232,7 +250,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
     
     do {
         @autoreleasepool {
-            CGImageRef imageRef = [self sd_drawnWebpImageWithCanvas:canvas iterator:iter colorSpace:colorSpace scaledSize:scaledSize];
+            CGImageRef imageRef = [self sd_drawnWebpImageWithCanvas:canvas demuxer:demuxer iterator:iter colorSpace:colorSpace];
             if (!imageRef) {
                 continue;
             }
@@ -307,8 +325,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
     _finished = finished;
     // check whether we can detect Animated WebP or Static WebP, they need different codec (Demuxer or IDecoder)
     if (!_hasAnimation) {
-        _imageData = [data copy];
-        VP8StatusCode status = WebPIUpdate(_idec, _imageData.bytes, _imageData.length);
+        VP8StatusCode status = WebPIUpdate(_idec, data.bytes, data.length);
         // For Static WebP, all things done.
         // For Animated WebP (currently use `VP8_STATUS_UNSUPPORTED_FEATURE` to check), continue to create demuxer
         if (status != VP8_STATUS_UNSUPPORTED_FEATURE) {
@@ -324,7 +341,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
         WebPDemuxDelete(_demux);
         _demux = NULL;
     }
-    _imageData = [data copy];
+    _imageData = data;
     WebPData webpData;
     WebPDataInit(&webpData);
     webpData.bytes = _imageData.bytes;
@@ -382,7 +399,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
             return nil;
         }
         
-        CGContextRef canvas = CGBitmapContextCreate(NULL, width, height, 8, 0, [SDImageCoderHelper colorSpaceGetDeviceRGB], bitmapInfo);
+        CGContextRef canvas = CreateWebPCanvas(YES, CGSizeMake(width, height), _thumbnailSize, _preserveAspectRatio);
         if (!canvas) {
             CGImageRelease(imageRef);
             return nil;
@@ -404,13 +421,6 @@ else OSSpinLockUnlock(&lock##_deprecated);
                 scale = 1;
             }
         }
-        CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(width, height) scaleSize:_thumbnailSize preserveAspectRatio:_preserveAspectRatio shouldScaleUp:NO];
-        // Check whether we need to use thumbnail
-        if (!CGSizeEqualToSize(CGSizeMake(width, height), scaledSize)) {
-            CGImageRef scaledImageRef = [SDImageCoderHelper CGImageCreateScaled:newImageRef size:scaledSize];
-            CGImageRelease(newImageRef);
-            newImageRef = scaledImageRef;
-        }
         
 #if SD_UIKIT || SD_WATCH
         image = [[UIImage alloc] initWithCGImage:newImageRef scale:scale orientation:UIImageOrientationUp];
@@ -426,8 +436,8 @@ else OSSpinLockUnlock(&lock##_deprecated);
     return image;
 }
 
-- (void)sd_blendWebpImageWithCanvas:(CGContextRef)canvas iterator:(WebPIterator)iter colorSpace:(nonnull CGColorSpaceRef)colorSpaceRef {
-    size_t canvasHeight = CGBitmapContextGetHeight(canvas);
+- (void)sd_blendWebpImageWithCanvas:(CGContextRef)canvas demuxer:(nonnull WebPDemuxer *)demuxer iterator:(WebPIterator)iter colorSpace:(nonnull CGColorSpaceRef)colorSpaceRef {
+    int canvasHeight = WebPDemuxGetI(demuxer, WEBP_FF_CANVAS_HEIGHT);
     CGFloat tmpX = iter.x_offset;
     CGFloat tmpY = canvasHeight - iter.height - iter.y_offset;
     CGRect imageRect = CGRectMake(tmpX, tmpY, iter.width, iter.height);
@@ -449,14 +459,13 @@ else OSSpinLockUnlock(&lock##_deprecated);
     }
 }
 
-- (nullable CGImageRef)sd_drawnWebpImageWithCanvas:(CGContextRef)canvas iterator:(WebPIterator)iter colorSpace:(nonnull CGColorSpaceRef)colorSpaceRef scaledSize:(CGSize)scaledSize CF_RETURNS_RETAINED {
+- (nullable CGImageRef)sd_drawnWebpImageWithCanvas:(CGContextRef)canvas demuxer:(nonnull WebPDemuxer *)demuxer iterator:(WebPIterator)iter colorSpace:(nonnull CGColorSpaceRef)colorSpaceRef CF_RETURNS_RETAINED {
     CGImageRef imageRef = [self sd_createWebpImageWithData:iter.fragment colorSpace:colorSpaceRef scaledSize:CGSizeZero];
     if (!imageRef) {
         return nil;
     }
     
-    size_t canvasWidth = CGBitmapContextGetWidth(canvas);
-    size_t canvasHeight = CGBitmapContextGetHeight(canvas);
+    int canvasHeight = WebPDemuxGetI(demuxer, WEBP_FF_CANVAS_HEIGHT);
     CGFloat tmpX = iter.x_offset;
     CGFloat tmpY = canvasHeight - iter.height - iter.y_offset;
     CGRect imageRect = CGRectMake(tmpX, tmpY, iter.width, iter.height);
@@ -467,24 +476,13 @@ else OSSpinLockUnlock(&lock##_deprecated);
     if (!shouldBlend) {
         CGContextClearRect(canvas, imageRect);
     }
+    
     CGContextDrawImage(canvas, imageRect, imageRef);
     CGImageRef newImageRef = CGBitmapContextCreateImage(canvas);
-    
     CGImageRelease(imageRef);
 
     if (iter.dispose_method == WEBP_MUX_DISPOSE_BACKGROUND) {
         CGContextClearRect(canvas, imageRect);
-    }
-    
-    // Check whether we need to use thumbnail
-    if (!CGSizeEqualToSize(CGSizeMake(canvasWidth, canvasHeight), scaledSize)) {
-        // Important: For Animated WebP thumbnail generation, we can not just use a scaled small canvas and draw each thumbnail frame
-        // This works **On Theory**. However, image scale down loss details. Animated WebP use the partial pixels with blend mode / dispose method with offset, to cover previous canvas status
-        // Because of this reason, even each frame contains small zigzag, the final animation contains visible glitch, this is not we want.
-        // So, always create the full pixels canvas (even though this consume more RAM), after drawn on the canvas, re-scale again with the final size
-        CGImageRef scaledImageRef = [SDImageCoderHelper CGImageCreateScaled:newImageRef size:scaledSize];
-        CGImageRelease(newImageRef);
-        newImageRef = scaledImageRef;
     }
     
     return newImageRef;
@@ -595,6 +593,24 @@ else OSSpinLockUnlock(&lock##_deprecated);
     if (!image) {
         return nil;
     }
+    NSArray<SDImageFrame *> *frames = [SDImageCoderHelper framesFromAnimatedImage:image];
+    if (!frames || frames.count == 0) {
+        SDImageFrame *frame = [SDImageFrame frameWithImage:image duration:0];
+        frames = @[frame];
+    }
+    return [self encodedDataWithFrames:frames loopCount:image.sd_imageLoopCount format:format options:options];
+}
+
+- (NSData *)encodedDataWithFrames:(NSArray<SDImageFrame *> *)frames loopCount:(NSUInteger)loopCount format:(SDImageFormat)format options:(SDImageCoderOptions *)options {
+    UIImage *image = frames.firstObject.image; // Primary image
+    if (!image) {
+        return nil;
+    }
+    CGImageRef imageRef = image.CGImage;
+    if (!imageRef) {
+        // Earily return, supports CGImage only
+        return nil;
+    }
     
     NSData *data;
     
@@ -615,12 +631,11 @@ else OSSpinLockUnlock(&lock##_deprecated);
     if (options[SDImageCoderEncodeMaxFileSize]) {
         maxFileSize = [options[SDImageCoderEncodeMaxFileSize] unsignedIntegerValue];
     }
-    NSArray<SDImageFrame *> *frames = [SDImageCoderHelper framesFromAnimatedImage:image];
     
     BOOL encodeFirstFrame = [options[SDImageCoderEncodeFirstFrameOnly] boolValue];
-    if (encodeFirstFrame || frames.count == 0) {
+    if (encodeFirstFrame || frames.count <= 1) {
         // for static single webp image
-        data = [self sd_encodedWebpDataWithImage:image.CGImage
+        data = [self sd_encodedWebpDataWithImage:imageRef
                                          quality:compressionQuality
                                     maxPixelSize:maxPixelSize
                                      maxFileSize:maxFileSize
@@ -652,9 +667,8 @@ else OSSpinLockUnlock(&lock##_deprecated);
             }
         }
         
-        int loopCount = (int)image.sd_imageLoopCount;
         WebPMuxAnimParams params = { .bgcolor = 0,
-            .loop_count = loopCount
+            .loop_count = (int)loopCount
         };
         if (WebPMuxSetAnimationParams(mux, &params) != WEBP_MUX_OK) {
             WebPMuxDelete(mux);
@@ -721,76 +735,22 @@ else OSSpinLockUnlock(&lock##_deprecated);
     if (!dataProvider) {
         return nil;
     }
-    // Check colorSpace is RGB/RGBA
-    CGColorSpaceRef colorSpace = CGImageGetColorSpace(imageRef);
-    BOOL isRGB = CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelRGB;
     
-    CFDataRef dataRef;
     uint8_t *rgba = NULL; // RGBA Buffer managed by CFData, don't call `free` on it, instead call `CFRelease` on `dataRef`
     // We could not assume that input CGImage's color mode is always RGB888/RGBA8888. Convert all other cases to target color mode using vImage
-    BOOL isRGB888 = isRGB && byteOrderNormal && alphaInfo == kCGImageAlphaNone && components == 3;
-    BOOL isRGBA8888 = isRGB && byteOrderNormal && alphaInfo == kCGImageAlphaLast && components == 4;
-    if (isRGB888 || isRGBA8888) {
-        // If the input CGImage is already RGB888/RGBA8888
-        dataRef = CGDataProviderCopyData(dataProvider);
-        if (!dataRef) {
-            return nil;
-        }
-        rgba = (uint8_t *)CFDataGetBytePtr(dataRef);
-    } else {
-        // Convert all other cases to target color mode using vImage
-        vImageConverterRef convertor = NULL;
-        vImage_Error error = kvImageNoError;
-        
-        vImage_CGImageFormat srcFormat = {
-            .bitsPerComponent = (uint32_t)bitsPerComponent,
-            .bitsPerPixel = (uint32_t)bitsPerPixel,
-            .colorSpace = colorSpace,
-            .bitmapInfo = bitmapInfo,
-            .renderingIntent = CGImageGetRenderingIntent(imageRef)
-        };
-        vImage_CGImageFormat destFormat = {
-            .bitsPerComponent = 8,
-            .bitsPerPixel = hasAlpha ? 32 : 24,
-            .colorSpace = [SDImageCoderHelper colorSpaceGetDeviceRGB],
-            .bitmapInfo = hasAlpha ? kCGImageAlphaLast | kCGBitmapByteOrderDefault : kCGImageAlphaNone | kCGBitmapByteOrderDefault // RGB888/RGBA8888 (Non-premultiplied to works for libwebp)
-        };
-        
-        convertor = vImageConverter_CreateWithCGImageFormat(&srcFormat, &destFormat, NULL, kvImageNoFlags, &error);
-        if (error != kvImageNoError) {
-            return nil;
-        }
-        
-        vImage_Buffer src;
-        error = vImageBuffer_InitWithCGImage(&src, &srcFormat, nil, imageRef, kvImageNoFlags);
-        if (error != kvImageNoError) {
-            vImageConverter_Release(convertor);
-            return nil;
-        }
-        
-        vImage_Buffer dest;
-        error = vImageBuffer_Init(&dest, height, width, destFormat.bitsPerPixel, kvImageNoFlags);
-        if (error != kvImageNoError) {
-            vImageConverter_Release(convertor);
-            free(src.data);
-            return nil;
-        }
-        
-        // Convert input color mode to RGB888/RGBA8888
-        error = vImageConvert_AnyToAny(convertor, &src, &dest, NULL, kvImageNoFlags);
-        
-        // Free the buffer
-        free(src.data);
-        vImageConverter_Release(convertor);
-        if (error != kvImageNoError) {
-            free(dest.data);
-            return nil;
-        }
-        
-        rgba = dest.data; // Converted buffer
-        bytesPerRow = dest.rowBytes; // Converted bytePerRow
-        dataRef = CFDataCreateWithBytesNoCopy(kCFAllocatorDefault, rgba, bytesPerRow * height, kCFAllocatorDefault);
+    vImage_CGImageFormat destFormat = {
+        .bitsPerComponent = 8,
+        .bitsPerPixel = hasAlpha ? 32 : 24,
+        .colorSpace = [SDImageCoderHelper colorSpaceGetDeviceRGB],
+        .bitmapInfo = hasAlpha ? kCGImageAlphaLast | kCGBitmapByteOrderDefault : kCGImageAlphaNone | kCGBitmapByteOrderDefault // RGB888/RGBA8888 (Non-premultiplied to works for libwebp)
+    };
+    vImage_Buffer dest;
+    vImage_Error error = vImageBuffer_InitWithCGImage(&dest, &destFormat, NULL, imageRef, kvImageNoFlags);
+    if (error != kvImageNoError) {
+        return nil;
     }
+    rgba = dest.data;
+    bytesPerRow = dest.rowBytes;
     
     float qualityFactor = quality * 100; // WebP quality is 0-100
     // Encode RGB888/RGBA8888 buffer to WebP data
@@ -802,7 +762,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
     if (!WebPConfigPreset(&config, WEBP_PRESET_DEFAULT, qualityFactor) ||
         !WebPPictureInit(&picture)) {
         // shouldn't happen, except if system installation is broken
-        CFRelease(dataRef);
+        free(dest.data);
         return nil;
     }
 
@@ -822,7 +782,7 @@ else OSSpinLockUnlock(&lock##_deprecated);
     }
     if (!result) {
         WebPMemoryWriterClear(&writer);
-        CFRelease(dataRef);
+        free(dest.data);
         return nil;
     }
     
@@ -833,14 +793,14 @@ else OSSpinLockUnlock(&lock##_deprecated);
         if (!result) {
             WebPMemoryWriterClear(&writer);
             WebPPictureFree(&picture);
-            CFRelease(dataRef);
+            free(dest.data);
             return nil;
         }
     }
     
     result = WebPEncode(&config, &picture);
     WebPPictureFree(&picture);
-    CFRelease(dataRef); // Free bitmap buffer
+    free(dest.data);
     
     if (result) {
         // success
@@ -1122,16 +1082,13 @@ static float GetFloatValueForKey(NSDictionary * _Nonnull dictionary, NSString * 
     if (_hasAnimation) {
         // If have animation, we still need to allocate a CGContext, because the poster frame may be smaller than canvas
         if (!_canvas) {
-            CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
-            bitmapInfo |= _hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
-            CGContextRef canvas = CGBitmapContextCreate(NULL, _canvasWidth, _canvasHeight, 8, 0, [SDImageCoderHelper colorSpaceGetDeviceRGB], bitmapInfo);
+            CGContextRef canvas = CreateWebPCanvas(_hasAlpha, CGSizeMake(_canvasWidth, _canvasHeight), _thumbnailSize, _preserveAspectRatio);
             if (!canvas) {
                 return nil;
             }
             _canvas = canvas;
         }
-        CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(_canvasWidth, _canvasHeight) scaleSize:_thumbnailSize preserveAspectRatio:_preserveAspectRatio shouldScaleUp:NO];
-        imageRef = [self sd_drawnWebpImageWithCanvas:_canvas iterator:iter colorSpace:_colorSpace scaledSize:scaledSize];
+        imageRef = [self sd_drawnWebpImageWithCanvas:_canvas demuxer:_demux iterator:iter colorSpace:_colorSpace];
     } else {
         CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(iter.width, iter.height) scaleSize:_thumbnailSize preserveAspectRatio:_preserveAspectRatio shouldScaleUp:NO];
         imageRef = [self sd_createWebpImageWithData:iter.fragment colorSpace:_colorSpace scaledSize:scaledSize];
@@ -1151,9 +1108,7 @@ static float GetFloatValueForKey(NSDictionary * _Nonnull dictionary, NSString * 
 
 - (UIImage *)safeAnimatedImageFrameAtIndex:(NSUInteger)index {
     if (!_canvas) {
-        CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
-        bitmapInfo |= _hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
-        CGContextRef canvas = CGBitmapContextCreate(NULL, _canvasWidth, _canvasHeight, 8, 0, [SDImageCoderHelper colorSpaceGetDeviceRGB], bitmapInfo);
+        CGContextRef canvas = CreateWebPCanvas(_hasAlpha, CGSizeMake(_canvasWidth, _canvasHeight), _thumbnailSize, _preserveAspectRatio);
         if (!canvas) {
             return nil;
         }
@@ -1197,7 +1152,7 @@ static float GetFloatValueForKey(NSDictionary * _Nonnull dictionary, NSString * 
         if (endIndex > startIndex) {
             do {
                 @autoreleasepool {
-                    [self sd_blendWebpImageWithCanvas:_canvas iterator:iter colorSpace:_colorSpace];
+                    [self sd_blendWebpImageWithCanvas:_canvas demuxer:_demux iterator:iter colorSpace:_colorSpace];
                 }
             } while ((size_t)iter.frame_num < endIndex && WebPDemuxNextFrame(&iter));
         }
@@ -1210,9 +1165,7 @@ static float GetFloatValueForKey(NSDictionary * _Nonnull dictionary, NSString * 
     _currentBlendIndex = index;
     
     // Now the canvas is ready, which respects of dispose method behavior. Just do normal decoding and produce image.
-    // Check whether we need to use thumbnail
-    CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(_canvasWidth, _canvasHeight) scaleSize:_thumbnailSize preserveAspectRatio:_preserveAspectRatio shouldScaleUp:NO];
-    CGImageRef imageRef = [self sd_drawnWebpImageWithCanvas:_canvas iterator:iter colorSpace:_colorSpace scaledSize:scaledSize];
+    CGImageRef imageRef = [self sd_drawnWebpImageWithCanvas:_canvas demuxer:_demux iterator:iter colorSpace:_colorSpace];
     if (!imageRef) {
         return nil;
     }

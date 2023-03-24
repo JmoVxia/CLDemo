@@ -32,11 +32,6 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>LookinServer.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>16</integer>
-		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>

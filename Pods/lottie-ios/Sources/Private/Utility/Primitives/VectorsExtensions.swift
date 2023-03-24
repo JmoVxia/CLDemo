@@ -66,14 +66,6 @@ extension Double {
   }
 }
 
-// MARK: - Vector2D
-
-@available(*, deprecated, renamed: "LottieVector2D", message: """
-  `Lottie.Vector2D` has been renamed to `LottieVector2D` for consistency with \
-  the new `LottieVector3D` type. This notice will be removed in Lottie 4.0.
-  """)
-public typealias Vector2D = LottieVector2D
-
 // MARK: - LottieVector2D
 
 /// Needed for decoding json {x: y:} to a CGPoint
@@ -254,6 +246,10 @@ extension CGSize {
 
 extension CATransform3D {
 
+  enum Axis {
+    case x, y, z
+  }
+
   static func makeSkew(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
     let mCos = cos(skewAxis.toRadians())
     let mSin = sin(skewAxis.toRadians())
@@ -319,20 +315,37 @@ extension CATransform3D {
     anchor: CGPoint,
     position: CGPoint,
     scale: CGSize,
-    rotation: CGFloat,
+    rotationX: CGFloat,
+    rotationY: CGFloat,
+    rotationZ: CGFloat,
     skew: CGFloat?,
     skewAxis: CGFloat?)
     -> CATransform3D
   {
     if let skew = skew, let skewAxis = skewAxis {
-      return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).skewed(skew: -skew, skewAxis: skewAxis)
-        .scaled(scale * 0.01).translated(anchor * -1)
+      return CATransform3DMakeTranslation(position.x, position.y, 0)
+        .rotated(rotationX, axis: .x)
+        .rotated(rotationY, axis: .y)
+        .rotated(rotationZ, axis: .z)
+        .skewed(skew: -skew, skewAxis: skewAxis)
+        .scaled(scale * 0.01)
+        .translated(anchor * -1)
     }
-    return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
+    return CATransform3DMakeTranslation(position.x, position.y, 0)
+      .rotated(rotationX, axis: .x)
+      .rotated(rotationY, axis: .y)
+      .rotated(rotationZ, axis: .z)
+      .scaled(scale * 0.01)
+      .translated(anchor * -1)
   }
 
-  func rotated(_ degrees: CGFloat) -> CATransform3D {
-    CATransform3DRotate(self, degrees.toRadians(), 0, 0, 1)
+  func rotated(_ degrees: CGFloat, axis: Axis) -> CATransform3D {
+    CATransform3DRotate(
+      self,
+      degrees.toRadians(),
+      axis == .x ? 1 : 0,
+      axis == .y ? 1 : 0,
+      axis == .z ? 1 : 0)
   }
 
   func translated(_ translation: CGPoint) -> CATransform3D {
@@ -346,4 +359,5 @@ extension CATransform3D {
   func skewed(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
     CATransform3DConcat(CATransform3D.makeSkew(skew: skew, skewAxis: skewAxis), self)
   }
+
 }

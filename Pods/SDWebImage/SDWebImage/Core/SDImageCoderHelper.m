@@ -94,6 +94,13 @@ static CGFloat kDestImageLimitBytes = 30.f * kBytesPerMB;
 
 static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to overlap the seems where tiles meet.
 
+#if SD_MAC
+@interface SDAnimatedImageRep (Private)
+/// This wrap the animated image frames for legacy animated image coder API (`encodedDataWithImage:`).
+@property (nonatomic, readwrite, weak) NSArray<SDImageFrame *> *frames;
+@end
+#endif
+
 @implementation SDImageCoderHelper
 
 + (UIImage *)animatedImageWithFrames:(NSArray<SDImageFrame *> *)frames {
@@ -159,6 +166,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     SDAnimatedImageRep *imageRep = [[SDAnimatedImageRep alloc] initWithData:imageData];
     NSSize size = NSMakeSize(imageRep.pixelsWide / scale, imageRep.pixelsHigh / scale);
     imageRep.size = size;
+    imageRep.frames = frames; // Weak assign to avoid effect lazy semantic of NSBitmapImageRep
     animatedImage = [[NSImage alloc] initWithSize:size];
     [animatedImage addRepresentation:imageRep];
 #endif
@@ -211,6 +219,14 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     
     NSRect imageRect = NSMakeRect(0, 0, animatedImage.size.width, animatedImage.size.height);
     NSImageRep *imageRep = [animatedImage bestRepresentationForRect:imageRect context:nil hints:nil];
+    // Check weak assigned frames firstly
+    if ([imageRep isKindOfClass:[SDAnimatedImageRep class]]) {
+        SDAnimatedImageRep *animatedImageRep = (SDAnimatedImageRep *)imageRep;
+        if (animatedImageRep.frames) {
+            return animatedImageRep.frames;
+        }
+    }
+    
     NSBitmapImageRep *bitmapImageRep;
     if ([imageRep isKindOfClass:[NSBitmapImageRep class]]) {
         bitmapImageRep = (NSBitmapImageRep *)imageRep;
@@ -235,7 +251,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     }
 #endif
     
-    return frames;
+    return [frames copy];
 }
 
 + (CGColorSpaceRef)colorSpaceGetDeviceRGB {
@@ -418,8 +434,8 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     }
     
     UIImage *decodedImage;
-#if SD_UIKIT
     SDImageCoderDecodeSolution decodeSolution = self.defaultDecodeSolution;
+#if SD_UIKIT
     if (decodeSolution == SDImageCoderDecodeSolutionAutomatic) {
         // See #3365, CMPhoto iOS 15 only supports JPEG/HEIF format, or it will print an error log :(
         SDImageFormat format = image.sd_imageFormat;
@@ -439,19 +455,31 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     
     CGImageRef imageRef = image.CGImage;
     if (!imageRef) {
+        // Only decode for CGImage-based
         return image;
     }
-    BOOL hasAlpha = [self CGImageContainsAlpha:imageRef];
-    // Prefer to use new Image Renderer to re-draw image, instead of low-level CGBitmapContext and CGContextDrawImage
-    // This can keep both OS compatible and don't fight with Apple's performance optimization
-    SDGraphicsImageRendererFormat *format = [[SDGraphicsImageRendererFormat alloc] init];
-    format.opaque = !hasAlpha;
-    format.scale = image.scale;
-    CGSize imageSize = image.size;
-    SDGraphicsImageRenderer *renderer = [[SDGraphicsImageRenderer alloc] initWithSize:imageSize format:format];
-    decodedImage = [renderer imageWithActions:^(CGContextRef  _Nonnull context) {
-            [image drawInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
-    }];
+    
+    if (decodeSolution == SDImageCoderDecodeSolutionCoreGraphics) {
+        CGImageRef decodedImageRef = [self CGImageCreateDecoded:imageRef];
+#if SD_MAC
+        decodedImage = [[UIImage alloc] initWithCGImage:decodedImageRef scale:image.scale orientation:kCGImagePropertyOrientationUp];
+#else
+        decodedImage = [[UIImage alloc] initWithCGImage:decodedImageRef scale:image.scale orientation:image.imageOrientation];
+#endif
+        CGImageRelease(decodedImageRef);
+    } else {
+        BOOL hasAlpha = [self CGImageContainsAlpha:imageRef];
+        // Prefer to use new Image Renderer to re-draw image, instead of low-level CGBitmapContext and CGContextDrawImage
+        // This can keep both OS compatible and don't fight with Apple's performance optimization
+        SDGraphicsImageRendererFormat *format = SDGraphicsImageRendererFormat.preferredFormat;
+        format.opaque = !hasAlpha;
+        format.scale = image.scale;
+        CGSize imageSize = image.size;
+        SDGraphicsImageRenderer *renderer = [[SDGraphicsImageRenderer alloc] initWithSize:imageSize format:format];
+        decodedImage = [renderer imageWithActions:^(CGContextRef  _Nonnull context) {
+                [image drawInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
+        }];
+    }
     SDImageCopyAssociatedObject(image, decodedImage);
     decodedImage.sd_isDecoded = YES;
     return decodedImage;
@@ -472,6 +500,10 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     tileTotalPixels = destTotalPixels / 3;
     
     CGImageRef sourceImageRef = image.CGImage;
+    if (!sourceImageRef) {
+        // Only decode for CGImage-based
+        return image;
+    }
     CGSize sourceResolution = CGSizeZero;
     sourceResolution.width = CGImageGetWidth(sourceImageRef);
     sourceResolution.height = CGImageGetHeight(sourceImageRef);

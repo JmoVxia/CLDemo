@@ -1,4 +1,10 @@
-
+//
+//  swift
+//  FUSHENG
+//
+//  Created by JmoVxia on 2019/12/24.
+//  Copyright © 2019 FuSheng. All rights reserved.
+//
 
 import UIKit
 
@@ -58,7 +64,7 @@ public extension CLPopoverManager {
     static func show(_ controller: CLPopoverController) {
         guard !share.windows.values.contains(where: { ($0.rootViewController as? CLPopoverController)?.config.mode == .unique }) else { return }
         guard !share.windows.values.contains(where: { ($0.rootViewController as? CLPopoverController)?.config.identifier == controller.config.identifier && controller.config.identifier != nil }) else { return }
-        guard !share.waitQueue.values.contains(where: { $0.config.identifier == controller.config.identifier && controller.config.identifier != nil }) else { return }
+        guard !share.waitQueue.values.contains(where: { $0 != controller && $0.config.identifier == controller.config.identifier && controller.config.identifier != nil }) else { return }
 
         mainSync {
             if controller.config.isWait, !share.windows.isEmpty {
