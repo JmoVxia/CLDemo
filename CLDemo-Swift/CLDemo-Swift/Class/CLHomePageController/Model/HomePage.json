@@ -12,6 +12,10 @@
     "class": "CLDarkModeController"
   },
   {
+    "title": "表格视图",
+    "class": "CLExcelController"
+  },
+  {
     "title": "多级列表",
     "class": "CLMultiValueController"
   },
@@ -137,7 +141,7 @@
   },
   {
     "title": "气泡弹框",
-    "class": "CLPopoverController"
+    "class": "CLBubblePopupController"
   },
   {
     "title": "旋转图片",

@@ -176,10 +176,10 @@ class CLChatInputToolBar: UIView {
         view.textColor = .black
         view.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom:8, right: 8)
         view.textContainer.lineFragmentPadding = 0
-        view.textViewHeightChangeCallBack = {[weak self] (height) in
+        view.textViewHeightChangeCallback = {[weak self] (height) in
             self?.textViewHeightChange(height: height)
         }
-        view.textDidChangeCallBack = {[weak self](text) in
+        view.textDidChangeCallback = {[weak self] (text) in
             self?.isHiddenSend = text.isEmpty || (text).isValidAllEmpty()
             self?.emojiView.isCanSend = !(text.isEmpty || (text).isValidAllEmpty())
             self?.emojiView.isCanDelete = !text.isEmpty

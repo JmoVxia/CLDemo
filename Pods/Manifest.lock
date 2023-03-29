@@ -1,5 +1,5 @@
 PODS:
-  - CryptoSwift (1.6.0)
+  - CryptoSwift (1.7.0)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
   - Kingfisher (7.6.2)
@@ -12,9 +12,9 @@ PODS:
   - libwebp/mux (1.2.4):
     - libwebp/demux
   - libwebp/webp (1.2.4)
+  - LookinServer (1.1.5):
+    - LookinServer/Core (= 1.1.5)
   - LookinServer/Core (1.1.5)
-  - LookinServer/Swift (1.1.5):
-    - LookinServer/Core
   - lottie-ios (4.1.3)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
@@ -37,7 +37,7 @@ DEPENDENCIES:
   - DateTools
   - DateToolsSwift
   - Kingfisher
-  - LookinServer/Swift
+  - LookinServer
   - lottie-ios
   - Masonry
   - MJExtension
@@ -65,7 +65,7 @@ SPEC REPOS:
     - TZImagePickerController
 
 SPEC CHECKSUMS:
-  CryptoSwift: 562f8eceb40e80796fffc668b0cad9313284cfa6
+  CryptoSwift: e71dbe5bbb7a945e365d4b9034dbccf28d033a8f
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
@@ -80,6 +80,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
 
-PODFILE CHECKSUM: 4cc332254951b70969ac6fc7f98b5b72ad70285b
+PODFILE CHECKSUM: ad8f6ebad7026d4d8b0226ad14e92f7ab70ac148
 
 COCOAPODS: 1.12.0

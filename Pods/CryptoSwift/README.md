@@ -19,7 +19,7 @@ Crypto related functions and helpers for [Swift](https://swift.org) implemented 
 
 It takes some time to keep it all for your convenience, so maybe spare $1, so I can keep working on that. There are more than 8000 clones daily. If I'd get $1/month from each company that uses my work here, I'd say we're even. Hurry up, find the [Sponsorship](https://github.com/users/krzyzanowskim/sponsorship) button, and fulfill your duty.
 
-CryptoSwift isn't backed by any big company and is developer in my spare time that I also use to as a freelancer.
+CryptoSwift isn't backed by any big company and is developed in my spare time that I also use to as a freelancer.
 
 [![Twitter](https://img.shields.io/badge/Twitter-@krzyzanowskim-blue.svg?style=flat)](http://twitter.com/krzyzanowskim)
 
@@ -127,7 +127,7 @@ It is recommended to enable [Whole-Module Optimization](https://swift.org/blog/w
 You can use [Swift Package Manager](https://swift.org/package-manager/) and specify dependency in `Package.swift` by adding this:
 
 ```swift
-.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMajor(from: "1.6.0"))
+.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMajor(from: "1.7.0"))
 ```
 
 See: [Package.swift - manual](http://blog.krzyzanowskim.com/2016/08/09/package-swift-manual/)
@@ -139,7 +139,7 @@ Notice: Swift Package Manager uses debug configuration for debug Xcode build, th
 You can use [CocoaPods](https://cocoapods.org/pods/CryptoSwift).
 
 ```ruby
-pod 'CryptoSwift', '~> 1.6.0'
+pod 'CryptoSwift', '~> 1.7.0'
 ```
 
 Bear in mind that CocoaPods will build CryptoSwift without [Whole-Module Optimization](https://swift.org/blog/whole-module-optimizations/) that may impact performance. You can change it manually after installation, or use [cocoapods-wholemodule](https://github.com/jedlewison/cocoapods-wholemodule) plugin.
@@ -166,7 +166,7 @@ CryptoSwift.xcframework is a Release (Optimized) binary that offer best availabl
 
 #### Embedded Framework
 
-Embedded frameworks require a minimum deployment target of iOS 9 or macOS Sierra (10.12). Drag the `CryptoSwift.xcodeproj` file into your Xcode project, and add appropriate framework as a dependency to your target. Now select your App and choose the General tab for the app target. Find *Embedded Binaries* and press "+", then select `CryptoSwift.framework` (iOS, macOS, watchOS or tvOS)
+Embedded frameworks require a minimum deployment target of iOS 11.0 or macOS Sierra (10.13). Drag the `CryptoSwift.xcodeproj` file into your Xcode project, and add appropriate framework as a dependency to your target. Now select your App and choose the General tab for the app target. Find *Embedded Binaries* and press "+", then select `CryptoSwift.framework` (iOS, macOS, watchOS or tvOS)
 
 ![](https://cloud.githubusercontent.com/assets/758033/10834511/25a26852-7e9a-11e5-8c01-6cc8f1838459.png)
 
@@ -560,10 +560,10 @@ RSA Encryption & Decryption Example
 let alicesPrivateKey = try RSA(keySize: 1024)
     
 // Alice shares her **public** key with Bob
-let alicesPublicKeyData = try alicesPrivateKey.publicKeyDER()
+let alicesPublicKeyData = try alicesPrivateKey.publicKeyExternalRepresentation()
     
 // Bob receives the raw external representation of Alices public key and imports it
-let bobsImportOfAlicesPublicKey = try RSA(rawRepresentation: Data(alicesPublicKeyData))
+let bobsImportOfAlicesPublicKey = try RSA(rawRepresentation: alicesPublicKeyData)
     
 // Bob can now encrypt a message for Alice using her public key
 let message = "Hi Alice! This is Bob!"
@@ -591,10 +591,10 @@ let messageAliceSupports = "Hi my name is Alice!"
 let alicesSignature = try alicesPrivateKey.sign(messageAliceSupports.bytes)
     
 // Alice shares her Public key and the signature with Bob
-let alicesPublicKeyData = try alicesPrivateKey.publicKeyDER()
+let alicesPublicKeyData = try alicesPrivateKey.publicKeyExternalRepresentation()
     
 // Bob receives the raw external representation of Alices Public key and imports it!
-let bobsImportOfAlicesPublicKey = try RSA(rawRepresentation: Data(alicesPublicKeyData))
+let bobsImportOfAlicesPublicKey = try RSA(rawRepresentation: alicesPublicKeyData)
         
 // Bob can now verify that Alice signed the message using the Private key associated with her shared Public key.
 let verifiedSignature = try bobsImportOfAlicesPublicKey.verify(signature: alicesSignature, for: "Hi my name is Alice!".bytes)

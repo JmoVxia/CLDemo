@@ -17,17 +17,28 @@ class CLPopupFoodPickerContentView: UIView {
     var selectedCallback: ((CLPopupFoodPickerContentModel) -> ())?
     var dataArray = [CLPopupFoodPickerContentModel]() {
         didSet {
-            tableview.reloadData()
+            tableView.reloadData()
         }
     }
-    lazy var tableview: UITableView = {
-       let view = UITableView()
+    private lazy var tableView: UITableView = {
+        let view = UITableView(frame: .zero, style: .plain)
+        view.dataSource = self
+        view.delegate = self
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
-        view.dataSource = self
-        view.delegate = self
-        view.register(CLPopupFoodPickerContentCell.self, forCellReuseIdentifier: "CLPopupFoodPickerContentCell")
+        view.backgroundColor = .clear
+        view.estimatedRowHeight = 150
+        view.estimatedSectionHeaderHeight = 0
+        view.estimatedSectionFooterHeight = 0
+        view.contentInset = .zero
+        view.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 13.0, *) {
+            view.automaticallyAdjustsScrollIndicatorInsets = false
+        }
+        if #available(iOS 15.0, *) {
+            view.sectionHeaderTopPadding = 0
+        }
         return view
     }()
     var selectedTitle: String?
@@ -43,10 +54,10 @@ class CLPopupFoodPickerContentView: UIView {
 extension CLPopupFoodPickerContentView {
     private func initUI() {
         backgroundColor = .white
-        addSubview(tableview)
+        addSubview(tableView)
     }
     private func makeConstraints () {
-        tableview.snp.makeConstraints { (make) in
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }

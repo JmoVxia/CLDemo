@@ -23,13 +23,22 @@ class CLHomePageController: CLController {
     }()
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
-        view.backgroundColor = .white
         view.dataSource = tableViewHepler
         view.delegate = tableViewHepler
-        if #available(iOS 11.0, *) {
-            view.contentInsetAdjustmentBehavior = .never
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.separatorStyle = .none
+        view.backgroundColor = .clear
+        view.estimatedRowHeight = 150
+        view.estimatedSectionHeaderHeight = 0
+        view.estimatedSectionFooterHeight = 0
+        view.contentInset = .zero
+        view.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 13.0, *) {
+            view.automaticallyAdjustsScrollIndicatorInsets = false
+        }
+        if #available(iOS 15.0, *) {
+            view.sectionHeaderTopPadding = 0
         }
         return view
     }()
@@ -83,7 +92,9 @@ private extension CLHomePageController {
             return
         }
         for model in array {
-            guard let type = NSClassFromString("CLDemo_Swift.\(model.class)") as? CLController.Type else { break }
+            guard let type = NSClassFromString("CLDemo_Swift.\(model.class)") as? CLController.Type else {
+                continue
+            }
 
             let item = CLTitleCellItem(title: model.title.localized, type: type)
             item.accessoryType = .disclosureIndicator

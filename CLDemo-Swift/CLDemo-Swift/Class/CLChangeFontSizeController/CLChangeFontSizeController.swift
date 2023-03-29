@@ -34,12 +34,23 @@ class CLChangeFontSizeController: CLController {
     }()
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
-        view.backgroundColor = .init("#EEEEED")
-        view.separatorStyle = .none
         view.dataSource = tableViewHepler
         view.delegate = tableViewHepler
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.separatorStyle = .none
+        view.backgroundColor = .clear
+        view.estimatedRowHeight = 150
+        view.estimatedSectionHeaderHeight = 0
+        view.estimatedSectionFooterHeight = 0
+        view.contentInset = .zero
+        view.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 13.0, *) {
+            view.automaticallyAdjustsScrollIndicatorInsets = false
+        }
+        if #available(iOS 15.0, *) {
+            view.sectionHeaderTopPadding = 0
+        }
         return view
     }()
 }

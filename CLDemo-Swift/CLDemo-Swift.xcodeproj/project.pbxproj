@@ -66,6 +66,7 @@
 		5B58C57226846B34001736D7 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B58C56C26846B34001736D7 /* libmp3lame.a */; };
 		5B58C57326846B34001736D7 /* CLMp3Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B58C57026846B34001736D7 /* CLMp3Encoder.m */; };
 		5B58C57426846B34001736D7 /* CLRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B58C57126846B34001736D7 /* CLRecorder.m */; };
+		5B63E55329D6898400F39220 /* CLMultiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B63E55229D6898400F39220 /* CLMultiCell.swift */; };
 		5B6C088E29CD7BE000C61C29 /* CLPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088A29CD7BDF00C61C29 /* CLPopoverController.swift */; };
 		5B6C088F29CD7BE000C61C29 /* CLPopoverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088B29CD7BE000C61C29 /* CLPopoverManager.swift */; };
 		5B6C089029CD7BE000C61C29 /* CLPopoverWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088C29CD7BE000C61C29 /* CLPopoverWindow.swift */; };
@@ -155,6 +156,10 @@
 		5BAABFFC2681B3B200C2F609 /* CLTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAABFFB2681B3B200C2F609 /* CLTitleCell.swift */; };
 		5BAAC0012681B65200C2F609 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BAAC0032681B65200C2F609 /* Localizable.strings */; };
 		5BAAC0072681B6BB00C2F609 /* CLChangeLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC0062681B6BB00C2F609 /* CLChangeLanguageController.swift */; };
+		5BBFE84E29DE53DE00A5AC34 /* CLExcelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE84D29DE53DE00A5AC34 /* CLExcelController.swift */; };
+		5BBFE85229DE548400A5AC34 /* CLExcelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE85129DE548400A5AC34 /* CLExcelView.swift */; };
+		5BBFE85629DE556B00A5AC34 /* CLCollectionExcelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE85529DE556B00A5AC34 /* CLCollectionExcelCell.swift */; };
+		5BBFE85829DE558A00A5AC34 /* CLCollectionExcelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE85729DE558A00A5AC34 /* CLCollectionExcelLayout.swift */; };
 		5BC13529269E95D600D1CCB5 /* CLCustomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC13528269E95D600D1CCB5 /* CLCustomTransitionController.swift */; };
 		5BC1352B269EB71900D1CCB5 /* CLBubbleTransitionPresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1352A269EB71900D1CCB5 /* CLBubbleTransitionPresentController.swift */; };
 		5BC1352D269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1352C269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift */; };
@@ -389,6 +394,7 @@
 		5B58C56F26846B34001736D7 /* CLRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRecorder.h; sourceTree = "<group>"; };
 		5B58C57026846B34001736D7 /* CLMp3Encoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMp3Encoder.m; sourceTree = "<group>"; };
 		5B58C57126846B34001736D7 /* CLRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRecorder.m; sourceTree = "<group>"; };
+		5B63E55229D6898400F39220 /* CLMultiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiCell.swift; sourceTree = "<group>"; };
 		5B6C088A29CD7BDF00C61C29 /* CLPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverController.swift; sourceTree = "<group>"; };
 		5B6C088B29CD7BE000C61C29 /* CLPopoverManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverManager.swift; sourceTree = "<group>"; };
 		5B6C088C29CD7BE000C61C29 /* CLPopoverWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverWindow.swift; sourceTree = "<group>"; };
@@ -481,6 +487,10 @@
 		5BAAC0022681B65200C2F609 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5BAAC0042681B65900C2F609 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5BAAC0062681B6BB00C2F609 /* CLChangeLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChangeLanguageController.swift; sourceTree = "<group>"; };
+		5BBFE84D29DE53DE00A5AC34 /* CLExcelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLExcelController.swift; sourceTree = "<group>"; };
+		5BBFE85129DE548400A5AC34 /* CLExcelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLExcelView.swift; sourceTree = "<group>"; };
+		5BBFE85529DE556B00A5AC34 /* CLCollectionExcelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionExcelCell.swift; sourceTree = "<group>"; };
+		5BBFE85729DE558A00A5AC34 /* CLCollectionExcelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionExcelLayout.swift; sourceTree = "<group>"; };
 		5BC13528269E95D600D1CCB5 /* CLCustomTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCustomTransitionController.swift; sourceTree = "<group>"; };
 		5BC1352A269EB71900D1CCB5 /* CLBubbleTransitionPresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBubbleTransitionPresentController.swift; sourceTree = "<group>"; };
 		5BC1352C269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBubbleTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -942,12 +952,7 @@
 				5BD4EB352681872D00B5284F /* CLPopupManager */,
 				5B7982A526A02256004A6473 /* CLTheme */,
 				5B8004342681948A000E39AC /* Class */,
-				5B4895FB268097510046AF31 /* Main.storyboard */,
-				5B4895FE268097520046AF31 /* Assets.xcassets */,
-				5B489600268097520046AF31 /* LaunchScreen.storyboard */,
-				5B489603268097520046AF31 /* Info.plist */,
-				5BAAC0032681B65200C2F609 /* Localizable.strings */,
-				5B04E8862684657C006DE091 /* CLDemo-Bridge.h */,
+				5B6003DB29E39D4600FE645C /* Resource */,
 			);
 			path = "CLDemo-Swift";
 			sourceTree = "<group>";
@@ -971,6 +976,19 @@
 				5B58C56D26846B34001736D7 /* lame.h */,
 			);
 			path = LAME;
+			sourceTree = "<group>";
+		};
+		5B6003DB29E39D4600FE645C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5B4895FB268097510046AF31 /* Main.storyboard */,
+				5B4895FE268097520046AF31 /* Assets.xcassets */,
+				5B489600268097520046AF31 /* LaunchScreen.storyboard */,
+				5B489603268097520046AF31 /* Info.plist */,
+				5BAAC0032681B65200C2F609 /* Localizable.strings */,
+				5B04E8862684657C006DE091 /* CLDemo-Bridge.h */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		5B7692AC26841445008BB92B /* CLVernierCaliperController */ = {
@@ -1314,6 +1332,7 @@
 				5BD4EAF7268183E700B5284F /* Base */,
 				5B800435268194B1000E39AC /* CLHomePageController */,
 				5B3CC416291EA8D000568D77 /* CLLineChartController */,
+				5BBFE84A29DE53BF00A5AC34 /* CLExcelController */,
 				5BC9911926C65D780026B6FF /* CLHoneycombController */,
 				5BEF4CFA2881011A00A15433 /* CLTruncationController */,
 				5B9E321D29CDDA4B00D96638 /* CLMultiValueController */,
@@ -1331,7 +1350,7 @@
 				5B80044B2681AE22000E39AC /* CLMeController */,
 				5BE6694126848F140095F82E /* CLTransitionViewController */,
 				5BE6693E26848E280095F82E /* CLRotatingPictureViewController */,
-				5BE6693626848DB90095F82E /* CLPopoverViewController */,
+				5BE6693626848DB90095F82E /* CLBubblePopupController */,
 				5BE6692326848CEC0095F82E /* CLWaveController */,
 				5BE6690B26848BE10095F82E /* CLTextViewViewController */,
 				5BE668F6268489940095F82E /* CLPasswordController */,
@@ -1510,6 +1529,7 @@
 				5B49A20529D310920010A1F4 /* data.json */,
 				5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */,
 				5B9E322029CDDB4E00D96638 /* CLMultiController.swift */,
+				5B63E55229D6898400F39220 /* CLMultiCell.swift */,
 				5BDCDB0929CEA862000F8A6C /* CLMultiDataSource.swift */,
 				5BDCDB0D29CEAAEB000F8A6C /* CLMultiIndexPath.swift */,
 				5B49A20A29D310BE0010A1F4 /* CLMultiModel.swift */,
@@ -1540,6 +1560,33 @@
 				5B08E44B2681E682001C271A /* CLLanguageManager */,
 			);
 			path = CLChangeLanguageController;
+			sourceTree = "<group>";
+		};
+		5BBFE84A29DE53BF00A5AC34 /* CLExcelController */ = {
+			isa = PBXGroup;
+			children = (
+				5BBFE85029DE547300A5AC34 /* View */,
+				5BBFE84F29DE546C00A5AC34 /* Controller */,
+			);
+			path = CLExcelController;
+			sourceTree = "<group>";
+		};
+		5BBFE84F29DE546C00A5AC34 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5BBFE84D29DE53DE00A5AC34 /* CLExcelController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5BBFE85029DE547300A5AC34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5BBFE85129DE548400A5AC34 /* CLExcelView.swift */,
+				5BBFE85529DE556B00A5AC34 /* CLCollectionExcelCell.swift */,
+				5BBFE85729DE558A00A5AC34 /* CLCollectionExcelLayout.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5BC13527269E95B800D1CCB5 /* CLCustomTransitionController */ = {
@@ -2106,14 +2153,14 @@
 			path = CLWaveController;
 			sourceTree = "<group>";
 		};
-		5BE6693626848DB90095F82E /* CLPopoverViewController */ = {
+		5BE6693626848DB90095F82E /* CLBubblePopupController */ = {
 			isa = PBXGroup;
 			children = (
 				5BE6693826848DB90095F82E /* CLBubblePopupController.swift */,
 				5BE6693726848DB90095F82E /* CLBubblePopupController.xib */,
 				5BE6693B26848DCD0095F82E /* CLBubblePopupView */,
 			);
-			path = CLPopoverViewController;
+			path = CLBubblePopupController;
 			sourceTree = "<group>";
 		};
 		5BE6693B26848DCD0095F82E /* CLBubblePopupView */ = {
@@ -2343,6 +2390,7 @@
 				5B0CDAFD26B7938000B45AD1 /* CLiWatchAnimationController.swift in Sources */,
 				5BD043B8268332BF0054F2B4 /* CLHistogramIndexView.swift in Sources */,
 				5B83980326A15C3600FD1D3C /* CLCircleRetroPushTransitionController.swift in Sources */,
+				5BBFE85629DE556B00A5AC34 /* CLCollectionExcelCell.swift in Sources */,
 				5BE6681A268475940095F82E /* CLCarouselCell.swift in Sources */,
 				5B08E44D2681E6A7001C271A /* CLLanguageManager.swift in Sources */,
 				5B76931F26841C70008BB92B /* CLChatPhotoView.swift in Sources */,
@@ -2421,6 +2469,7 @@
 				5B80042926818E0A000E39AC /* CLBackView.swift in Sources */,
 				5B0DC71E26CA4AE400909BF2 /* CLHoneycombCustomCell.swift in Sources */,
 				5B6C089129CD7BE000C61C29 /* CLPopoverConfig.swift in Sources */,
+				5B63E55329D6898400F39220 /* CLMultiCell.swift in Sources */,
 				5BD4EB6B2681872D00B5284F /* CLPopupTwoInputController.swift in Sources */,
 				5BDCDB0A29CEA862000F8A6C /* CLMultiDataSource.swift in Sources */,
 				5B76932B26841C70008BB92B /* CLChatTipsCell.swift in Sources */,
@@ -2497,6 +2546,7 @@
 				5B76932726841C70008BB92B /* CLChatVoiceCell.swift in Sources */,
 				5BD4EB692681872D00B5284F /* CLGradientLayerView.swift in Sources */,
 				5B7982A126A014DE004A6473 /* CLCalculateHepler.swift in Sources */,
+				5BBFE85229DE548400A5AC34 /* CLExcelView.swift in Sources */,
 				5BD043A42683302E0054F2B4 /* CLDrawerSlideAnimation.swift in Sources */,
 				5BD4EB31268185A900B5284F /* CLFontManager.swift in Sources */,
 				5B0DC71426CA377300909BF2 /* CLHoneycombDataSource.swift in Sources */,
@@ -2518,6 +2568,7 @@
 				5B330A092901180C000D44DF /* CLSectionProtocol.swift in Sources */,
 				5B1C366F26841FAF00D777EB /* CLPermissionInterface.swift in Sources */,
 				5BC1352D269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift in Sources */,
+				5BBFE85829DE558A00A5AC34 /* CLCollectionExcelLayout.swift in Sources */,
 				5BD4EB642681872D00B5284F /* CLPopupFoodPickerContentView.swift in Sources */,
 				5B7692C126841566008BB92B /* CLVernierCaliperMiddleCell.swift in Sources */,
 				5B330A0B2901180C000D44DF /* CLTableViewHepler.swift in Sources */,
@@ -2575,6 +2626,7 @@
 				5BD0442F26833CD60054F2B4 /* CLTagsItem.swift in Sources */,
 				5B8397F826A15A0D00FD1D3C /* CLBubbleTransitionController.swift in Sources */,
 				5BD0442326833C670054F2B4 /* CLStartsController.swift in Sources */,
+				5BBFE84E29DE53DE00A5AC34 /* CLExcelController.swift in Sources */,
 				5B76931E26841C70008BB92B /* CLChatPhotoCellButton.swift in Sources */,
 				5B3309F12900F496000D44DF /* CLTagsController.swift in Sources */,
 				5B39ECCB275747DE000FCF67 /* CLIngredientLeftTitleCell.swift in Sources */,
@@ -2759,7 +2811,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "CLDemo-Swift/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CLDemo-Swift/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2774,7 +2826,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo-Swift/CLDemo-Bridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo-Swift/Resource/CLDemo-Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2789,7 +2841,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "CLDemo-Swift/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CLDemo-Swift/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2804,7 +2856,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo-Swift/CLDemo-Bridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/CLDemo-Swift/Resource/CLDemo-Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

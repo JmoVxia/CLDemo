@@ -27,15 +27,17 @@ class CLTagsController: CLController {
     }()
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
         view.dataSource = tableViewHepler
         view.delegate = tableViewHepler
-        view.backgroundColor = .clear
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
-        if #available(iOS 11.0, *) {
-            view.contentInsetAdjustmentBehavior = .never
-        }
+        view.backgroundColor = .clear
+        view.estimatedRowHeight = 150
+        view.estimatedSectionHeaderHeight = 0
+        view.estimatedSectionFooterHeight = 0
+        view.contentInset = .zero
+        view.contentInsetAdjustmentBehavior = .never
         if #available(iOS 13.0, *) {
             view.automaticallyAdjustsScrollIndicatorInsets = false
         }

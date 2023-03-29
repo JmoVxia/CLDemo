@@ -8,193 +8,208 @@
 
 import UIKit
 
-class CLPasswordInputViewConfigure: NSObject {
-    ///密码的位数
-    var passwordNum: UInt = 6
-    ///边框正方形的大小
-    var squareWidth: CGFloat = 50
-    ///黑点的半径
-    var pointRadius: CGFloat = 18 * 0.5
-    ///边距相对中间间隙倍数
-    var spaceMultiple: CGFloat = 5;
-    ///黑点颜色
-    var pointColor: UIColor = UIColor.black
-    ///边框颜色
-    var rectColor: UIColor = UIColor.lightGray
-    ///输入框背景颜色
-    var rectBackgroundColor: UIColor = UIColor.white
-    ///控件背景颜色
-    var backgroundColor: UIColor = UIColor.white
-    ///是否支持三方键盘
-    var threePartyKeyboard: Bool = false
-    
-    fileprivate class func defaultConfigure() -> CLPasswordInputViewConfigure {
-        let configure = CLPasswordInputViewConfigure()
-        return configure
+class CLPasswordInputViewConfig: NSObject {
+    /// 密码的位数
+    var passwordLength = 6
+    /// 边框正方形的大小
+    var squareSize = 45.0
+    /// 边框圆角
+    var cornerRadius = 5.0
+    /// 边距相对中间间隙倍数
+    var spaceRatio = 2.0
+    /// 线条宽度
+    var lineWidth = 5.0
+    /// 圆点大小
+    var dotRadius = 0.0
+    /// 黑点颜色
+    var dotColor = UIColor.black
+    /// 边框颜色
+    var borderColor = UIColor.lightGray
+    /// 输入框背景颜色
+    var inputBackgroundColor = UIColor.white
+    /// 控件背景颜色
+    var backgroundColor = UIColor.white
+    /// 键盘类型
+    var keyboardType = UIKeyboardType.asciiCapable
+    /// 文字属性
+    var attributes: [NSAttributedString.Key: Any]?
+    /// 输入限制正则
+    var regex = "^[a-zA-Z0-9]*$"
+    /// 是否转化为全大写
+    var shouldConvertToUpper = true
+    /// 是否支持三方键盘
+    var thirdPartyKeyboardEnabled = false
+
+    fileprivate class func config() -> CLPasswordInputViewConfig {
+        return CLPasswordInputViewConfig()
     }
 }
 
 protocol CLPasswordInputViewDelegate: AnyObject {
-    ///输入改变
-    func passwordInputViewDidChange(passwordInputView:CLPasswordInputView) -> Void
-    ///点击删除
-    func passwordInputViewDidDeleteBackward(passwordInputView:CLPasswordInputView) -> Void
-    ///输入完成
-    func passwordInputViewCompleteInput(passwordInputView:CLPasswordInputView) -> Void
-    ///开始输入
-    func passwordInputViewBeginInput(passwordInputView:CLPasswordInputView) -> Void
-    ///结束输入
-    func passwordInputViewEndInput(passwordInputView:CLPasswordInputView) -> Void
+    /// 输入改变
+    func passwordInputViewDidChange(passwordInputView: CLPasswordInputView) -> Void
+    /// 点击删除
+    func passwordInputViewDidDeleteBackward(passwordInputView: CLPasswordInputView) -> Void
+    /// 输入完成
+    func passwordInputViewCompleteInput(passwordInputView: CLPasswordInputView) -> Void
+    /// 开始输入
+    func passwordInputViewBeginInput(passwordInputView: CLPasswordInputView) -> Void
+    /// 结束输入
+    func passwordInputViewEndInput(passwordInputView: CLPasswordInputView) -> Void
 }
 
 extension CLPasswordInputViewDelegate {
-    ///输入改变
-    func passwordInputViewDidChange(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///点击删除
-    func passwordInputViewDidDeleteBackward(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///输入完成
-    func passwordInputViewCompleteInput(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///开始输入
-    func passwordInputViewBeginInput(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
-    ///结束输入
-    func passwordInputViewEndInput(passwordInputView:CLPasswordInputView) -> Void {
-        
-    }
+    /// 输入改变
+    func passwordInputViewDidChange(passwordInputView: CLPasswordInputView) {}
+
+    /// 点击删除
+    func passwordInputViewDidDeleteBackward(passwordInputView: CLPasswordInputView) {}
+
+    /// 输入完成
+    func passwordInputViewCompleteInput(passwordInputView: CLPasswordInputView) {}
+
+    /// 开始输入
+    func passwordInputViewBeginInput(passwordInputView: CLPasswordInputView) {}
+
+    /// 结束输入
+    func passwordInputViewEndInput(passwordInputView: CLPasswordInputView) {}
 }
 
 class CLPasswordInputView: UIView {
-    
-    weak var delegate: CLPasswordInputViewDelegate?
-    var configure: CLPasswordInputViewConfigure
-    
-    private (set) var text: NSMutableString = NSMutableString()
-    private var isShow: Bool = false
-    
     override init(frame: CGRect) {
-        configure = CLPasswordInputViewConfigure.defaultConfigure()
         super.init(frame: frame)
-        backgroundColor = configure.backgroundColor
+        backgroundColor = config.backgroundColor
     }
+
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    weak var delegate: CLPasswordInputViewDelegate?
+
+    private(set) var config = CLPasswordInputViewConfig.config()
+
+    private(set) var text = String()
+
+    private(set) var isShowKeyboard = false
 }
+
 extension CLPasswordInputView {
     override func becomeFirstResponder() -> Bool {
-        if !isShow {
+        if !isShowKeyboard {
             delegate?.passwordInputViewBeginInput(passwordInputView: self)
         }
-        isShow = true;
+        isShowKeyboard = true
         return super.becomeFirstResponder()
     }
+
     override func resignFirstResponder() -> Bool {
-        if isShow {
+        if isShowKeyboard {
             delegate?.passwordInputViewEndInput(passwordInputView: self)
         }
-        isShow = false
+        isShowKeyboard = false
         return super.resignFirstResponder()
     }
-    var keyboardType: UIKeyboardType {
-        get {
-            return .numberPad
-        }
-        set {
 
-        }
-    }
-    var isSecureTextEntry: Bool {
-        get {
-            return !configure.threePartyKeyboard
-        }
-        set {
-            
-        }
-    }
     override var canBecomeFirstResponder: Bool {
-        return true
+        true
     }
+
     override var canResignFirstResponder: Bool {
-        return true
+        true
     }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        if !isFirstResponder {
-            _ = becomeFirstResponder()
-        }
+        guard !isFirstResponder else { return }
+        _ = becomeFirstResponder()
     }
-    ///更新配置，block不会造成循环引用
-    func updateWithConfigure(_ configureBlock: ((CLPasswordInputViewConfigure) -> Void)?) -> Void {
-        configureBlock?(configure)
-        backgroundColor = configure.backgroundColor
-        setNeedsDisplay()
-    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         setNeedsDisplay()
     }
+
     override func draw(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else { return }
         let height = rect.size.height
         let width = rect.size.width
-        let squareWidth = min(max(min(height, configure.squareWidth), configure.pointRadius * 4), height)
-        let pointRadius = min(configure.pointRadius, squareWidth * 0.5) * 0.8
-        let middleSpace = CGFloat(width - CGFloat(configure.passwordNum) * squareWidth) / CGFloat(CGFloat(configure.passwordNum - 1) + configure.spaceMultiple * 2)
-        let leftSpace = middleSpace * configure.spaceMultiple
+        let squareWidth = min(max(min(height, config.squareSize), config.dotRadius * 4), height)
+        let middleSpace = CGFloat(width - CGFloat(config.passwordLength) * squareWidth) / CGFloat(CGFloat(config.passwordLength - 1) + config.spaceRatio * 2)
+        let leftSpace = middleSpace * config.spaceRatio
         let y = (height - squareWidth) * 0.5
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        for i in 0 ..< configure.passwordNum {
-            context?.addRect(CGRect(x: leftSpace + CGFloat(i) * squareWidth + CGFloat(i) * middleSpace, y: y, width: squareWidth, height: squareWidth))
-            context?.setLineWidth(1)
-            context?.setStrokeColor(configure.rectColor.cgColor)
-            context?.setFillColor(configure.rectBackgroundColor.cgColor)
+
+        let rectPaths = (0 ..< config.passwordLength).map { i in
+            UIBezierPath(roundedRect: CGRect(x: leftSpace + CGFloat(i) * squareWidth + CGFloat(i) * middleSpace, y: y, width: squareWidth, height: squareWidth), cornerRadius: config.cornerRadius).cgPath
         }
-        context?.drawPath(using: .fillStroke)
-        context?.setFillColor(configure.pointColor.cgColor)
-        
-        for i in 0 ..< text.length {
-            context?.addArc(center: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5, y: y + squareWidth * 0.5), radius: pointRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
-            context?.drawPath(using: .fill)
+        context.addPath(rectPaths.reduce(CGMutablePath()) { $0.addPath($1); return $0 })
+        context.setLineWidth(config.lineWidth)
+        context.setStrokeColor(config.borderColor.cgColor)
+        context.setFillColor(config.inputBackgroundColor.cgColor)
+        context.drawPath(using: .fillStroke)
+
+        let dotPaths = text.enumerated().map { i, char -> CGPath in
+            if config.dotRadius > .zero {
+                return UIBezierPath(arcCenter: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5, y: y + squareWidth * 0.5), radius: config.dotRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true).cgPath
+            } else {
+                let string = String(char) as NSString
+                let size = string.size(withAttributes: config.attributes)
+                string.draw(at: CGPoint(x: leftSpace + CGFloat(i + 1) * squareWidth + CGFloat(i) * middleSpace - squareWidth * 0.5 - size.width * 0.5, y: y + squareWidth * 0.5 - size.height * 0.5), withAttributes: config.attributes)
+                return CGMutablePath()
+            }
         }
+        context.addPath(dotPaths.reduce(CGMutablePath()) { $0.addPath($1); return $0 })
+        context.setFillColor(config.dotColor.cgColor)
+        context.drawPath(using: .fill)
+    }
+}
+
+extension CLPasswordInputView {
+    func updateConfig(_ configBlock: ((CLPasswordInputViewConfig) -> Void)?) {
+        configBlock?(config)
+        backgroundColor = config.backgroundColor
+        setNeedsDisplay()
     }
 }
 
 extension CLPasswordInputView: UIKeyInput {
     var hasText: Bool {
-        return text.length > 0
+        !text.isEmpty
     }
-    
+
     func insertText(_ text: String) {
-        if self.text.length < configure.passwordNum {
-            let cs = NSCharacterSet.init(charactersIn: "0123456789").inverted
-            let string = text.components(separatedBy: cs).joined(separator: "")
-            let basicTest = text == string
-            if basicTest {
-                self.text.append(text)
-                delegate?.passwordInputViewDidChange(passwordInputView: self)
-                if self.text.length == configure.passwordNum {
-                    delegate?.passwordInputViewCompleteInput(passwordInputView: self)
-                }
-                setNeedsDisplay()
-            }
-        }
+        guard text.range(of: config.regex, options: .regularExpression) != nil else { return }
+        guard self.text.count < config.passwordLength else { return }
+
+        let text = config.shouldConvertToUpper ? text.uppercased() : text
+        self.text.append(text)
+        setNeedsDisplay()
+
+        delegate?.passwordInputViewDidChange(passwordInputView: self)
+        guard self.text.count == config.passwordLength else { return }
+        delegate?.passwordInputViewCompleteInput(passwordInputView: self)
     }
-    
+
     func deleteBackward() {
-        if text.length > 0 {
-            text.deleteCharacters(in: NSRange(location: text.length - 1, length: 1))
-            delegate?.passwordInputViewDidChange(passwordInputView: self)
-        }
+        guard !text.isEmpty else { return }
+        text.removeLast()
+        delegate?.passwordInputViewDidChange(passwordInputView: self)
         delegate?.passwordInputViewDidDeleteBackward(passwordInputView: self)
         setNeedsDisplay()
     }
-}
 
+    var keyboardType: UIKeyboardType {
+        get {
+            return config.keyboardType
+        }
+        set {}
+    }
+
+    var isSecureTextEntry: Bool {
+        get {
+            return !config.thirdPartyKeyboardEnabled
+        }
+        set {}
+    }
+}

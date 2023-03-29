@@ -45,7 +45,7 @@ class CLMultiController: CLController {
         view.alignment = .fill
         view.insetsLayoutMarginsFromSafeArea = false
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = .zero
+        view.layoutMargins = .init(top: 0, left: 15, bottom: 0, right: 15)
         view.spacing = menuItemSpaceX
         return view
     }()
@@ -87,11 +87,11 @@ class CLMultiController: CLController {
         return view
     }()
     
-    var topToolBarHeight = 50.0
+    var topToolBarHeight = 40.0
     
-    var titleViewHeight = 50.0
+    var titleViewHeight = 40.0
     
-    var menuItemSpaceX = 20.0
+    var menuItemSpaceX = 32.0
     
     var viewHeight = screenHeight * 0.5
     
@@ -117,7 +117,6 @@ extension CLMultiController {
         makeConstraints()
         view.setNeedsLayout()
         view.layoutIfNeeded()
-        addPage()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -194,40 +193,42 @@ extension CLMultiController {
         }
     }
 }
+extension CLMultiController {
+    func reload() {
+        selectedIndexPath.removeAll()
+        deletePage(from: 0)
+        addPage()
+    }
+}
 private extension CLMultiController {
     func addPage() {
         let column = titleStackView.arrangedSubviews.count
         let titleButton = UIButton()
         titleButton.addTarget(self, action: #selector(clickTitleButton(_:)), for: .touchUpInside)
         titleButton.setTitle("请选择", for: .normal)
-        titleButton.setTitleColor(.black, for: .normal)
-        titleButton.setTitleColor(.red, for: .selected)
+        titleButton.setTitleColor("#2C2F2D".uiColor, for: .normal)
+        titleButton.setTitleColor("#02AA5D".uiColor, for: .selected)
         titleButton.sizeToFit()
         titleStackView.addArrangedSubview(titleButton)
         titleButton.tag = column
 
         let tableView = UITableView()
-        tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .random
+        tableView.backgroundColor = .clear
         tableViewStackView.addArrangedSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.width.equalTo(view)
         }
         clickTitleButton(titleButton)
     }
-    func deletePageFromColumn(_ column: Int) {
-        guard column < tableViewStackView.arrangedSubviews.count else { return }
-        for (index, view) in tableViewStackView.arrangedSubviews.enumerated() where index >= column {
-            let titleButton = titleStackView.arrangedSubviews[column]
-            tableViewStackView.removeArrangedSubview(view)
-            titleStackView.removeArrangedSubview(titleButton)
-            view.removeFromSuperview()
-            titleButton.removeFromSuperview()
-        }
-        column == 1 ? selectedIndexPath.removeAll() : selectedIndexPath.removeAll(where: { $0.column < column })
+    
+    func deletePage(from column: Int) {
+        tableViewStackView.arrangedSubviews.enumerated().filter({ $0.offset >= column }).forEach({ $0.element.removeFromSuperview() })
+        titleStackView.arrangedSubviews.enumerated().filter({ $0.offset >= column }).forEach({ $0.element.removeFromSuperview() })
     }
+
     func resetOffset() {
         guard let button = lastSelectedButton else { return }
         titleScrollView.setNeedsLayout()
@@ -255,9 +256,10 @@ private extension CLMultiController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         } completion: { _ in
+            self.selectedIndexPath.removeAll()
+            self.deletePage(from: 0)
             self.dismiss(animated: false)
         }
-
     }
     func clickTitleButton(_ button: UIButton) {
         guard button != lastSelectedButton else { return }
@@ -290,20 +292,23 @@ extension CLMultiController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let dataSource = dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return }
         
+        selectedIndexPath.removeAll(where: { $0.column >= column })
+
         let currentIndexPath = CLMultiIndexPath(indexPath: indexPath, column: column)
-            
+        
+        let isAlreadySelected = selectedIndexPath.contains(currentIndexPath)
+        
+        selectedIndexPath.append(currentIndexPath)
+
         guard dataSource.multiController(self, isCompletedAt: currentIndexPath) else { return cancelAction() }
-               
-        let title = dataSource.multiController(self, didSelectRowAt: currentIndexPath)
-        lastSelectedButton?.setTitle(title, for: .normal)
-        if selectedIndexPath.contains(currentIndexPath),
-           let button = titleStackView.arrangedSubviews[safe: column + 1] as? UIButton
-        {
-            selectedIndexPath.append(currentIndexPath)
+        
+        lastSelectedButton?.setTitle(dataSource.multiController(self, didSelectRowAt: currentIndexPath), for: .normal)
+        
+        if isAlreadySelected {
+            guard let button = titleStackView.arrangedSubviews[safe: column + 1] as? UIButton else { return }
             clickTitleButton(button)
         } else {
-            deletePageFromColumn(column + 1)
-            selectedIndexPath.append(currentIndexPath)
+            deletePage(from: column + 1)
             addPage()
         }
     }

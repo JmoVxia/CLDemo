@@ -14,15 +14,25 @@ class CLPlayGifController: CLController {
         return hepler
     }()
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.dataSource = tableViewHepler
-        tableView.delegate = tableViewHepler
-        tableView.backgroundColor = UIColor.clear
-        tableView.separatorStyle = .none
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
+        let view = UITableView(frame: .zero, style: .plain)
+        view.dataSource = tableViewHepler
+        view.delegate = tableViewHepler
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.separatorStyle = .none
+        view.backgroundColor = .clear
+        view.estimatedRowHeight = 150
+        view.estimatedSectionHeaderHeight = 0
+        view.estimatedSectionFooterHeight = 0
+        view.contentInset = .zero
+        view.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 13.0, *) {
+            view.automaticallyAdjustsScrollIndicatorInsets = false
         }
-        return tableView
+        if #available(iOS 15.0, *) {
+            view.sectionHeaderTopPadding = 0
+        }
+        return view
     }()
 
     override func viewDidLoad() {

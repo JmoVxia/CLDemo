@@ -44,13 +44,31 @@ class CLPasswordController: CLController {
 
         passwordInputView.snp.makeConstraints({ (make) in
             make.left.centerY.right.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(80)
         })
 
-        passwordInputView.updateWithConfigure { (configure) in
-            print("我不会循环引用\(self)")
-            configure.spaceMultiple = 1000
-//            configure.threePartyKeyboard = true
+        passwordInputView.updateConfig { config in
+            //            config.dotRadius = 10
+            //            config.dotColor = .cyan
+//            config.regex = "^[0-9]*$"
+//            config.keyboardType = .numberPad
+            config.lineWidth = 1.0
+            config.cornerRadius = 4
+            config.spaceRatio = 2
+            config.borderColor = "#DFDEDE".uiColor
+//            config.inputBackgroundColor = .red.withAlphaComponent(0.4)
+//            config.backgroundColor = .orange.withAlphaComponent(0.4)
+//            config.thirdPartyKeyboardEnabled = true
+            config.attributes = {
+                let item = NSAttributedString.AttributesItem()
+                return item
+                    .font(.boldPingFangSC(24))
+                    .foregroundColor("#2C2F2D".uiColor)
+//                    .oblique(0.4)
+//                    .underlineStyle(.single)
+//                    .underlineColor(.purple)
+                    .attributes
+            }()
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
