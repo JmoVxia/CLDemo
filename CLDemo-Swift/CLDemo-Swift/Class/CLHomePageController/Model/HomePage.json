@@ -16,6 +16,10 @@
     "class": "CLExcelController"
   },
   {
+    "title": "雷达图",
+    "class": "CLRadarChartController"
+  },
+  {
     "title": "多级列表",
     "class": "CLMultiValueController"
   },
