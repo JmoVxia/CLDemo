@@ -7,24 +7,29 @@
 
 import UIKit
 
+// MARK: - JmoVxia---枚举
 
-//MARK: - JmoVxia---枚举
-extension CLChangeLanguageController {
-}
-//MARK: - JmoVxia---类-属性
+extension CLChangeLanguageController {}
+
+// MARK: - JmoVxia---类-属性
+
 class CLChangeLanguageController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    deinit {
-    }
+
+    deinit {}
+
     private lazy var tableViewHepler: CLTableViewHepler = {
         let hepler = CLTableViewHepler()
         return hepler
     }()
+
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.dataSource = tableViewHepler
@@ -47,31 +52,40 @@ class CLChangeLanguageController: CLController {
         return view
     }()
 }
-//MARK: - JmoVxia---生命周期
+
+// MARK: - JmoVxia---生命周期
+
 extension CLChangeLanguageController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         makeConstraints()
         initData()
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLChangeLanguageController {
     func initUI() {
         updateTitleLabel { label in
@@ -79,6 +93,7 @@ private extension CLChangeLanguageController {
         }
         view.addSubview(tableView)
     }
+
     func makeConstraints() {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(navigationBarHeight + statusBarHeight)
@@ -86,31 +101,33 @@ private extension CLChangeLanguageController {
         }
     }
 }
-//MARK: - JmoVxia---数据
+
+// MARK: - JmoVxia---数据
+
 private extension CLChangeLanguageController {
     func initData() {
-        do{
+        do {
             let item = CLTitleCellItem(title: "跟随系统".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .system ? .checkmark : .none
-            item.didSelectCellCallback = {[weak self] (value) in
+            item.didSelectCellCallback = { [weak self] value in
                 guard let self = self else { return }
                 self.changeLanguage(.system)
             }
             tableViewHepler.rows.append(item)
         }
-        do{
+        do {
             let item = CLTitleCellItem(title: "中文".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .chineseSimplified ? .checkmark : .none
-            item.didSelectCellCallback = {[weak self] (value) in
+            item.didSelectCellCallback = { [weak self] value in
                 guard let self = self else { return }
                 self.changeLanguage(.chineseSimplified)
             }
             tableViewHepler.rows.append(item)
         }
-        do{
+        do {
             let item = CLTitleCellItem(title: "英文".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .english ? .checkmark : .none
-            item.didSelectCellCallback = {[weak self] (value) in
+            item.didSelectCellCallback = { [weak self] value in
                 guard let self = self else { return }
                 self.changeLanguage(.english)
             }
@@ -119,7 +136,9 @@ private extension CLChangeLanguageController {
         tableView.reloadData()
     }
 }
-//MARK: - JmoVxia---私有方法
+
+// MARK: - JmoVxia---私有方法
+
 private extension CLChangeLanguageController {
     func changeLanguage(_ language: CLLanguageManager.Language) {
         guard CLLanguageManager.shared.currentLanguage != language else { return }
@@ -129,15 +148,14 @@ private extension CLChangeLanguageController {
 
         let tabbarController = CLTabBarController()
         tabbarController.selectedIndex = 0
-        
+
         guard let navigationController = (tabbarController.selectedViewController as? CLNavigationController) else { return }
         var viewControllers = navigationController.viewControllers
         viewControllers.append(CLChangeLanguageController())
-        
+
         DispatchQueue.main.async {
             delegate.window?.rootViewController = tabbarController
             navigationController.viewControllers = viewControllers
         }
     }
 }
-

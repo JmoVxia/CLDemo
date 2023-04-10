@@ -19,6 +19,7 @@ class CLDrawerPresentationController: UIPresentationController {
         return view
     }()
 }
+
 extension CLDrawerPresentationController {
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         return CGSize(width: parentSize.width * 0.6, height: parentSize.height)
@@ -36,7 +37,7 @@ extension CLDrawerPresentationController {
     }
 
     override func presentationTransitionWillBegin() {
-        guard  let containerView = containerView else {
+        guard let containerView = containerView else {
             return
         }
 
@@ -45,14 +46,14 @@ extension CLDrawerPresentationController {
             dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
             dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ])
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
             dimmingView.alpha = 1
             return
         }
-        coordinator.animate { (_) in
+        coordinator.animate { _ in
             self.dimmingView.alpha = 1
         }
     }
@@ -62,11 +63,12 @@ extension CLDrawerPresentationController {
             dimmingView.alpha = 0
             return
         }
-        coordinator.animate { (_) in
+        coordinator.animate { _ in
             self.dimmingView.alpha = 0
         }
     }
 }
+
 extension CLDrawerPresentationController {
     @objc private func dismissPresentedController() {
         presentedViewController.dismiss(animated: true)

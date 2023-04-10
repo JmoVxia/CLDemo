@@ -6,12 +6,12 @@
 //  Copyright © 2019 FuSheng. All rights reserved.
 //
 
-import UIKit
 import DateToolsSwift
+import UIKit
 
 extension CLPopoverManager {
     /// 显示翻牌弹窗
-    @discardableResult static func showFlop(configCallback: ((CLPopoverConfig) -> ())? = nil) -> String {
+    @discardableResult static func showFlop(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
         return mainSync {
             let controller = CLPopupFlopController()
             configCallback?(controller.config)
@@ -19,16 +19,18 @@ extension CLPopoverManager {
             return controller.key
         }
     }
+
     /// 显示可拖拽弹窗
-    static func showDrag(configCallback: ((CLPopoverConfig) -> ())? = nil) {
+    static func showDrag(configCallback: ((CLPopoverConfig) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupMomentumController()
             configCallback?(controller.config)
             controller.show()
         }
     }
-    ///显示提示弹窗
-    static func showTips(configCallback: ((CLPopoverConfig) -> ())? = nil, text: String, dismissInterval: TimeInterval = 1.0, dissmissCallBack: (() -> ())? = nil) {
+
+    /// 显示提示弹窗
+    static func showTips(configCallback: ((CLPopoverConfig) -> Void)? = nil, text: String, dismissInterval: TimeInterval = 1.0, dissmissCallBack: (() -> Void)? = nil) {
         mainSync {
             let controller = CLPopupTipsController()
             configCallback?(controller.config)
@@ -38,8 +40,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示一个消息弹窗
-    static func showOneAlert(configCallback: ((CLPopoverConfig) -> ())? = nil, title: String? = nil, message: String? = nil, sure: String = "确定", sureCallBack: (() -> ())? = nil) {
+
+    /// 显示一个消息弹窗
+    static func showOneAlert(configCallback: ((CLPopoverConfig) -> Void)? = nil, title: String? = nil, message: String? = nil, sure: String = "确定", sureCallBack: (() -> Void)? = nil) {
         mainSync {
             let controller = CLPopupMessageController()
             configCallback?(controller.config)
@@ -53,8 +56,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示两个消息弹窗
-    static func showTwoAlert(configCallback: ((CLPopoverConfig) -> ())? = nil, title: String? = nil, message: String? = nil, left: String = "取消", right: String = "确定", leftCallBack: (() -> ())? = nil, rightCallBack: (() -> ())? = nil) {
+
+    /// 显示两个消息弹窗
+    static func showTwoAlert(configCallback: ((CLPopoverConfig) -> Void)? = nil, title: String? = nil, message: String? = nil, left: String = "取消", right: String = "确定", leftCallBack: (() -> Void)? = nil, rightCallBack: (() -> Void)? = nil) {
         mainSync {
             let controller = CLPopupMessageController()
             configCallback?(controller.config)
@@ -72,8 +76,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示成功
-    static func showSuccess(configCallback: ((CLPopoverConfig) -> ())? = nil, strokeColor: UIColor = UIColor.red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> ())? = nil) {
+
+    /// 显示成功
+    static func showSuccess(configCallback: ((CLPopoverConfig) -> Void)? = nil, strokeColor: UIColor = UIColor.red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> Void)? = nil) {
         mainSync {
             let controller = CLPopupHudController()
             configCallback?(controller.config)
@@ -85,8 +90,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示错误
-    static func showError(configCallback: ((CLPopoverConfig) -> ())? = nil, strokeColor: UIColor = .red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> ())? = nil) {
+
+    /// 显示错误
+    static func showError(configCallback: ((CLPopoverConfig) -> Void)? = nil, strokeColor: UIColor = .red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> Void)? = nil) {
         mainSync {
             let controller = CLPopupHudController()
             configCallback?(controller.config)
@@ -98,8 +104,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示加载动画
-    static func showHudLoading(configCallback: ((CLPopoverConfig) -> ())? = nil, strokeColor: UIColor = .red, text: String? = nil) {
+
+    /// 显示加载动画
+    static func showHudLoading(configCallback: ((CLPopoverConfig) -> Void)? = nil, strokeColor: UIColor = .red, text: String? = nil) {
         mainSync {
             let controller = CLPopupHudController()
             configCallback?(controller.config)
@@ -110,8 +117,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示年月日选择器
-    static func showYearMonthDayDataPicker(configCallback: ((CLPopoverConfig) -> ())? = nil, minDate: Date = Date().subtract(TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 10)), maxDate: Date = Date(), yearMonthDayCallback: ((Int, Int, Int) -> ())? = nil) {
+
+    /// 显示年月日选择器
+    static func showYearMonthDayDataPicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, minDate: Date = Date().subtract(TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 10)), maxDate: Date = Date(), yearMonthDayCallback: ((Int, Int, Int) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupDataPickerController()
             controller.minDate = minDate
@@ -122,8 +130,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示时分选择器
-    static func showHourMinuteDataPicker(configCallback: ((CLPopoverConfig) -> ())? = nil, hourMinuteCallback: ((Int, Int) -> ())? = nil) {
+
+    /// 显示时分选择器
+    static func showHourMinuteDataPicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, hourMinuteCallback: ((Int, Int) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupDataPickerController()
             configCallback?(controller.config)
@@ -132,8 +141,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示年月日时分选择器
-    static func showYearMonthDayHourMinuteDataPicker(configCallback: ((CLPopoverConfig) -> ())? = nil, yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> ())? = nil) {
+
+    /// 显示年月日时分选择器
+    static func showYearMonthDayHourMinuteDataPicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupDataPickerController()
             configCallback?(controller.config)
@@ -142,8 +152,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示时长选择器
-    static func showDurationDataPicker(configCallback: ((CLPopoverConfig) -> ())? = nil, durationCallback: ((String, String) -> ())? = nil) {
+
+    /// 显示时长选择器
+    static func showDurationDataPicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, durationCallback: ((String, String) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupDataPickerController()
             configCallback?(controller.config)
@@ -152,8 +163,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示一个选择器
-    static func showOnePicker(configCallback: ((CLPopoverConfig) -> ())? = nil, dataSource: [String], unit: String? = nil, space: CGFloat = -10, selectedCallback: ((String) -> ())? = nil) {
+
+    /// 显示一个选择器
+    static func showOnePicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, dataSource: [String], unit: String? = nil, space: CGFloat = -10, selectedCallback: ((String) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupDataPickerController()
             configCallback?(controller.config)
@@ -165,8 +177,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示BMI输入弹窗
-    static func showBMIInput(configCallback: ((CLPopoverConfig) -> ())? = nil, bmiCallback: ((CGFloat) -> ())? = nil) {
+
+    /// 显示BMI输入弹窗
+    static func showBMIInput(configCallback: ((CLPopoverConfig) -> Void)? = nil, bmiCallback: ((CGFloat) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupBMIInputController()
             configCallback?(controller.config)
@@ -174,8 +187,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示一个输入框弹窗
-    static func showOneInput(configCallback: ((CLPopoverConfig) -> ())? = nil, type: CLPopupOneInputType, sureCallback: ((String?) -> ())? = nil) {
+
+    /// 显示一个输入框弹窗
+    static func showOneInput(configCallback: ((CLPopoverConfig) -> Void)? = nil, type: CLPopupOneInputType, sureCallback: ((String?) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupOneInputController()
             configCallback?(controller.config)
@@ -184,8 +198,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示两个输入框弹窗
-    static func showTwoInput(configCallback: ((CLPopoverConfig) -> ())? = nil, type: CLPopupTwoInputType, sureCallback: ((String?, String?) -> ())? = nil) {
+
+    /// 显示两个输入框弹窗
+    static func showTwoInput(configCallback: ((CLPopoverConfig) -> Void)? = nil, type: CLPopupTwoInputType, sureCallback: ((String?, String?) -> Void)? = nil) {
         mainSync {
             let controller = CLPopupTwoInputController()
             configCallback?(controller.config)
@@ -194,8 +209,9 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示食物选择器
-    static func showFoodPicker(configCallback: ((CLPopoverConfig) -> ())? = nil, selectedCallback: ((String, String, String, String)->())?) {
+
+    /// 显示食物选择器
+    static func showFoodPicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, selectedCallback: ((String, String, String, String) -> Void)?) {
         mainSync {
             let controller = CLPopupFoodPickerController()
             configCallback?(controller.config)
@@ -203,10 +219,22 @@ extension CLPopoverManager {
             controller.show()
         }
     }
-    ///显示加载动画
-    @discardableResult static func showLoading(configCallback: ((CLPopoverConfig) -> ())? = nil) -> String {
+
+    /// 显示加载动画
+    @discardableResult static func showLoading(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
         return mainSync {
             let controller = CLPopupLoadingController()
+            configCallback?(controller.config)
+            controller.show()
+            return controller.key
+        }
+    }
+}
+
+extension CLPopoverManager {
+    @discardableResult static func showCalendar(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
+        return mainSync {
+            let controller = CLPopupCalendarController()
             configCallback?(controller.config)
             controller.show()
             return controller.key

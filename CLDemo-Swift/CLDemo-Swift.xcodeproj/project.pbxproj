@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -152,6 +152,7 @@
 		5B83980B26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */; };
 		5B83980D26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */; };
 		5B9756A226C64FFA006C0841 /* HomePage.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B9756A126C64FFA006C0841 /* HomePage.json */; };
+		5B988AC329FB73680076379C /* CLPopupCalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B988AC229FB73680076379C /* CLPopupCalendarController.swift */; };
 		5B9E321F29CDDA6500D96638 /* CLMultiValueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */; };
 		5B9E322129CDDB4E00D96638 /* CLMultiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E322029CDDB4E00D96638 /* CLMultiController.swift */; };
 		5BA719B626CA608F00368316 /* CLHoneycombContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA719B526CA608F00368316 /* CLHoneycombContentView.swift */; };
@@ -483,6 +484,7 @@
 		5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroTransition.swift; sourceTree = "<group>"; };
 		5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroPushTransitionController.swift; sourceTree = "<group>"; };
 		5B9756A126C64FFA006C0841 /* HomePage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HomePage.json; sourceTree = "<group>"; };
+		5B988AC229FB73680076379C /* CLPopupCalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupCalendarController.swift; sourceTree = "<group>"; };
 		5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiValueController.swift; sourceTree = "<group>"; };
 		5B9E322029CDDB4E00D96638 /* CLMultiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiController.swift; sourceTree = "<group>"; };
 		5BA719B526CA608F00368316 /* CLHoneycombContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHoneycombContentView.swift; sourceTree = "<group>"; };
@@ -1000,8 +1002,8 @@
 		5B62C39C29E3E7FB00A836C0 /* CLRadarChartController */ = {
 			isa = PBXGroup;
 			children = (
-				5B62C3A029E3E82700A836C0 /* View */,
 				5B62C39F29E3E82100A836C0 /* Controller */,
+				5B62C3A029E3E82700A836C0 /* View */,
 			);
 			path = CLRadarChartController;
 			sourceTree = "<group>";
@@ -1556,6 +1558,14 @@
 			path = CLTiledFlipRetroTransition;
 			sourceTree = "<group>";
 		};
+		5B988AC129FB73380076379C /* CLPopupCalendarController */ = {
+			isa = PBXGroup;
+			children = (
+				5B988AC229FB73680076379C /* CLPopupCalendarController.swift */,
+			);
+			path = CLPopupCalendarController;
+			sourceTree = "<group>";
+		};
 		5B9E321D29CDDA4B00D96638 /* CLMultiValueController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2088,6 +2098,7 @@
 		5BE317CA293859E100404CD8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5B988AC129FB73380076379C /* CLPopupCalendarController */,
 				5BD4EB362681872D00B5284F /* CLPopupTipsController */,
 				5BD4EB392681872D00B5284F /* CLPopupFoodPickerController */,
 				5BD4EB402681872D00B5284F /* CLPopupFlopController */,
@@ -2259,6 +2270,7 @@
 				5B4895EF268097510046AF31 /* Frameworks */,
 				5B4895F0268097510046AF31 /* Resources */,
 				82C1B3F56A3A3875C33AB06A /* [CP] Copy Pods Resources */,
+				5BBC602629E5067900E7FB3E /* SwiftFormat */,
 			);
 			buildRules = (
 			);
@@ -2361,6 +2373,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5BBC602629E5067900E7FB3E /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" . --exclude Carthage,Pods --swiftversion \"5.0\" --disable unusedArguments --disable acronyms --disable enumNamespaces\n";
+			showEnvVarsInLog = 0;
+		};
 		82C1B3F56A3A3875C33AB06A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2642,6 +2674,7 @@
 				5B76931C26841C70008BB92B /* CLChatPhotoAlbumBottomBar.swift in Sources */,
 				5BEF4CFC2881013100A15433 /* CLTruncationController.swift in Sources */,
 				5B9E322129CDDB4E00D96638 /* CLMultiController.swift in Sources */,
+				5B988AC329FB73680076379C /* CLPopupCalendarController.swift in Sources */,
 				5BE668FA268489BD0095F82E /* CLPasswordInputView.swift in Sources */,
 				5B7692D526841ABD008BB92B /* CLFlipView.swift in Sources */,
 				5B76932926841C70008BB92B /* CLChatImageProgressView.swift in Sources */,

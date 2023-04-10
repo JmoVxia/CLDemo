@@ -6,37 +6,41 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 class CLChatPhotoAlbumImageCache: NSObject {
     class CLChatPhotoAlbumImageItem: NSObject {
-        private (set) var key: String!
-        private (set) var image: UIImage!
+        private(set) var key: String!
+        private(set) var image: UIImage!
         init(key: String, image: UIImage) {
             self.key = key
             self.image = image
             super.init()
         }
     }
+
     private var imageManager: PHCachingImageManager = {
         let manager = PHCachingImageManager()
         return manager
     }()
+
     private lazy var cachedImages: NSCache<NSString, CLChatPhotoAlbumImageItem> = {
         let cache = NSCache<NSString, CLChatPhotoAlbumImageItem>()
         cache.delegate = self
         return cache
     }()
-    private var loadingResponses = [String : [(UIImage) -> Void]]()
+
+    private var loadingResponses = [String: [(UIImage) -> Void]]()
 }
+
 extension CLChatPhotoAlbumImageCache {
     private func image(identifier: String) -> UIImage? {
         return cachedImages.object(forKey: identifier as NSString)?.image
     }
 }
+
 extension CLChatPhotoAlbumImageCache {
-    
     /// 加载图片
     /// - Parameters:
     ///   - asset: 相册资源
@@ -62,7 +66,7 @@ extension CLChatPhotoAlbumImageCache {
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = false
         options.resizeMode = .none
-        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) {[weak self] (image, info) in
+        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { [weak self] image, info in
             guard let image = image,
                   let self = self,
                   let blocks = self.loadingResponses[key]
@@ -79,6 +83,7 @@ extension CLChatPhotoAlbumImageCache {
         }
     }
 }
+
 extension CLChatPhotoAlbumImageCache: NSCacheDelegate {
     func cache(_ cache: NSCache<AnyObject, AnyObject>, willEvictObject obj: Any) {
         if let item = obj as? CLChatPhotoAlbumImageItem {

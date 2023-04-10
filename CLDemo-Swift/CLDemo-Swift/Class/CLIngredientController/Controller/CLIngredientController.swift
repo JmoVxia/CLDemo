@@ -5,9 +5,9 @@
 //  Created by Chen JmoVxia on 2021/12/1.
 //
 
+import SnapKit
 import SwiftyJSON
 import UIKit
-import SnapKit
 
 // MARK: - JmoVxia---类-属性
 
@@ -22,7 +22,7 @@ class CLIngredientController: CLController {
     }
 
     deinit {}
-    
+
     private lazy var leftTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.scrollsToTop = false
@@ -250,7 +250,7 @@ private extension CLIngredientController {
             else {
                 return
             }
-            self.dataSource = json.arrayValue.map({.init(json: $0)})
+            self.dataSource = json.arrayValue.map { .init(json: $0) }
             self.leftDataSource = Dictionary(grouping: self.dataSource, by: { $0.sortedPrimary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { Dictionary(grouping: $0.value, by: { $0.sortedSecondary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { $0.value } }
             self.rightDataSource = Dictionary(grouping: self.dataSource, by: { $0.sortedSecondary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { $0.value }
             DispatchQueue.main.async {

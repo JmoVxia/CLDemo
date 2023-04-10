@@ -8,7 +8,8 @@
 
 import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLPlayGifCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
@@ -17,10 +18,12 @@ class CLPlayGifCell: UITableViewCell {
         view.textAlignment = .left
         return view
     }()
+
     lazy var animageView: UIView = {
         let view = UIView()
         return view
     }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -37,17 +40,20 @@ class CLPlayGifCell: UITableViewCell {
             make.size.equalTo(0)
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLPlayGifCell: CLRowProtocol {
     func setItem(_ item: CLPlayGifItem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)
         }
-        CLGifPlayer.startPlay(item.path) { image, imagePath  in
+        CLGifPlayer.startPlay(item.path) { image, imagePath in
             self.animageView.layer.contents = image
         }
     }

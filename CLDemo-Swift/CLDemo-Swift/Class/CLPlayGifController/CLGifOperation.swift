@@ -9,7 +9,7 @@
 import UIKit
 
 class CLGifOperation: Operation {
-    var imageCallback: ((CGImage, String) -> ())?
+    var imageCallback: ((CGImage, String) -> Void)?
     private var path: String!
     private var taskFinished: Bool = true {
         willSet {
@@ -23,6 +23,7 @@ class CLGifOperation: Operation {
             }
         }
     }
+
     private var taskExecuting: Bool = false {
         willSet {
             if taskExecuting != newValue {
@@ -35,31 +36,37 @@ class CLGifOperation: Operation {
             }
         }
     }
+
     override var isFinished: Bool {
         return taskFinished
     }
+
     override var isExecuting: Bool {
         return taskExecuting
     }
+
     override var isAsynchronous: Bool {
         return true
     }
-    init(path: String, imageCallback: @escaping ((CGImage, String) -> ())) {
+
+    init(path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
         self.path = path
         self.imageCallback = imageCallback
         super.init()
     }
+
     deinit {
 //        CLLog("CLGifOperation deinit")
     }
 }
+
 extension CLGifOperation {
     override func start() {
         autoreleasepool {
             if isCancelled {
                 taskFinished = true
                 taskExecuting = false
-            }else {
+            } else {
                 taskFinished = false
                 taskExecuting = true
                 startTask {
@@ -69,16 +76,18 @@ extension CLGifOperation {
             }
         }
     }
+
     override func cancel() {
-        if (isExecuting) {
+        if isExecuting {
             taskFinished = true
             taskExecuting = false
         }
         super.cancel()
     }
 }
+
 extension CLGifOperation {
-    private func startTask(_ complete: (() -> ())) {
+    private func startTask(_ complete: () -> Void) {
         defer {
             complete()
         }
@@ -100,6 +109,7 @@ extension CLGifOperation {
         }
     }
 }
+
 extension CLGifOperation {
     private func getCGImageSourceGifFrameDelay(imageSource: CGImageSource, index: Int) -> TimeInterval {
         var delay = 0.1

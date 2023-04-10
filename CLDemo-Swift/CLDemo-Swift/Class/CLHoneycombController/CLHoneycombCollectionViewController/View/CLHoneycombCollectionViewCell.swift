@@ -13,6 +13,7 @@ class CLHoneycombCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = .init("#7CB88D")
         return view
     }()
+
     lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
@@ -28,17 +29,22 @@ class CLHoneycombCollectionViewCell: UICollectionViewCell {
             self.imageView.setupHexagonMask(lineWidth: 10, color: .random, cornerRadius: 0)
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLHoneycombCollectionViewCell {
     func initUI() {
         backgroundColor = .clear
         contentView.addSubview(contentBackgroundView)
         contentView.addSubview(imageView)
     }
+
     func makeConstraints() {
         contentBackgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -48,6 +54,7 @@ private extension CLHoneycombCollectionViewCell {
         }
     }
 }
+
 extension CLHoneycombCollectionViewCell {
     func animation() {
         imageView.transform = CGAffineTransform(scaleX: 0, y: 0)

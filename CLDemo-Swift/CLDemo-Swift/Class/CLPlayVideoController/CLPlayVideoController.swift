@@ -13,6 +13,7 @@ class CLPlayVideoController: CLController {
         let hepler = CLTableViewHepler(delegate: self)
         return hepler
     }()
+
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.dataSource = tableViewHepler
@@ -51,11 +52,13 @@ class CLPlayVideoController: CLController {
             }
         }
     }
+
     deinit {
         CLLog("CLPlayVideoController deinit")
         CLVideoPlayer.destroy()
     }
 }
+
 extension CLPlayVideoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let path = (tableViewHepler.rows[indexPath.row] as? CLPlayVideoitem)?.path else { return }

@@ -9,9 +9,9 @@
 import UIKit
 
 class CLChatPhotoAlbumBottomBar: UIView {
-    var sendCallback: (() -> ())?
-    var closeCallback: (() -> ())?
-    ///是否可以发送
+    var sendCallback: (() -> Void)?
+    var closeCallback: (() -> Void)?
+    /// 是否可以发送
     var seletedNumber: Int = 0 {
         didSet {
             if oldValue != seletedNumber {
@@ -25,7 +25,7 @@ class CLChatPhotoAlbumBottomBar: UIView {
                     sendButton.setTitleColor(.white, for: .selected)
                     sendButton.setTitleColor(.white, for: .highlighted)
                     sendButton.backgroundColor = .init("#2DD178")
-                }else {
+                } else {
                     sendButton.isUserInteractionEnabled = false
                     sendButton.setTitleColor(.init("#666666"), for: .normal)
                     sendButton.setTitleColor(.init("#666666"), for: .selected)
@@ -35,7 +35,8 @@ class CLChatPhotoAlbumBottomBar: UIView {
             }
         }
     }
-    ///发送按钮
+
+    /// 发送按钮
     private lazy var sendButton: UIButton = {
         let view = UIButton()
         view.isUserInteractionEnabled = false
@@ -53,7 +54,8 @@ class CLChatPhotoAlbumBottomBar: UIView {
         view.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
         return view
     }()
-    ///关闭按钮
+
+    /// 关闭按钮
     private lazy var closeButton: UIButton = {
         let view = UIButton()
         view.titleLabel?.font = .mediumPingFangSC(16)
@@ -66,38 +68,45 @@ class CLChatPhotoAlbumBottomBar: UIView {
         view.addTarget(self, action: #selector(closeButtonAction), for: .touchUpInside)
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLChatPhotoAlbumBottomBar {
     private func initUI() {
         seletedNumber = 0
         addSubview(closeButton)
         addSubview(sendButton)
     }
+
     private func makeConstraints() {
-        closeButton.snp.makeConstraints { (make) in
+        closeButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(15)
         }
-        sendButton.snp.makeConstraints { (make) in
+        sendButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalTo(-15)
             make.height.equalTo(30)
         }
     }
 }
+
 extension CLChatPhotoAlbumBottomBar {
     @objc private func sendButtonAction() {
-       sendCallback?()
+        sendCallback?()
     }
+
     @objc private func closeButtonAction() {
         closeCallback?()
     }

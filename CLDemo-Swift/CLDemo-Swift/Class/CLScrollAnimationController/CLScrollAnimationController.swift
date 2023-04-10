@@ -6,9 +6,7 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-
-//from https://github.com/YouXianMing/Animations
-
+// from https://github.com/YouXianMing/Animations
 
 import UIKit
 
@@ -19,6 +17,7 @@ class CLScrollAnimationController: CLController {
             scrollView.contentSize = CGSize(width: view.bounds.width * CGFloat(page), height: view.bounds.height)
         }
     }
+
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.isPagingEnabled = true
@@ -29,15 +28,16 @@ class CLScrollAnimationController: CLController {
         return view
     }()
 }
+
 extension CLScrollAnimationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (make) in
+        scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         page = 5
-        for item in 0..<page {
+        for item in 0 ..< page {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFill
             imageView.image = UIImage(named: String(format: "%d", item))
@@ -49,6 +49,7 @@ extension CLScrollAnimationController {
         }
     }
 }
+
 extension CLScrollAnimationController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for item in dataSouce {

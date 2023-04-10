@@ -13,9 +13,12 @@ class CLFlowLayout: UICollectionViewFlowLayout {
     override init() {
         super.init()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else { return proposedContentOffset }
         let pageLength: CGFloat
@@ -23,11 +26,11 @@ class CLFlowLayout: UICollectionViewFlowLayout {
         let currentPage: CGFloat
         let speed: CGFloat
         if scrollDirection == .horizontal {
-            pageLength = (self.itemSize.width + self.minimumLineSpacing) * numberOfItemsPerPage
+            pageLength = (itemSize.width + minimumLineSpacing) * numberOfItemsPerPage
             approxPage = collectionView.contentOffset.x / pageLength
             speed = velocity.x
         } else {
-            pageLength = (self.itemSize.height + self.minimumLineSpacing) * numberOfItemsPerPage
+            pageLength = (itemSize.height + minimumLineSpacing) * numberOfItemsPerPage
             approxPage = collectionView.contentOffset.y / pageLength
             speed = velocity.y
         }

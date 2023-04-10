@@ -5,22 +5,26 @@
 //  Created by Chen JmoVxia on 2021/12/1.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-//MARK: - JmoVxia---枚举
-extension CLActivityButton {
-}
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---枚举
+
+extension CLActivityButton {}
+
+// MARK: - JmoVxia---类-属性
+
 class CLActivityButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         initUI()
     }
+
     private lazy var activityIndicator: UIActivityIndicatorView = { [unowned self] in
         let activityIndicator = UIActivityIndicatorView(style: .white)
         return activityIndicator
     }()
+
     private var title: String?
 
     override var isEnabled: Bool {
@@ -33,7 +37,9 @@ class CLActivityButton: UIButton {
         }
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLActivityButton {
     func initUI() {
         addSubview(activityIndicator)
@@ -42,24 +48,30 @@ private extension CLActivityButton {
         addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
     }
-    func makeConstraints() {
-    }
+
+    func makeConstraints() {}
 }
-//MARK: - JmoVxia---数据
+
+// MARK: - JmoVxia---数据
+
 private extension CLActivityButton {
-    func initData() {
-    }
+    func initData() {}
 }
-//MARK: - JmoVxia---override
-extension CLActivityButton {
-}
-//MARK: - JmoVxia---objc
-@objc private extension CLActivityButton {
-}
-//MARK: - JmoVxia---私有方法
-private extension CLActivityButton {
-}
-//MARK: - JmoVxia---公共方法
+
+// MARK: - JmoVxia---override
+
+extension CLActivityButton {}
+
+// MARK: - JmoVxia---objc
+
+@objc private extension CLActivityButton {}
+
+// MARK: - JmoVxia---私有方法
+
+private extension CLActivityButton {}
+
+// MARK: - JmoVxia---公共方法
+
 extension CLActivityButton {
     func startAnimating() {
         title = titleLabel?.text
@@ -72,4 +84,3 @@ extension CLActivityButton {
         setTitle(title, for: .normal)
     }
 }
-

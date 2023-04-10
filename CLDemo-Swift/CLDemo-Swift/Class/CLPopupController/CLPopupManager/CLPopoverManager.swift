@@ -15,8 +15,7 @@ import UIKit
         super.init()
     }
 
-    deinit {
-    }
+    deinit {}
 
     private var waitQueue = [String: CLPopoverController]()
     private var windows = [String: CLPopoverWindow]()
@@ -24,15 +23,15 @@ import UIKit
     /// 切换到主线程同步执行
     @discardableResult static func mainSync<T>(execute block: () -> T) -> T {
         guard !Thread.isMainThread else { return block() }
-        return DispatchQueue.main.sync { return block() }
+        return DispatchQueue.main.sync { block() }
     }
-    
+
     static var keyWindow: UIWindow? = {
         if #available(iOS 13.0, *) {
             return UIApplication.shared.connectedScenes
-                .compactMap{$0 as? UIWindowScene}
-                .flatMap{$0.windows}
-                .first{$0.isKeyWindow}
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first { $0.isKeyWindow }
         } else {
             return UIApplication.shared.keyWindow
         }

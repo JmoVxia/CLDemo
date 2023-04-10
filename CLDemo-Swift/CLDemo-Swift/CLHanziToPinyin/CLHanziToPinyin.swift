@@ -64,7 +64,7 @@ class CLHanziToPinyin {
         guard let dictionary = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] else { return [:] }
         return dictionary
     }()
-    
+
     static let sharedInstance = CLHanziToPinyin()
 
     private init() {}
@@ -86,10 +86,10 @@ extension CLHanziToPinyin {
         while range.length > 0 {
             let subRang = NSRange(location: range.location, length: range.length)
             let keyWord = (string as NSString).substring(with: subRang)
-            
+
             if let sentence = CLHanziToPinyin.sharedInstance.sentence[keyWord] {
                 let longPinyin = " " + CLHanziToPinyin.format(sentence, withOutputFormat: outputFormat)
-                let shortPinyin = longPinyin.components(separatedBy: " ").map({$0.prefix(1)}).joined(separator: " ")
+                let shortPinyin = longPinyin.components(separatedBy: " ").map { $0.prefix(1) }.joined(separator: " ")
                 longWords.append(longPinyin)
                 shortWords.append(shortPinyin)
             } else {

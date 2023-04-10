@@ -4,8 +4,8 @@
 //
 //  Created by Chen JmoVxia on 2022/10/19.
 //
-import UIKit
 import DateToolsSwift
+import UIKit
 
 struct CLCalendarConfig {
     enum CLSelectType {
@@ -24,6 +24,7 @@ struct CLCalendarConfig {
         var selectEndBackground = "#4bce817f".uiColor
         var todayText = "#32cd32".uiColor
         var titleText = "#555555".uiColor
+        var headerTextColor = "#353A55".uiColor
         var subtitleText = "#555555".uiColor
         var selectTodayText = "#32cd32".uiColor
         var selectTitleText = "#ffffff".uiColor
@@ -44,5 +45,6 @@ struct CLCalendarConfig {
     var limitEnd: Date?
     var isShowLunarCalendar = true
     var insetsLayoutMarginsFromSafeArea = true
+    var layoutMargins = UIEdgeInsets.zero
     var headerHight = 50.0
 }

@@ -15,15 +15,17 @@ class CLMarqueeVerticalCell: UICollectionViewCell {
         view.numberOfLines = 0
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(label)
-        label.snp.makeConstraints { (make) in
+        label.snp.makeConstraints { make in
             make.width.equalTo(20)
             make.center.equalToSuperview()
         }
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

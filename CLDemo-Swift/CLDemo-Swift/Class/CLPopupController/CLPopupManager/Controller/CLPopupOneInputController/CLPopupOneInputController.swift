@@ -9,18 +9,18 @@
 import UIKit
 
 enum CLPopupOneInputType {
-    ///呼吸频次
+    /// 呼吸频次
     case respiratoryFrequency
-    ///尿量
+    /// 尿量
     case UrineVolume
-    ///心率
+    /// 心率
     case heartRate
-    ///脉搏
+    /// 脉搏
     case pulse
 }
 
 class CLPopupOneInputController: CLPopoverController {
-    var sureCallback: ((String?) -> ())?
+    var sureCallback: ((String?) -> Void)?
     var type: CLPopupOneInputType = .respiratoryFrequency {
         didSet {
             switch type {
@@ -43,6 +43,7 @@ class CLPopupOneInputController: CLPopoverController {
             }
         }
     }
+
     private var isMoveUp: Bool = false
     private var isDismiss: Bool = false
     private lazy var contentView: UIView = {
@@ -52,6 +53,7 @@ class CLPopupOneInputController: CLPopoverController {
         contentView.clipsToBounds = true
         return contentView
     }()
+
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -60,22 +62,26 @@ class CLPopupOneInputController: CLPopoverController {
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
+
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
         textField.textAlignment = .center
         return textField
     }()
+
     private lazy var fristLineView: UIView = {
         let fristLineView = UIView()
         fristLineView.backgroundColor = .init("#F0F0F0")
         return fristLineView
     }()
+
     private lazy var fristTapView: UIControl = {
         let fristTapView = UIControl()
         fristTapView.addTarget(self, action: #selector(fristTapViewAction), for: .touchUpInside)
         return fristTapView
     }()
+
     private lazy var sureButton: UIButton = {
         let sureButton = UIButton()
         sureButton.setTitle("确定", for: .normal)
@@ -91,6 +97,7 @@ class CLPopupOneInputController: CLPopoverController {
         sureButton.addTarget(self, action: #selector(sureAction), for: .touchUpInside)
         return sureButton
     }()
+
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton()
         closeButton.setImage(UIImage(named: "clear"), for: .normal)
@@ -99,23 +106,26 @@ class CLPopupOneInputController: CLPopoverController {
         closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         return closeButton
     }()
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 }
+
 extension CLPopupOneInputController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         makeConstraints()
         showAnimation()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification,object: nil)
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillHide(notification:)),name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
+
 extension CLPopupOneInputController {
     private func initUI() {
-        view.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.00)
+        view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
         view.addSubview(contentView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(textField)
@@ -124,47 +134,49 @@ extension CLPopupOneInputController {
         contentView.addSubview(sureButton)
         view.addSubview(closeButton)
     }
+
     private func makeConstraints() {
-        contentView.snp.makeConstraints { (make) in
+        contentView.snp.makeConstraints { make in
             make.left.equalTo(36)
             make.right.equalTo(-36)
             make.bottom.equalTo(view.snp.top)
         }
-        titleLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(36)
             make.left.equalTo(21)
             make.right.equalTo(-21)
         }
-        textField.snp.makeConstraints { (make) in
+        textField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(36)
             make.left.equalTo(21)
             make.right.equalTo(-21)
         }
-        fristLineView.snp.makeConstraints { (make) in
+        fristLineView.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(16)
             make.left.equalTo(21)
             make.right.equalTo(-21)
             make.height.equalTo(0.5)
         }
-        fristTapView.snp.makeConstraints { (make) in
+        fristTapView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom)
             make.bottom.equalTo(fristLineView)
         }
-        sureButton.snp.makeConstraints { (make) in
+        sureButton.snp.makeConstraints { make in
             make.left.equalTo(70)
             make.right.equalTo(-70)
             make.height.equalTo(40)
             make.bottom.equalTo(-32)
             make.top.equalTo(fristLineView.snp.bottom).offset(20)
         }
-        closeButton.snp.makeConstraints { (make) in
+        closeButton.snp.makeConstraints { make in
             make.size.equalTo(30)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(contentView.snp.top).offset(-15)
         }
     }
 }
+
 extension CLPopupOneInputController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -173,13 +185,14 @@ extension CLPopupOneInputController {
         }
     }
 }
+
 extension CLPopupOneInputController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text else {
             return true
         }
         let text = (textFieldText as NSString).replacingCharacters(in: range, with: string)
-        if (string == "") {
+        if string == "" {
             return true
         }
         switch type {
@@ -194,15 +207,16 @@ extension CLPopupOneInputController: UITextFieldDelegate {
         }
     }
 }
+
 extension CLPopupOneInputController {
     // 键盘显示
     @objc func keyboardWillShow(notification: Notification) {
         DispatchQueue.main.async {
-            guard let userInfo = notification.userInfo, let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval, let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSInteger else {return}
+            guard let userInfo = notification.userInfo, let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval, let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSInteger else { return }
             let margin = keyboardRect.minY - 10
             self.isMoveUp = self.contentView.frame.maxY - keyboardRect.minY > 0
             if self.isMoveUp {
-                self.contentView.snp.remakeConstraints { (make) in
+                self.contentView.snp.remakeConstraints { make in
                     make.left.equalTo(36)
                     make.right.equalTo(-36)
                     make.bottom.equalTo(self.view.snp.top).offset(margin)
@@ -214,12 +228,13 @@ extension CLPopupOneInputController {
             }
         }
     }
+
     // 键盘隐藏
     @objc func keyboardWillHide(notification: Notification) {
-        guard let userInfo = notification.userInfo, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval, let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSInteger else {return}
+        guard let userInfo = notification.userInfo, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval, let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSInteger else { return }
         if !isDismiss, isMoveUp {
             DispatchQueue.main.async {
-                self.contentView.snp.remakeConstraints { (make) in
+                self.contentView.snp.remakeConstraints { make in
                     make.left.equalTo(36)
                     make.right.equalTo(-36)
                     make.center.equalToSuperview()
@@ -232,50 +247,55 @@ extension CLPopupOneInputController {
         }
     }
 }
+
 extension CLPopupOneInputController {
     @objc func fristTapViewAction() {
         DispatchQueue.main.async {
             self.textField.becomeFirstResponder()
         }
     }
+
     @objc func sureAction() {
         isDismiss = true
         sureCallback?(textField.text)
         closeAction()
     }
+
     @objc func closeAction() {
         isDismiss = true
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        dismissAnimation { (_) in
+        dismissAnimation { _ in
             self.hidden()
         }
     }
 }
+
 extension CLPopupOneInputController {
     private func showAnimation() {
         view.setNeedsLayout()
         view.layoutIfNeeded()
-        contentView.snp.remakeConstraints { (make) in
+        contentView.snp.remakeConstraints { make in
             make.left.equalTo(36)
             make.right.equalTo(-36)
             make.center.equalToSuperview()
         }
         UIView.animate(withDuration: 0.35) {
-            self.view.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.40)
+            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.40)
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }
     }
+
     private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
-        contentView.snp.remakeConstraints { (make) in
+        contentView.snp.remakeConstraints { make in
             make.left.equalTo(36)
             make.right.equalTo(-36)
             make.bottom.equalTo(view.snp.top)
         }
         UIView.animate(withDuration: 0.35, animations: {
-            self.view.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.00)
+            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }, completion: completion)

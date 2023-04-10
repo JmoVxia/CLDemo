@@ -31,16 +31,15 @@ class CLTagsFrameConfigure: NSObject {
 }
 
 class CLTagsFrameHelper {
-    
     /// 计算标签frame
     /// - Parameters:
     ///   - configure: 标签配置
     ///   - tagsArray: 标签数组
     /// - Returns: 计算后标签frame数组，总高度
-    class func calculateTagsFrame(configure: ((CLTagsFrameConfigure) -> ()), tagsArray: [String]) -> (tagsFrames: [CGRect], tagsHeight: CGFloat) {
+    class func calculateTagsFrame(configure: (CLTagsFrameConfigure) -> Void, tagsArray: [String]) -> (tagsFrames: [CGRect], tagsHeight: CGFloat) {
         let defaultConfigure = CLTagsFrameConfigure.defaultConfigure()
         configure(defaultConfigure)
-        var tagsFrames: [CGRect] = [CGRect]()
+        var tagsFrames = [CGRect]()
         var tagsHeight: CGFloat = 0.0
         var textX = defaultConfigure.tagsMargin
         var textWidht: CGFloat = 0
@@ -48,8 +47,8 @@ class CLTagsFrameHelper {
         var moreWidth: CGFloat = 0
         var lastIndexs: [Int] = []
         var moreWidths: [CGFloat] = []
-        let attributedFont: [NSAttributedString.Key : Any] = [.font : defaultConfigure.tagsTitleFont]
-        for i in 0..<tagsArray.count {
+        let attributedFont: [NSAttributedString.Key: Any] = [.font: defaultConfigure.tagsTitleFont]
+        for i in 0 ..< tagsArray.count {
             textWidht = ceil((tagsArray[i] as NSString).size(withAttributes: attributedFont).width) + defaultConfigure.tagsMinPadding * 2
             if i < tagsArray.count - 1 {
                 nextWidth = ceil((tagsArray[i + 1] as NSString).size(withAttributes: attributedFont).width) + defaultConfigure.tagsMinPadding * 2
@@ -74,10 +73,10 @@ class CLTagsFrameHelper {
         var length = 0
         var averageWidth: CGFloat = 0
         var tagWidth: CGFloat = 0
-        for i in 0..<lastIndexs.count {
+        for i in 0 ..< lastIndexs.count {
             let lastIndex = lastIndexs[i]
             length = i == 0 ? (lastIndex + 1) : (lastIndexs[i] - lastIndexs[i - 1])
-            let rowArray = tagsArray[location..<(min(length + location, tagsArray.count))]
+            let rowArray = tagsArray[location ..< min(length + location, tagsArray.count)]
             location = lastIndex + 1
             averageWidth = moreWidths[i] / CGFloat(rowArray.count)
             var tagX = defaultConfigure.tagsMargin

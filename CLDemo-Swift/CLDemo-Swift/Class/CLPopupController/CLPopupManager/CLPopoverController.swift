@@ -11,11 +11,11 @@ import UIKit
 
 @objcMembers open class CLPopoverController: UIViewController {
     @available(*, unavailable)
-    required public init?(coder _: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         let keyWindow = CLPopoverManager.keyWindow
         if let isHiddenStatusBar = keyWindow?.rootViewController?.prefersStatusBarHidden {
@@ -30,7 +30,7 @@ import UIKit
     }
 
     @available(iOS 13.0, *)
-    open override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
+    override open var overrideUserInterfaceStyle: UIUserInterfaceStyle {
         set {
             super.overrideUserInterfaceStyle = newValue
         }
@@ -39,8 +39,7 @@ import UIKit
         }
     }
 
-    deinit {
-    }
+    deinit {}
 
     open var config = CLPopoverConfig()
 
@@ -50,46 +49,46 @@ import UIKit
 }
 
 extension CLPopoverController {
-    open override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
-    open override func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
-    open override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
     }
 
-    open override func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
 
-    open override func viewDidDisappear(_ animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
 
-    open override func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 }
 
 extension CLPopoverController {
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
+    override open var preferredStatusBarStyle: UIStatusBarStyle {
         return config.statusBarStyle
     }
 
-    open override var prefersStatusBarHidden: Bool {
+    override open var prefersStatusBarHidden: Bool {
         return config.isHiddenStatusBar
     }
 
-    open override var shouldAutorotate: Bool {
+    override open var shouldAutorotate: Bool {
         return config.isAutorotate
     }
 
-    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return config.supportedInterfaceOrientations
     }
 }

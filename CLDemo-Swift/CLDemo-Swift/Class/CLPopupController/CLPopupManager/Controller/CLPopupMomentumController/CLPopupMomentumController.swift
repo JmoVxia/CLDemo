@@ -18,6 +18,7 @@ class CLPopupMomentumController: CLPopoverController {
         return view
     }()
 }
+
 extension CLPopupMomentumController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +26,16 @@ extension CLPopupMomentumController {
         makeConstraints()
         showAnimation()
     }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (_) in
+        coordinator.animate(alongsideTransition: { _ in
             print(size.height * 0.6)
             let momentumView = self.momentumView
             momentumView.closedTransform = momentumView.isOpen ? .identity : CGAffineTransform(translationX: 0, y: (momentumView.bounds.height) * 0.6)
         }, completion: nil)
     }
 }
+
 extension CLPopupMomentumController {
     private func initUI() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
@@ -40,8 +43,9 @@ extension CLPopupMomentumController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(hiddenAction))
         view.addGestureRecognizer(tap)
     }
+
     private func makeConstraints() {
-        momentumView.snp.makeConstraints { (make) in
+        momentumView.snp.makeConstraints { make in
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(8)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-8)
             make.bottom.equalToSuperview()
@@ -49,6 +53,7 @@ extension CLPopupMomentumController {
         }
     }
 }
+
 extension CLPopupMomentumController {
     private func showAnimation() {
         view.setNeedsLayout()
@@ -60,6 +65,7 @@ extension CLPopupMomentumController {
             self.momentumView.closedTransform = .init(translationX: 0, y: height * 0.6)
         }
     }
+
     private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
@@ -69,8 +75,9 @@ extension CLPopupMomentumController {
             self.momentumView.closedTransform = .init(translationX: 0, y: height)
         }, completion: completion)
     }
+
     @objc private func hiddenAction() {
-        dismissAnimation { (_) in
+        dismissAnimation { _ in
             self.hidden()
         }
     }

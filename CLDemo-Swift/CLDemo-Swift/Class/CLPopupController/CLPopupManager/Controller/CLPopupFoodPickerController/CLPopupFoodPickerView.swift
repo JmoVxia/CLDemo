@@ -6,11 +6,11 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
 class CLPopupFoodPickerView: UIView {
-    var selectedCallback: ((String, String, String, String)->())?
+    var selectedCallback: ((String, String, String, String) -> Void)?
     var foodModel: CLPopupFoodPickerModel?
     private var selectedCount: Int = 0
     private var buttonArray = [UIButton]()
@@ -22,16 +22,19 @@ class CLPopupFoodPickerView: UIView {
         clipView.clipsToBounds = true
         return clipView
     }()
+
     private lazy var lineView: UIView = {
         let lineView = UIView()
         lineView.backgroundColor = .theme
         return lineView
     }()
+
     private lazy var showView: UIView = {
         let showView = UIView()
         showView.backgroundColor = UIColor.clear
         return showView
     }()
+
     private lazy var contentView: UIScrollView = {
         let contentView = UIScrollView()
         contentView.showsHorizontalScrollIndicator = false
@@ -54,29 +57,32 @@ class CLPopupFoodPickerView: UIView {
         initUI()
         initData()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLPopupFoodPickerView {
     func initData() {
         DispatchQueue.global().async {
             let path = Bundle.main.path(forResource: "food", ofType: "json")
             let url = URL(fileURLWithPath: path!)
             if let data = try? Data(contentsOf: url) {
-                self.foodModel = CLPopupFoodPickerModel.init(json: JSON(data))
+                self.foodModel = CLPopupFoodPickerModel(json: JSON(data))
                 DispatchQueue.main.async {
                     self.refreshTableView(index: 0)
                 }
             }
         }
     }
+
     private func initUI() {
         let width: CGFloat = (frame.width) / 3.0
-        let height: CGFloat = 40;
+        let height: CGFloat = 40
         var lastButton: UIButton?
-        for i in 0...2 {
+        for i in 0 ... 2 {
             let button = creatButton(title: "请选择", titleColor: .init("#333333"))
             button.isHidden = i > 0
             button.addTarget(self, action: #selector(buttonClickAction(_:)), for: .touchUpInside)
@@ -85,7 +91,7 @@ extension CLPopupFoodPickerView {
             button.setNewFrame(CGRect(x: x, y: 0, width: width, height: height))
             lastButton = button
             buttonArray.append(button)
-            
+
             let topButton = creatButton(title: "请选择", titleColor: .theme)
             topButton.isHidden = button.isHidden
             topButton.isUserInteractionEnabled = false
@@ -93,7 +99,7 @@ extension CLPopupFoodPickerView {
             showView.addSubview(topButton)
             topButtonArray.append(topButton)
         }
-        
+
         addSubview(contentView)
         contentView.setNewFrame(CGRect(x: 0, y: height, width: frame.width, height: frame.height - height))
         contentView.contentSize = CGSize(width: contentView.frame.width, height: contentView.frame.height)
@@ -102,13 +108,14 @@ extension CLPopupFoodPickerView {
 
         addSubview(clipView)
         clipView.setNewFrame(seleceButton.frame)
-        
+
         clipView.addSubview(showView)
         showView.setNewFrame(CGRect(x: 0, y: 0, width: frame.width, height: height))
-        
+
         clipView.addSubview(lineView)
         lineView.setNewFrame(CGRect(x: clipView.frame.width * 0.2, y: clipView.frame.height - 2, width: clipView.frame.width * 0.6, height: 2))
     }
+
     private func seleceButton(_ button: UIButton) {
         if seleceButton != button {
             seleceButton = button
@@ -133,16 +140,17 @@ extension CLPopupFoodPickerView {
             contentView.setContentOffset(CGPoint(x: CGFloat(index) * frame.width, y: 0), animated: true)
             if !seleceButton.isSelected {
                 let view = CLPopupFoodPickerContentView()
-                view.selectedCallback = {[weak self](data) in
+                view.selectedCallback = { [weak self] data in
                     self?.refreshTableView(model: data, index: index + 1)
                 }
-                view.frame = CGRect(x: CGFloat(index) * contentView.frame.width, y: 0, width: contentView.frame.width, height: contentView.frame.height);
+                view.frame = CGRect(x: CGFloat(index) * contentView.frame.width, y: 0, width: contentView.frame.width, height: contentView.frame.height)
                 contentView.addSubview(view)
                 button.isSelected = true
                 tableViewArray.append(view)
             }
         }
     }
+
     private func refreshTableView(model: CLPopupFoodPickerContentModel? = nil, index: Int) {
         let name = model?.title ?? "请选择"
         seleceButton.setTitle(name, for: .normal)
@@ -152,7 +160,7 @@ extension CLPopupFoodPickerView {
         if index < buttonArray.count {
             let button = buttonArray[index]
             seleceButton(button)
-        }else {
+        } else {
             guard let frist = buttonArray[0].titleLabel?.text, let second = buttonArray[1].titleLabel?.text, let third = buttonArray[2].titleLabel?.text, let foodId = model?.foodId else {
                 return
             }
@@ -162,37 +170,38 @@ extension CLPopupFoodPickerView {
             guard let group = foodModel?.baseGroup else {
                 return
             }
-            let modelArray = group.map({ (baseGroun) -> CLPopupFoodPickerContentModel in
-                return CLPopupFoodPickerContentModel(title: baseGroun.foodBaseGroupName)
-            })
-            tableViewArray[index].dataArray = modelArray
-        }else if index == 1 {
-            guard let group = foodModel?.baseGroup.first(where: { (baseGroup) -> Bool in
-                return baseGroup.foodBaseGroupName == buttonArray[0].titleLabel?.text
-            })else {
-                return
+            let modelArray = group.map { baseGroun -> CLPopupFoodPickerContentModel in
+                CLPopupFoodPickerContentModel(title: baseGroun.foodBaseGroupName)
             }
-            let modelArray = group.group.map({ (baseGroun) -> CLPopupFoodPickerContentModel in
-                return CLPopupFoodPickerContentModel(title: baseGroun.foodGroupName)
-            })
             tableViewArray[index].dataArray = modelArray
-        }else if index == 2 {
-            guard let group = foodModel?.baseGroup.first(where: { (baseGroup) -> Bool in
-                return baseGroup.foodBaseGroupName == buttonArray[0].titleLabel?.text
-            })else {
-                return
-            }
-            guard let foodGroup = group.group.first(where: { (group) -> Bool in
-                return group.foodGroupName == buttonArray[1].titleLabel?.text
+        } else if index == 1 {
+            guard let group = foodModel?.baseGroup.first(where: { baseGroup -> Bool in
+                baseGroup.foodBaseGroupName == buttonArray[0].titleLabel?.text
             }) else {
                 return
             }
-            let modelArray = foodGroup.foods.map({ (baseGroun) -> CLPopupFoodPickerContentModel in
-                return CLPopupFoodPickerContentModel(title: baseGroun.foodName, foodId: baseGroun.foodId)
-            })
+            let modelArray = group.group.map { baseGroun -> CLPopupFoodPickerContentModel in
+                CLPopupFoodPickerContentModel(title: baseGroun.foodGroupName)
+            }
+            tableViewArray[index].dataArray = modelArray
+        } else if index == 2 {
+            guard let group = foodModel?.baseGroup.first(where: { baseGroup -> Bool in
+                baseGroup.foodBaseGroupName == buttonArray[0].titleLabel?.text
+            }) else {
+                return
+            }
+            guard let foodGroup = group.group.first(where: { group -> Bool in
+                group.foodGroupName == buttonArray[1].titleLabel?.text
+            }) else {
+                return
+            }
+            let modelArray = foodGroup.foods.map { baseGroun -> CLPopupFoodPickerContentModel in
+                CLPopupFoodPickerContentModel(title: baseGroun.foodName, foodId: baseGroun.foodId)
+            }
             tableViewArray[index].dataArray = modelArray
         }
     }
+
     private func creatButton(title: String, titleColor: UIColor) -> UIButton {
         let button = UIButton()
         button.backgroundColor = UIColor.white
@@ -204,23 +213,27 @@ extension CLPopupFoodPickerView {
         return button
     }
 }
+
 extension CLPopupFoodPickerView {
     @objc private func buttonClickAction(_ button: UIButton) {
         seleceButton(button)
     }
 }
+
 extension CLPopupFoodPickerView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let x = ((scrollView.contentOffset.x - lastOffsetX) / scrollView.frame.width) * clipView.frame.width + lastX
         clipView.setNewFrame(CGRect(x: min(max(x, 0), scrollView.frame.width - clipView.frame.width), y: clipView.frame.minY, width: clipView.frame.width, height: clipView.frame.height))
         showView.setNewFrame(CGRect(x: -min(max(x, 0), scrollView.frame.width - clipView.frame.width), y: showView.frame.minY, width: showView.frame.width, height: showView.frame.height))
     }
+
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
         seleceButton(buttonArray[index])
         lastOffsetX = scrollView.contentOffset.x
         lastX = seleceButton.frame.minX
     }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDidEndScrollingAnimation(scrollView)
     }

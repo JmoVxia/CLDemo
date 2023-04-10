@@ -15,16 +15,19 @@ enum InchWidth: Double {
         return .iPhone6
     }
 }
+
 enum InchHeight: Double {
     case iPhone5 = 568
     case iPhone6 = 667
     case iPhoneX = 812
 }
+
 extension Double {
     private func rounded(_ decimalPlaces: Int) -> Double {
         let divisor = pow(10.0, Double(max(0, decimalPlaces)))
         return (self * divisor).rounded() / divisor
     }
+
     func autoWidth(_ inch: InchWidth = .iPhone6) -> Double {
         guard UIDevice.current.userInterfaceIdiom == .phone else {
             return self
@@ -35,6 +38,7 @@ extension Double {
         let width = min(screenWidth, screenHeight) - Double(safeAreaEdgeInsets.left - safeAreaEdgeInsets.right)
         return (self * (width / base)).rounded(3)
     }
+
     func autoHeight(_ inch: InchHeight = .iPhone6) -> Double {
         guard UIDevice.current.userInterfaceIdiom == .phone else {
             return self
@@ -52,22 +56,27 @@ extension BinaryInteger {
         let temp = Double("\(self)") ?? 0
         return temp.autoWidth(inch)
     }
+
     func autoWidth<T: BinaryInteger>(_ inch: InchWidth = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoWidth(inch))
     }
+
     func autoWidth<T: BinaryFloatingPoint>(_ inch: InchWidth = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoWidth(inch))
     }
+
     func autoHeight(_ inch: InchHeight = .iPhone6) -> Double {
         let temp = Double("\(self)") ?? 0
         return temp.autoHeight(inch)
     }
+
     func autoHeight<T: BinaryInteger>(_ inch: InchHeight = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoHeight(inch))
     }
+
     func autoHeight<T: BinaryFloatingPoint>(_ inch: InchHeight = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoHeight(inch))
@@ -79,31 +88,38 @@ extension BinaryFloatingPoint {
         let temp = Double("\(self)") ?? 0
         return temp.autoWidth(inch)
     }
+
     func autoWidth<T: BinaryInteger>(_ inch: InchWidth = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoWidth(inch))
     }
+
     func autoWidth<T: BinaryFloatingPoint>(_ inch: InchWidth = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoWidth(inch))
     }
+
     func autoHeight(_ inch: InchHeight = .iPhone6) -> Double {
         let temp = Double("\(self)") ?? 0
         return temp.autoHeight(inch)
     }
+
     func autoHeight<T: BinaryInteger>(_ inch: InchHeight = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoHeight(inch))
     }
+
     func autoHeight<T: BinaryFloatingPoint>(_ inch: InchHeight = .iPhone6) -> T {
         let temp = Double("\(self)") ?? 0
         return T(temp.autoHeight(inch))
     }
 }
+
 extension CGSize {
     func autoWidth(_ inch: InchWidth = .iPhone6) -> CGSize {
         return CGSize(width: width.autoWidth(), height: height.autoWidth())
     }
+
     func autoHeight(_ inch: InchHeight = .iPhone6) -> CGSize {
         return CGSize(width: width.autoHeight(), height: height.autoHeight())
     }

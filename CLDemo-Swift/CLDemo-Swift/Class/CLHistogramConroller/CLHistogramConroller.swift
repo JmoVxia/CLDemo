@@ -13,10 +13,11 @@ class CLHistogramConroller: CLController {
         let view = CLHistogramView()
         return view
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(histogramView)
-        histogramView.snp.makeConstraints { (make) in
+        histogramView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalTo(view)
         }

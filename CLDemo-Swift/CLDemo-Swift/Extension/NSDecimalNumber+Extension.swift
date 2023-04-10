@@ -24,9 +24,11 @@ extension NSDecimalNumber {
             raiseOnExactness: false,
             raiseOnOverflow: false,
             raiseOnUnderflow: false,
-            raiseOnDivideByZero: false)
+            raiseOnDivideByZero: false
+        )
         return rounding(accordingToBehavior: roundBankers)
     }
+
     /// 根据小数位格式化
     func formatter(withDecimalsNumber decimalsNumber: Int16) -> NSDecimalNumber {
         let roundBankers = NSDecimalNumberHandler(
@@ -35,9 +37,11 @@ extension NSDecimalNumber {
             raiseOnExactness: false,
             raiseOnOverflow: false,
             raiseOnUnderflow: false,
-            raiseOnDivideByZero: false)
+            raiseOnDivideByZero: false
+        )
         return rounding(accordingToBehavior: roundBankers)
     }
+
     /// 根据范例小数点位数格式化
     func stringFormatter(withExample example: NSDecimalNumber) -> String {
         let decimal = formatter(withExample: example)
@@ -46,17 +50,18 @@ extension NSDecimalNumber {
         let exampleNumber = example.stringValue.components(separatedBy: ".").last?.count ?? 0
         if !example.stringValue.contains(".") {
             return string
-        }else {
+        } else {
             if !string.contains(".") {
                 currentNumber = 0
                 string += "."
             }
-            for _ in 0..<max(exampleNumber - currentNumber, 0) {
+            for _ in 0 ..< max(exampleNumber - currentNumber, 0) {
                 string += "0"
             }
             return string
         }
     }
+
     /// 根据小数位格式化
     func stringFormatter(withDecimalsNumber decimalsNumber: Int16) -> String {
         let decimal = formatter(withDecimalsNumber: decimalsNumber)
@@ -66,7 +71,7 @@ extension NSDecimalNumber {
             currentNumber = 0
             string += "."
         }
-        for _ in 0..<max(Int(decimalsNumber) - currentNumber, 0) {
+        for _ in 0 ..< max(Int(decimalsNumber) - currentNumber, 0) {
             string += "0"
         }
         return string

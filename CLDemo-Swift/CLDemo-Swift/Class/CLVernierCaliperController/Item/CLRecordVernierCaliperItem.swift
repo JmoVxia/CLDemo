@@ -9,7 +9,7 @@
 import UIKit
 
 class CLRecordVernierCaliperItem: NSObject {
-    ///指标类型
+    /// 指标类型
     enum physicalType {
         case unKnown
         case sbp
@@ -23,30 +23,32 @@ class CLRecordVernierCaliperItem: NSObject {
         case urine
         case respirationRate
     }
-    ///指标标准类型
+
+    /// 指标标准类型
     var type: physicalType = .unKnown
-    ///标题
+    /// 标题
     var title: String = ""
-    ///单位
+    /// 单位
     var unit: String = ""
-    ///是否小写单位
+    /// 是否小写单位
     var isSmallUnit: Bool = true
-    ///默认值
+    /// 默认值
     var value: CGFloat = 0.0
-    ///间隔值，每两条相隔多少值
+    /// 间隔值，每两条相隔多少值
     var gap: Int = 12
-    ///最小值
+    /// 最小值
     var minValue: CGFloat = 0.0
-    ///最大值
+    /// 最大值
     var maxValue: CGFloat = 100.0
-    ///最小单位
+    /// 最小单位
     var minimumUnit: CGFloat = 1
-    ///单位间隔
+    /// 单位间隔
     var unitInterval: Int = 10
-    ///数值背景大小
-    var valueBackgroundViewSize: CGSize = CGSize(width: 110, height: 40)
-    var valueChangeCallback: ((String) -> ())?
+    /// 数值背景大小
+    var valueBackgroundViewSize: CGSize = .init(width: 110, height: 40)
+    var valueChangeCallback: ((String) -> Void)?
 }
+
 extension CLRecordVernierCaliperItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
         return CLRecordVernierCaliperCell.self

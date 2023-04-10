@@ -8,17 +8,19 @@
 import UIKit
 
 class CLChatVoiceItem: CLChatItem {
-    ///总时长
+    /// 总时长
     var duration: TimeInterval = 0.0
-    ///播放状态
+    /// 播放状态
     var isPlaying: Bool = false
-    ///音频路径
+    /// 音频路径
     var path: String = ""
 }
+
 extension CLChatVoiceItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
         return CLChatVoiceCell.self
     }
+
     func cellHeight() -> CGFloat {
         return 60
     }

@@ -8,11 +8,12 @@
 import UIKit
 
 protocol CLChatEmojiItemProtocol: AnyObject {
-    ///创建cell
+    /// 创建cell
     func dequeueReusableCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell
-    ///cell类型
+    /// cell类型
     func reuseIdentifier() -> String
 }
+
 extension CLChatEmojiItemProtocol {
     func dequeueReusableCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier(), for: indexPath)

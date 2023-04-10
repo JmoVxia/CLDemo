@@ -18,6 +18,7 @@ class CLHoneycombLayout: UICollectionViewFlowLayout {
     private var items: Int = 0
     private var attributesArray: [UICollectionViewLayoutAttributes]?
 }
+
 extension CLHoneycombLayout {
     override func prepare() {
         super.prepare()
@@ -31,9 +32,9 @@ extension CLHoneycombLayout {
         itemSize = CGSize(width: itemWidth, height: itemHeight)
         heightOfGroup = itemSideLength + itemSize.height + 2 * minimumLineSpacing
         itemsPerGroup = itemsPerRow + itemsPerRow - 1
-        
+
         items = collectionView.numberOfItems(inSection: 0)
-        
+
         contentSize = {
             let group = CGFloat(items / itemsPerGroup)
             let groupModulo = items % itemsPerGroup
@@ -41,9 +42,9 @@ extension CLHoneycombLayout {
             let residualHeight: CGFloat = {
                 if groupModulo == 0 {
                     return itemHeight * 0.25
-                }else if residualRow == 2 {
+                } else if residualRow == 2 {
                     return heightOfGroup + itemHeight * 0.25
-                }else {
+                } else {
                     return itemHeight
                 }
             }()
@@ -51,21 +52,23 @@ extension CLHoneycombLayout {
         }()
     }
 }
+
 extension CLHoneycombLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         if let attributesArray = attributesArray {
             return attributesArray
-        }else {
-            attributesArray = Array(0..<items).compactMap({layoutAttributesForItem(at: IndexPath(item: $0, section: 0))})
+        } else {
+            attributesArray = Array(0 ..< items).compactMap { layoutAttributesForItem(at: IndexPath(item: $0, section: 0)) }
             return attributesArray
         }
     }
+
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let groupIndex: Int = indexPath.row / itemsPerGroup
         let indexInGroup: Int = indexPath.row % itemsPerGroup
         let isFirstLine: Bool = indexInGroup < Int(itemsPerGroup / 2)
         let indexInLine: Int = isFirstLine ? indexInGroup : indexInGroup - Int(itemsPerGroup / 2)
-        
+
         let x = (itemSize.width) * (CGFloat(indexInLine) + (isFirstLine ? 0.5 : 0)) + CGFloat(indexInLine) * minimumInteritemSpacing + (isFirstLine ? minimumInteritemSpacing * 0.5 : 0)
         let y = (itemSize.height) * (isFirstLine ? 0 : 0.75) + heightOfGroup * CGFloat(groupIndex) + (isFirstLine ? 0 : minimumLineSpacing)
         let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -73,6 +76,7 @@ extension CLHoneycombLayout {
         return attributes
     }
 }
+
 extension CLHoneycombLayout {
     override var itemSize: CGSize {
         get {
@@ -82,9 +86,11 @@ extension CLHoneycombLayout {
             super.itemSize = newValue
         }
     }
+
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return false
     }
+
     override var collectionViewContentSize: CGSize {
         return contentSize
     }

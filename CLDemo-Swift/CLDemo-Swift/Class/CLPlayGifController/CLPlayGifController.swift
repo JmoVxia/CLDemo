@@ -13,6 +13,7 @@ class CLPlayGifController: CLController {
         let hepler = CLTableViewHepler(delegate: self)
         return hepler
     }()
+
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.dataSource = tableViewHepler
@@ -51,11 +52,13 @@ class CLPlayGifController: CLController {
             }
         }
     }
+
     deinit {
         CLGifPlayer.destroy()
         CLLog("CLPlayGifController deinit")
     }
 }
+
 extension CLPlayGifController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let path = (tableViewHepler.rows[indexPath.row] as? CLPlayGifItem)?.path else { return }

@@ -74,10 +74,12 @@ extension CLCalendarCell {
         isUserInteractionEnabled = {
             guard let date = model.date else { return false }
             if let limitBegin = config.limitBegin,
-               date.isEarlier(than: limitBegin) {
+               date.isEarlier(than: limitBegin)
+            {
                 return false
-            }else if let limitEnd = config.limitEnd,
-                     date.isLater(than: limitEnd) {
+            } else if let limitEnd = config.limitEnd,
+                      date.isLater(than: limitEnd)
+            {
                 return false
             }
             return true

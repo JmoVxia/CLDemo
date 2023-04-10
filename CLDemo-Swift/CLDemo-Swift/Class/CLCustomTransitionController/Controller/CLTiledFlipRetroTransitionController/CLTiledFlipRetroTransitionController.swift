@@ -7,21 +7,26 @@
 
 import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLTiledFlipRetroTransitionController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    deinit {
-    }
+
+    deinit {}
+
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "2")
         return view
     }()
+
     private lazy var bottomButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .init("#FF6666")
@@ -34,37 +39,47 @@ class CLTiledFlipRetroTransitionController: CLController {
         return view
     }()
 }
-//MARK: - JmoVxia---生命周期
+
+// MARK: - JmoVxia---生命周期
+
 extension CLTiledFlipRetroTransitionController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.delegate = self
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         makeConstraints()
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.delegate = nil
     }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLTiledFlipRetroTransitionController {
     func initUI() {
         view.addSubview(imageView)
         view.addSubview(bottomButton)
     }
+
     func makeConstraints() {
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -76,7 +91,9 @@ private extension CLTiledFlipRetroTransitionController {
         }
     }
 }
-//MARK: - JmoVxia---override
+
+// MARK: - JmoVxia---override
+
 extension CLTiledFlipRetroTransitionController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if operation == .push {
@@ -85,7 +102,9 @@ extension CLTiledFlipRetroTransitionController: UINavigationControllerDelegate {
         return nil
     }
 }
-//MARK: - JmoVxia---objc
+
+// MARK: - JmoVxia---objc
+
 @objc private extension CLTiledFlipRetroTransitionController {
     func buttonAction() {
         let controller = CLTiledFlipRetroPushTransitionController()

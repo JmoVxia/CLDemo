@@ -8,8 +8,8 @@
 import Foundation
 
 protocol CLChatEmojiCellProtocol: AnyObject {
-    ///cell复用标识符
+    /// cell复用标识符
     static func cellReuseIdentifier() -> String
-    ///更新数据
+    /// 更新数据
     func updateItem(item: CLChatEmojiItemProtocol)
 }

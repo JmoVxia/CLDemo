@@ -7,26 +7,32 @@
 
 import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLTitleCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLTitleCell {
     func initUI() {
         textLabel?.font = .mediumPingFangSC(18)
         selectionStyle = .none
     }
-    func makeConstraints() {
-    }
+
+    func makeConstraints() {}
 }
+
 extension CLTitleCell: CLRowProtocol {
     func setItem(_ item: CLTitleCellItem, indexPath: IndexPath) {
         textLabel?.text = item.title

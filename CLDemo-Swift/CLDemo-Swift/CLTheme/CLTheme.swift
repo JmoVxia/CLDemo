@@ -7,24 +7,23 @@
 
 import UIKit
 
-
 extension CLTheme {
     /// 模式
     enum Mode: String, CaseIterable {
-        ///跟随系统
+        /// 跟随系统
         case follow
-        ///白天
+        /// 白天
         case light
-        ///夜间
+        /// 夜间
         case dark
 
         @available(iOS 13.0, *)
         /// 风格
         var style: UIUserInterfaceStyle {
             switch self {
-                case .follow: return .unspecified
-                case .light: return .light
-                case .dark: return .dark
+            case .follow: return .unspecified
+            case .light: return .light
+            case .dark: return .dark
             }
         }
     }
@@ -34,11 +33,12 @@ class CLTheme {
     @CLUserDefaultStorage(keyName: "appTheme")
     private static var appTheme: String?
 
-    ///模式
+    /// 模式
     static var mode: Mode {
         get { return Mode(rawValue: appTheme ?? "") ?? .follow }
         set { appTheme = newValue.rawValue }
     }
+
     /// 创造颜色
     static func makeColor(light: UIColor, dark: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
@@ -47,6 +47,7 @@ class CLTheme {
             return CLTheme.mode == .light ? light : dark
         }
     }
+
     /// 创造图片
     static func makeImage(light: UIImage, dark: UIImage) -> UIImage {
         if #available(iOS 13.0, *) {

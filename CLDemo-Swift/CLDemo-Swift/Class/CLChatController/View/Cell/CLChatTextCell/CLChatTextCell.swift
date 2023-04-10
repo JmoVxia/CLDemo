@@ -18,9 +18,9 @@ import UIKit
 import UIKit
 
 class CLChatTextCell: CLChatCell {
-    ///背景气泡
+    /// 背景气泡
     var bubbleImageView = UIImageView()
-    ///文字
+    /// 文字
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.textColor = .white
@@ -29,57 +29,62 @@ class CLChatTextCell: CLChatCell {
         view.preferredMaxLayoutWidth = 200.autoWidth()
         return view
     }()
-    ///左侧气泡
+
+    /// 左侧气泡
     private lazy var leftBubbleImage: UIImage = {
         var image = UIImage(named: "leftBg")!
         return image
     }()
-    ///右侧气泡
+
+    /// 右侧气泡
     private lazy var rightBubbleImage: UIImage = {
         var image = UIImage(named: "rightBg")!
         return image
     }()
 }
+
 extension CLChatTextCell {
     override func initUI() {
         super.initUI()
         contentView.addSubview(bubbleImageView)
         contentView.addSubview(titleLabel)
     }
+
     override func makeConstraints() {
         super.makeConstraints()
     }
 }
+
 extension CLChatTextCell {
     private func remakeConstraints(isFromMyself: Bool) {
-        bubbleImageView.snp.remakeConstraints { (make) in
+        bubbleImageView.snp.remakeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(10)
             make.bottom.equalTo(contentView.snp.bottom).offset(-10).priority(.high)
             if isFromMyself {
                 make.right.equalTo(contentView.snp.right).offset(-10)
-            }else {
+            } else {
                 make.left.equalTo(contentView.snp.left).offset(10)
             }
         }
-        titleLabel.snp.remakeConstraints { (make) in
+        titleLabel.snp.remakeConstraints { make in
             make.top.equalTo(bubbleImageView.snp.top).offset(5)
             make.bottom.equalTo(bubbleImageView.snp.bottom).offset(-5)
             make.left.equalTo(bubbleImageView.snp.left).offset(isFromMyself ? 10 : 15)
             make.right.equalTo(bubbleImageView.snp.right).offset(isFromMyself ? -15 : -10)
         }
-        bottomContentView.snp.remakeConstraints { (make) in
+        bottomContentView.snp.remakeConstraints { make in
             make.edges.equalTo(bubbleImageView)
         }
     }
 }
+
 extension CLChatTextCell: CLRowProtocol {
     func setItem(_ item: CLChatTextItem, indexPath: IndexPath) {
         titleLabel.textColor = item.isFromMyself ? .white : .black
         titleLabel.attributedText = item.attributedText
         titleLabel.sizeToFit()
-        
+
         bubbleImageView.image = item.isFromMyself ? rightBubbleImage : leftBubbleImage
         remakeConstraints(isFromMyself: item.isFromMyself)
     }
 }
-

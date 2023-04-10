@@ -11,9 +11,10 @@ import UIKit
 class CLFlopBottomView: UIView {
     lazy var iconImageView: UIImageView = {
         let iconImageView = UIImageView()
-        iconImageView.image = UIImage.init(named: "FlopWant")
+        iconImageView.image = UIImage(named: "FlopWant")
         return iconImageView
     }()
+
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "想要"
@@ -21,21 +22,24 @@ class CLFlopBottomView: UIView {
         titleLabel.textColor = .init("#FFFFFF")
         return titleLabel
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(iconImageView)
         addSubview(titleLabel)
 
-        iconImageView.snp.makeConstraints { (make) in
+        iconImageView.snp.makeConstraints { make in
             make.left.equalTo(0)
             make.centerY.equalToSuperview()
         }
-        titleLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { make in
             make.right.top.bottom.equalTo(0)
             make.left.equalTo(iconImageView.snp.right).offset(6)
             make.top.bottom.equalToSuperview()
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

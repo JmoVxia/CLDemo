@@ -5,8 +5,8 @@
 //  Created by AUG on 2019/10/22.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class CLChatTextView: UITextView {
     /// 最大高度

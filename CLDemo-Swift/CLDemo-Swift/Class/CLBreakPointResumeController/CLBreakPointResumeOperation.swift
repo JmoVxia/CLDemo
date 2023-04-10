@@ -9,8 +9,8 @@
 import UIKit
 
 class CLBreakPointResumeOperation: Operation {
-    var progressBlock: ((CGFloat) -> ())?
-    private (set) var error: CLBreakPointResumeManager.DownloadError?
+    var progressBlock: ((CGFloat) -> Void)?
+    private(set) var error: CLBreakPointResumeManager.DownloadError?
     private var url: URL!
     private var path: String!
     private var currentBytes: Int64 = 0
@@ -29,6 +29,7 @@ class CLBreakPointResumeOperation: Operation {
             }
         }
     }
+
     private var taskExecuting: Bool = false {
         willSet {
             if taskExecuting != newValue {
@@ -41,21 +42,25 @@ class CLBreakPointResumeOperation: Operation {
             }
         }
     }
+
     override var isFinished: Bool {
         return taskFinished
     }
+
     override var isExecuting: Bool {
         return taskExecuting
     }
+
     override var isAsynchronous: Bool {
         return true
     }
+
     init(url: URL, path: String, currentBytes: Int64) {
         super.init()
         self.url = url
         self.path = path
         self.currentBytes = currentBytes
-        
+
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
         if currentBytes > 0 {
@@ -65,34 +70,39 @@ class CLBreakPointResumeOperation: Operation {
         session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
         task = session.dataTask(with: request)
     }
+
     deinit {
         print("CLBreakPointResumeOperation deinit")
     }
 }
+
 extension CLBreakPointResumeOperation {
     override func start() {
         autoreleasepool {
             if isCancelled {
                 taskFinished = true
                 taskExecuting = false
-            }else {
+            } else {
                 taskFinished = false
                 taskExecuting = true
                 startTask()
             }
         }
     }
+
     override func cancel() {
-        if (isExecuting) {
+        if isExecuting {
             task.cancel()
         }
         super.cancel()
     }
 }
+
 private extension CLBreakPointResumeOperation {
     func startTask() {
         task.resume()
     }
+
     func complete(_ error: CLBreakPointResumeManager.DownloadError? = nil) {
         self.error = error
         outputStream?.close()
@@ -101,6 +111,7 @@ private extension CLBreakPointResumeOperation {
         taskExecuting = false
     }
 }
+
 extension CLBreakPointResumeOperation: URLSessionDataDelegate {
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         if !isCancelled {
@@ -113,11 +124,12 @@ extension CLBreakPointResumeOperation: URLSessionDataDelegate {
                 return
             }
             if response.statusCode == 200,
-               FileManager.default.fileExists(atPath: path) {
+               FileManager.default.fileExists(atPath: path)
+            {
                 do {
                     try FileManager.default.removeItem(atPath: path)
                     currentBytes = 0
-                } catch  {
+                } catch {
                     complete(.throws(error))
                     return
                 }
@@ -137,6 +149,7 @@ extension CLBreakPointResumeOperation: URLSessionDataDelegate {
             completionHandler(.allow)
         }
     }
+
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         session.invalidateAndCancel()
         guard let response = task.response as? HTTPURLResponse else {
@@ -145,12 +158,13 @@ extension CLBreakPointResumeOperation: URLSessionDataDelegate {
         }
         if let error = error {
             complete(.download(error))
-        }else if (response.statusCode == 200 || response.statusCode == 206) {
+        } else if response.statusCode == 200 || response.statusCode == 206 {
             complete()
-        }else {
+        } else {
             complete(.statusCode(response.statusCode))
         }
     }
+
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         if !isCancelled {
             let receiveBytes = dataTask.countOfBytesReceived + currentBytes

@@ -15,9 +15,10 @@ enum CLChatPhotoMoveDirection {
     case right
     case left
 }
+
 class CLChatPhotoAlbumCell: UICollectionViewCell {
-    var lockScollViewCallBack: ((Bool) -> ())?
-    var sendImageCallBack: ((UIImage) -> ())?
+    var lockScollViewCallBack: ((Bool) -> Void)?
+    var sendImageCallBack: ((UIImage) -> Void)?
     var seletedNumber: Int = 0 {
         didSet {
             let title = seletedNumber == 0 ? " " : "\(seletedNumber)"
@@ -26,32 +27,33 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
             seletedNumberButton.setTitle(title, for: .highlighted)
             if seletedNumber > 0 {
                 seletedNumberButton.isSelected = true
-            }else {
+            } else {
                 seletedNumberButton.isSelected = false
             }
         }
     }
+
     var image: UIImage? {
         didSet {
             imageView.image = image
         }
     }
+
     private var endPoint: CGPoint = .zero {
         didSet {
             canSend = endPoint.y < 20
         }
     }
+
     private var canSend: Bool = false {
-        didSet {
-            
-        }
+        didSet {}
     }
+
     private var direction: CLChatPhotoMoveDirection = .none
     private var isOnWindow: Bool = false {
-        didSet {
-
-        }
+        didSet {}
     }
+
     private var gestureMinimumTranslation: CGFloat = 10.0
     private lazy var tipsBackgroundView: UIView = {
         let view = UIView()
@@ -60,6 +62,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.clipsToBounds = true
         return view
     }()
+
     private lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
@@ -69,6 +72,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.text = "松手发送"
         return view
     }()
+
     private lazy var seletedNumberButton: UIButton = {
         let view = UIButton()
         view.isUserInteractionEnabled = false
@@ -78,9 +82,10 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.setTitleColor(.white, for: .selected)
         view.setTitleColor(.white, for: .highlighted)
         view.titleLabel?.font = .mediumPingFangSC(12)
-        view.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom:5, right: 5)
+        view.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         return view
     }()
+
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
@@ -88,15 +93,19 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.isUserInteractionEnabled = true
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
         makeConstraints()
         addPanGestureRecognizer()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         DispatchQueue.main.async {
@@ -105,6 +114,7 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         }
     }
 }
+
 extension CLChatPhotoAlbumCell {
     private func initUI() {
         contentView.addSubview(imageView)
@@ -112,20 +122,21 @@ extension CLChatPhotoAlbumCell {
         imageView.addSubview(tipsBackgroundView)
         tipsBackgroundView.addSubview(tipsLabel)
     }
+
     private func makeConstraints() {
-        imageView.snp.makeConstraints { (make) in
+        imageView.snp.makeConstraints { make in
             make.center.width.height.equalToSuperview()
         }
-        seletedNumberButton.snp.makeConstraints { (make) in
+        seletedNumberButton.snp.makeConstraints { make in
             make.top.equalTo(5)
             make.left.equalTo(5)
             make.width.equalTo(seletedNumberButton.snp.height)
         }
-        tipsBackgroundView.snp.makeConstraints { (make) in
+        tipsBackgroundView.snp.makeConstraints { make in
             make.top.equalTo(12)
             make.centerX.equalToSuperview()
         }
-        tipsLabel.snp.makeConstraints { (make) in
+        tipsLabel.snp.makeConstraints { make in
             make.left.equalTo(12)
             make.right.equalTo(-12)
             make.top.equalTo(8)
@@ -133,6 +144,7 @@ extension CLChatPhotoAlbumCell {
         }
     }
 }
+
 extension CLChatPhotoAlbumCell {
     func updateSeletedNumberOffset() {
         guard let supperView = superview else {
@@ -142,15 +154,16 @@ extension CLChatPhotoAlbumCell {
         let rect = supperView.convert(frame, to: supperView.superview)
         if rect.minX < 0 {
             offset = -rect.minX
-        }else if rect.maxX > supperView.frame.width {
+        } else if rect.maxX > supperView.frame.width {
             offset = supperView.frame.width - rect.maxX
         }
-        let left = max(5, min(bounds.width - seletedNumberButton.frame.width, bounds.width - seletedNumberButton.frame.width + offset) - 5);
-        seletedNumberButton.snp.updateConstraints { (make) in
+        let left = max(5, min(bounds.width - seletedNumberButton.frame.width, bounds.width - seletedNumberButton.frame.width + offset) - 5)
+        seletedNumberButton.snp.updateConstraints { make in
             make.left.equalTo(left)
         }
     }
 }
+
 extension CLChatPhotoAlbumCell {
     private func addPanGestureRecognizer() {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handGesture(recognizer:)))
@@ -158,14 +171,16 @@ extension CLChatPhotoAlbumCell {
         imageView.addGestureRecognizer(panGestureRecognizer)
     }
 }
+
 extension CLChatPhotoAlbumCell: UIGestureRecognizerDelegate {
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    if (gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) ) {
-           return true
-       }
-       return false
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
+            return true
+        }
+        return false
     }
 }
+
 extension CLChatPhotoAlbumCell {
     @objc private func handGesture(recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: contentView)
@@ -180,7 +195,7 @@ extension CLChatPhotoAlbumCell {
         }
         if recognizer.state == .ended || recognizer.state == .cancelled {
             if direction == .up || direction == .down {
-                if canSend && isOnWindow {
+                if canSend, isOnWindow {
                     sendImageRecognizer(recognizer)
                 } else {
                     backImageRecognizer(recognizer)
@@ -191,6 +206,7 @@ extension CLChatPhotoAlbumCell {
         }
     }
 }
+
 extension CLChatPhotoAlbumCell {
     private func determinePictureDirectionIfNeeded(_ translation: CGPoint) -> CLChatPhotoMoveDirection {
         let absX = CGFloat(abs(Float(translation.x)))
@@ -200,19 +216,20 @@ extension CLChatPhotoAlbumCell {
         }
         if absX > absY {
             if translation.x < 0 {
-                return.left
+                return .left
             } else {
-                return.right
+                return .right
             }
         } else if absY > absX {
             if translation.y < 0 {
                 return .up
             } else {
-                return.down
+                return .down
             }
         }
         return .none
     }
+
     private func verticalAction(with recognizer: UIPanGestureRecognizer) {
         guard let keyWindow = UIApplication.shared.keyWindow, let view = recognizer.view, let superview = view.superview else {
             return
@@ -224,13 +241,13 @@ extension CLChatPhotoAlbumCell {
             keyWindow.addSubview(view)
         }
         endPoint = contentView.convert(centerInKeyWindow, from: keyWindow)
-        if canSend && isOnWindow {
+        if canSend, isOnWindow {
             tipsBackgroundView.isHidden = false
         } else {
             tipsBackgroundView.isHidden = true
         }
         let toCenter = CGPoint(x: centerInKeyWindow.x, y: (translation.y) + (centerInKeyWindow.y))
-        view.snp.remakeConstraints { (make) in
+        view.snp.remakeConstraints { make in
             make.width.height.equalTo(bounds.size)
             make.center.equalTo(toCenter)
         }
@@ -239,20 +256,21 @@ extension CLChatPhotoAlbumCell {
         isOnWindow = true
         recognizer.setTranslation(CGPoint(x: 0, y: 0), in: keyWindow)
     }
+
     private func sendImageRecognizer(_ recognizer: UIPanGestureRecognizer) {
         guard let view = recognizer.view else {
             return
         }
         tipsBackgroundView.isHidden = true
         contentView.insertSubview(view, at: 0)
-        view.snp.remakeConstraints { (make) in
+        view.snp.remakeConstraints { make in
             make.width.height.equalToSuperview()
             make.center.equalToSuperview()
         }
         view.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        }) { (_) in
+        }) { _ in
             self.seletedNumberButton.isHidden = false
         }
         guard let image = image else {
@@ -260,6 +278,7 @@ extension CLChatPhotoAlbumCell {
         }
         sendImageCallBack?(image)
     }
+
     private func backImageRecognizer(_ recognizer: UIPanGestureRecognizer) {
         guard let view = recognizer.view else {
             return
@@ -267,7 +286,7 @@ extension CLChatPhotoAlbumCell {
         let orginalCenter = contentView.convert(contentView.center, to: view.superview)
         tipsBackgroundView.isHidden = true
         UIView.animate(withDuration: 0.5, animations: {
-            view.snp.remakeConstraints { (make) in
+            view.snp.remakeConstraints { make in
                 make.width.height.equalTo(self.bounds.size)
                 make.center.equalTo(orginalCenter)
             }
@@ -276,7 +295,7 @@ extension CLChatPhotoAlbumCell {
         }) { _ in
             self.seletedNumberButton.isHidden = false
             self.contentView.insertSubview(view, at: 0)
-            view.snp.remakeConstraints { (make) in
+            view.snp.remakeConstraints { make in
                 make.width.height.equalToSuperview()
                 make.center.equalToSuperview()
             }

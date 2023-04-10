@@ -8,23 +8,23 @@
 import UIKit
 
 class CLHanziPinyinController: CLController {
+    @IBOutlet var inputTextField: UITextField!
 
-    @IBOutlet weak var inputTextField: UITextField!
-    
-    @IBOutlet weak var outputTextView: UITextView!
-    
-    @IBOutlet weak var pinyinButton: CLActivityButton!
-    
+    @IBOutlet var outputTextView: UITextView!
+
+    @IBOutlet var pinyinButton: CLActivityButton!
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 }
+
 extension CLHanziPinyinController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
+
     private func setupUI() {
         inputTextField.returnKeyType = .done
         inputTextField.placeholder = "请输入中文..."
@@ -34,6 +34,7 @@ extension CLHanziPinyinController {
         NotificationCenter.default.addObserver(self, selector: #selector(inputTextFieldTextChanged(_:)), name: UITextField.textDidChangeNotification, object: inputTextField)
     }
 }
+
 extension CLHanziPinyinController {
     @IBAction func pinyinAction(_ sender: Any) {
         guard let text = inputTextField.text else {
@@ -51,11 +52,12 @@ extension CLHanziPinyinController {
             self.pinyinButton.stopAnimating()
         }
     }
+
     @IBAction func newArchivedAction(_ sender: CLActivityButton) {
         outputTextView.text = nil
         sender.startAnimating()
         do {
-            self.outputTextView.text += "开始写入汉字拼音文件..."
+            outputTextView.text += "开始写入汉字拼音文件..."
             CLLog("开始写入多音字词组文件...")
             let path = "\(NSHomeDirectory())/hanyupinyin"
             guard let resourcePath = Bundle.main.path(forResource: "hanyupinyin.txt", ofType: nil) else { return }
@@ -68,15 +70,15 @@ extension CLHanziPinyinController {
             }
             let data = try NSKeyedArchiver.archivedData(withRootObject: pinyinTable, requiringSecureCoding: true)
             try data.write(to: URL(fileURLWithPath: path))
-            self.outputTextView.text += "\n\n写入汉字拼音文件 Success"
+            outputTextView.text += "\n\n写入汉字拼音文件 Success"
             CLLog("写入汉字拼音文件 Success\n文件地址：\(path)")
         } catch {
-            self.outputTextView.text += "\n\n写入汉字拼音文件 Error：\(error)"
+            outputTextView.text += "\n\n写入汉字拼音文件 Error：\(error)"
             CLLog("写入汉字拼音文件 Error：\(error)")
             sender.stopAnimating()
         }
         do {
-            self.outputTextView.text += "\n\n开始写入多音字词组文件..."
+            outputTextView.text += "\n\n开始写入多音字词组文件..."
             CLLog("开始写入多音字词组文件...")
             let path = "\(NSHomeDirectory())/sentencepinyin"
             guard let resourcePath = Bundle.main.path(forResource: "sentencepinyin.txt", ofType: nil) else { return }
@@ -89,24 +91,27 @@ extension CLHanziPinyinController {
             }
             let data = try NSKeyedArchiver.archivedData(withRootObject: pinyinTable, requiringSecureCoding: true)
             try data.write(to: URL(fileURLWithPath: path))
-            self.outputTextView.text += "\n\n写入多音字词组文件 Success"
+            outputTextView.text += "\n\n写入多音字词组文件 Success"
             CLLog("写入多音字词组文件 Success\n文件地址：\(path)")
         } catch {
-            self.outputTextView.text += "\n\n写入多音字词组文件 Error：\(error)"
+            outputTextView.text += "\n\n写入多音字词组文件 Error：\(error)"
             CLLog("写入多音字词组文件 Error：\(error)")
             sender.stopAnimating()
         }
         sender.stopAnimating()
     }
+
     @IBAction func dissmissAction(_ sender: Any) {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
 extension CLHanziPinyinController {
     @objc func inputTextFieldTextChanged(_ notification: Notification) {
         pinyinButton.isEnabled = (inputTextField.text?.count ?? 0) > 0
     }
 }
+
 extension CLHanziPinyinController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         inputTextField.resignFirstResponder()

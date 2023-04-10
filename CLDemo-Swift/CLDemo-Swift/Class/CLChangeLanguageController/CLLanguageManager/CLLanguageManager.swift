@@ -9,19 +9,19 @@ import UIKit
 
 extension CLLanguageManager {
     enum Language: String {
-        ///跟随系统
+        /// 跟随系统
         case system = ""
-        ///英文
+        /// 英文
         case english = "en"
-        ///简体中文
+        /// 简体中文
         case chineseSimplified = "zh-Hans"
     }
 }
 
 class CLLanguageManager: NSObject {
-    static let shared: CLLanguageManager = CLLanguageManager()
-    private (set) var bundle: Bundle = Bundle.main
-    private (set) var currentLanguage: Language = .system {
+    static let shared: CLLanguageManager = .init()
+    private(set) var bundle: Bundle = .main
+    private(set) var currentLanguage: Language = .system {
         didSet {
             if currentLanguage != oldValue {
                 if currentLanguage.rawValue.isEmpty {
@@ -37,22 +37,25 @@ class CLLanguageManager: NSObject {
             }
         }
     }
-    private override init() {
+
+    override private init() {
         super.init()
         defer {
             if let string = UserDefaults.standard.string(forKey: "UserLanguage"),
-               let language = Language(rawValue: string) {
+               let language = Language(rawValue: string)
+            {
                 self.currentLanguage = language
             }
         }
     }
 }
+
 extension CLLanguageManager {
-    ///设置用户自定义语言
+    /// 设置用户自定义语言
     static func setUserLanguage(_ language: Language) {
         UserDefaults.standard.setValue(language.rawValue, forKey: "UserLanguage")
         UserDefaults.standard.synchronize()
-        
+
         shared.currentLanguage = language
     }
 }

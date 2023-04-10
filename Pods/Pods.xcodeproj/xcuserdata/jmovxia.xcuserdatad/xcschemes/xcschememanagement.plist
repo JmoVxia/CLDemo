@@ -88,19 +88,26 @@
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>SwiftFormat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>TZImagePickerController.xcscheme</key>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>16</integer>
+		</dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>17</integer>
 		</dict>
 		<key>libwebp.xcscheme</key>
 		<dict>

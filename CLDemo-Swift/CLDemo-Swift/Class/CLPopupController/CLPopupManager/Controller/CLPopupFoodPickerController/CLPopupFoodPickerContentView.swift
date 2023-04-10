@@ -14,12 +14,13 @@ struct CLPopupFoodPickerContentModel {
 }
 
 class CLPopupFoodPickerContentView: UIView {
-    var selectedCallback: ((CLPopupFoodPickerContentModel) -> ())?
+    var selectedCallback: ((CLPopupFoodPickerContentModel) -> Void)?
     var dataArray = [CLPopupFoodPickerContentModel]() {
         didSet {
             tableView.reloadData()
         }
     }
+
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.dataSource = self
@@ -41,32 +42,38 @@ class CLPopupFoodPickerContentView: UIView {
         }
         return view
     }()
+
     var selectedTitle: String?
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLPopupFoodPickerContentView {
     private func initUI() {
         backgroundColor = .white
         addSubview(tableView)
     }
-    private func makeConstraints () {
-        tableView.snp.makeConstraints { (make) in
+
+    private func makeConstraints() {
+        tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
 }
+
 extension CLPopupFoodPickerContentView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CLPopupFoodPickerContentCell", for: indexPath) as! CLPopupFoodPickerContentCell
         let model = dataArray[indexPath.row]
@@ -75,6 +82,7 @@ extension CLPopupFoodPickerContentView: UITableViewDataSource {
         return cell
     }
 }
+
 extension CLPopupFoodPickerContentView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArray[indexPath.row]

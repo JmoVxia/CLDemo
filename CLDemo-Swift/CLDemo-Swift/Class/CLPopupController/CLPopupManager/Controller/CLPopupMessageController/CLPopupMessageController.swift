@@ -7,20 +7,19 @@
 
 import UIKit
 
-
 enum CLPopupMessageType {
-    ///一个按钮
+    /// 一个按钮
     case one
-    ///两个按钮
+    /// 两个按钮
     case two
 }
 
 class CLPopupMessageController: CLPopoverController {
     var type: CLPopupMessageType = .one
-    var sureCallBack: (() -> ())?
-    var leftCallBack: (() -> ())?
-    var rightCallBack: (() -> ())?
-    
+    var sureCallBack: (() -> Void)?
+    var leftCallBack: (() -> Void)?
+    var rightCallBack: (() -> Void)?
+
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = .init("0xc3c3c8")
@@ -29,16 +28,19 @@ class CLPopupMessageController: CLPopoverController {
         contentView.clipsToBounds = true
         return contentView
     }()
+
     private lazy var titleBackgroundView: UIView = {
         let titleBackgroundView = UIView()
         titleBackgroundView.backgroundColor = UIColor.white
         return titleBackgroundView
     }()
+
     private lazy var messageBackgroundView: UIView = {
         let messageBackgroundView = UIView()
         messageBackgroundView.backgroundColor = UIColor.white
         return messageBackgroundView
     }()
+
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.backgroundColor = UIColor.clear
@@ -48,6 +50,7 @@ class CLPopupMessageController: CLPopoverController {
         titleLabel.font = UIFont.systemFont(ofSize: 17)
         return titleLabel
     }()
+
     lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.backgroundColor = UIColor.clear
@@ -57,10 +60,11 @@ class CLPopupMessageController: CLPopoverController {
         messageLabel.font = UIFont.systemFont(ofSize: 13)
         return messageLabel
     }()
+
     lazy var sureButton: UIButton = {
         let sureButton = UIButton()
         sureButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
-        sureButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
+        sureButton.setBackgroundImage(.imageWithColor(UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1.00)), for: .highlighted)
         sureButton.setTitleColor(UIColor("0x007ee5"), for: .normal)
         sureButton.setTitleColor(UIColor("0x007ee5"), for: .selected)
         sureButton.setTitleColor(UIColor("0x007ee5"), for: .highlighted)
@@ -68,10 +72,11 @@ class CLPopupMessageController: CLPopoverController {
         sureButton.addTarget(self, action: #selector(sureButtonAction), for: .touchUpInside)
         return sureButton
     }()
+
     lazy var leftButton: UIButton = {
         let leftButton = UIButton()
         leftButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
-        leftButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
+        leftButton.setBackgroundImage(.imageWithColor(UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1.00)), for: .highlighted)
         leftButton.setTitleColor(UIColor("0x007ee5"), for: .normal)
         leftButton.setTitleColor(UIColor("0x007ee5"), for: .selected)
         leftButton.setTitleColor(UIColor("0x007ee5"), for: .highlighted)
@@ -79,10 +84,11 @@ class CLPopupMessageController: CLPopoverController {
         leftButton.addTarget(self, action: #selector(leftButtonAction), for: .touchUpInside)
         return leftButton
     }()
+
     lazy var rightButton: UIButton = {
         let rightButton = UIButton()
         rightButton.setBackgroundImage(.imageWithColor(UIColor.white), for: .normal)
-        rightButton.setBackgroundImage(.imageWithColor(UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)), for: .highlighted)
+        rightButton.setBackgroundImage(.imageWithColor(UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1.00)), for: .highlighted)
         rightButton.setTitleColor(UIColor("0x007ee5"), for: .normal)
         rightButton.setTitleColor(UIColor("0x007ee5"), for: .selected)
         rightButton.setTitleColor(UIColor("0x007ee5"), for: .highlighted)
@@ -91,6 +97,7 @@ class CLPopupMessageController: CLPopoverController {
         return rightButton
     }()
 }
+
 extension CLPopupMessageController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,9 +106,10 @@ extension CLPopupMessageController {
         showAnimation()
     }
 }
+
 extension CLPopupMessageController {
     private func initUI() {
-        view.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.00)
+        view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
         view.addSubview(contentView)
         contentView.addSubview(titleBackgroundView)
         contentView.addSubview(messageBackgroundView)
@@ -114,89 +122,95 @@ extension CLPopupMessageController {
         leftButton.isHidden = type == .one
         rightButton.isHidden = type == .one
     }
+
     private func makeConstraints() {
         let hasTitle: Bool = titleLabel.text != nil
         let hasMessage: Bool = messageLabel.text != nil
-        contentView.snp.makeConstraints { (make) in
+        contentView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalTo(270)
         }
-        titleBackgroundView.snp.makeConstraints { (make) in
+        titleBackgroundView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
         }
-        titleLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.top.equalToSuperview().offset(hasTitle ? 20 : 0)
             make.bottom.equalToSuperview().offset(hasTitle ? -20 : 0)
         }
-        messageBackgroundView.snp.makeConstraints { (make) in
+        messageBackgroundView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleBackgroundView.snp.bottom)
         }
-        messageLabel.snp.makeConstraints { (make) in
+        messageLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(hasMessage ? -20 : 0)
             make.top.equalToSuperview().offset((hasMessage && !hasTitle) ? 20 : 0)
         }
-        sureButton.snp.makeConstraints { (make) in
-            make.top.equalTo(messageBackgroundView.snp.bottom).offset(1/UIScreen.main.scale)
+        sureButton.snp.makeConstraints { make in
+            make.top.equalTo(messageBackgroundView.snp.bottom).offset(1 / UIScreen.main.scale)
             make.height.equalTo(44)
             make.left.right.bottom.equalToSuperview()
         }
-        leftButton.snp.makeConstraints { (make) in
-            make.top.equalTo(messageBackgroundView.snp.bottom).offset(1/UIScreen.main.scale)
+        leftButton.snp.makeConstraints { make in
+            make.top.equalTo(messageBackgroundView.snp.bottom).offset(1 / UIScreen.main.scale)
             make.height.equalTo(44)
-            make.width.equalTo((270 - 1/UIScreen.main.scale) * 0.5)
+            make.width.equalTo((270 - 1 / UIScreen.main.scale) * 0.5)
             make.left.bottom.equalToSuperview()
         }
-        rightButton.snp.makeConstraints { (make) in
-            make.top.equalTo(messageBackgroundView.snp.bottom).offset(1/UIScreen.main.scale)
+        rightButton.snp.makeConstraints { make in
+            make.top.equalTo(messageBackgroundView.snp.bottom).offset(1 / UIScreen.main.scale)
             make.height.equalTo(44)
-            make.width.equalTo((270 - 1/UIScreen.main.scale) * 0.5)
+            make.width.equalTo((270 - 1 / UIScreen.main.scale) * 0.5)
             make.right.bottom.equalToSuperview()
         }
     }
 }
+
 extension CLPopupMessageController {
     private func showAnimation() {
         UIView.animate(withDuration: 0.2) {
-            self.view.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.40)
+            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.40)
             self.contentView.alpha = 1.0
         }
         contentView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        UIView.animate(withDuration: 0.35, delay: 0.0, options: UIView.AnimationOptions(rawValue: UIView.AnimationOptions.RawValue(7<<16)), animations: {
+        UIView.animate(withDuration: 0.35, delay: 0.0, options: UIView.AnimationOptions(rawValue: UIView.AnimationOptions.RawValue(7 << 16)), animations: {
             self.contentView.transform = CGAffineTransform.identity
         }, completion: nil)
     }
+
     private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.view.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.00)
+            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
             self.contentView.alpha = 0.0
         }, completion: completion)
     }
 }
+
 extension CLPopupMessageController {
     @objc func sureButtonAction() {
-        dismissAnimation { (_) in
+        dismissAnimation { _ in
             self.hidden()
             self.sureCallBack?()
             self.sureCallBack = nil
         }
     }
+
     @objc func leftButtonAction() {
-        dismissAnimation { (_) in
+        dismissAnimation { _ in
             self.hidden()
             self.leftCallBack?()
-            self.leftCallBack = nil;
+            self.leftCallBack = nil
         }
     }
+
     @objc func rightButtonAction() {
-        dismissAnimation { (_) in
+        dismissAnimation { _ in
             self.hidden()
             self.rightCallBack?()
-            self.rightCallBack = nil;
+            self.rightCallBack = nil
         }
     }
 }

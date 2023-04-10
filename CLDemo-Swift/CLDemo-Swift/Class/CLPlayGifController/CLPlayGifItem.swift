@@ -10,7 +10,7 @@ import UIKit
 
 class CLPlayGifItem: NSObject {
     let path: String!
-    private (set) var size: CGSize = .zero
+    private(set) var size: CGSize = .zero
     init(path: String) {
         self.path = path
         guard let data = NSData(contentsOfFile: path),
@@ -22,10 +22,12 @@ class CLPlayGifItem: NSObject {
         size = calculateScaleSize(imageSize: CGSize(width: image.width, height: image.height))
     }
 }
+
 extension CLPlayGifItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
         return CLPlayGifCell.self
     }
+
     func cellHeight() -> CGFloat {
         return size.height + 60
     }

@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
+
 extension AppDelegate {
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return .all
     }
 }
-

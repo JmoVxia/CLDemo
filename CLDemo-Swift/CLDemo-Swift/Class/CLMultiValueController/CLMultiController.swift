@@ -25,19 +25,19 @@ class CLMultiController: CLController {
         view.spacing = 0
         return view
     }()
-    
+
     private lazy var topToolBar: UIView = {
         let view = UIView()
         return view
     }()
-    
+
     private lazy var titleScrollView: UIScrollView = {
         let view = UIScrollView()
         view.showsHorizontalScrollIndicator = false
         view.showsVerticalScrollIndicator = false
         return view
     }()
-    
+
     private lazy var titleStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -49,7 +49,7 @@ class CLMultiController: CLController {
         view.spacing = menuItemSpaceX
         return view
     }()
-    
+
     private lazy var tableViewScrollView: UIScrollView = {
         let view = UIScrollView()
         view.delegate = self
@@ -58,7 +58,7 @@ class CLMultiController: CLController {
         view.showsVerticalScrollIndicator = false
         return view
     }()
-    
+
     private lazy var tableViewStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -70,14 +70,14 @@ class CLMultiController: CLController {
         view.spacing = 0
         return view
     }()
-    
+
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "请选择所在地区"
         view.textColor = .black
         return view
     }()
-    
+
     private lazy var cancelButton: UIButton = {
         let view = UIButton()
         view.setTitle("取消", for: .normal)
@@ -86,30 +86,32 @@ class CLMultiController: CLController {
         view.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return view
     }()
-    
+
     var topToolBarHeight = 40.0
-    
+
     var titleViewHeight = 40.0
-    
+
     var menuItemSpaceX = 32.0
-    
+
     var viewHeight = screenHeight * 0.5
-    
+
     weak var dataSource: CLMultiDataSource?
-    
+
     private(set) var selectedIndexPath = [CLMultiIndexPath]()
-    
+
     private var lastSelectedButton: UIButton?
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         modalPresentationStyle = .overCurrentContext
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLMultiController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,10 +120,12 @@ extension CLMultiController {
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showAnimation()
     }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil, completion: { [weak self] _ in
@@ -130,6 +134,7 @@ extension CLMultiController {
         })
     }
 }
+
 extension CLMultiController {
     func initUI() {
         view.addSubview(contentView)
@@ -140,13 +145,14 @@ extension CLMultiController {
 
         topToolBar.addSubview(titleLabel)
         topToolBar.addSubview(cancelButton)
-        
+
         titleScrollView.addSubview(titleStackView)
         tableViewScrollView.addSubview(tableViewStackView)
-        
+
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(cancelAction))
 //        view.addGestureRecognizer(tap)
     }
+
     func makeConstraints() {
         contentView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -178,7 +184,7 @@ extension CLMultiController {
             make.height.equalToSuperview()
         }
     }
-    
+
     func showAnimation() {
         view.setNeedsLayout()
         view.layoutIfNeeded()
@@ -193,6 +199,7 @@ extension CLMultiController {
         }
     }
 }
+
 extension CLMultiController {
     func reload() {
         selectedIndexPath.removeAll()
@@ -200,6 +207,7 @@ extension CLMultiController {
         addPage()
     }
 }
+
 private extension CLMultiController {
     func addPage() {
         let column = titleStackView.arrangedSubviews.count
@@ -223,10 +231,10 @@ private extension CLMultiController {
         }
         clickTitleButton(titleButton)
     }
-    
+
     func deletePage(from column: Int) {
-        tableViewStackView.arrangedSubviews.enumerated().filter({ $0.offset >= column }).forEach({ $0.element.removeFromSuperview() })
-        titleStackView.arrangedSubviews.enumerated().filter({ $0.offset >= column }).forEach({ $0.element.removeFromSuperview() })
+        tableViewStackView.arrangedSubviews.enumerated().filter { $0.offset >= column }.forEach { $0.element.removeFromSuperview() }
+        titleStackView.arrangedSubviews.enumerated().filter { $0.offset >= column }.forEach { $0.element.removeFromSuperview() }
     }
 
     func resetOffset() {
@@ -235,7 +243,7 @@ private extension CLMultiController {
         titleScrollView.layoutIfNeeded()
         let visibleRect = CGRect(origin: .init(x: button.frame.minX, y: 0), size: titleScrollView.bounds.size)
         titleScrollView.scrollRectToVisible(visibleRect, animated: false)
-        
+
         let index = CGFloat(button.tag)
         tableViewScrollView.setContentOffset(.init(x: view.bounds.width * index, y: .zero), animated: false)
         lastSelectedButton?.isSelected = false
@@ -243,8 +251,9 @@ private extension CLMultiController {
         button.isSelected = true
     }
 }
+
 @objc extension CLMultiController {
-     func cancelAction() {
+    func cancelAction() {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
@@ -261,14 +270,15 @@ private extension CLMultiController {
             self.dismiss(animated: false)
         }
     }
+
     func clickTitleButton(_ button: UIButton) {
         guard button != lastSelectedButton else { return }
-        
+
         titleScrollView.setNeedsLayout()
         titleScrollView.layoutIfNeeded()
         let visibleRect = CGRect(origin: .init(x: button.frame.minX, y: 0), size: titleScrollView.bounds.size)
         titleScrollView.scrollRectToVisible(visibleRect, animated: true)
-        
+
         let index = CGFloat(button.tag)
         tableViewScrollView.setContentOffset(.init(x: view.bounds.width * index, y: .zero), animated: true)
         lastSelectedButton?.isSelected = false
@@ -276,34 +286,36 @@ private extension CLMultiController {
         button.isSelected = true
     }
 }
+
 extension CLMultiController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let index = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return .zero }
         return dataSource?.multiController(self, numberOfItemsInColumn: index) ?? .zero
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let dataSource = dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return UITableViewCell() }
         let currentIndexPath = CLMultiIndexPath(indexPath: indexPath, column: column)
         return dataSource.multiController(self, tableView: tableView, cellForRowAt: currentIndexPath)
     }
 }
+
 extension CLMultiController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let dataSource = dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return }
-        
+
         selectedIndexPath.removeAll(where: { $0.column >= column })
 
         let currentIndexPath = CLMultiIndexPath(indexPath: indexPath, column: column)
-        
+
         let isAlreadySelected = selectedIndexPath.contains(currentIndexPath)
-        
+
         selectedIndexPath.append(currentIndexPath)
 
         guard dataSource.multiController(self, isCompletedAt: currentIndexPath) else { return cancelAction() }
-        
+
         lastSelectedButton?.setTitle(dataSource.multiController(self, didSelectRowAt: currentIndexPath), for: .normal)
-        
+
         if isAlreadySelected {
             guard let button = titleStackView.arrangedSubviews[safe: column + 1] as? UIButton else { return }
             clickTitleButton(button)
@@ -313,10 +325,11 @@ extension CLMultiController: UITableViewDelegate {
         }
     }
 }
-extension CLMultiController: UIScrollViewDelegate{
+
+extension CLMultiController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard scrollView == tableViewScrollView else { return }
-        let index = Int(tableViewScrollView.contentOffset.x / tableViewScrollView.bounds.width);
+        let index = Int(tableViewScrollView.contentOffset.x / tableViewScrollView.bounds.width)
         guard let button = titleStackView.arrangedSubviews[safe: index] as? UIButton else { return }
         clickTitleButton(button)
     }

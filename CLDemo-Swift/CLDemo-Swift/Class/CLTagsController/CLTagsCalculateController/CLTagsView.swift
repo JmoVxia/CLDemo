@@ -11,12 +11,13 @@ import UIKit
 class CLTagsView: UIView {
     var tagsMinPadding: CGFloat = 0.0 {
         didSet {
-            label.snp.updateConstraints { (make) in
+            label.snp.updateConstraints { make in
                 make.left.equalTo(tagsMinPadding)
                 make.right.equalTo(-tagsMinPadding)
             }
         }
     }
+
     lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -24,6 +25,7 @@ class CLTagsView: UIView {
         label.backgroundColor = UIColor.white
         return label
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.borderWidth = 1
@@ -31,13 +33,15 @@ class CLTagsView: UIView {
         layer.cornerRadius = 4
         layer.masksToBounds = true
         addSubview(label)
-        label.snp.makeConstraints { (make) in
+        label.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.top.bottom.equalToSuperview()
             make.left.equalTo(5)
             make.right.equalTo(-5)
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

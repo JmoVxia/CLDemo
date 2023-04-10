@@ -7,16 +7,20 @@
 
 import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLMultiCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubViews()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     private lazy var mainStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -28,6 +32,7 @@ class CLMultiCell: UITableViewCell {
         view.spacing = 5
         return view
     }()
+
     private(set) lazy var titleButton: UIButton = {
         let view = UIButton()
         view.isUserInteractionEnabled = false
@@ -37,16 +42,17 @@ class CLMultiCell: UITableViewCell {
         view.contentHorizontalAlignment = .left
         return view
     }()
+
     private lazy var iconImageView: UIImageView = {
         let view = UIImageView()
         view.isHidden = true
         view.image = .init(named: "selectIcon")
         return view
     }()
-
-
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLMultiCell {
     func initSubViews() {
         selectionStyle = .none
@@ -54,13 +60,16 @@ private extension CLMultiCell {
         mainStackView.addArrangedSubview(titleButton)
         mainStackView.addArrangedSubview(iconImageView)
     }
+
     func makeConstraints() {
         mainStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
 }
-//MARK: - JmoVxia---override
+
+// MARK: - JmoVxia---override
+
 extension CLMultiCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -68,12 +77,15 @@ extension CLMultiCell {
         iconImageView.isHidden = !selected
     }
 }
-//MARK: - JmoVxia---objc
-@objc private extension CLMultiCell {
-}
-//MARK: - JmoVxia---私有方法
-private extension CLMultiCell {
-}
-//MARK: - JmoVxia---公共方法
-extension CLMultiCell {
-}
+
+// MARK: - JmoVxia---objc
+
+@objc private extension CLMultiCell {}
+
+// MARK: - JmoVxia---私有方法
+
+private extension CLMultiCell {}
+
+// MARK: - JmoVxia---公共方法
+
+extension CLMultiCell {}

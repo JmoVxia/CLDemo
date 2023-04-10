@@ -11,13 +11,13 @@ import UIKit
 class CLDrawerSlideAnimation: NSObject {
     var isPresenting: Bool = true
 }
+
 extension CLDrawerSlideAnimation: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-
         let key: UITransitionContextViewControllerKey = isPresenting ? .to : .from
         guard let presentedController = transitionContext.viewController(forKey: key) else {
             return
@@ -41,7 +41,7 @@ extension CLDrawerSlideAnimation: UIViewControllerAnimatedTransitioning {
 
         UIView.animate(withDuration: duration) {
             presentedController.view.frame = toFrame
-        } completion: { (_) in
+        } completion: { _ in
             transitionContext.completeTransition(!wasCancelled)
         }
     }

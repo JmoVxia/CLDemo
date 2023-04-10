@@ -9,12 +9,13 @@
 import UIKit
 
 class CLPopupFoodPickerController: CLPopoverController {
-    var selectedCallback: ((String, String, String, String)->())?
+    var selectedCallback: ((String, String, String, String) -> Void)?
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()
         topToolBar.backgroundColor = .init("#F8F6F9")
         return topToolBar
     }()
+
     lazy var cancelButton: UIButton = {
         let cancelButton = UIButton()
         cancelButton.titleLabel?.font = .mediumPingFangSC(14)
@@ -27,6 +28,7 @@ class CLPopupFoodPickerController: CLPopoverController {
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return cancelButton
     }()
+
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "选择饮食"
@@ -34,21 +36,24 @@ class CLPopupFoodPickerController: CLPopoverController {
         view.textColor = .init("#666666")
         return view
     }()
+
     lazy var foodPicker: CLPopupFoodPickerView = {
         let view = CLPopupFoodPickerView(frame: CGRect(x: 0, y: 50, width: screenWidth, height: 302.5))
         view.backgroundColor = .white
-        view.selectedCallback = {[weak self] (value1, value2, value3, foodId)in
+        view.selectedCallback = { [weak self] value1, value2, value3, foodId in
             self?.selectedCallback?(value1, value2, value3, foodId)
             self?.dismissAnimation()
         }
         return view
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         showAnimation()
     }
 }
+
 extension CLPopupFoodPickerController {
     func initUI() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
@@ -58,14 +63,15 @@ extension CLPopupFoodPickerController {
         view.addSubview(foodPicker)
     }
 }
+
 extension CLPopupFoodPickerController {
     func showAnimation() {
-        topToolBar.snp.makeConstraints { (make) in
+        topToolBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(50)
             make.top.equalTo(view.snp.bottom)
         }
-        cancelButton.snp.makeConstraints { (make) in
+        cancelButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             if #available(iOS 11.0, *) {
                 make.left.equalTo(view.safeAreaLayoutGuide).offset(15)
@@ -73,17 +79,17 @@ extension CLPopupFoodPickerController {
                 make.left.equalTo(15)
             }
         }
-        titleLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        foodPicker.snp.makeConstraints { (make) in
+        foodPicker.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(topToolBar.snp.bottom)
             make.height.equalTo(302.5)
         }
         view.setNeedsLayout()
         view.layoutIfNeeded()
-        topToolBar.snp.updateConstraints { (make) in
+        topToolBar.snp.updateConstraints { make in
             make.top.equalTo(view.snp.bottom).offset(-50 - 302.5)
         }
         UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
@@ -92,24 +98,27 @@ extension CLPopupFoodPickerController {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
+
     func dismissAnimation() {
-        topToolBar.snp.updateConstraints { (make) in
+        topToolBar.snp.updateConstraints { make in
             make.top.equalTo(view.snp.bottom)
         }
         UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
-        }) { (_) in
+        }) { _ in
             self.hidden()
         }
     }
 }
+
 extension CLPopupFoodPickerController {
     @objc func cancelAction() {
         dismissAnimation()
     }
 }
+
 extension CLPopupFoodPickerController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

@@ -17,31 +17,38 @@ class CLHistogramCell: UITableViewCell {
         var total: NSDecimalNumber {
             return morning.adding(noon).adding(night).adding(additional)
         }
+
         var isMorningNomal: Bool {
             return morning.lessThan(1.0)
         }
+
         var isNoonNomal: Bool {
             return morning.adding(noon).lessThan(1.0)
         }
+
         var isNightNomal: Bool {
             return morning.adding(noon).adding(night).lessThan(1.0)
         }
+
         var isAdditionalNomal: Bool {
             return morning.adding(noon).adding(night).adding(additional).lessThan(1.0)
         }
     }
-    var item: CLHistogramItem = CLHistogramItem() {
+
+    var item: CLHistogramItem = .init() {
         didSet {
             if oldValue.morning != item.morning ||
-               oldValue.noon != item.noon ||
-               oldValue.night != item.night ||
-               oldValue.additional != item.additional {
+                oldValue.noon != item.noon ||
+                oldValue.night != item.night ||
+                oldValue.additional != item.additional
+            {
                 DispatchQueue.main.async {
                     self.drawLayer()
                 }
             }
         }
     }
+
     var name: String = "" {
         didSet {
             if oldValue != name {
@@ -49,7 +56,7 @@ class CLHistogramCell: UITableViewCell {
             }
         }
     }
-    
+
     private var maxValue: CGFloat = 1.8
     private var leftRightEdge: CGFloat = 60
     private var middleSpace: CGFloat = 10
@@ -62,6 +69,7 @@ class CLHistogramCell: UITableViewCell {
         view.textAlignment = .right
         return view
     }()
+
     private lazy var backgroundLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.cornerRadius = cornerRadius
@@ -70,60 +78,70 @@ class CLHistogramCell: UITableViewCell {
         layer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
         return layer
     }()
+
     private lazy var animationLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.anchorPoint = CGPoint(x: 0, y: 0.5)
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var morningLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor("#ADE1D0").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var noonLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor("#79C9AE").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var nightLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor("#3B9778").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var additionalLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor("#20BC88").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var exceedLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor("#F57629").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var seriousExceedLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor("#BE0909").cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var oneThirdLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.backgroundColor = UIColor.red.cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var twoThirdLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.backgroundColor = UIColor.red.cgColor
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
+
     private lazy var springAnimation: CASpringAnimation = {
         let animation = CASpringAnimation(keyPath: "transform.scale.x")
         animation.mass = 0.6
@@ -136,15 +154,19 @@ class CLHistogramCell: UITableViewCell {
         animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.6, 0.1, 0.30, 0.90)
         return animation
     }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLHistogramCell {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -163,6 +185,7 @@ extension CLHistogramCell {
         twoThirdLayer.frame = CGRect(x: width * 1.0 / maxValue * 2.0 / 3.0, y: layerHeight - 5, width: 1, height: 5)
     }
 }
+
 private extension CLHistogramCell {
     func initUI() {
         selectionStyle = .none
@@ -179,21 +202,23 @@ private extension CLHistogramCell {
         animationLayer.addSublayer(oneThirdLayer)
         animationLayer.addSublayer(twoThirdLayer)
     }
+
     func makeConstraints() {
-        nameLabel.snp.makeConstraints { (make) in
+        nameLabel.snp.makeConstraints { make in
             make.width.equalTo(leftRightEdge)
             make.left.centerY.equalToSuperview()
         }
     }
 }
+
 private extension CLHistogramCell {
     func drawLayer() {
         let width = (bounds.width - (leftRightEdge + middleSpace) * 2) * 1.0 / maxValue
-        
+
         let morningRadius: CGFloat = (item.isMorningNomal && item.morning.moreThan(0.0) && (item.noon.adding(item.night).adding(item.additional)) == 0.0) ? cornerRadius : 0
         let morningWidth = width * CGFloat(min(item.morning.floatValue, 1.0))
         morningLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: morningRadius, bottomLeft: 0, bottomRight: morningRadius), width: morningWidth, height: layerHeight).cgPath
-        
+
         let noonRadius: CGFloat = (item.isNoonNomal && item.noon.moreThan(0.0) && (item.night.adding(item.additional)) == 0.0) ? cornerRadius : 0
         let noonWidth = width * CGFloat(min(item.morning.adding(item.noon).floatValue, 1.0))
         noonLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: noonRadius, bottomLeft: 0, bottomRight: noonRadius), edgeInsets: UIEdgeInsets(top: 0, left: morningWidth, bottom: 0, right: 0), width: noonWidth, height: layerHeight).cgPath
@@ -205,7 +230,7 @@ private extension CLHistogramCell {
         let additionalRadius: CGFloat = (item.isAdditionalNomal && item.additional.moreThan(0.0)) ? cornerRadius : 0
         let additionalWidth = width * CGFloat(min(item.total.floatValue, 1.0))
         additionalLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: additionalRadius, bottomLeft: 0, bottomRight: additionalRadius), edgeInsets: UIEdgeInsets(top: 0, left: nightWidth, bottom: 0, right: 0), width: additionalWidth, height: layerHeight).cgPath
-        
+
         let exceedRadius: CGFloat = (item.total.lessThan(1.5) && item.total.moreThan(1.0)) ? cornerRadius : 0
         let exceedWidth = width * CGFloat(min(item.total.floatValue, 1.5))
         exceedLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: exceedRadius, bottomLeft: 0, bottomRight: exceedRadius), edgeInsets: UIEdgeInsets(top: 0, left: additionalWidth, bottom: 0, right: 0), width: exceedWidth, height: layerHeight).cgPath
@@ -213,7 +238,7 @@ private extension CLHistogramCell {
         let seriousExceedRadius: CGFloat = item.total.moreThan(1.5) ? cornerRadius : 0
         let seriousExceedWidth = width * CGFloat(min(item.total.floatValue, 1.8))
         seriousExceedLayer.path = UIBezierPath(radius: .init(topLeft: 0, topRight: seriousExceedRadius, bottomLeft: 0, bottomRight: seriousExceedRadius), edgeInsets: UIEdgeInsets(top: 0, left: exceedWidth, bottom: 0, right: 0), width: seriousExceedWidth, height: layerHeight).cgPath
-        
+
         animationLayer.add(springAnimation, forKey: "springAnimation")
     }
 }

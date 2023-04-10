@@ -6,48 +6,51 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
-import UIKit
 import AVFoundation
-import UserNotifications
-import Photos
-import MapKit
-import EventKit
 import Contacts
-import Speech
-import MediaPlayer
-import HealthKit
 import CoreMotion
+import EventKit
+import HealthKit
+import MapKit
+import MediaPlayer
+import Photos
+import Speech
+import UIKit
+import UserNotifications
 
 class CLPermissions: NSObject {
     enum CLPermissionType: Int {
-        ///相机
+        /// 相机
         case camera = 0
-        ///相册
+        /// 相册
         case photoLibrary = 1
-        ///麦克风
+        /// 麦克风
         case microphone = 2
     }
-    ///是否允许权限
+
+    /// 是否允许权限
     class func isAllowed(_ permission: CLPermissionType) -> Bool {
         let manager = getManagerForPermission(permission)
         return manager.isAuthorized
     }
-    ///是否拒绝权限
+
+    /// 是否拒绝权限
     class func isDenied(_ permission: CLPermissionType) -> Bool {
         let manager = getManagerForPermission(permission)
         return manager.isDenied
     }
-    ///请求权限
-    class func request(_ permission: CLPermissionType, with сompletionCallback: ((CLAuthorizationStatus)->())? = nil) {
+
+    /// 请求权限
+    class func request(_ permission: CLPermissionType, with сompletionCallback: ((CLAuthorizationStatus) -> Void)? = nil) {
         let manager = getManagerForPermission(permission)
-        manager.request { (status) in
+        manager.request { status in
             DispatchQueue.main.async {
                 сompletionCallback?(status)
             }
         }
     }
 }
+
 extension CLPermissions {
     private class func getManagerForPermission(_ permission: CLPermissionType) -> CLPermissionInterface {
         switch permission {

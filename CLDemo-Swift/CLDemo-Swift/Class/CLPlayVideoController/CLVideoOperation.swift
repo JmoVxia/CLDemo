@@ -6,11 +6,11 @@
 //  Copyright © 2021 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class CLVideoOperation: Operation {
-    var imageCallback: ((CGImage, String) -> ())?
+    var imageCallback: ((CGImage, String) -> Void)?
     private var path: String!
     private var taskFinished: Bool = true {
         willSet {
@@ -24,6 +24,7 @@ class CLVideoOperation: Operation {
             }
         }
     }
+
     private var taskExecuting: Bool = false {
         willSet {
             if taskExecuting != newValue {
@@ -36,31 +37,37 @@ class CLVideoOperation: Operation {
             }
         }
     }
+
     override var isFinished: Bool {
         return taskFinished
     }
+
     override var isExecuting: Bool {
         return taskExecuting
     }
+
     override var isAsynchronous: Bool {
         return true
     }
-    init(path: String, imageCallback: @escaping ((CGImage, String) -> ())) {
+
+    init(path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
         self.path = path
         self.imageCallback = imageCallback
         super.init()
     }
+
     deinit {
 //        CLLog("CLVideoOperation deinit")
     }
 }
+
 extension CLVideoOperation {
     override func start() {
         autoreleasepool {
             if isCancelled {
                 taskFinished = true
                 taskExecuting = false
-            }else {
+            } else {
                 taskFinished = false
                 taskExecuting = true
                 startTask {
@@ -70,16 +77,18 @@ extension CLVideoOperation {
             }
         }
     }
+
     override func cancel() {
-        if (isExecuting) {
+        if isExecuting {
             taskFinished = true
             taskExecuting = false
         }
         super.cancel()
     }
 }
+
 extension CLVideoOperation {
-    private func startTask(_ complete: (() -> ())) {
+    private func startTask(_ complete: () -> Void) {
         defer {
             complete()
         }
@@ -93,8 +102,8 @@ extension CLVideoOperation {
             return
         }
         let orientation = orientation(from: videoTrack)
-        let videoReaderTrackOptput = AVAssetReaderTrackOutput(track: videoTrack, outputSettings: [kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA])
-        
+        let videoReaderTrackOptput = AVAssetReaderTrackOutput(track: videoTrack, outputSettings: [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA])
+
         assetReader.add(videoReaderTrackOptput)
         assetReader.startReading()
 
@@ -113,6 +122,7 @@ extension CLVideoOperation {
         assetReader.cancelReading()
     }
 }
+
 extension CLVideoOperation {
     private func image(from sampleBuffer: CMSampleBuffer, orientation: UIImage.Orientation) -> CGImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
@@ -127,10 +137,11 @@ extension CLVideoOperation {
         guard let cgImage = context.makeImage() else { return nil }
         if orientation == .up {
             return cgImage
-        }else {
+        } else {
             return fixImage(cgImage, orientation: orientation)
         }
     }
+
     private func orientation(from videoTrack: AVAssetTrack) -> UIImage.Orientation {
         var orientation: UIImage.Orientation = .up
         let track = videoTrack.preferredTransform
@@ -145,6 +156,7 @@ extension CLVideoOperation {
         }
         return orientation
     }
+
     private func fixImage(_ image: CGImage, orientation: UIImage.Orientation) -> CGImage {
         var rect: CGRect
         var rotate: CGFloat = 0
@@ -155,30 +167,30 @@ extension CLVideoOperation {
 
         let size = CGSize(width: CGFloat(image.width), height: CGFloat(image.height))
         switch orientation {
-            case .left:
-                rotate = .pi * 0.5
-                rect = CGRect(x: 0, y: 0, width: size.height, height: size.width)
-                translateX = 0
-                translateY = -rect.width
-                scaleY = rect.width / rect.height
-                scaleX = rect.height / rect.width
-            case .right:
-                rotate = 1.5 * .pi
-                rect = CGRect(x: 0, y: 0, width: size.height, height: size.width)
-                translateX = -rect.height
-                translateY = 0
-                scaleY = rect.width / rect.height
-                scaleX = rect.height / rect.width
-            case .down:
-                rotate = .pi
-                rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-                translateX = -rect.width
-                translateY = -rect.height
-            default:
-                rotate = 0.0
-                rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-                translateX = 0
-                translateY = 0
+        case .left:
+            rotate = .pi * 0.5
+            rect = CGRect(x: 0, y: 0, width: size.height, height: size.width)
+            translateX = 0
+            translateY = -rect.width
+            scaleY = rect.width / rect.height
+            scaleX = rect.height / rect.width
+        case .right:
+            rotate = 1.5 * .pi
+            rect = CGRect(x: 0, y: 0, width: size.height, height: size.width)
+            translateX = -rect.height
+            translateY = 0
+            scaleY = rect.width / rect.height
+            scaleX = rect.height / rect.width
+        case .down:
+            rotate = .pi
+            rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            translateX = -rect.width
+            translateY = -rect.height
+        default:
+            rotate = 0.0
+            rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            translateX = 0
+            translateY = 0
         }
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -192,7 +204,7 @@ extension CLVideoOperation {
         UIGraphicsEndImageContext()
         if let cgImage = cgImage {
             return cgImage
-        }else {
+        } else {
             return image
         }
     }

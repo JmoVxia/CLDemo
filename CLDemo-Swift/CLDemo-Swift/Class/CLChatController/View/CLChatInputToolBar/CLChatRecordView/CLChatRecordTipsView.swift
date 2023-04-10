@@ -15,6 +15,7 @@ class CLChatRecordTipsView: UIView {
             tipsLabel.text = isCanSend ? "松手发送 滑动取消" : "松手取消"
         }
     }
+
     private lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.font = .mediumPingFangSC(15)
@@ -23,13 +24,16 @@ class CLChatRecordTipsView: UIView {
         view.textAlignment = .center
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(tipsLabel)
-        tipsLabel.snp.makeConstraints { (make) in
+        tipsLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

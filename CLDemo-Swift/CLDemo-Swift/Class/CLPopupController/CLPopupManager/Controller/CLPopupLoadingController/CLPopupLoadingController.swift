@@ -6,8 +6,8 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import Lottie
+import UIKit
 
 class CLPopupLoadingController: CLPopoverController {
     private lazy var backgroundView: UIView = {
@@ -17,24 +17,26 @@ class CLPopupLoadingController: CLPopoverController {
         view.clipsToBounds = true
         return view
     }()
+
     private lazy var loadingView: LottieAnimationView = {
-        let view = LottieAnimationView.init(name: "loading")
+        let view = LottieAnimationView(name: "loading")
         view.backgroundBehavior = .pauseAndRestore
         view.loopMode = .loop
         view.play()
         return view
     }()
 }
+
 extension CLPopupLoadingController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(backgroundView)
         backgroundView.addSubview(loadingView)
-        backgroundView.snp.makeConstraints { (make) in
+        backgroundView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(65)
         }
-        loadingView.snp.makeConstraints { (make) in
+        loadingView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(55)
         }

@@ -5,21 +5,23 @@
 //  Created by Chen JmoVxia on 2022/2/14.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
+// MARK: - JmoVxia---类-属性
 
-//MARK: - JmoVxia---类-属性
 class CLGrayscaleController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    deinit {
-    }
-        
+
+    deinit {}
+
     let image = UIImage(named: "sss")
 
     private lazy var imageView: UIImageView = {
@@ -28,7 +30,7 @@ class CLGrayscaleController: CLController {
         view.image = image
         return view
     }()
-    
+
     private lazy var averageButton: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -41,6 +43,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var rec601Button: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -52,6 +55,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var rec709Button: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -63,6 +67,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var rec2001Button: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -74,6 +79,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var maxButton: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -85,6 +91,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var minButton: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -96,6 +103,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var redButton: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -107,6 +115,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var greenButton: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -118,6 +127,7 @@ class CLGrayscaleController: CLController {
         view.addTarget(self, action: #selector(clickButton(_:)), for: .touchUpInside)
         return view
     }()
+
     private lazy var blueButton: UIButton = {
         let view = UIButton()
         view.clipsToBounds = true
@@ -130,31 +140,40 @@ class CLGrayscaleController: CLController {
         return view
     }()
 }
-//MARK: - JmoVxia---生命周期
+
+// MARK: - JmoVxia---生命周期
+
 extension CLGrayscaleController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         makeConstraints()
         initData()
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLGrayscaleController {
     func initUI() {
         view.addSubview(imageView)
@@ -222,15 +241,19 @@ private extension CLGrayscaleController {
         }
     }
 }
-//MARK: - JmoVxia---数据
+
+// MARK: - JmoVxia---数据
+
 private extension CLGrayscaleController {
-    func initData() {
-    }
+    func initData() {}
 }
-//MARK: - JmoVxia---override
-extension CLGrayscaleController {
-}
-//MARK: - JmoVxia---objc
+
+// MARK: - JmoVxia---override
+
+extension CLGrayscaleController {}
+
+// MARK: - JmoVxia---objc
+
 @objc private extension CLGrayscaleController {
     func clickButton(_ button: UIButton) {
         switch button {
@@ -257,9 +280,11 @@ extension CLGrayscaleController {
         }
     }
 }
-//MARK: - JmoVxia---私有方法
-private extension CLGrayscaleController {
-}
-//MARK: - JmoVxia---公共方法
-extension CLGrayscaleController {
-}
+
+// MARK: - JmoVxia---私有方法
+
+private extension CLGrayscaleController {}
+
+// MARK: - JmoVxia---公共方法
+
+extension CLGrayscaleController {}

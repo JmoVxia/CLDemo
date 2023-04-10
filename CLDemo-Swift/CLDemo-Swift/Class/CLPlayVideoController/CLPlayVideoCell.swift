@@ -6,8 +6,8 @@
 //  Copyright © 2021 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class CLPlayVideoCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
@@ -17,10 +17,12 @@ class CLPlayVideoCell: UITableViewCell {
         view.textAlignment = .left
         return view
     }()
+
     lazy var animageView: UIView = {
         let view = UIView()
         return view
     }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -37,17 +39,20 @@ class CLPlayVideoCell: UITableViewCell {
             make.size.equalTo(0)
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLPlayVideoCell: CLRowProtocol {
     func setItem(_ item: CLPlayVideoitem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)
         }
-        CLVideoPlayer.startPlay(item.path) { image, imagePath  in
+        CLVideoPlayer.startPlay(item.path) { image, imagePath in
             self.animageView.layer.contents = image
         }
     }

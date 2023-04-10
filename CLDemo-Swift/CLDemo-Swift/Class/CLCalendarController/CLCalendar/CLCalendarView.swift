@@ -79,6 +79,7 @@ class CLCalendarView: UIView {
 
     init(frame: CGRect = .zero, config: CLCalendarConfig = CLCalendarConfig()) {
         super.init(frame: frame)
+        self.config = config
         configUI()
         makeConstraints()
         initDataSource()
@@ -93,6 +94,7 @@ class CLCalendarView: UIView {
 extension CLCalendarView {
     func configUI() {
         backgroundColor = config.color.background
+        mainStackView.layoutMargins = config.layoutMargins
         mainStackView.insetsLayoutMarginsFromSafeArea = config.insetsLayoutMarginsFromSafeArea
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(topStackView)
@@ -113,7 +115,7 @@ extension CLCalendarView {
             make.edges.equalToSuperview()
         }
         topStackView.snp.makeConstraints { make in
-            make.height.equalTo(40)
+            make.height.equalTo(35)
         }
     }
 }
@@ -195,7 +197,10 @@ extension CLCalendarView {
                 let maxWidth = width - minimumDifference
                 let cellWidth = maxWidth / CGFloat(self.weekArray.count)
                 self.itemSize = CGSize(width: cellWidth, height: cellWidth)
-                self.mainStackView.layoutMargins = .init(top: 0, left: CGFloat(minimumDifference) * 0.5, bottom: 0, right: CGFloat(minimumDifference) * 0.5)
+                self.mainStackView.layoutMargins = .init(top: self.config.layoutMargins.top,
+                                                         left: self.config.layoutMargins.left + CGFloat(minimumDifference) * 0.5,
+                                                         bottom: self.config.layoutMargins.bottom,
+                                                         right: self.config.layoutMargins.right + CGFloat(minimumDifference) * 0.5)
                 self.monthsArray = tempDataArray
                 scrollToStartIndexPath()
             }
@@ -215,6 +220,7 @@ extension CLCalendarView: CLCalendarDelegateFlowLayout {
         if kind == UICollectionView.elementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CLCalendarHeadView.reuseIdentifier, for: indexPath) as! CLCalendarHeadView
             headerView.titleLabel.text = monthsArray[indexPath.section].headerText
+            headerView.titleLabel.textColor = config.color.headerTextColor
             return headerView
         }
         return UICollectionReusableView(frame: .zero)
@@ -225,16 +231,14 @@ extension CLCalendarView: CLCalendarDelegateFlowLayout {
         let calendarItem = headerItem.daysArray[indexPath.row]
         guard let date = calendarItem.date else { return }
         func reloadDate() {
+            defer {
+                delegate?.didSelectDate(date: date, in: self)
+            }
             if config.selectType == .single {
                 beginDate = date
-                delegate?.didSelectSingle(date: date, in: self)
             } else {
                 guard let start = beginDate else { return beginDate = date }
-                guard endDate != nil || date < start else {
-                    endDate = date
-                    delegate?.didSelectArea(begin: start, end: date, in: self)
-                    return
-                }
+                guard endDate != nil || date < start else { return endDate = date }
                 beginDate = date
                 endDate = nil
             }

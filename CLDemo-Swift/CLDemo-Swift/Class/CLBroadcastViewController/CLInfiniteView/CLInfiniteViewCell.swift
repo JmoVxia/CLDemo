@@ -15,14 +15,16 @@ class CLInfiniteViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.red.withAlphaComponent(0.35)
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(label)
-        label.snp.makeConstraints { (make) in
+        label.snp.makeConstraints { make in
             make.edges.equalTo(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         }
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

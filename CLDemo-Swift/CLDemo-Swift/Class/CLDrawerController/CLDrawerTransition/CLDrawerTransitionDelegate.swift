@@ -11,6 +11,7 @@ import UIKit
 class CLDrawerTransitionDelegate: NSObject {
     let slideAnimation = CLDrawerSlideAnimation()
 }
+
 extension CLDrawerTransitionDelegate: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return CLDrawerPresentationController(presentedViewController: presented, presenting: presenting)

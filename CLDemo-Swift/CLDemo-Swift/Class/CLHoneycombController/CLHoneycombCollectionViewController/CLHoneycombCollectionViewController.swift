@@ -5,19 +5,23 @@
 //  Created by Chen JmoVxia on 2021/8/13.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLHoneycombCollectionViewController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    deinit {
-    }
+
+    deinit {}
+
     private lazy var collectionView: UICollectionView = {
         let layout = CLHoneycombLayout()
         layout.itemsPerRow = 4
@@ -32,30 +36,39 @@ class CLHoneycombCollectionViewController: CLController {
         return view
     }()
 }
-//MARK: - JmoVxia---生命周期
+
+// MARK: - JmoVxia---生命周期
+
 extension CLHoneycombCollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         makeConstraints()
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLHoneycombCollectionViewController {
     func initUI() {
         updateTitleLabel { label in
@@ -64,26 +77,31 @@ private extension CLHoneycombCollectionViewController {
         view.backgroundColor = .init("#93DAAE")
         view.addSubview(collectionView)
     }
+
     func makeConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
 }
+
 extension CLHoneycombCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CLHoneycombCollectionViewCell", for: indexPath)
         (cell as? CLHoneycombCollectionViewCell)?.imageView.image = UIImage(named: "Hexagon-\(indexPath.row % 30 + 1)")
         return cell
     }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 210
     }
 }
+
 extension CLHoneycombCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? CLHoneycombCollectionViewCell)?.animation()
     }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("===== \(indexPath.row) =====")
     }

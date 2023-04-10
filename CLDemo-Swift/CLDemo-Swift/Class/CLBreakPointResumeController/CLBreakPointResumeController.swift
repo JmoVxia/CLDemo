@@ -13,6 +13,7 @@ class CLBreakPointResumeController: CLController {
         let hepler = CLTableViewHepler()
         return hepler
     }()
+
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.dataSource = tableViewHepler

@@ -8,17 +8,20 @@
 
 import UIKit
 
+// MARK: - JmoVxia---类-属性
 
-//MARK: - JmoVxia---类-属性
 class CLBackView: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     var title: String = "    " {
         didSet {
             textLabel.text = title
@@ -27,42 +30,48 @@ class CLBackView: UIControl {
             super.layoutIfNeeded()
         }
     }
+
     var themeColor: UIColor = .black {
         didSet {
             backimageView.image = .image(light: UIImage(named: "navigationBack")!, dark: (UIImage(named: "navigationBack")?.tintImage(.white))!)
-            textLabel.textColor = themeColor;
+            textLabel.textColor = themeColor
         }
     }
+
     private lazy var textLabel: UILabel = {
-       let view = UILabel()
+        let view = UILabel()
         view.textColor = themeColor
         view.font = .mediumPingFangSC(16)
         return view
     }()
+
     private lazy var backimageView: UIImageView = {
-       let view = UIImageView()
+        let view = UIImageView()
         view.image = .image(light: UIImage(named: "navigationBack")!, dark: (UIImage(named: "navigationBack")?.tintImage(.white))!)
         return view
     }()
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLBackView {
     func initUI() {
         addSubview(backimageView)
         addSubview(textLabel)
     }
+
     func makeConstraints() {
-        backimageView.snp.makeConstraints { (make) in
+        backimageView.snp.makeConstraints { make in
             make.left.centerY.equalToSuperview()
-            make.width.equalTo(20);
-            make.height.equalTo(20);
-            make.bottom.equalTo(-5).priority(.low);
-            make.top.equalTo(5).priority(.low);
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+            make.bottom.equalTo(-5).priority(.low)
+            make.top.equalTo(5).priority(.low)
         }
-        textLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(backimageView.snp.right).offset(7);
-            make.centerY.equalToSuperview();
-            make.right.equalTo(0).priority(.high);
+        textLabel.snp.makeConstraints { make in
+            make.left.equalTo(backimageView.snp.right).offset(7)
+            make.centerY.equalToSuperview()
+            make.right.equalTo(0).priority(.high)
         }
     }
 }

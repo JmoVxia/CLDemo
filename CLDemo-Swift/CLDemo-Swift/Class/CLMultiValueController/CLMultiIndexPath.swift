@@ -11,6 +11,7 @@ struct CLMultiIndexPath {
     let indexPath: IndexPath
     let column: Int
 }
+
 extension CLMultiIndexPath: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.indexPath == rhs.indexPath && lhs.column == rhs.column

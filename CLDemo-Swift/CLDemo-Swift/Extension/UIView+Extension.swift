@@ -12,38 +12,44 @@ extension UIView {
     var controller: UIViewController? {
         return findController(with: UIViewController.self)
     }
+
     var navigationController: UIViewController? {
         return findController(with: UINavigationController.self)
     }
+
     var tabbarController: UITabBarController? {
         return findController(with: UITabBarController.self)
     }
-    ///根据类型查找控制器
+
+    /// 根据类型查找控制器
     func findController<T: UIViewController>(with class: T.Type) -> T? {
         var responder = next
-        while(responder != nil) {
-            if (responder!.isKind(of: `class`)) {
+        while responder != nil {
+            if responder!.isKind(of: `class`) {
                 return responder as? T
             }
             responder = responder?.next
         }
         return nil
     }
-    ///设置新frame
+
+    /// 设置新frame
     func setNewFrame(_ frame: CGRect) {
         if self.frame != frame {
             self.frame = frame
         }
     }
 }
+
 extension UIView {
-    ///抖动方向枚举
+    /// 抖动方向枚举
     enum ShakeDirection: Int {
-        ///水平抖动
+        /// 水平抖动
         case horizontal
-        ///垂直抖动
+        /// 垂直抖动
         case vertical
     }
+
     /// 抖动
     /// - Parameters:
     ///   - direction: 抖动方向（默认是水平方向）
@@ -55,42 +61,42 @@ extension UIView {
                times: Int = 5,
                interval: TimeInterval = 0.1,
                delta: CGFloat = 2,
-               completion: (() -> Void)? = nil) {
+               completion: (() -> Void)? = nil)
+    {
         UIView.animate(withDuration: interval, animations: {
             switch direction {
             case .horizontal:
                 self.layer.setAffineTransform(CGAffineTransform(translationX: delta, y: 0))
-                break
             case .vertical:
                 self.layer.setAffineTransform(CGAffineTransform(translationX: 0, y: delta))
-                break
             }
-        }) { (_) in
-            if (times == 0) {
+        }) { _ in
+            if times == 0 {
                 UIView.animate(withDuration: interval, animations: {
                     self.layer.setAffineTransform(.identity)
-                }, completion: { (_) in
+                }, completion: { _ in
                     completion?()
                 })
-            }else {
+            } else {
                 self.shake(direction: direction,
                            times: times - 1,
                            interval: interval,
                            delta: delta * -1,
-                           completion:completion)
+                           completion: completion)
             }
         }
     }
 }
+
 extension UIView {
-    ///圆角
+    /// 圆角
     struct CLCornerRadius {
         var topLeft: CGFloat = 0
         var topRight: CGFloat = 0
         var bottomLeft: CGFloat = 0
         var bottomRight: CGFloat = 0
     }
-    
+
     /// 设置圆角
     /// - Parameters:
     ///   - radius: 圆角
@@ -112,6 +118,7 @@ extension UIView {
         layer.mask = maskLayer
     }
 }
+
 extension UIView {
     /// 按照view大小截图
     var snapshot: UIImage? {
@@ -122,6 +129,7 @@ extension UIView {
         return img
     }
 }
+
 extension UIView {
     func setupHexagonMask(lineWidth: CGFloat, color: UIColor, cornerRadius: CGFloat) {
         let path = UIBezierPath(roundedPolygonPathInRect: bounds, lineWidth: lineWidth, sides: 6, cornerRadius: cornerRadius, rotationOffset: CGFloat.pi / 2.0).cgPath

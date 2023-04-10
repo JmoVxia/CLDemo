@@ -8,7 +8,6 @@
 import UIKit
 
 class CLCollectionExcelLayout: UICollectionViewFlowLayout {
-
     var stickyRowsCount = 1 {
         didSet {
             invalidateLayout()
@@ -29,6 +28,7 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
     }
 
     // MARK: - Collection view flow layout methods
+
     override var collectionViewContentSize: CGSize {
         return contentSize
     }
@@ -58,17 +58,18 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
     }
 
     // MARK: - Helpers
+
     private func setupAttributes() {
         allAttributes = []
 
         var xOffset: CGFloat = 0
         var yOffset: CGFloat = 0
 
-        for row in 0..<rowsCount {
+        for row in 0 ..< rowsCount {
             var rowAttrs: [UICollectionViewLayoutAttributes] = []
             xOffset = 0
 
-            for col in 0..<columnsCount(in: row) {
+            for col in 0 ..< columnsCount(in: row) {
                 let itemSize = size(forRow: row, column: col)
                 let indexPath = IndexPath(row: row, column: col)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -85,8 +86,8 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
     }
 
     private func updateStickyItemsPositions() {
-        for row in 0..<rowsCount {
-            for col in 0..<columnsCount(in: row) {
+        for row in 0 ..< rowsCount {
+            for col in 0 ..< columnsCount(in: row) {
                 let attributes = allAttributes[row][col]
 
                 if row < stickyRowsCount {
@@ -117,6 +118,7 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
     }
 
     // MARK: - Sizing
+
     private var rowsCount: Int {
         return collectionView!.numberOfSections
     }
@@ -127,7 +129,8 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
 
     private func size(forRow row: Int, column: Int) -> CGSize {
         guard let delegate = collectionView?.delegate as? UICollectionViewDelegateFlowLayout,
-            let size = delegate.collectionView?(collectionView!, layout: self, sizeForItemAt: IndexPath(row: row, column: column)) else {
+              let size = delegate.collectionView?(collectionView!, layout: self, sizeForItemAt: IndexPath(row: row, column: column))
+        else {
             assertionFailure("Implement collectionView(_,layout:,sizeForItemAt: in UICollectionViewDelegateFlowLayout")
             return .zero
         }
@@ -137,6 +140,7 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
 }
 
 // MARK: - IndexPath
+
 private extension IndexPath {
     init(row: Int, column: Int) {
         self = IndexPath(item: column, section: row)
@@ -144,6 +148,7 @@ private extension IndexPath {
 }
 
 // MARK: - ZOrder
+
 private enum ZOrder {
     static let commonItem = 0
     static let stickyItem = 1

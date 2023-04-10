@@ -9,24 +9,23 @@
 import UIKit
 
 class CLRotatingPictureViewController: CLController {
-
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "444")
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
     }
-    
+
     func calculationFrame(image: UIImage) -> CGRect {
         var x: CGFloat = 0
         var y: CGFloat = 0
         var width: CGFloat = 0
         var height: CGFloat = 0
-        
+
         var screenWidth: CGFloat
         var screenHeight: CGFloat
 
@@ -42,41 +41,42 @@ class CLRotatingPictureViewController: CLController {
         }
         let imageWidth = image.size.width
         let imageHeight = image.size.height
-        
+
         let widthSpace = fabsf(Float(screenWidth - imageWidth))
         let heightSpace = fabsf(Float(screenHeight - imageHeight))
-        
+
         if widthSpace >= heightSpace {
             if screenWidth > imageWidth {
                 width = imageWidth * (screenHeight / imageHeight)
                 height = imageHeight * (screenHeight / imageHeight)
-            }else {
+            } else {
                 width = imageWidth / (imageWidth / screenWidth)
                 height = imageHeight / (imageWidth / screenWidth)
             }
-        }else {
+        } else {
             if screenHeight > imageHeight {
                 width = imageWidth * (screenWidth / imageWidth)
                 height = imageHeight * (screenWidth / imageWidth)
-            }else {
+            } else {
                 width = imageWidth / (imageHeight / screenHeight)
                 height = imageHeight / (imageHeight / screenHeight)
             }
         }
-        x = (self.view.frame.size.width - width) * 0.5
-        y = (self.view.frame.size.height - height) * 0.5
-        return CGRect.init(x: x, y: y, width: width, height: height)
+        x = (view.frame.size.width - width) * 0.5
+        y = (view.frame.size.height - height) * 0.5
+        return CGRect(x: x, y: y, width: width, height: height)
     }
-    
+
     override func viewLayoutMarginsDidChange() {
-        imageView.frame = self.calculationFrame(image: UIImage(named: "444")!)
+        imageView.frame = calculationFrame(image: UIImage(named: "444")!)
     }
-    
 }
+
 extension CLRotatingPictureViewController {
     override var shouldAutorotate: Bool {
         return true
     }
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }

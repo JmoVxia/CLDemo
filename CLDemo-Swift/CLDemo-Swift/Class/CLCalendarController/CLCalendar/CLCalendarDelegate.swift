@@ -8,11 +8,9 @@
 import Foundation
 
 protocol CLCalendarDelegate: AnyObject {
-    func didSelectArea(begin: Date, end: Date, in view: CLCalendarView)
-    func didSelectSingle(date: Date, in view: CLCalendarView)
+    func didSelectDate(date: Date, in view: CLCalendarView)
 }
 
 extension CLCalendarDelegate {
-    func didSelectArea(begin: Date, end: Date, in view: CLCalendarView) {}
-    func didSelectSingle(date: Date, in view: CLCalendarView) {}
+    func didSelectDate(date: Date, in view: CLCalendarView) {}
 }

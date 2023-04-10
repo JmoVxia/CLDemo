@@ -9,17 +9,19 @@
 import UIKit
 
 class CLFontManager: NSObject {
-    private override init() {
+    override private init() {
         super.init()
         let coefficient = UserDefaults.standard.integer(forKey: "CLFontSize.key.JmoVxia")
         if coefficient != 0 {
             self.coefficient = coefficient
         }
     }
+
     static let shared = CLFontManager()
-    ///字体等级
-    private (set) var coefficient: Int = 2
+    /// 字体等级
+    private(set) var coefficient: Int = 2
 }
+
 extension CLFontManager {
     /// 设置字体等级
     static func setFontSizeCoefficient(_ coefficient: Int) {
@@ -27,10 +29,12 @@ extension CLFontManager {
         UserDefaults.standard.setValue(coefficient, forKey: "CLFontSize.key.JmoVxia")
         UserDefaults.standard.synchronize()
     }
+
     /// 字体等级
     static var fontSizeCoefficient: Int {
         return shared.coefficient
     }
+
     /// 字体比例系数
     static var scaleCoefficient: CGFloat {
         return 0.075 * CGFloat(shared.coefficient - 2) + 1

@@ -17,22 +17,27 @@ class CLTwoSidedView: UIView {
             addSubview(view)
         }
     }
+
     var bottomView: UIView?
-    
+
     private var isTurning: Bool = false
     private var isReversed: Bool = false
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         topView?.frame = bounds
         bottomView?.frame = bounds
     }
 }
+
 extension CLTwoSidedView {
     func transition(withDuration duration: TimeInterval, completion: (() -> Void)?) {
         guard !isTurning, let top = topView, let bottom = bottomView else {

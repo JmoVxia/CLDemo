@@ -9,24 +9,27 @@
 import UIKit
 
 class CLGradientLayerView: UIView {
-    var colors: [CGColor] = [CGColor]() {
+    var colors: [CGColor] = .init() {
         didSet {
-            guard let gradientLayer = self.layer as? CAGradientLayer else { return }
+            guard let gradientLayer = layer as? CAGradientLayer else { return }
             gradientLayer.colors = colors
         }
     }
+
     var startPoint: CGPoint? {
         didSet {
-            guard let gradientLayer = self.layer as? CAGradientLayer else { return }
+            guard let gradientLayer = layer as? CAGradientLayer else { return }
             gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         }
     }
+
     var endPoint: CGPoint? {
         didSet {
             guard let gradientLayer = self.layer as? CAGradientLayer else { return }
             gradientLayer.endPoint = CGPoint(x: 0, y: 1)
         }
     }
+
     override class var layerClass: AnyClass {
         return CAGradientLayer.classForCoder()
     }

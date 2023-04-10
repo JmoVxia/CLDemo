@@ -8,7 +8,8 @@
 
 import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLBreakPointResumeCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
@@ -17,6 +18,7 @@ class CLBreakPointResumeCell: UITableViewCell {
         view.textAlignment = .left
         return view
     }()
+
     private lazy var progressLabel: UILabel = {
         let view = UILabel()
         view.font = .mediumPingFangSC(12)
@@ -24,10 +26,12 @@ class CLBreakPointResumeCell: UITableViewCell {
         view.textAlignment = .left
         return view
     }()
+
     private lazy var progressView: UIProgressView = {
         let view = UIProgressView()
         return view
     }()
+
     private lazy var downloadButton: UIButton = {
         let view = UIButton()
         view.titleLabel?.font = .mediumPingFangSC(16)
@@ -40,6 +44,7 @@ class CLBreakPointResumeCell: UITableViewCell {
         view.addTarget(self, action: #selector(downloadAction), for: .touchUpInside)
         return view
     }()
+
     private lazy var cancelButton: UIButton = {
         let view = UIButton()
         view.titleLabel?.font = .mediumPingFangSC(16)
@@ -52,6 +57,7 @@ class CLBreakPointResumeCell: UITableViewCell {
         view.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return view
     }()
+
     private lazy var deleteButton: UIButton = {
         let view = UIButton()
         view.titleLabel?.font = .mediumPingFangSC(16)
@@ -64,16 +70,21 @@ class CLBreakPointResumeCell: UITableViewCell {
         view.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         return view
     }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLBreakPointResumeCell {
     func initUI() {
         selectionStyle = .none
@@ -86,6 +97,7 @@ private extension CLBreakPointResumeCell {
         contentView.addSubview(cancelButton)
         contentView.addSubview(deleteButton)
     }
+
     func makeConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.left.top.equalTo(15)
@@ -116,6 +128,7 @@ private extension CLBreakPointResumeCell {
         }
     }
 }
+
 @objc extension CLBreakPointResumeCell {
     func downloadAction() {
         guard let item = item else { return }
@@ -131,10 +144,12 @@ private extension CLBreakPointResumeCell {
             }
         }
     }
+
     func cancelAction() {
         guard let item = item else { return }
         CLBreakPointResumeManager.cancel(item.url)
     }
+
     func deleteAction() {
         guard let item = item else { return }
         do {
@@ -147,6 +162,7 @@ private extension CLBreakPointResumeCell {
         }
     }
 }
+
 extension CLBreakPointResumeCell: CLRowProtocol {
     func setItem(_ item: CLBreakPointResumeItem, indexPath: IndexPath) {
         nameLabel.text = item.url.lastPathComponent

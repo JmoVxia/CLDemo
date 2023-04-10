@@ -5,8 +5,8 @@
 //  Created by JmoVxia on 2023/3/24.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
 class CLMultiValueController: CLController {
     lazy var button: UIButton = {
@@ -14,18 +14,19 @@ class CLMultiValueController: CLController {
         view.setTitle("点我", for: .normal)
         view.setTitleColor(.red, for: .normal)
         view.backgroundColor = .orange
-        view.addTarget(self, action: #selector(clickAction ), for: .touchUpInside)
+        view.addTarget(self, action: #selector(clickAction), for: .touchUpInside)
         return view
     }()
-    
+
     private var model: [CLMultiModel] = []
-    
+
     private lazy var multiController: CLMultiController = {
         let controller = CLMultiController()
         controller.dataSource = self
         return controller
     }()
 }
+
 extension CLMultiValueController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,6 @@ extension CLMultiValueController {
         button.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
     }
 }
 
@@ -46,7 +46,7 @@ extension CLMultiValueController {
                     let path = Bundle.main.path(forResource: "data", ofType: "json")
                     let url = URL(fileURLWithPath: path!)
                     if let data = try? Data(contentsOf: url) {
-                        return JSON(data).arrayValue.compactMap({ .init(json: $0) })
+                        return JSON(data).arrayValue.compactMap { .init(json: $0) }
                     }
                     return []
                 }()
@@ -54,11 +54,12 @@ extension CLMultiValueController {
                     self.multiController.reload()
                 }
             }
-        }else {
+        } else {
             multiController.reload()
         }
     }
 }
+
 extension CLMultiValueController: CLMultiDataSource {
     func multiController(_ controller: CLMultiController, tableView: UITableView, cellForRowAt indexPath: CLMultiIndexPath) -> UITableViewCell {
         let data = retrieveModel(at: indexPath)
@@ -69,24 +70,26 @@ extension CLMultiValueController: CLMultiDataSource {
         cell.titleButton.setTitle(data?.name ?? "", for: .normal)
         return cell
     }
-    
+
     func multiController(_ controller: CLMultiController, didSelectRowAt indexPath: CLMultiIndexPath) -> String {
         let data = retrieveModel(at: indexPath)
         return data?.name ?? "请选择"
     }
+
     func multiController(_ controller: CLMultiController, isCompletedAt indexPath: CLMultiIndexPath) -> Bool {
         let data = retrieveModel(at: indexPath)
         return (data?.children.count ?? .zero) > 0
     }
+
     func multiController(_ controller: CLMultiController, numberOfItemsInColumn column: Int) -> Int {
         if column == .zero {
             return model.count
-        }else {
+        } else {
             var data: CLMultiModel?
             for selectedIndexPath in controller.selectedIndexPath {
                 if let value = data {
                     data = value.children[safe: selectedIndexPath.indexPath.row]
-                }else {
+                } else {
                     data = model[safe: selectedIndexPath.indexPath.row]
                 }
             }
@@ -94,10 +97,11 @@ extension CLMultiValueController: CLMultiDataSource {
         }
     }
 }
+
 private extension CLMultiValueController {
     func retrieveModel(at indexPath: CLMultiIndexPath) -> CLMultiModel? {
         guard indexPath.column != .zero else { return model[safe: indexPath.indexPath.row] }
-        
+
         var multiModel: CLMultiModel?
         for selectedIndexPath in multiController.selectedIndexPath
             where selectedIndexPath.column < indexPath.column

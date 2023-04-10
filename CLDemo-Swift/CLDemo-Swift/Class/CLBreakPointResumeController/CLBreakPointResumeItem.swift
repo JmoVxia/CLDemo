@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CLBreakPointResumeItem: NSObject {
     let url: URL!
     var progress: CGFloat = 0
@@ -18,10 +17,12 @@ class CLBreakPointResumeItem: NSObject {
         progress = fileAttribute.totalBytes <= 0 ? 0 : min(max(0, CGFloat(fileAttribute.currentBytes) / CGFloat(fileAttribute.totalBytes)), 1)
     }
 }
+
 extension CLBreakPointResumeItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
         return CLBreakPointResumeCell.self
     }
+
     func cellHeight() -> CGFloat {
         return 110
     }

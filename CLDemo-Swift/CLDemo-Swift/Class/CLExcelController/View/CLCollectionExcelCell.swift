@@ -18,6 +18,7 @@ class CLCollectionExcelCell: UICollectionViewCell {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     private(set) lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.numberOfLines = 0
@@ -26,30 +27,31 @@ class CLCollectionExcelCell: UICollectionViewCell {
         view.textAlignment = .center
         return view
     }()
+
     private(set) lazy var lineTop: UIView = {
         let view = UIView()
         view.backgroundColor = "#FFECCB".uiColor
         return view
     }()
-    
+
     private(set) lazy var lineLeft: UIView = {
         let view = UIView()
         view.backgroundColor = "#FFECCB".uiColor
         return view
     }()
-    
+
     private(set) lazy var lineBottom: UIView = {
         let view = UIView()
         view.backgroundColor = "#FFECCB".uiColor
         return view
     }()
-    
+
     private(set) lazy var lineRight: UIView = {
         let view = UIView()
         view.backgroundColor = "#FFECCB".uiColor
         return view
     }()
-    
+
     private var lineWidth = 1
 }
 
@@ -90,8 +92,7 @@ private extension CLCollectionExcelCell {
 
 // MARK: - JmoVxia---override
 
-extension CLCollectionExcelCell {
-}
+extension CLCollectionExcelCell {}
 
 // MARK: - JmoVxia---objc
 

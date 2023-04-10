@@ -6,16 +6,17 @@
 //  Copyright © 2019 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 class CLChatController: CLController {
-    ///图片上传路径
+    /// 图片上传路径
     private let imageUploadPath: String = pathDocuments + "/CLChatImageUpload"
     private lazy var tableViewHepler: CLTableViewHepler = {
         let hepler = CLTableViewHepler()
         return hepler
     }()
+
     private lazy var tableView: CLIntrinsicTableView = {
         let tableView = CLIntrinsicTableView()
         tableView.dataSource = tableViewHepler
@@ -35,7 +36,8 @@ class CLChatController: CLController {
         tableView.addGestureRecognizer(tapGestureRecognizer)
         return tableView
     }()
-    ///输入工具条
+
+    /// 输入工具条
     private lazy var inputToolBar: CLChatInputToolBar = {
         let inputToolBar = CLChatInputToolBar()
         inputToolBar.delegate = self
@@ -44,6 +46,7 @@ class CLChatController: CLController {
         return inputToolBar
     }()
 }
+
 extension CLChatController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,22 +55,25 @@ extension CLChatController {
         addTipsMessages(["欢迎来到本Demo"])
     }
 }
+
 extension CLChatController {
     private func initUI() {
         view.backgroundColor = .init("#EEEEED")
         view.addSubview(tableView)
         view.addSubview(inputToolBar)
     }
+
     private func makeConstraints() {
-        inputToolBar.snp.makeConstraints { (make) in
+        inputToolBar.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
         }
-        tableView.snp.makeConstraints { (make) in
+        tableView.snp.makeConstraints { make in
             make.left.right.equalTo(view)
             make.bottom.equalTo(inputToolBar.snp.top)
             make.height.equalToSuperview().offset(-(navigationController?.navigationBar.frame.height ?? 0.0) - statusBarHeight - inputToolBar.toolBarDefaultHeight)
         }
     }
+
     private func reloadData() {
         tableView.reloadData()
         if tableViewHepler.rows.count >= 1 {
@@ -76,22 +82,24 @@ extension CLChatController {
         }
     }
 }
+
 extension CLChatController {
     private func addTipsMessages(_ messages: [String]) {
-        messages.forEach { (text) in
+        messages.forEach { text in
             let item = CLChatTipsItem()
             item.text = text
             tableViewHepler.rows.append(item)
         }
         reloadData()
     }
+
     private func addTextMessages(_ messages: [String]) {
-        messages.forEach { (text) in
+        messages.forEach { text in
             let rightItem = CLChatTextItem()
             rightItem.isFromMyself = true
             rightItem.text = text
             tableViewHepler.rows.append(rightItem)
-            
+
             let leftItem = CLChatTextItem()
             leftItem.isFromMyself = false
             leftItem.text = text
@@ -99,25 +107,27 @@ extension CLChatController {
         }
         reloadData()
     }
+
     private func addImageMessages(_ messages: [(image: UIImage, asset: PHAsset)]) {
-        messages.forEach { (imageInfo) in
+        messages.forEach { imageInfo in
             guard let previewImageData = imageInfo.image.pngData() else {
                 return
             }
             let rightItem = CLChatImageItem()
-            rightItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: (rightItem.messageId + "previewImage"))
+            rightItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: rightItem.messageId + "previewImage")
             rightItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
             rightItem.isFromMyself = true
             tableViewHepler.rows.append(rightItem)
-            
+
             let leftItem = CLChatImageItem()
-            leftItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: (leftItem.messageId + "previewImage"))
+            leftItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: leftItem.messageId + "previewImage")
             leftItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
             leftItem.isFromMyself = false
             tableViewHepler.rows.append(leftItem)
         }
         reloadData()
     }
+
     private func addVoiceMessages(duration: TimeInterval, path: String) {
         do {
             let item = CLChatVoiceItem()
@@ -135,6 +145,7 @@ extension CLChatController {
         reloadData()
     }
 }
+
 extension CLChatController {
     func saveUploadImage(imageData: Data, messageId: String) -> String? {
         let path = imageUploadPath + "/\(messageId)"
@@ -147,22 +158,27 @@ extension CLChatController {
         return nil
     }
 }
+
 extension CLChatController {
     @objc func dismissKeyboard() {
         inputToolBar.dismissKeyboard()
     }
 }
+
 extension CLChatController: CLChatInputToolBarDelegate {
     func inputBarWillSendText(text: String) {
         addTextMessages([text])
     }
+
     func inputBarWillSendImage(images: [(image: UIImage, asset: PHAsset)]) {
         addImageMessages(images)
     }
+
     func inputBarFinishRecord(duration: TimeInterval, file: Data) {
         addVoiceMessages(duration: duration, path: "")
     }
 }
+
 extension CLChatController {
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let touchView = touch.view, !(touchView is UIButton) else {

@@ -14,13 +14,16 @@ class CLCarouselCell: UIView {
         view.textAlignment = .center
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(label)
-        label.snp.makeConstraints { (make) in
+        label.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

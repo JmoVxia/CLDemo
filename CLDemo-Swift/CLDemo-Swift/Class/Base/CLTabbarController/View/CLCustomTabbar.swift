@@ -9,7 +9,7 @@
 import UIKit
 
 class CLCustomTabbar: UITabBar {
-    var bulgeCallBack: ((UITabBarItem) -> ())?
+    var bulgeCallBack: ((UITabBarItem) -> Void)?
     private lazy var bulgeButton: UIButton = {
         let view = UIButton()
         view.setImage(UIImage(named: "recording"), for: .normal)
@@ -18,11 +18,13 @@ class CLCustomTabbar: UITabBar {
         view.addTarget(self, action: #selector(bulgeButtonAction), for: .touchUpInside)
         return view
     }()
+
     private lazy var lineView: UIView = {
         let view = UIView()
         view.backgroundColor = .init("EEEEEE")
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -33,10 +35,13 @@ class CLCustomTabbar: UITabBar {
         addSubview(lineView)
         addSubview(bulgeButton)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLCustomTabbar {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -44,7 +49,7 @@ extension CLCustomTabbar {
         let height = bounds.height
         var index = 0
         for subviews in subviews {
-            if ("UITabBarButton" == NSStringFromClass(type(of: subviews).self)) {
+            if NSStringFromClass(type(of: subviews).self) == "UITabBarButton" {
                 if index == 2 {
                     subviews.isHidden = true
                 }
@@ -56,8 +61,9 @@ extension CLCustomTabbar {
         lineView.frame = CGRect(x: 0, y: 0, width: width, height: 0.5)
     }
 }
+
 extension CLCustomTabbar {
-    ///判断点是否在响应范围
+    /// 判断点是否在响应范围
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let circle = UIBezierPath(arcCenter: bulgeButton.center, radius: 28, startAngle: 0, endAngle: .pi * 2, clockwise: true)
         let tabbar = UIBezierPath(rect: bounds)
@@ -67,6 +73,7 @@ extension CLCustomTabbar {
         return super.point(inside: point, with: event)
     }
 }
+
 @objc extension CLCustomTabbar {
     func bulgeButtonAction() {
         guard let item = items?[safe: 2] else { return }
@@ -83,8 +90,9 @@ extension CLCustomTabbar {
         bulgeButton.layer.add(animation, forKey: nil)
     }
 }
+
 extension CLCustomTabbar {
-    ///显示小红点
+    /// 显示小红点
     func showBadgeOnItem(index: Int, badgeValue: Int) {
         guard let items = items, items.count > index else {
             return
@@ -92,11 +100,12 @@ extension CLCustomTabbar {
         let item = items[index]
         if badgeValue > 99 {
             item.badgeValue = "99+"
-        }else {
+        } else {
             item.badgeValue = "\(badgeValue)"
         }
     }
-    ///移除小红点
+
+    /// 移除小红点
     func hiddenBadgeOnItem(index: Int) {
         guard let items = items, items.count > index else {
             return

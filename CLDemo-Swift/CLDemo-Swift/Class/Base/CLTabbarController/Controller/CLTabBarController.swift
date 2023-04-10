@@ -6,22 +6,26 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-//MARK: - JmoVxia---类-属性
+// MARK: - JmoVxia---类-属性
+
 class CLTabBarController: UITabBarController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    deinit {
-    }
+
+    deinit {}
+
     private lazy var tabbar: CLCustomTabbar = {
         let view = CLCustomTabbar()
-        view.bulgeCallBack = {[weak self] (value) in
+        view.bulgeCallBack = { [weak self] value in
             guard let self = self else { return }
             self.selectedIndex = 2
             self.tabBar(self.tabbar, didSelect: value)
@@ -29,29 +33,38 @@ class CLTabBarController: UITabBarController {
         return view
     }()
 }
-//MARK: - JmoVxia---生命周期
+
+// MARK: - JmoVxia---生命周期
+
 extension CLTabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 }
-//MARK: - JmoVxia---布局
+
+// MARK: - JmoVxia---布局
+
 private extension CLTabBarController {
     func initUI() {
         setValue(tabbar, forKey: "tabBar")
@@ -62,16 +75,17 @@ private extension CLTabBarController {
         addChild(CLMeController(), title: "我的".localized, image: UIImage(named: "me"), selectedImage: UIImage(named: "meHover"))
     }
 }
-//MARK: - JmoVxia---override
+
+// MARK: - JmoVxia---override
+
 extension CLTabBarController {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         let index = tabBar.items?.firstIndex(of: item) ?? 0
         animationItem(with: index)
     }
+
     @available(iOS 13.0, *) override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
-        set {
-            
-        }
+        set {}
         get {
             if let navigationController = selectedViewController as? UINavigationController {
                 return navigationController.topViewController?.overrideUserInterfaceStyle ?? .light
@@ -81,6 +95,7 @@ extension CLTabBarController {
         }
     }
 }
+
 extension CLTabBarController {
     // 是否支持自动转屏
     override var shouldAutorotate: Bool {
@@ -112,20 +127,23 @@ extension CLTabBarController {
         return navigationController.topViewController?.prefersStatusBarHidden ?? false
     }
 }
-//MARK: - JmoVxia---私有方法
+
+// MARK: - JmoVxia---私有方法
+
 private extension CLTabBarController {
     func addChild(_ child: UIViewController, title: String, image: UIImage?, selectedImage: UIImage?) {
         child.title = title
-        child.tabBarItem.setTitleTextAttributes([.font : UIFont.boldPingFangSC(11), .foregroundColor : UIColor("333333")], for: .normal)
-        child.tabBarItem.setTitleTextAttributes([.font : UIFont.boldPingFangSC(11), .foregroundColor : UIColor("666666")], for: .selected)
+        child.tabBarItem.setTitleTextAttributes([.font: UIFont.boldPingFangSC(11), .foregroundColor: UIColor("333333")], for: .normal)
+        child.tabBarItem.setTitleTextAttributes([.font: UIFont.boldPingFangSC(11), .foregroundColor: UIColor("666666")], for: .selected)
         child.tabBarItem.image = image?.withRenderingMode(.alwaysOriginal)
         child.tabBarItem.selectedImage = selectedImage?.withRenderingMode(.alwaysOriginal)
         let navController = CLNavigationController(rootViewController: child)
         addChild(navController)
     }
+
     func animationItem(with index: Int) {
         if let `class` = NSClassFromString("UITabBarButton") {
-            let view = tabBar.subviews.filter({$0.isKind(of: `class`)})[index]
+            let view = tabBar.subviews.filter { $0.isKind(of: `class`) }[index]
             let animation = CASpringAnimation(keyPath: "transform.scale")
             animation.mass = 0.6
             animation.stiffness = 80

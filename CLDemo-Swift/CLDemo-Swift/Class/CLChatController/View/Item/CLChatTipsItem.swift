@@ -8,9 +8,10 @@
 import UIKit
 
 class CLChatTipsItem: CLChatItem {
-    ///文字
-    var text:String?
+    /// 文字
+    var text: String?
 }
+
 extension CLChatTipsItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
         return CLChatTipsCell.self

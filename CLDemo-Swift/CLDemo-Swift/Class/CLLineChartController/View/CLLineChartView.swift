@@ -12,36 +12,37 @@ struct CLLineChartPoint {
     let y: CGFloat
 }
 
-
 class CLLineChartView: UIView {
     weak var dataSource: CLLineChartViewDataSource?
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLLineChartView {
     func reload() {
         guard let dataSource = dataSource else { return }
         layer.removeAllAnimations()
         layer.sublayers?.removeAll()
-        
+
         let size = dataSource.size(in: self)
         let axisInX = dataSource.axisInX(in: self)
         let axisInY = dataSource.axisInY(in: self)
 
         let xSpace = axisInX.max - axisInX.min
         let ySpace = axisInY.max - axisInY.min
-        
+
         let lines = dataSource.numberOfLines(in: self)
 
-        for line in 0..<lines {
+        for line in 0 ..< lines {
             let points = dataSource.chartView(self, numberOfPointsInLine: line)
             let lineLayer = dataSource.chartView(self, layerForLineAt: line)
-            
+
             let linePath: UIBezierPath = {
                 let path = UIBezierPath()
                 for (index, point) in points.enumerated() {
@@ -49,7 +50,7 @@ extension CLLineChartView {
                     let y = size.height - (point.y - axisInY.min) * size.height / ySpace
                     if index == 0 {
                         path.move(to: .init(x: x, y: y))
-                    }else {
+                    } else {
                         path.addLine(to: .init(x: x, y: y))
                     }
                 }

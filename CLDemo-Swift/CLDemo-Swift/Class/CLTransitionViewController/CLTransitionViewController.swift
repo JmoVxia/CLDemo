@@ -9,25 +9,24 @@
 import UIKit
 
 class CLTransitionViewController: CLController {
-
-    var isPush:Bool = true
+    var isPush: Bool = true
     lazy var button: UIButton = {
-        let button:UIButton = UIButton()
+        let button = UIButton()
         button.backgroundColor = UIColor.red
         button.addTarget(self, action: #selector(push), for: .touchUpInside)
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.orange
         view.addSubview(button)
-        button.snp.makeConstraints { (make) in
+        button.snp.makeConstraints { make in
             make.center.equalTo(view)
             make.width.height.equalTo(80)
         }
     }
-    
+
     @objc func push() {
         guard let navigationController = navigationController else {
             return
@@ -40,15 +39,15 @@ class CLTransitionViewController: CLController {
             transition.duration = 0.5
             transition.type = .push
             transition.subtype = .fromBottom
-            transition.timingFunction = CAMediaTimingFunction.init(name: .easeIn)
+            transition.timingFunction = CAMediaTimingFunction(name: .easeIn)
             navigationController.view.layer.add(transition, forKey: kCATransition)
             navigationController.pushViewController(controller, animated: false)
-        }else {
+        } else {
             let transition = CATransition()
             transition.duration = 0.5
             transition.type = .reveal
             transition.subtype = .fromTop
-            transition.timingFunction = CAMediaTimingFunction.init(name: .easeIn)
+            transition.timingFunction = CAMediaTimingFunction(name: .easeIn)
             navigationController.view.layer.add(transition, forKey: kCATransition)
             navigationController.popViewController(animated: false)
         }

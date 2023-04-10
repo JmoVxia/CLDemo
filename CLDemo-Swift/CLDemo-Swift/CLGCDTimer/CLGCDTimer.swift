@@ -9,24 +9,24 @@
 import UIKit
 
 class CLGCDTimer: NSObject {
-    typealias actionBlock = ((NSInteger) -> Void)
-    ///执行时间
+    typealias actionBlock = (NSInteger) -> Void
+    /// 执行时间
     private var interval: TimeInterval!
-    ///延迟时间
+    /// 延迟时间
     private var delaySecs: TimeInterval!
-    ///队列
+    /// 队列
     private var serialQueue: DispatchQueue!
-    ///是否重复
+    /// 是否重复
     private var repeats: Bool = true
-    ///响应
+    /// 响应
     private var action: actionBlock?
-    ///定时器
+    /// 定时器
     private var timer: DispatchSourceTimer!
-    ///是否正在运行
+    /// 是否正在运行
     private var isRuning: Bool = false
-    ///响应次数
-    private (set) var actionTimes: NSInteger = 0
-    
+    /// 响应次数
+    private(set) var actionTimes: NSInteger = 0
+
     /// 创建定时器
     ///
     /// - Parameters:
@@ -40,30 +40,34 @@ class CLGCDTimer: NSObject {
         self.interval = interval
         self.delaySecs = delaySecs
         self.repeats = repeats
-        self.serialQueue = queue
+        serialQueue = queue
         self.action = action
-        self.timer = DispatchSource.makeTimerSource(queue: self.serialQueue)
+        timer = DispatchSource.makeTimerSource(queue: serialQueue)
     }
-    ///替换旧响应
-    func replaceOldAction(action: actionBlock?) -> Void {
+
+    /// 替换旧响应
+    func replaceOldAction(action: actionBlock?) {
         guard let action = action else {
             return
         }
         self.action = action
     }
-    ///执行一次定时器响应
+
+    /// 执行一次定时器响应
     func responseOnce() {
         actionTimes += 1
         isRuning = true
         action?(actionTimes)
         isRuning = false
     }
+
     deinit {
         cancel()
     }
 }
+
 extension CLGCDTimer {
-    ///开始定时器
+    /// 开始定时器
     func start() {
         timer.schedule(deadline: .now() + delaySecs, repeating: interval)
         timer.setEventHandler { [weak self] in
@@ -79,21 +83,24 @@ extension CLGCDTimer {
         }
         resume()
     }
-    ///暂停
+
+    /// 暂停
     func suspend() {
         if isRuning {
             timer.suspend()
             isRuning = false
         }
     }
-    ///恢复定时器
+
+    /// 恢复定时器
     func resume() {
         if !isRuning {
             timer.resume()
-            isRuning = true;
+            isRuning = true
         }
     }
-    ///取消定时器
+
+    /// 取消定时器
     func cancel() {
         if !isRuning {
             resume()

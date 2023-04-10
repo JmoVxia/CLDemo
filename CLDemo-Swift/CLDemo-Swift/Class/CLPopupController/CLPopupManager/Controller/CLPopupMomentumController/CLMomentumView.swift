@@ -11,7 +11,7 @@ import UIKit
 class CLMomentumPanGestureRecognizer: UIPanGestureRecognizer {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesBegan(touches, with: event)
-        self.state = .began
+        state = .began
     }
 }
 
@@ -21,12 +21,14 @@ class CLMomentumView: CLGradientLayerView {
             transform = closedTransform
         }
     }
+
     private lazy var panRecognier: CLMomentumPanGestureRecognizer = {
         let pan = CLMomentumPanGestureRecognizer()
         pan.addTarget(self, action: #selector(panned))
         return pan
     }()
-    private (set) var isOpen = false
+
+    private(set) var isOpen = false
     private var animator = UIViewPropertyAnimator()
     private var animationProgress: CGFloat = 0
     private lazy var handleView: UIView = {
@@ -36,21 +38,25 @@ class CLMomentumView: CLGradientLayerView {
         view.clipsToBounds = true
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addGestureRecognizer(panRecognier)
         colors = [UIColor("#fdbb2d").cgColor, UIColor("#22c1c3").cgColor]
         addSubview(handleView)
-        handleView.snp.makeConstraints { (make) in
+        handleView.snp.makeConstraints { make in
             make.top.equalTo(10)
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 50, height: 6))
         }
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLMomentumView {
     @objc private func panned(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
@@ -71,11 +77,11 @@ extension CLMomentumView {
                 break
             }
             if isOpen {
-                if !shouldClose && !animator.isReversed { animator.isReversed.toggle() }
-                if shouldClose && animator.isReversed { animator.isReversed.toggle() }
+                if !shouldClose, !animator.isReversed { animator.isReversed.toggle() }
+                if shouldClose, animator.isReversed { animator.isReversed.toggle() }
             } else {
-                if shouldClose && !animator.isReversed { animator.isReversed.toggle() }
-                if !shouldClose && animator.isReversed { animator.isReversed.toggle() }
+                if shouldClose, !animator.isReversed { animator.isReversed.toggle() }
+                if !shouldClose, animator.isReversed { animator.isReversed.toggle() }
             }
             let fractionRemaining = 1 - animator.fractionComplete
             let distanceRemaining = fractionRemaining * closedTransform.ty
@@ -91,6 +97,7 @@ extension CLMomentumView {
         default: break
         }
     }
+
     private func startAnimationIfNeeded() {
         if animator.isRunning { return }
         let timingParameters = UISpringTimingParameters(damping: 1, response: 0.4)

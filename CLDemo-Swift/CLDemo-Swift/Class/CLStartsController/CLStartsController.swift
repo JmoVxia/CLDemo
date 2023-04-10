@@ -14,10 +14,11 @@ class CLStartsController: CLController {
         view.dataSource = self
         return view
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(startsView)
-        startsView.snp.makeConstraints { (make) in
+        startsView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(CGSize(width: 250, height: 50))
         }
@@ -25,10 +26,12 @@ class CLStartsController: CLController {
         startsView.currentScore = 0
     }
 }
+
 extension CLStartsController: CLStartsViewDataSource {
     func numberOfItems(in startsView: CLStartsView) -> Int {
         return 5
-    }    
+    }
+
     func imageOfStartsView(startsView: CLStartsView) -> (nomal: UIImage, selected: UIImage) {
         return (UIImage(named: "evaluateBIcon")!, UIImage(named: "evaluateCIcon")!)
     }

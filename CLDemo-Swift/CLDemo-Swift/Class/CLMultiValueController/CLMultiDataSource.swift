@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol CLMultiDataSource: AnyObject {
     func multiController(_ controller: CLMultiController, didSelectRowAt indexPath: CLMultiIndexPath) -> String
     func multiController(_ controller: CLMultiController, isCompletedAt indexPath: CLMultiIndexPath) -> Bool

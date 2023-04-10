@@ -6,8 +6,8 @@
 //  Copyright © 2021 JmoVxia. All rights reserved.
 //  https://github.com/okmr-d/DOFavoriteButton
 
-import UIKit
 import SnapKit
+import UIKit
 
 class CLAnimationButtonController: CLController {
     override func viewDidLoad() {
@@ -19,14 +19,14 @@ class CLAnimationButtonController: CLController {
         let likeButton = CLAnimationButton(frame: .zero, image: UIImage(named: "like")!)
         likeButton.addTarget(self, action: #selector(tappedButtonAction), for: .touchUpInside)
         view.addSubview(likeButton)
-        likeButton.snp.makeConstraints { (make) in
+        likeButton.snp.makeConstraints { make in
             make.size.equalTo(100)
             make.center.equalToSuperview()
         }
         let smileButton = CLAnimationButton(frame: .zero, image: UIImage(named: "smile")!)
         smileButton.addTarget(self, action: #selector(tappedButtonAction), for: .touchUpInside)
         view.addSubview(smileButton)
-        smileButton.snp.makeConstraints { (make) in
+        smileButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(100)
             make.top.equalTo(likeButton.snp.bottom).offset(40)
@@ -34,12 +34,13 @@ class CLAnimationButtonController: CLController {
         let heartButton = CLAnimationButton(frame: .zero, image: UIImage(named: "heart")!)
         heartButton.addTarget(self, action: #selector(tappedButtonAction), for: .touchUpInside)
         view.addSubview(heartButton)
-        heartButton.snp.makeConstraints { (make) in
+        heartButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(100)
             make.bottom.equalTo(likeButton.snp.top).offset(-40)
         }
     }
+
     @objc func tappedButtonAction(button: CLAnimationButton) {
         button.isSelected ? button.deselect() : button.select()
     }

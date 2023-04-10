@@ -25,6 +25,7 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.15)
   - SnapKit (5.6.0)
+  - SwiftFormat/CLI (0.51.3)
   - SwiftyJSON (5.0.1)
   - TZImagePickerController (3.8.3):
     - TZImagePickerController/Basic (= 3.8.3)
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - SDWebImage
   - SDWebImageWebPCoder
   - SnapKit
+  - SwiftFormat/CLI
   - SwiftyJSON
   - TZImagePickerController
 
@@ -61,6 +63,7 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageWebPCoder
     - SnapKit
+    - SwiftFormat
     - SwiftyJSON
     - TZImagePickerController
 
@@ -77,9 +80,10 @@ SPEC CHECKSUMS:
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   SDWebImageWebPCoder: 295a6573c512f54ad2dd58098e64e17dcf008499
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftFormat: 5267f6bed90485029b7ebe65a6c48db72e7423ef
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
 
-PODFILE CHECKSUM: ad8f6ebad7026d4d8b0226ad14e92f7ab70ac148
+PODFILE CHECKSUM: be373a007dab8e9b1792d1fbe0edddf2d0e4703e
 
 COCOAPODS: 1.12.0

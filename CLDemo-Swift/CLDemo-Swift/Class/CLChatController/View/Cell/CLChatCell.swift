@@ -6,11 +6,11 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import Lottie
+import UIKit
 
 class CLChatCell: UITableViewCell {
-    ///数据item
+    /// 数据item
     var item: CLChatItem? {
         didSet {
             guard let chatItem = item else {
@@ -21,24 +21,27 @@ class CLChatCell: UITableViewCell {
             }
         }
     }
-    ///底部内容view
+
+    /// 底部内容view
     lazy var bottomContentView: UIView = {
         let bottomContentView = UIView()
         return bottomContentView
     }()
-    ///发送中动画view
+
+    /// 发送中动画view
     lazy var sendingAnimation: LottieAnimationView = {
-        let view = LottieAnimationView.init(animation: LottieAnimation.named("send_timeout"))
+        let view = LottieAnimationView(animation: LottieAnimation.named("send_timeout"))
         view.loopMode = .loop
         view.isHidden = true
         view.backgroundBehavior = .pauseAndRestore
         return view
     }()
-    ///发送失败
+
+    /// 发送失败
     lazy var sendFailButton: UIButton = {
         let sendFailButton = UIButton()
-        sendFailButton.setImage(UIImage.init(named: "icon_failed"), for: .normal)
-        sendFailButton.setImage(UIImage.init(named: "icon_failed"), for: .selected)
+        sendFailButton.setImage(UIImage(named: "icon_failed"), for: .normal)
+        sendFailButton.setImage(UIImage(named: "icon_failed"), for: .selected)
         sendFailButton.isHidden = true
         sendFailButton.addTarget(self, action: #selector(reSendMessage), for: .touchUpInside)
         return sendFailButton
@@ -49,10 +52,13 @@ class CLChatCell: UITableViewCell {
         initUI()
         makeConstraints()
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLChatCell {
     @objc private func reSendMessage() {
 //        guard let chatItem = item  else {
@@ -61,8 +67,9 @@ extension CLChatCell {
 //        presenter?.reSendMessageWithItem(chatItem)
     }
 }
+
 extension CLChatCell {
-    ///创建UI
+    /// 创建UI
     @objc dynamic func initUI() {
         contentView.addSubview(bottomContentView)
         contentView.addSubview(sendingAnimation)
@@ -70,24 +77,26 @@ extension CLChatCell {
         backgroundColor = UIColor.clear
         selectionStyle = .none
     }
-    ///布局
+
+    /// 布局
     @objc dynamic func makeConstraints() {
-        sendingAnimation.snp.makeConstraints { (make) in
+        sendingAnimation.snp.makeConstraints { make in
             make.size.equalTo(15)
             make.centerY.equalTo(bottomContentView)
             make.right.equalTo(bottomContentView.snp.left).offset(-7)
         }
-        sendFailButton.snp.makeConstraints { (make) in
+        sendFailButton.snp.makeConstraints { make in
             make.size.equalTo(30)
             make.centerY.equalTo(bottomContentView)
             make.right.equalTo(bottomContentView.snp.left)
         }
     }
+
     @objc dynamic func upDateItem(_ item: CLChatItem) {
         if let _ = item as? CLChatTipsItem {
             return
         }
-        if item.isFromMyself{
+        if item.isFromMyself {
             switch item.messageSendState {
             case .sending:
                 sendingAnimation.isHidden = false
@@ -102,7 +111,7 @@ extension CLChatCell {
                 sendingAnimation.pause()
                 sendFailButton.isHidden = true
             }
-        }else {
+        } else {
             sendingAnimation.isHidden = true
             sendingAnimation.pause()
             sendFailButton.isHidden = true

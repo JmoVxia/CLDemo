@@ -17,19 +17,20 @@ class CLBubbleTransitionDelegate: NSObject {
         self.endCallback = endCallback
     }
 }
+
 extension CLBubbleTransitionDelegate: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
         transition.itemCallback = startCallback
         return transition
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.itemCallback = endCallback
         return transition
     }
-    
+
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactiveTransition
     }

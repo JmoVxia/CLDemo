@@ -11,26 +11,25 @@ import UIKit
 public enum HexagonalAnimationType { case Spiral, Circle, None }
 
 public struct HexagonalItemViewAppearance {
-    
-    //item appearance
+    // item appearance
     public let needToConfigureItem: Bool
     public let itemSize: CGFloat
     public let itemSpacing: CGFloat
     public let itemBorderWidth: CGFloat
     public let itemBorderColor: UIColor
-    
-    //animation
+
+    // animation
     public let animationType: HexagonalAnimationType
     public let animationDuration: TimeInterval
-    
+
     public init(needToConfigureItem: Bool,
-            itemSize: CGFloat,
-            itemSpacing: CGFloat,
-            itemBorderWidth: CGFloat,
-            itemBorderColor: UIColor,
-            animationType: HexagonalAnimationType,
-            animationDuration: TimeInterval) {
-        
+                itemSize: CGFloat,
+                itemSpacing: CGFloat,
+                itemBorderWidth: CGFloat,
+                itemBorderColor: UIColor,
+                animationType: HexagonalAnimationType,
+                animationDuration: TimeInterval)
+    {
         self.needToConfigureItem = needToConfigureItem
         self.itemSize = itemSize
         self.itemSpacing = itemSpacing
@@ -39,15 +38,14 @@ public struct HexagonalItemViewAppearance {
         self.animationType = animationType
         self.animationDuration = animationDuration
     }
-    
+
     static func defaultAppearance() -> HexagonalItemViewAppearance {
         return HexagonalItemViewAppearance(needToConfigureItem: true,
-            itemSize: 50,
-            itemSpacing: 0,
-            itemBorderWidth: 0,
-            itemBorderColor: .red,
-            animationType: .Circle,
-            animationDuration: 0.2)
+                                           itemSize: 50,
+                                           itemSpacing: 0,
+                                           itemBorderWidth: 0,
+                                           itemBorderColor: .red,
+                                           animationType: .Circle,
+                                           animationDuration: 0.2)
     }
 }
-

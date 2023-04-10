@@ -10,37 +10,41 @@ import UIKit
 
 class CLChatRecordTimeView: UIView {
     private lazy var contentView: UIView = {
-       let contentView = UIView()
+        let contentView = UIView()
         contentView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         return contentView
     }()
+
     private lazy var timeLabel: UILabel = {
-       let timeLabel = UILabel()
+        let timeLabel = UILabel()
         timeLabel.textAlignment = .center
         timeLabel.textColor = UIColor.white
         timeLabel.font = .monospacedDigitSystemFont(ofSize: 13, weight: .medium)
         timeLabel.text = "00:00"
         return timeLabel
     }()
+
     private lazy var backgroundImageView: UIImageView = {
-       let backgroundImageView = UIImageView()
-        backgroundImageView.image = UIImage.init(named: "img_time")?.tintImage(.theme)
+        let backgroundImageView = UIImageView()
+        backgroundImageView.image = UIImage(named: "img_time")?.tintImage(.theme)
         return backgroundImageView
     }()
-    private (set) var isAnimationing: Bool = false
+
+    private(set) var isAnimationing: Bool = false
     var isOut: Bool = false {
         didSet {
             if isOut != oldValue {
                 if isOut {
                     timeLabel.textColor = .init("0xff3b30")
-                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintImage(.init("ffffff"))
+                    backgroundImageView.image = UIImage(named: "img_time")?.tintImage(.init("ffffff"))
                 } else {
                     timeLabel.textColor = UIColor.white
-                    backgroundImageView.image = UIImage.init(named: "img_time")?.tintImage(.theme)
+                    backgroundImageView.image = UIImage(named: "img_time")?.tintImage(.theme)
                 }
             }
         }
     }
+
     var time: String = "00:00" {
         didSet {
             if time != oldValue {
@@ -48,33 +52,37 @@ class CLChatRecordTimeView: UIView {
             }
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
         makeConstraints()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 extension CLChatRecordTimeView {
     private func initUI() {
         addSubview(contentView)
         contentView.addSubview(backgroundImageView)
         contentView.addSubview(timeLabel)
     }
+
     private func makeConstraints() {
-        backgroundImageView.snp.makeConstraints { (make) in
+        backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        timeLabel.snp.makeConstraints { (make) in
+        timeLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.left.right.equalToSuperview()
         }
     }
 }
+
 extension CLChatRecordTimeView {
     func show() {
         contentView.isHidden = false
@@ -87,6 +95,7 @@ extension CLChatRecordTimeView {
         animation.isRemovedOnCompletion = false
         contentView.layer.add(animation, forKey: "")
     }
+
     func dismiss() {
         isAnimationing = true
         contentView.frame = bounds
@@ -95,7 +104,7 @@ extension CLChatRecordTimeView {
         }) { finished in
             self.contentView.alpha = 1
             self.contentView.isHidden = true
-            self.backgroundImageView.image = UIImage.init(named: "img_time")?.tintImage(.theme)
+            self.backgroundImageView.image = UIImage(named: "img_time")?.tintImage(.theme)
             self.timeLabel.textColor = UIColor.white
             self.isAnimationing = false
             self.timeLabel.text = "00:00"

@@ -9,7 +9,6 @@
 import UIKit
 
 extension UISpringTimingParameters {
-    
     /// A design-friendly way to create a spring timing curve.
     ///
     /// - Parameters:

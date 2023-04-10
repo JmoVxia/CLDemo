@@ -6,84 +6,84 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-struct CLPopupFoodPickerModel  {
+struct CLPopupFoodPickerModel {
     var baseGroup = [CLPopupFoodPickerBaseGroup]()
     init(json: JSON) {
-        baseGroup = json["baseGroup"].arrayValue.compactMap({ CLPopupFoodPickerBaseGroup(json: $0)})
+        baseGroup = json["baseGroup"].arrayValue.compactMap { CLPopupFoodPickerBaseGroup(json: $0) }
     }
 }
 
 struct CLPopupFoodPickerNutrients {
-    ///蛋氨酸（毫克）
+    /// 蛋氨酸（毫克）
     var Met: String
-    ///色氨酸（毫克）
+    /// 色氨酸（毫克）
     var Trp: String
-    ///亮氨酸（毫克）
+    /// 亮氨酸（毫克）
     var Lle: String
-    ///蛋白质（克）
+    /// 蛋白质（克）
     var Protein: String
-    ///多不饱和MUFA（克）
+    /// 多不饱和MUFA（克）
     var PUFA: String
-    ///碳水化合物（克）
+    /// 碳水化合物（克）
     var CHO: String
-    ///脯氨酸（毫克）
+    /// 脯氨酸（毫克）
     var Pro: String
-    ///天冬氨酸（毫克）
+    /// 天冬氨酸（毫克）
     var Asp: String
-    ///钾（毫克）
+    /// 钾（毫克）
     var K: String
-    ///食物纤维（克）
+    /// 食物纤维（克）
     var Dietaryfiber: String
-    ///钙（毫克）
+    /// 钙（毫克）
     var Ca: String
-    ///可食部（%）
+    /// 可食部（%）
     var Edible: String
-    ///单不饱和MUFA（克）
+    /// 单不饱和MUFA（克）
     var MUFA: String
-    ///丝氨酸（毫克）
+    /// 丝氨酸（毫克）
     var Ser: String
-    ///苯丙氨酸（毫克）
+    /// 苯丙氨酸（毫克）
     var Phe: String
-    ///饱和SFA（克）
+    /// 饱和SFA（克）
     var SFA: String
-    ///水
+    /// 水
     var Water: String
-    ///苏丙氨酸（毫克）
+    /// 苏丙氨酸（毫克）
     var Thr: String
-    ///甘氨酸（毫克）
+    /// 甘氨酸（毫克）
     var Gly: String
-    ///异亮氨酸（毫克）
+    /// 异亮氨酸（毫克）
     var leu: String
-    ///精氨酸（毫克）
+    /// 精氨酸（毫克）
     var Arg: String
-    ///脂肪（克）
+    /// 脂肪（克）
     var Fat: String
-    ///胱氨酸（毫克）
+    /// 胱氨酸（毫克）
     var Cys: String
-    ///磷（毫克）
+    /// 磷（毫克）
     var P: String
-    ///谷氨酸（毫克）
+    /// 谷氨酸（毫克）
     var Glu: String
-    ///铁（毫克）
+    /// 铁（毫克）
     var Fe: String
-    ///热量（千卡）
+    /// 热量（千卡）
     var Energy: String
-    ///丙氨酸（毫克）
+    /// 丙氨酸（毫克）
     var Ala: String
-    ///缬氨酸（毫克）
+    /// 缬氨酸（毫克）
     var Val: String
-    ///镁（毫克）
+    /// 镁（毫克）
     var Mg: String
-    ///组氨酸（毫克）
+    /// 组氨酸（毫克）
     var His: String
-    ///赖氨酸（毫克）
+    /// 赖氨酸（毫克）
     var lys: String
-    ///酪氨酸（毫克）
+    /// 酪氨酸（毫克）
     var Tyr: String
-    ///钠（毫克）
+    /// 钠（毫克）
     var Na: String
 
     init(json: JSON) {
@@ -144,7 +144,7 @@ struct CLPopupFoodPickerGroup {
     init(json: JSON) {
         foodGroupId = json["foodGroupId"].stringValue
         foodGroupName = json["foodGroupName"].stringValue
-        foods = json["foods"].arrayValue.compactMap({ CLPopupFoodPickerFoods(json: $0)})
+        foods = json["foods"].arrayValue.compactMap { CLPopupFoodPickerFoods(json: $0) }
     }
 }
 
@@ -154,6 +154,6 @@ struct CLPopupFoodPickerBaseGroup {
 
     init(json: JSON) {
         foodBaseGroupName = json["foodBaseGroupName"].stringValue
-        group = json["group"].arrayValue.compactMap({ CLPopupFoodPickerGroup(json: $0)})
+        group = json["group"].arrayValue.compactMap { CLPopupFoodPickerGroup(json: $0) }
     }
 }
