@@ -1,5 +1,5 @@
 //
-//  CLBundle.swift
+//  CLLanguageManager.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2021/6/22.

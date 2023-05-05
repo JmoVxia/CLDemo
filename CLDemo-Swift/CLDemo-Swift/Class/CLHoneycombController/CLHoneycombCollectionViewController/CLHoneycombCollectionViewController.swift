@@ -93,7 +93,7 @@ extension CLHoneycombCollectionViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 210
+        210
     }
 }
 

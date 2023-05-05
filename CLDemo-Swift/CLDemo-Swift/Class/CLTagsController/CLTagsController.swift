@@ -108,8 +108,8 @@ private extension CLTagsController {
             let item = CLTitleCellItem(title: "计算位置实现".localized, type: CLTagsCalculateController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] value in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }

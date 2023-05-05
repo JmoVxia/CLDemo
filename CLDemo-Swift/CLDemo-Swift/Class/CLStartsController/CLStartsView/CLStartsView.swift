@@ -84,7 +84,7 @@ private extension CLStartsView {
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
             view.addSubview(imageView)
-            if let lastView = lastView {
+            if let lastView {
                 imageView.snp.makeConstraints { make in
                     make.top.bottom.equalTo(self)
                     make.left.equalTo(lastView.snp.right)
@@ -109,7 +109,7 @@ private extension CLStartsView {
 
 extension CLStartsView {
     func reloadData() {
-        guard let dataSource = dataSource else { return }
+        guard let dataSource else { return }
         stars = dataSource.numberOfItems(in: self)
         let image = dataSource.imageOfStartsView(startsView: self)
 

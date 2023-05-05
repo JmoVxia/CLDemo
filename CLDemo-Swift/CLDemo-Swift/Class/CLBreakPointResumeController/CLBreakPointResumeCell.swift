@@ -81,6 +81,13 @@ class CLBreakPointResumeCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    var item: CLBreakPointResumeItem?
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        item?.progressChangeCallback = nil
+    }
 }
 
 // MARK: - JmoVxia---布局
@@ -131,42 +138,32 @@ private extension CLBreakPointResumeCell {
 
 @objc extension CLBreakPointResumeCell {
     func downloadAction() {
-        guard let item = item else { return }
-        CLBreakPointResumeManager.download(item.url) { progress in
-            item.progress = progress
-            self.progressView.progress = Float(progress)
-            self.progressLabel.text = String(format: "%.2f", progress * 100) + "%"
-        } completionBlock: { result in
-            result.failure { error in
-                CLLog("下载失败,error:\(error)")
-            }.success { path in
-                CLLog("下载成功,path:\(path)")
-            }
-        }
+        guard let item else { return }
+        item.downloadCallback?(item.url)
     }
 
     func cancelAction() {
-        guard let item = item else { return }
-        CLBreakPointResumeManager.cancel(item.url)
+        guard let item else { return }
+        item.cancelCallback?(item.url)
     }
 
     func deleteAction() {
-        guard let item = item else { return }
-        do {
-            try CLBreakPointResumeManager.delete(item.url)
-            item.progress = 0
-            progressView.progress = 0
-            progressLabel.text = "0.00%"
-        } catch {
-            CLLog("删除失败, error:\(error)")
-        }
+        guard let item else { return }
+        item.deleteCallback?(item.url)
     }
 }
 
 extension CLBreakPointResumeCell: CLRowProtocol {
     func setItem(_ item: CLBreakPointResumeItem, indexPath: IndexPath) {
+        item.progressChangeCallback = { [weak self] value in
+            self?.displayProgress(value)
+        }
         nameLabel.text = item.url.lastPathComponent
-        progressView.progress = Float(item.progress)
-        progressLabel.text = String(format: "%.2f", item.progress * 100) + "%"
+        displayProgress(item.progress)
+    }
+
+    func displayProgress(_ progress: CGFloat) {
+        progressView.progress = Float(progress)
+        progressLabel.text = String(format: "%.2f", progress * 100) + "%"
     }
 }

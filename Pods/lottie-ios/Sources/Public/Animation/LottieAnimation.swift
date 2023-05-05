@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - CoordinateSpace
 
-public enum CoordinateSpace: Int, Codable {
+public enum CoordinateSpace: Int, Codable, Sendable {
   case type2d
   case type3d
 }
@@ -20,7 +20,7 @@ public enum CoordinateSpace: Int, Codable {
 ///
 /// A `LottieAnimation` holds all of the animation data backing a Lottie Animation.
 /// Codable, see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master/docs/json).
-public final class LottieAnimation: Codable, DictionaryInitializable {
+public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -157,4 +157,23 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
   /// Markers
   let markers: [Marker]?
   let markerMap: [String: Marker]?
+
+  /// The marker to use if "reduced motion" is enabled.
+  /// Supported marker names are case insensitive, and include:
+  ///  - reduced motion
+  ///  - reducedMotion
+  ///  - reduced_motion
+  ///  - reduced-motion
+  var reducedMotionMarker: Marker? {
+    let allowedReducedMotionMarkerNames = Set([
+      "reduced motion",
+      "reduced_motion",
+      "reduced-motion",
+      "reducedmotion",
+    ])
+
+    return markers?.first(where: { marker in
+      allowedReducedMotionMarkerNames.contains(marker.name.lowercased())
+    })
+  }
 }

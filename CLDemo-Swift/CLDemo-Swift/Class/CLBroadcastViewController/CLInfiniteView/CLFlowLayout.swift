@@ -20,7 +20,7 @@ class CLFlowLayout: UICollectionViewFlowLayout {
     }
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        guard let collectionView = collectionView else { return proposedContentOffset }
+        guard let collectionView else { return proposedContentOffset }
         let pageLength: CGFloat
         let approxPage: CGFloat
         let currentPage: CGFloat

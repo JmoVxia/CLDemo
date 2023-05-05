@@ -42,13 +42,13 @@ public class HexagonalItemView: UIImageView {
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
 
-        guard let index = index else { return }
+        guard let index else { return }
 
         delegate?.hexagonalItemViewClikedOnButton(forIndex: index)
     }
 }
 
-internal extension UIView {
+extension UIView {
     func roundImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
@@ -59,7 +59,7 @@ internal extension UIView {
     }
 }
 
-internal extension UIImage {
+extension UIImage {
     func roundImage(color: UIColor? = nil, borderWidth: CGFloat = 0) -> UIImage {
         guard size != .zero else { return self }
 

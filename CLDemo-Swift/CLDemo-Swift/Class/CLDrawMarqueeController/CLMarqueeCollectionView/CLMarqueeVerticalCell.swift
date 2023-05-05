@@ -1,5 +1,5 @@
 //
-//  CLDrawMarqueeVerticalCell.swift
+//  CLMarqueeVerticalCell.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/11/10.

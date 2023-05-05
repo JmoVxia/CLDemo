@@ -99,11 +99,11 @@ class CLChatRecordView: UIView {
     private lazy var recorder: CLRecorder = {
         let recorder = CLRecorder()
         recorder.durationCallback = { [weak self] second in
-            guard let self = self else { return }
+            guard let self else { return }
             if second >= 60 {
-                self.endLongPress()
+                endLongPress()
             }
-            self.timeView.time = self.transToHourMinSec(time: Int(second))
+            timeView.time = transToHourMinSec(time: Int(second))
         }
         recorder.finishCallBack = { [weak self] duration, path in
             self?.finishRecorderCallBack?(TimeInterval(duration), path)

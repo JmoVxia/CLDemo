@@ -10,7 +10,7 @@ import Foundation
 
 extension Data {
     var bool: Bool {
-        return int8 == 1
+        int8 == 1
     }
 
     var int64: Int64 {

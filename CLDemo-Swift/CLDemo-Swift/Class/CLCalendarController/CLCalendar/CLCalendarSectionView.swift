@@ -1,5 +1,5 @@
 //
-//  CLCalendarBackgroundView.swift
+//  CLCalendarSectionBackgroundView.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2022/10/19.
@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - JmoVxia---类-属性
 
-class CLCalendarBackgroundView: UICollectionReusableView {
-    static let reuseIdentifier = "CLCollectionReusableView"
+class CLCalendarSectionBackgroundView: UICollectionReusableView {
+    static let reuseIdentifier = "CLCalendarSectionBackgroundView"
 
     private lazy var textLabel: UILabel = {
         let view = UILabel()
@@ -35,7 +35,7 @@ class CLCalendarBackgroundView: UICollectionReusableView {
 
 // MARK: - JmoVxia---布局
 
-private extension CLCalendarBackgroundView {
+private extension CLCalendarSectionBackgroundView {
     func configUI() {
         isUserInteractionEnabled = false
         addSubview(textLabel)
@@ -50,7 +50,7 @@ private extension CLCalendarBackgroundView {
 
 // MARK: - JmoVxia---override
 
-extension CLCalendarBackgroundView {
+extension CLCalendarSectionBackgroundView {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         guard let attributes = layoutAttributes as? CLCalendarLayoutAttributes else { return }

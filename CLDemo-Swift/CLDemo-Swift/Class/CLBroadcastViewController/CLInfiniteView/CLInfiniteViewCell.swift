@@ -1,5 +1,5 @@
 //
-//  CLInfiniteCollectionViewCell.swift
+//  CLInfiniteViewCell.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/11/4.

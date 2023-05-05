@@ -85,7 +85,7 @@ class CLIngredientSearchView: UIView {
     var textChangeCallback: ((String?) -> Void)?
     var clearCallback: (() -> Void)?
     var text: String? {
-        return searchTextField.text
+        searchTextField.text
     }
 }
 
@@ -139,11 +139,11 @@ private extension CLIngredientSearchView {
 
 extension CLIngredientSearchView {
     override var canBecomeFirstResponder: Bool {
-        return searchTextField.canBecomeFirstResponder
+        searchTextField.canBecomeFirstResponder
     }
 
     override var canResignFirstResponder: Bool {
-        return searchTextField.canResignFirstResponder
+        searchTextField.canResignFirstResponder
     }
 }
 

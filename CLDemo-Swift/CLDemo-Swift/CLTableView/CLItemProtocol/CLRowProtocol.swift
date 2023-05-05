@@ -1,5 +1,5 @@
 //
-//  CKDCellProtocol.swift
+//  CLRowProtocol.swift
 //  CL
 //
 //  Created by JmoVxia on 2020/3/26.
@@ -21,7 +21,7 @@ protocol CLRowProtocol: CLCellBaseProtocol where Self: UITableViewCell {
 extension CLRowProtocol {
     var item: T? {
         get {
-            return nil
+            nil
         }
         set {}
     }

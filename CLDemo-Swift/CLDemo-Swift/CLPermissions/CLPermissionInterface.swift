@@ -26,12 +26,12 @@ enum CLAuthorizationStatus {
     case noSupport
     /// 是否可以访问
     var isAuthorized: Bool {
-        return self == .authorized || self == .provisional
+        self == .authorized || self == .provisional
     }
 
     /// 是否不支持
     var isNoSupport: Bool {
-        return self == .noSupport
+        self == .noSupport
     }
 }
 
@@ -47,11 +47,11 @@ protocol CLPermissionInterface {
 /// 相册权限
 struct CLPhotoLibraryPermission: CLPermissionInterface {
     var isAuthorized: Bool {
-        return PHPhotoLibrary.authorizationStatus() == .authorized
+        PHPhotoLibrary.authorizationStatus() == .authorized
     }
 
     var isDenied: Bool {
-        return PHPhotoLibrary.authorizationStatus() == .denied
+        PHPhotoLibrary.authorizationStatus() == .denied
     }
 
     func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?) {
@@ -90,11 +90,11 @@ struct CLPhotoLibraryPermission: CLPermissionInterface {
 /// 相机权限
 struct CLCameraPermission: CLPermissionInterface {
     var isAuthorized: Bool {
-        return AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized
+        AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized
     }
 
     var isDenied: Bool {
-        return AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.denied
+        AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.denied
     }
 
     func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?) {
@@ -128,11 +128,11 @@ struct CLCameraPermission: CLPermissionInterface {
 /// 麦克风权限
 struct CLMicrophonePermission: CLPermissionInterface {
     var isAuthorized: Bool {
-        return AVAudioSession.sharedInstance().recordPermission == .granted
+        AVAudioSession.sharedInstance().recordPermission == .granted
     }
 
     var isDenied: Bool {
-        return AVAudioSession.sharedInstance().recordPermission == .denied
+        AVAudioSession.sharedInstance().recordPermission == .denied
     }
 
     func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?) {

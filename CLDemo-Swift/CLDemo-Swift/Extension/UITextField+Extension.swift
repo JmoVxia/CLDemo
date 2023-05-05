@@ -1,5 +1,5 @@
 //
-//  UITextField+CLExtension.swift
+//  UITextField+Extension.swift
 //  CL
 //
 //  Created by JmoVxia on 2020/4/2.
@@ -16,10 +16,10 @@ extension UITextField {
     ///   - font: 字体
     func setPlaceholder(_ string: String, color: UIColor? = nil, font: UIFont? = nil) {
         let attributedString = NSMutableAttributedString(string: string)
-        if let color = color {
+        if let color {
             attributedString.addAttributes([NSAttributedString.Key.foregroundColor: color], range: NSRange(location: 0, length: string.count))
         }
-        if let font = font {
+        if let font {
             attributedString.addAttributes([NSAttributedString.Key.font: font], range: NSRange(location: 0, length: string.count))
         }
         attributedPlaceholder = attributedString

@@ -20,12 +20,12 @@ enum CLChatMessageSendState: String {
 class CLChatItem: NSObject {
     /// 名字高度
     var nameHeight: CGFloat {
-        return ceil(UIFont.mediumPingFangSC(12).lineHeight)
+        ceil(UIFont.mediumPingFangSC(12).lineHeight)
     }
 
     /// 时间高度
     var timeHeight: CGFloat {
-        return ceil(UIFont.mediumPingFangSC(12).lineHeight)
+        ceil(UIFont.mediumPingFangSC(12).lineHeight)
     }
 
     /// cell高度
@@ -35,9 +35,9 @@ class CLChatItem: NSObject {
     /// 头像
     var avatarUrl: URL {
         if let url = URL(string: avatarString), url.scheme != nil {
-            return url
+            url
         } else {
-            return URL(fileURLWithPath: avatarString)
+            URL(fileURLWithPath: avatarString)
         }
     }
 
@@ -53,7 +53,7 @@ class CLChatItem: NSObject {
     var sendTime: Int64 = milliStamp
     /// 消息显示时间
     var messageShowTime: String {
-        return messageTimeFormat(sendTime)
+        messageTimeFormat(sendTime)
     }
 
     /// 是否显示发送时间

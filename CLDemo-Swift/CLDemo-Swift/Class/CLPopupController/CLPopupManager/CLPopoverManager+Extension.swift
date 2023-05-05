@@ -12,7 +12,7 @@ import UIKit
 extension CLPopoverManager {
     /// 显示翻牌弹窗
     @discardableResult static func showFlop(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
-        return mainSync {
+        mainSync {
             let controller = CLPopupFlopController()
             configCallback?(controller.config)
             controller.show()
@@ -222,7 +222,7 @@ extension CLPopoverManager {
 
     /// 显示加载动画
     @discardableResult static func showLoading(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
-        return mainSync {
+        mainSync {
             let controller = CLPopupLoadingController()
             configCallback?(controller.config)
             controller.show()
@@ -233,7 +233,7 @@ extension CLPopoverManager {
 
 extension CLPopoverManager {
     @discardableResult static func showCalendar(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
-        return mainSync {
+        mainSync {
             let controller = CLPopupCalendarController()
             configCallback?(controller.config)
             controller.show()

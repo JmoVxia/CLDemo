@@ -1,5 +1,5 @@
 //
-//  CLRecordTimeView.swift
+//  CLChatRecordTimeView.swift
 //  CLDemo
 //
 //  Created by JmoVxia on 2020/1/28.

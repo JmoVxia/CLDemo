@@ -12,7 +12,7 @@ enum InchWidth: Double {
     case iPhone5 = 320
     case iPhone6 = 375
     static var iPhoneX: InchWidth {
-        return .iPhone6
+        .iPhone6
     }
 }
 
@@ -117,10 +117,10 @@ extension BinaryFloatingPoint {
 
 extension CGSize {
     func autoWidth(_ inch: InchWidth = .iPhone6) -> CGSize {
-        return CGSize(width: width.autoWidth(), height: height.autoWidth())
+        CGSize(width: width.autoWidth(), height: height.autoWidth())
     }
 
     func autoHeight(_ inch: InchHeight = .iPhone6) -> CGSize {
-        return CGSize(width: width.autoHeight(), height: height.autoHeight())
+        CGSize(width: width.autoHeight(), height: height.autoHeight())
     }
 }

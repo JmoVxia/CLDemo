@@ -1,5 +1,5 @@
 //
-//  CLChatAlbumContentView.swift
+//  CLChatPhotoAlbumContentView.swift
 //  CLDemo
 //
 //  Created by Emma on 2020/2/11.
@@ -64,9 +64,9 @@ class CLChatPhotoAlbumContentView: UIView {
     private lazy var bottomToolBar: CLChatPhotoAlbumBottomBar = {
         let view = CLChatPhotoAlbumBottomBar()
         view.sendCallback = { [weak self] in
-            guard let self = self else { return }
-            self.sendImageCallBack?(self.selectedArray.map { ($0.image, $0.asset) })
-            self.restoreInitialState()
+            guard let self else { return }
+            sendImageCallBack?(selectedArray.map { ($0.image, $0.asset) })
+            restoreInitialState()
         }
         view.closeCallback = { [weak self] in
             self?.closeCallback?()
@@ -150,7 +150,7 @@ private extension CLChatPhotoAlbumContentView {
         imagePicker.allowPickingOriginalPhoto = false
         imagePicker.modalPresentationStyle = .fullScreen
         imagePicker.didFinishPickingPhotosHandle = { photos, assets, _ in
-            guard let photos = photos, let assets = assets as? [PHAsset], photos.count == assets.count else {
+            guard let photos, let assets = assets as? [PHAsset], photos.count == assets.count else {
                 return
             }
             var dataArray = [(UIImage, PHAsset)]()
@@ -182,7 +182,7 @@ private extension CLChatPhotoAlbumContentView {
 
     /// 计算显示大小
     func calculateSize(with asset: PHAsset?) -> CGSize {
-        guard let asset = asset else {
+        guard let asset else {
             return .zero
         }
         let scale = CGFloat(asset.pixelWidth) / CGFloat(asset.pixelHeight)
@@ -193,7 +193,7 @@ private extension CLChatPhotoAlbumContentView {
 
     /// 当前选中数字
     func currentSeletedNumber(_ indexPath: IndexPath) -> Int {
-        return (selectedArray.firstIndex(where: { $0.indexPath == indexPath }) ?? -1) + 1
+        (selectedArray.firstIndex(where: { $0.indexPath == indexPath }) ?? -1) + 1
     }
 
     /// 配置cell
@@ -212,7 +212,7 @@ private extension CLChatPhotoAlbumContentView {
 
 extension CLChatPhotoAlbumContentView: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        guard let fetchResult = fetchResult, let collectionChanges = changeInstance.changeDetails(for: fetchResult) else {
+        guard let fetchResult, let collectionChanges = changeInstance.changeDetails(for: fetchResult) else {
             return
         }
         var array = [String]()
@@ -257,7 +257,7 @@ extension CLChatPhotoAlbumContentView: UICollectionViewDelegate {
 
 extension CLChatPhotoAlbumContentView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return calculateSize(with: fetchResult?[indexPath.row])
+        calculateSize(with: fetchResult?[indexPath.row])
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -267,7 +267,7 @@ extension CLChatPhotoAlbumContentView: UICollectionViewDelegateFlowLayout {
 
 extension CLChatPhotoAlbumContentView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchResult?.count ?? 0
+        fetchResult?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

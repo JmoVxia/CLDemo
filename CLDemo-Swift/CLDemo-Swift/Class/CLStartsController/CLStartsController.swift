@@ -1,5 +1,5 @@
 //
-//  CLFiveStartsController.swift
+//  CLStartsController.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/12/28.
@@ -29,10 +29,10 @@ class CLStartsController: CLController {
 
 extension CLStartsController: CLStartsViewDataSource {
     func numberOfItems(in startsView: CLStartsView) -> Int {
-        return 5
+        5
     }
 
     func imageOfStartsView(startsView: CLStartsView) -> (nomal: UIImage, selected: UIImage) {
-        return (UIImage(named: "evaluateBIcon")!, UIImage(named: "evaluateCIcon")!)
+        (UIImage(named: "evaluateBIcon")!, UIImage(named: "evaluateCIcon")!)
     }
 }

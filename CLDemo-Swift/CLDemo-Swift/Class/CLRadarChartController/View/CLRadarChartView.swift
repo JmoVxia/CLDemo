@@ -38,13 +38,14 @@ private extension CLRadarChartView {
 
 extension CLRadarChartView {
     override func draw(_ rect: CGRect) {
-        guard let dataSource = dataSource else { return }
+        guard let dataSource else { return }
 
+        subviews.forEach { $0.removeFromSuperview() }
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }
 
         let horizontalInset = dataSource.horizontalInset(in: self)
         let verticalInset = dataSource.verticalInset(in: self)
-        let chartMaxRadius = dataSource.maximumRadius(in: self) - 2 * horizontalInset
+        let chartMaxRadius = dataSource.maximumRadius(in: self) - horizontalInset
         let chartPointCount = dataSource.numberOfPoints(in: self)
         let chartLayerCount = dataSource.numberOfWebLayers(in: self)
 
@@ -129,7 +130,12 @@ extension CLRadarChartView {
                 let size = attributedText.size()
                 let point = calculateTextPoint(size: size, index: index, chartMaxRadius: chartMaxRadius,
                                                angle: angle, centerPoint: centerPoint)
-                attributedText.draw(at: point)
+//                attributedText.draw(at: point)
+                let label = UILabel(frame: .init(origin: point, size: size))
+                label.numberOfLines = 0
+                label.attributedText = attributedText
+                label.backgroundColor = .random
+                addSubview(label)
             }
         }
 
@@ -168,7 +174,7 @@ private extension CLRadarChartView {}
 
 extension CLRadarChartView {
     static func calculateSize(radius: CGFloat, side: Int, verticalInset: CGFloat, horizontalInset: CGFloat) -> CGSize {
-        let value = radius - horizontalInset * 2.0
+        let value = radius - horizontalInset
         let maxHeight: CGFloat = {
             if side % 2 == .zero {
                 return 2 * value + verticalInset * 2.0
@@ -178,7 +184,7 @@ extension CLRadarChartView {
                 return tangent + value + verticalInset * 2.0
             }
         }()
-        let height = value * 2.0 + verticalInset
+        let height = value * 2.0
         let padding = maxHeight - height
         return .init(width: radius * 2.0, height: height + max(0, padding))
     }

@@ -110,8 +110,8 @@ private extension CLChangeLanguageController {
             let item = CLTitleCellItem(title: "跟随系统".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .system ? .checkmark : .none
             item.didSelectCellCallback = { [weak self] value in
-                guard let self = self else { return }
-                self.changeLanguage(.system)
+                guard let self else { return }
+                changeLanguage(.system)
             }
             tableViewHepler.rows.append(item)
         }
@@ -119,8 +119,8 @@ private extension CLChangeLanguageController {
             let item = CLTitleCellItem(title: "中文".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .chineseSimplified ? .checkmark : .none
             item.didSelectCellCallback = { [weak self] value in
-                guard let self = self else { return }
-                self.changeLanguage(.chineseSimplified)
+                guard let self else { return }
+                changeLanguage(.chineseSimplified)
             }
             tableViewHepler.rows.append(item)
         }
@@ -128,8 +128,8 @@ private extension CLChangeLanguageController {
             let item = CLTitleCellItem(title: "英文".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .english ? .checkmark : .none
             item.didSelectCellCallback = { [weak self] value in
-                guard let self = self else { return }
-                self.changeLanguage(.english)
+                guard let self else { return }
+                changeLanguage(.english)
             }
             tableViewHepler.rows.append(item)
         }

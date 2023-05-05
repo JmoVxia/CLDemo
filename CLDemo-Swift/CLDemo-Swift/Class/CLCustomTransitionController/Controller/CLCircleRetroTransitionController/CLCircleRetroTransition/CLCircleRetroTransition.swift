@@ -14,7 +14,7 @@ class CLCircleRetroTransition: NSObject {
 
 extension CLCircleRetroTransition: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return duration
+        duration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

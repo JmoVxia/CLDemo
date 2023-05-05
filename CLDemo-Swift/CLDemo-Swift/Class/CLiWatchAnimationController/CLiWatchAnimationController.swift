@@ -84,11 +84,11 @@ private extension CLiWatchAnimationController {
 
 extension CLiWatchAnimationController: HexagonalViewDataSource {
     func hexagonalView(_ hexagonalView: HexagonalView, imageForIndex index: Int) -> UIImage? {
-        return dataArray[index]
+        dataArray[index]
     }
 
     func numberOfItemInHexagonalView(_ hexagonalView: HexagonalView) -> Int {
-        return dataArray.count - 1
+        dataArray.count - 1
     }
 }
 

@@ -51,6 +51,6 @@ class CLRecordVernierCaliperItem: NSObject {
 
 extension CLRecordVernierCaliperItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLRecordVernierCaliperCell.self
+        CLRecordVernierCaliperCell.self
     }
 }

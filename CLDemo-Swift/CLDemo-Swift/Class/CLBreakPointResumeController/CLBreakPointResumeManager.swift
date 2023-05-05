@@ -34,11 +34,15 @@ class CLBreakPointResumeManager: NSObject {
         return queue
     }()
 
-    private lazy var operationSemap: DispatchSemaphore = {
+    private lazy var semaphore: DispatchSemaphore = {
         let semap = DispatchSemaphore(value: 0)
         semap.signal()
         return semap
     }()
+
+    private var progressSet = CLSafeArrayDictionary<String, (_ url: URL, _ progress: CGFloat) -> Void>()
+
+    private var completionsSet = CLSafeArrayDictionary<String, (Result<String, DownloadError>) -> Void>()
 
     override private init() {
         super.init()
@@ -49,40 +53,52 @@ class CLBreakPointResumeManager: NSObject {
 }
 
 extension CLBreakPointResumeManager {
-    static func download(_ url: URL, progressBlock: ((CGFloat) -> Void)? = nil, completionBlock: ((Result<String, DownloadError>) -> Void)? = nil) {
-        let completion = { result in
+    static func download(_ url: URL, progressBlock: ((_ url: URL, _ progress: CGFloat) -> Void)? = nil, completionBlock: ((Result<String, DownloadError>) -> Void)? = nil) {
+        let key = url.absoluteString.md5()
+
+        func notifyCallback(progress: CGFloat? = nil, result: Result<String, DownloadError>? = nil) {
             DispatchQueue.main.async {
-                completionBlock?(result)
+                if let progress { shared.progressSet[key]?.forEach { $0(url, progress) } }
+                if let result {
+                    shared.completionsSet[key]?.forEach { $0(result) }
+                    shared.progressSet[key] = nil
+                    shared.completionsSet[key] = nil
+                }
             }
         }
 
-        guard operation(url.absoluteString) == nil else {
-            completion(.failure(.downloading))
-            return
-        }
+        if let progress = progressBlock { shared.progressSet[key] = [progress] }
+
+        if let completion = completionBlock { shared.completionsSet[key] = [completion] }
+
+        guard getOperation(key) == nil else { return }
+
         let fileAttribute = fileAttribute(url)
+
         guard !isDownloaded(url).0 else {
-            progressBlock?(1)
-            completion(.success(fileAttribute.path))
+            notifyCallback(progress: 1, result: .success(fileAttribute.path))
             return
         }
 
         let operation = CLBreakPointResumeOperation(url: url, path: fileAttribute.path, currentBytes: fileAttribute.currentBytes)
-        operation.progressBlock = progressBlock
+        operation.progressBlock = { value in
+            notifyCallback(progress: value)
+        }
         operation.completionBlock = {
             if let error = operation.error {
-                completion(.failure(error))
+                notifyCallback(result: .failure(error))
             } else {
-                completion(.success(fileAttribute.path))
+                notifyCallback(result: .success(fileAttribute.path))
             }
-            removeValue(url.absoluteString)
+            removeOperation(key)
         }
         shared.queue.addOperation(operation)
-        setOperation(operation, for: url.absoluteString)
+        setOperation(operation, for: key)
     }
 
     static func cancel(_ url: URL) {
-        guard let operation = operation(url.absoluteString),
+        let key = url.absoluteString.md5()
+        guard let operation = getOperation(key),
               !operation.isCancelled
         else {
             return
@@ -104,23 +120,28 @@ extension CLBreakPointResumeManager {
 }
 
 private extension CLBreakPointResumeManager {
-    static func operation(_ value: String) -> CLBreakPointResumeOperation? {
-        shared.operationSemap.wait()
-        let operation = shared.operationDictionary[value]
-        shared.operationSemap.signal()
-        return operation
+    static func getOperation(_ value: String) -> CLBreakPointResumeOperation? {
+        shared.semaphore.wait()
+        defer {
+            shared.semaphore.signal()
+        }
+        return shared.operationDictionary[value]
     }
 
     static func setOperation(_ value: CLBreakPointResumeOperation, for key: String) {
-        shared.operationSemap.wait()
+        shared.semaphore.wait()
+        defer {
+            shared.semaphore.signal()
+        }
         shared.operationDictionary[key] = value
-        shared.operationSemap.signal()
     }
 
-    static func removeValue(_ value: String) {
-        shared.operationSemap.wait()
+    static func removeOperation(_ value: String) {
+        shared.semaphore.wait()
+        defer {
+            shared.semaphore.signal()
+        }
         shared.operationDictionary.removeValue(forKey: value)
-        shared.operationSemap.signal()
     }
 }
 
@@ -133,11 +154,11 @@ extension CLBreakPointResumeManager {
 
 extension CLBreakPointResumeManager {
     static func fileAttribute(_ url: URL) -> (path: String, currentBytes: Int64, totalBytes: Int64) {
-        return (filePath(url), fileCurrentBytes(url), fileTotalBytes(url))
+        (filePath(url), fileCurrentBytes(url), fileTotalBytes(url))
     }
 
     static func filePath(_ url: URL) -> String {
-        return folderPath + url.absoluteString.md5() + (url.pathExtension.isEmpty ? "" : ".\(url.pathExtension)")
+        folderPath + url.absoluteString.md5() + (url.pathExtension.isEmpty ? "" : ".\(url.pathExtension)")
     }
 
     static func fileCurrentBytes(_ url: URL) -> Int64 {

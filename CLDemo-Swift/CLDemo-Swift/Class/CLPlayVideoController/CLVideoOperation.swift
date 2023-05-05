@@ -39,15 +39,15 @@ class CLVideoOperation: Operation {
     }
 
     override var isFinished: Bool {
-        return taskFinished
+        taskFinished
     }
 
     override var isExecuting: Bool {
-        return taskExecuting
+        taskExecuting
     }
 
     override var isAsynchronous: Bool {
-        return true
+        true
     }
 
     init(path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
@@ -145,13 +145,13 @@ extension CLVideoOperation {
     private func orientation(from videoTrack: AVAssetTrack) -> UIImage.Orientation {
         var orientation: UIImage.Orientation = .up
         let track = videoTrack.preferredTransform
-        if track.a == 0 && track.b == 1.0 && track.c == -1.0 && track.d == 0 {
+        if track.a == 0, track.b == 1.0, track.c == -1.0, track.d == 0 {
             orientation = .right
-        } else if track.a == 0 && track.b == -1.0 && track.c == 1.0 && track.d == 0 {
+        } else if track.a == 0, track.b == -1.0, track.c == 1.0, track.d == 0 {
             orientation = .left
-        } else if track.a == 1.0 && track.b == 0 && track.c == 0 && track.d == 1.0 {
+        } else if track.a == 1.0, track.b == 0, track.c == 0, track.d == 1.0 {
             orientation = .up
-        } else if track.a == -1.0 && track.b == 0 && track.c == 0 && track.d == -1.0 {
+        } else if track.a == -1.0, track.b == 0, track.c == 0, track.d == -1.0 {
             orientation = .down
         }
         return orientation
@@ -202,7 +202,7 @@ extension CLVideoOperation {
         context?.draw(image, in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height))
         let cgImage = context?.makeImage()
         UIGraphicsEndImageContext()
-        if let cgImage = cgImage {
+        if let cgImage {
             return cgImage
         } else {
             return image

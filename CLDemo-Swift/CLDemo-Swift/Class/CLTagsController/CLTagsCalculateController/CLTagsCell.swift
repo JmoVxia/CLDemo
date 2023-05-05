@@ -31,7 +31,7 @@ class CLTagsCell: UITableViewCell {
 
 extension CLTagsCell {
     func reSetTags() {
-        guard let tagsItem = tagsItem else {
+        guard let tagsItem else {
             return
         }
         let count = max(tagsItem.tags.count, viewArray.count)

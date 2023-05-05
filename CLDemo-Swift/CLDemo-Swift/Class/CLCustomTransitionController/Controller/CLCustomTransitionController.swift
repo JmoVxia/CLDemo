@@ -107,8 +107,8 @@ private extension CLCustomTransitionController {
             let item = CLTitleCellItem(title: "气泡".localized, type: CLBubbleTransitionController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] value in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }
@@ -116,8 +116,8 @@ private extension CLCustomTransitionController {
             let item = CLTitleCellItem(title: "圆形".localized, type: CLCircleRetroTransitionController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] value in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }
@@ -125,8 +125,8 @@ private extension CLCustomTransitionController {
             let item = CLTitleCellItem(title: "翻盖".localized, type: CLTiledFlipRetroTransitionController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] value in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }

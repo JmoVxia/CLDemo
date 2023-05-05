@@ -1,5 +1,5 @@
 //
-//  CLHoneycomLayout.swift
+//  CLHoneycombLayout.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2021/8/13.
@@ -22,7 +22,7 @@ class CLHoneycombLayout: UICollectionViewFlowLayout {
 extension CLHoneycombLayout {
     override func prepare() {
         super.prepare()
-        guard let collectionView = collectionView else { return }
+        guard let collectionView else { return }
         scrollDirection = .vertical
         attributesArray = nil
 
@@ -39,15 +39,13 @@ extension CLHoneycombLayout {
             let group = CGFloat(items / itemsPerGroup)
             let groupModulo = items % itemsPerGroup
             let residualRow = (groupModulo <= (itemsPerRow - 1)) ? 1 : 2
-            let residualHeight: CGFloat = {
-                if groupModulo == 0 {
-                    return itemHeight * 0.25
-                } else if residualRow == 2 {
-                    return heightOfGroup + itemHeight * 0.25
-                } else {
-                    return itemHeight
-                }
-            }()
+            let residualHeight: CGFloat = if groupModulo == 0 {
+                itemHeight * 0.25
+            } else if residualRow == 2 {
+                heightOfGroup + itemHeight * 0.25
+            } else {
+                itemHeight
+            }
             return CGSize(width: collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right, height: group * heightOfGroup + residualHeight)
         }()
     }
@@ -55,7 +53,7 @@ extension CLHoneycombLayout {
 
 extension CLHoneycombLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        if let attributesArray = attributesArray {
+        if let attributesArray {
             return attributesArray
         } else {
             attributesArray = Array(0 ..< items).compactMap { layoutAttributesForItem(at: IndexPath(item: $0, section: 0)) }
@@ -80,7 +78,7 @@ extension CLHoneycombLayout {
 extension CLHoneycombLayout {
     override var itemSize: CGSize {
         get {
-            return CGSize(width: itemWidth, height: itemHeight)
+            CGSize(width: itemWidth, height: itemHeight)
         }
         set {
             super.itemSize = newValue
@@ -88,10 +86,10 @@ extension CLHoneycombLayout {
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return false
+        false
     }
 
     override var collectionViewContentSize: CGSize {
-        return contentSize
+        contentSize
     }
 }

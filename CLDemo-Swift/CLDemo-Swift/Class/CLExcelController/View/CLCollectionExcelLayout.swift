@@ -24,13 +24,13 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
     private var contentSize = CGSize.zero
 
     func isItemSticky(at indexPath: IndexPath) -> Bool {
-        return indexPath.item < stickyColumnsCount || indexPath.section < stickyRowsCount
+        indexPath.item < stickyColumnsCount || indexPath.section < stickyRowsCount
     }
 
     // MARK: - Collection view flow layout methods
 
     override var collectionViewContentSize: CGSize {
-        return contentSize
+        contentSize
     }
 
     override func prepare() {
@@ -54,7 +54,7 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
+        true
     }
 
     // MARK: - Helpers
@@ -109,22 +109,22 @@ class CLCollectionExcelLayout: UICollectionViewFlowLayout {
 
     private func zIndex(forRow row: Int, column col: Int) -> Int {
         if row < stickyRowsCount && col < stickyColumnsCount {
-            return ZOrder.staticStickyItem
+            ZOrder.staticStickyItem
         } else if row < stickyRowsCount || col < stickyColumnsCount {
-            return ZOrder.stickyItem
+            ZOrder.stickyItem
         } else {
-            return ZOrder.commonItem
+            ZOrder.commonItem
         }
     }
 
     // MARK: - Sizing
 
     private var rowsCount: Int {
-        return collectionView!.numberOfSections
+        collectionView!.numberOfSections
     }
 
     private func columnsCount(in row: Int) -> Int {
-        return collectionView!.numberOfItems(inSection: row)
+        collectionView!.numberOfItems(inSection: row)
     }
 
     private func size(forRow row: Int, column: Int) -> CGSize {

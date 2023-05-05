@@ -22,11 +22,11 @@ class CLDrawerPresentationController: UIPresentationController {
 
 extension CLDrawerPresentationController {
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        return CGSize(width: parentSize.width * 0.6, height: parentSize.height)
+        CGSize(width: parentSize.width * 0.6, height: parentSize.height)
     }
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        guard let containerView = containerView else {
+        guard let containerView else {
             return .zero
         }
         return CGRect(x: containerView.bounds.width * 0.4, y: 0, width: containerView.bounds.width * 0.6, height: containerView.bounds.height)
@@ -37,7 +37,7 @@ extension CLDrawerPresentationController {
     }
 
     override func presentationTransitionWillBegin() {
-        guard let containerView = containerView else {
+        guard let containerView else {
             return
         }
 

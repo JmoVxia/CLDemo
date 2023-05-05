@@ -39,14 +39,14 @@ class CLChatEmojiFlowLayout: UICollectionViewFlowLayout {
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return attributesArray
+        attributesArray
     }
 }
 
 extension CLChatEmojiFlowLayout {
     private func calculatePositionWithItem(_ item: Int) -> Int {
-        let itemCountPerRow = self.itemCountPerRow()
-        let rowCount = self.rowCount()
+        let itemCountPerRow = itemCountPerRow()
+        let rowCount = rowCount()
         let page = item / (itemCountPerRow * rowCount)
         let x = item % itemCountPerRow + page * itemCountPerRow
         let y = item / itemCountPerRow - page * rowCount

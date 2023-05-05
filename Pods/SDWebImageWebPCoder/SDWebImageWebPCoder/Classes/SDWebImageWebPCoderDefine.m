@@ -26,3 +26,4 @@ SDImageCoderOption _Nonnull const SDImageCoderEncodeWebPShowCompressed = @"webPS
 SDImageCoderOption _Nonnull const SDImageCoderEncodeWebPPartitions = @"webPPartitions";
 SDImageCoderOption _Nonnull const SDImageCoderEncodeWebPPartitionLimit = @"webPPartitionLimit";
 SDImageCoderOption _Nonnull const SDImageCoderEncodeWebPUseSharpYuv = @"webPUseSharpYuv";
+SDImageCoderOption _Nonnull const SDImageCoderEncodeWebPLossless = @"webPLossless";

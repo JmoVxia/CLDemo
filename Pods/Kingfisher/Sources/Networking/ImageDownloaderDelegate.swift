@@ -25,6 +25,11 @@
 //  THE SOFTWARE.
 
 import Foundation
+#if os(macOS)
+import AppKit
+#else
+import UIKit
+#endif
 
 /// Protocol of `ImageDownloader`. This protocol provides a set of methods which are related to image downloader
 /// working stages and rules.
@@ -116,6 +121,28 @@ public protocol ImageDownloaderDelegate: AnyObject {
     /// - Note: If the default 200 to 400 valid code does not suit your need,
     ///         you can implement this method to change that behavior.
     func isValidStatusCode(_ code: Int, for downloader: ImageDownloader) -> Bool
+
+    /// Called when the task has received a valid HTTP response after it passes other checks such as the status code.
+    /// You can perform additional checks or verification on the response to determine if the download should be allowed.
+    ///
+    /// For example, it is useful if you want to verify some header values in the response before actually starting the
+    /// download.
+    ///
+    /// If implemented, it is your responsibility to call the `completionHandler` with a proper response disposition,
+    /// such as `.allow` to start the actual downloading or `.cancel` to cancel the task. If `.cancel` is used as the
+    /// disposition, the downloader will raise an `KingfisherError` with
+    /// `ResponseErrorReason.cancelledByDelegate` as its reason. If not implemented, any response which passes other
+    /// checked will be allowed and the download starts.
+    ///
+    /// - Parameters:
+    ///   - downloader: The `ImageDownloader` object which is used for the downloading operation.
+    ///   - response: The original response object of the downloading process.
+    ///   - completionHandler: A completion handler that receives the disposition for the download task. You must call
+    ///   this handler with either `.allow` or `.cancel`.
+    func imageDownloader(
+        _ downloader: ImageDownloader,
+        didReceive response: URLResponse,
+        completionHandler: @escaping (URLSession.ResponseDisposition) -> Void)
 }
 
 // Default implementation for `ImageDownloaderDelegate`.
@@ -151,4 +178,12 @@ extension ImageDownloaderDelegate {
     public func imageDownloader(_ downloader: ImageDownloader, didDownload data: Data, for url: URL) -> Data? {
         return data
     }
+
+    public func imageDownloader(
+        _ downloader: ImageDownloader,
+        didReceive response: URLResponse,
+        completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+            completionHandler(.allow)
+        }
+
 }

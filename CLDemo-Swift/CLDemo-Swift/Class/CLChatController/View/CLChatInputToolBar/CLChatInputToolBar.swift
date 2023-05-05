@@ -334,19 +334,19 @@ class CLChatInputToolBar: UIView {
     private var isShowTextKeyboard: Bool = false
     /// 输入框默认大小
     private var textViewDefaultHeight: CGFloat {
-        return CGFloat(ceilf(Float(textFont.lineHeight + textView.textContainerInset.top + textView.textContainerInset.bottom)))
+        CGFloat(ceilf(Float(textFont.lineHeight + textView.textContainerInset.top + textView.textContainerInset.bottom)))
     }
 
     /// 输入框改变后大小
     private var textViewChangedHeight: CGFloat = 0.0
     /// 输入框大小
     var textViewHeight: CGFloat {
-        return max(textViewDefaultHeight, textViewChangedHeight)
+        max(textViewDefaultHeight, textViewChangedHeight)
     }
 
     /// 初始高度
     var toolBarDefaultHeight: CGFloat {
-        return textViewDefaultHeight + 15 + 15 + safeAreaEdgeInsets.bottom
+        textViewDefaultHeight + 15 + 15 + safeAreaEdgeInsets.bottom
     }
 
     /// 文字大小

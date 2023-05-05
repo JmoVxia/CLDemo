@@ -108,8 +108,8 @@ private extension CLHoneycombController {
             let item = CLTitleCellItem(title: "UICollectionView 实现".localized, type: CLHoneycombCollectionViewController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] value in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }
@@ -117,8 +117,8 @@ private extension CLHoneycombController {
             let item = CLTitleCellItem(title: "UIScrollView 实现".localized, type: CLHoneycombScrollViewController.self)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] value in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }

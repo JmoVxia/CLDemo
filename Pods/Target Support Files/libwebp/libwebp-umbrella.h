@@ -12,6 +12,7 @@
 
 #import "demux.h"
 #import "mux.h"
+#import "sharpyuv.h"
 #import "decode.h"
 #import "encode.h"
 #import "types.h"

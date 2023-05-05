@@ -33,7 +33,7 @@ import UIKit
 
     /// log路径数组
     class var logPathArray: [String] {
-        return findAllFile(type: "log", folderPath: shared.folderPath).sorted { path1, path2 -> Bool in
+        findAllFile(type: "log", folderPath: shared.folderPath).sorted { path1, path2 -> Bool in
             let date1 = Date(dateString: (path1.lastPathComponent as NSString).deletingPathExtension, format: "yyyy-MM-dd HH:mm:ss")
             let date2 = Date(dateString: (path2.lastPathComponent as NSString).deletingPathExtension, format: "yyyy-MM-dd HH:mm:ss")
             return date1.isLater(than: date2)

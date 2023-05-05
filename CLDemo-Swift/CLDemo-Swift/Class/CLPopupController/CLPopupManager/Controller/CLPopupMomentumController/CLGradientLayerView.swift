@@ -31,6 +31,6 @@ class CLGradientLayerView: UIView {
     }
 
     override class var layerClass: AnyClass {
-        return CAGradientLayer.classForCoder()
+        CAGradientLayer.classForCoder()
     }
 }

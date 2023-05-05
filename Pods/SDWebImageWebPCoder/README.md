@@ -12,6 +12,8 @@ Starting with the SDWebImage 5.0 version, we moved the WebP support code and [li
 
 SDWebImageWebPCoder supports both WebP decoding and encoding, for Static WebP or Animated WebP as well.
 
+Note: Apple's ImageIO supports WebP decoding from iOS 14/tvOS 14/watchOS 7/macOS 11, so SDWebImage on those platform can also decode WebP images (using `SDWebImageAWebPCoder` built-in coder). However it may contains some limitation, check https://github.com/SDWebImage/SDWebImage/issues/3558, you can still force to use this coder on those platforms by adding this coder.
+
 ## Requirements
 
 + iOS 9.0
@@ -166,6 +168,28 @@ UIImage *thumbnailImage = [[SDImageWebPCoder sharedCoder] decodedImageWithData:w
 let webpData: Data
 let thumbnailSize = CGSize(width: 300, height: 300)
 let image = SDImageWebPCoder.shared.decodedImage(with: data, options: [.decodeThumbnailPixelSize: thumbnailSize])
+```
+
+### Decoding with limit bytes (0.12.0+)
+
++ Objective-C
+
+```objective-c
+// WebP thumbnail image decoding
+NSData *webpData;
+NSUInteger limitBytes = 1024 * 1024; // 1MB
+UIImage *image = [[SDImageWebPCoder sharedCoder] decodedImageWithData:webpData options:@{SDImageCoderDecodeScaleDownLimitBytes : @(limitBytes)}];
+// The image pixel buffer is guaranteed to less than 1MB in RAM (may scale down or full size), suitable for large image
+```
+
++ Swift
+
+```swift
+// WebP thumbnail image decoding
+let webpData: Data
+let limitBytes = 1024 * 1024 // 1MB
+let image = SDImageWebPCoder.shared.decodedImage(with: data, options: [.decodeScaleDownLimitBytes: limitBytes])
+// The image pixel buffer is guaranteed to less than 1MB in RAM (may scale down or full size), suitable for large image
 ```
 
 ### Encoding

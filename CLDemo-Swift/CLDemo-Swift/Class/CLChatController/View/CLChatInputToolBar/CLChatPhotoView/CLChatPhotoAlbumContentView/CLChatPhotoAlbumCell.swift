@@ -273,7 +273,7 @@ extension CLChatPhotoAlbumCell {
         }) { _ in
             self.seletedNumberButton.isHidden = false
         }
-        guard let image = image else {
+        guard let image else {
             return
         }
         sendImageCallBack?(image)

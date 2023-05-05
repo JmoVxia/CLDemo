@@ -105,7 +105,7 @@ private extension CLExcelView {
                     maxWidthDictionary[columnIndex] = size.width
                 }
             }
-            if let maxHeight = columnSizes.map({ $0.height }).max() {
+            if let maxHeight = columnSizes.map(\.height).max() {
                 maxHeightDictionary[rowIndex] = maxHeight
             }
         }
@@ -139,11 +139,11 @@ extension CLExcelView {
 
 extension CLExcelView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dataList.count
+        dataList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataList[section].count
+        dataList[section].count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

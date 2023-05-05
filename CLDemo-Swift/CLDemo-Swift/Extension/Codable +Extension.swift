@@ -1,5 +1,5 @@
 //
-//  Codable+Extension.swift
+//  Codable +Extension.swift
 //  CL
 //
 //  Created by JmoVxia on 2020/5/13.
@@ -10,7 +10,7 @@ import UIKit
 
 extension Encodable {
     func toJSONData() -> Data? {
-        return try? JSONEncoder().encode(self)
+        try? JSONEncoder().encode(self)
     }
 
     func toJSONString() -> String? {

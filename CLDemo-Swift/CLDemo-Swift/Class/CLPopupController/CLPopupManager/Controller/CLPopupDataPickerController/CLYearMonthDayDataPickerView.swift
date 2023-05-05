@@ -1,5 +1,5 @@
 //
-//  CLDataPickerView.swift
+//  CLYearMonthDayDataPickerView.swift
 //  CLDemo
 //
 //  Created by JmoVxia on 2020/3/30.
@@ -11,15 +11,15 @@ import UIKit
 
 class CLYearMonthDayDataPickerView: UIView {
     var year: Int {
-        return yearArray[yearIndex]
+        yearArray[yearIndex]
     }
 
     var month: Int {
-        return monthArray[monthIndex]
+        monthArray[monthIndex]
     }
 
     var day: Int {
-        return dayArray[dayIndex]
+        dayArray[dayIndex]
     }
 
     private var minDate: Date = .init()
@@ -123,15 +123,15 @@ extension CLYearMonthDayDataPickerView {
 
 extension CLYearMonthDayDataPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        3
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return [yearArray.count, monthArray.count, dayArray.count][component]
+        [yearArray.count, monthArray.count, dayArray.count][component]
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 50
+        50
     }
 }
 

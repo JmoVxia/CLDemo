@@ -1,5 +1,5 @@
 //
-//  ZenlyHexaView.swift
+//  HexagonalView.swift
 //  Hexacon
 //
 //  Created by Gautier Gdx on 05/02/16.
@@ -63,8 +63,8 @@ protocol HexagonalViewDataSource: AnyObject {
 }
 
 extension HexagonalViewDataSource {
-    func hexagonalView(_ hexagonalView: HexagonalView, imageForIndex index: Int) -> UIImage? { return nil }
-    func hexagonalView(_ hexagonalView: HexagonalView, viewForIndex index: Int) -> UIView? { return nil }
+    func hexagonalView(_ hexagonalView: HexagonalView, imageForIndex index: Int) -> UIImage? { nil }
+    func hexagonalView(_ hexagonalView: HexagonalView, viewForIndex index: Int) -> UIView? { nil }
 }
 
 final class HexagonalView: UIScrollView {
@@ -266,25 +266,25 @@ final class HexagonalView: UIScrollView {
         // check if the view is close to the left
         // changing the distance to border and the offset accordingly
         let leftDistance = center.x - insets.left
-        if leftDistance < distanceToBeOffset && leftDistance < distanceToBorder {
+        if leftDistance < distanceToBeOffset, leftDistance < distanceToBorder {
             distanceToBorder = leftDistance
         }
 
         // same for top
         let topDistance = center.y - insets.top
-        if topDistance < distanceToBeOffset && topDistance < distanceToBorder {
+        if topDistance < distanceToBeOffset, topDistance < distanceToBorder {
             distanceToBorder = topDistance
         }
 
         // same for right
         let rightDistance = size.width - center.x - insets.right
-        if rightDistance < distanceToBeOffset && rightDistance < distanceToBorder {
+        if rightDistance < distanceToBeOffset, rightDistance < distanceToBorder {
             distanceToBorder = rightDistance
         }
 
         // same for bottom
         let bottomDistance = size.height - center.y - insets.bottom
-        if bottomDistance < distanceToBeOffset && bottomDistance < distanceToBorder {
+        if bottomDistance < distanceToBeOffset, bottomDistance < distanceToBorder {
             distanceToBorder = bottomDistance
         }
 
@@ -378,7 +378,7 @@ final class HexagonalView: UIScrollView {
 
 extension HexagonalView: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return contentView
+        contentView
     }
 
     func scrollViewDidZoom(_ scrollView: UIScrollView) {

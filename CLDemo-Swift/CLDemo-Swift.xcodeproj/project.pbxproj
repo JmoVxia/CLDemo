@@ -34,7 +34,7 @@
 		5B3309E828FFFB23000D44DF /* CLCalendarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309DE28FFFB23000D44DF /* CLCalendarHeadView.swift */; };
 		5B3309E928FFFB23000D44DF /* CLCalendarFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309DF28FFFB23000D44DF /* CLCalendarFlowLayout.swift */; };
 		5B3309EA28FFFB23000D44DF /* CLCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309E028FFFB23000D44DF /* CLCalendarView.swift */; };
-		5B3309EB28FFFB23000D44DF /* CLCalendarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309E128FFFB23000D44DF /* CLCalendarBackgroundView.swift */; };
+		5B3309EB28FFFB23000D44DF /* CLCalendarSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309E128FFFB23000D44DF /* CLCalendarSectionView.swift */; };
 		5B3309ED28FFFC4B000D44DF /* CLCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309EC28FFFC4B000D44DF /* CLCalendarViewController.swift */; };
 		5B3309F12900F496000D44DF /* CLTagsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309F02900F496000D44DF /* CLTagsController.swift */; };
 		5B330A072901180C000D44DF /* CLRowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B330A012901180C000D44DF /* CLRowProtocol.swift */; };
@@ -151,6 +151,7 @@
 		5B83980826A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980726A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift */; };
 		5B83980B26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */; };
 		5B83980D26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */; };
+		5B9057A72B46549A003E3B1C /* CLSafeArrayDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9057A62B46549A003E3B1C /* CLSafeArrayDictionary.swift */; };
 		5B9756A226C64FFA006C0841 /* HomePage.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B9756A126C64FFA006C0841 /* HomePage.json */; };
 		5B988AC329FB73680076379C /* CLPopupCalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B988AC229FB73680076379C /* CLPopupCalendarController.swift */; };
 		5B9E321F29CDDA6500D96638 /* CLMultiValueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */; };
@@ -202,20 +203,6 @@
 		5BD0438826832F980054F2B4 /* CLPlayGifItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0437426832F980054F2B4 /* CLPlayGifItem.swift */; };
 		5BD0438926832F980054F2B4 /* CLPlayGifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0437526832F980054F2B4 /* CLPlayGifCell.swift */; };
 		5BD0438A26832F980054F2B4 /* CLGifPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0437626832F980054F2B4 /* CLGifPlayer.swift */; };
-		5BD0438B26832F980054F2B4 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437826832F980054F2B4 /* 4.gif */; };
-		5BD0438C26832F980054F2B4 /* 5.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437926832F980054F2B4 /* 5.gif */; };
-		5BD0438D26832F980054F2B4 /* 7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437A26832F980054F2B4 /* 7.gif */; };
-		5BD0438E26832F980054F2B4 /* 6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437B26832F980054F2B4 /* 6.gif */; };
-		5BD0438F26832F980054F2B4 /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437C26832F980054F2B4 /* 2.gif */; };
-		5BD0439026832F980054F2B4 /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437D26832F980054F2B4 /* 3.gif */; };
-		5BD0439126832F980054F2B4 /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437E26832F980054F2B4 /* 1.gif */; };
-		5BD0439226832F980054F2B4 /* 8.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0437F26832F980054F2B4 /* 8.gif */; };
-		5BD0439326832F980054F2B4 /* 9.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0438026832F980054F2B4 /* 9.gif */; };
-		5BD0439426832F980054F2B4 /* 14.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0438126832F980054F2B4 /* 14.gif */; };
-		5BD0439526832F980054F2B4 /* 12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0438226832F980054F2B4 /* 12.gif */; };
-		5BD0439626832F980054F2B4 /* 13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0438326832F980054F2B4 /* 13.gif */; };
-		5BD0439726832F980054F2B4 /* 11.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0438426832F980054F2B4 /* 11.gif */; };
-		5BD0439826832F980054F2B4 /* 10.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0438526832F980054F2B4 /* 10.gif */; };
 		5BD0439926832F980054F2B4 /* CLPlayGifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0438626832F980054F2B4 /* CLPlayGifController.swift */; };
 		5BD043A12683302E0054F2B4 /* CLDrawerTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0439B2683302E0054F2B4 /* CLDrawerTestController.swift */; };
 		5BD043A22683302E0054F2B4 /* CLDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0439C2683302E0054F2B4 /* CLDrawerController.swift */; };
@@ -328,6 +315,20 @@
 		5BEF4CFC2881013100A15433 /* CLTruncationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4CFB2881013100A15433 /* CLTruncationController.swift */; };
 		5BEF4CFE2881028D00A15433 /* CLTruncationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4CFD2881028D00A15433 /* CLTruncationLabel.swift */; };
 		5BEF4D002881047D00A15433 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4CFF2881047D00A15433 /* NSAttributedString+Extension.swift */; };
+		5BF2B14A2A41498B00FEBD58 /* 13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B13C2A41498900FEBD58 /* 13.gif */; };
+		5BF2B14B2A41498B00FEBD58 /* 9.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B13D2A41498900FEBD58 /* 9.gif */; };
+		5BF2B14C2A41498B00FEBD58 /* 11.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B13E2A41498900FEBD58 /* 11.gif */; };
+		5BF2B14D2A41498B00FEBD58 /* 7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B13F2A41498A00FEBD58 /* 7.gif */; };
+		5BF2B14E2A41498B00FEBD58 /* 6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1402A41498A00FEBD58 /* 6.gif */; };
+		5BF2B14F2A41498B00FEBD58 /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1412A41498A00FEBD58 /* 2.gif */; };
+		5BF2B1502A41498B00FEBD58 /* 5.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1422A41498A00FEBD58 /* 5.gif */; };
+		5BF2B1512A41498B00FEBD58 /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1432A41498A00FEBD58 /* 1.gif */; };
+		5BF2B1522A41498B00FEBD58 /* 10.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1442A41498A00FEBD58 /* 10.gif */; };
+		5BF2B1532A41498B00FEBD58 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1452A41498A00FEBD58 /* 4.gif */; };
+		5BF2B1542A41498B00FEBD58 /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1462A41498A00FEBD58 /* 3.gif */; };
+		5BF2B1552A41498B00FEBD58 /* 14.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1472A41498B00FEBD58 /* 14.gif */; };
+		5BF2B1562A41498B00FEBD58 /* 12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1482A41498B00FEBD58 /* 12.gif */; };
+		5BF2B1572A41498B00FEBD58 /* 8.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1492A41498B00FEBD58 /* 8.gif */; };
 		C010E9D2E10B3C83DC2DFA27 /* libPods-CLDemo-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */; };
 /* End PBXBuildFile section */
 
@@ -361,7 +362,7 @@
 		5B3309DE28FFFB23000D44DF /* CLCalendarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarHeadView.swift; sourceTree = "<group>"; };
 		5B3309DF28FFFB23000D44DF /* CLCalendarFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarFlowLayout.swift; sourceTree = "<group>"; };
 		5B3309E028FFFB23000D44DF /* CLCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarView.swift; sourceTree = "<group>"; };
-		5B3309E128FFFB23000D44DF /* CLCalendarBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarBackgroundView.swift; sourceTree = "<group>"; };
+		5B3309E128FFFB23000D44DF /* CLCalendarSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarSectionView.swift; sourceTree = "<group>"; };
 		5B3309EC28FFFC4B000D44DF /* CLCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCalendarViewController.swift; sourceTree = "<group>"; };
 		5B3309F02900F496000D44DF /* CLTagsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTagsController.swift; sourceTree = "<group>"; };
 		5B330A012901180C000D44DF /* CLRowProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLRowProtocol.swift; sourceTree = "<group>"; };
@@ -483,6 +484,7 @@
 		5B83980726A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroTransitionController.swift; sourceTree = "<group>"; };
 		5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroTransition.swift; sourceTree = "<group>"; };
 		5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroPushTransitionController.swift; sourceTree = "<group>"; };
+		5B9057A62B46549A003E3B1C /* CLSafeArrayDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSafeArrayDictionary.swift; sourceTree = "<group>"; };
 		5B9756A126C64FFA006C0841 /* HomePage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HomePage.json; sourceTree = "<group>"; };
 		5B988AC229FB73680076379C /* CLPopupCalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupCalendarController.swift; sourceTree = "<group>"; };
 		5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiValueController.swift; sourceTree = "<group>"; };
@@ -537,20 +539,6 @@
 		5BD0437426832F980054F2B4 /* CLPlayGifItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayGifItem.swift; sourceTree = "<group>"; };
 		5BD0437526832F980054F2B4 /* CLPlayGifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayGifCell.swift; sourceTree = "<group>"; };
 		5BD0437626832F980054F2B4 /* CLGifPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLGifPlayer.swift; sourceTree = "<group>"; };
-		5BD0437826832F980054F2B4 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
-		5BD0437926832F980054F2B4 /* 5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 5.gif; sourceTree = "<group>"; };
-		5BD0437A26832F980054F2B4 /* 7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 7.gif; sourceTree = "<group>"; };
-		5BD0437B26832F980054F2B4 /* 6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 6.gif; sourceTree = "<group>"; };
-		5BD0437C26832F980054F2B4 /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
-		5BD0437D26832F980054F2B4 /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
-		5BD0437E26832F980054F2B4 /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
-		5BD0437F26832F980054F2B4 /* 8.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 8.gif; sourceTree = "<group>"; };
-		5BD0438026832F980054F2B4 /* 9.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 9.gif; sourceTree = "<group>"; };
-		5BD0438126832F980054F2B4 /* 14.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 14.gif; sourceTree = "<group>"; };
-		5BD0438226832F980054F2B4 /* 12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 12.gif; sourceTree = "<group>"; };
-		5BD0438326832F980054F2B4 /* 13.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 13.gif; sourceTree = "<group>"; };
-		5BD0438426832F980054F2B4 /* 11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 11.gif; sourceTree = "<group>"; };
-		5BD0438526832F980054F2B4 /* 10.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 10.gif; sourceTree = "<group>"; };
 		5BD0438626832F980054F2B4 /* CLPlayGifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayGifController.swift; sourceTree = "<group>"; };
 		5BD0439B2683302E0054F2B4 /* CLDrawerTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLDrawerTestController.swift; sourceTree = "<group>"; };
 		5BD0439C2683302E0054F2B4 /* CLDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLDrawerController.swift; sourceTree = "<group>"; };
@@ -663,6 +651,20 @@
 		5BEF4CFB2881013100A15433 /* CLTruncationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTruncationController.swift; sourceTree = "<group>"; };
 		5BEF4CFD2881028D00A15433 /* CLTruncationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTruncationLabel.swift; sourceTree = "<group>"; };
 		5BEF4CFF2881047D00A15433 /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		5BF2B13C2A41498900FEBD58 /* 13.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 13.gif; sourceTree = "<group>"; };
+		5BF2B13D2A41498900FEBD58 /* 9.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 9.gif; sourceTree = "<group>"; };
+		5BF2B13E2A41498900FEBD58 /* 11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 11.gif; sourceTree = "<group>"; };
+		5BF2B13F2A41498A00FEBD58 /* 7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 7.gif; sourceTree = "<group>"; };
+		5BF2B1402A41498A00FEBD58 /* 6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 6.gif; sourceTree = "<group>"; };
+		5BF2B1412A41498A00FEBD58 /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
+		5BF2B1422A41498A00FEBD58 /* 5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 5.gif; sourceTree = "<group>"; };
+		5BF2B1432A41498A00FEBD58 /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
+		5BF2B1442A41498A00FEBD58 /* 10.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 10.gif; sourceTree = "<group>"; };
+		5BF2B1452A41498A00FEBD58 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
+		5BF2B1462A41498A00FEBD58 /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
+		5BF2B1472A41498B00FEBD58 /* 14.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 14.gif; sourceTree = "<group>"; };
+		5BF2B1482A41498B00FEBD58 /* 12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 12.gif; sourceTree = "<group>"; };
+		5BF2B1492A41498B00FEBD58 /* 8.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 8.gif; sourceTree = "<group>"; };
 		6B6549039237527F047D3A8E /* Pods-CLDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-Swift.release.xcconfig"; path = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLDemo-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -784,7 +786,7 @@
 				5B3309D828FFFB22000D44DF /* CLCalendarModel.swift */,
 				5B3309DC28FFFB23000D44DF /* CLCalendarConfig.swift */,
 				5B3309E028FFFB23000D44DF /* CLCalendarView.swift */,
-				5B3309E128FFFB23000D44DF /* CLCalendarBackgroundView.swift */,
+				5B3309E128FFFB23000D44DF /* CLCalendarSectionView.swift */,
 				5B3309DE28FFFB23000D44DF /* CLCalendarHeadView.swift */,
 				5B3309D928FFFB22000D44DF /* CLCalendarCell.swift */,
 				5B3309DA28FFFB23000D44DF /* CLCalendarLayoutAttributes.swift */,
@@ -1314,6 +1316,7 @@
 				5BD4EB7F26818AF100B5284F /* Regex.swift */,
 				5B7982A026A014DE004A6473 /* CLCalculateHepler.swift */,
 				5B7982A826A022BF004A6473 /* CLUserDefaultStorage.swift */,
+				5B9057A62B46549A003E3B1C /* CLSafeArrayDictionary.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1738,20 +1741,20 @@
 		5BD0437726832F980054F2B4 /* gif */ = {
 			isa = PBXGroup;
 			children = (
-				5BD0437826832F980054F2B4 /* 4.gif */,
-				5BD0437926832F980054F2B4 /* 5.gif */,
-				5BD0437A26832F980054F2B4 /* 7.gif */,
-				5BD0437B26832F980054F2B4 /* 6.gif */,
-				5BD0437C26832F980054F2B4 /* 2.gif */,
-				5BD0437D26832F980054F2B4 /* 3.gif */,
-				5BD0437E26832F980054F2B4 /* 1.gif */,
-				5BD0437F26832F980054F2B4 /* 8.gif */,
-				5BD0438026832F980054F2B4 /* 9.gif */,
-				5BD0438126832F980054F2B4 /* 14.gif */,
-				5BD0438226832F980054F2B4 /* 12.gif */,
-				5BD0438326832F980054F2B4 /* 13.gif */,
-				5BD0438426832F980054F2B4 /* 11.gif */,
-				5BD0438526832F980054F2B4 /* 10.gif */,
+				5BF2B1432A41498A00FEBD58 /* 1.gif */,
+				5BF2B1412A41498A00FEBD58 /* 2.gif */,
+				5BF2B1462A41498A00FEBD58 /* 3.gif */,
+				5BF2B1452A41498A00FEBD58 /* 4.gif */,
+				5BF2B1422A41498A00FEBD58 /* 5.gif */,
+				5BF2B1402A41498A00FEBD58 /* 6.gif */,
+				5BF2B13F2A41498A00FEBD58 /* 7.gif */,
+				5BF2B1492A41498B00FEBD58 /* 8.gif */,
+				5BF2B13D2A41498900FEBD58 /* 9.gif */,
+				5BF2B1442A41498A00FEBD58 /* 10.gif */,
+				5BF2B13E2A41498900FEBD58 /* 11.gif */,
+				5BF2B1482A41498B00FEBD58 /* 12.gif */,
+				5BF2B13C2A41498900FEBD58 /* 13.gif */,
+				5BF2B1472A41498B00FEBD58 /* 14.gif */,
 			);
 			path = gif;
 			sourceTree = "<group>";
@@ -2319,44 +2322,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BD0438D26832F980054F2B4 /* 7.gif in Resources */,
 				5BD0436326832EAB0054F2B4 /* 1.mp4 in Resources */,
 				5B489602268097520046AF31 /* LaunchScreen.storyboard in Resources */,
-				5BD0438E26832F980054F2B4 /* 6.gif in Resources */,
 				5BD0436B26832EAB0054F2B4 /* 13.mp4 in Resources */,
+				5BF2B1522A41498B00FEBD58 /* 10.gif in Resources */,
 				5BD0436D26832EAB0054F2B4 /* 9.mp4 in Resources */,
+				5BF2B14D2A41498B00FEBD58 /* 7.gif in Resources */,
 				5B81E9A227575D0A009DCB3E /* CLHanziPinyinController.xib in Resources */,
 				5BD0436626832EAB0054F2B4 /* 14.mp4 in Resources */,
+				5BF2B1502A41498B00FEBD58 /* 5.gif in Resources */,
+				5BF2B1542A41498B00FEBD58 /* 3.gif in Resources */,
 				5BAAC0012681B65200C2F609 /* Localizable.strings in Resources */,
+				5BF2B1552A41498B00FEBD58 /* 14.gif in Resources */,
+				5BF2B1562A41498B00FEBD58 /* 12.gif in Resources */,
 				5BD0436026832EAB0054F2B4 /* 6.mp4 in Resources */,
 				5BD0436726832EAB0054F2B4 /* 15.mp4 in Resources */,
 				5B81E9D327586A02009DCB3E /* hanyupinyin in Resources */,
-				5BD0439826832F980054F2B4 /* 10.gif in Resources */,
-				5BD0438C26832F980054F2B4 /* 5.gif in Resources */,
+				5BF2B14F2A41498B00FEBD58 /* 2.gif in Resources */,
 				5BD4EB612681872D00B5284F /* food.json in Resources */,
-				5BD0439726832F980054F2B4 /* 11.gif in Resources */,
-				5BD0439326832F980054F2B4 /* 9.gif in Resources */,
-				5BD0439526832F980054F2B4 /* 12.gif in Resources */,
 				5BD0436C26832EAB0054F2B4 /* 8.mp4 in Resources */,
 				5BD0436826832EAB0054F2B4 /* 11.mp4 in Resources */,
 				5B76931326841C70008BB92B /* data-left.json in Resources */,
-				5BD0439626832F980054F2B4 /* 13.gif in Resources */,
 				5B81E9CF27585FDC009DCB3E /* sentencepinyin in Resources */,
-				5BD0438B26832F980054F2B4 /* 4.gif in Resources */,
+				5BF2B1512A41498B00FEBD58 /* 1.gif in Resources */,
+				5BF2B14A2A41498B00FEBD58 /* 13.gif in Resources */,
 				5B39ECD927574D69000FCF67 /* CLIngredients.json in Resources */,
+				5BF2B14E2A41498B00FEBD58 /* 6.gif in Resources */,
 				5BD0436526832EAB0054F2B4 /* 3.mp4 in Resources */,
+				5BF2B14B2A41498B00FEBD58 /* 9.gif in Resources */,
 				5BE6693926848DB90095F82E /* CLBubblePopupController.xib in Resources */,
 				5B4895FF268097520046AF31 /* Assets.xcassets in Resources */,
 				5BD0436426832EAB0054F2B4 /* 2.mp4 in Resources */,
-				5BD0439126832F980054F2B4 /* 1.gif in Resources */,
 				5B76931126841C70008BB92B /* recoredWave_dk.json in Resources */,
 				5B76931426841C70008BB92B /* data-right.json in Resources */,
-				5BD0439426832F980054F2B4 /* 14.gif in Resources */,
+				5BF2B1572A41498B00FEBD58 /* 8.gif in Resources */,
 				5B81E9C02758589D009DCB3E /* sentencepinyin.txt in Resources */,
 				5B76931226841C70008BB92B /* send_timeout.json in Resources */,
-				5BD0439026832F980054F2B4 /* 3.gif in Resources */,
-				5BD0439226832F980054F2B4 /* 8.gif in Resources */,
 				5BD0436926832EAB0054F2B4 /* 10.mp4 in Resources */,
+				5BF2B1532A41498B00FEBD58 /* 4.gif in Resources */,
+				5BF2B14C2A41498B00FEBD58 /* 11.gif in Resources */,
 				5B9756A226C64FFA006C0841 /* HomePage.json in Resources */,
 				5BD0435F26832EAB0054F2B4 /* 7.mp4 in Resources */,
 				5BD0436126832EAB0054F2B4 /* 4.mp4 in Resources */,
@@ -2366,7 +2370,6 @@
 				5B4895FD268097510046AF31 /* Main.storyboard in Resources */,
 				5BD4EB752681872D00B5284F /* loading.json in Resources */,
 				5BD0436226832EAB0054F2B4 /* 5.mp4 in Resources */,
-				5BD0438F26832F980054F2B4 /* 2.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2390,7 +2393,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" . --exclude Carthage,Pods --swiftversion \"5.0\" --disable unusedArguments --disable acronyms --disable enumNamespaces\n";
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" . --exclude Carthage,Pods --swiftversion \"5.9\" --disable unusedArguments --disable acronyms --disable enumNamespaces\n";
 			showEnvVarsInLog = 0;
 		};
 		82C1B3F56A3A3875C33AB06A /* [CP] Copy Pods Resources */ = {
@@ -2518,7 +2521,7 @@
 				5BE668E7268488B90095F82E /* CLRoundAnimationView.swift in Sources */,
 				5BD0442026833B6C0054F2B4 /* CLMarqueeView.swift in Sources */,
 				5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */,
-				5B3309EB28FFFB23000D44DF /* CLCalendarBackgroundView.swift in Sources */,
+				5B3309EB28FFFB23000D44DF /* CLCalendarSectionView.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
 				5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5B76933626841E11008BB92B /* CLGCDTimer.swift in Sources */,
@@ -2602,6 +2605,7 @@
 				5BD043A12683302E0054F2B4 /* CLDrawerTestController.swift in Sources */,
 				5B3309E528FFFB23000D44DF /* CLCalendarDelegateFlowLayout.swift in Sources */,
 				5BD043AE268332100054F2B4 /* CLAnimatedGradientController.swift in Sources */,
+				5B9057A72B46549A003E3B1C /* CLSafeArrayDictionary.swift in Sources */,
 				5BD4EB17268184AB00B5284F /* Date+Extension.swift in Sources */,
 				5BD043BD2683333E0054F2B4 /* CLWheelMenuController.swift in Sources */,
 				5BD0434726832D3F0054F2B4 /* CLBreakPointResumeCell.swift in Sources */,
@@ -2878,7 +2882,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				DEVELOPMENT_TEAM = YPW3979SPT;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CLDemo-Swift/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2908,7 +2912,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				DEVELOPMENT_TEAM = YPW3979SPT;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CLDemo-Swift/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;

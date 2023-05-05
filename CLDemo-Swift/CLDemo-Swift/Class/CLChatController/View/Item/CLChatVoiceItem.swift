@@ -18,10 +18,10 @@ class CLChatVoiceItem: CLChatItem {
 
 extension CLChatVoiceItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLChatVoiceCell.self
+        CLChatVoiceCell.self
     }
 
     func cellHeight() -> CGFloat {
-        return 60
+        60
     }
 }

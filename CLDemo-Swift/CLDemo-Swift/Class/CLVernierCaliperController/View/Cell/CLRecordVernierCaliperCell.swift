@@ -39,10 +39,10 @@ class CLRecordVernierCaliperCell: UITableViewCell {
     private lazy var vernierCaliperView: CLVernierCaliperView = {
         let view = CLVernierCaliperView()
         view.indexValueCallback = { [weak self] value in
-            guard let self = self, let item = self.item else { return }
+            guard let self, let item else { return }
             self.item?.value = value.cgFloat
             self.item?.valueChangeCallback?(value)
-            self.valueLabel.attributedText = self.attributedString(value, type: item.type)
+            valueLabel.attributedText = attributedString(value, type: item.type)
         }
         return view
     }()
@@ -128,70 +128,70 @@ extension CLRecordVernierCaliperCell {
         switch type {
         case .sbp:
             if value > 160 || value < 75 {
-                return ("危险", .init("#FF5757"))
+                ("危险", .init("#FF5757"))
             } else if value > 140 || value < 90 {
-                return ("超标", .init("#FFD118"))
+                ("超标", .init("#FFD118"))
             } else {
-                return ("正常", .theme)
+                ("正常", .theme)
             }
         case .dbp:
             if value > 110 || value < 50 {
-                return ("危险", .init("#FF5757"))
+                ("危险", .init("#FF5757"))
             } else if value > 90 || value < 60 {
-                return ("超标", .init("FFD118"))
+                ("超标", .init("FFD118"))
             } else {
-                return ("正常", .theme)
+                ("正常", .theme)
             }
         case .glucose:
             if value > 11.1 {
-                return ("偏高", .init("#FF7474"))
+                ("偏高", .init("#FF7474"))
             } else if value >= 8 {
-                return ("一般", .init("#65AAFF"))
+                ("一般", .init("#65AAFF"))
             } else if value >= 6.1 {
-                return ("理想", .init("#33D27C"))
+                ("理想", .init("#33D27C"))
             } else if value >= 3.9 {
-                return ("良好", .init("#45DEC0"))
+                ("良好", .init("#45DEC0"))
             } else {
-                return ("偏低", .init("#FFB81E"))
+                ("偏低", .init("#FFB81E"))
             }
         case .height:
-            return ("cm", .theme)
+            ("cm", .theme)
         case .weight:
-            return ("kg", .theme)
+            ("kg", .theme)
         case .pulse, .heartRate:
             if value > 100 {
-                return ("偏高", .init("#FF6060"))
+                ("偏高", .init("#FF6060"))
             } else if value >= 60 {
-                return ("正常", .theme)
+                ("正常", .theme)
             } else {
-                return ("偏低", .init("#FFB618"))
+                ("偏低", .init("#FFB618"))
             }
         case .temperature:
             if value > 37.2 {
-                return ("偏高", .init("#FF6060"))
+                ("偏高", .init("#FF6060"))
             } else if value >= 36 {
-                return ("正常", .theme)
+                ("正常", .theme)
             } else {
-                return ("偏低", .init("#FFB618"))
+                ("偏低", .init("#FFB618"))
             }
         case .urine:
             if value > 2000 {
-                return ("偏高", .init("#FF6060"))
+                ("偏高", .init("#FF6060"))
             } else if value >= 800 {
-                return ("正常", .theme)
+                ("正常", .theme)
             } else {
-                return ("偏低", .init("#FFB618"))
+                ("偏低", .init("#FFB618"))
             }
         case .respirationRate:
             if value > 85 {
-                return ("偏高", .init("#FF6060"))
+                ("偏高", .init("#FF6060"))
             } else if value >= 67 {
-                return ("正常", .theme)
+                ("正常", .theme)
             } else {
-                return ("偏低", .init("#FFB618"))
+                ("偏低", .init("#FFB618"))
             }
         case .unKnown:
-            return ("正常", .theme)
+            ("正常", .theme)
         }
     }
 }

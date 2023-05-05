@@ -14,7 +14,7 @@ class CLDrawerTransitionDelegate: NSObject {
 
 extension CLDrawerTransitionDelegate: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return CLDrawerPresentationController(presentedViewController: presented, presenting: presenting)
+        CLDrawerPresentationController(presentedViewController: presented, presenting: presenting)
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

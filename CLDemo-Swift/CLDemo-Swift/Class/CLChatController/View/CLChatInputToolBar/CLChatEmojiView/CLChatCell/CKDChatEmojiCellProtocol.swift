@@ -1,5 +1,5 @@
 //
-//  CLChatEmojiCellProtocol.swift
+//  CKDChatEmojiCellProtocol.swift
 //  Potato
 //
 //  Created by AUG on 2019/10/30.

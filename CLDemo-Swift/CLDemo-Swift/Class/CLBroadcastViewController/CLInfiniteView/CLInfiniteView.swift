@@ -1,5 +1,5 @@
 //
-//  CLInfiniteCollectionView.swift
+//  CLInfiniteView.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/11/4.
@@ -23,7 +23,7 @@ class CLInfiniteView: UIView {
     weak var delegate: CLInfiniteViewDelegate?
     private(set) var collectionView: UICollectionView!
     private var isHorizontalScroll: Bool {
-        return (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .horizontal
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .horizontal
     }
 
     private var indexOffset: Int = 0
@@ -59,7 +59,7 @@ extension CLInfiniteView {
     }
 
     func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 }
 
@@ -141,12 +141,12 @@ extension CLInfiniteView {
 
     private func getTotalContentHeight() -> CGFloat {
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout, let numberOfCells = dataSource?.numberOfItems(in: self) else { return 0 }
-        return (CGFloat(numberOfCells) * (layout.itemSize.height + layout.minimumLineSpacing))
+        return CGFloat(numberOfCells) * (layout.itemSize.height + layout.minimumLineSpacing)
     }
 
     private func getCorrectedIndex(_ indexToCorrect: Int) -> Int {
         guard let numberOfCells = dataSource?.numberOfItems(in: self) else { return 0 }
-        if indexToCorrect < numberOfCells && indexToCorrect >= 0 {
+        if indexToCorrect < numberOfCells, indexToCorrect >= 0 {
             return indexToCorrect
         } else {
             let countInIndex = Float(indexToCorrect) / Float(numberOfCells)
@@ -159,15 +159,15 @@ extension CLInfiniteView {
 
 extension CLInfiniteView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        3
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.numberOfItems(in: self) ?? 0
+        dataSource?.numberOfItems(in: self) ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return dataSource!.infiniteView(self, cellForItemAt: indexPath, index: getCorrectedIndex(indexPath.row - indexOffset))
+        dataSource!.infiniteView(self, cellForItemAt: indexPath, index: getCorrectedIndex(indexPath.row - indexOffset))
     }
 }
 

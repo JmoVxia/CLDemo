@@ -53,7 +53,7 @@ extension Date {
         var mib: [Int32] = [CTL_KERN, KERN_BOOTTIME]
         var size = MemoryLayout.size(ofValue: boottime)
         var uptime: Double = -1
-        if sysctl(&mib, 2, &boottime, &size, nil, 0) != -1 && boottime.tv_sec != 0 {
+        if sysctl(&mib, 2, &boottime, &size, nil, 0) != -1, boottime.tv_sec != 0 {
             uptime = Double(now.tv_sec - boottime.tv_sec)
             uptime += Double(now.tv_usec - boottime.tv_usec) / 1_000_000.0
         }

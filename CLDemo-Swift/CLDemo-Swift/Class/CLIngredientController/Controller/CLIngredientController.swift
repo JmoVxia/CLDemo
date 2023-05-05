@@ -1,5 +1,5 @@
 //
-//  CLLinkageController.swift
+//  CLIngredientController.swift
 //  CLDemo-Swift
 //
 //  Created by Chen JmoVxia on 2021/12/1.
@@ -104,8 +104,8 @@ class CLIngredientController: CLController {
     private lazy var searchView: CLIngredientSearchView = {
         let view = CLIngredientSearchView()
         view.textChangeCallback = { [weak self] value in
-            guard let self = self else { return }
-            self.search(text: value)
+            guard let self else { return }
+            search(text: value)
         }
         return view
     }()
@@ -251,8 +251,8 @@ private extension CLIngredientController {
                 return
             }
             self.dataSource = json.arrayValue.map { .init(json: $0) }
-            self.leftDataSource = Dictionary(grouping: self.dataSource, by: { $0.sortedPrimary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { Dictionary(grouping: $0.value, by: { $0.sortedSecondary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { $0.value } }
-            self.rightDataSource = Dictionary(grouping: self.dataSource, by: { $0.sortedSecondary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { $0.value }
+            self.leftDataSource = Dictionary(grouping: self.dataSource, by: { $0.sortedPrimary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map { Dictionary(grouping: $0.value, by: { $0.sortedSecondary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map(\.value) }
+            self.rightDataSource = Dictionary(grouping: self.dataSource, by: { $0.sortedSecondary }).sorted(by: { NSDecimalNumber(string: $0.key).lessThan(NSDecimalNumber(string: $1.key)) }).map(\.value)
             DispatchQueue.main.async {
                 self.leftTableView.reloadData()
                 self.rightTableView.reloadData()
@@ -286,7 +286,7 @@ private extension CLIngredientController {
         }
 
         isShowSearch = !(text?.isEmpty ?? true)
-        guard let text = text else { return }
+        guard let text else { return }
         let start = milliStamp
 
         let searchResult: [(item: CLIngredients, similarity: Int)] = dataSource.compactMap { item in
@@ -294,7 +294,7 @@ private extension CLIngredientController {
             guard result.0 else { return nil }
             return (item, result.1)
         }
-        searchDataSource = searchResult.sorted(by: { $0.similarity > $1.similarity }).map { $0.0 }
+        searchDataSource = searchResult.sorted(by: { $0.similarity > $1.similarity }).map(\.0)
         let end = milliStamp
         CLLog("耗时：\(CGFloat(end - start) / 1000)，数组个数：\(dataSource.count)，筛选后个数：\(searchDataSource.count)")
 
@@ -353,41 +353,41 @@ extension CLIngredientController {}
 extension CLIngredientController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == leftTableView {
-            return (section == seletedIndexPath.section && !isShowSearch) ? 54 : 50
+            (section == seletedIndexPath.section && !isShowSearch) ? 54 : 50
         } else if tableView == rightTableView {
-            return 50
+            50
         } else {
-            return .leastNormalMagnitude
+            .leastNormalMagnitude
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == leftTableView {
-            return (indexPath.section == seletedIndexPath.section && !isShowSearch) ? (indexPath.row == leftDataSource[indexPath.section].count - 1 ? 44 : 40) : 0
+            (indexPath.section == seletedIndexPath.section && !isShowSearch) ? (indexPath.row == leftDataSource[indexPath.section].count - 1 ? 44 : 40) : 0
         } else if tableView == rightTableView {
-            return UITableView.automaticDimension
+            UITableView.automaticDimension
         } else {
-            return UITableView.automaticDimension
+            UITableView.automaticDimension
         }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == leftTableView {
-            return leftDataSource.count
+            leftDataSource.count
         } else if tableView == rightTableView {
-            return rightDataSource.count
+            rightDataSource.count
         } else {
-            return 1
+            1
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == leftTableView {
-            return leftDataSource[section].count
+            leftDataSource[section].count
         } else if tableView == rightTableView {
-            return rightDataSource[section].count
+            rightDataSource[section].count
         } else {
-            return searchDataSource.count + 1
+            searchDataSource.count + 1
         }
     }
 

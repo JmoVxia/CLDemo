@@ -41,17 +41,21 @@ import UIKit
     /// 模式
     public var mode: CKDMode = .removeBefore
     /// 手势穿透
-    public var isPenetrate = false
+    public var shouldPenetrate = false
+    /// 手势穿透时自动隐藏
+    public var autoHiddenWhenPenetrate = false
     /// 是否等待
-    public var isWait = true
+    public var shouldWait = true
     /// 是否自动旋转
-    public var isAutorotate = false
+    public var shouldAutorotate = false
     /// 是否隐藏状态栏
-    public var isHiddenStatusBar = false
+    public var prefersStatusBarHidden = false
     /// 状态栏颜色
-    public var statusBarStyle = UIStatusBarStyle.lightContent
+    public var preferredStatusBarStyle = UIStatusBarStyle.lightContent
     /// 支持方向
     public var supportedInterfaceOrientations = UIInterfaceOrientationMask.portrait
+    /// 夜间模式
+    public var overrideUserInterfaceStyle: UIUserInterfaceStyle = .light
     /// 去重标识
     public var identifier: String?
 }

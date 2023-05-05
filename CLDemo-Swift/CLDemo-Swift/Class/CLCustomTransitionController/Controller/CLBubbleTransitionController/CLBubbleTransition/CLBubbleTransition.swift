@@ -19,7 +19,7 @@ class CLBubbleTransition: NSObject {
 
 extension CLBubbleTransition: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return duration
+        duration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

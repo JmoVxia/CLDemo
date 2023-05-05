@@ -14,10 +14,10 @@ protocol CLCalendarDelegateFlowLayout: UICollectionViewDelegateFlowLayout {
 
 extension CLCalendarDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, textColorForSectionAt section: Int) -> UIColor {
-        return .white
+        .white
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, textForSectionAt section: Int) -> String {
-        return ""
+        ""
     }
 }

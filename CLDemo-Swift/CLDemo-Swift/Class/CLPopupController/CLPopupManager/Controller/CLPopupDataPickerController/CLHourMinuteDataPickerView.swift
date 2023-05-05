@@ -11,11 +11,11 @@ import UIKit
 
 class CLHourMinuteDataPickerView: UIView {
     var hour: Int {
-        return hourArray[hourIndex]
+        hourArray[hourIndex]
     }
 
     var minute: Int {
-        return minuteArray[minuteIndex]
+        minuteArray[minuteIndex]
     }
 
     private var nowDate: Date = .init(timeIntervalSinceNow: 0)
@@ -86,7 +86,7 @@ extension CLHourMinuteDataPickerView {
 
 extension CLHourMinuteDataPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        2
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -95,7 +95,7 @@ extension CLHourMinuteDataPickerView: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 50
+        50
     }
 }
 

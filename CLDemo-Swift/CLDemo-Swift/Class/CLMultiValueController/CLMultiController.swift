@@ -129,8 +129,8 @@ extension CLMultiController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil, completion: { [weak self] _ in
-            guard let self = self else { return }
-            self.resetOffset()
+            guard let self else { return }
+            resetOffset()
         })
     }
 }
@@ -294,7 +294,7 @@ extension CLMultiController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let dataSource = dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return UITableViewCell() }
+        guard let dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return UITableViewCell() }
         let currentIndexPath = CLMultiIndexPath(indexPath: indexPath, column: column)
         return dataSource.multiController(self, tableView: tableView, cellForRowAt: currentIndexPath)
     }
@@ -302,7 +302,7 @@ extension CLMultiController: UITableViewDataSource {
 
 extension CLMultiController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let dataSource = dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return }
+        guard let dataSource, let column = tableViewStackView.arrangedSubviews.firstIndex(of: tableView) else { return }
 
         selectedIndexPath.removeAll(where: { $0.column >= column })
 

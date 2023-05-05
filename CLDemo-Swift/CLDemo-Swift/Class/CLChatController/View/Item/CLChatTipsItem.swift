@@ -14,6 +14,6 @@ class CLChatTipsItem: CLChatItem {
 
 extension CLChatTipsItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLChatTipsCell.self
+        CLChatTipsCell.self
     }
 }

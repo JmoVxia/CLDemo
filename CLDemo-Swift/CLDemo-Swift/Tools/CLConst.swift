@@ -11,12 +11,12 @@ import UIKit
 
 /// 屏幕宽
 var screenWidth: CGFloat {
-    return UIScreen.main.bounds.size.width
+    UIScreen.main.bounds.size.width
 }
 
 /// 屏幕高
 var screenHeight: CGFloat {
-    return UIScreen.main.bounds.size.height
+    UIScreen.main.bounds.size.height
 }
 
 /// 状态栏高度
@@ -35,15 +35,15 @@ var statusBarHeight: CGFloat {
 /// 安全区域
 var safeAreaEdgeInsets: UIEdgeInsets {
     if #available(iOS 11.0, *) {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window?.safeAreaInsets ?? UIEdgeInsets.zero
+        (UIApplication.shared.delegate as? AppDelegate)?.window?.safeAreaInsets ?? UIEdgeInsets.zero
     } else {
-        return UIEdgeInsets.zero
+        UIEdgeInsets.zero
     }
 }
 
 /// 是否是刘海屏
 var isIPhoneXScreen: Bool {
-    return safeAreaEdgeInsets.bottom > 0
+    safeAreaEdgeInsets.bottom > 0
 }
 
 /// 秒级时间戳格式化
@@ -62,32 +62,32 @@ func milliStampFormat(with timeStamp: String, format: String) -> String {
 
 /// 秒级时间戳
 var timeStamp: Int64 {
-    return Date().timeStamp
+    Date().timeStamp
 }
 
 /// 毫秒级时间戳
 var milliStamp: Int64 {
-    return Date().milliStamp
+    Date().milliStamp
 }
 
 /// 纳秒级时间戳
 var nanosecondStamp: Int64 {
-    return Date().nanosecondStamp
+    Date().nanosecondStamp
 }
 
 /// 秒级时间戳
 var timeStampString: String {
-    return Date().timeStampString
+    Date().timeStampString
 }
 
 /// 毫秒级时间戳
 var milliStampString: String {
-    return Date().milliStampString
+    Date().milliStampString
 }
 
 /// 纳秒级时间戳
 var nanosecondStampString: String {
-    return Date().nanosecondStampString
+    Date().nanosecondStampString
 }
 
 /// 日志打印，会加入日志中
@@ -167,13 +167,13 @@ func deleteAllEmptyFolderWithPath(path: String) -> Bool {
 
 /// 沙盒路径
 var pathDocuments: String {
-    return NSHomeDirectory() + "/Documents"
+    NSHomeDirectory() + "/Documents"
 }
 
 /// 根据时间生成随机字符串
 var dateRandomString: String {
     let string: String = nanosecondStampString + UUID().uuidString + "\(TimeInterval.random(in: 0.01 ... 10000))"
-    return (string).md5ForUpper32Bate
+    return string.md5ForUpper32Bate
 }
 
 /// 消息毫秒级时间戳格式化
@@ -234,13 +234,13 @@ func calculateScaleSize(imageSize: CGSize, maxSize: CGSize = CGSize(width: scree
     } else {
         let maxRatio = maxHeight / maxWidth
         let minRatio = minHeight / minWidth
-        if imageRatio >= minRatio && imageHeight > maxHeight {
+        if imageRatio >= minRatio, imageHeight > maxHeight {
             return CGSize(width: imageWidth / imageHeight * maxHeight, height: maxHeight)
-        } else if imageRatio < maxRatio && imageWidth > maxWidth {
+        } else if imageRatio < maxRatio, imageWidth > maxWidth {
             return CGSize(width: maxWidth, height: imageHeight / imageWidth * maxWidth)
-        } else if imageRatio >= maxRatio && imageWidth < minWidth {
+        } else if imageRatio >= maxRatio, imageWidth < minWidth {
             return CGSize(width: minWidth, height: imageHeight / imageWidth * minWidth)
-        } else if imageRatio < maxRatio && imageHeight < minHeight {
+        } else if imageRatio < maxRatio, imageHeight < minHeight {
             return CGSize(width: imageWidth / imageHeight * minHeight, height: minHeight)
         } else {
             return imageSize

@@ -25,23 +25,23 @@ class CLScrollComputingValue: NSObject {
 
     func outputValue(_ inputValue: CGFloat) -> CGFloat {
         if inputValue <= startValue {
-            return 0
+            0
         } else if inputValue <= midValue {
-            return frontLine.k * inputValue + frontLine.b
+            frontLine.k * inputValue + frontLine.b
         } else if inputValue <= endValue {
-            return backLine.k * inputValue + backLine.b
+            backLine.k * inputValue + backLine.b
         } else {
-            return 0
+            0
         }
     }
 }
 
 private extension CLScrollComputingValue {
     func calculateSlope(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) -> CGFloat {
-        return x2 == x1 ? 0 : (y2 - y1) / (x2 - x1)
+        x2 == x1 ? 0 : (y2 - y1) / (x2 - x1)
     }
 
     func calculateConstant(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) -> CGFloat {
-        return x2 == x1 ? 0 : (y1 * (x2 - x1) - x1 * (y2 - y1)) / (x2 - x1)
+        x2 == x1 ? 0 : (y1 * (x2 - x1) - x1 * (y2 - y1)) / (x2 - x1)
     }
 }

@@ -16,7 +16,7 @@ extension UIControl {
     /// 扩大点击区域
     var expandClickEdgeInsets: UIEdgeInsets {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.expandClickEdgeInsets) as? UIEdgeInsets ?? .zero
+            objc_getAssociatedObject(self, &AssociatedKey.expandClickEdgeInsets) as? UIEdgeInsets ?? .zero
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.expandClickEdgeInsets, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)

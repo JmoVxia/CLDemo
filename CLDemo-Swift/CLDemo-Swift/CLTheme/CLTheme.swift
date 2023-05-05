@@ -21,9 +21,9 @@ extension CLTheme {
         /// 风格
         var style: UIUserInterfaceStyle {
             switch self {
-            case .follow: return .unspecified
-            case .light: return .light
-            case .dark: return .dark
+            case .follow: .unspecified
+            case .light: .light
+            case .dark: .dark
             }
         }
     }
@@ -35,16 +35,16 @@ class CLTheme {
 
     /// 模式
     static var mode: Mode {
-        get { return Mode(rawValue: appTheme ?? "") ?? .follow }
+        get { Mode(rawValue: appTheme ?? "") ?? .follow }
         set { appTheme = newValue.rawValue }
     }
 
     /// 创造颜色
     static func makeColor(light: UIColor, dark: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
-            return UIColor { $0.userInterfaceStyle == .light ? light : dark }
+            UIColor { $0.userInterfaceStyle == .light ? light : dark }
         } else {
-            return CLTheme.mode == .light ? light : dark
+            CLTheme.mode == .light ? light : dark
         }
     }
 
@@ -63,12 +63,12 @@ class CLTheme {
 
 extension UIColor {
     static func color(light: UIColor, dark: UIColor) -> UIColor {
-        return CLTheme.makeColor(light: light, dark: dark)
+        CLTheme.makeColor(light: light, dark: dark)
     }
 }
 
 extension UIImage {
     static func image(light: UIImage, dark: UIImage) -> UIImage {
-        return CLTheme.makeImage(light: light, dark: dark)
+        CLTheme.makeImage(light: light, dark: dark)
     }
 }

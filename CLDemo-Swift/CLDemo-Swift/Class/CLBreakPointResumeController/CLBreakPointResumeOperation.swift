@@ -13,9 +13,9 @@ class CLBreakPointResumeOperation: Operation {
     private(set) var error: CLBreakPointResumeManager.DownloadError?
     private var url: URL!
     private var path: String!
-    private var currentBytes: Int64 = 0
     private var session: URLSession!
     private var task: URLSessionDataTask!
+    private var currentBytes: Int64 = 0
     private var outputStream: OutputStream?
     private var taskFinished: Bool = true {
         willSet {
@@ -44,15 +44,15 @@ class CLBreakPointResumeOperation: Operation {
     }
 
     override var isFinished: Bool {
-        return taskFinished
+        taskFinished
     }
 
     override var isExecuting: Bool {
-        return taskExecuting
+        taskExecuting
     }
 
     override var isAsynchronous: Bool {
-        return true
+        true
     }
 
     init(url: URL, path: String, currentBytes: Int64) {
@@ -156,7 +156,7 @@ extension CLBreakPointResumeOperation: URLSessionDataDelegate {
             complete(.notHTTPURLResponse)
             return
         }
-        if let error = error {
+        if let error {
             complete(.download(error))
         } else if response.statusCode == 200 || response.statusCode == 206 {
             complete()

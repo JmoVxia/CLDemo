@@ -172,7 +172,7 @@ extension CLDrawMarqueeController: CLDrawMarqueeViewDelegate {
 
 extension CLDrawMarqueeController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return array.count
+        array.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

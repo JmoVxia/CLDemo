@@ -159,7 +159,7 @@ extension NSAttributedString {
 extension NSAttributedString {
     /// 计算行数
     func calculateLines(_ width: CGFloat) -> Int {
-        return lines(width).count
+        lines(width).count
     }
 
     /// 根据字体和每一行宽度切割字符串

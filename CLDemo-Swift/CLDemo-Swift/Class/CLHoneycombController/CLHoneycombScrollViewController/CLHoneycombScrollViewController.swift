@@ -128,11 +128,11 @@ extension CLHoneycombScrollViewController {}
 
 extension CLHoneycombScrollViewController: CLHoneycombDataSource {
     func honeycombViewNumberOfItemsPerRow(_ honeycombView: CLHoneycombView) -> Int {
-        return 4
+        4
     }
 
     func honeycombViewNumberOfItems(_ honeycombView: CLHoneycombView) -> Int {
-        return dataSource.count
+        dataSource.count
     }
 
     func honeycombView(_ honeycombView: CLHoneycombView, cellForRowAtIndex index: Int) -> CLHoneycombCell {

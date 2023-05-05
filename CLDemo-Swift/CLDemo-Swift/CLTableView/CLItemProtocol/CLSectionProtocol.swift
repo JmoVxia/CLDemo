@@ -1,5 +1,5 @@
 //
-//  CKDSectionProtocol.swift
+//  CLSectionProtocol.swift
 //  CKDDoctor
 //
 //  Created by Chen JmoVxia on 2022/6/15.
@@ -20,7 +20,7 @@ protocol CLSectionProtocol: CLSectionBaseProtocol where Self: UITableViewHeaderF
 extension CLSectionProtocol {
     var item: T? {
         get {
-            return nil
+            nil
         }
         set {}
     }

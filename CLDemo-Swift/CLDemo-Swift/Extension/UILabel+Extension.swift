@@ -11,7 +11,7 @@ import UIKit
 extension UILabel {
     /// 设置行间距
     func setLineSpacing(_ lineSpacing: CGFloat, alignment: NSTextAlignment = .left) {
-        guard let text = text else { return }
+        guard let text else { return }
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = alignment

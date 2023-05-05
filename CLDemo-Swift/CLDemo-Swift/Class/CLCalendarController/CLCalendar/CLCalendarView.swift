@@ -127,7 +127,7 @@ extension CLCalendarView {
             collectionView.reloadData()
             collectionView.setNeedsLayout()
             collectionView.layoutIfNeeded()
-            guard let startIndexPath = startIndexPath else { return }
+            guard let startIndexPath else { return }
             collectionView.scrollToItem(at: startIndexPath, at: .top, animated: false)
             collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentOffset.y - config.headerHight)
         }
@@ -248,24 +248,24 @@ extension CLCalendarView: CLCalendarDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, textForSectionAt section: Int) -> String {
-        return monthsArray[section].month
+        monthsArray[section].month
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, textColorForSectionAt section: Int) -> UIColor {
-        return config.color.sectionBackgroundText
+        config.color.sectionBackgroundText
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return itemSize
+        itemSize
     }
 }
 
 extension CLCalendarView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return monthsArray.count
+        monthsArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return monthsArray[section].daysArray.count
+        monthsArray[section].daysArray.count
     }
 }

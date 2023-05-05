@@ -10,23 +10,23 @@ import UIKit
 
 class CLYearMonthDayHourMinuteDataPickerView: UIView {
     var year: Int {
-        return yearArray[yearIndex]
+        yearArray[yearIndex]
     }
 
     var month: Int {
-        return monthArray[monthIndex]
+        monthArray[monthIndex]
     }
 
     var day: Int {
-        return dayArray[dayIndex]
+        dayArray[dayIndex]
     }
 
     var hour: Int {
-        return hourArray[hourIndex]
+        hourArray[hourIndex]
     }
 
     var minute: Int {
-        return minuteArray[minuteIndex]
+        minuteArray[minuteIndex]
     }
 
     private var nowDate: Date = .init(timeIntervalSinceNow: 0)
@@ -173,7 +173,7 @@ extension CLYearMonthDayHourMinuteDataPickerView {
 
 extension CLYearMonthDayHourMinuteDataPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 5
+        5
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -187,7 +187,7 @@ extension CLYearMonthDayHourMinuteDataPickerView: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 50
+        50
     }
 }
 

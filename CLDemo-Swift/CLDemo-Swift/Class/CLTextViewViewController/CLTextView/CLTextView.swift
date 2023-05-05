@@ -82,7 +82,7 @@ class CLTextView: UIView {
     weak var delegate: CLTextViewDelegate?
     /// 高度
     var height: CGFloat {
-        return textViewHeight() + config.edgeInsets.top - config.edgeInsets.bottom + (config.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - config.edgeInsets.bottom) : 0)
+        textViewHeight() + config.edgeInsets.top - config.edgeInsets.bottom + (config.showLengthLabel ? (lengthLabel.sizeThatFits(.zero).height - config.edgeInsets.bottom) : 0)
     }
 
     /// 输入框
@@ -257,13 +257,11 @@ extension CLTextView: UITextViewDelegate {
             } else {
                 self.lastText = textView.text
             }
-            let lengthText: String = {
-                if self.config.statistics == .bytesLength {
-                    return String(format: "%ld/%ld", self.bytesLength(text: textView.text), self.config.maxBytesLength)
-                } else {
-                    return String(format: "%ld/%ld", textView.text.count, self.config.maxCount)
-                }
-            }()
+            let lengthText: String = if self.config.statistics == .bytesLength {
+                .init(format: "%ld/%ld", self.bytesLength(text: textView.text), self.config.maxBytesLength)
+            } else {
+                .init(format: "%ld/%ld", textView.text.count, self.config.maxCount)
+            }
             self.lengthLabel.text = lengthText
             self.remakeConstraints()
             if self.lastText != self.text {
@@ -288,23 +286,23 @@ extension CLTextView {
     /// 成为第一响应者
     @discardableResult
     override func becomeFirstResponder() -> Bool {
-        return textView.becomeFirstResponder()
+        textView.becomeFirstResponder()
     }
 
     /// 取消第一响应者
     @discardableResult
     override func resignFirstResponder() -> Bool {
-        return textView.resignFirstResponder()
+        textView.resignFirstResponder()
     }
 
     /// 可以成为第一响应者
     override var canBecomeFirstResponder: Bool {
-        return textView.canBecomeFirstResponder
+        textView.canBecomeFirstResponder
     }
 
     /// 可以注销第一响应者
     override var canResignFirstResponder: Bool {
-        return textView.canResignFirstResponder
+        textView.canResignFirstResponder
     }
 }
 
@@ -312,9 +310,9 @@ extension CLTextView {
     func bytesLength(text: String) -> Int {
         switch config.encoding {
         case .gbk:
-            return text.gbkLength()
+            text.gbkLength()
         case let .bytesLength(using: encoding):
-            return text.bytesLength(using: encoding)
+            text.bytesLength(using: encoding)
         }
     }
 }
@@ -331,13 +329,13 @@ extension String {
 
     /// 按照编码获取对应字节
     func bytesLength(using: String.Encoding) -> NSInteger {
-        return lengthOfBytes(using: using)
+        lengthOfBytes(using: using)
     }
 }
 
 extension CLTextView: UITextPasteDelegate {
     @available(iOS 11.0, *)
     func textPasteConfigurationSupporting(_ textPasteConfigurationSupporting: UITextPasteConfigurationSupporting, shouldAnimatePasteOf attributedString: NSAttributedString, to textRange: UITextRange) -> Bool {
-        return false
+        false
     }
 }

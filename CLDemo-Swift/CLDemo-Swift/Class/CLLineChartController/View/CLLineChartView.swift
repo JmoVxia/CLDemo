@@ -26,7 +26,7 @@ class CLLineChartView: UIView {
 
 extension CLLineChartView {
     func reload() {
-        guard let dataSource = dataSource else { return }
+        guard let dataSource else { return }
         layer.removeAllAnimations()
         layer.sublayers?.removeAll()
 

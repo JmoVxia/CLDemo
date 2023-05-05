@@ -51,11 +51,11 @@ extension CLChatTextItem {
 
 extension CLChatTextItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLChatTextCell.self
+        CLChatTextCell.self
     }
 
     func cellHeight() -> CGFloat {
-        if let height = height {
+        if let height {
             return height
         } else {
             let textHeight: CGFloat = CLCalculateHepler.height(with: attributedText, maxWidth: 200.autoWidth())

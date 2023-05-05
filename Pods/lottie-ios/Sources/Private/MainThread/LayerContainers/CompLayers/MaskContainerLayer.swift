@@ -73,7 +73,9 @@ final class MaskContainerLayer: CALayer {
   // MARK: Internal
 
   func updateWithFrame(frame: CGFloat, forceUpdates: Bool) {
-    maskLayers.forEach { $0.updateWithFrame(frame: frame, forceUpdates: forceUpdates) }
+    for maskLayer in maskLayers {
+      maskLayer.updateWithFrame(frame: frame, forceUpdates: forceUpdates)
+    }
   }
 
   // MARK: Fileprivate
@@ -167,7 +169,7 @@ private class MaskNodeProperties: NodePropertyMap {
     shape = NodeProperty(provider: KeyframeInterpolator(keyframes: mask.shape.keyframes))
     expansion = NodeProperty(provider: KeyframeInterpolator(keyframes: mask.expansion.keyframes))
     propertyMap = [
-      "Opacity" : opacity,
+      PropertyName.opacity.rawValue : opacity,
       "Shape" : shape,
       "Expansion" : expansion,
     ]

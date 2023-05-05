@@ -26,9 +26,9 @@ class CLTabBarController: UITabBarController {
     private lazy var tabbar: CLCustomTabbar = {
         let view = CLCustomTabbar()
         view.bulgeCallBack = { [weak self] value in
-            guard let self = self else { return }
-            self.selectedIndex = 2
-            self.tabBar(self.tabbar, didSelect: value)
+            guard let self else { return }
+            selectedIndex = 2
+            tabBar(tabbar, didSelect: value)
         }
         return view
     }()
@@ -88,9 +88,9 @@ extension CLTabBarController {
         set {}
         get {
             if let navigationController = selectedViewController as? UINavigationController {
-                return navigationController.topViewController?.overrideUserInterfaceStyle ?? .light
+                navigationController.topViewController?.overrideUserInterfaceStyle ?? .light
             } else {
-                return selectedViewController?.overrideUserInterfaceStyle ?? .light
+                selectedViewController?.overrideUserInterfaceStyle ?? .light
             }
         }
     }

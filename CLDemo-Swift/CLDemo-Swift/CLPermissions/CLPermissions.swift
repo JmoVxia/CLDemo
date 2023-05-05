@@ -55,11 +55,11 @@ extension CLPermissions {
     private class func getManagerForPermission(_ permission: CLPermissionType) -> CLPermissionInterface {
         switch permission {
         case .camera:
-            return CLCameraPermission()
+            CLCameraPermission()
         case .photoLibrary:
-            return CLPhotoLibraryPermission()
+            CLPhotoLibraryPermission()
         case .microphone:
-            return CLMicrophonePermission()
+            CLMicrophonePermission()
         }
     }
 }

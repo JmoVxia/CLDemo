@@ -43,9 +43,9 @@ extension CLLineChartController: CLLineChartViewDataSource {
 
     func chartView(_ chartView: CLLineChartView, numberOfPointsInLine line: Int) -> [CLLineChartPoint] {
         if line == 0 {
-            return points
+            points
         } else {
-            return points1
+            points1
         }
     }
 

@@ -1,5 +1,5 @@
 //
-//  CLChatEmojiTextCell.swift
+//  CKDChatEmojiTextCell.swift
 //  Potato
 //
 //  Created by AUG on 2019/10/28.
@@ -41,6 +41,6 @@ extension CLChatEmojiTextCell: CLChatEmojiCellProtocol {
     }
 
     static func cellReuseIdentifier() -> String {
-        return "CLChatEmojiTextCell"
+        "CLChatEmojiTextCell"
     }
 }

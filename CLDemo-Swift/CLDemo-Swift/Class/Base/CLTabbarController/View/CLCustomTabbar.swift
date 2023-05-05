@@ -94,7 +94,7 @@ extension CLCustomTabbar {
 extension CLCustomTabbar {
     /// 显示小红点
     func showBadgeOnItem(index: Int, badgeValue: Int) {
-        guard let items = items, items.count > index else {
+        guard let items, items.count > index else {
             return
         }
         let item = items[index]
@@ -107,7 +107,7 @@ extension CLCustomTabbar {
 
     /// 移除小红点
     func hiddenBadgeOnItem(index: Int) {
-        guard let items = items, items.count > index else {
+        guard let items, items.count > index else {
             return
         }
         let item = items[index]

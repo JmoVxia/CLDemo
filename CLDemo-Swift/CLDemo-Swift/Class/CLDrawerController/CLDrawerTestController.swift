@@ -60,7 +60,9 @@ extension CLDrawerTestController {
 // MARK: - JmoVxia---布局
 
 private extension CLDrawerTestController {
-    func initUI() {}
+    func initUI() {
+        view.backgroundColor = .random
+    }
 
     func makeConstraints() {}
 }

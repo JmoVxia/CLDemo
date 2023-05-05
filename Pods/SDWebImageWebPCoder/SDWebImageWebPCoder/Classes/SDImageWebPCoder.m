@@ -71,8 +71,8 @@ else OSSpinLockUnlock(&lock##_deprecated);
 /// Used for animated WebP, which need a canvas for decoding (rendering), possible apply a scale transform for thumbnail decoding (avoiding post-rescale using vImage)
 /// See more in #73
 static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canvasSize, CGSize thumbnailSize, BOOL preserveAspectRatio) {
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
-    bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
+    // From SDWebImage v5.17.0, use runtime detection of bitmap info instead of hardcode.
+    CGBitmapInfo bitmapInfo = [SDImageCoderHelper preferredPixelFormat:hasAlpha].bitmapInfo;
     // Check whether we need to use thumbnail
     CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(canvasSize.width, canvasSize.height) scaleSize:thumbnailSize preserveAspectRatio:preserveAspectRatio shouldScaleUp:NO];
     CGContextRef canvas = CGBitmapContextCreate(NULL, scaledSize.width, scaledSize.height, 8, 0, [SDImageCoderHelper colorSpaceGetDeviceRGB], bitmapInfo);
@@ -86,6 +86,89 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
         CGContextScaleCTM(canvas, sx, sy);
     }
     return canvas;
+}
+
+WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
+    // Get alpha info, byteOrder info
+    CGImageAlphaInfo alphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
+    CGBitmapInfo byteOrderInfo = bitmapInfo & kCGBitmapByteOrderMask;
+    BOOL byteOrderNormal = NO;
+    switch (byteOrderInfo) {
+        case kCGBitmapByteOrderDefault: {
+            byteOrderNormal = YES;
+        } break;
+        case kCGBitmapByteOrder32Little: {
+        } break;
+        case kCGBitmapByteOrder32Big: {
+            byteOrderNormal = YES;
+        } break;
+        default: break;
+    }
+    switch (alphaInfo) {
+        case kCGImageAlphaPremultipliedFirst: {
+            if (byteOrderNormal) {
+                // ARGB8888, premultiplied
+                return MODE_Argb;
+            } else {
+                // BGRA8888, premultiplied
+                return MODE_bgrA;
+            }
+        }
+            break;
+        case kCGImageAlphaPremultipliedLast: {
+            if (byteOrderNormal) {
+                // RGBA8888, premultiplied
+                return MODE_rgbA;
+            } else {
+                // ABGR8888, premultiplied
+                // Unsupported!
+                return MODE_LAST;
+            }
+        }
+            break;
+        case kCGImageAlphaNone: {
+            if (byteOrderNormal) {
+                // RGB
+                return MODE_RGB;
+            } else {
+                // BGR
+                return MODE_BGR;
+            }
+        }
+            break;
+        case kCGImageAlphaLast:
+        case kCGImageAlphaNoneSkipLast: {
+            if (byteOrderNormal) {
+                // RGBA or RGBX
+                return MODE_RGBA;
+            } else {
+                // ABGR or XBGR
+                // Unsupported!
+                return MODE_LAST;
+            }
+        }
+            break;
+        case kCGImageAlphaFirst:
+        case kCGImageAlphaNoneSkipFirst: {
+            if (byteOrderNormal) {
+                // ARGB or XRGB
+                return MODE_ARGB;
+            } else {
+                // BGRA or BGRX
+                return MODE_BGRA;
+            }
+        }
+            break;
+        case kCGImageAlphaOnly: {
+            // A
+            // Unsupported
+            return MODE_LAST;
+        }
+            break;
+        default:
+            break;
+    }
+    return MODE_LAST;
 }
 
 @interface SDWebPCoderFrame : NSObject
@@ -126,6 +209,7 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
     NSUInteger _currentBlendIndex;
     BOOL _preserveAspectRatio;
     CGSize _thumbnailSize;
+    BOOL _limitBytes;
 }
 
 - (void)dealloc {
@@ -218,6 +302,24 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
     CGColorSpaceRef colorSpace = [self sd_createColorSpaceWithDemuxer:demuxer];
     int canvasWidth = WebPDemuxGetI(demuxer, WEBP_FF_CANVAS_WIDTH);
     int canvasHeight = WebPDemuxGetI(demuxer, WEBP_FF_CANVAS_HEIGHT);
+    uint32_t frameCount = WebPDemuxGetI(demuxer, WEBP_FF_FRAME_COUNT);
+    int loopCount = WebPDemuxGetI(demuxer, WEBP_FF_LOOP_COUNT);
+    
+    NSUInteger limitBytes = 0;
+    NSNumber *limitBytesValue = options[SDImageCoderDecodeScaleDownLimitBytes];
+    if (limitBytesValue != nil) {
+        limitBytes = limitBytesValue.unsignedIntegerValue;
+    }
+    // Scale down to limit bytes if need
+    if (limitBytes > 0) {
+        // Hack 32 BitsPerPixel
+        CGSize imageSize = CGSizeMake(canvasWidth, canvasHeight);
+        CGSize framePixelSize = [SDImageCoderHelper scaledSizeWithImageSize:imageSize limitBytes:limitBytes bytesPerPixel:4 frameCount:frameCount];
+        // Override thumbnail size
+        thumbnailSize = framePixelSize;
+        preserveAspectRatio = YES;
+    }
+    
     // Check whether we need to use thumbnail
     CGSize scaledSize = [SDImageCoderHelper scaledSizeWithImageSize:CGSizeMake(canvasWidth, canvasHeight) scaleSize:thumbnailSize preserveAspectRatio:preserveAspectRatio shouldScaleUp:NO];
     
@@ -245,7 +347,6 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
         return nil;
     }
     
-    int loopCount = WebPDemuxGetI(demuxer, WEBP_FF_LOOP_COUNT);
     NSMutableArray<SDImageFrame *> *frames = [NSMutableArray array];
     
     do {
@@ -285,8 +386,8 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
 - (instancetype)initIncrementalWithOptions:(nullable SDImageCoderOptions *)options {
     self = [super init];
     if (self) {
-        // Progressive images need transparent, so always use premultiplied BGRA
-        _idec = WebPINewRGB(MODE_bgrA, NULL, 0, 0);
+        // Progressive images need transparent, so always use premultiplied RGBA
+        _idec = WebPINewRGB(MODE_rgbA, NULL, 0, 0);
         CGFloat scale = 1;
         NSNumber *scaleFactor = options[SDImageCoderDecodeScaleFactor];
         if (scaleFactor != nil) {
@@ -312,6 +413,12 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
             preserveAspectRatio = preserveAspectRatioValue.boolValue;
         }
         _preserveAspectRatio = preserveAspectRatio;
+        NSUInteger limitBytes = 0;
+        NSNumber *limitBytesValue = options[SDImageCoderDecodeScaleDownLimitBytes];
+        if (limitBytesValue != nil) {
+            limitBytes = limitBytesValue.unsignedIntegerValue;
+        }
+        _limitBytes = limitBytes;
         _currentBlendIndex = NSNotFound;
         SD_LOCK_INIT(_lock);
     }
@@ -352,6 +459,15 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
         [self scanAndCheckFramesValidWithDemuxer:_demux];
     }
     SD_UNLOCK(_lock);
+    // Scale down to limit bytes if need
+    if (_limitBytes > 0) {
+        // Hack 32 BitsPerPixel
+        CGSize imageSize = CGSizeMake(_canvasWidth, _canvasHeight);
+        CGSize framePixelSize = [SDImageCoderHelper scaledSizeWithImageSize:imageSize limitBytes:_limitBytes bytesPerPixel:4 frameCount:_frameCount];
+        // Override thumbnail size
+        _thumbnailSize = framePixelSize;
+        _preserveAspectRatio = YES;
+    }
 }
 
 - (UIImage *)incrementalDecodedImageWithOptions:(SDImageCoderOptions *)options {
@@ -381,9 +497,10 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
         CGDataProviderRef provider =
         CGDataProviderCreateWithData(NULL, rgba, rgbaSize, NULL);
         CGColorSpaceRef colorSpaceRef = [SDImageCoderHelper colorSpaceGetDeviceRGB];
-        
-        CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host | kCGImageAlphaPremultipliedFirst;
+        // Because _idec use MODE_rgbA
+        CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
         size_t components = 4;
+        BOOL shouldInterpolate = YES;
         CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
         // Why to use last_y for image height is because of libwebp's bug (https://bugs.chromium.org/p/webp/issues/detail?id=362)
         // It will not keep memory barrier safe on x86 architechure (macOS & iPhone simulator) but on ARM architecture (iPhone & iPad & tv & watch) it works great
@@ -391,7 +508,7 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
         // So this will cause our drawed image looks strange(above is the current part but below is the previous part)
         // We only grab the last_y height and draw the last_y height instead of total height image
         // Besides fix, this can enhance performance since we do not need to create extra bitmap
-        CGImageRef imageRef = CGImageCreate(width, last_y, 8, components * 8, components * width, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
+        CGImageRef imageRef = CGImageCreate(width, last_y, 8, components * 8, components * width, colorSpaceRef, bitmapInfo, provider, NULL, shouldInterpolate, renderingIntent);
         
         CGDataProviderRelease(provider);
         
@@ -499,19 +616,44 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
     }
     
     BOOL hasAlpha = config.input.has_alpha;
-    // iOS prefer BGRA8888 (premultiplied) or BGRX8888 bitmapInfo for screen rendering, which is same as `UIGraphicsBeginImageContext()` or `- [CALayer drawInContext:]`
-    // use this bitmapInfo, combined with right colorspace, even without decode, can still avoid extra CA::Render::copy_image(which marked `Color Copied Images` from Instruments)
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
-    bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
+    // From SDWebImage v5.17.0, use runtime detection of bitmap info instead of hardcode.
+    SDImagePixelFormat pixelFormat = [SDImageCoderHelper preferredPixelFormat:hasAlpha];
+    CGBitmapInfo bitmapInfo = pixelFormat.bitmapInfo;
+    WEBP_CSP_MODE mode = ConvertCSPMode(bitmapInfo);
+    if (mode == MODE_LAST) {
+        NSAssert(NO, @"Unsupported libwebp preferred CGBitmapInfo: %d", bitmapInfo);
+        return nil;
+    }
+    config.output.colorspace = mode;
     config.options.use_threads = 1;
-    config.output.colorspace = MODE_bgrA;
+    
     
     // Use scaling for thumbnail
+    size_t width = config.input.width;
+    size_t height = config.input.height;
     if (scaledSize.width != 0 && scaledSize.height != 0) {
         config.options.use_scaling = 1;
         config.options.scaled_width = scaledSize.width;
         config.options.scaled_height = scaledSize.height;
+        width = scaledSize.width;
+        height = scaledSize.height;
     }
+    
+    // We alloc the buffer and do byte alignment by ourself. libwebp defaults does not byte alignment to `bitsPerPixel`, which cause the CoreAnimation unhappy and always trigger the `CA::Render::copy_image`
+    size_t bitsPerComponent = 8;
+    size_t components = (mode == MODE_RGB || mode == MODE_BGR) ? 3 : 4; // Actually always 4
+    size_t bitsPerPixel = bitsPerComponent * components;
+    // Read: https://github.com/path/FastImageCache#byte-alignment
+    // A properly aligned bytes-per-row value must be a multiple of 8 pixels × bytes per pixel
+    // For a typical ARGB image, the aligned bytes-per-row value is a multiple of 64.
+    size_t alignment = pixelFormat.alignment;
+    size_t bytesPerRow = SDByteAlign(width * (bitsPerPixel / 8), alignment);
+    
+    void *rgba = WebPMalloc(bytesPerRow * height);
+    config.output.is_external_memory = 1;
+    config.output.u.RGBA.rgba = rgba;
+    config.output.u.RGBA.stride = (int)bytesPerRow;
+    config.output.u.RGBA.size = height * bytesPerRow;
     
     // Decode the WebP image data into a RGBA value array
     if (WebPDecode(webpData.bytes, webpData.size, &config) != VP8_STATUS_OK) {
@@ -521,13 +663,9 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
     // Construct a UIImage from the decoded RGBA value array
     CGDataProviderRef provider =
     CGDataProviderCreateWithData(NULL, config.output.u.RGBA.rgba, config.output.u.RGBA.size, FreeImageData);
-    size_t bitsPerComponent = 8;
-    size_t bitsPerPixel = 32;
-    size_t bytesPerRow = config.output.u.RGBA.stride;
-    size_t width = config.output.width;
-    size_t height = config.output.height;
+    BOOL shouldInterpolate = YES;
     CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-    CGImageRef imageRef = CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
+    CGImageRef imageRef = CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, shouldInterpolate, renderingIntent);
     
     CGDataProviderRelease(provider);
     
@@ -709,9 +847,6 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
     }
     
     size_t bytesPerRow = CGImageGetBytesPerRow(imageRef);
-    size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
-    size_t bitsPerPixel = CGImageGetBitsPerPixel(imageRef);
-    size_t components = bitsPerPixel / bitsPerComponent;
     CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
     CGImageAlphaInfo alphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
     CGBitmapInfo byteOrderInfo = bitmapInfo & kCGBitmapByteOrderMask;
@@ -820,7 +955,7 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
 
     config->target_size = (int)maxFileSize; // Max filesize for output, 0 means use quality instead
     config->pass = maxFileSize > 0 ? 6 : 1; // Use 6 passes for file size limited encoding, which is the default value of `cwebp` command line
-    config->lossless = 0; // Disable lossless encoding (If we need, can add new Encoding Options in future version)
+    config->lossless = GetIntValueForKey(options, SDImageCoderEncodeWebPLossless, config->lossless);
     
     config->method = GetIntValueForKey(options, SDImageCoderEncodeWebPMethod, config->method);
     config->pass = GetIntValueForKey(options, SDImageCoderEncodeWebPPass, config->pass);
@@ -844,7 +979,7 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
 }
 
 static void FreeImageData(void *info, const void *data, size_t size) {
-    free((void *)data);
+    WebPFree((void *)data);
 }
 
 static int GetIntValueForKey(NSDictionary * _Nonnull dictionary, NSString * _Nonnull key, int defaultValue) {
@@ -911,6 +1046,21 @@ static float GetFloatValueForKey(NSDictionary * _Nonnull dictionary, NSString * 
             preserveAspectRatio = preserveAspectRatioValue.boolValue;
         }
         _preserveAspectRatio = preserveAspectRatio;
+        NSUInteger limitBytes = 0;
+        NSNumber *limitBytesValue = options[SDImageCoderDecodeScaleDownLimitBytes];
+        if (limitBytesValue != nil) {
+            limitBytes = limitBytesValue.unsignedIntegerValue;
+        }
+        _limitBytes = limitBytes;
+        // Scale down to limit bytes if need
+        if (_limitBytes > 0) {
+            // Hack 32 BitsPerPixel
+            CGSize imageSize = CGSizeMake(_canvasWidth, _canvasHeight);
+            CGSize framePixelSize = [SDImageCoderHelper scaledSizeWithImageSize:imageSize limitBytes:_limitBytes bytesPerPixel:4 frameCount:_frameCount];
+            // Override thumbnail size
+            _thumbnailSize = framePixelSize;
+            _preserveAspectRatio = YES;
+        }
         _scale = scale;
         _demux = demuxer;
         _imageData = data;
@@ -1174,6 +1324,7 @@ static float GetFloatValueForKey(NSDictionary * _Nonnull dictionary, NSString * 
 #else
     image = [[UIImage alloc] initWithCGImage:imageRef scale:_scale orientation:kCGImagePropertyOrientationUp];
 #endif
+    image.sd_imageFormat = SDImageFormatWebP;
     CGImageRelease(imageRef);
     
     WebPDemuxReleaseIterator(&iter);

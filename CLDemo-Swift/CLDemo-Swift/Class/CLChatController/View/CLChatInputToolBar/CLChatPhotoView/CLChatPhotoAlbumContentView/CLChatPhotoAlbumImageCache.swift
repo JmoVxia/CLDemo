@@ -36,7 +36,7 @@ class CLChatPhotoAlbumImageCache: NSObject {
 
 extension CLChatPhotoAlbumImageCache {
     private func image(identifier: String) -> UIImage? {
-        return cachedImages.object(forKey: identifier as NSString)?.image
+        cachedImages.object(forKey: identifier as NSString)?.image
     }
 }
 
@@ -67,13 +67,13 @@ extension CLChatPhotoAlbumImageCache {
         options.isSynchronous = false
         options.resizeMode = .none
         imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { [weak self] image, info in
-            guard let image = image,
-                  let self = self,
-                  let blocks = self.loadingResponses[key]
+            guard let image,
+                  let self,
+                  let blocks = loadingResponses[key]
             else {
                 return
             }
-            self.cachedImages.setObject(CLChatPhotoAlbumImageItem(key: key, image: image), forKey: key as NSString)
+            cachedImages.setObject(CLChatPhotoAlbumImageItem(key: key, image: image), forKey: key as NSString)
             for block in blocks {
                 DispatchQueue.main.async {
                     block(image)

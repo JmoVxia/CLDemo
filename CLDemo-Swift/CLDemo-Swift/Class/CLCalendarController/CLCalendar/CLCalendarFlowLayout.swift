@@ -25,14 +25,14 @@ extension CLCalendarFlowLayout {
         sectionInset = .zero
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
-        register(CLCalendarBackgroundView.classForCoder(), forDecorationViewOfKind: CLCalendarBackgroundView.reuseIdentifier)
+        register(CLCalendarSectionBackgroundView.classForCoder(), forDecorationViewOfKind: CLCalendarSectionBackgroundView.reuseIdentifier)
     }
 }
 
 extension CLCalendarFlowLayout {
     override func prepare() {
         super.prepare()
-        guard let collectionView = collectionView else { return }
+        guard let collectionView else { return }
         guard let delegate = collectionView.delegate as? CLCalendarDelegateFlowLayout else { return }
 
         decorationViewAttributes.removeAll()
@@ -56,7 +56,7 @@ extension CLCalendarFlowLayout {
                                  : CGSize(width: collectionView.frame.width, height: sectionInset.top + sectionInset.bottom + size.height))
             }()
 
-            let attributes = CLCalendarLayoutAttributes(forDecorationViewOfKind: CLCalendarBackgroundView.reuseIdentifier, with: IndexPath(item: 0, section: section))
+            let attributes = CLCalendarLayoutAttributes(forDecorationViewOfKind: CLCalendarSectionBackgroundView.reuseIdentifier, with: IndexPath(item: 0, section: section))
             attributes.frame = sectionFrame
             attributes.zIndex = -1
             attributes.month = delegate.collectionView(collectionView, layout: self, textForSectionAt: section)
@@ -72,7 +72,7 @@ extension CLCalendarFlowLayout {
     }
 
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        guard elementKind != CLCalendarBackgroundView.reuseIdentifier else { return decorationViewAttributes[indexPath.section] }
+        guard elementKind != CLCalendarSectionBackgroundView.reuseIdentifier else { return decorationViewAttributes[indexPath.section] }
         return super.layoutAttributesForDecorationView(ofKind: elementKind, at: indexPath)
     }
 }

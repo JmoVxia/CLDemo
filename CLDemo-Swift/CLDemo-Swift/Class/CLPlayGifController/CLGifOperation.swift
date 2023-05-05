@@ -38,15 +38,15 @@ class CLGifOperation: Operation {
     }
 
     override var isFinished: Bool {
-        return taskFinished
+        taskFinished
     }
 
     override var isExecuting: Bool {
-        return taskExecuting
+        taskExecuting
     }
 
     override var isAsynchronous: Bool {
-        return true
+        true
     }
 
     init(path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {

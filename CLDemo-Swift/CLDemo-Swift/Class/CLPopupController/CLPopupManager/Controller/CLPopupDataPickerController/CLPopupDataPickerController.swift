@@ -27,7 +27,7 @@ class CLPopupDataPickerController: CLPopoverController {
     var unit: String?
     var space: CGFloat = -10
     var dataSource: [String]?
-    var minDate: Date = Date().subtract(TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 10))
+    var minDate: Date = .init().subtract(TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 10))
     var maxDate: Date = .init()
     lazy var topToolBar: UIButton = {
         let topToolBar = UIButton()

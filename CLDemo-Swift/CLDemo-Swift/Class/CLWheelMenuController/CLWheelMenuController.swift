@@ -108,9 +108,9 @@ class CLWheelMenuController: CLController {
 extension CLWheelMenuController: CLWheelMenuViewDataSource {
     func numberOfItems(in wheelMenuView: CLWheelMenuView) -> Int {
         if wheelMenuView == self.wheelMenuView {
-            return items1.count
+            items1.count
         } else {
-            return items.count
+            items.count
         }
     }
 

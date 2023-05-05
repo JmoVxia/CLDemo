@@ -31,7 +31,7 @@ extension String {
 
     /// 验证是否为0
     func isValidZero() -> Bool {
-        return self == "0"
+        self == "0"
     }
 
     /// 验证是否纯数字
@@ -113,25 +113,25 @@ extension String {
 extension String {
     /// 最后的文件路径
     var lastPathComponent: String {
-        return (self as NSString).lastPathComponent
+        (self as NSString).lastPathComponent
     }
 
     /// 文件后缀
     var pathExtension: String {
-        return (self as NSString).pathExtension
+        (self as NSString).pathExtension
     }
 }
 
 extension String {
     var url: URL? {
-        return URL(string: self)
+        URL(string: self)
     }
 }
 
 extension String {
     /// 正则匹配验证（true表示匹配成功）
     func matches(_ string: String) -> Bool {
-        return firstMatch(string) != nil
+        firstMatch(string) != nil
     }
 
     /// 获取第一个匹配结果
@@ -143,7 +143,7 @@ extension String {
     /// 获取所有的匹配结果
     func matches(_ string: String) -> [String] {
         let regex = try! Regex(string)
-        return regex.matches(in: self).map { $0.string }
+        return regex.matches(in: self).map(\.string)
     }
 
     /// 正则替换
@@ -178,12 +178,12 @@ extension String {
 extension String {
     /// 32位 小写
     var md5ForLower32Bate: String {
-        return md5()
+        md5()
     }
 
     /// 32位 大写
     var md5ForUpper32Bate: String {
-        return md5().uppercased()
+        md5().uppercased()
     }
 }
 
@@ -191,9 +191,9 @@ extension String {
     /// aes加密字符串
     var aes128Encrypt: String {
         if let aes = try? AES(key: "5A9C0A4D1A3ACC1D", iv: "9AA257C93AEDC915", padding: .pkcs7), let encrypted = try? aes.encrypt(bytes).toBase64() {
-            return encrypted
+            encrypted
         } else {
-            return ""
+            ""
         }
     }
 }
@@ -203,7 +203,7 @@ extension String {
     /// - Parameter index: 起始位置
     subscript(from index: Int) -> String? {
         guard index >= 0, index < count else { return nil }
-        let startIndex = self.index(self.startIndex, offsetBy: index)
+        let startIndex = self.index(startIndex, offsetBy: index)
         let subString = self[startIndex ..< endIndex]
         return String(subString)
     }
@@ -241,7 +241,7 @@ extension String {
 extension String {
     /// 国际化
     var localized: String {
-        return NSLocalizedString(self, tableName: "", bundle: CLLanguageManager.shared.bundle, value: "", comment: "")
+        NSLocalizedString(self, tableName: "", bundle: CLLanguageManager.shared.bundle, value: "", comment: "")
     }
 }
 

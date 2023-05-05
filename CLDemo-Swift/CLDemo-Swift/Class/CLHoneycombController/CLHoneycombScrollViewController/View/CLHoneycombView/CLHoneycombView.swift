@@ -119,20 +119,20 @@ class CLHoneycombView: UIView {
     private var cellRects = [Int: CGRect]()
     /// 当前显示的Cell的Rect
     private var visibleCellRects: [(Int, CGRect)] {
-        return cellRects.filter { displayingContentRect.containsVisibleRect($0.1) }
+        cellRects.filter { displayingContentRect.containsVisibleRect($0.1) }
     }
 
     /// 显示内容区域
     private var displayingContentRect: CGRect {
-        return CGRect(x: contentView.contentOffset.x, y: contentView.contentOffset.y, width: bounds.width, height: bounds.height)
+        CGRect(x: contentView.contentOffset.x, y: contentView.contentOffset.y, width: bounds.width, height: bounds.height)
     }
 
     /// 滑动容器
     private lazy var contentView: CLHoneycombContentView = {
         let view = CLHoneycombContentView()
         view.layoutSubviewsCallback = { [weak self] in
-            guard let self = self else { return }
-            self.invalidateLayout()
+            guard let self else { return }
+            invalidateLayout()
         }
         return view
     }()
@@ -156,7 +156,7 @@ private extension CLHoneycombView {
 
 private extension CLHoneycombView {
     func invalidateLayout() {
-        guard let delegation = delegate, let dataSource = dataSource else { return }
+        guard let delegation = delegate, let dataSource else { return }
         cellRects.filter { displayingContentRect.containsVisibleRect($0.1) && visibleCells[$0.0] == nil }.forEach { i, cellRect in
             let cell = dataSource.honeycombView(self, cellForRowAtIndex: i)
             cell.frame = cellRect
@@ -214,7 +214,7 @@ private extension CLHoneycombView {
 
 extension CLHoneycombView {
     private func centerForRect(_ rect: CGRect) -> CGPoint {
-        return CGPoint(x: (rect.maxX - rect.minX) * 0.5 + rect.origin.x, y: (rect.maxY - rect.minY) * 0.5 + rect.origin.y)
+        CGPoint(x: (rect.maxX - rect.minX) * 0.5 + rect.origin.x, y: (rect.maxY - rect.minY) * 0.5 + rect.origin.y)
     }
 
     private func distanceBetween(_ p1: CGPoint, _ p2: CGPoint) -> CGFloat {
@@ -275,11 +275,11 @@ extension CLHoneycombView {
     /// 复用cell
     func dequeueReusableCell(withReuseIdentifier identifier: String) -> CLHoneycombCell? {
         if let cell = reusePool.popCell(forReuseIdentifier: identifier) {
-            return cell
+            cell
         } else if let registeredCellType = registeredCellTypes[identifier] {
-            return registeredCellType.init(reuseIdentifier: identifier)
+            registeredCellType.init(reuseIdentifier: identifier)
         } else {
-            return nil
+            nil
         }
     }
 }

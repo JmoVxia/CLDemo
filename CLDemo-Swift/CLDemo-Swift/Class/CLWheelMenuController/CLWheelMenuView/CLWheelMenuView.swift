@@ -87,7 +87,7 @@ private extension CLWheelMenuView {
     }
 
     func creatMenuCell() {
-        guard let dataSource = dataSource else {
+        guard let dataSource else {
             return
         }
         setNeedsLayout()

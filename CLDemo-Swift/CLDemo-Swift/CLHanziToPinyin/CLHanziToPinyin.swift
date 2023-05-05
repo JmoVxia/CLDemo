@@ -46,7 +46,7 @@ struct CKDPinyinOutputFormat {
     var caseType: PinyinCaseType
 
     static var `default`: CKDPinyinOutputFormat {
-        return CKDPinyinOutputFormat(toneType: .none, vCharType: .vCharacter, caseType: .lowercased)
+        CKDPinyinOutputFormat(toneType: .none, vCharType: .vCharacter, caseType: .lowercased)
     }
 }
 
@@ -147,7 +147,7 @@ extension CLHanziToPinyin {
 extension CLHanziToPinyin {
     private static func pinyinArray(key: String, outputFormat: CKDPinyinOutputFormat = .default) -> [String] {
         func isValidPinyin(_ pinyin: String) -> Bool {
-            return pinyin != "(none0)"
+            pinyin != "(none0)"
         }
 
         guard let pinyin = CLHanziToPinyin.sharedInstance.unicodeToPinyinTable[key],

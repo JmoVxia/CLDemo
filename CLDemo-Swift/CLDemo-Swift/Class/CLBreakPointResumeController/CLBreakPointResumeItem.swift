@@ -10,7 +10,20 @@ import UIKit
 
 class CLBreakPointResumeItem: NSObject {
     let url: URL!
-    var progress: CGFloat = 0
+    var progress: CGFloat = 0 {
+        didSet {
+            progressChangeCallback?(progress)
+        }
+    }
+
+    var downloadCallback: ((URL) -> Void)?
+
+    var cancelCallback: ((URL) -> Void)?
+
+    var deleteCallback: ((URL) -> Void)?
+
+    var progressChangeCallback: ((CGFloat) -> Void)?
+
     init(url: URL) {
         self.url = url
         let fileAttribute = CLBreakPointResumeManager.fileAttribute(url)
@@ -20,10 +33,10 @@ class CLBreakPointResumeItem: NSObject {
 
 extension CLBreakPointResumeItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLBreakPointResumeCell.self
+        CLBreakPointResumeCell.self
     }
 
     func cellHeight() -> CGFloat {
-        return 110
+        110
     }
 }

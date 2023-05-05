@@ -10,11 +10,11 @@ import UIKit
 
 class CLDurationDataPickerView: UIView {
     var duration: Int {
-        return durationArray[durationIndex]
+        durationArray[durationIndex]
     }
 
     var unit: String {
-        return unitArray[unitIndex]
+        unitArray[unitIndex]
     }
 
     private var durationIndex: Int = 0
@@ -24,9 +24,7 @@ class CLDurationDataPickerView: UIView {
         return hourArray
     }()
 
-    private lazy var unitArray: [String] = {
-        ["分钟", "小时"]
-    }()
+    private lazy var unitArray: [String] = ["分钟", "小时"]
 
     private lazy var lineView: UILabel = {
         let lineView = UILabel()
@@ -82,7 +80,7 @@ extension CLDurationDataPickerView {
 
 extension CLDurationDataPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        2
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -91,7 +89,7 @@ extension CLDurationDataPickerView: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 50
+        50
     }
 }
 

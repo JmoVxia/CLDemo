@@ -15,23 +15,23 @@ class CLHistogramCell: UITableViewCell {
         var night: NSDecimalNumber = 0.0
         var additional: NSDecimalNumber = 0.0
         var total: NSDecimalNumber {
-            return morning.adding(noon).adding(night).adding(additional)
+            morning.adding(noon).adding(night).adding(additional)
         }
 
         var isMorningNomal: Bool {
-            return morning.lessThan(1.0)
+            morning.lessThan(1.0)
         }
 
         var isNoonNomal: Bool {
-            return morning.adding(noon).lessThan(1.0)
+            morning.adding(noon).lessThan(1.0)
         }
 
         var isNightNomal: Bool {
-            return morning.adding(noon).adding(night).lessThan(1.0)
+            morning.adding(noon).adding(night).lessThan(1.0)
         }
 
         var isAdditionalNomal: Bool {
-            return morning.adding(noon).adding(night).adding(additional).lessThan(1.0)
+            morning.adding(noon).adding(night).adding(additional).lessThan(1.0)
         }
     }
 

@@ -205,28 +205,31 @@ extension CLPopupController {
 
     func showDragView() {
         CLPopoverManager.showDrag { configure in
-            configure.isAutorotate = true
+            configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
         }
     }
 
     func showOneAlert() {
         CLPopoverManager.showOneAlert(configCallback: { configure in
-            configure.isAutorotate = true
+            configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
+            configure.shouldPenetrate = true
+            configure.autoHiddenWhenPenetrate = true
+            configure.overrideUserInterfaceStyle = .unspecified
         }, title: "我是一个按钮", message: "我有一个按钮")
     }
 
     func showTwoAlert() {
         CLPopoverManager.showTwoAlert(configCallback: { configure in
-            configure.isAutorotate = true
+            configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
         }, title: "我是两个按钮", message: "我有两个按钮")
     }
 
     func showSuccess() {
         CLPopoverManager.showSuccess(configCallback: { configure in
-            configure.isAutorotate = true
+            configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
         }, text: "显示成功", dismissCallback: {
             print("success animation dismiss")

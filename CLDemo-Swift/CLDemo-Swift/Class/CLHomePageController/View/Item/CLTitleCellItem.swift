@@ -20,10 +20,10 @@ class CLTitleCellItem: NSObject {
 
 extension CLTitleCellItem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLTitleCell.self
+        CLTitleCell.self
     }
 
     func cellHeight() -> CGFloat {
-        return UIFont.mediumPingFangSC(18).lineHeight + 30
+        UIFont.mediumPingFangSC(18).lineHeight + 30
     }
 }

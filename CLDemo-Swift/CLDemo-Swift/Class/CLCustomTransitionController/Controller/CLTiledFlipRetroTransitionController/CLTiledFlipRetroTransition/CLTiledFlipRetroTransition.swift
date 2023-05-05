@@ -56,7 +56,7 @@ extension CLTiledFlipRetroTransition {
 
 extension CLTiledFlipRetroTransition: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return duration
+        duration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

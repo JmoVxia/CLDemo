@@ -34,7 +34,7 @@ class CLBubbleInteractiveTransition: UIPercentDrivenInteractiveTransition {
 
 extension CLBubbleInteractiveTransition {
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
-        guard let controller = controller, let view = controller.view else { return }
+        guard let controller, let view = controller.view else { return }
 
         let translation = gesture.translation(in: controller.view.superview)
 

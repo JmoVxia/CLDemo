@@ -32,11 +32,11 @@ extension CLFontManager {
 
     /// 字体等级
     static var fontSizeCoefficient: Int {
-        return shared.coefficient
+        shared.coefficient
     }
 
     /// 字体比例系数
     static var scaleCoefficient: CGFloat {
-        return 0.075 * CGFloat(shared.coefficient - 2) + 1
+        0.075 * CGFloat(shared.coefficient - 2) + 1
     }
 }

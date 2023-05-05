@@ -53,7 +53,7 @@ class CLTagsCalculateController: CLController {
 
 extension CLTagsCalculateController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayDS.count
+        arrayDS.count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

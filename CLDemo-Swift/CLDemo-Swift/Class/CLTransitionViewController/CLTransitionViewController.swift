@@ -28,7 +28,7 @@ class CLTransitionViewController: CLController {
     }
 
     @objc func push() {
-        guard let navigationController = navigationController else {
+        guard let navigationController else {
             return
         }
         if isPush {

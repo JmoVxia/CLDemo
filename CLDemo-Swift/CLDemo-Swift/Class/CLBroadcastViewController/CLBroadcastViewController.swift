@@ -164,7 +164,7 @@ extension CLBroadcastViewController {
 
 extension CLBroadcastViewController: CLCarouselViewDataSource {
     func carouselViewRows() -> Int {
-        return arrayDS.count
+        arrayDS.count
     }
 
     func carouselViewDidChange(cell: CLCarouselCell, index: Int) {
@@ -180,7 +180,7 @@ extension CLBroadcastViewController: CLCarouselViewDelegate {
 
 extension CLBroadcastViewController: CLInfiniteViewDataSource {
     func numberOfItems(in infiniteView: CLInfiniteView) -> Int {
-        return arrayDS.count
+        arrayDS.count
     }
 
     func infiniteView(_ infiniteView: CLInfiniteView, cellForItemAt indexPath: IndexPath, index: Int) -> UICollectionViewCell {

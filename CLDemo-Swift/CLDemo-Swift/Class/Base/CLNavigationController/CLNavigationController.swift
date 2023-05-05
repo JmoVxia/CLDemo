@@ -95,7 +95,7 @@ extension CLNavigationController {
     override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
         set {}
         get {
-            return topViewController?.overrideUserInterfaceStyle ?? .light
+            topViewController?.overrideUserInterfaceStyle ?? .light
         }
     }
 }
@@ -103,27 +103,27 @@ extension CLNavigationController {
 extension CLNavigationController {
     // 是否支持自动转屏
     override var shouldAutorotate: Bool {
-        return topViewController?.shouldAutorotate ?? false
+        topViewController?.shouldAutorotate ?? false
     }
 
     // 支持哪些屏幕方向
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return topViewController?.supportedInterfaceOrientations ?? .portrait
+        topViewController?.supportedInterfaceOrientations ?? .portrait
     }
 
     // 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return topViewController?.preferredInterfaceOrientationForPresentation ?? .portrait
+        topViewController?.preferredInterfaceOrientationForPresentation ?? .portrait
     }
 
     /// 状态栏样式
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.preferredStatusBarStyle ?? .default
+        topViewController?.preferredStatusBarStyle ?? .default
     }
 
     /// 是否隐藏状态栏
     override var prefersStatusBarHidden: Bool {
-        return topViewController?.prefersStatusBarHidden ?? false
+        topViewController?.prefersStatusBarHidden ?? false
     }
 }
 

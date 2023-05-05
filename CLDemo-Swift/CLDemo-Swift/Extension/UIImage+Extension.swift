@@ -1,5 +1,5 @@
 //
-//  UIImage+CLExtension.swift
+//  UIImage+Extension.swift
 //  CL
 //
 //  Created by JmoVxia on 2020/2/26.
@@ -26,7 +26,7 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, _: false, _: 0.0)
         let context = UIGraphicsGetCurrentContext()
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        if let context = context {
+        if let context {
             context.setBlendMode(.sourceAtop)
         }
         context?.setFillColor(color.cgColor)
@@ -217,7 +217,7 @@ extension UIImage {
 
     /// 灰度图
     func grayscale(_ type: GrayscaleAlgorithm) -> UIImage? {
-        guard let cgImage = cgImage else {
+        guard let cgImage else {
             return nil
         }
 

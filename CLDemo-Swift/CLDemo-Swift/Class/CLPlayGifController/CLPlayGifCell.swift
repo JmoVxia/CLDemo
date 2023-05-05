@@ -53,6 +53,7 @@ extension CLPlayGifCell: CLRowProtocol {
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)
         }
+        animageView.layer.contents = nil
         CLGifPlayer.startPlay(item.path) { image, imagePath in
             self.animageView.layer.contents = image
         }

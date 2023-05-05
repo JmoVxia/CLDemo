@@ -116,8 +116,8 @@ private extension CLHomePageController {
             let item = CLTitleCellItem(title: model.title.localized, type: type)
             item.accessoryType = .disclosureIndicator
             item.didSelectCellCallback = { [weak self, weak item] _ in
-                guard let self = self, let item = item else { return }
-                self.push(item.type, title: item.title)
+                guard let self, let item else { return }
+                push(item.type, title: item.title)
             }
             tableViewHepler.rows.append(item)
         }

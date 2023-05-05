@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 1/24/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+import CoreFoundation
+
 // MARK: - Keyframe
 
 /// A keyframe with a single value, and timing information
@@ -90,3 +92,7 @@ extension Keyframe: Hashable where T: Hashable {
     hasher.combine(spatialOutTangent)
   }
 }
+
+// MARK: Sendable
+
+extension Keyframe: Sendable where T: Sendable { }

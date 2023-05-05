@@ -10,6 +10,6 @@ import Foundation
 extension CGRect {
     func containsVisibleRect(_ rect: CGRect) -> Bool {
         let intersection = intersection(rect)
-        return (intersection.width > 0 && intersection.height > 0)
+        return intersection.width > 0 && intersection.height > 0
     }
 }

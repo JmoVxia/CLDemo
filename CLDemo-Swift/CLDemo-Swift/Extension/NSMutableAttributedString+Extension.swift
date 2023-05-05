@@ -36,7 +36,7 @@ extension NSMutableAttributedString {
     /// 添加图片
     @discardableResult
     func addImage(_ image: UIImage?, _ bounds: CGRect) -> NSMutableAttributedString {
-        guard let image = image else { return self }
+        guard let image else { return self }
         let attch = NSTextAttachment()
         attch.image = image
         attch.bounds = bounds

@@ -10,6 +10,6 @@ import Foundation
 
 extension Int {
     var stringValue: String {
-        return String(Double(self))
+        String(Double(self))
     }
 }

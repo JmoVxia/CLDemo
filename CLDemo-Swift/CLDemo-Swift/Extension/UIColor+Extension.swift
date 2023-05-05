@@ -1,5 +1,5 @@
 //
-//  UIColor+CLExtension.swift
+//  UIColor+Extension.swift
 //  CL
 //
 //  Created by JmoVxia on 2020/2/25.
@@ -52,15 +52,13 @@ extension UIColor {
         case RGBA(rgba: String)
 
         init?(from hex: String) {
-            let hexString: String = {
-                if hex.hasPrefix("#") {
-                    return hex.replacingOccurrences(of: "#", with: "")
-                } else if hex.hasPrefix("0x") {
-                    return hex.replacingOccurrences(of: "0x", with: "")
-                } else {
-                    return hex
-                }
-            }()
+            let hexString: String = if hex.hasPrefix("#") {
+                hex.replacingOccurrences(of: "#", with: "")
+            } else if hex.hasPrefix("0x") {
+                hex.replacingOccurrences(of: "0x", with: "")
+            } else {
+                hex
+            }
             switch hexString.count {
             case 3:
                 self = .RGBshort(rgb: hexString)
@@ -78,13 +76,13 @@ extension UIColor {
         var value: String {
             switch self {
             case let .RGBshort(rgb):
-                return rgb
+                rgb
             case let .RGBshortAlpha(rgba):
-                return rgba
+                rgba
             case let .RGB(rgb):
-                return rgb
+                rgb
             case let .RGBA(rgba):
-                return rgba
+                rgba
             }
         }
 
@@ -140,11 +138,11 @@ extension UIColor {
 
 extension String {
     var uiColor: UIColor {
-        return .init(self)
+        .init(self)
     }
 
     var cgColor: CGColor {
-        return uiColor.cgColor
+        uiColor.cgColor
     }
 }
 
@@ -152,10 +150,10 @@ extension String {
 
 extension Int {
     var uiColor: UIColor {
-        return .init(String(format: "%02X", self))
+        .init(String(format: "%02X", self))
     }
 
     var cgColor: CGColor {
-        return uiColor.cgColor
+        uiColor.cgColor
     }
 }

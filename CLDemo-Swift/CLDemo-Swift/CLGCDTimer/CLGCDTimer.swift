@@ -47,7 +47,7 @@ class CLGCDTimer: NSObject {
 
     /// 替换旧响应
     func replaceOldAction(action: actionBlock?) {
-        guard let action = action else {
+        guard let action else {
             return
         }
         self.action = action

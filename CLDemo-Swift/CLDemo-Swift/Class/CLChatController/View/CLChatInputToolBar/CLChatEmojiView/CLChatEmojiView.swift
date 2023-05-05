@@ -42,17 +42,17 @@ class CLChatEmojiView: UIView {
 
     /// 控件高度
     var height: CGFloat {
-        return 6 * itemSize.height + columnMargin * 5 + safeAreaEdgeInsets.bottom
+        6 * itemSize.height + columnMargin * 5 + safeAreaEdgeInsets.bottom
     }
 
     /// 控件宽度
     private var emojiViewWidth: CGFloat {
-        return screenWidth
+        screenWidth
     }
 
     /// collectionView宽度
     private var collectionViewWidth: CGFloat {
-        return (emojiViewWidth - safeAreaEdgeInsets.left - safeAreaEdgeInsets.right)
+        emojiViewWidth - safeAreaEdgeInsets.left - safeAreaEdgeInsets.right
     }
 
     /// 数据
@@ -259,17 +259,17 @@ extension CLChatEmojiView: UICollectionViewDelegate {
 
 extension CLChatEmojiView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return emojiDataSource.count
+        emojiDataSource.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return emojiDataSource[indexPath.row].dequeueReusableCell(collectionView: collectionView, indexPath: indexPath)
+        emojiDataSource[indexPath.row].dequeueReusableCell(collectionView: collectionView, indexPath: indexPath)
     }
 }
 
 extension CLChatEmojiView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return itemSize
+        itemSize
     }
 }
 

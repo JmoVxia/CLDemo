@@ -48,27 +48,34 @@ class BaseCompositionLayer: BaseAnimationLayer {
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
   override func setupAnimations(context: LayerAnimationContext) throws {
-    var context = context
-    if renderLayerContents {
-      context = context.addingKeypathComponent(baseLayerModel.name)
-    }
+    let layerContext = context.addingKeypathComponent(baseLayerModel.name)
+    let childContext = renderLayerContents ? layerContext : context
 
-    try setupLayerAnimations(context: context)
-    try setupChildAnimations(context: context)
+    try setupLayerAnimations(context: layerContext)
+    try setupChildAnimations(context: childContext)
   }
 
   func setupLayerAnimations(context: LayerAnimationContext) throws {
-    let context = context.addingKeypathComponent(baseLayerModel.name)
+    let transformContext = context.addingKeypathComponent("Transform")
 
-    try contentsLayer.addTransformAnimations(for: baseLayerModel.transform, context: context)
+    try contentsLayer.addTransformAnimations(for: baseLayerModel.transform, context: transformContext)
 
     if renderLayerContents {
-      try contentsLayer.addOpacityAnimation(for: baseLayerModel.transform, context: context)
+      try contentsLayer.addOpacityAnimation(for: baseLayerModel.transform, context: transformContext)
 
       contentsLayer.addVisibilityAnimation(
         inFrame: CGFloat(baseLayerModel.inFrame),
         outFrame: CGFloat(baseLayerModel.outFrame),
         context: context)
+
+      // There are two different drop shadow schemas, either using `DropShadowEffect` or `DropShadowStyle`.
+      // If both happen to be present, prefer the `DropShadowEffect` (which is the drop shadow schema
+      // supported on other platforms).
+      let dropShadowEffect = baseLayerModel.effects.first(where: { $0 is DropShadowEffect }) as? DropShadowModel
+      let dropShadowStyle = baseLayerModel.styles.first(where: { $0 is DropShadowStyle }) as? DropShadowModel
+      if let dropShadowModel = dropShadowEffect ?? dropShadowStyle {
+        try contentsLayer.addDropShadowAnimations(for: dropShadowModel, context: context)
+      }
     }
   }
 

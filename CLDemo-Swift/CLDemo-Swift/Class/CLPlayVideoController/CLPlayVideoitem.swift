@@ -25,10 +25,10 @@ class CLPlayVideoitem: NSObject {
 
 extension CLPlayVideoitem: CLRowItemProtocol {
     func cellClass() -> UITableViewCell.Type {
-        return CLPlayVideoCell.self
+        CLPlayVideoCell.self
     }
 
     func cellHeight() -> CGFloat {
-        return size.height + 60
+        size.height + 60
     }
 }

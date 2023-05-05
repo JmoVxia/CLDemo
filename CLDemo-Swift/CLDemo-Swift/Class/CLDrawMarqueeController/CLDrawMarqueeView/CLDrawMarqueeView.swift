@@ -37,11 +37,11 @@ class CLDrawMarqueeView: UIView {
     private var stoped: Bool = false
     private var isFrist: Bool = true
     private var animationViewWidth: CGFloat {
-        return label.bounds.width
+        label.bounds.width
     }
 
     private var animationViewHeight: CGFloat {
-        return label.bounds.height
+        label.bounds.height
     }
 
     private lazy var label: UILabel = {
@@ -168,7 +168,7 @@ extension CLDrawMarqueeView: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         index += 1
         delegate?.drawMarqueeView(view: self, index: index, animationDidStopFinished: flag)
-        if flag && !stoped {
+        if flag, !stoped {
             startAnimation()
         }
     }

@@ -1,5 +1,5 @@
 //
-//  CLPopoverView.swift
+//  CLBubblePopupView.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/12/7.
@@ -18,7 +18,7 @@ class CLBubblePopupViewConfigure {
     /// 箭头方向
     var arrowDirection: CLBubblePopupView.popoverDirection = .bottom
     /// 遮罩颜色
-    var maskBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.35)
+    var maskBackgroundColor: UIColor = .black.withAlphaComponent(0.35)
     /// 模糊
     var overlayBlur: UIBlurEffect?
     /// 气泡颜色
@@ -80,11 +80,11 @@ class CLBubblePopupView: UIView {
 
 extension CLBubblePopupView {
     private var isCornerLeftArrow: Bool {
-        return arrowShowPoint.x == frame.origin.x
+        arrowShowPoint.x == frame.origin.x
     }
 
     private var isCornerRightArrow: Bool {
-        return arrowShowPoint.x == frame.origin.x + bounds.width
+        arrowShowPoint.x == frame.origin.x + bounds.width
     }
 }
 
@@ -115,31 +115,30 @@ extension CLBubblePopupView {
 
 extension CLBubblePopupView {
     private func show(_ contentView: UIView, fromView: UIView, inView: UIView) {
-        let point: CGPoint
-        switch configure.arrowDirection {
+        let point: CGPoint = switch configure.arrowDirection {
         case .top:
-            point = inView.convert(
+            inView.convert(
                 CGPoint(
                     x: fromView.frame.origin.x + (fromView.frame.size.width / 2),
                     y: fromView.frame.origin.y
                 ), from: fromView.superview
             )
         case .bottom:
-            point = inView.convert(
+            inView.convert(
                 CGPoint(
                     x: fromView.frame.origin.x + (fromView.frame.size.width / 2),
                     y: fromView.frame.origin.y + fromView.frame.size.height
                 ), from: fromView.superview
             )
         case .left:
-            point = inView.convert(
+            inView.convert(
                 CGPoint(
                     x: fromView.frame.origin.x,
                     y: fromView.frame.origin.y + fromView.frame.height / 2.0
                 ), from: fromView.superview
             )
         case .right:
-            point = inView.convert(
+            inView.convert(
                 CGPoint(
                     x: fromView.frame.origin.x + fromView.frame.size.width,
                     y: fromView.frame.origin.y + fromView.frame.height / 2.0
@@ -201,7 +200,7 @@ extension CLBubblePopupView {
 
 extension CLBubblePopupView {
     private func radians(_ degrees: CGFloat) -> CGFloat {
-        return CGFloat.pi * degrees / 180
+        CGFloat.pi * degrees / 180
     }
 
     override func draw(_ rect: CGRect) {

@@ -26,34 +26,34 @@ protocol CLRowItemProtocol where Self: AnyObject {
 extension CLRowItemProtocol {
     var willDisplayCallback: ((IndexPath) -> Void)? {
         get {
-            return nil
+            nil
         }
         set {}
     }
 
     var didEndDisplayingCallback: ((IndexPath) -> Void)? {
         get {
-            return nil
+            nil
         }
         set {}
     }
 
     var cellForRowCallback: ((IndexPath) -> Void)? {
         get {
-            return nil
+            nil
         }
         set {}
     }
 
     var didSelectCellCallback: ((IndexPath) -> Void)? {
         get {
-            return nil
+            nil
         }
         set {}
     }
 
     /// 高度
     func cellHeight() -> CGFloat {
-        return UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 }

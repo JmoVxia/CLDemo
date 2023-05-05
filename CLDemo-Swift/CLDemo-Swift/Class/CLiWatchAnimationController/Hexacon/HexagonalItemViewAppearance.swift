@@ -1,5 +1,5 @@
 //
-//  HexagonalViewItemAppearance.swift
+//  HexagonalItemViewAppearance.swift
 //  Hexacon
 //
 //  Created by Gautier Gdx on 05/03/16.
@@ -40,12 +40,12 @@ public struct HexagonalItemViewAppearance {
     }
 
     static func defaultAppearance() -> HexagonalItemViewAppearance {
-        return HexagonalItemViewAppearance(needToConfigureItem: true,
-                                           itemSize: 50,
-                                           itemSpacing: 0,
-                                           itemBorderWidth: 0,
-                                           itemBorderColor: .red,
-                                           animationType: .Circle,
-                                           animationDuration: 0.2)
+        HexagonalItemViewAppearance(needToConfigureItem: true,
+                                    itemSize: 50,
+                                    itemSpacing: 0,
+                                    itemBorderWidth: 0,
+                                    itemBorderColor: .red,
+                                    animationType: .Circle,
+                                    animationDuration: 0.2)
     }
 }

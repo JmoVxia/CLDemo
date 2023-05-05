@@ -74,10 +74,10 @@ class CLRotatingPictureViewController: CLController {
 
 extension CLRotatingPictureViewController {
     override var shouldAutorotate: Bool {
-        return true
+        true
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        .all
     }
 }

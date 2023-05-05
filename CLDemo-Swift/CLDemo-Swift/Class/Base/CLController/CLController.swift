@@ -50,12 +50,12 @@ class CLController: UIViewController {
 
     /// 导航条高度
     var navigationBarHeight: CGFloat {
-        return navigationController?.navigationBar.bounds.height ?? 0
+        navigationController?.navigationBar.bounds.height ?? 0
     }
 
     /// 顶部文字
     var titleText: String? {
-        return titleLabel.text
+        titleLabel.text
     }
 
     /// 转子标识符
@@ -120,30 +120,30 @@ extension CLController {
     @available(iOS 13.0, *) override var overrideUserInterfaceStyle: UIUserInterfaceStyle {
         set {}
         get {
-            return CLTheme.mode.style
+            CLTheme.mode.style
         }
     }
 }
 
 extension CLController {
     override var shouldAutorotate: Bool {
-        return true
+        true
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        .all
     }
 
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
+        .portrait
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
+        statusBarStyle
     }
 
     override var prefersStatusBarHidden: Bool {
-        return isHiddenStatusBar
+        isHiddenStatusBar
     }
 }
 
@@ -165,7 +165,7 @@ extension CLController {
 
     /// 隐藏加载动画
     func hiddenProgress() {
-        guard let identifier = identifier else { return }
+        guard let identifier else { return }
         CLPopoverManager.hidden(identifier)
     }
 

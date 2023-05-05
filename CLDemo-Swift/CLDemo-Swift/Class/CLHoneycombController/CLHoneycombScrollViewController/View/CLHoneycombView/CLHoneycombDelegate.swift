@@ -29,7 +29,7 @@ protocol CLHoneycombDelegate: UIScrollViewDelegate {
 
 extension CLHoneycombDelegate {
     func honeycombView(_ honeycombView: CLHoneycombView, shouldHightlightItemAtIndex index: Int) -> Bool {
-        return true
+        true
     }
 
     func honeycombView(_ honeycombView: CLHoneycombView, didHighlightItemAtIndex index: Int) {}
@@ -37,11 +37,11 @@ extension CLHoneycombDelegate {
     func honeycombView(_ honeycombView: CLHoneycombView, didUnhighlightItemAtIndex index: Int) {}
 
     func honeycombView(_ honeycombView: CLHoneycombView, shouldSelectItemAtIndex index: Int) -> Bool {
-        return true
+        true
     }
 
     func honeycombView(_ honeycombView: CLHoneycombView, shouldDeselectItemAtIndex index: Int) -> Bool {
-        return true
+        true
     }
 
     func honeycombView(_ honeycombView: CLHoneycombView, didSelectItemAtIndex index: Int) {}

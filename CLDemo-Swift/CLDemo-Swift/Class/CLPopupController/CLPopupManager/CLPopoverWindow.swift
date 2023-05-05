@@ -13,23 +13,21 @@ import UIKit
     /// 向下传递手势
     public var isPenetrate = false
 
+    public var autoHiddenWhenPenetrate = false
+
     override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
         if view == rootViewController?.view {
-            return isPenetrate ? nil : view
+            if isPenetrate {
+                if autoHiddenWhenPenetrate {
+                    (rootViewController as? CLPopoverController)?.hidden()
+                }
+                return nil
+            }
+            return view
         }
         return view
     }
 
     deinit {}
-
-    @available(iOS 13.0, *)
-    override public var overrideUserInterfaceStyle: UIUserInterfaceStyle {
-        set {
-            super.overrideUserInterfaceStyle = newValue
-        }
-        get {
-            return .light
-        }
-    }
 }

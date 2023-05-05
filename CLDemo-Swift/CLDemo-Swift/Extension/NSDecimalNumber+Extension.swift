@@ -10,7 +10,7 @@ import UIKit
 
 extension NSDecimalNumber {
     var isNan: Bool {
-        return self == NSDecimalNumber.notANumber
+        self == NSDecimalNumber.notANumber
     }
 }
 
@@ -67,7 +67,7 @@ extension NSDecimalNumber {
         let decimal = formatter(withDecimalsNumber: decimalsNumber)
         var string = decimal.stringValue
         var currentNumber = string.components(separatedBy: ".").last?.count ?? 0
-        if !string.contains(".") && decimalsNumber != 0 {
+        if !string.contains("."), decimalsNumber != 0 {
             currentNumber = 0
             string += "."
         }
@@ -80,18 +80,18 @@ extension NSDecimalNumber {
 
 extension NSDecimalNumber {
     func moreThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
-        return compare(decimalsNumber) == .orderedDescending && !isNan && !decimalsNumber.isNan
+        compare(decimalsNumber) == .orderedDescending && !isNan && !decimalsNumber.isNan
     }
 
     func moreOrEqualThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
-        return compare(decimalsNumber) != .orderedAscending && !isNan && !decimalsNumber.isNan
+        compare(decimalsNumber) != .orderedAscending && !isNan && !decimalsNumber.isNan
     }
 
     func lessThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
-        return compare(decimalsNumber) == .orderedAscending && !isNan && !decimalsNumber.isNan
+        compare(decimalsNumber) == .orderedAscending && !isNan && !decimalsNumber.isNan
     }
 
     func lessOrEqualThan(_ decimalsNumber: NSDecimalNumber) -> Bool {
-        return compare(decimalsNumber) != .orderedDescending && !isNan && !decimalsNumber.isNan
+        compare(decimalsNumber) != .orderedDescending && !isNan && !decimalsNumber.isNan
     }
 }

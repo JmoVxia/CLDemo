@@ -39,11 +39,11 @@ class CLBubbleTransitionPresentController: CLController {
 
     lazy var bubbleDelegate: CLBubbleTransitionDelegate = {
         let delegate = CLBubbleTransitionDelegate { [weak self] in
-            guard let self = self else { return (.zero, .white) }
-            return (self.startCenter, .init("#FF6666"))
+            guard let self else { return (.zero, .white) }
+            return (startCenter, .init("#FF6666"))
         } endCallback: { [weak self] in
-            guard let self = self else { return (.zero, .white) }
-            return (self.bottomButton.center, .init("#FF6666"))
+            guard let self else { return (.zero, .white) }
+            return (bottomButton.center, .init("#FF6666"))
         }
         delegate.interactiveTransition.attach(to: self)
         return delegate

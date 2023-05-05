@@ -18,11 +18,11 @@ import UIKit
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         let keyWindow = CLPopoverManager.keyWindow
-        if let isHiddenStatusBar = keyWindow?.rootViewController?.prefersStatusBarHidden {
-            config.isHiddenStatusBar = isHiddenStatusBar
+        if let prefersStatusBarHidden = keyWindow?.rootViewController?.prefersStatusBarHidden {
+            config.prefersStatusBarHidden = prefersStatusBarHidden
         }
-        if let statusBarStyle = keyWindow?.rootViewController?.preferredStatusBarStyle {
-            config.statusBarStyle = statusBarStyle
+        if let preferredStatusBarStyle = keyWindow?.rootViewController?.preferredStatusBarStyle {
+            config.preferredStatusBarStyle = preferredStatusBarStyle
         }
         if let supportedInterfaceOrientations = keyWindow?.rootViewController?.supportedInterfaceOrientations {
             config.supportedInterfaceOrientations = supportedInterfaceOrientations
@@ -35,7 +35,7 @@ import UIKit
             super.overrideUserInterfaceStyle = newValue
         }
         get {
-            return .light
+            config.overrideUserInterfaceStyle
         }
     }
 
@@ -77,19 +77,19 @@ extension CLPopoverController {
 
 extension CLPopoverController {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return config.statusBarStyle
+        config.preferredStatusBarStyle
     }
 
     override open var prefersStatusBarHidden: Bool {
-        return config.isHiddenStatusBar
+        config.prefersStatusBarHidden
     }
 
     override open var shouldAutorotate: Bool {
-        return config.isAutorotate
+        config.shouldAutorotate
     }
 
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return config.supportedInterfaceOrientations
+        config.supportedInterfaceOrientations
     }
 }
 

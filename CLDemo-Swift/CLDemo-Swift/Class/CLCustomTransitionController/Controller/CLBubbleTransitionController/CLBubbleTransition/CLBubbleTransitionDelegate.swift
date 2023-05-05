@@ -32,6 +32,6 @@ extension CLBubbleTransitionDelegate: UIViewControllerTransitioningDelegate {
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactiveTransition
+        interactiveTransition
     }
 }

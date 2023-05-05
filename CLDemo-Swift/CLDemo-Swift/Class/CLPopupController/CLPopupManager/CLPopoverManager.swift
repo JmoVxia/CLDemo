@@ -26,16 +26,14 @@ import UIKit
         return DispatchQueue.main.sync { block() }
     }
 
-    static var keyWindow: UIWindow? = {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .flatMap { $0.windows }
-                .first { $0.isKeyWindow }
-        } else {
-            return UIApplication.shared.keyWindow
-        }
-    }()
+    static var keyWindow: UIWindow? = if #available(iOS 13.0, *) {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first { $0.isKeyWindow }
+    } else {
+        UIApplication.shared.keyWindow
+    }
 }
 
 public extension CLPopoverManager {
@@ -66,7 +64,7 @@ public extension CLPopoverManager {
         guard !share.waitQueue.values.contains(where: { $0 != controller && $0.config.identifier == controller.config.identifier && controller.config.identifier != nil }) else { return }
 
         mainSync {
-            if controller.config.isWait, !share.windows.isEmpty {
+            if controller.config.shouldWait, !share.windows.isEmpty {
                 share.waitQueue[controller.key] = controller
             } else {
                 switch controller.config.mode {
@@ -80,7 +78,11 @@ public extension CLPopoverManager {
                 }
                 let window = CLPopoverWindow(frame: UIScreen.main.bounds)
                 window.backgroundColor = .clear
-                window.isPenetrate = controller.config.isPenetrate
+                if #available(iOS 13.0, *) {
+                    window.overrideUserInterfaceStyle = controller.config.overrideUserInterfaceStyle
+                }
+                window.autoHiddenWhenPenetrate = controller.config.autoHiddenWhenPenetrate
+                window.isPenetrate = controller.config.shouldPenetrate
                 window.windowLevel = .alert + 50
                 window.rootViewController = controller
                 window.makeKeyAndVisible()

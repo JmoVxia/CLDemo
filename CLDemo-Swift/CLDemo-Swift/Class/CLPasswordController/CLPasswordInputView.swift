@@ -41,7 +41,7 @@ class CLPasswordInputViewConfig: NSObject {
     var thirdPartyKeyboardEnabled = false
 
     fileprivate class func config() -> CLPasswordInputViewConfig {
-        return CLPasswordInputViewConfig()
+        CLPasswordInputViewConfig()
     }
 }
 
@@ -201,14 +201,14 @@ extension CLPasswordInputView: UIKeyInput {
 
     var keyboardType: UIKeyboardType {
         get {
-            return config.keyboardType
+            config.keyboardType
         }
         set {}
     }
 
     var isSecureTextEntry: Bool {
         get {
-            return !config.thirdPartyKeyboardEnabled
+            !config.thirdPartyKeyboardEnabled
         }
         set {}
     }

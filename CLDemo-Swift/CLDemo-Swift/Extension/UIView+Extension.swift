@@ -1,5 +1,5 @@
 //
-//  UIView+CLExtension.swift
+//  UIView+Extension.swift
 //  CL
 //
 //  Created by JmoVxia on 2020/3/12.
@@ -10,15 +10,15 @@ import UIKit
 
 extension UIView {
     var controller: UIViewController? {
-        return findController(with: UIViewController.self)
+        findController(with: UIViewController.self)
     }
 
     var navigationController: UIViewController? {
-        return findController(with: UINavigationController.self)
+        findController(with: UINavigationController.self)
     }
 
     var tabbarController: UITabBarController? {
-        return findController(with: UITabBarController.self)
+        findController(with: UITabBarController.self)
     }
 
     /// 根据类型查找控制器
@@ -108,7 +108,7 @@ extension UIView {
         maskBezierPath.addArc(withCenter: CGPoint(x: bounds.maxX - radius.bottomRight, y: bounds.maxY - radius.bottomRight), radius: radius.bottomRight, startAngle: 0, endAngle: .pi * 0.5, clockwise: true)
         maskBezierPath.addArc(withCenter: CGPoint(x: bounds.minX + radius.bottomLeft, y: bounds.maxY - radius.bottomLeft), radius: radius.bottomLeft, startAngle: .pi * 0.5, endAngle: .pi, clockwise: true)
         maskBezierPath.close()
-        if let borderLayer = borderLayer {
+        if let borderLayer {
             borderLayer.frame = bounds
             borderLayer.path = maskBezierPath.cgPath
             layer.addSublayer(borderLayer)

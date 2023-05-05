@@ -14,6 +14,6 @@ class CLChatEmojTextItem: NSObject {
 
 extension CLChatEmojTextItem: CLChatEmojiItemProtocol {
     func reuseIdentifier() -> String {
-        return CLChatEmojiTextCell.cellReuseIdentifier()
+        CLChatEmojiTextCell.cellReuseIdentifier()
     }
 }

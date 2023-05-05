@@ -1,5 +1,5 @@
 //
-//  CLDrawMarqueeCollectionView.swift
+//  CLMarqueeView.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2020/11/10.
@@ -37,14 +37,14 @@ class CLMarqueeView: UIView {
     override func forwardingTarget(for aSelector: Selector!) -> Any? {
         if super.responds(to: aSelector) {
             return self
-        } else if let delegate = delegate, delegate.responds(to: aSelector) {
+        } else if let delegate, delegate.responds(to: aSelector) {
             return delegate
         }
         return self
     }
 
     override func responds(to aSelector: Selector!) -> Bool {
-        if let delegate = delegate {
+        if let delegate {
             return super.responds(to: aSelector) || delegate.responds(to: aSelector)
         }
         return super.responds(to: aSelector)
@@ -79,15 +79,15 @@ extension CLMarqueeView {
 
 extension CLMarqueeView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        3
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return delegate.collectionView(collectionView, numberOfItemsInSection: section)
+        delegate.collectionView(collectionView, numberOfItemsInSection: section)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return delegate.collectionView(collectionView, cellForItemAt: indexPath)
+        delegate.collectionView(collectionView, cellForItemAt: indexPath)
     }
 }
 

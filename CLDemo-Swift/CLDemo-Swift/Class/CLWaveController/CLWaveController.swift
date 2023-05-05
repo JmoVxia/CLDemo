@@ -1,5 +1,5 @@
 //
-//  CLWaveSwiftViewController.swift
+//  CLWaveController.swift
 //  CLDemo
 //
 //  Created by AUG on 2019/3/18.

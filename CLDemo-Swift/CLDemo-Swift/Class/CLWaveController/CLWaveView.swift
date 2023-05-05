@@ -59,7 +59,7 @@ class CLWaveView: UIView {
     }
 
     @objc private func currentWave() {
-        if configure.amplitude == 0 && configure.y == 0 && configure.upSpeed != 0 {
+        if configure.amplitude == 0, configure.y == 0, configure.upSpeed != 0 {
             invalidate()
         } else {
             offsetX = offsetX + configure.speed
