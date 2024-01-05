@@ -41,7 +41,7 @@ To install Lottie using [Swift Package Manager](https://github.com/apple/swift-p
 or you can add the following dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.3.3")
+.package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.4.1")
 ```
 
 When using Swift Package Manager we recommend using the [lottie-spm](https://github.com/airbnb/lottie-spm) repo instead of the main lottie-ios repo.  The main git repository for [lottie-ios](https://github.com/airbnb/lottie-ios) is somewhat large (300+ MB), and Swift Package Manager always downloads the full repository with all git history. The [lottie-spm](https://github.com/airbnb/lottie-spm) repo is much smaller (less than 500kb), so can be downloaded much more quickly. 
@@ -75,9 +75,27 @@ carthage update
 ```
 In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
-### Data collection
+## Swift Version Support
 
-The Lottie SDK does not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/).
+Lottie supports Swift / Xcode versions back to the minimum version that is permited by Apple for submissions to the App Store. You can see the most up-to-date information for which Swift versions Lottie supports on [Swift Package Index](https://swiftpackageindex.com/airbnb/lottie-ios):
+
+[![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Flottie-ios%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/lottie-ios)
+
+## Privacy
+
+Lottie does not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/). We additionally provide a [privacy manifest](https://github.com/airbnb/lottie-ios/blob/master/Sources/PrivacyInfo.xcprivacy) which can be included in your app.
+
+## Security
+
+We distribute XCFramework bundles for each release on [GitHub](https://github.com/airbnb/lottie-ios/releases/latest). In Lottie 4.4.0 and later, these XCFramework bundles include a [code signature](https://developer.apple.com/documentation/xcode/verifying-the-origin-of-your-xcframeworks). These bundles are self-signed under the name "Lottie iOS" and have the following fingerprint:
+
+```
+89 2F 1B 43 04 7B 50 53 8F 2F 46 EA D9 29 00 DD 3D 48 11 F358 21 78 C0 61 A5 FB 20 F1 11 CB 26
+```
+
+In Xcode you can verify this by selecting `Lottie.xcframework` and confirming that it shows the following information:
+
+![Code Signature in Xcode](_Gifs/code_signature.png)
 
 ## Contributing
 

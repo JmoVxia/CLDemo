@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
-import CoreGraphics
-import Foundation
 #if canImport(UIKit)
 import UIKit
 
@@ -34,16 +32,13 @@ public class BundleImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    if
-      let data = Data(imageAsset: asset),
-      let image = UIImage(data: data)
-    {
-      return image.cgImage
+    if let base64Image = asset.base64Image {
+      return base64Image
     }
 
     let imagePath: String?
     /// Try to find the image in the bundle.
-    if let searchPath = searchPath {
+    if let searchPath {
       /// Search in the provided search path for the image
       var directoryPath = URL(fileURLWithPath: searchPath)
       directoryPath.appendPathComponent(asset.directory)

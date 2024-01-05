@@ -53,7 +53,7 @@ extension CGPath {
 // MARK: - BezierPathKeyframe
 
 /// Data that represents how to render a bezier path at a specific point in time
-struct BezierPathKeyframe {
+struct BezierPathKeyframe: Interpolatable {
   let path: BezierPath
   let cornerRadius: LottieVector1D?
 
@@ -65,7 +65,7 @@ struct BezierPathKeyframe {
     -> KeyframeGroup<BezierPathKeyframe>
   {
     guard
-      let cornerRadius = cornerRadius,
+      let cornerRadius,
       cornerRadius.keyframes.contains(where: { $0.value.cgFloatValue > 0 })
     else {
       return path.map { path in
@@ -76,5 +76,11 @@ struct BezierPathKeyframe {
     return Keyframes.combined(
       path, cornerRadius,
       makeCombinedResult: BezierPathKeyframe.init)
+  }
+
+  func interpolate(to: BezierPathKeyframe, amount: CGFloat) -> BezierPathKeyframe {
+    BezierPathKeyframe(
+      path: path.interpolate(to: to.path, amount: amount),
+      cornerRadius: cornerRadius.interpolate(to: to.cornerRadius, amount: amount))
   }
 }

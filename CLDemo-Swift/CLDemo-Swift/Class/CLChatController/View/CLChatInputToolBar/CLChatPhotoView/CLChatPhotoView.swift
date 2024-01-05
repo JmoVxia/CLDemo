@@ -121,7 +121,7 @@ extension CLChatPhotoView {
 
 extension CLChatPhotoView {
     @objc private func albumButtonAction() {
-        CLPermissions.request(.photoLibrary) { status in
+        CLPermissionsManager.request(.photoLibrary) { status in
             if status.isNoSupport {
                 CLPopoverManager.showOneAlert(title: "当前设备不支持")
             } else if status.isAuthorized {
@@ -135,7 +135,7 @@ extension CLChatPhotoView {
     }
 
     @objc private func cameraButtonButtonAction() {
-        CLPermissions.request(.camera) { status in
+        CLPermissionsManager.request(.camera) { status in
             if status.isNoSupport {
                 CLPopoverManager.showOneAlert(title: "当前设备不支持")
             } else if status.isAuthorized {

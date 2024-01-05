@@ -7,29 +7,30 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 extension URL {
-    /// 读取JSON扩展属性。
-    func readJSONAttribute<T: Decodable>(forName name: String, type: T.Type) throws -> T {
-        let data = try extendedAttribute(forName: name)
+    /// Read Decodable extension attribute.
+    func readDecodableExtendedAttribute<T: Decodable>(forName name: String, type: T.Type) throws -> T {
+        let data = try readExtendedAttribute(forName: name)
         return try JSONDecoder().decode(T.self, from: data)
     }
 
-    /// 设置JSON扩展属性。
-    func setJSONAttribute(value: some Encodable, forName name: String) throws {
+    /// Set Encodable extension attribute.
+    func setEncodableExtendedAttribute(value: some Encodable, forName name: String) throws {
         let data = try JSONEncoder().encode(value)
         try setExtendedAttribute(data: data, forName: name)
     }
 
-    /// 获取扩展属性。
-    func extendedAttribute(forName name: String) throws -> Data {
+    /// Get extended attribute.
+    func readExtendedAttribute(forName name: String) throws -> Data {
         let data = try withUnsafeFileSystemRepresentation { fileSystemPath -> Data in
-            // 确定属性的大小：
+            // Determine attribute size:
             let length = getxattr(fileSystemPath, name, nil, 0, 0, 0)
             guard length >= 0 else { throw URL.posixError(errno) }
-            // 创建具有所需大小的缓冲区：
+            // Create buffer with required size:
             var data = Data(count: length)
-            // 检索属性：
+            // Retrieve attribute:
             let result = data.withUnsafeMutableBytes { [count = data.count] in
                 getxattr(fileSystemPath, name, $0.baseAddress, count, 0, 0)
             }
@@ -39,7 +40,7 @@ extension URL {
         return data
     }
 
-    /// 设置扩展属性。
+    /// Set extended attribute.
     func setExtendedAttribute(data: Data, forName name: String) throws {
         try withUnsafeFileSystemRepresentation { fileSystemPath in
             let result = data.withUnsafeBytes {
@@ -49,7 +50,7 @@ extension URL {
         }
     }
 
-    /// 移除扩展属性。
+    /// Remove extended attribute.
     func removeExtendedAttribute(forName name: String) throws {
         try withUnsafeFileSystemRepresentation { fileSystemPath in
             let result = removexattr(fileSystemPath, name, 0)
@@ -57,17 +58,17 @@ extension URL {
         }
     }
 
-    /// 获取所有扩展属性的列表。
+    /// Get list of all extended attributes.
     func listExtendedAttributes() throws -> [String] {
         let list = try withUnsafeFileSystemRepresentation { fileSystemPath -> [String] in
             let length = listxattr(fileSystemPath, nil, 0, 0)
             guard length >= 0 else { throw URL.posixError(errno) }
-            // 创建具有所需大小的缓冲区：
+            // Create buffer with required size:
             var namebuf = [CChar](repeating: 0, count: length)
-            // 检索属性列表：
+            // Retrieve attribute list:
             let result = listxattr(fileSystemPath, &namebuf, namebuf.count, 0)
             guard result >= 0 else { throw URL.posixError(errno) }
-            // 提取属性名称：
+            // Extract attribute names:
             let list = namebuf.split(separator: 0).compactMap {
                 $0.withUnsafeBufferPointer {
                     $0.withMemoryRebound(to: UInt8.self) {
@@ -80,8 +81,24 @@ extension URL {
         return list
     }
 
-    /// 从Unix errno创建NSError的辅助函数。
+    /// Helper function to create an NSError from a Unix errno.
     private static func posixError(_ err: Int32) -> NSError {
         NSError(domain: NSPOSIXErrorDomain, code: Int(err), userInfo: [NSLocalizedDescriptionKey: String(cString: strerror(err))])
+    }
+}
+
+public extension URL {
+    var parameters: JSON {
+        let array = absoluteString.removingPercentEncoding?.components(separatedBy: "?")
+        guard array?.count == 2 else { return JSON() }
+        guard let paramsString = array?.last else { return JSON() }
+        guard !paramsString.isEmpty else { return JSON() }
+        var params: [String: String] = [:]
+        for param in paramsString.components(separatedBy: "&") {
+            let elements = param.components(separatedBy: "=")
+            guard elements.count == 2 else { continue }
+            params[elements[0]] = elements[1]
+        }
+        return JSON(params)
     }
 }

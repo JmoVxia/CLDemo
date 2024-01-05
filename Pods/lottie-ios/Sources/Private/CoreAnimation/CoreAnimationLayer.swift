@@ -1,7 +1,6 @@
 // Created by Cal Stephens on 12/13/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-import Foundation
 import QuartzCore
 
 // MARK: - CoreAnimationLayer
@@ -161,7 +160,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     //    allocate a very large amount of memory (400mb+).
     //  - Alternatively this layer could subclass `CATransformLayer`,
     //    but this causes Core Animation to emit unnecessary logs.
-    if var pendingAnimationConfiguration = pendingAnimationConfiguration {
+    if var pendingAnimationConfiguration {
       pendingAnimationConfigurationModification?(&pendingAnimationConfiguration.animationConfiguration)
       pendingAnimationConfigurationModification = nil
       self.pendingAnimationConfiguration = nil
@@ -249,6 +248,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     try setupLayerHierarchy(
       for: animation.layers,
       context: layerContext)
+
+    try validateReasonableNumberOfTimeRemappingLayers()
   }
 
   /// Immediately builds and begins playing `CAAnimation`s for each sublayer
@@ -387,7 +388,10 @@ extension CoreAnimationLayer: RootAnimationLayer {
       let requiredAnimationConfiguration = AnimationConfiguration(
         animationContext: AnimationContext(
           playFrom: animation.startFrame,
-          playTo: animation.endFrame,
+          // Normal animation playback (like when looping) skips the last frame.
+          // However when the animation is paused, we need to be able to render the final frame.
+          // To allow this we have to extend the length of the animation by one frame.
+          playTo: animation.endFrame + 1,
           closure: nil),
         timingConfiguration: CAMediaTimingConfiguration(speed: 0))
 
@@ -529,6 +533,18 @@ extension CoreAnimationLayer: RootAnimationLayer {
     }
   }
 
+  /// Time remapping in the Core Animation rendering engine requires manually interpolating
+  /// every frame of every animation. For very large animations with a huge number of layers,
+  /// this can be prohibitively expensive.
+  func validateReasonableNumberOfTimeRemappingLayers() throws {
+    try layerContext.compatibilityAssert(
+      numberOfLayersWithTimeRemapping < 500,
+      """
+      This animation has a very large number of layers with time remapping (\(numberOfLayersWithTimeRemapping)),
+      so will perform poorly with the Core Animation rendering engine.
+      """)
+  }
+
 }
 
 // MARK: - CALayer + allSublayers
@@ -545,5 +561,24 @@ extension CALayer {
     }
 
     return allSublayers
+  }
+
+  /// The number of layers in this layer hierarchy that have a time remapping applied
+  @nonobjc
+  var numberOfLayersWithTimeRemapping: Int {
+    var numberOfSublayersWithTimeRemapping = 0
+
+    for sublayer in sublayers ?? [] {
+      if 
+        let preCompLayer = sublayer as? PreCompLayer,
+        preCompLayer.preCompLayer.timeRemapping != nil
+      {
+        numberOfSublayersWithTimeRemapping += preCompLayer.allSublayers.count
+      } else {
+        numberOfSublayersWithTimeRemapping += sublayer.numberOfLayersWithTimeRemapping
+      }
+    }
+
+    return numberOfSublayersWithTimeRemapping
   }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class CLRotateAnimationSwiftController: CLController {
-    let timer = CLGCDTimer(interval: 0.1, queue: DispatchQueue.main, action: nil)
+    var timer: CLGCDTimer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +61,11 @@ class CLRotateAnimationSwiftController: CLController {
         do {
             let sectorAnimationView = CLSectorAnimationView(frame: CGRect(x: 200, y: 120, width: 80, height: 80))
             view.addSubview(sectorAnimationView)
-            timer.replaceOldAction { actions in
-                let progress = CGFloat(CGFloat(actions) / 100.0)
+            timer = .init(interval: 0.1, queue: .main)
+            timer?.start { count in
+                let progress = CGFloat(CGFloat(count) / 100.0)
                 sectorAnimationView.updateProgress(progress: progress)
             }
-            timer.start()
         }
 
         do {

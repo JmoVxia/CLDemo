@@ -8,6 +8,7 @@
 
 #import "SDImageWebPCoder.h"
 #import "SDWebImageWebPCoderDefine.h"
+#import "SDInternalMacros.h"
 #import <Accelerate/Accelerate.h>
 #import <os/lock.h>
 #import <libkern/OSAtomic.h>
@@ -24,48 +25,6 @@
 #import <libwebp/mux.h>
 #else
 @import libwebp;
-#endif
-
-#define SD_USE_OS_UNFAIR_LOCK TARGET_OS_MACCATALYST ||\
-    (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0) ||\
-    (__MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_12) ||\
-    (__TV_OS_VERSION_MIN_REQUIRED >= __TVOS_10_0) ||\
-    (__WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_3_0)
-
-#ifndef SD_LOCK_DECLARE
-#if SD_USE_OS_UNFAIR_LOCK
-#define SD_LOCK_DECLARE(lock) os_unfair_lock lock
-#else
-#define SD_LOCK_DECLARE(lock) os_unfair_lock lock API_AVAILABLE(ios(10.0), tvos(10), watchos(3), macos(10.12)); \
-OSSpinLock lock##_deprecated;
-#endif
-#endif
-
-#ifndef SD_LOCK_INIT
-#if SD_USE_OS_UNFAIR_LOCK
-#define SD_LOCK_INIT(lock) lock = OS_UNFAIR_LOCK_INIT
-#else
-#define SD_LOCK_INIT(lock) if (@available(iOS 10, tvOS 10, watchOS 3, macOS 10.12, *)) lock = OS_UNFAIR_LOCK_INIT; \
-else lock##_deprecated = OS_SPINLOCK_INIT;
-#endif
-#endif
-
-#ifndef SD_LOCK
-#if SD_USE_OS_UNFAIR_LOCK
-#define SD_LOCK(lock) os_unfair_lock_lock(&lock)
-#else
-#define SD_LOCK(lock) if (@available(iOS 10, tvOS 10, watchOS 3, macOS 10.12, *)) os_unfair_lock_lock(&lock); \
-else OSSpinLockLock(&lock##_deprecated);
-#endif
-#endif
-
-#ifndef SD_UNLOCK
-#if SD_USE_OS_UNFAIR_LOCK
-#define SD_UNLOCK(lock) os_unfair_lock_unlock(&lock)
-#else
-#define SD_UNLOCK(lock) if (@available(iOS 10, tvOS 10, watchOS 3, macOS 10.12, *)) os_unfair_lock_unlock(&lock); \
-else OSSpinLockUnlock(&lock##_deprecated);
-#endif
 #endif
 
 /// Used for animated WebP, which need a canvas for decoding (rendering), possible apply a scale transform for thumbnail decoding (avoiding post-rescale using vImage)
@@ -91,15 +50,21 @@ static inline CGContextRef _Nullable CreateWebPCanvas(BOOL hasAlpha, CGSize canv
 WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     // Get alpha info, byteOrder info
     CGImageAlphaInfo alphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
-    CGBitmapInfo byteOrderInfo = bitmapInfo & kCGBitmapByteOrderMask;
+    CGImageByteOrderInfo byteOrderInfo = bitmapInfo & kCGBitmapByteOrderMask;
+    size_t bitsPerPixel = 8;
+    if (bitmapInfo & kCGBitmapFloatComponents) {
+        bitsPerPixel = 16; // 16-Bits, which don't support currently!
+    }
     BOOL byteOrderNormal = NO;
     switch (byteOrderInfo) {
-        case kCGBitmapByteOrderDefault: {
+        case kCGImageByteOrderDefault: {
             byteOrderNormal = YES;
         } break;
-        case kCGBitmapByteOrder32Little: {
+        case kCGImageByteOrder32Little:
+        case kCGImageByteOrder16Little: {
         } break;
-        case kCGBitmapByteOrder32Big: {
+        case kCGImageByteOrder32Big:
+        case kCGImageByteOrder16Big: {
             byteOrderNormal = YES;
         } break;
         default: break;
@@ -161,7 +126,7 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
             break;
         case kCGImageAlphaOnly: {
             // A
-            // Unsupported
+            // Unsupported!
             return MODE_LAST;
         }
             break;
@@ -621,8 +586,13 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     CGBitmapInfo bitmapInfo = pixelFormat.bitmapInfo;
     WEBP_CSP_MODE mode = ConvertCSPMode(bitmapInfo);
     if (mode == MODE_LAST) {
-        NSAssert(NO, @"Unsupported libwebp preferred CGBitmapInfo: %d", bitmapInfo);
-        return nil;
+#if DEBUG
+        NSLog(@"Unsupported libwebp preferred CGBitmapInfo: %d", bitmapInfo);
+#endif
+        // Fallback to RGBA8888/RGB888 instead
+        mode = MODE_rgbA;
+        bitmapInfo = kCGBitmapByteOrderDefault;
+        bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedLast : kCGImageAlphaNoneSkipLast;
     }
     config.output.colorspace = mode;
     config.options.use_threads = 1;
@@ -773,7 +743,14 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     BOOL encodeFirstFrame = [options[SDImageCoderEncodeFirstFrameOnly] boolValue];
     if (encodeFirstFrame || frames.count <= 1) {
         // for static single webp image
+        // Keep EXIF orientation
+#if SD_UIKIT || SD_WATCH
+        CGImagePropertyOrientation orientation = [SDImageCoderHelper exifOrientationFromImageOrientation:image.imageOrientation];
+#else
+        CGImagePropertyOrientation orientation = kCGImagePropertyOrientationUp;
+#endif
         data = [self sd_encodedWebpDataWithImage:imageRef
+                                     orientation:orientation
                                          quality:compressionQuality
                                     maxPixelSize:maxPixelSize
                                      maxFileSize:maxFileSize
@@ -786,7 +763,15 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
         }
         for (size_t i = 0; i < frames.count; i++) {
             SDImageFrame *currentFrame = frames[i];
-            NSData *webpData = [self sd_encodedWebpDataWithImage:currentFrame.image.CGImage
+            UIImage *currentImage = currentFrame.image;
+            // Keep EXIF orientation
+#if SD_UIKIT || SD_WATCH
+            CGImagePropertyOrientation orientation = [SDImageCoderHelper exifOrientationFromImageOrientation:currentImage.imageOrientation];
+#else
+            CGImagePropertyOrientation orientation = kCGImagePropertyOrientationUp;
+#endif
+            NSData *webpData = [self sd_encodedWebpDataWithImage:currentImage.CGImage
+                                                     orientation:orientation
                                                          quality:compressionQuality
                                                     maxPixelSize:maxPixelSize
                                                      maxFileSize:maxFileSize
@@ -827,6 +812,7 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
 }
 
 - (nullable NSData *)sd_encodedWebpDataWithImage:(nullable CGImageRef)imageRef
+                                     orientation:(CGImagePropertyOrientation)orientation
                                          quality:(double)quality
                                     maxPixelSize:(CGSize)maxPixelSize
                                      maxFileSize:(NSUInteger)maxFileSize
@@ -835,6 +821,20 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     NSData *webpData;
     if (!imageRef) {
         return nil;
+    }
+    // Seems libwebp has no convenient EXIF orientation API ?
+    // Use transform to apply ourselves. Need to release before return
+    // TODO: Use `WebPMuxSetChunk` API to write/read EXIF data, see: https://developers.google.com/speed/webp/docs/riff_container#extended_file_format
+    __block CGImageRef rotatedCGImage = NULL;
+    @onExit {
+        if (rotatedCGImage) {
+            CGImageRelease(rotatedCGImage);
+        }
+    };
+    if (orientation != kCGImagePropertyOrientationUp) {
+        rotatedCGImage = [SDImageCoderHelper CGImageCreateDecoded:imageRef orientation:orientation];
+        NSCParameterAssert(rotatedCGImage);
+        imageRef = rotatedCGImage;
     }
     
     size_t width = CGImageGetWidth(imageRef);
@@ -872,14 +872,28 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     }
     
     uint8_t *rgba = NULL; // RGBA Buffer managed by CFData, don't call `free` on it, instead call `CFRelease` on `dataRef`
-    // We could not assume that input CGImage's color mode is always RGB888/RGBA8888. Convert all other cases to target color mode using vImage
+    // We must prefer the input CGImage's color space, which may contains ICC profile
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(imageRef);
+    // We only supports RGB colorspace, filter the un-supported one (like Monochrome, CMYK, etc)
+    if (CGColorSpaceGetModel(colorSpace) != kCGColorSpaceModelRGB) {
+        // Ignore and convert, we don't know how to encode this colorspace directlly to WebP
+        // This may cause little visible difference because of colorpsace conversion
+        colorSpace = NULL;
+    }
+    if (!colorSpace) {
+        colorSpace = [SDImageCoderHelper colorSpaceGetDeviceRGB];
+    }
+    CGColorRenderingIntent renderingIntent = CGImageGetRenderingIntent(imageRef);
     vImage_CGImageFormat destFormat = {
         .bitsPerComponent = 8,
         .bitsPerPixel = hasAlpha ? 32 : 24,
-        .colorSpace = [SDImageCoderHelper colorSpaceGetDeviceRGB],
-        .bitmapInfo = hasAlpha ? kCGImageAlphaLast | kCGBitmapByteOrderDefault : kCGImageAlphaNone | kCGBitmapByteOrderDefault // RGB888/RGBA8888 (Non-premultiplied to works for libwebp)
+        .colorSpace = colorSpace,
+        .bitmapInfo = hasAlpha ? kCGImageAlphaLast | kCGBitmapByteOrderDefault : kCGImageAlphaNone | kCGBitmapByteOrderDefault, // RGB888/RGBA8888 (Non-premultiplied to works for libwebp)
+        .renderingIntent = renderingIntent
     };
     vImage_Buffer dest;
+    // We could not assume that input CGImage's color mode is always RGB888/RGBA8888. Convert all other cases to target color mode using vImage
+    // But vImageBuffer_InitWithCGImage will do convert automatically (unless you use `kvImageNoAllocate`), so no need to call `vImageConvert` by ourselves
     vImage_Error error = vImageBuffer_InitWithCGImage(&dest, &destFormat, NULL, imageRef, kvImageNoFlags);
     if (error != kvImageNoError) {
         return nil;

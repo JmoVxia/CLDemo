@@ -11,7 +11,7 @@ import UIKit
 
 class CLChatController: CLController {
     /// 图片上传路径
-    private let imageUploadPath: String = pathDocuments + "/CLChatImageUpload"
+    private let imageUploadPath: String = NSHomeDirectory() + "/Documents" + "/CLChatImageUpload"
     private lazy var tableViewHepler: CLTableViewHepler = {
         let hepler = CLTableViewHepler()
         return hepler
@@ -85,7 +85,7 @@ extension CLChatController {
 
 extension CLChatController {
     private func addTipsMessages(_ messages: [String]) {
-        messages.forEach { text in
+        for text in messages {
             let item = CLChatTipsItem()
             item.text = text
             tableViewHepler.rows.append(item)
@@ -94,7 +94,7 @@ extension CLChatController {
     }
 
     private func addTextMessages(_ messages: [String]) {
-        messages.forEach { text in
+        for text in messages {
             let rightItem = CLChatTextItem()
             rightItem.isFromMyself = true
             rightItem.text = text
@@ -109,9 +109,9 @@ extension CLChatController {
     }
 
     private func addImageMessages(_ messages: [(image: UIImage, asset: PHAsset)]) {
-        messages.forEach { imageInfo in
+        for imageInfo in messages {
             guard let previewImageData = imageInfo.image.pngData() else {
-                return
+                continue
             }
             let rightItem = CLChatImageItem()
             rightItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: rightItem.messageId + "previewImage")

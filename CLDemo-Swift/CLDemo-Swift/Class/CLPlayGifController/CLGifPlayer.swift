@@ -63,7 +63,7 @@ extension CLGifPlayer {
     }
 
     static func cacanAll() {
-        shared.operationDictionary.keys.forEach { key in
+        for key in shared.operationDictionary.keys {
             cancel(key)
         }
     }

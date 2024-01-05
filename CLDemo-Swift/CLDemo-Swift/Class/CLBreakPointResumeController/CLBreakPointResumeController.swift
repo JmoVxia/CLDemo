@@ -79,14 +79,14 @@ class CLBreakPointResumeController: CLController {
     }
 
     func download(_ url: URL) {
-        CLBreakPointResumeManager.download(url) { [weak self] downloadURL, progress in
-            let rows = self?.tableViewHepler.rows.filter { ($0 as? CLBreakPointResumeItem)?.url == downloadURL } as? [CLBreakPointResumeItem]
+        CLBreakPointResumeManager.download(url) { [weak self] progress in
+            let rows = self?.tableViewHepler.rows.filter { ($0 as? CLBreakPointResumeItem)?.url == url } as? [CLBreakPointResumeItem]
             rows?.forEach { $0.progress = progress }
         } completionBlock: { result in
             result.failure { error in
-                CLLog("下载失败,error:\(error)")
+                CLLog("下载失败: \(error)")
             }.success { path in
-                CLLog("下载成功,path:\(path)")
+                CLLog("下载成功: \(path)")
             }
         }
     }

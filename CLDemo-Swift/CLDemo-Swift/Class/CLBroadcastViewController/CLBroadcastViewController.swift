@@ -13,11 +13,11 @@ class CLBroadcastViewController: CLController {
         var array = [String]()
         array.append("我是第一个")
         array.append("我是第二个")
-        array.append("我是第三个")
-        array.append("我是第四个")
-        array.append("我是第五个")
-        array.append("我是第六个")
-        array.append("我是第七个")
+//        array.append("我是第三个")
+//        array.append("我是第四个")
+//        array.append("我是第五个")
+//        array.append("我是第六个")
+//        array.append("我是第七个")
         return array
     }()
 
@@ -49,11 +49,9 @@ class CLBroadcastViewController: CLController {
 
     private lazy var carouseView: CLCarouselView = {
         let view = CLCarouselView()
-        view.backgroundColor = UIColor.orange.withAlphaComponent(0.25)
+        view.backgroundColor = UIColor.yellow
         view.dataSource = self
         view.delegate = self
-        view.isAutoScroll = true
-        view.autoScrollDeley = 1
         return view
     }()
 
@@ -83,12 +81,7 @@ class CLBroadcastViewController: CLController {
         return view
     }()
 
-    private lazy var timer: CLGCDTimer = {
-        let gcdTimer = CLGCDTimer(interval: 1, delaySecs: 1) { [weak self] _ in
-            self?.scrollToNext()
-        }
-        return gcdTimer
-    }()
+    private var timer: CLGCDTimer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,7 +146,10 @@ extension CLBroadcastViewController {
         horizontalInfiniteView.reloadData()
         verticalInfiniteView.reloadData()
 
-        timer.start()
+        timer = CLGCDTimer(interval: 1, delaySecs: 1)
+        timer?.start { [weak self] count in
+            self?.scrollToNext()
+        }
     }
 
     func scrollToNext() {
@@ -163,17 +159,17 @@ extension CLBroadcastViewController {
 }
 
 extension CLBroadcastViewController: CLCarouselViewDataSource {
-    func carouselViewRows() -> Int {
+    func numberOfItems(inCarouselView carouselView: CLCarouselView) -> Int {
         arrayDS.count
     }
 
-    func carouselViewDidChange(cell: CLCarouselCell, index: Int) {
+    func carouselView(_ carouselView: CLCarouselView, configureCell cell: CLCarouselCell, forItemAt index: Int) {
         cell.label.text = arrayDS[index]
     }
 }
 
 extension CLBroadcastViewController: CLCarouselViewDelegate {
-    func carouselViewDidSelect(cell: CLCarouselCell, index: Int) {
+    func carouselView(_ carouselView: CLCarouselView, didSelectItemAt index: Int) {
         print("点击\(index)")
     }
 }

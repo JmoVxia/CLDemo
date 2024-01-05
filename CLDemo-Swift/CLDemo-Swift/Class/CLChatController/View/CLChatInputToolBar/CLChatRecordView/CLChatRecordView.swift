@@ -268,7 +268,7 @@ extension CLChatRecordView {
                 cancelRecord()
             } else if recorder.audioDuration < 1.0 {
                 cancelRecord()
-                if CLPermissions.isAllowed(.microphone) {
+                if CLPermissionsManager.isAllowed(.microphone) {
                     CLPopoverManager.showTips(text: "录音时间过短")
                 }
             } else {
@@ -292,11 +292,11 @@ extension CLChatRecordView {
 
 extension CLChatRecordView {
     private func startRecord() {
-        if CLPermissions.isAllowed(.microphone) {
+        if CLPermissionsManager.isAllowed(.microphone) {
             recorder.start()
             startRecorderCallBack?()
         } else {
-            CLPermissions.request(.microphone) { status in
+            CLPermissionsManager.request(.microphone) { status in
                 if status.isNoSupport {
                     CLPopoverManager.showOneAlert(title: "当前设备不支持")
                 } else if status.isAuthorized {

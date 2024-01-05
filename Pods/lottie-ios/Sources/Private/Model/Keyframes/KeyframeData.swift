@@ -5,9 +5,6 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
-import CoreGraphics
-import Foundation
-
 // MARK: - KeyframeData
 
 /// A generic class used to parse and remap keyframe json.
@@ -72,7 +69,7 @@ final class KeyframeData<T> {
   let spatialOutTangent: LottieVector3D?
 
   var isHold: Bool {
-    if let hold = hold {
+    if let hold {
       return hold > 0
     }
     return false

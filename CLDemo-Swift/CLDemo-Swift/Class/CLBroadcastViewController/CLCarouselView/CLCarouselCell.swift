@@ -17,6 +17,7 @@ class CLCarouselCell: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .gray
         addSubview(label)
         label.snp.makeConstraints { make in
             make.edges.equalToSuperview()

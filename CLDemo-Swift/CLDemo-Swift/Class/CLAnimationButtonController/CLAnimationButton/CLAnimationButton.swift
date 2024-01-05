@@ -269,7 +269,7 @@ extension CLAnimationButton {
         circleShapeLayer.add(circleTransformAnimation, forKey: "transform")
         circleMaskLayer.add(circleMaskTransformAnimation, forKey: "transform")
         imageShapeLayer.add(imageTransformAnimation, forKey: "transform")
-        lineLayers.forEach { layer in
+        for layer in lineLayers {
             layer.add(lineStrokeStartAnimation, forKey: "strokeStart")
             layer.add(lineStrokeEndAnimation, forKey: "strokeEnd")
             layer.add(lineOpacityAnimation, forKey: "opacity")
@@ -283,7 +283,7 @@ extension CLAnimationButton {
         circleShapeLayer.removeAllAnimations()
         circleMaskLayer.removeAllAnimations()
         imageShapeLayer.removeAllAnimations()
-        lineLayers.forEach { layer in
+        for layer in lineLayers {
             layer.removeAllAnimations()
         }
     }

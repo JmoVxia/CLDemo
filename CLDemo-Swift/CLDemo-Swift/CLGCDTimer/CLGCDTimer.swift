@@ -9,23 +9,25 @@
 import UIKit
 
 class CLGCDTimer: NSObject {
-    typealias actionBlock = (NSInteger) -> Void
+    public enum State {
+        case suspended
+        case resumed
+    }
+
     /// 执行时间
-    private var interval: TimeInterval!
+    public private(set) var interval: TimeInterval!
     /// 延迟时间
-    private var delaySecs: TimeInterval!
+    public private(set) var delaySecs: TimeInterval!
     /// 队列
-    private var serialQueue: DispatchQueue!
-    /// 是否重复
-    private var repeats: Bool = true
-    /// 响应
-    private var action: actionBlock?
+    public private(set) var serialQueue: DispatchQueue!
     /// 定时器
-    private var timer: DispatchSourceTimer!
+    public private(set) var timer: DispatchSourceTimer!
     /// 是否正在运行
-    private var isRuning: Bool = false
+    public private(set) var state: State = .suspended
     /// 响应次数
-    private(set) var actionTimes: NSInteger = 0
+    public private(set) var actionTimes = Int.zero
+    /// 响应
+    public private(set) var eventHandler: ((Int) -> Void)?
 
     /// 创建定时器
     ///
@@ -35,76 +37,51 @@ class CLGCDTimer: NSObject {
     ///   - queue: 定时器调用的队列，默认主队列
     ///   - repeats: 是否重复执行，默认true
     ///   - action: 响应
-    init(interval: TimeInterval, delaySecs: TimeInterval = 0, queue: DispatchQueue = .main, repeats: Bool = true, action: actionBlock?) {
+    public init(interval: TimeInterval,
+                delaySecs: TimeInterval = 0,
+                queue: DispatchQueue = .main)
+    {
         super.init()
         self.interval = interval
         self.delaySecs = delaySecs
-        self.repeats = repeats
         serialQueue = queue
-        self.action = action
         timer = DispatchSource.makeTimerSource(queue: serialQueue)
-    }
-
-    /// 替换旧响应
-    func replaceOldAction(action: actionBlock?) {
-        guard let action else {
-            return
+        timer.schedule(deadline: .now() + delaySecs, repeating: interval)
+        timer.setEventHandler { [weak self] in
+            guard let self else { return }
+            actionTimes += 1
+            eventHandler?(actionTimes)
         }
-        self.action = action
-    }
-
-    /// 执行一次定时器响应
-    func responseOnce() {
-        actionTimes += 1
-        isRuning = true
-        action?(actionTimes)
-        isRuning = false
     }
 
     deinit {
-        cancel()
+        timer?.setEventHandler(handler: nil)
+        timer?.cancel()
+        eventHandler = nil
+        resume()
     }
 }
 
 extension CLGCDTimer {
-    /// 开始定时器
-    func start() {
-        timer.schedule(deadline: .now() + delaySecs, repeating: interval)
-        timer.setEventHandler { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.actionTimes += 1
-            strongSelf.action?(strongSelf.actionTimes)
-            if !strongSelf.repeats {
-                strongSelf.cancel()
-                strongSelf.action = nil
-            }
-        }
+    /// 开始
+    public func start(_ handler: @escaping ((_ count: Int) -> Void)) {
+        eventHandler = handler
         resume()
     }
 
     /// 暂停
-    func suspend() {
-        if isRuning {
-            timer.suspend()
-            isRuning = false
-        }
+    public func suspend() {
+        guard let timer else { return }
+        guard state != .suspended else { return }
+        state = .suspended
+        timer.suspend()
     }
 
     /// 恢复定时器
-    func resume() {
-        if !isRuning {
-            timer.resume()
-            isRuning = true
-        }
-    }
-
-    /// 取消定时器
-    func cancel() {
-        if !isRuning {
-            resume()
-        }
-        timer.cancel()
+    public func resume() {
+        guard state != .resumed else { return }
+        guard let timer else { return }
+        state = .resumed
+        timer.resume()
     }
 }

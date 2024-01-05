@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
-import Foundation
-
 // MARK: - TextJustification
 
 enum TextJustification: Int, Codable {
@@ -27,7 +25,7 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     fontFamily = try dictionary.value(for: CodingKeys.fontFamily)
     let justificationValue: Int = try dictionary.value(for: CodingKeys.justification)
     guard let justification = TextJustification(rawValue: justificationValue) else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     self.justification = justification
     tracking = try dictionary.value(for: CodingKeys.tracking)
@@ -59,7 +57,7 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
 
   convenience init(value: Any) throws {
     guard let dictionary = value as? [String: Any] else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     try self.init(dictionary: dictionary)
   }

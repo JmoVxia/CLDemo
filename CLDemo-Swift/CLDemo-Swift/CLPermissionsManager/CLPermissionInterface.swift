@@ -9,7 +9,7 @@
 import Photos
 import UIKit
 
-enum CLAuthorizationStatus {
+enum CLPermissionStatus {
     /// 未知状态
     case unknown
     /// 用户未选择
@@ -35,17 +35,17 @@ enum CLAuthorizationStatus {
     }
 }
 
-protocol CLPermissionInterface {
+protocol CLPermissionProtocol {
     /// 是否允许
     var isAuthorized: Bool { get }
     /// 是否拒绝
     var isDenied: Bool { get }
     /// 请求权限
-    func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?)
+    func request(сompletionCallback: ((CLPermissionStatus) -> Void)?)
 }
 
 /// 相册权限
-struct CLPhotoLibraryPermission: CLPermissionInterface {
+struct CLPhotoLibrary: CLPermissionProtocol {
     var isAuthorized: Bool {
         PHPhotoLibrary.authorizationStatus() == .authorized
     }
@@ -54,9 +54,9 @@ struct CLPhotoLibraryPermission: CLPermissionInterface {
         PHPhotoLibrary.authorizationStatus() == .denied
     }
 
-    func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?) {
+    func request(сompletionCallback: ((CLPermissionStatus) -> Void)?) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            var authorizationStatus: CLAuthorizationStatus = .unknown
+            var authorizationStatus: CLPermissionStatus = .unknown
             switch PHPhotoLibrary.authorizationStatus() {
             case .authorized:
                 authorizationStatus = .authorized
@@ -88,7 +88,7 @@ struct CLPhotoLibraryPermission: CLPermissionInterface {
 }
 
 /// 相机权限
-struct CLCameraPermission: CLPermissionInterface {
+struct CLCamera: CLPermissionProtocol {
     var isAuthorized: Bool {
         AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized
     }
@@ -97,9 +97,9 @@ struct CLCameraPermission: CLPermissionInterface {
         AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.denied
     }
 
-    func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?) {
+    func request(сompletionCallback: ((CLPermissionStatus) -> Void)?) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            var authorizationStatus: CLAuthorizationStatus = .unknown
+            var authorizationStatus: CLPermissionStatus = .unknown
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized:
                 authorizationStatus = .authorized
@@ -126,7 +126,7 @@ struct CLCameraPermission: CLPermissionInterface {
 }
 
 /// 麦克风权限
-struct CLMicrophonePermission: CLPermissionInterface {
+struct CLMicrophone: CLPermissionProtocol {
     var isAuthorized: Bool {
         AVAudioSession.sharedInstance().recordPermission == .granted
     }
@@ -135,9 +135,9 @@ struct CLMicrophonePermission: CLPermissionInterface {
         AVAudioSession.sharedInstance().recordPermission == .denied
     }
 
-    func request(сompletionCallback: ((CLAuthorizationStatus) -> Void)?) {
+    func request(сompletionCallback: ((CLPermissionStatus) -> Void)?) {
         if AVAudioSession.sharedInstance().isInputAvailable {
-            var authorizationStatus: CLAuthorizationStatus = .unknown
+            var authorizationStatus: CLPermissionStatus = .unknown
             switch AVAudioSession.sharedInstance().recordPermission {
             case .undetermined:
                 authorizationStatus = .notDetermined

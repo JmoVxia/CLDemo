@@ -54,7 +54,7 @@ extension LottieVector1D: AnyInitializable {
     } else if let double = value as? Double {
       self.value = double
     } else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
   }
 
@@ -127,7 +127,7 @@ extension LottieVector2D: AnyInitializable {
 
   init(value: Any) throws {
     guard let dictionary = value as? [String: Any] else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
 
     if
@@ -138,7 +138,7 @@ extension LottieVector2D: AnyInitializable {
     } else if let double = dictionary[CodingKeys.x.rawValue] as? Double {
       x = double
     } else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     if
       let array = dictionary[CodingKeys.y.rawValue] as? [Double],
@@ -148,7 +148,7 @@ extension LottieVector2D: AnyInitializable {
     } else if let double = dictionary[CodingKeys.y.rawValue] as? Double {
       y = double
     } else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
   }
 }
@@ -213,7 +213,7 @@ extension LottieVector3D: AnyInitializable {
 
   init(value: Any) throws {
     guard var array = value as? [Double] else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     x = array.count > 0 ? array.removeFirst() : 0
     y = array.count > 0 ? array.removeFirst() : 0
@@ -322,7 +322,7 @@ extension CATransform3D {
     skewAxis: CGFloat?)
     -> CATransform3D
   {
-    if let skew = skew, let skewAxis = skewAxis {
+    if let skew, let skewAxis {
       return CATransform3DMakeTranslation(position.x, position.y, 0)
         .rotated(rotationX, axis: .x)
         .rotated(rotationY, axis: .y)

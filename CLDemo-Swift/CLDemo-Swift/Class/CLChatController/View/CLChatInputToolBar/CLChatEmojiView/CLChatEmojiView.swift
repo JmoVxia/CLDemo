@@ -151,6 +151,7 @@ class CLChatEmojiView: UIView {
 
     /// 定时器
     private var timer: CLGCDTimer?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = CGRect(x: 0, y: 0, width: emojiViewWidth, height: height)
@@ -213,14 +214,12 @@ extension CLChatEmojiView {
 
     @objc private func handleLongPress(gesture: UILongPressGestureRecognizer!) {
         if gesture.state == .ended || gesture.state == .cancelled || gesture.state == .failed {
-            timer?.cancel()
+            timer = nil
         } else if gesture.state == .began {
-            timer = CLGCDTimer(interval: 0.1, action: { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.didSelectDeleteCallBack?()
-                }
-            })
-            timer?.start()
+            timer = CLGCDTimer(interval: 0.1, queue: .main)
+            timer?.start { [weak self] _ in
+                self?.didSelectDeleteCallBack?()
+            }
         }
     }
 }

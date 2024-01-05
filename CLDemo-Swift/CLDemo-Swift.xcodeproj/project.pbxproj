@@ -24,7 +24,7 @@
 		5B0DC71E26CA4AE400909BF2 /* CLHoneycombCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0DC71D26CA4AE400909BF2 /* CLHoneycombCustomCell.swift */; };
 		5B0FB9D828FFF87A001D012B /* CLCalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0FB9D728FFF87A001D012B /* CLCalendarController.swift */; };
 		5B1C366F26841FAF00D777EB /* CLPermissionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */; };
-		5B1C367026841FAF00D777EB /* CLPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366E26841FAF00D777EB /* CLPermissions.swift */; };
+		5B1C367026841FAF00D777EB /* CLPermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C366E26841FAF00D777EB /* CLPermissionsManager.swift */; };
 		5B3309E228FFFB23000D44DF /* CLCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309D828FFFB22000D44DF /* CLCalendarModel.swift */; };
 		5B3309E328FFFB23000D44DF /* CLCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309D928FFFB22000D44DF /* CLCalendarCell.swift */; };
 		5B3309E428FFFB23000D44DF /* CLCalendarLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309DA28FFFB23000D44DF /* CLCalendarLayoutAttributes.swift */; };
@@ -152,6 +152,7 @@
 		5B83980B26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */; };
 		5B83980D26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */; };
 		5B9057A72B46549A003E3B1C /* CLSafeArrayDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9057A62B46549A003E3B1C /* CLSafeArrayDictionary.swift */; };
+		5B91B27F2B83300300272CA1 /* CLCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91B27E2B83300300272CA1 /* CLCaptureController.swift */; };
 		5B9756A226C64FFA006C0841 /* HomePage.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B9756A126C64FFA006C0841 /* HomePage.json */; };
 		5B988AC329FB73680076379C /* CLPopupCalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B988AC229FB73680076379C /* CLPopupCalendarController.swift */; };
 		5B9E321F29CDDA6500D96638 /* CLMultiValueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */; };
@@ -174,6 +175,7 @@
 		5BC9911B26C65DBD0026B6FF /* CLHoneycombCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC9911A26C65DBD0026B6FF /* CLHoneycombCollectionViewController.swift */; };
 		5BC9911E26C65E070026B6FF /* CLHoneycombLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC9911D26C65E070026B6FF /* CLHoneycombLayout.swift */; };
 		5BC9912126C65E3A0026B6FF /* CLHoneycombCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC9912026C65E3A0026B6FF /* CLHoneycombCollectionViewCell.swift */; };
+		5BCBC30A2B512C7D00863AF2 /* CLCarouselPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBC3092B512C7D00863AF2 /* CLCarouselPageControl.swift */; };
 		5BD0434326832D3F0054F2B4 /* CLBreakPointResumeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0433E26832D3F0054F2B4 /* CLBreakPointResumeOperation.swift */; };
 		5BD0434426832D3F0054F2B4 /* CLBreakPointResumeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0433F26832D3F0054F2B4 /* CLBreakPointResumeManager.swift */; };
 		5BD0434526832D3F0054F2B4 /* CLBreakPointResumeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0434026832D3F0054F2B4 /* CLBreakPointResumeItem.swift */; };
@@ -352,7 +354,7 @@
 		5B0DC71D26CA4AE400909BF2 /* CLHoneycombCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHoneycombCustomCell.swift; sourceTree = "<group>"; };
 		5B0FB9D728FFF87A001D012B /* CLCalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCalendarController.swift; sourceTree = "<group>"; };
 		5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissionInterface.swift; sourceTree = "<group>"; };
-		5B1C366E26841FAF00D777EB /* CLPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissions.swift; sourceTree = "<group>"; };
+		5B1C366E26841FAF00D777EB /* CLPermissionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPermissionsManager.swift; sourceTree = "<group>"; };
 		5B3309D828FFFB22000D44DF /* CLCalendarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarModel.swift; sourceTree = "<group>"; };
 		5B3309D928FFFB22000D44DF /* CLCalendarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarCell.swift; sourceTree = "<group>"; };
 		5B3309DA28FFFB23000D44DF /* CLCalendarLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarLayoutAttributes.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 		5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroTransition.swift; sourceTree = "<group>"; };
 		5B83980C26A1678500FD1D3C /* CLTiledFlipRetroPushTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTiledFlipRetroPushTransitionController.swift; sourceTree = "<group>"; };
 		5B9057A62B46549A003E3B1C /* CLSafeArrayDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSafeArrayDictionary.swift; sourceTree = "<group>"; };
+		5B91B27E2B83300300272CA1 /* CLCaptureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCaptureController.swift; sourceTree = "<group>"; };
 		5B9756A126C64FFA006C0841 /* HomePage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HomePage.json; sourceTree = "<group>"; };
 		5B988AC229FB73680076379C /* CLPopupCalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupCalendarController.swift; sourceTree = "<group>"; };
 		5B9E321E29CDDA6500D96638 /* CLMultiValueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiValueController.swift; sourceTree = "<group>"; };
@@ -510,6 +513,7 @@
 		5BC9911A26C65DBD0026B6FF /* CLHoneycombCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHoneycombCollectionViewController.swift; sourceTree = "<group>"; };
 		5BC9911D26C65E070026B6FF /* CLHoneycombLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHoneycombLayout.swift; sourceTree = "<group>"; };
 		5BC9912026C65E3A0026B6FF /* CLHoneycombCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHoneycombCollectionViewCell.swift; sourceTree = "<group>"; };
+		5BCBC3092B512C7D00863AF2 /* CLCarouselPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCarouselPageControl.swift; sourceTree = "<group>"; };
 		5BD0433E26832D3F0054F2B4 /* CLBreakPointResumeOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBreakPointResumeOperation.swift; sourceTree = "<group>"; };
 		5BD0433F26832D3F0054F2B4 /* CLBreakPointResumeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBreakPointResumeManager.swift; sourceTree = "<group>"; };
 		5BD0434026832D3F0054F2B4 /* CLBreakPointResumeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBreakPointResumeItem.swift; sourceTree = "<group>"; };
@@ -795,13 +799,21 @@
 			path = CLCalendar;
 			sourceTree = "<group>";
 		};
-		5B1C366C26841FAF00D777EB /* CLPermissions */ = {
+		5B1C366C26841FAF00D777EB /* CLPermissionsManager */ = {
 			isa = PBXGroup;
 			children = (
 				5B1C366D26841FAF00D777EB /* CLPermissionInterface.swift */,
-				5B1C366E26841FAF00D777EB /* CLPermissions.swift */,
+				5B1C366E26841FAF00D777EB /* CLPermissionsManager.swift */,
 			);
-			path = CLPermissions;
+			path = CLPermissionsManager;
+			sourceTree = "<group>";
+		};
+		5B23A65E2B8325F400DC4975 /* CLCaptureController */ = {
+			isa = PBXGroup;
+			children = (
+				5B91B2802B8335D600272CA1 /* Controller */,
+			);
+			path = CLCaptureController;
 			sourceTree = "<group>";
 		};
 		5B3309F22900F49F000D44DF /* CLTagsCalculateController */ = {
@@ -954,7 +966,7 @@
 				5BD4EAFA268184AB00B5284F /* Extension */,
 				5B39ECD127574B18000FCF67 /* CLHanziToPinyin */,
 				5B58C56A26846B34001736D7 /* CLRecorder */,
-				5B1C366C26841FAF00D777EB /* CLPermissions */,
+				5B1C366C26841FAF00D777EB /* CLPermissionsManager */,
 				5B76933726841E14008BB92B /* CLGCDTimer */,
 				5B3309FF2901180C000D44DF /* CLTableView */,
 				5BD4EB7926818A1300B5284F /* CLLogManager */,
@@ -1370,6 +1382,7 @@
 				5B800435268194B1000E39AC /* CLHomePageController */,
 				5B3CC416291EA8D000568D77 /* CLLineChartController */,
 				5BBFE84A29DE53BF00A5AC34 /* CLExcelController */,
+				5B23A65E2B8325F400DC4975 /* CLCaptureController */,
 				5BC9911926C65D780026B6FF /* CLHoneycombController */,
 				5BEF4CFA2881011A00A15433 /* CLTruncationController */,
 				5B9E321D29CDDA4B00D96638 /* CLMultiValueController */,
@@ -1559,6 +1572,14 @@
 				5B83980A26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift */,
 			);
 			path = CLTiledFlipRetroTransition;
+			sourceTree = "<group>";
+		};
+		5B91B2802B8335D600272CA1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5B91B27E2B83300300272CA1 /* CLCaptureController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		5B988AC129FB73380076379C /* CLPopupCalendarController */ = {
@@ -2132,6 +2153,7 @@
 			children = (
 				5BE66817268475940095F82E /* CLCarouselView.swift */,
 				5BE66818268475940095F82E /* CLCarouselCell.swift */,
+				5BCBC3092B512C7D00863AF2 /* CLCarouselPageControl.swift */,
 			);
 			path = CLCarouselView;
 			sourceTree = "<group>";
@@ -2290,8 +2312,9 @@
 		5B4895EA268097510046AF31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					5B4895F1268097510046AF31 = {
 						CreatedOnToolsVersion = 12.5;
@@ -2445,6 +2468,7 @@
 				5B0DC71226CA372400909BF2 /* CLHoneycombView.swift in Sources */,
 				5BAABFF92681B36800C2F609 /* CLTitleCellItem.swift in Sources */,
 				5BD4EB782681872D00B5284F /* CLPopupBMIInputController.swift in Sources */,
+				5B91B27F2B83300300272CA1 /* CLCaptureController.swift in Sources */,
 				5B76932A26841C70008BB92B /* CLChatImageCell.swift in Sources */,
 				5BD043A32683302E0054F2B4 /* CLDrawerTransitionDelegate.swift in Sources */,
 				5B7692C026841566008BB92B /* CLVernierCaliperHeaderCell.swift in Sources */,
@@ -2491,7 +2515,7 @@
 				5B76931626841C70008BB92B /* CLChatRecordView.swift in Sources */,
 				5B8397FC26A15BAC00FD1D3C /* CLCircleRetroTransitionController.swift in Sources */,
 				5BD4EB19268184AB00B5284F /* UIView+Extension.swift in Sources */,
-				5B1C367026841FAF00D777EB /* CLPermissions.swift in Sources */,
+				5B1C367026841FAF00D777EB /* CLPermissionsManager.swift in Sources */,
 				5B76932226841C70008BB92B /* CLChatEmojiView.swift in Sources */,
 				5B39ECD027574AC0000FCF67 /* CLIngredients.swift in Sources */,
 				5BD0442626833C7C0054F2B4 /* CLStartsView.swift in Sources */,
@@ -2499,6 +2523,7 @@
 				5B0DC71626CA378900909BF2 /* CLHoneycombDelegate.swift in Sources */,
 				5B0FB9D828FFF87A001D012B /* CLCalendarController.swift in Sources */,
 				5B76932626841C70008BB92B /* CLChatTextView.swift in Sources */,
+				5BCBC30A2B512C7D00863AF2 /* CLCarouselPageControl.swift in Sources */,
 				5BE6690D26848BE10095F82E /* CLTextViewViewController.swift in Sources */,
 				5BD043B1268332880054F2B4 /* CLHistogramConroller.swift in Sources */,
 				5BD4EB1B268184AB00B5284F /* UIControl+Extension.swift in Sources */,
@@ -2789,6 +2814,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2854,6 +2880,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2883,6 +2910,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YPW3979SPT;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CLDemo-Swift/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2913,6 +2941,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YPW3979SPT;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CLDemo-Swift/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;

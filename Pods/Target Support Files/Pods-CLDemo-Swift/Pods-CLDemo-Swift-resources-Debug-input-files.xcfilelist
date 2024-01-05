@@ -1,3 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift-resources.sh
+${PODS_ROOT}/CLCamera/Camera/Resource/CLCamera.bundle
 ${PODS_ROOT}/DateToolsSwift/DateToolsSwift/DateTools/DateTools.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher/Kingfisher.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit_Privacy.bundle
 ${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios/LottiePrivacyInfo.bundle

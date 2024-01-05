@@ -7,11 +7,12 @@
 //
 
 import UIKit
+
 // import DateToolsSwift
 
 @objcMembers class CLLogManager: NSObject {
     static let shared = CLLogManager()
-    private(set) var folderPath: String = .init(format: "%@/%@", pathDocuments, "CLLog")
+    private(set) var folderPath: String = .init(format: "%@/%@", NSHomeDirectory() + "/Documents", "CLLog")
     private var logQueue: DispatchQueue = .init(label: "CLLogManager.logQueue")
     private lazy var logFileHandle: FileHandle? = {
         let fileManager = FileManager.default

@@ -11,77 +11,79 @@ import UIKit
 
 extension CLBreakPointResumeManager {
     enum DownloadError: Error {
-        /// 下载中
+        /// Downloading in progress
         case downloading
-        /// 不是HTTPURLResponse类型
+        /// Not an HTTPURLResponse type
         case notHTTPURLResponse
-        /// throws错误
+        /// Error thrown
         case `throws`(Error)
-        /// 状态码错误
+        /// Status code error
         case statusCode(Int)
-        /// 下载错误
+        /// Download error
         case download(Error)
     }
 }
 
 class CLBreakPointResumeManager: NSObject {
     static let shared: CLBreakPointResumeManager = .init()
-    static let folderPath: String = NSHomeDirectory() + "/Documents/CLBreakPointResume/"
+
+    private let folderPath: String = NSHomeDirectory() + "/Documents/CLBreakPointResume/"
+
     private var operationDictionary = [String: CLBreakPointResumeOperation]()
-    private lazy var queue: OperationQueue = {
+
+    private var progressCallbacks = CLSafeArrayDictionary<String, (CGFloat) -> Void>()
+
+    private var completionCallbacks = CLSafeArrayDictionary<String, (Result<String, DownloadError>) -> Void>()
+
+    private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
         return queue
     }()
 
     private lazy var semaphore: DispatchSemaphore = {
-        let semap = DispatchSemaphore(value: 0)
-        semap.signal()
-        return semap
+        let sema = DispatchSemaphore(value: 0)
+        sema.signal()
+        return sema
     }()
-
-    private var progressSet = CLSafeArrayDictionary<String, (_ url: URL, _ progress: CGFloat) -> Void>()
-
-    private var completionsSet = CLSafeArrayDictionary<String, (Result<String, DownloadError>) -> Void>()
 
     override private init() {
         super.init()
-        if !FileManager.default.fileExists(atPath: CLBreakPointResumeManager.folderPath) {
-            try? FileManager.default.createDirectory(atPath: CLBreakPointResumeManager.folderPath, withIntermediateDirectories: true)
-        }
+        guard !FileManager.default.fileExists(atPath: folderPath) else { return }
+        try? FileManager.default.createDirectory(atPath: folderPath, withIntermediateDirectories: true)
     }
 }
 
 extension CLBreakPointResumeManager {
-    static func download(_ url: URL, progressBlock: ((_ url: URL, _ progress: CGFloat) -> Void)? = nil, completionBlock: ((Result<String, DownloadError>) -> Void)? = nil) {
+    static func download(_ url: URL, progressBlock: ((CGFloat) -> Void)? = nil, completionBlock: ((Result<String, DownloadError>) -> Void)? = nil) {
         let key = url.absoluteString.md5()
 
         func notifyCallback(progress: CGFloat? = nil, result: Result<String, DownloadError>? = nil) {
             DispatchQueue.main.async {
-                if let progress { shared.progressSet[key]?.forEach { $0(url, progress) } }
+                if let progress { shared.progressCallbacks[key]?.forEach { $0(progress) } }
                 if let result {
-                    shared.completionsSet[key]?.forEach { $0(result) }
-                    shared.progressSet[key] = nil
-                    shared.completionsSet[key] = nil
+                    shared.completionCallbacks[key]?.forEach { $0(result) }
+                    shared.progressCallbacks[key] = nil
+                    shared.completionCallbacks[key] = nil
                 }
             }
         }
 
-        if let progress = progressBlock { shared.progressSet[key] = [progress] }
+        if let progress = progressBlock { shared.progressCallbacks[key] = [progress] }
 
-        if let completion = completionBlock { shared.completionsSet[key] = [completion] }
+        if let completion = completionBlock { shared.completionCallbacks[key] = [completion] }
 
         guard getOperation(key) == nil else { return }
 
         let fileAttribute = fileAttribute(url)
 
-        guard !isDownloaded(url).0 else {
+        guard isDownloaded(url) != nil else {
             notifyCallback(progress: 1, result: .success(fileAttribute.path))
             return
         }
 
-        let operation = CLBreakPointResumeOperation(url: url, path: fileAttribute.path, currentBytes: fileAttribute.currentBytes)
-        operation.progressBlock = { value in
+        let operation = CLBreakPointResumeOperation(url: url, localPath: fileAttribute.path, currentBytes: fileAttribute.currentBytes)
+        operation.progressHandler = { value in
             notifyCallback(progress: value)
         }
         operation.completionBlock = {
@@ -92,7 +94,7 @@ extension CLBreakPointResumeManager {
             }
             removeOperation(key)
         }
-        shared.queue.addOperation(operation)
+        shared.operationQueue.addOperation(operation)
         setOperation(operation, for: key)
     }
 
@@ -115,7 +117,7 @@ extension CLBreakPointResumeManager {
         for operation in shared.operationDictionary.values where !operation.isCancelled {
             operation.cancel()
         }
-        try FileManager.default.removeItem(atPath: folderPath)
+        try FileManager.default.removeItem(atPath: shared.folderPath)
     }
 }
 
@@ -146,9 +148,10 @@ private extension CLBreakPointResumeManager {
 }
 
 extension CLBreakPointResumeManager {
-    static func isDownloaded(_ url: URL) -> (Bool, String) {
+    static func isDownloaded(_ url: URL) -> String? {
         let fileAttribute = fileAttribute(url)
-        return (fileAttribute.currentBytes != 0 && fileAttribute.currentBytes == fileAttribute.totalBytes, fileAttribute.path)
+        guard fileAttribute.currentBytes != 0, fileAttribute.currentBytes == fileAttribute.totalBytes else { return nil }
+        return fileAttribute.path
     }
 }
 
@@ -158,25 +161,15 @@ extension CLBreakPointResumeManager {
     }
 
     static func filePath(_ url: URL) -> String {
-        folderPath + url.absoluteString.md5() + (url.pathExtension.isEmpty ? "" : ".\(url.pathExtension)")
+        shared.folderPath + url.absoluteString.md5() + (url.pathExtension.isEmpty ? "" : ".\(url.pathExtension)")
     }
 
     static func fileCurrentBytes(_ url: URL) -> Int64 {
-        let path = filePath(url)
-        var downloadedBytes: Int64 = 0
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: path) {
-            let fileDict = try? fileManager.attributesOfItem(atPath: path)
-            downloadedBytes = fileDict?[.size] as? Int64 ?? 0
-        }
-        return downloadedBytes
+        (try? FileManager.default.attributesOfItem(atPath: filePath(url)))?[.size] as? Int64 ?? 0
     }
 
     static func fileTotalBytes(_ url: URL) -> Int64 {
-        var totalBytes: Int64 = 0
-        if let sizeData = try? URL(fileURLWithPath: filePath(url)).extendedAttribute(forName: "totalBytes") {
-            (sizeData as NSData).getBytes(&totalBytes, length: sizeData.count)
-        }
-        return totalBytes
+        let totalBytes = try? URL(fileURLWithPath: filePath(url)).readDecodableExtendedAttribute(forName: "totalBytes", type: Int64.self)
+        return totalBytes ?? .zero
     }
 }

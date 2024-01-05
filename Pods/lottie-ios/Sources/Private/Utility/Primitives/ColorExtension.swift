@@ -6,7 +6,6 @@
 //
 
 import CoreGraphics
-import Foundation
 
 // MARK: - LottieColor + Codable
 
@@ -70,7 +69,7 @@ extension LottieColor: AnyInitializable {
 
   init(value: Any) throws {
     guard var array = value as? [Double] else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     var r: Double = array.count > 0 ? array.removeFirst() : 0
     var g: Double = array.count > 0 ? array.removeFirst() : 0

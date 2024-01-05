@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 /// 消息发送状态
 enum CLChatMessageSendState: String {
     /// 正在发送

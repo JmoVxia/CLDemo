@@ -1,5 +1,5 @@
 //
-//  CLPermissions.swift
+//  CLPermissionsManager.swift
 //  CLDemo
 //
 //  Created by JmoVxia on 2020/6/30.
@@ -7,18 +7,10 @@
 //
 
 import AVFoundation
-import Contacts
-import CoreMotion
-import EventKit
-import HealthKit
-import MapKit
-import MediaPlayer
 import Photos
-import Speech
 import UIKit
-import UserNotifications
 
-class CLPermissions: NSObject {
+class CLPermissionsManager: NSObject {
     enum CLPermissionType: Int {
         /// 相机
         case camera = 0
@@ -41,25 +33,37 @@ class CLPermissions: NSObject {
     }
 
     /// 请求权限
-    class func request(_ permission: CLPermissionType, with сompletionCallback: ((CLAuthorizationStatus) -> Void)? = nil) {
+    static func request(_ permission: CLPermissionType, completion: ((CLPermissionStatus) -> Void)? = nil) {
         let manager = getManagerForPermission(permission)
         manager.request { status in
             DispatchQueue.main.async {
-                сompletionCallback?(status)
+                completion?(status)
             }
+        }
+    }
+
+    static func request(_ permissions: [CLPermissionType], completion: ((CLPermissionStatus) -> Void)? = nil) {
+        request(permissions[0]) { status in
+            guard status.isAuthorized, permissions.count > 1 else {
+                completion?(status)
+                return
+            }
+            var temp = permissions
+            temp.remove(at: 0)
+            request(temp, completion: completion)
         }
     }
 }
 
-extension CLPermissions {
-    private class func getManagerForPermission(_ permission: CLPermissionType) -> CLPermissionInterface {
+extension CLPermissionsManager {
+    private class func getManagerForPermission(_ permission: CLPermissionType) -> CLPermissionProtocol {
         switch permission {
         case .camera:
-            CLCameraPermission()
+            CLCamera()
         case .photoLibrary:
-            CLPhotoLibraryPermission()
+            CLPhotoLibrary()
         case .microphone:
-            CLMicrophonePermission()
+            CLMicrophone()
         }
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
-import Foundation
 import QuartzCore
 
 extension MaskMode {
@@ -129,7 +128,7 @@ private class MaskLayer: CALayer {
   let maskLayer = CAShapeLayer()
 
   func updateWithFrame(frame: CGFloat, forceUpdates: Bool) {
-    guard let properties = properties else { return }
+    guard let properties else { return }
     if properties.opacity.needsUpdate(frame: frame) || forceUpdates {
       properties.opacity.update(frame: frame)
       opacity = Float(properties.opacity.value.cgFloatValue)

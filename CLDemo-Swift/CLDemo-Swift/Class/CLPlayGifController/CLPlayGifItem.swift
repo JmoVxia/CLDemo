@@ -19,7 +19,7 @@ class CLPlayGifItem: NSObject {
         else {
             return
         }
-        size = calculateScaleSize(imageSize: CGSize(width: image.width, height: image.height))
+        size = calculateScaleSize(size: CGSize(width: image.width, height: image.height))
     }
 }
 

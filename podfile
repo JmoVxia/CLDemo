@@ -32,6 +32,8 @@ pod 'Kingfisher'
 pod 'TZImagePickerController'
 pod 'LookinServer'
 pod 'SwiftFormat/CLI'
+pod 'CLCamera', :git => 'https://github.com/JmoVxia/CLCamera.git'
+
 
 
 end

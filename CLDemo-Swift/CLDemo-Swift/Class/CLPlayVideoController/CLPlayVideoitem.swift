@@ -19,7 +19,7 @@ class CLPlayVideoitem: NSObject {
         let generate = AVAssetImageGenerator(asset: asset)
         generate.appliesPreferredTrackTransform = true
         guard let oneRef = try? generate.copyCGImage(at: CMTimeMake(value: 1, timescale: 2), actualTime: nil) else { return }
-        size = calculateScaleSize(imageSize: CGSize(width: oneRef.width, height: oneRef.height))
+        size = calculateScaleSize(size: CGSize(width: oneRef.width, height: oneRef.height))
     }
 }
 

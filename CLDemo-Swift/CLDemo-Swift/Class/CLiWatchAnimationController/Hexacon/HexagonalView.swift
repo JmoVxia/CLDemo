@@ -354,7 +354,7 @@ final class HexagonalView: UIScrollView {
         var distance: CGFloat = 0
         var index = currentIndex
 
-        views.enumerated().forEach { viewIndex, view in
+        for (viewIndex, view) in views.enumerated() {
             let center = view.center
             let potentialDistance = distanceBetweenPoint(point1: center, point2: contentViewCenter)
 

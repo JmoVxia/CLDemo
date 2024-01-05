@@ -54,14 +54,14 @@ class CLHanziToPinyin {
     private(set) lazy var unicodeToPinyinTable: [String: String] = {
         guard let resourcePath = Bundle.main.path(forResource: "hanyupinyin", ofType: nil) else { return [:] }
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) else { return [:] }
-        guard let dictionary = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] else { return [:] }
+        guard let dictionary = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSDictionary.self, NSString.self], from: data) as? [String: String] else { return [:] }
         return dictionary
     }()
 
     private(set) lazy var sentence: [String: String] = {
         guard let resourcePath = Bundle.main.path(forResource: "sentencepinyin", ofType: nil) else { return [:] }
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) else { return [:] }
-        guard let dictionary = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] else { return [:] }
+        guard let dictionary = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSDictionary.self, NSString.self], from: data) as? [String: String] else { return [:] }
         return dictionary
     }()
 

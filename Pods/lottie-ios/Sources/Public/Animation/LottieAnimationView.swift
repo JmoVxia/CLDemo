@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/23/19.
 //
 
-import Foundation
 import QuartzCore
 
 // MARK: - LottieBackgroundBehavior
@@ -115,7 +114,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     self.logger = logger
     super.init(frame: .zero)
     commonInit()
-    if let animation = animation {
+    if let animation {
       frame = animation.bounds
     }
   }
@@ -139,7 +138,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     self.logger = logger
     super.init(frame: .zero)
     commonInit()
-    if let animation = animation {
+    if let animation {
       frame = animation.bounds
     }
   }
@@ -368,6 +367,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Public
 
+  /// Whether or not transform and position changes of the view should animate alongside
+  /// any existing animation context.
+  ///  - Defaults to `true` which will grab the current animation context and animate position and
+  ///    transform changes matching the current context's curve and duration.
+  ///    `false` will cause transform and position changes to happen unanimated
+  public var animateLayoutChangesWithCurrentCoreAnimationContext = true
+
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
     get { lottieAnimationLayer.configuration }
@@ -431,7 +437,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// ```
   public var animationLoaded: ((_ animationView: LottieAnimationView, _ animation: LottieAnimation) -> Void)? {
     didSet {
-      if let animation = animation {
+      if let animation {
         animationLoaded?(self, animation)
       }
     }
@@ -828,14 +834,14 @@ open class LottieAnimationView: LottieAnimationViewBase {
     viewLayer?.addSublayer(lottieAnimationLayer)
 
     lottieAnimationLayer.animationLoaded = { [weak self] _, animation in
-      guard let self = self else { return }
+      guard let self else { return }
       self.animationLoaded?(self, animation)
       self.invalidateIntrinsicContentSize()
       self.setNeedsLayout()
     }
 
     lottieAnimationLayer.animationLayerDidLoad = { [weak self] _, _ in
-      guard let self = self else { return }
+      guard let self else { return }
       self.invalidateIntrinsicContentSize()
       self.setNeedsLayout()
     }
@@ -848,8 +854,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     let xform: CATransform3D
     var shouldForceUpdates = false
 
-    if let viewportFrame = viewportFrame {
-      setNeedsLayout()
+    if let viewportFrame {
       shouldForceUpdates = contentMode == .redraw
 
       let compAspect = viewportFrame.size.width / viewportFrame.size.height
@@ -933,7 +938,11 @@ open class LottieAnimationView: LottieAnimationViewBase {
     // If layout is changed without animation, explicitly set animation duration to 0.0
     // inside CATransaction to avoid unwanted artifacts.
     /// Check if any animation exist on the view's layer, and match it.
-    if let key = lottieAnimationLayer.animationKeys()?.first, let animation = lottieAnimationLayer.animation(forKey: key) {
+    if
+      let key = lottieAnimationLayer.animationKeys()?.first,
+      let animation = lottieAnimationLayer.animation(forKey: key),
+      animateLayoutChangesWithCurrentCoreAnimationContext
+    {
       // The layout is happening within an animation block. Grab the animation data.
 
       let positionKey = "LayoutPositionAnimation"
@@ -985,11 +994,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   func updateRasterizationState() {
-    if lottieAnimationLayer.isAnimationPlaying {
-      lottieAnimationLayer.animationLayer?.shouldRasterize = false
-    } else {
-      lottieAnimationLayer.animationLayer?.shouldRasterize = lottieAnimationLayer.shouldRasterizeWhenIdle
-    }
+    lottieAnimationLayer.updateRasterizationState()
   }
 
   /// Updates the animation frame. Does not affect any current animations

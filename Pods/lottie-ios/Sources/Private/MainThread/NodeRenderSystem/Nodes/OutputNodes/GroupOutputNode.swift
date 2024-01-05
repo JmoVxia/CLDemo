@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
-import CoreGraphics
-import Foundation
 import QuartzCore
 
 class GroupOutputNode: NodeOutput {
@@ -59,7 +57,7 @@ class GroupOutputNode: NodeOutput {
       }
       var xform = CATransform3DGetAffineTransform(transform)
       if
-        let rootNode = rootNode,
+        let rootNode,
         let rootPath = rootNode.outputPath,
         let xformedPath = rootPath.copy(using: &xform)
       {

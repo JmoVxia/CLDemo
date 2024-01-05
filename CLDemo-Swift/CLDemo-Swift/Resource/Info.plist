@@ -32,7 +32,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>App需要您的同意,才能访问日历</string>
 	<key>NSCameraUsageDescription</key>
-	<string>App需要您的同意,才能访问相册</string>
+	<string>App需要您的同意,才能访问相机</string>
 	<key>NSContactsUsageDescription</key>
 	<string>App需要您的同意,才能访问通信录</string>
 	<key>NSHealthShareUsageDescription</key>
@@ -50,7 +50,7 @@
 	<key>NSMotionUsageDescription</key>
 	<string>App需要您的同意,才能访问运动与健身</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App需要您的同意,才能访问相机</string>
+	<string>App需要您的同意,才能访问相相册</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>App需要您的同意,才能访问提醒事项</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

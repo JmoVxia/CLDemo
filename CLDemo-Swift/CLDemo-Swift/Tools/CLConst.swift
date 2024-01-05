@@ -9,41 +9,91 @@
 import DateToolsSwift
 import UIKit
 
+/// 根据时间生成随机字符串
+var dateRandomString: String { "\(nanosecondStampString)-\(UUID().uuidString)-\(TimeInterval.random(in: 0.01 ... 10000))".md5ForUpper32Bate }
+
+/// 秒级时间戳
+var timeStamp: Int64 { Date().timeStamp }
+
+/// 毫秒级时间戳
+var milliStamp: Int64 { Date().milliStamp }
+
+/// 纳秒级时间戳
+var nanosecondStamp: Int64 { Date().nanosecondStamp }
+
+/// 秒级时间戳
+var timeStampString: String { Date().timeStampString }
+
+/// 毫秒级时间戳
+var milliStampString: String { Date().milliStampString }
+
+/// 纳秒级时间戳
+var nanosecondStampString: String { Date().nanosecondStampString }
+
 /// 屏幕宽
-var screenWidth: CGFloat {
-    UIScreen.main.bounds.size.width
-}
+var screenWidth: CGFloat { UIScreen.main.bounds.size.width }
 
 /// 屏幕高
-var screenHeight: CGFloat {
-    UIScreen.main.bounds.size.height
-}
+var screenHeight: CGFloat { UIScreen.main.bounds.size.height }
+
+/// AppDelegate
+var appDelegate: AppDelegate? { mainSync { UIApplication.shared.delegate as? AppDelegate } }
 
 /// 状态栏高度
 var statusBarHeight: CGFloat {
-    var hight: CGFloat = 0
-    if #available(iOS 13.0, *),
-       let statusBarManager = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.statusBarManager
-    {
-        hight = statusBarManager.statusBarFrame.size.height
+    var statusBarHeight: CGFloat = 0
+    if #available(iOS 13.0, *) {
+        let scene = UIApplication.shared.connectedScenes.first
+        guard let windowScene = scene as? UIWindowScene else { return 0 }
+        guard let statusBarManager = windowScene.statusBarManager else { return 0 }
+        statusBarHeight = statusBarManager.statusBarFrame.height
     } else {
-        hight = UIApplication.shared.statusBarFrame.height
+        statusBarHeight = UIApplication.shared.statusBarFrame.height
     }
-    return hight
+    return statusBarHeight
 }
 
 /// 安全区域
-var safeAreaEdgeInsets: UIEdgeInsets {
-    if #available(iOS 11.0, *) {
-        (UIApplication.shared.delegate as? AppDelegate)?.window?.safeAreaInsets ?? UIEdgeInsets.zero
-    } else {
-        UIEdgeInsets.zero
+var safeAreaEdgeInsets: UIEdgeInsets { mainSync { keyWindow?.safeAreaInsets ?? .zero } }
+
+/// 是否是刘海屏
+var isIPhoneXScreen: Bool { safeAreaEdgeInsets.bottom > 0 }
+
+/// keyWindow
+var keyWindow: UIWindow? {
+    mainSync {
+        if #available(iOS 13.0, *) {
+            UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap(\.windows)
+                .first { $0.isKeyWindow }
+        } else {
+            UIApplication.shared.keyWindow
+        }
     }
 }
 
-/// 是否是刘海屏
-var isIPhoneXScreen: Bool {
-    safeAreaEdgeInsets.bottom > 0
+/// 顶层控制器
+var topViewController: UIViewController? {
+    var controller = keyWindow?.rootViewController
+    while true {
+        if let presented = controller?.presentedViewController {
+            controller = presented
+        } else if let navController = controller as? UINavigationController {
+            controller = navController.topViewController
+        } else if let tabBarController = controller as? UITabBarController {
+            controller = tabBarController.selectedViewController
+        } else {
+            break
+        }
+    }
+    return controller
+}
+
+/// 切换到主线程同步执行
+@discardableResult func mainSync<T>(execute block: () -> T) -> T {
+    guard !Thread.isMainThread else { return block() }
+    return DispatchQueue.main.sync { block() }
 }
 
 /// 秒级时间戳格式化
@@ -58,36 +108,6 @@ func milliStampFormat(with timeStamp: String, format: String) -> String {
     let timeInterval = TimeInterval(timeStamp.int) / 1000.0
     let date = Date(timeIntervalSince1970: timeInterval)
     return date.format(with: format, locale: Locale(identifier: "zh_CN"))
-}
-
-/// 秒级时间戳
-var timeStamp: Int64 {
-    Date().timeStamp
-}
-
-/// 毫秒级时间戳
-var milliStamp: Int64 {
-    Date().milliStamp
-}
-
-/// 纳秒级时间戳
-var nanosecondStamp: Int64 {
-    Date().nanosecondStamp
-}
-
-/// 秒级时间戳
-var timeStampString: String {
-    Date().timeStampString
-}
-
-/// 毫秒级时间戳
-var milliStampString: String {
-    Date().milliStampString
-}
-
-/// 纳秒级时间戳
-var nanosecondStampString: String {
-    Date().nanosecondStampString
 }
 
 /// 日志打印，会加入日志中
@@ -165,17 +185,6 @@ func deleteAllEmptyFolderWithPath(path: String) -> Bool {
     return isSuccess
 }
 
-/// 沙盒路径
-var pathDocuments: String {
-    NSHomeDirectory() + "/Documents"
-}
-
-/// 根据时间生成随机字符串
-var dateRandomString: String {
-    let string: String = nanosecondStampString + UUID().uuidString + "\(TimeInterval.random(in: 0.01 ... 10000))"
-    return string.md5ForUpper32Bate
-}
-
 /// 消息毫秒级时间戳格式化
 func messageTimeFormat(_ timeStamp: Int64) -> String {
     let timeInterval = TimeInterval(Double(timeStamp) / 1000.0)
@@ -216,49 +225,44 @@ func messageTimeFormat(_ timeStamp: Int64) -> String {
 ///   - maxSize: 最大范围
 ///   - minSize: 最小范围
 /// - Returns: 缩放后的大小
-func calculateScaleSize(imageSize: CGSize, maxSize: CGSize = CGSize(width: screenWidth * 0.45, height: screenWidth * 0.45), minSize: CGSize = CGSize(width: 60, height: 60)) -> CGSize {
-    let maxWidth = maxSize.width
-    let maxHeight = maxSize.height
-    let minWidth = minSize.width
-    let minHeight = minSize.height
+func calculateScaleSize(size: CGSize, maxSize: CGSize? = nil, minSize: CGSize? = nil) -> CGSize {
+    let maxWidth = maxSize?.width ?? screenWidth * 0.45
+    let maxHeight = maxSize?.height ?? screenWidth * 0.45
+    let minWidth = minSize?.width ?? 60
+    let minHeight = minSize?.height ?? 60
 
-    let imageWidth = imageSize.width
-    let imageHeight = imageSize.height
+    guard size.width > 0, size.height > 0 else {
+        return CGSize.zero
+    }
 
-    let imageRatio = imageHeight / imageWidth
+    let imageRatio = size.height / size.width
+    let maxRatio = maxHeight / maxWidth
+    let minRatio = minHeight / minWidth
 
     if imageRatio >= (maxHeight / minWidth) {
         return CGSize(width: minWidth, height: maxHeight)
     } else if imageRatio <= (minHeight / maxWidth) {
         return CGSize(width: maxWidth, height: minHeight)
+    } else if imageRatio >= minRatio, size.height > maxHeight {
+        return CGSize(width: size.width / size.height * maxHeight, height: maxHeight)
+    } else if imageRatio < maxRatio, size.width > maxWidth {
+        return CGSize(width: maxWidth, height: size.height / size.width * maxWidth)
+    } else if imageRatio >= maxRatio, size.width < minWidth {
+        return CGSize(width: minWidth, height: size.height / size.width * minWidth)
+    } else if imageRatio < maxRatio, size.height < minHeight {
+        return CGSize(width: size.width / size.height * minHeight, height: minHeight)
     } else {
-        let maxRatio = maxHeight / maxWidth
-        let minRatio = minHeight / minWidth
-        if imageRatio >= minRatio, imageHeight > maxHeight {
-            return CGSize(width: imageWidth / imageHeight * maxHeight, height: maxHeight)
-        } else if imageRatio < maxRatio, imageWidth > maxWidth {
-            return CGSize(width: maxWidth, height: imageHeight / imageWidth * maxWidth)
-        } else if imageRatio >= maxRatio, imageWidth < minWidth {
-            return CGSize(width: minWidth, height: imageHeight / imageWidth * minWidth)
-        } else if imageRatio < maxRatio, imageHeight < minHeight {
-            return CGSize(width: imageWidth / imageHeight * minHeight, height: minHeight)
-        } else {
-            return imageSize
-        }
+        return size
     }
 }
 
 /// 拨打电话
 func callPhone(_ phone: String) {
-    if !phone.isEmpty {
-        var tel = "tel://" + phone
-        // 去掉空格-不然有些电话号码会使 URL 报 nil
-        tel = tel.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
-        if let urls = URL(string: tel) {
-            DispatchQueue.main.async {
-                UIApplication.shared.open(urls, options: [:], completionHandler: nil)
-            }
-        }
+    guard !phone.isEmpty else { return }
+    guard let urls = URL(string: ("tel://" + phone).replacingOccurrences(of: " ", with: "", options: .literal, range: nil)) else { return }
+    // 去掉空格-不然有些电话号码会使 URL 报 nil
+    DispatchQueue.main.async {
+        UIApplication.shared.open(urls, options: [:], completionHandler: nil)
     }
 }
 
@@ -268,4 +272,9 @@ func openSettings() {
     DispatchQueue.main.async {
         UIApplication.shared.open(url, options: [:])
     }
+}
+
+/// 关闭键盘
+func closeKeyboard() {
+    keyWindow?.endEditing(true)
 }

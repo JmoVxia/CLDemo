@@ -232,11 +232,11 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 #endif
             dispatch_main_async_safe(^{
 #if SD_UIKIT || SD_MAC
-                [self sd_setImage:targetImage imageData:targetData basedOnClassOrViaCustomSetImageBlock:setImageBlock transition:transition cacheType:cacheType imageURL:imageURL];
+                [self sd_setImage:targetImage imageData:targetData options:options basedOnClassOrViaCustomSetImageBlock:setImageBlock transition:transition cacheType:cacheType imageURL:imageURL callback:callCompletedBlockClosure];
 #else
                 [self sd_setImage:targetImage imageData:targetData basedOnClassOrViaCustomSetImageBlock:setImageBlock cacheType:cacheType imageURL:imageURL];
-#endif
                 callCompletedBlockClosure();
+#endif
             });
         }];
         [self sd_setImageLoadOperation:operation forKey:validOperationKey];
@@ -255,13 +255,18 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
     return operation;
 }
 
+- (void)sd_cancelLatestImageLoad {
+    [self sd_cancelImageLoadOperationWithKey:self.sd_latestOperationKey];
+}
+
 - (void)sd_cancelCurrentImageLoad {
     [self sd_cancelImageLoadOperationWithKey:self.sd_latestOperationKey];
 }
 
+// Set image logic without transition (like placeholder and watchOS)
 - (void)sd_setImage:(UIImage *)image imageData:(NSData *)imageData basedOnClassOrViaCustomSetImageBlock:(SDSetImageBlock)setImageBlock cacheType:(SDImageCacheType)cacheType imageURL:(NSURL *)imageURL {
 #if SD_UIKIT || SD_MAC
-    [self sd_setImage:image imageData:imageData basedOnClassOrViaCustomSetImageBlock:setImageBlock transition:nil cacheType:cacheType imageURL:imageURL];
+    [self sd_setImage:image imageData:imageData options:0 basedOnClassOrViaCustomSetImageBlock:setImageBlock transition:nil cacheType:cacheType imageURL:imageURL callback:nil];
 #else
     // watchOS does not support view transition. Simplify the logic
     if (setImageBlock) {
@@ -273,8 +278,9 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 #endif
 }
 
+// Set image logic with transition
 #if SD_UIKIT || SD_MAC
-- (void)sd_setImage:(UIImage *)image imageData:(NSData *)imageData basedOnClassOrViaCustomSetImageBlock:(SDSetImageBlock)setImageBlock transition:(SDWebImageTransition *)transition cacheType:(SDImageCacheType)cacheType imageURL:(NSURL *)imageURL {
+- (void)sd_setImage:(UIImage *)image imageData:(NSData *)imageData options:(SDWebImageOptions)options basedOnClassOrViaCustomSetImageBlock:(SDSetImageBlock)setImageBlock transition:(SDWebImageTransition *)transition cacheType:(SDImageCacheType)cacheType imageURL:(NSURL *)imageURL callback:(SDWebImageNoParamsBlock)callback {
     UIView *view = self;
     SDSetImageBlock finalSetImageBlock;
     if (setImageBlock) {
@@ -302,6 +308,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
     }
 #endif
     
+    BOOL waitTransition = SD_OPTIONS_CONTAINS(options, SDWebImageWaitTransition);
     if (transition) {
         NSString *originalOperationKey = view.sd_latestOperationKey;
 
@@ -331,6 +338,11 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
                 }
                 if (transition.completion) {
                     transition.completion(finished);
+                }
+                if (waitTransition) {
+                    if (callback) {
+                        callback();
+                    }
                 }
             }];
         }];
@@ -376,12 +388,35 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
                 if (transition.completion) {
                     transition.completion(YES);
                 }
+                if (waitTransition) {
+                    if (callback) {
+                        callback();
+                    }
+                }
             }];
         }];
 #endif
+        if (!waitTransition) {
+            if (callback) {
+                callback();
+            }
+        }
     } else {
         if (finalSetImageBlock) {
             finalSetImageBlock(image, imageData, cacheType, imageURL);
+            // TODO, in 6.0
+            // for `waitTransition`, the `setImageBlock` will provide a extra `completionHandler` params
+            // Execute `callback` only after that completionHandler is called
+            if (waitTransition) {
+                if (callback) {
+                    callback();
+                }
+            }
+        }
+        if (!waitTransition) {
+            if (callback) {
+                callback();
+            }
         }
     }
 }

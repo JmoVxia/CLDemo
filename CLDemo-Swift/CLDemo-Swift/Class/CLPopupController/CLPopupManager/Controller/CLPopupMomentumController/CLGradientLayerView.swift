@@ -25,7 +25,7 @@ class CLGradientLayerView: UIView {
 
     var endPoint: CGPoint? {
         didSet {
-            guard let gradientLayer = self.layer as? CAGradientLayer else { return }
+            guard let gradientLayer = layer as? CAGradientLayer else { return }
             gradientLayer.endPoint = CGPoint(x: 0, y: 1)
         }
     }

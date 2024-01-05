@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
-import Foundation
 import QuartzCore
 
 extension KeypathSearchable {
@@ -201,7 +200,7 @@ extension AnimationKeypath {
   // Pops the top keypath from the stack if the keyname matches.
   func popKey(_ keyname: String) -> AnimationKeypath? {
     guard
-      let currentKey = currentKey,
+      let currentKey,
       currentKey.equalsKeypath(keyname),
       keys.count > 1
     else {
@@ -215,7 +214,7 @@ extension AnimationKeypath {
     if currentKey.keyPathType == .fuzzyWildcard {
       /// Dont remove if current key is a fuzzy wildcard, and if the next keypath doesnt equal keypathname
       if
-        let nextKeypath = nextKeypath,
+        let nextKeypath,
         nextKeypath.equalsKeypath(keyname)
       {
         /// Remove next two keypaths. This keypath breaks the wildcard.

@@ -165,11 +165,18 @@ extension LayerProperty {
       customizableProperty: .opacity)
   }
 
+  static var isHidden: LayerProperty<Bool> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.isHidden),
+      defaultValue: false,
+      customizableProperty: nil /* unsupported */ )
+  }
+
   static var transform: LayerProperty<CATransform3D> {
     .init(
       caLayerKeypath: #keyPath(CALayer.transform),
       isDefaultValue: { transform in
-        guard let transform = transform else { return false }
+        guard let transform else { return false }
         return CATransform3DIsIdentity(transform)
       },
       customizableProperty: nil /* currently unsupported */ )

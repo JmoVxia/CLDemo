@@ -16,6 +16,10 @@
     "class": "CLExcelController"
   },
   {
+    "title": "自定义相机",
+    "class": "CLCaptureController"
+  },
+  {
     "title": "雷达图",
     "class": "CLRadarChartController"
   },

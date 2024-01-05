@@ -1,8 +1,10 @@
 PODS:
-  - CryptoSwift (1.8.0)
+  - CLCamera (1.0.0):
+    - SnapKit
+  - CryptoSwift (1.8.1)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
-  - Kingfisher (7.9.1)
+  - Kingfisher (7.11.0)
   - libwebp (1.3.2):
     - libwebp/demux (= 1.3.2)
     - libwebp/mux (= 1.3.2)
@@ -15,28 +17,29 @@ PODS:
   - libwebp/sharpyuv (1.3.2)
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
-  - LookinServer (1.2.2):
-    - LookinServer/Core (= 1.2.2)
-  - LookinServer/Core (1.2.2)
-  - lottie-ios (4.3.3)
+  - LookinServer (1.2.6):
+    - LookinServer/Core (= 1.2.6)
+  - LookinServer/Core (1.2.6)
+  - lottie-ios (4.4.1)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
-  - SDWebImage (5.18.2):
-    - SDWebImage/Core (= 5.18.2)
-  - SDWebImage/Core (5.18.2)
-  - SDWebImageWebPCoder (0.14.0):
+  - SDWebImage (5.19.0):
+    - SDWebImage/Core (= 5.19.0)
+  - SDWebImage/Core (5.19.0)
+  - SDWebImageWebPCoder (0.14.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
-  - SnapKit (5.6.0)
-  - SwiftFormat/CLI (0.52.7)
+  - SnapKit (5.7.1)
+  - SwiftFormat/CLI (0.53.2)
   - SwiftyJSON (5.0.1)
-  - TZImagePickerController (3.8.3):
-    - TZImagePickerController/Basic (= 3.8.3)
-    - TZImagePickerController/Location (= 3.8.3)
-  - TZImagePickerController/Basic (3.8.3)
-  - TZImagePickerController/Location (3.8.3)
+  - TZImagePickerController (3.8.4):
+    - TZImagePickerController/Basic (= 3.8.4)
+    - TZImagePickerController/Location (= 3.8.4)
+  - TZImagePickerController/Basic (3.8.4)
+  - TZImagePickerController/Location (3.8.4)
 
 DEPENDENCIES:
+  - CLCamera (from `https://github.com/JmoVxia/CLCamera.git`)
   - CryptoSwift
   - DateTools
   - DateToolsSwift
@@ -70,23 +73,33 @@ SPEC REPOS:
     - SwiftyJSON
     - TZImagePickerController
 
+EXTERNAL SOURCES:
+  CLCamera:
+    :git: https://github.com/JmoVxia/CLCamera.git
+
+CHECKOUT OPTIONS:
+  CLCamera:
+    :commit: c4c461658f8cd80fc02e629f2d48df0c48d30c85
+    :git: https://github.com/JmoVxia/CLCamera.git
+
 SPEC CHECKSUMS:
-  CryptoSwift: 52aaf3fce7337552863b1d952e408085f0e65030
+  CLCamera: f5096124cf639919efc57cd9616515ce4e084caa
+  CryptoSwift: b9c701d6f5011df23794dbf7f2e480a77835d83d
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
+  Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
-  LookinServer: 3204eefff2f18e19fa546931fb5f1b88bc709a0b
-  lottie-ios: 25e7b2675dad5c3ddad369ac9baab03560c5bfdd
+  LookinServer: de929b55f8fa2e241c18c39af3f900eaa9166389
+  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
-  SDWebImage: c0de394d7cf7f9838aed1fd6bb6037654a4572e4
-  SDWebImageWebPCoder: 3027af94522d94df79c21c070894c8a2128927ff
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  SwiftFormat: 2c4785ad647322b41e027b9d4df160aef526a656
+  SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
+  SDWebImageWebPCoder: c94f09adbca681822edad9e532ac752db713eabf
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SwiftFormat: 19cf302c4ecf4f8c64d394d57589beb145debed5
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
-  TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
+  TZImagePickerController: f1c9f1cae6ac0e30b31aaa9698f9bf4a7cf5b84f
 
-PODFILE CHECKSUM: be373a007dab8e9b1792d1fbe0edddf2d0e4703e
+PODFILE CHECKSUM: bc2b38f65d6c4cce7db74d4c9d829025e2024916
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2

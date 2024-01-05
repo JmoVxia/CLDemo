@@ -44,7 +44,7 @@ class CLPlayVideoController: CLController {
             make.top.equalTo(statusBarHeight + (navigationController?.navigationBar.bounds.height ?? 0))
         }
         DispatchQueue.global().async {
-            Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil).forEach { path in
+            for path in Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil) {
                 self.tableViewHepler.rows.append(CLPlayVideoitem(path: path))
             }
             DispatchQueue.main.async {
