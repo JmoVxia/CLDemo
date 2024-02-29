@@ -79,7 +79,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CLCamera:
-    :commit: c4c461658f8cd80fc02e629f2d48df0c48d30c85
+    :commit: f2b22377e5a7f48310e3e45b57d2342169d62b08
     :git: https://github.com/JmoVxia/CLCamera.git
 
 SPEC CHECKSUMS:
