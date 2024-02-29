@@ -162,6 +162,8 @@
 		5BAABFFC2681B3B200C2F609 /* CLTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAABFFB2681B3B200C2F609 /* CLTitleCell.swift */; };
 		5BAAC0012681B65200C2F609 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BAAC0032681B65200C2F609 /* Localizable.strings */; };
 		5BAAC0072681B6BB00C2F609 /* CLChangeLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC0062681B6BB00C2F609 /* CLChangeLanguageController.swift */; };
+		5BB6943B2BB50490000088A1 /* CLQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6943A2BB50490000088A1 /* CLQRCode.swift */; };
+		5BB6943D2BB504E1000088A1 /* CLQRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6943C2BB504E1000088A1 /* CLQRController.swift */; };
 		5BBFE84E29DE53DE00A5AC34 /* CLExcelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE84D29DE53DE00A5AC34 /* CLExcelController.swift */; };
 		5BBFE85229DE548400A5AC34 /* CLExcelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE85129DE548400A5AC34 /* CLExcelView.swift */; };
 		5BBFE85629DE556B00A5AC34 /* CLCollectionExcelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFE85529DE556B00A5AC34 /* CLCollectionExcelCell.swift */; };
@@ -500,6 +502,8 @@
 		5BAAC0022681B65200C2F609 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5BAAC0042681B65900C2F609 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5BAAC0062681B6BB00C2F609 /* CLChangeLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLChangeLanguageController.swift; sourceTree = "<group>"; };
+		5BB6943A2BB50490000088A1 /* CLQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLQRCode.swift; sourceTree = "<group>"; };
+		5BB6943C2BB504E1000088A1 /* CLQRController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLQRController.swift; sourceTree = "<group>"; };
 		5BBFE84D29DE53DE00A5AC34 /* CLExcelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLExcelController.swift; sourceTree = "<group>"; };
 		5BBFE85129DE548400A5AC34 /* CLExcelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLExcelView.swift; sourceTree = "<group>"; };
 		5BBFE85529DE556B00A5AC34 /* CLCollectionExcelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionExcelCell.swift; sourceTree = "<group>"; };
@@ -1329,6 +1333,7 @@
 				5B7982A026A014DE004A6473 /* CLCalculateHepler.swift */,
 				5B7982A826A022BF004A6473 /* CLUserDefaultStorage.swift */,
 				5B9057A62B46549A003E3B1C /* CLSafeArrayDictionary.swift */,
+				5BB6943A2BB50490000088A1 /* CLQRCode.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1424,6 +1429,7 @@
 				5BD0434826832EAB0054F2B4 /* CLPlayVideoController */,
 				5BD0433D26832D3F0054F2B4 /* CLBreakPointResumeController */,
 				5BAAC0052681B6AD00C2F609 /* CLChangeLanguageController */,
+				5BB6943E2BB504E6000088A1 /* CLQRController */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -1627,6 +1633,14 @@
 				5B08E44B2681E682001C271A /* CLLanguageManager */,
 			);
 			path = CLChangeLanguageController;
+			sourceTree = "<group>";
+		};
+		5BB6943E2BB504E6000088A1 /* CLQRController */ = {
+			isa = PBXGroup;
+			children = (
+				5BB6943C2BB504E1000088A1 /* CLQRController.swift */,
+			);
+			path = CLQRController;
 			sourceTree = "<group>";
 		};
 		5BBFE84A29DE53BF00A5AC34 /* CLExcelController */ = {
@@ -2314,7 +2328,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					5B4895F1268097510046AF31 = {
 						CreatedOnToolsVersion = 12.5;
@@ -2524,6 +2538,7 @@
 				5B0FB9D828FFF87A001D012B /* CLCalendarController.swift in Sources */,
 				5B76932626841C70008BB92B /* CLChatTextView.swift in Sources */,
 				5BCBC30A2B512C7D00863AF2 /* CLCarouselPageControl.swift in Sources */,
+				5BB6943D2BB504E1000088A1 /* CLQRController.swift in Sources */,
 				5BE6690D26848BE10095F82E /* CLTextViewViewController.swift in Sources */,
 				5BD043B1268332880054F2B4 /* CLHistogramConroller.swift in Sources */,
 				5BD4EB1B268184AB00B5284F /* UIControl+Extension.swift in Sources */,
@@ -2695,6 +2710,7 @@
 				5B79829F26A00B34004A6473 /* CLSubsectionSlider.swift in Sources */,
 				5B0DC71826CA37B600909BF2 /* CLHoneycombCell.swift in Sources */,
 				5BD0434426832D3F0054F2B4 /* CLBreakPointResumeManager.swift in Sources */,
+				5BB6943B2BB50490000088A1 /* CLQRCode.swift in Sources */,
 				5BE66820268475C90095F82E /* CLInfiniteViewCell.swift in Sources */,
 				5B7692C326841566008BB92B /* CLVernierCaliperFooterCell.swift in Sources */,
 				5BD043A8268330CF0054F2B4 /* CLAnimationButtonController.swift in Sources */,
@@ -2780,6 +2796,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2846,6 +2863,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

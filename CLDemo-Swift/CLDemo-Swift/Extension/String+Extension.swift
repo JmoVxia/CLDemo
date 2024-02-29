@@ -241,7 +241,9 @@ extension String {
 extension String {
     /// 国际化
     var localized: String {
-        NSLocalizedString(self, tableName: "", bundle: CLLanguageManager.shared.bundle, value: "", comment: "")
+        mainSync {
+            NSLocalizedString(self, tableName: "", bundle: CLLanguageManager.shared.bundle, value: "", comment: "")
+        }
     }
 }
 
