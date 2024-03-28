@@ -23,6 +23,7 @@ class CLQRController: CLController {
 
     private lazy var qrImageView: UIImageView = {
         let view = UIImageView()
+        view.backgroundColor = .random
         return view
     }()
 }

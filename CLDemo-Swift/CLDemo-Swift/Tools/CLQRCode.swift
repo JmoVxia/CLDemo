@@ -116,24 +116,24 @@ private extension CLQRCode {
             context.restoreGState()
         }
 
-//        for points in codePoints {
-//            for (point, isCodePoint) in points where isCodePoint {
-//                guard point.x >= 8 || point.y >= 8 else { continue }
-//                guard point.y >= 8 || point.x < CGFloat(codePoints.count - 8) else { continue }
-//                guard point.x >= 8 || point.y < CGFloat(codePoints.count - 8) else { continue }
-//                drawPath(heartPath(point), color: colorsArray.randomElement() ?? .black, mode: .fill)
-//            }
-//        }
-
-        let drawPoints = codePoints.flatMap { $0.compactMap { $0.1 ? $0.0 : nil } }
         for points in codePoints {
             for (point, isCodePoint) in points where isCodePoint {
                 guard point.x >= 8 || point.y >= 8 else { continue }
                 guard point.y >= 8 || point.x < CGFloat(codePoints.count - 8) else { continue }
                 guard point.x >= 8 || point.y < CGFloat(codePoints.count - 8) else { continue }
-                drawPath(adhesionPointPath(point, in: drawPoints), color: colorsArray.randomElement() ?? .black, mode: .fill)
+                drawPath(heartPath(point, delta: delta), color: colorsArray.randomElement() ?? .black, mode: .fill)
             }
         }
+
+//        let drawPoints = codePoints.flatMap { $0.compactMap { $0.1 ? $0.0 : nil } }
+//        for points in codePoints {
+//            for (point, isCodePoint) in points where isCodePoint {
+//                guard point.x >= 8 || point.y >= 8 else { continue }
+//                guard point.y >= 8 || point.x < CGFloat(codePoints.count - 8) else { continue }
+//                guard point.x >= 8 || point.y < CGFloat(codePoints.count - 8) else { continue }
+//                drawPath(adhesionPointPath(point, delta: delta, in: drawPoints), color: colorsArray.randomElement() ?? .black, mode: .fill)
+//            }
+//        }
 
         drawPath(outBorderPath(.init(x: 4, y: 4), delta: delta), color: leftTop.out, mode: .eoFill)
         drawPath(outBorderPath(.init(x: codePoints.count - 5, y: 4), delta: delta), color: rightTop.out, mode: .eoFill)
@@ -172,7 +172,7 @@ extension CLQRCode {
         return UIBezierPath(roundedRect: CGRect(x: point.x * delta, y: point.y * delta, width: width, height: width), cornerRadius: width * 0.3)
     }
 
-    func adhesionPointPath(_ point: CGPoint, in points: [CGPoint]) -> UIBezierPath {
+    func adhesionPointPath(_ point: CGPoint, delta: CGFloat, in points: [CGPoint]) -> UIBezierPath {
         let path = UIBezierPath()
         let size: CGFloat = delta * scale // 点的单位尺寸
         let radius: CGFloat = delta * scale * 0.5 // 圆角的半径，根据实际需要调整
