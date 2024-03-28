@@ -43,7 +43,7 @@ extension CLQRCode {
 struct CLQRCode {
     var text: String
     var scale = 1.0
-    var delta = 30.0
+    var delta = 90.0
     var correctionLevel = CLQRCodeCorrectionLevel.low
     var colorsArray = [UIColor.black]
 
@@ -135,13 +135,13 @@ private extension CLQRCode {
             }
         }
 
-        drawPath(outBorderPath(.init(x: 4, y: 4)), color: leftTop.out, mode: .eoFill)
-        drawPath(outBorderPath(.init(x: codePoints.count - 5, y: 4)), color: rightTop.out, mode: .eoFill)
-        drawPath(outBorderPath(.init(x: 4, y: codePoints.count - 5)), color: leftBottom.out, mode: .eoFill)
+        drawPath(outBorderPath(.init(x: 4, y: 4), delta: delta), color: leftTop.out, mode: .eoFill)
+        drawPath(outBorderPath(.init(x: codePoints.count - 5, y: 4), delta: delta), color: rightTop.out, mode: .eoFill)
+        drawPath(outBorderPath(.init(x: 4, y: codePoints.count - 5), delta: delta), color: leftBottom.out, mode: .eoFill)
 
-        drawPath(inBorderPath(.init(x: 4, y: 4)), color: leftTop.in, mode: .fill)
-        drawPath(inBorderPath(.init(x: codePoints.count - 5, y: 4)), color: rightTop.in, mode: .fill)
-        drawPath(inBorderPath(.init(x: 4, y: codePoints.count - 5)), color: leftBottom.in, mode: .fill)
+        drawPath(inBorderPath(.init(x: 4, y: 4), delta: delta), color: leftTop.in, mode: .fill)
+        drawPath(inBorderPath(.init(x: codePoints.count - 5, y: 4), delta: delta), color: rightTop.in, mode: .fill)
+        drawPath(inBorderPath(.init(x: 4, y: codePoints.count - 5), delta: delta), color: leftBottom.in, mode: .fill)
 
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -150,7 +150,7 @@ private extension CLQRCode {
 }
 
 extension CLQRCode {
-    func heartPath(_ point: CGPoint) -> UIBezierPath {
+    func heartPath(_ point: CGPoint, delta: CGFloat) -> UIBezierPath {
         let padding = 0.0
         let curveRadius = (delta * scale - 2 * padding) / 4.0
         let heartPath = UIBezierPath()
@@ -167,7 +167,7 @@ extension CLQRCode {
         return heartPath
     }
 
-    func pointPath(_ point: CGPoint) -> UIBezierPath {
+    func pointPath(_ point: CGPoint, delta: CGFloat) -> UIBezierPath {
         let width = delta * scale
         return UIBezierPath(roundedRect: CGRect(x: point.x * delta, y: point.y * delta, width: width, height: width), cornerRadius: width * 0.3)
     }
@@ -237,12 +237,12 @@ extension CLQRCode {
         return path
     }
 
-    func inBorderPath(_ point: CGPoint) -> UIBezierPath {
+    func inBorderPath(_ point: CGPoint, delta: CGFloat) -> UIBezierPath {
         let radius = (3 * 0.5 - (1 - scale) * 0.5) * delta
         return UIBezierPath(arcCenter: CGPoint(x: point.x * delta + 0.5 * delta * scale, y: point.y * delta + 0.5 * delta * scale), radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
     }
 
-    func outBorderPath(_ point: CGPoint) -> UIBezierPath {
+    func outBorderPath(_ point: CGPoint, delta: CGFloat) -> UIBezierPath {
         let outWidth = (7 - (1 - scale)) * delta
         let inWidth = (5 - (1 - scale)) * delta
 

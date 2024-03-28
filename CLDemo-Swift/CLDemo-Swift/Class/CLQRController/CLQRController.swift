@@ -79,7 +79,7 @@ private extension CLQRController {
 private extension CLQRController {
     func configData() {
         DispatchQueue.global().async {
-            let image = CLQRCode(text: "12345").generateQRCode()
+            let image = CLQRCode(text: "12345asasasasasasa").generateQRCode()
             DispatchQueue.main.async {
                 self.qrImageView.image = image
             }
