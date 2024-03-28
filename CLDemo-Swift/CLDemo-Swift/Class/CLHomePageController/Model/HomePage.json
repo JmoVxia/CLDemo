@@ -16,6 +16,10 @@
     "class": "CLExcelController"
   },
   {
+    "title": "自定义二维码",
+    "class": "CLQRController"
+  },
+  {
     "title": "自定义相机",
     "class": "CLCaptureController"
   },
