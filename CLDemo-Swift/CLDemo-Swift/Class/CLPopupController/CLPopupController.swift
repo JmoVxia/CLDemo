@@ -164,14 +164,6 @@ extension CLPopupController {
             }
             arrayDS.append(model)
         }
-        do {
-            let model = CLPopupModel()
-            model.title = "食物选择"
-            model.callback = { [weak self] in
-                self?.showFoodPicker()
-            }
-            arrayDS.append(model)
-        }
     }
 }
 
@@ -214,9 +206,9 @@ extension CLPopupController {
         CLPopoverManager.showOneAlert(configCallback: { configure in
             configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
-            configure.shouldPenetrate = true
-            configure.autoHiddenWhenPenetrate = true
-            configure.overrideUserInterfaceStyle = .unspecified
+            configure.allowsEventPenetration = true
+            configure.autoHideWhenPenetrated = true
+            configure.userInterfaceStyleOverride = .unspecified
         }, title: "我是一个按钮", message: "我有一个按钮")
     }
 
@@ -245,7 +237,7 @@ extension CLPopupController {
     func showLoading() {
         CLPopoverManager.showLoading()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
-            CLPopoverManager.hiddenAll()
+            CLPopoverManager.dismissAll()
         }
     }
 
@@ -286,12 +278,6 @@ extension CLPopupController {
     func showTwoInput() {
         CLPopoverManager.showTwoInput(type: .bloodPressure) { value1, value2 in
             print("-----\(String(describing: value1))----------\(String(describing: value2))")
-        }
-    }
-
-    func showFoodPicker() {
-        CLPopoverManager.showFoodPicker { value1, value2, value3, value4 in
-            print("-----\(value1)----------\(value2)-------\(value3)-------\(value4)")
         }
     }
 }

@@ -1,6 +1,7 @@
 PODS:
   - CLCamera (1.0.0):
     - SnapKit
+  - CLPopoverManager (0.0.1)
   - CryptoSwift (1.8.1)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
@@ -40,6 +41,7 @@ PODS:
 
 DEPENDENCIES:
   - CLCamera (from `https://github.com/JmoVxia/CLCamera.git`)
+  - CLPopoverManager (from `https://github.com/JmoVxia/CLPopoverManager.git`)
   - CryptoSwift
   - DateTools
   - DateToolsSwift
@@ -76,14 +78,20 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CLCamera:
     :git: https://github.com/JmoVxia/CLCamera.git
+  CLPopoverManager:
+    :git: https://github.com/JmoVxia/CLPopoverManager.git
 
 CHECKOUT OPTIONS:
   CLCamera:
     :commit: f2b22377e5a7f48310e3e45b57d2342169d62b08
     :git: https://github.com/JmoVxia/CLCamera.git
+  CLPopoverManager:
+    :commit: ad052d1d9cf42e842576c05bdb11069a34fd2c09
+    :git: https://github.com/JmoVxia/CLPopoverManager.git
 
 SPEC CHECKSUMS:
   CLCamera: f5096124cf639919efc57cd9616515ce4e084caa
+  CLPopoverManager: 51b977c4e499293c6dc9c560fb96e939c69621d0
   CryptoSwift: b9c701d6f5011df23794dbf7f2e480a77835d83d
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
@@ -100,6 +108,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TZImagePickerController: f1c9f1cae6ac0e30b31aaa9698f9bf4a7cf5b84f
 
-PODFILE CHECKSUM: bc2b38f65d6c4cce7db74d4c9d829025e2024916
+PODFILE CHECKSUM: 99921468ddef049aa905f15c5e7922acfefe11d3
 
 COCOAPODS: 1.15.2

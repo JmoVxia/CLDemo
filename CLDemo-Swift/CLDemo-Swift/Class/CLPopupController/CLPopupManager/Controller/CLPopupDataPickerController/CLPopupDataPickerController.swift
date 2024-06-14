@@ -83,7 +83,6 @@ class CLPopupDataPickerController: CLPopoverController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        showAnimation()
     }
 }
 
@@ -94,11 +93,6 @@ extension CLPopupDataPickerController {
         topToolBar.addSubview(cancelButton)
         topToolBar.addSubview(sureButton)
         view.addSubview(dataPicker)
-    }
-}
-
-extension CLPopupDataPickerController {
-    func showAnimation() {
         topToolBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(50)
@@ -125,6 +119,11 @@ extension CLPopupDataPickerController {
             make.top.equalTo(topToolBar.snp.bottom)
             make.height.equalTo(302.5)
         }
+    }
+}
+
+extension CLPopupDataPickerController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         topToolBar.snp.updateConstraints { make in
@@ -134,10 +133,12 @@ extension CLPopupDataPickerController {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }) { _ in
+            completion?()
+        }
     }
 
-    func dismissAnimation() {
+    func dismissAnimation(completion: (() -> Void)?) {
         topToolBar.snp.updateConstraints { make in
             make.top.equalTo(view.snp.bottom)
         }
@@ -146,14 +147,15 @@ extension CLPopupDataPickerController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { _ in
-            self.hidden()
+            CLPopoverManager.dismiss(self.key)
+            completion?()
         }
     }
 }
 
 extension CLPopupDataPickerController {
     @objc func cancelAction() {
-        dismissAnimation()
+        dismissAnimation(completion: nil)
     }
 
     @objc func sureAction() {
@@ -168,13 +170,13 @@ extension CLPopupDataPickerController {
         } else if let picker = dataPicker as? CLDurationDataPickerView {
             durationCallback?(String(format: "%02d", picker.duration), picker.unit)
         }
-        dismissAnimation()
+        dismissAnimation(completion: nil)
     }
 }
 
 extension CLPopupDataPickerController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        dismissAnimation()
+        dismissAnimation(completion: nil)
     }
 }

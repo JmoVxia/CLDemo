@@ -109,35 +109,10 @@ class CLPopupFlopController: CLPopoverController {
             make.size.equalTo(32)
             make.centerX.equalTo(view)
         }
-
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
-        view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
-        UIView.animate(withDuration: 0.35) {
-            self.contentView.snp.updateConstraints { make in
-                make.top.equalTo(self.view.snp.top)
-            }
-            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.40)
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    func dismiss(completion: ((Bool) -> Void)? = nil) {
-        UIView.animate(withDuration: 0.35, animations: {
-            self.contentView.snp.updateConstraints { make in
-                make.top.equalTo(self.view.snp.top).offset(self.view.frame.height)
-            }
-            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-        }, completion: completion)
     }
 
     @objc func closeButtonAction() {
-        dismiss { _ in
-            self.hidden()
-        }
+        dismissAnimation(completion: nil)
     }
 
     @objc func flopButtonAction(tap: UITapGestureRecognizer) {
@@ -168,5 +143,38 @@ class CLPopupFlopController: CLPopoverController {
             self.view.layoutIfNeeded()
         }
         view.transition(withDuration: 1, completion: nil)
+    }
+}
+
+extension CLPopupFlopController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+        view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
+
+        UIView.animate(withDuration: 0.35) {
+            self.contentView.snp.updateConstraints { make in
+                make.top.equalTo(self.view.snp.top)
+            }
+            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.40)
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
+    }
+
+    func dismissAnimation(completion: (() -> Void)?) {
+        UIView.animate(withDuration: 0.35, animations: {
+            self.contentView.snp.updateConstraints { make in
+                make.top.equalTo(self.view.snp.top).offset(self.view.frame.height)
+            }
+            self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }) { _ in
+            CLPopoverManager.dismiss(self.key)
+            completion?()
+        }
     }
 }

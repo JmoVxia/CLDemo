@@ -37,7 +37,6 @@ extension CLPopupTipsController {
         super.viewDidLoad()
         initUI()
         makeConstraints()
-        showAnimation()
     }
 
     override func viewDidLayoutSubviews() {
@@ -66,23 +65,25 @@ extension CLPopupTipsController {
     }
 }
 
-extension CLPopupTipsController {
-    private func showAnimation() {
+extension CLPopupTipsController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.35, animations: {
             self.backgroundView.alpha = 1.0
         }, completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.dismissInterval) {
-                self.dismissAnimation { _ in
-                    self.hidden()
+                self.dismissAnimation {
                     self.dissmissCallBack?()
                 }
             }
         })
     }
 
-    private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
+    func dismissAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.35, animations: {
             self.backgroundView.alpha = 0.0
-        }, completion: completion)
+        }) { _ in
+            CLPopoverManager.dismiss(self.key)
+            completion?()
+        }
     }
 }

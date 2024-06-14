@@ -110,7 +110,6 @@ extension CLPopupCalendarController {
         configUI()
         makeConstraints()
         initData()
-        showAnimation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -174,23 +173,20 @@ extension CLPopupCalendarController {}
         guard let start = calendarView.beginDate else { return }
         guard let end = calendarView.endDate else { return }
 
-        dismissAnimation { _ in
-            self.hidden()
+        dismissAnimation {
             self.dismissCallback?(start, end)
         }
     }
 
     func close() {
-        dismissAnimation { _ in
-            self.hidden()
-        }
+        dismissAnimation(completion: nil)
     }
 }
 
 // MARK: - JmoVxia---私有方法
 
-private extension CLPopupCalendarController {
-    func showAnimation() {
+extension CLPopupCalendarController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         colorView.snp.remakeConstraints { make in
@@ -200,10 +196,12 @@ private extension CLPopupCalendarController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.40)
-        })
+        }) { _ in
+            completion?()
+        }
     }
 
-    func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
+    func dismissAnimation(completion: (() -> Void)?) {
         colorView.snp.remakeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(view.snp.bottom)
@@ -212,7 +210,10 @@ private extension CLPopupCalendarController {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
-        }, completion: completion)
+        }) { _ in
+            CLPopoverManager.dismiss(self.key)
+            completion?()
+        }
     }
 }
 

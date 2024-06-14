@@ -6,6 +6,7 @@
 //  Copyright © 2020 JmoVxia. All rights reserved.
 //
 
+import SnapKit
 import UIKit
 
 /// 动画类型
@@ -18,7 +19,7 @@ enum CLHudType {
     case loading
 }
 
-class CLPopupHudController: CLPopoverController {
+class CLPopoverHudController: CLPopoverController {
     var animationType: CLHudType = .success
     var dismissCallback: (() -> Void)?
     var text: String? {
@@ -27,14 +28,14 @@ class CLPopupHudController: CLPopoverController {
         }
     }
 
-    var strokeColor: UIColor = .orange {
+    var strokeColor = UIColor.orange {
         didSet {
             shapeLayer.strokeColor = strokeColor.cgColor
         }
     }
 
     var dismissDuration: CGFloat = 1.0
-    var animationSize: CGSize = .init(width: 150, height: 150) {
+    var animationSize = CGSize(width: 150, height: 150) {
         didSet {
             shapeLayer.frame = CGRect(x: 0, y: 0, width: animationSize.width, height: animationSize.height)
             leftLayer.frame = CGRect(x: 0, y: 0, width: animationSize.width, height: animationSize.height)
@@ -48,7 +49,7 @@ class CLPopupHudController: CLPopoverController {
     lazy var textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.numberOfLines = 0
-        textLabel.font = UIFont.systemFont(ofSize: 18)
+        textLabel.font = .mediumPingFangSC(18)
         textLabel.textColor = UIColor.white
         textLabel.textAlignment = .center
         textLabel.preferredMaxLayoutWidth = animationSize.width
@@ -57,7 +58,7 @@ class CLPopupHudController: CLPopoverController {
 
     lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .init("0x000000", alpha: 0.8)
+        contentView.backgroundColor = UIColor("0x000000", alpha: 0.8)
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
         return contentView
@@ -100,26 +101,16 @@ class CLPopupHudController: CLPopoverController {
     }()
 }
 
-extension CLPopupHudController {
+extension CLPopoverHudController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        initUI()
+        initSubViews()
         makeConstraints()
-        switch animationType {
-        case .success:
-            successAnimation()
-            dismiss(duration: Double(dismissDuration))
-        case .error:
-            errorAnimation()
-            dismiss(duration: Double(dismissDuration))
-        case .loading:
-            loadingAnimation()
-        }
     }
 }
 
-extension CLPopupHudController {
-    private func initUI() {
+extension CLPopoverHudController {
+    private func initSubViews() {
         view.addSubview(contentView)
         if textLabel.text != nil {
             contentView.addSubview(textLabel)
@@ -151,7 +142,7 @@ extension CLPopupHudController {
     }
 }
 
-extension CLPopupHudController {
+extension CLPopoverHudController {
     private func successAnimation() {
         animationView.layer.addSublayer(shapeLayer)
         addAlphaLineLayer()
@@ -260,28 +251,41 @@ extension CLPopupHudController {
     }
 }
 
-extension CLPopupHudController {
+extension CLPopoverHudController {
     func addAlphaLineLayer() {
         let circlePath = UIBezierPath()
         circlePath.addArc(withCenter: CGPoint(x: animationSize.width / 2, y: animationSize.height / 2), radius: animationSize.width / 2 - lineWidth, startAngle: 0 * .pi / 180, endAngle: 360 * .pi / 180, clockwise: false)
         let alphaLineLayer = CAShapeLayer()
         alphaLineLayer.path = circlePath.cgPath
-        alphaLineLayer.strokeColor = UIColor(cgColor: UIColor.white.cgColor).withAlphaComponent(0.1).cgColor
+        alphaLineLayer.strokeColor = UIColor(white: 1, alpha: 0.1).cgColor
         alphaLineLayer.lineWidth = lineWidth
         alphaLineLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.addSublayer(alphaLineLayer)
     }
 }
 
-extension CLPopupHudController {
-    private func dismiss(duration: Double) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration + 0.6) {
+extension CLPopoverHudController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)? = nil) {
+        switch animationType {
+        case .success:
+            successAnimation()
+            CLPopoverManager.dismiss(key)
+        case .error:
+            errorAnimation()
+            CLPopoverManager.dismiss(key)
+        case .loading:
+            loadingAnimation()
+        }
+    }
+
+    func dismissAnimation(completion: (() -> Void)? = nil) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + dismissDuration + 0.6) {
             UIView.animate(withDuration: 0.3, animations: {
                 self.contentView.alpha = 0.0
                 self.contentView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             }) { _ in
-                self.hidden()
                 self.dismissCallback?()
+                completion?()
             }
         }
     }

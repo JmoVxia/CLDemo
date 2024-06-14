@@ -118,7 +118,6 @@ extension CLPopupBMIInputController {
         super.viewDidLoad()
         initUI()
         makeConstraints()
-        showAnimation()
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -321,14 +320,12 @@ extension CLPopupBMIInputController {
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        dismissAnimation { _ in
-            self.hidden()
-        }
+        dismissAnimation(completion: nil)
     }
 }
 
-extension CLPopupBMIInputController {
-    private func showAnimation() {
+extension CLPopupBMIInputController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         contentView.snp.remakeConstraints { make in
@@ -343,7 +340,7 @@ extension CLPopupBMIInputController {
         }
     }
 
-    private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
+    func dismissAnimation(completion: (() -> Void)?) {
         contentView.snp.remakeConstraints { make in
             make.left.equalTo(36)
             make.right.equalTo(-36)
@@ -353,6 +350,9 @@ extension CLPopupBMIInputController {
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
-        }, completion: completion)
+        }) { _ in
+            CLPopoverManager.dismiss(self.key)
+            completion?()
+        }
     }
 }

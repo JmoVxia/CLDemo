@@ -24,7 +24,6 @@ extension CLPopupMomentumController {
         super.viewDidLoad()
         initUI()
         makeConstraints()
-        showAnimation()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -54,8 +53,8 @@ extension CLPopupMomentumController {
     }
 }
 
-extension CLPopupMomentumController {
-    private func showAnimation() {
+extension CLPopupMomentumController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         let height = momentumView.bounds.height
@@ -63,22 +62,25 @@ extension CLPopupMomentumController {
         UIView.animate(withDuration: 0.35) {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.35)
             self.momentumView.closedTransform = .init(translationX: 0, y: height * 0.6)
+        } completion: { _ in
+            completion?()
         }
     }
 
-    private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
+    func dismissAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         let height = momentumView.bounds.height
         UIView.animate(withDuration: 0.35, animations: {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             self.momentumView.closedTransform = .init(translationX: 0, y: height)
-        }, completion: completion)
+        }) { _ in
+            CLPopoverManager.dismiss(self.key)
+            completion?()
+        }
     }
 
     @objc private func hiddenAction() {
-        dismissAnimation { _ in
-            self.hidden()
-        }
+        dismissAnimation(completion: nil)
     }
 }
