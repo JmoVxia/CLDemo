@@ -9,10 +9,10 @@
 import Lottie
 import UIKit
 
-class CLPopupLoadingController: CLPopoverController {
+class CLPopoverLoadingController: CLPopoverController {
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .init("#000000", alpha: 0.15)
+        view.backgroundColor = UIColor("#000000", alpha: 0.15)
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
         return view
@@ -27,7 +27,7 @@ class CLPopupLoadingController: CLPopoverController {
     }()
 }
 
-extension CLPopupLoadingController {
+extension CLPopoverLoadingController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(backgroundView)
@@ -39,6 +39,24 @@ extension CLPopupLoadingController {
         loadingView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(55)
+        }
+    }
+}
+
+extension CLPopoverLoadingController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
+        UIView.animate(withDuration: 0.25) {
+            self.backgroundView.alpha = 1.0
+        } completion: { _ in
+            completion?()
+        }
+    }
+
+    func dismissAnimation(completion: (() -> Void)?) {
+        UIView.animate(withDuration: 0.25) {
+            self.backgroundView.alpha = 0.0
+        } completion: { _ in
+            completion?()
         }
     }
 }

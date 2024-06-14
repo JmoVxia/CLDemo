@@ -44,7 +44,8 @@ class CLPlayGifController: CLController {
             make.top.equalTo(statusBarHeight + (navigationController?.navigationBar.bounds.height ?? 0))
         }
         DispatchQueue.global().async {
-            for path in Bundle.main.paths(forResourcesOfType: "gif", inDirectory: nil) {
+            let paths = Bundle.main.paths(forResourcesOfType: "gif", inDirectory: nil)
+            for path in paths {
                 self.tableViewHepler.rows.append(CLPlayGifItem(path: path))
             }
             DispatchQueue.main.async {

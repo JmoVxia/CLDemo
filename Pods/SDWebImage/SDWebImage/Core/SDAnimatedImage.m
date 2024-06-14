@@ -141,6 +141,12 @@ static CGFloat SDImageScaleFromPath(NSString *string) {
     if (!data || data.length == 0) {
         return nil;
     }
+    // Vector image does not supported, guard firstly
+    SDImageFormat format = [NSData sd_imageFormatForImageData:data];
+    if (format == SDImageFormatSVG || format == SDImageFormatPDF) {
+        return nil;
+    }
+    
     id<SDAnimatedImageCoder> animatedCoder = nil;
     SDImageCoderMutableOptions *mutableCoderOptions;
     if (options != nil) {
@@ -165,6 +171,10 @@ static CGFloat SDImageScaleFromPath(NSString *string) {
         // Static Image (Before 5.19 this code path return nil)
         UIImage *image = [[SDImageCodersManager sharedManager] decodedImageWithData:data options:options];
         if (!image) {
+            return nil;
+        }
+        // Vector image does not supported, guard secondly
+        if (image.sd_isVector) {
             return nil;
         }
 #if SD_MAC
@@ -335,7 +345,7 @@ static CGFloat SDImageScaleFromPath(NSString *string) {
 @implementation SDAnimatedImage (Metadata)
 
 - (BOOL)sd_isAnimated {
-    return YES;
+    return self.animatedImageFrameCount > 1;
 }
 
 - (NSUInteger)sd_imageLoopCount {
@@ -347,11 +357,21 @@ static CGFloat SDImageScaleFromPath(NSString *string) {
 }
 
 - (NSUInteger)sd_imageFrameCount {
-    return self.animatedImageFrameCount;
+    NSUInteger frameCount = self.animatedImageFrameCount;
+    if (frameCount > 1) {
+        return frameCount;
+    } else {
+        return 1;
+    }
 }
 
 - (SDImageFormat)sd_imageFormat {
-    return self.animatedImageFormat;
+    NSData *animatedImageData = self.animatedImageData;
+    if (animatedImageData) {
+        return [NSData sd_imageFormatForImageData:animatedImageData];
+    } else {
+        return [super sd_imageFormat];
+    }
 }
 
 - (void)setSd_imageFormat:(SDImageFormat)sd_imageFormat {

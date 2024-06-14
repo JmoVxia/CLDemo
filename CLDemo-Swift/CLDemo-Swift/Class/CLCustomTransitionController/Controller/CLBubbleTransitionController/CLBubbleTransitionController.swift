@@ -29,9 +29,9 @@ class CLBubbleTransitionController: CLController {
     private lazy var bottomButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .init("#FF6666")
-        view.setImage(UIImage(named: "add"), for: .normal)
-        view.setImage(UIImage(named: "add"), for: .selected)
-        view.setImage(UIImage(named: "add"), for: .highlighted)
+        view.setImage(UIImage(named: "addcc"), for: .normal)
+        view.setImage(UIImage(named: "addcc"), for: .selected)
+        view.setImage(UIImage(named: "addcc"), for: .highlighted)
         view.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         view.clipsToBounds = true
         view.layer.cornerRadius = 30

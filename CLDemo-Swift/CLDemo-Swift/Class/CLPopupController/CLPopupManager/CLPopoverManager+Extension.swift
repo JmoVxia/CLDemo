@@ -15,7 +15,7 @@ extension CLPopoverManager {
         mainSync {
             let controller = CLPopupFlopController()
             configCallback?(controller.config)
-            controller.show()
+            CLPopoverManager.show(controller)
             return controller.key
         }
     }
@@ -25,7 +25,7 @@ extension CLPopoverManager {
         mainSync {
             let controller = CLPopupMomentumController()
             configCallback?(controller.config)
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -37,7 +37,7 @@ extension CLPopoverManager {
             controller.text = text
             controller.dismissInterval = dismissInterval
             controller.dissmissCallBack = dissmissCallBack
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -53,7 +53,7 @@ extension CLPopoverManager {
             controller.sureButton.setTitle(sure, for: .selected)
             controller.sureButton.setTitle(sure, for: .highlighted)
             controller.sureCallBack = sureCallBack
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -73,48 +73,48 @@ extension CLPopoverManager {
             controller.rightButton.setTitle(right, for: .highlighted)
             controller.leftCallBack = leftCallBack
             controller.rightCallBack = rightCallBack
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
     /// 显示成功
     static func showSuccess(configCallback: ((CLPopoverConfig) -> Void)? = nil, strokeColor: UIColor = UIColor.red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> Void)? = nil) {
         mainSync {
-            let controller = CLPopupHudController()
+            let controller = CLPopoverHudController()
             configCallback?(controller.config)
             controller.animationType = .success
             controller.strokeColor = strokeColor
             controller.text = text
             controller.dismissDuration = dismissDuration
             controller.dismissCallback = dismissCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
     /// 显示错误
     static func showError(configCallback: ((CLPopoverConfig) -> Void)? = nil, strokeColor: UIColor = .red, text: String? = nil, dismissDuration: CGFloat = 1.0, dismissCallback: (() -> Void)? = nil) {
         mainSync {
-            let controller = CLPopupHudController()
+            let controller = CLPopoverHudController()
             configCallback?(controller.config)
             controller.animationType = .error
             controller.strokeColor = strokeColor
             controller.text = text
             controller.dismissDuration = dismissDuration
             controller.dismissCallback = dismissCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
     /// 显示加载动画
     static func showHudLoading(configCallback: ((CLPopoverConfig) -> Void)? = nil, strokeColor: UIColor = .red, text: String? = nil) {
         mainSync {
-            let controller = CLPopupHudController()
+            let controller = CLPopoverHudController()
             configCallback?(controller.config)
             controller.animationType = .loading
             controller.strokeColor = strokeColor
             controller.text = text
             controller.animationSize = CGSize(width: 80, height: 80)
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -127,7 +127,7 @@ extension CLPopoverManager {
             configCallback?(controller.config)
             controller.type = .yearMonthDay
             controller.yearMonthDayCallback = yearMonthDayCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -138,7 +138,7 @@ extension CLPopoverManager {
             configCallback?(controller.config)
             controller.type = .hourMinute
             controller.hourMinuteCallback = hourMinuteCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -149,7 +149,7 @@ extension CLPopoverManager {
             configCallback?(controller.config)
             controller.type = .yearMonthDayHourMinute
             controller.yearMonthDayHourMinuteCallback = yearMonthDayHourMinuteCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -160,7 +160,7 @@ extension CLPopoverManager {
             configCallback?(controller.config)
             controller.type = .duration
             controller.durationCallback = durationCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -174,7 +174,7 @@ extension CLPopoverManager {
             controller.space = space
             controller.dataSource = dataSource
             controller.selectedCallback = selectedCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -184,7 +184,7 @@ extension CLPopoverManager {
             let controller = CLPopupBMIInputController()
             configCallback?(controller.config)
             controller.bmiCallback = bmiCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -195,7 +195,7 @@ extension CLPopoverManager {
             configCallback?(controller.config)
             controller.type = type
             controller.sureCallback = sureCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
@@ -206,26 +206,16 @@ extension CLPopoverManager {
             configCallback?(controller.config)
             controller.type = type
             controller.sureCallback = sureCallback
-            controller.show()
-        }
-    }
-
-    /// 显示食物选择器
-    static func showFoodPicker(configCallback: ((CLPopoverConfig) -> Void)? = nil, selectedCallback: ((String, String, String, String) -> Void)?) {
-        mainSync {
-            let controller = CLPopupFoodPickerController()
-            configCallback?(controller.config)
-            controller.selectedCallback = selectedCallback
-            controller.show()
+            CLPopoverManager.show(controller)
         }
     }
 
     /// 显示加载动画
     @discardableResult static func showLoading(configCallback: ((CLPopoverConfig) -> Void)? = nil) -> String {
         mainSync {
-            let controller = CLPopupLoadingController()
+            let controller = CLPopoverLoadingController()
             configCallback?(controller.config)
-            controller.show()
+            CLPopoverManager.show(controller)
             return controller.key
         }
     }
@@ -236,7 +226,7 @@ extension CLPopoverManager {
         mainSync {
             let controller = CLPopupCalendarController()
             configCallback?(controller.config)
-            controller.show()
+            CLPopoverManager.show(controller)
             return controller.key
         }
     }

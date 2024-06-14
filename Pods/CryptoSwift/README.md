@@ -1,7 +1,7 @@
 [![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20Android%20%7CmacOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20Linux-4E4E4E.svg?colorA=28a745)](#installation)
 
 [![Swift support](https://img.shields.io/badge/Swift-3.1%20%7C%203.2%20%7C%204.0%20%7C%204.1%20%7C%204.2%20%7C%205.0-lightgrey.svg?colorA=28a745&colorB=4E4E4E)](#swift-versions-support)
-[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/apple/swift-package-manager)
+[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/swiftlang/swift-package-manager)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/CryptoSwift.svg?style=flat&label=CocoaPods&colorA=28a745&&colorB=4E4E4E)](https://cocoapods.org/pods/CryptoSwift)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/Carthage/Carthage)
 
@@ -24,7 +24,7 @@ The financial sustainability of the project is possible thanks to the ongoing co
   [Emerge Tools](https://www.emergetools.com/) is a suite of revolutionary products designed to supercharge mobile apps and the teams that build them.
 
   [<img alt="www.emergetools.com/" width="200" src="https://github-production-user-asset-6210df.s3.amazonaws.com/758033/256565082-a21f5ac1-ef39-4b56-a8d2-575adeb7fe55.png" />](https://www.emergetools.com)
-  
+
 ## Requirements
 Good mood
 
@@ -131,7 +131,7 @@ It is recommended to enable [Whole-Module Optimization](https://swift.org/blog/w
 You can use [Swift Package Manager](https://swift.org/package-manager/) and specify dependency in `Package.swift` by adding this:
 
 ```swift
-.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMajor(from: "1.8.1"))
+.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.8.3")
 ```
 
 See: [Package.swift - manual](https://blog.krzyzanowskim.com/2016/08/09/package-swift-manual/)
@@ -143,7 +143,7 @@ Notice: Swift Package Manager uses debug configuration for debug Xcode build, th
 You can use [CocoaPods](https://cocoapods.org/pods/CryptoSwift).
 
 ```ruby
-pod 'CryptoSwift', '~> 1.8.1'
+pod 'CryptoSwift', '~> 1.8.3'
 ```
 
 Bear in mind that CocoaPods will build CryptoSwift without [Whole-Module Optimization](https://swift.org/blog/whole-module-optimizations/) that may impact performance. You can change it manually after installation, or use [cocoapods-wholemodule](https://github.com/jedlewison/cocoapods-wholemodule) plugin.

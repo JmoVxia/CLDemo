@@ -103,7 +103,6 @@ extension CLPopupMessageController {
         super.viewDidLoad()
         initUI()
         makeConstraints()
-        showAnimation()
     }
 }
 
@@ -169,8 +168,8 @@ extension CLPopupMessageController {
     }
 }
 
-extension CLPopupMessageController {
-    private func showAnimation() {
+extension CLPopupMessageController: CLPopoverProtocol {
+    func showAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.2) {
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.40)
             self.contentView.alpha = 1.0
@@ -178,37 +177,39 @@ extension CLPopupMessageController {
         contentView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         UIView.animate(withDuration: 0.35, delay: 0.0, options: UIView.AnimationOptions(rawValue: UIView.AnimationOptions.RawValue(7 << 16)), animations: {
             self.contentView.transform = CGAffineTransform.identity
-        }, completion: nil)
+        }) { _ in
+            completion?()
+        }
     }
 
-    private func dismissAnimation(completion: ((Bool) -> Void)? = nil) {
+    func dismissAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.2, animations: {
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
             self.contentView.alpha = 0.0
-        }, completion: completion)
+        }) { _ in
+            CLPopoverManager.dismiss(self.key)
+            completion?()
+        }
     }
 }
 
 extension CLPopupMessageController {
     @objc func sureButtonAction() {
-        dismissAnimation { _ in
-            self.hidden()
+        dismissAnimation {
             self.sureCallBack?()
             self.sureCallBack = nil
         }
     }
 
     @objc func leftButtonAction() {
-        dismissAnimation { _ in
-            self.hidden()
+        dismissAnimation {
             self.leftCallBack?()
             self.leftCallBack = nil
         }
     }
 
     @objc func rightButtonAction() {
-        dismissAnimation { _ in
-            self.hidden()
+        dismissAnimation {
             self.rightCallBack?()
             self.rightCallBack = nil
         }

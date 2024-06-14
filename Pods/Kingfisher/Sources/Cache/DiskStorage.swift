@@ -395,7 +395,7 @@ public enum DiskStorage {
         /// - Returns: The URLs for removed files.
         ///
         /// - Note: This method checks `config.sizeLimit` and remove cached files in an LRU (Least Recently Used) way.
-        func removeSizeExceededValues() throws -> [URL] {
+        public func removeSizeExceededValues() throws -> [URL] {
 
             if config.sizeLimit == 0 { return [] } // Back compatible. 0 means no limit.
 
@@ -467,7 +467,7 @@ extension DiskStorage {
 
         /// Default is `false`
         /// If set to `true`, image extension will be extracted from original file name and append to
-        /// the hased file name and used as the cache key on disk.
+        /// the hashed file name and used as the cache key on disk.
         public var autoExtAfterHashedFileName = false
         
         /// Closure that takes in initial directory path and generates

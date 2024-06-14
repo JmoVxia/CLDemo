@@ -28,9 +28,9 @@ class CLBubbleTransitionPresentController: CLController {
         let view = UIButton()
         view.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 4)
         view.backgroundColor = .orange.withAlphaComponent(0.5)
-        view.setImage(UIImage(named: "add"), for: .normal)
-        view.setImage(UIImage(named: "add"), for: .selected)
-        view.setImage(UIImage(named: "add"), for: .highlighted)
+        view.setImage(UIImage(named: "addcc"), for: .normal)
+        view.setImage(UIImage(named: "addcc"), for: .selected)
+        view.setImage(UIImage(named: "addcc"), for: .highlighted)
         view.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         view.clipsToBounds = true
         view.layer.cornerRadius = 30

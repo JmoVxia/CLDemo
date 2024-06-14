@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources.sh
 ${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/MJExtension/MJExtension.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle

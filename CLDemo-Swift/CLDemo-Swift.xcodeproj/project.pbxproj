@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B08E44D2681E6A7001C271A /* CLLanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08E44C2681E6A7001C271A /* CLLanguageManager.swift */; };
+		5B09A0602C1BE3A90034395A /* PCH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B09A05F2C1BE3A90034395A /* PCH.swift */; };
 		5B0CDAFD26B7938000B45AD1 /* CLiWatchAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDAFC26B7938000B45AD1 /* CLiWatchAnimationController.swift */; };
 		5B0CDB0626B7940100B45AD1 /* HexagonalItemViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0126B7940100B45AD1 /* HexagonalItemViewAppearance.swift */; };
 		5B0CDB0726B7940100B45AD1 /* HexagonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CDB0226B7940100B45AD1 /* HexagonalView.swift */; };
@@ -34,7 +35,7 @@
 		5B3309E828FFFB23000D44DF /* CLCalendarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309DE28FFFB23000D44DF /* CLCalendarHeadView.swift */; };
 		5B3309E928FFFB23000D44DF /* CLCalendarFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309DF28FFFB23000D44DF /* CLCalendarFlowLayout.swift */; };
 		5B3309EA28FFFB23000D44DF /* CLCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309E028FFFB23000D44DF /* CLCalendarView.swift */; };
-		5B3309EB28FFFB23000D44DF /* CLCalendarSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309E128FFFB23000D44DF /* CLCalendarSectionView.swift */; };
+		5B3309EB28FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309E128FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift */; };
 		5B3309ED28FFFC4B000D44DF /* CLCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309EC28FFFC4B000D44DF /* CLCalendarViewController.swift */; };
 		5B3309F12900F496000D44DF /* CLTagsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3309F02900F496000D44DF /* CLTagsController.swift */; };
 		5B330A072901180C000D44DF /* CLRowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B330A012901180C000D44DF /* CLRowProtocol.swift */; };
@@ -70,10 +71,6 @@
 		5B62C3A229E3E83700A836C0 /* CLRadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B62C3A129E3E83700A836C0 /* CLRadarChartView.swift */; };
 		5B62C3A429E3EA6800A836C0 /* CLRadarChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B62C3A329E3EA6800A836C0 /* CLRadarChartDataSource.swift */; };
 		5B63E55329D6898400F39220 /* CLMultiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B63E55229D6898400F39220 /* CLMultiCell.swift */; };
-		5B6C088E29CD7BE000C61C29 /* CLPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088A29CD7BDF00C61C29 /* CLPopoverController.swift */; };
-		5B6C088F29CD7BE000C61C29 /* CLPopoverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088B29CD7BE000C61C29 /* CLPopoverManager.swift */; };
-		5B6C089029CD7BE000C61C29 /* CLPopoverWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088C29CD7BE000C61C29 /* CLPopoverWindow.swift */; };
-		5B6C089129CD7BE000C61C29 /* CLPopoverConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C088D29CD7BE000C61C29 /* CLPopoverConfig.swift */; };
 		5B7692C026841566008BB92B /* CLVernierCaliperHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7692BB26841566008BB92B /* CLVernierCaliperHeaderCell.swift */; };
 		5B7692C126841566008BB92B /* CLVernierCaliperMiddleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7692BC26841566008BB92B /* CLVernierCaliperMiddleCell.swift */; };
 		5B7692C226841566008BB92B /* CLIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7692BD26841566008BB92B /* CLIndexView.swift */; };
@@ -264,12 +261,6 @@
 		5BD4EB31268185A900B5284F /* CLFontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB30268185A900B5284F /* CLFontManager.swift */; };
 		5BD4EB5D2681872D00B5284F /* CLPopupTipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB372681872D00B5284F /* CLPopupTipsController.swift */; };
 		5BD4EB5E2681872D00B5284F /* CLPopoverManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB382681872D00B5284F /* CLPopoverManager+Extension.swift */; };
-		5BD4EB5F2681872D00B5284F /* CLPopupFoodPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB3A2681872D00B5284F /* CLPopupFoodPickerController.swift */; };
-		5BD4EB602681872D00B5284F /* CLPopupFoodPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB3B2681872D00B5284F /* CLPopupFoodPickerModel.swift */; };
-		5BD4EB612681872D00B5284F /* food.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4EB3C2681872D00B5284F /* food.json */; };
-		5BD4EB622681872D00B5284F /* CLPopupFoodPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB3D2681872D00B5284F /* CLPopupFoodPickerView.swift */; };
-		5BD4EB632681872D00B5284F /* CLPopupFoodPickerContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB3E2681872D00B5284F /* CLPopupFoodPickerContentCell.swift */; };
-		5BD4EB642681872D00B5284F /* CLPopupFoodPickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB3F2681872D00B5284F /* CLPopupFoodPickerContentView.swift */; };
 		5BD4EB652681872D00B5284F /* CLFlopBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB412681872D00B5284F /* CLFlopBottomView.swift */; };
 		5BD4EB662681872D00B5284F /* CLFlopPrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB422681872D00B5284F /* CLFlopPrizeView.swift */; };
 		5BD4EB672681872D00B5284F /* CLPopupFlopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB432681872D00B5284F /* CLPopupFlopController.swift */; };
@@ -340,6 +331,7 @@
 		3B3CD2B2D686C071F5172431 /* Pods-CLDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		5B04E8862684657C006DE091 /* CLDemo-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLDemo-Bridge.h"; sourceTree = "<group>"; };
 		5B08E44C2681E6A7001C271A /* CLLanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLanguageManager.swift; sourceTree = "<group>"; };
+		5B09A05F2C1BE3A90034395A /* PCH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PCH.swift; sourceTree = "<group>"; };
 		5B0CDAFC26B7938000B45AD1 /* CLiWatchAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLiWatchAnimationController.swift; sourceTree = "<group>"; };
 		5B0CDB0126B7940100B45AD1 /* HexagonalItemViewAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalItemViewAppearance.swift; sourceTree = "<group>"; };
 		5B0CDB0226B7940100B45AD1 /* HexagonalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalView.swift; sourceTree = "<group>"; };
@@ -366,7 +358,7 @@
 		5B3309DE28FFFB23000D44DF /* CLCalendarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarHeadView.swift; sourceTree = "<group>"; };
 		5B3309DF28FFFB23000D44DF /* CLCalendarFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarFlowLayout.swift; sourceTree = "<group>"; };
 		5B3309E028FFFB23000D44DF /* CLCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarView.swift; sourceTree = "<group>"; };
-		5B3309E128FFFB23000D44DF /* CLCalendarSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarSectionView.swift; sourceTree = "<group>"; };
+		5B3309E128FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLCalendarSectionBackgroundView.swift; sourceTree = "<group>"; };
 		5B3309EC28FFFC4B000D44DF /* CLCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCalendarViewController.swift; sourceTree = "<group>"; };
 		5B3309F02900F496000D44DF /* CLTagsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTagsController.swift; sourceTree = "<group>"; };
 		5B330A012901180C000D44DF /* CLRowProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLRowProtocol.swift; sourceTree = "<group>"; };
@@ -407,10 +399,6 @@
 		5B62C3A129E3E83700A836C0 /* CLRadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRadarChartView.swift; sourceTree = "<group>"; };
 		5B62C3A329E3EA6800A836C0 /* CLRadarChartDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRadarChartDataSource.swift; sourceTree = "<group>"; };
 		5B63E55229D6898400F39220 /* CLMultiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiCell.swift; sourceTree = "<group>"; };
-		5B6C088A29CD7BDF00C61C29 /* CLPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverController.swift; sourceTree = "<group>"; };
-		5B6C088B29CD7BE000C61C29 /* CLPopoverManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverManager.swift; sourceTree = "<group>"; };
-		5B6C088C29CD7BE000C61C29 /* CLPopoverWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverWindow.swift; sourceTree = "<group>"; };
-		5B6C088D29CD7BE000C61C29 /* CLPopoverConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverConfig.swift; sourceTree = "<group>"; };
 		5B7692BB26841566008BB92B /* CLVernierCaliperHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVernierCaliperHeaderCell.swift; sourceTree = "<group>"; };
 		5B7692BC26841566008BB92B /* CLVernierCaliperMiddleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVernierCaliperMiddleCell.swift; sourceTree = "<group>"; };
 		5B7692BD26841566008BB92B /* CLIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLIndexView.swift; sourceTree = "<group>"; };
@@ -604,12 +592,6 @@
 		5BD4EB30268185A900B5284F /* CLFontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLFontManager.swift; sourceTree = "<group>"; };
 		5BD4EB372681872D00B5284F /* CLPopupTipsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupTipsController.swift; sourceTree = "<group>"; };
 		5BD4EB382681872D00B5284F /* CLPopoverManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLPopoverManager+Extension.swift"; sourceTree = "<group>"; };
-		5BD4EB3A2681872D00B5284F /* CLPopupFoodPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFoodPickerController.swift; sourceTree = "<group>"; };
-		5BD4EB3B2681872D00B5284F /* CLPopupFoodPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFoodPickerModel.swift; sourceTree = "<group>"; };
-		5BD4EB3C2681872D00B5284F /* food.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = food.json; sourceTree = "<group>"; };
-		5BD4EB3D2681872D00B5284F /* CLPopupFoodPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFoodPickerView.swift; sourceTree = "<group>"; };
-		5BD4EB3E2681872D00B5284F /* CLPopupFoodPickerContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFoodPickerContentCell.swift; sourceTree = "<group>"; };
-		5BD4EB3F2681872D00B5284F /* CLPopupFoodPickerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFoodPickerContentView.swift; sourceTree = "<group>"; };
 		5BD4EB412681872D00B5284F /* CLFlopBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLFlopBottomView.swift; sourceTree = "<group>"; };
 		5BD4EB422681872D00B5284F /* CLFlopPrizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLFlopPrizeView.swift; sourceTree = "<group>"; };
 		5BD4EB432681872D00B5284F /* CLPopupFlopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupFlopController.swift; sourceTree = "<group>"; };
@@ -794,7 +776,7 @@
 				5B3309D828FFFB22000D44DF /* CLCalendarModel.swift */,
 				5B3309DC28FFFB23000D44DF /* CLCalendarConfig.swift */,
 				5B3309E028FFFB23000D44DF /* CLCalendarView.swift */,
-				5B3309E128FFFB23000D44DF /* CLCalendarSectionView.swift */,
+				5B3309E128FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift */,
 				5B3309DE28FFFB23000D44DF /* CLCalendarHeadView.swift */,
 				5B3309D928FFFB22000D44DF /* CLCalendarCell.swift */,
 				5B3309DA28FFFB23000D44DF /* CLCalendarLayoutAttributes.swift */,
@@ -1328,6 +1310,7 @@
 		5B80042A268192D6000E39AC /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5B09A05F2C1BE3A90034395A /* PCH.swift */,
 				5BD4EB2D2681850000B5284F /* CLConst.swift */,
 				5BD4EB7F26818AF100B5284F /* Regex.swift */,
 				5B7982A026A014DE004A6473 /* CLCalculateHepler.swift */,
@@ -2001,10 +1984,6 @@
 		5BD4EB352681872D00B5284F /* CLPopupManager */ = {
 			isa = PBXGroup;
 			children = (
-				5B6C088D29CD7BE000C61C29 /* CLPopoverConfig.swift */,
-				5B6C088A29CD7BDF00C61C29 /* CLPopoverController.swift */,
-				5B6C088B29CD7BE000C61C29 /* CLPopoverManager.swift */,
-				5B6C088C29CD7BE000C61C29 /* CLPopoverWindow.swift */,
 				5BD4EB382681872D00B5284F /* CLPopoverManager+Extension.swift */,
 				5BE317CA293859E100404CD8 /* Controller */,
 			);
@@ -2018,19 +1997,6 @@
 				5BD4EB372681872D00B5284F /* CLPopupTipsController.swift */,
 			);
 			path = CLPopupTipsController;
-			sourceTree = "<group>";
-		};
-		5BD4EB392681872D00B5284F /* CLPopupFoodPickerController */ = {
-			isa = PBXGroup;
-			children = (
-				5BD4EB3C2681872D00B5284F /* food.json */,
-				5BD4EB3A2681872D00B5284F /* CLPopupFoodPickerController.swift */,
-				5BD4EB3B2681872D00B5284F /* CLPopupFoodPickerModel.swift */,
-				5BD4EB3D2681872D00B5284F /* CLPopupFoodPickerView.swift */,
-				5BD4EB3E2681872D00B5284F /* CLPopupFoodPickerContentCell.swift */,
-				5BD4EB3F2681872D00B5284F /* CLPopupFoodPickerContentView.swift */,
-			);
-			path = CLPopupFoodPickerController;
 			sourceTree = "<group>";
 		};
 		5BD4EB402681872D00B5284F /* CLPopupFlopController */ = {
@@ -2138,7 +2104,6 @@
 			children = (
 				5B988AC129FB73380076379C /* CLPopupCalendarController */,
 				5BD4EB362681872D00B5284F /* CLPopupTipsController */,
-				5BD4EB392681872D00B5284F /* CLPopupFoodPickerController */,
 				5BD4EB402681872D00B5284F /* CLPopupFlopController */,
 				5BD4EB442681872D00B5284F /* CLPopupMomentumController */,
 				5BD4EB482681872D00B5284F /* CLPopupTwoInputController */,
@@ -2376,7 +2341,6 @@
 				5BD0436726832EAB0054F2B4 /* 15.mp4 in Resources */,
 				5B81E9D327586A02009DCB3E /* hanyupinyin in Resources */,
 				5BF2B14F2A41498B00FEBD58 /* 2.gif in Resources */,
-				5BD4EB612681872D00B5284F /* food.json in Resources */,
 				5BD0436C26832EAB0054F2B4 /* 8.mp4 in Resources */,
 				5BD0436826832EAB0054F2B4 /* 11.mp4 in Resources */,
 				5B76931326841C70008BB92B /* data-left.json in Resources */,
@@ -2510,6 +2474,7 @@
 				5BC9912126C65E3A0026B6FF /* CLHoneycombCollectionViewCell.swift in Sources */,
 				5B39ECCA275747DE000FCF67 /* CLIngredientSearchCell.swift in Sources */,
 				5BD9C21C27BA2E00003B948D /* CLGrayscaleController.swift in Sources */,
+				5B09A0602C1BE3A90034395A /* PCH.swift in Sources */,
 				5BD4EB702681872D00B5284F /* CLDataPickerTitleView.swift in Sources */,
 				5BD0437026832EAB0054F2B4 /* CLVideoOperation.swift in Sources */,
 				5B0CDB0A26B7940100B45AD1 /* HexagonalItemView.swift in Sources */,
@@ -2517,7 +2482,6 @@
 				5BD0438826832F980054F2B4 /* CLPlayGifItem.swift in Sources */,
 				5BE668E22684889C0095F82E /* CLRotateAnimationView.swift in Sources */,
 				5B0CDB0726B7940100B45AD1 /* HexagonalView.swift in Sources */,
-				5BD4EB5F2681872D00B5284F /* CLPopupFoodPickerController.swift in Sources */,
 				5BE668F8268489940095F82E /* CLPasswordController.swift in Sources */,
 				5BD043B7268332BF0054F2B4 /* CLHistogramCell.swift in Sources */,
 				5BE668E0268488740095F82E /* CLRotateAnimationSwiftController.swift in Sources */,
@@ -2561,7 +2525,7 @@
 				5BE668E7268488B90095F82E /* CLRoundAnimationView.swift in Sources */,
 				5BD0442026833B6C0054F2B4 /* CLMarqueeView.swift in Sources */,
 				5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */,
-				5B3309EB28FFFB23000D44DF /* CLCalendarSectionView.swift in Sources */,
+				5B3309EB28FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
 				5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5B76933626841E11008BB92B /* CLGCDTimer.swift in Sources */,
@@ -2576,7 +2540,6 @@
 				5B80044D2681AE28000E39AC /* CLMeController.swift in Sources */,
 				5B80042926818E0A000E39AC /* CLBackView.swift in Sources */,
 				5B0DC71E26CA4AE400909BF2 /* CLHoneycombCustomCell.swift in Sources */,
-				5B6C089129CD7BE000C61C29 /* CLPopoverConfig.swift in Sources */,
 				5B63E55329D6898400F39220 /* CLMultiCell.swift in Sources */,
 				5BD4EB6B2681872D00B5284F /* CLPopupTwoInputController.swift in Sources */,
 				5BDCDB0A29CEA862000F8A6C /* CLMultiDataSource.swift in Sources */,
@@ -2625,12 +2588,10 @@
 				5B76933126841C70008BB92B /* CLChatTipsItem.swift in Sources */,
 				5B8004472681ADF0000E39AC /* CLRecordController.swift in Sources */,
 				5BD0438A26832F980054F2B4 /* CLGifPlayer.swift in Sources */,
-				5B6C088E29CD7BE000C61C29 /* CLPopoverController.swift in Sources */,
 				5B81E9A127575D0A009DCB3E /* CLHanziPinyinController.swift in Sources */,
 				5BD4EB672681872D00B5284F /* CLPopupFlopController.swift in Sources */,
 				5B3309E628FFFB23000D44DF /* CLCalendarConfig.swift in Sources */,
 				5BC9911B26C65DBD0026B6FF /* CLHoneycombCollectionViewController.swift in Sources */,
-				5BD4EB602681872D00B5284F /* CLPopupFoodPickerModel.swift in Sources */,
 				5B3309EA28FFFB23000D44DF /* CLCalendarView.swift in Sources */,
 				5B330A0D29011C13000D44DF /* UIFont+Extension.swift in Sources */,
 				5B7982A726A02265004A6473 /* CLTheme.swift in Sources */,
@@ -2652,7 +2613,6 @@
 				5B58C57326846B34001736D7 /* CLMp3Encoder.m in Sources */,
 				5B800437268194CC000E39AC /* CLHomePageController.swift in Sources */,
 				5B7982A926A022BF004A6473 /* CLUserDefaultStorage.swift in Sources */,
-				5BD4EB622681872D00B5284F /* CLPopupFoodPickerView.swift in Sources */,
 				5B62C3A229E3E83700A836C0 /* CLRadarChartView.swift in Sources */,
 				5B76932726841C70008BB92B /* CLChatVoiceCell.swift in Sources */,
 				5BD4EB692681872D00B5284F /* CLGradientLayerView.swift in Sources */,
@@ -2666,7 +2626,6 @@
 				5BD4EB732681872D00B5284F /* CLPopupOneInputController.swift in Sources */,
 				5BD4EB1A268184AB00B5284F /* UIImage+Extension.swift in Sources */,
 				5BD4EB6D2681872D00B5284F /* CLPopupDataPickerController.swift in Sources */,
-				5B6C089029CD7BE000C61C29 /* CLPopoverWindow.swift in Sources */,
 				5BD0447826833D240054F2B4 /* CLPopupController.swift in Sources */,
 				5BD4EB6A2681872D00B5284F /* CLPopupMomentumController.swift in Sources */,
 				5BD4EB1D268184AB00B5284F /* NSDecimalNumber+Extension.swift in Sources */,
@@ -2681,7 +2640,6 @@
 				5B1C366F26841FAF00D777EB /* CLPermissionInterface.swift in Sources */,
 				5BC1352D269EB75100D1CCB5 /* CLBubbleTransitionDelegate.swift in Sources */,
 				5BBFE85829DE558A00A5AC34 /* CLCollectionExcelLayout.swift in Sources */,
-				5BD4EB642681872D00B5284F /* CLPopupFoodPickerContentView.swift in Sources */,
 				5B7692C126841566008BB92B /* CLVernierCaliperMiddleCell.swift in Sources */,
 				5B330A0B2901180C000D44DF /* CLTableViewHepler.swift in Sources */,
 				5B3CC41B291EA9A700568D77 /* CLLineChartView.swift in Sources */,
@@ -2731,9 +2689,7 @@
 				5B3309E828FFFB23000D44DF /* CLCalendarHeadView.swift in Sources */,
 				5B39ECC9275747DE000FCF67 /* CLIngredientLeftTitleHead.swift in Sources */,
 				5B4895F6268097510046AF31 /* AppDelegate.swift in Sources */,
-				5BD4EB632681872D00B5284F /* CLPopupFoodPickerContentCell.swift in Sources */,
 				5B76931726841C70008BB92B /* CLChatRecordTimeView.swift in Sources */,
-				5B6C088F29CD7BE000C61C29 /* CLPopoverManager.swift in Sources */,
 				5B39ECBB27574748000FCF67 /* CLIngredientController.swift in Sources */,
 				5BD4EB5D2681872D00B5284F /* CLPopupTipsController.swift in Sources */,
 				5BD0434626832D3F0054F2B4 /* CLBreakPointResumeController.swift in Sources */,

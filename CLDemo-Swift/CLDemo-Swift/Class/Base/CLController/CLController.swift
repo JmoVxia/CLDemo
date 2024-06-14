@@ -166,7 +166,7 @@ extension CLController {
     /// 隐藏加载动画
     func hiddenProgress() {
         guard let identifier else { return }
-        CLPopoverManager.hidden(identifier)
+        CLPopoverManager.dismiss(identifier)
     }
 
     /// 返回

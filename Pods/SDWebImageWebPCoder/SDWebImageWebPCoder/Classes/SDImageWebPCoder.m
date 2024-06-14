@@ -174,7 +174,7 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     NSUInteger _currentBlendIndex;
     BOOL _preserveAspectRatio;
     CGSize _thumbnailSize;
-    BOOL _limitBytes;
+    NSUInteger _limitBytes;
 }
 
 - (void)dealloc {
