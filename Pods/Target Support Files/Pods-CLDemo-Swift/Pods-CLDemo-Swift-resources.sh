@@ -97,6 +97,7 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle"
   install_resource "${PODS_ROOT}/CLCamera/Camera/Resource/CLCamera.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift/CryptoSwift.bundle"
   install_resource "${PODS_ROOT}/DateToolsSwift/DateToolsSwift/DateTools/DateTools.bundle"
@@ -107,6 +108,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios/LottiePrivacyInfo.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle"
   install_resource "${PODS_ROOT}/CLCamera/Camera/Resource/CLCamera.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift/CryptoSwift.bundle"
   install_resource "${PODS_ROOT}/DateToolsSwift/DateToolsSwift/DateTools/DateTools.bundle"

@@ -9,7 +9,7 @@
 import UIKit
 
 class CLGifOperation: Operation {
-    var imageCallback: ((CGImage, String) -> Void)?
+    private(set) var contentHandlers = [(CGImage, String) -> Void]()
     private var path: String!
     private var taskFinished: Bool = true {
         willSet {
@@ -49,9 +49,8 @@ class CLGifOperation: Operation {
         true
     }
 
-    init(path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
+    init(path: String) {
         self.path = path
-        self.imageCallback = imageCallback
         super.init()
     }
 
@@ -78,6 +77,7 @@ extension CLGifOperation {
     }
 
     override func cancel() {
+        print("\(path.lastPathComponent)   =====   CLGifOperation cancel   =====")
         if isExecuting {
             taskFinished = true
             taskExecuting = false
@@ -87,8 +87,24 @@ extension CLGifOperation {
 }
 
 extension CLGifOperation {
+    func removeAllHandler() {
+        contentHandlers.removeAll()
+    }
+
+    func removeFristHandler() {
+        guard !contentHandlers.isEmpty else { return }
+        contentHandlers.removeFirst()
+    }
+
+    func appendHandler(_ handler: @escaping ((CGImage, String) -> Void)) {
+        contentHandlers.append(handler)
+    }
+}
+
+extension CLGifOperation {
     private func startTask(_ complete: () -> Void) {
         defer {
+            print("\(path.lastPathComponent)   =====   complete   =====")
             complete()
         }
         guard let data = NSData(contentsOfFile: path),
@@ -99,12 +115,16 @@ extension CLGifOperation {
         let imageCount = CGImageSourceGetCount(imageSource)
         var i = 0
         while imageCount > i, !isCancelled {
+            guard !isFinished else {
+                print("\(path.lastPathComponent)   =====   break   =====")
+                break
+            }
             guard let image = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { break }
             let timePerFrame = getCGImageSourceGifFrameDelay(imageSource: imageSource, index: i)
             DispatchQueue.main.async {
-                self.imageCallback?(image, self.path)
+                self.contentHandlers.forEach { $0(image, self.path) }
             }
-            i += 1
+            i == imageCount - 1 ? (i = 0) : (i += 1)
             Thread.sleep(forTimeInterval: timePerFrame)
         }
     }

@@ -47,6 +47,7 @@ class CLPlayGifController: CLController {
             let paths = Bundle.main.paths(forResourcesOfType: "gif", inDirectory: nil)
             for path in paths {
                 self.tableViewHepler.rows.append(CLPlayGifItem(path: path))
+                self.tableViewHepler.rows.append(CLPlayGifItem(path: path))
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -55,14 +56,10 @@ class CLPlayGifController: CLController {
     }
 
     deinit {
-        CLGifPlayer.destroy()
         CLLog("CLPlayGifController deinit")
     }
 }
 
 extension CLPlayGifController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let path = (tableViewHepler.rows[indexPath.row] as? CLPlayGifItem)?.path else { return }
-        CLGifPlayer.cancel(path)
-    }
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {}
 }

@@ -9,27 +9,23 @@
 import UIKit
 
 class CLGifPlayer: NSObject {
+    private let operationMap = CLMapTable<String, CLGifOperation>()
+
+    private lazy var operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+//        queue.maxConcurrentOperationCount = 10
+        return queue
+    }()
+
     private static var manager: CLGifPlayer?
-    private class var shared: CLGifPlayer {
+
+    private static var shared: CLGifPlayer {
         guard let shareManager = manager else {
             manager = CLGifPlayer()
             return manager!
         }
         return shareManager
     }
-
-    private var operationDictionary = [String: CLGifOperation]()
-    private lazy var operationQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 10
-        return queue
-    }()
-
-    private lazy var operationSemap: DispatchSemaphore = {
-        let semap = DispatchSemaphore(value: 0)
-        semap.signal()
-        return semap
-    }()
 
     override private init() {}
 
@@ -39,59 +35,41 @@ class CLGifPlayer: NSObject {
 }
 
 extension CLGifPlayer {
-    static func startPlay(_ path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
-        cancel(path)
-        let gifOperation = CLGifOperation(path: path, imageCallback: imageCallback)
-        gifOperation.completionBlock = {
-            removeValue(path)
-            startPlay(path, imageCallback: imageCallback)
+    static func loadGif(with path: String, imageHandler: @escaping ((CGImage, String) -> Void)) -> String {
+        if let operation = shared.operationMap.object(forKey: path) {
+            print("\(String(describing: path.lastPathComponent))   =====   loadGif 存在   =====")
+            operation.appendHandler(imageHandler)
+        } else {
+            let operation = CLGifOperation(path: path)
+            operation.appendHandler(imageHandler)
+            shared.operationMap.setObject(operation, forKey: path)
+            shared.operationQueue.addOperation(operation)
+            print("\(String(describing: path.lastPathComponent))   =====   loadGif 新建   =====")
         }
-        setOperation(gifOperation, for: path)
-        shared.operationQueue.addOperation(gifOperation)
+        return path
     }
 
-    static func cancel(_ path: String) {
-        guard let operation = operation(path),
-              !operation.isCancelled
+    static func cancel(_ path: String?) {
+        guard let path,
+              let operation = shared.operationMap.object(forKey: path)
         else {
+            print("\(String(describing: path?.lastPathComponent))   =====   cancel operation 不存在   =====")
             return
         }
-        operation.imageCallback = nil
-        operation.completionBlock = nil
+        print("\(String(describing: path.lastPathComponent))   =====   CLGifPlayer cancel =====")
+        operation.removeFristHandler()
+        guard operation.contentHandlers.isEmpty else { return }
         operation.cancel()
-        removeValue(path)
+        shared.operationMap.removeObject(forKey: path)
     }
 
     static func cacanAll() {
-        for key in shared.operationDictionary.keys {
-            cancel(key)
-        }
+        shared.operationQueue.cancelAllOperations()
     }
 
     /// 销毁
     static func destroy() {
         cacanAll()
         manager = nil
-    }
-}
-
-private extension CLGifPlayer {
-    static func operation(_ value: String) -> CLGifOperation? {
-        shared.operationSemap.wait()
-        let operation = shared.operationDictionary[value]
-        shared.operationSemap.signal()
-        return operation
-    }
-
-    static func setOperation(_ value: CLGifOperation, for key: String) {
-        shared.operationSemap.wait()
-        shared.operationDictionary[key] = value
-        shared.operationSemap.signal()
-    }
-
-    static func removeValue(_ value: String) {
-        shared.operationSemap.wait()
-        shared.operationDictionary.removeValue(forKey: value)
-        shared.operationSemap.signal()
     }
 }

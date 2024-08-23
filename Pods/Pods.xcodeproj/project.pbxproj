@@ -1201,143 +1201,150 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
+			remoteGlobalIDString = 3847153A6E5EEFB86565BA840768F429;
+			remoteInfo = SDWebImage;
+		};
+		46EB2E0000A570 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 46EB2E00000000 /* Project object */;
+			proxyType = 1;
 			remoteGlobalIDString = 7B01858F4318778678571D6E58E2D832;
 			remoteInfo = CLCamera;
 		};
-		46EB2E0000A570 /* PBXContainerItemProxy */ = {
+		46EB2E0000A590 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2808B98A5B29AEEB5B7418EEA8B1B92C;
 			remoteInfo = CLPopoverManager;
 		};
-		46EB2E0000A590 /* PBXContainerItemProxy */ = {
+		46EB2E0000A5B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 99313990C1D76A6D1D017868B6975CC8;
 			remoteInfo = CryptoSwift;
 		};
-		46EB2E0000A5B0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A5D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CCB5EA80CC733D89D54DAEB30E93351D;
 			remoteInfo = DateToolsSwift;
 		};
-		46EB2E0000A5D0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A5F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E8022D22FAA6690B5E1C379C1BCE1491;
 			remoteInfo = Kingfisher;
 		};
-		46EB2E0000A5F0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A610 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 638FEAAFC575BB76BC6AC055CDDA3506;
 			remoteInfo = LookinServer;
 		};
-		46EB2E0000A610 /* PBXContainerItemProxy */ = {
+		46EB2E0000A630 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
 			remoteInfo = SnapKit;
 		};
-		46EB2E0000A630 /* PBXContainerItemProxy */ = {
+		46EB2E0000A650 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1CD0618C486973D5588EF20D2E8C0AEA;
 			remoteInfo = SwiftFormat;
 		};
-		46EB2E0000A650 /* PBXContainerItemProxy */ = {
+		46EB2E0000A670 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
 			remoteInfo = SwiftyJSON;
 		};
-		46EB2E0000A670 /* PBXContainerItemProxy */ = {
+		46EB2E0000A690 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A96BBB982D62BB807B5BD10774BE2D07;
 			remoteInfo = TZImagePickerController;
 		};
-		46EB2E0000A690 /* PBXContainerItemProxy */ = {
+		46EB2E0000A6B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0B967D7F8561D42493EE289EC8D450D1;
 			remoteInfo = "lottie-ios";
 		};
-		46EB2E0000A6B0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A6D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
 			remoteInfo = SnapKit;
 		};
-		46EB2E0000A6D0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A6F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = EBC10B6451F5FE5244D138B5176C2A02;
 			remoteInfo = "CryptoSwift-CryptoSwift";
 		};
-		46EB2E0000A6F0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A710 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9828BBC09E9FB1238624113D7456E59E;
 			remoteInfo = "Kingfisher-Kingfisher";
 		};
-		46EB2E0000A710 /* PBXContainerItemProxy */ = {
+		46EB2E0000A730 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B32AF3F43989CBA171BB1FB3957A4509;
 			remoteInfo = "MJExtension-MJExtension";
 		};
-		46EB2E0000A730 /* PBXContainerItemProxy */ = {
+		46EB2E0000A750 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 94CFBA7D633ECA58DF85C327B035E6A3;
 			remoteInfo = "SDWebImage-SDWebImage";
 		};
-		46EB2E0000A750 /* PBXContainerItemProxy */ = {
+		46EB2E0000A770 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3847153A6E5EEFB86565BA840768F429;
 			remoteInfo = SDWebImage;
 		};
-		46EB2E0000A770 /* PBXContainerItemProxy */ = {
+		46EB2E0000A790 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 47D2E85A78C25869BB13521D8561A638;
 			remoteInfo = libwebp;
 		};
-		46EB2E0000A790 /* PBXContainerItemProxy */ = {
+		46EB2E0000A7B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8A8DB685241263AFDF5E6B20FE67B93A;
 			remoteInfo = "SnapKit-SnapKit_Privacy";
 		};
-		46EB2E0000A7B0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A7D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 677650A76A720691B88A6959EFED6418;
 			remoteInfo = "SwiftyJSON-SwiftyJSON";
 		};
-		46EB2E0000A7D0 /* PBXContainerItemProxy */ = {
+		46EB2E0000A7F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
@@ -4951,7 +4958,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A7E0 /* PBXTargetDependency */,
+				46EB2E0000A800 /* PBXTargetDependency */,
 			);
 			name = "lottie-ios";
 			productName = "lottie-ios";
@@ -4992,8 +4999,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A760 /* PBXTargetDependency */,
 				46EB2E0000A780 /* PBXTargetDependency */,
+				46EB2E0000A7A0 /* PBXTargetDependency */,
 			);
 			name = SDWebImageWebPCoder;
 			productName = SDWebImageWebPCoder;
@@ -5012,7 +5019,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A7A0 /* PBXTargetDependency */,
+				46EB2E0000A7C0 /* PBXTargetDependency */,
 			);
 			name = SnapKit;
 			productName = SnapKit;
@@ -5065,7 +5072,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A740 /* PBXTargetDependency */,
+				46EB2E0000A760 /* PBXTargetDependency */,
 			);
 			name = SDWebImage;
 			productName = SDWebImage;
@@ -5100,7 +5107,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A720 /* PBXTargetDependency */,
+				46EB2E0000A740 /* PBXTargetDependency */,
 			);
 			name = MJExtension;
 			productName = MJExtension;
@@ -5170,7 +5177,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A6C0 /* PBXTargetDependency */,
+				46EB2E0000A6E0 /* PBXTargetDependency */,
 			);
 			name = CLCamera;
 			productName = CLCamera;
@@ -5240,7 +5247,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A6E0 /* PBXTargetDependency */,
+				46EB2E0000A700 /* PBXTargetDependency */,
 			);
 			name = CryptoSwift;
 			productName = CryptoSwift;
@@ -5258,17 +5265,18 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A560 /* PBXTargetDependency */,
 				46EB2E0000A580 /* PBXTargetDependency */,
 				46EB2E0000A5A0 /* PBXTargetDependency */,
 				46EB2E0000A5C0 /* PBXTargetDependency */,
 				46EB2E0000A5E0 /* PBXTargetDependency */,
 				46EB2E0000A600 /* PBXTargetDependency */,
 				46EB2E0000A620 /* PBXTargetDependency */,
+				46EB2E0000A560 /* PBXTargetDependency */,
 				46EB2E0000A640 /* PBXTargetDependency */,
 				46EB2E0000A660 /* PBXTargetDependency */,
 				46EB2E0000A680 /* PBXTargetDependency */,
 				46EB2E0000A6A0 /* PBXTargetDependency */,
+				46EB2E0000A6C0 /* PBXTargetDependency */,
 			);
 			name = "Pods-CLDemo-Swift";
 			productName = "Pods-CLDemo-Swift";
@@ -5356,7 +5364,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A7C0 /* PBXTargetDependency */,
+				46EB2E0000A7E0 /* PBXTargetDependency */,
 			);
 			name = SwiftyJSON;
 			productName = SwiftyJSON;
@@ -5375,7 +5383,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E0000A700 /* PBXTargetDependency */,
+				46EB2E0000A720 /* PBXTargetDependency */,
 			);
 			name = Kingfisher;
 			productName = Kingfisher;
@@ -6777,129 +6785,135 @@
 		};
 		46EB2E0000A560 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = CLCamera;
-			target = 7B01858F4318778678571D6E58E2D832 /* CLCamera */;
+			name = SDWebImage;
+			target = 3847153A6E5EEFB86565BA840768F429 /* SDWebImage */;
 			targetProxy = 46EB2E0000A550 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A580 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = CLPopoverManager;
-			target = 2808B98A5B29AEEB5B7418EEA8B1B92C /* CLPopoverManager */;
+			name = CLCamera;
+			target = 7B01858F4318778678571D6E58E2D832 /* CLCamera */;
 			targetProxy = 46EB2E0000A570 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A5A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = CryptoSwift;
-			target = 99313990C1D76A6D1D017868B6975CC8 /* CryptoSwift */;
+			name = CLPopoverManager;
+			target = 2808B98A5B29AEEB5B7418EEA8B1B92C /* CLPopoverManager */;
 			targetProxy = 46EB2E0000A590 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A5C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = DateToolsSwift;
-			target = CCB5EA80CC733D89D54DAEB30E93351D /* DateToolsSwift */;
+			name = CryptoSwift;
+			target = 99313990C1D76A6D1D017868B6975CC8 /* CryptoSwift */;
 			targetProxy = 46EB2E0000A5B0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A5E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Kingfisher;
-			target = E8022D22FAA6690B5E1C379C1BCE1491 /* Kingfisher */;
+			name = DateToolsSwift;
+			target = CCB5EA80CC733D89D54DAEB30E93351D /* DateToolsSwift */;
 			targetProxy = 46EB2E0000A5D0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A600 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = LookinServer;
-			target = 638FEAAFC575BB76BC6AC055CDDA3506 /* LookinServer */;
+			name = Kingfisher;
+			target = E8022D22FAA6690B5E1C379C1BCE1491 /* Kingfisher */;
 			targetProxy = 46EB2E0000A5F0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A620 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SnapKit;
-			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
+			name = LookinServer;
+			target = 638FEAAFC575BB76BC6AC055CDDA3506 /* LookinServer */;
 			targetProxy = 46EB2E0000A610 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A640 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftFormat;
-			target = 1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */;
+			name = SnapKit;
+			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
 			targetProxy = 46EB2E0000A630 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A660 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
+			name = SwiftFormat;
+			target = 1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */;
 			targetProxy = 46EB2E0000A650 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A680 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = TZImagePickerController;
-			target = A96BBB982D62BB807B5BD10774BE2D07 /* TZImagePickerController */;
+			name = SwiftyJSON;
+			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
 			targetProxy = 46EB2E0000A670 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A6A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "lottie-ios";
-			target = 0B967D7F8561D42493EE289EC8D450D1 /* lottie-ios */;
+			name = TZImagePickerController;
+			target = A96BBB982D62BB807B5BD10774BE2D07 /* TZImagePickerController */;
 			targetProxy = 46EB2E0000A690 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A6C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SnapKit;
-			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
+			name = "lottie-ios";
+			target = 0B967D7F8561D42493EE289EC8D450D1 /* lottie-ios */;
 			targetProxy = 46EB2E0000A6B0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A6E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "CryptoSwift-CryptoSwift";
-			target = EBC10B6451F5FE5244D138B5176C2A02 /* CryptoSwift-CryptoSwift */;
+			name = SnapKit;
+			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
 			targetProxy = 46EB2E0000A6D0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A700 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Kingfisher-Kingfisher";
-			target = 9828BBC09E9FB1238624113D7456E59E /* Kingfisher-Kingfisher */;
+			name = "CryptoSwift-CryptoSwift";
+			target = EBC10B6451F5FE5244D138B5176C2A02 /* CryptoSwift-CryptoSwift */;
 			targetProxy = 46EB2E0000A6F0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A720 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "MJExtension-MJExtension";
-			target = B32AF3F43989CBA171BB1FB3957A4509 /* MJExtension-MJExtension */;
+			name = "Kingfisher-Kingfisher";
+			target = 9828BBC09E9FB1238624113D7456E59E /* Kingfisher-Kingfisher */;
 			targetProxy = 46EB2E0000A710 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A740 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "SDWebImage-SDWebImage";
-			target = 94CFBA7D633ECA58DF85C327B035E6A3 /* SDWebImage-SDWebImage */;
+			name = "MJExtension-MJExtension";
+			target = B32AF3F43989CBA171BB1FB3957A4509 /* MJExtension-MJExtension */;
 			targetProxy = 46EB2E0000A730 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A760 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SDWebImage;
-			target = 3847153A6E5EEFB86565BA840768F429 /* SDWebImage */;
+			name = "SDWebImage-SDWebImage";
+			target = 94CFBA7D633ECA58DF85C327B035E6A3 /* SDWebImage-SDWebImage */;
 			targetProxy = 46EB2E0000A750 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A780 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = libwebp;
-			target = 47D2E85A78C25869BB13521D8561A638 /* libwebp */;
+			name = SDWebImage;
+			target = 3847153A6E5EEFB86565BA840768F429 /* SDWebImage */;
 			targetProxy = 46EB2E0000A770 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A7A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "SnapKit-SnapKit_Privacy";
-			target = 8A8DB685241263AFDF5E6B20FE67B93A /* SnapKit-SnapKit_Privacy */;
+			name = libwebp;
+			target = 47D2E85A78C25869BB13521D8561A638 /* libwebp */;
 			targetProxy = 46EB2E0000A790 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A7C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "SwiftyJSON-SwiftyJSON";
-			target = 677650A76A720691B88A6959EFED6418 /* SwiftyJSON-SwiftyJSON */;
+			name = "SnapKit-SnapKit_Privacy";
+			target = 8A8DB685241263AFDF5E6B20FE67B93A /* SnapKit-SnapKit_Privacy */;
 			targetProxy = 46EB2E0000A7B0 /* PBXContainerItemProxy */;
 		};
 		46EB2E0000A7E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			name = "SwiftyJSON-SwiftyJSON";
+			target = 677650A76A720691B88A6959EFED6418 /* SwiftyJSON-SwiftyJSON */;
+			targetProxy = 46EB2E0000A7D0 /* PBXContainerItemProxy */;
+		};
+		46EB2E0000A800 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
 			name = "lottie-ios-LottiePrivacyInfo";
 			target = BF2A15FEC3F3424BBC4B9AD5F86F2D54 /* lottie-ios-LottiePrivacyInfo */;
-			targetProxy = 46EB2E0000A7D0 /* PBXContainerItemProxy */;
+			targetProxy = 46EB2E0000A7F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
