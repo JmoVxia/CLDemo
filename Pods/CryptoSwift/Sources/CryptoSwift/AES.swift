@@ -1,7 +1,7 @@
 //
 //  CryptoSwift
 //
-//  Copyright (C) 2014-2022 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
+//  Copyright (C) 2014-2025 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 //  This software is provided 'as-is', without any express or implied warranty.
 //
 //  In no event will the authors be held liable for any damages arising from the use of this software.
@@ -251,7 +251,7 @@ public final class AES: BlockCipher {
     let rounds = self.variantNr
     let rk = self.expandedKeyInv
 
-    // Save miliseconds by not using `block.toUInt32Array()`
+    // Save milliseconds by not using `block.toUInt32Array()`
     let b00 = UInt32(block[block.startIndex.advanced(by: 0)])
     let b01 = UInt32(block[block.startIndex.advanced(by: 1)]) << 8
     let b02 = UInt32(block[block.startIndex.advanced(by: 2)]) << 16

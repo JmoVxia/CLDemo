@@ -1,7 +1,7 @@
 //
 //  CryptoSwift
 //
-//  Copyright (C) 2014-2022 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
+//  Copyright (C) 2014-2025 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 //  This software is provided 'as-is', without any express or implied warranty.
 //
 //  In no event will the authors be held liable for any damages arising from the use of this software.
@@ -283,7 +283,7 @@ private final class GF {
     self.h = h
     self.x = 0
 
-    // Calculate for AAD at the begining
+    // Calculate for AAD at the beginning
     self.x = GF.calculateX(aad: aad, x: self.x, h: h, blockSize: blockSize)
   }
 

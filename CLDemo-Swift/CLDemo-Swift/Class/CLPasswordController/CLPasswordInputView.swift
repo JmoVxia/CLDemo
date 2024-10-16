@@ -47,15 +47,15 @@ class CLPasswordInputViewConfig: NSObject {
 
 protocol CLPasswordInputViewDelegate: AnyObject {
     /// 输入改变
-    func passwordInputViewDidChange(passwordInputView: CLPasswordInputView) -> Void
+    func passwordInputViewDidChange(passwordInputView: CLPasswordInputView)
     /// 点击删除
-    func passwordInputViewDidDeleteBackward(passwordInputView: CLPasswordInputView) -> Void
+    func passwordInputViewDidDeleteBackward(passwordInputView: CLPasswordInputView)
     /// 输入完成
-    func passwordInputViewCompleteInput(passwordInputView: CLPasswordInputView) -> Void
+    func passwordInputViewCompleteInput(passwordInputView: CLPasswordInputView)
     /// 开始输入
-    func passwordInputViewBeginInput(passwordInputView: CLPasswordInputView) -> Void
+    func passwordInputViewBeginInput(passwordInputView: CLPasswordInputView)
     /// 结束输入
-    func passwordInputViewEndInput(passwordInputView: CLPasswordInputView) -> Void
+    func passwordInputViewEndInput(passwordInputView: CLPasswordInputView)
 }
 
 extension CLPasswordInputViewDelegate {

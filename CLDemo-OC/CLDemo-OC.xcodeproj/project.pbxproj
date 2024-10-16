@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1710,7 +1710,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/LAME",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "JmoVxia.CKD.CLDemo-OC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.JmoVxia.CKD.CLDemo-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1737,7 +1737,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/LAME",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "JmoVxia.CKD.CLDemo-OC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.JmoVxia.CKD.CLDemo-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

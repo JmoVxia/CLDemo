@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLGifOperation: Operation {
+class CLGifOperation: Operation, @unchecked Sendable {
     private(set) var contentHandlers = [(CGImage, String) -> Void]()
     private var path: String!
     private var taskFinished: Bool = true {

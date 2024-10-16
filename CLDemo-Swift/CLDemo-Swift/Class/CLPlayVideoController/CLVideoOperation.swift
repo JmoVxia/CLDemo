@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 
-class CLVideoOperation: Operation {
+class CLVideoOperation: Operation, @unchecked Sendable {
     var imageCallback: ((CGImage, String) -> Void)?
     private var path: String!
     private var taskFinished: Bool = true {

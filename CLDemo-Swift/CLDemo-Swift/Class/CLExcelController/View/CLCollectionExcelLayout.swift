@@ -150,7 +150,7 @@ private extension IndexPath {
 // MARK: - ZOrder
 
 private enum ZOrder {
-    static let commonItem = 0
+    static let commonItem = -1
     static let stickyItem = 1
     static let staticStickyItem = 2
 }

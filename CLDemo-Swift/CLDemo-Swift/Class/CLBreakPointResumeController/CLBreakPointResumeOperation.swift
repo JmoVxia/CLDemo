@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CLBreakPointResumeOperation: Operation {
+class CLBreakPointResumeOperation: Operation, @unchecked Sendable {
     var progressHandler: ((CGFloat) -> Void)?
 
     private(set) var error: CLBreakPointResumeManager.DownloadError?

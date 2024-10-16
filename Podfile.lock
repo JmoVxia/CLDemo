@@ -2,7 +2,7 @@ PODS:
   - CLCamera (1.0.2):
     - SnapKit
   - CLPopoverManager (0.0.1)
-  - CryptoSwift (1.8.3)
+  - CryptoSwift (1.8.4)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
   - Kingfisher (7.12.0)
@@ -24,20 +24,20 @@ PODS:
   - lottie-ios (4.4.1)
   - Masonry (1.1.0)
   - MJExtension (3.4.2)
-  - SDWebImage (5.19.6):
-    - SDWebImage/Core (= 5.19.6)
-  - SDWebImage/Core (5.19.6)
+  - SDWebImage (5.20.0):
+    - SDWebImage/Core (= 5.20.0)
+  - SDWebImage/Core (5.20.0)
   - SDWebImageWebPCoder (0.14.6):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SnapKit (5.7.1)
-  - SwiftFormat/CLI (0.54.3)
+  - SwiftFormat/CLI (0.55.4)
   - SwiftyJSON (5.0.2)
-  - TZImagePickerController (3.8.6):
-    - TZImagePickerController/Basic (= 3.8.6)
-    - TZImagePickerController/Location (= 3.8.6)
-  - TZImagePickerController/Basic (3.8.6)
-  - TZImagePickerController/Location (3.8.6)
+  - TZImagePickerController (3.8.8):
+    - TZImagePickerController/Basic (= 3.8.8)
+    - TZImagePickerController/Location (= 3.8.8)
+  - TZImagePickerController/Basic (3.8.8)
+  - TZImagePickerController/Location (3.8.8)
 
 DEPENDENCIES:
   - CLCamera (from `https://github.com/JmoVxia/CLCamera.git`)
@@ -92,7 +92,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   CLCamera: d849090d2bed834cb99fc8e2a9a6ac9bbbc025cb
   CLPopoverManager: 51b977c4e499293c6dc9c560fb96e939c69621d0
-  CryptoSwift: 967f37cea5a3294d9cce358f78861652155be483
+  CryptoSwift: e64e11850ede528a02a0f3e768cec8e9d92ecb90
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
   Kingfisher: 53a10ea35051a436b5fb626ca2dd8f3144d755e9
@@ -101,13 +101,13 @@ SPEC CHECKSUMS:
   lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
-  SDWebImage: a79252b60f4678812d94316c91da69ec83089c9f
+  SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  SwiftFormat: 0e575b1d412d27cd5906c59fab64a806ba8f2b8e
-  SwiftyJSON: 967521cb94e7e1169f99045be1378b87c50d8f8c
-  TZImagePickerController: a013c186415f6044914bb0d0dd960a884cff46ec
+  SwiftFormat: 0184d1cd809c9d9e5e3f3c15c89fe0166f372788
+  SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
+  TZImagePickerController: d084a7b97c82d387e7669dd86dc9a9057500aacf
 
 PODFILE CHECKSUM: 817a9f6635815ee132800871dcfecfd381ee2044
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

@@ -17,8 +17,8 @@ extension CLTheme {
         /// 夜间
         case dark
 
-        @available(iOS 13.0, *)
         /// 风格
+        @available(iOS 13.0, *)
         var style: UIUserInterfaceStyle {
             switch self {
             case .follow: .unspecified

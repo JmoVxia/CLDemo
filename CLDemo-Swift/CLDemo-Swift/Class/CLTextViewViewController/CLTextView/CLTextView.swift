@@ -70,11 +70,11 @@ class CLTextViewConfig: NSObject {
 
 protocol CLTextViewDelegate: AnyObject {
     /// 输入改变
-    func textViewDidChange(textView: CLTextView) -> Void
+    func textViewDidChange(textView: CLTextView)
     /// 开始输入
-    func textViewBeginEditing(textView: CLTextView) -> Void
+    func textViewBeginEditing(textView: CLTextView)
     /// 结束输入
-    func textViewEndEditing(textView: CLTextView) -> Void
+    func textViewEndEditing(textView: CLTextView)
 }
 
 class CLTextView: UIView {

@@ -316,7 +316,7 @@ try CMAC(key: key).authenticate(bytes)
 let password: Array<UInt8> = Array("s33krit".utf8)
 let salt: Array<UInt8> = Array("nacllcan".utf8)
 
-let key = try PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, keyLength: 32, variant: .sha256).calculate()
+let key = try PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, keyLength: 32, variant: .sha2(.sha256)).calculate()
 ```
 
 ```swift
@@ -656,7 +656,7 @@ let rsaKey = try RSA(rawRepresentation: cfdata as Data)
 
 CryptoSwift is owned and maintained by [Marcin Krzyżanowski](https://www.krzyzanowskim.com)
 
-You can follow me on Twitter at [@krzyzanowskim](https://twitter.com/krzyzanowskim) for project updates and releases.
+You can follow me on Twitter at [@krzyzanowskim](https://x.com/krzyzanowskim) for project updates and releases.
 
 # Cryptography Notice
 
@@ -664,7 +664,7 @@ This distribution includes cryptographic software. The country in which you curr
 
 ## License
 
-Copyright (C) 2014-2022 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
+Copyright (C) 2014-2025 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 This software is provided 'as-is', without any express or implied warranty.
 
 In no event will the authors be held liable for any damages arising from the use of this software.
