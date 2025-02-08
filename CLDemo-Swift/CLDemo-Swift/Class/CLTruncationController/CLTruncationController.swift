@@ -28,7 +28,7 @@ class CLTruncationController: CLController {
 
     private lazy var truncationLabel: CLTruncationLabel = {
         let view = CLTruncationLabel()
-        view.numberOfLines = 3
+        view.numberOfLines = 5
         view.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
         view.layer.cornerRadius = 5
         view.layer.borderColor = UIColor.orange.cgColor
