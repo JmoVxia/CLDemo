@@ -93,7 +93,7 @@ extension CLTruncationLabel {
         let width = textLabel.bounds.width
         let lines = attributedText.lines(width)
         if numberOfLines > 0,
-           lines.count >= numberOfLines
+           lines.count > numberOfLines
         {
             let additionalAttributedText = isOpen ? truncationToken.close : truncationToken.open
             let length = lines.prefix(numberOfLines).reduce(0) { $0 + CTLineGetStringRange($1).length }
