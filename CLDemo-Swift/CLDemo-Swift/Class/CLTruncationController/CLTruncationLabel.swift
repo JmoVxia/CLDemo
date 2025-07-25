@@ -8,6 +8,13 @@
 import SnapKit
 import UIKit
 
+public enum CLTruncationMode {
+    /// 精准, 性能稍低
+    case binarySearch
+    /// 性能高, 可能不太准确
+    case fast
+}
+
 // MARK: - JmoVxia---类-属性
 
 class CLTruncationLabel: UIControl {
@@ -58,7 +65,11 @@ class CLTruncationLabel: UIControl {
     }
 
     var isOpen = false
+
     var numberOfLines: Int = 3
+
+    var truncationMode: CLTruncationMode = .binarySearch
+
     var contentEdgeInsets: UIEdgeInsets = .zero {
         didSet {
             guard contentEdgeInsets != oldValue else { return }
@@ -88,24 +99,58 @@ extension CLTruncationLabel {
     func reload() {
         guard let attributedText = attributedText?.addAttributes({ $0.font(textLabel.font) }) else { return }
         guard Thread.isMainThread else { return DispatchQueue.main.async { self.reload() } }
+
         setNeedsLayout()
         layoutIfNeeded()
+
         let width = textLabel.bounds.width
         let lines = attributedText.lines(width)
-        if numberOfLines > 0,
-           lines.count >= numberOfLines
-        {
-            let additionalAttributedText = isOpen ? truncationToken.close : truncationToken.open
-            let length = lines.prefix(numberOfLines).reduce(0) { $0 + CTLineGetStringRange($1).length }
-            textLabel.attributedText = additionalAttributedText
-            let truncationTokenWidth = textLabel.sizeThatFits(.zero).width
-            let maxLength = isOpen ? attributedText.length : min(CTLineGetStringIndexForPosition(lines[numberOfLines - 1], CGPoint(x: width - truncationTokenWidth, y: 0)), length) - 1
-            displayAttributedText = {
-                let attributedText = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: NSRange(location: 0, length: maxLength)))
-                attributedText.append(additionalAttributedText)
-                return attributedText
-            }()
+
+        guard numberOfLines > 0, lines.count >= numberOfLines else {
+            textLabel.attributedText = attributedText
+            return
         }
+
+        let token = isOpen ? truncationToken.close : truncationToken.open
+        let length = lines.prefix(numberOfLines).reduce(0) { $0 + CTLineGetStringRange($1).length }
+
+        let maxLength: Int = {
+            guard !isOpen else { return attributedText.length }
+            switch truncationMode {
+            case .binarySearch:
+                var low = 0, high = length, result = 0
+                while low <= high {
+                    let mid = (low + high) / 2
+                    let range = NSRange(location: 0, length: mid)
+                    guard NSMaxRange(range) <= attributedText.length else {
+                        high = mid - 1
+                        continue
+                    }
+
+                    let testText = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: range))
+                    testText.append(token)
+
+                    if testText.lines(width).count <= numberOfLines {
+                        result = mid
+                        low = mid + 1
+                    } else {
+                        high = mid - 1
+                    }
+                }
+                return result
+            case .fast:
+                let truncationTokenWidth = token.size().width
+                return min(CTLineGetStringIndexForPosition(lines[numberOfLines - 1], CGPoint(x: width - truncationTokenWidth, y: 0)), length) - 1
+            }
+        }()
+
+        displayAttributedText = {
+            let range = NSRange(location: 0, length: max(0, maxLength))
+            let result = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: range))
+            result.append(token)
+            return result
+        }()
+
         textLabel.attributedText = displayAttributedText
     }
 }
