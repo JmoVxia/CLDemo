@@ -1,6 +1,8 @@
 PODS:
   - CLCamera (1.0.2):
     - SnapKit
+  - CLNestedSlide (1.0.2):
+    - SnapKit
   - CLPopoverManager (0.0.3)
   - CryptoSwift (1.8.4)
   - DateTools (2.0.0)
@@ -41,6 +43,7 @@ PODS:
 
 DEPENDENCIES:
   - CLCamera (from `https://github.com/JmoVxia/CLCamera.git`)
+  - CLNestedSlide
   - CLPopoverManager (from `https://github.com/JmoVxia/CLPopoverManager.git`)
   - CryptoSwift
   - DateTools
@@ -59,6 +62,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - CLNestedSlide
     - CryptoSwift
     - DateTools
     - DateToolsSwift
@@ -91,6 +95,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   CLCamera: 8aa4a3f48a01a5b74d4ebcac6551e162fea261d4
+  CLNestedSlide: 97ad3e5ad8a8c03977e00beab8d4345233116a43
   CLPopoverManager: ddb791ea98c8d6348ae3adacc0d7ca032a5b607a
   CryptoSwift: e64e11850ede528a02a0f3e768cec8e9d92ecb90
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
@@ -108,6 +113,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
   TZImagePickerController: 456f470b5dea97b37226ec7a694994a8663340b2
 
-PODFILE CHECKSUM: 1aee504c6aec3e0a18bcfd0b26262797e45e91ae
+PODFILE CHECKSUM: 270e88f11688ec520d0980be87be322ad957ad39
 
 COCOAPODS: 1.16.2

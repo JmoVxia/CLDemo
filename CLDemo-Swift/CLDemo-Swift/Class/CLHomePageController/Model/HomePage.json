@@ -20,6 +20,10 @@
     "class": "CLQRController"
   },
   {
+    "title": "滑动嵌套",
+    "class": "CLNestedSlideController"
+  },
+  {
     "title": "自定义相机",
     "class": "CLCaptureController"
   },

@@ -1,0 +1,6 @@
+module CLNestedSlide {
+  umbrella header "CLNestedSlide-umbrella.h"
+
+  export *
+  module * { export * }
+}
