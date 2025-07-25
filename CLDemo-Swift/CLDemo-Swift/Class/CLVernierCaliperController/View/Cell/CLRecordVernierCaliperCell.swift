@@ -9,6 +9,8 @@
 import UIKit
 
 class CLRecordVernierCaliperCell: UITableViewCell {
+    var item: CLRecordVernierCaliperItem?
+
     private lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = .mediumPingFangSC(16)
