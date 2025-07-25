@@ -17,7 +17,7 @@ extension CLMultiIndexPath: Equatable {
         lhs.indexPath == rhs.indexPath && lhs.column == rhs.column
     }
 
-    public static func != (lhs: Self, rhs: Self) -> Bool {
+    static func != (lhs: Self, rhs: Self) -> Bool {
         lhs.indexPath != rhs.indexPath || lhs.column != rhs.column
     }
 }

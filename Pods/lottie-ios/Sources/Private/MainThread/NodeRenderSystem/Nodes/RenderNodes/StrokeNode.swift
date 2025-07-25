@@ -36,11 +36,11 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
       dashPhase = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     keypathProperties = [
-      PropertyName.opacity.rawValue : opacity,
-      PropertyName.color.rawValue : color,
-      PropertyName.strokeWidth.rawValue : width,
-      "Dashes" : dashPattern,
-      "Dash Phase" : dashPhase,
+      PropertyName.opacity.rawValue: opacity,
+      PropertyName.color.rawValue: color,
+      PropertyName.strokeWidth.rawValue: width,
+      "Dashes": dashPattern,
+      "Dash Phase": dashPhase,
     ]
     properties = Array(keypathProperties.values)
   }
@@ -169,11 +169,11 @@ extension [DashElement] {
 }
 
 extension [CGFloat] {
-  // If all of the items in the dash pattern are zeros, then we shouldn't attempt to render it.
-  // This causes Core Animation to have extremely poor performance for some reason, even though
-  // it doesn't affect the appearance of the animation.
-  //  - We check for `== 0.01` instead of `== 0` because `dashPattern.shapeLayerConfiguration`
-  //    converts all `0` values to `0.01` to work around a different Core Animation rendering issue.
+  /// If all of the items in the dash pattern are zeros, then we shouldn't attempt to render it.
+  /// This causes Core Animation to have extremely poor performance for some reason, even though
+  /// it doesn't affect the appearance of the animation.
+  ///  - We check for `== 0.01` instead of `== 0` because `dashPattern.shapeLayerConfiguration`
+  ///    converts all `0` values to `0.01` to work around a different Core Animation rendering issue.
   var isSupportedLayerDashPattern: Bool {
     !allSatisfy { $0 == 0.01 }
   }

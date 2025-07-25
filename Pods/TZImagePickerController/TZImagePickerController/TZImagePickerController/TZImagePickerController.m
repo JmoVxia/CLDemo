@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 3.8.8 - 2024.10.27
+//  version 3.8.9 - 2025.5.27
 //  更多信息，请前往项目的github地址：https://github.com/banchichen/TZImagePickerController
 
 #import "TZImagePickerController.h"
@@ -942,6 +942,16 @@
 @end
 
 
+// 适配RTL的UICollectionViewFlowLayout
+@interface TZRTLLayout : UICollectionViewFlowLayout
+@end
+
+@implementation TZRTLLayout
+- (BOOL)flipsHorizontallyInOppositeLayoutDirection {
+    return [TZCommonTools tz_isRightToLeftLayout];
+}
+@end
+
 @implementation TZCommonTools
 
 + (UIEdgeInsets)tz_safeAreaInsets {
@@ -1057,6 +1067,10 @@
         }
     }
     return notSelectable;
+}
+
++ (UICollectionViewFlowLayout *)tz_rtlFlowLayout {
+    return [[TZRTLLayout alloc] init];
 }
 
 @end

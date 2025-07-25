@@ -16,22 +16,26 @@ extension TextJustification {
   var textAlignment: NSTextAlignment {
     switch self {
     case .left:
-      return .left
+      .left
     case .right:
-      return .right
+      .right
     case .center:
-      return .center
+      .center
+    case .justifyLastLineLeft, .justifyLastLineRight, .justifyLastLineCenter, .justifyLastLineFull:
+      .justified
     }
   }
 
   var caTextAlignement: CATextLayerAlignmentMode {
     switch self {
     case .left:
-      return .left
+      .left
     case .right:
-      return .right
+      .right
     case .center:
-      return .center
+      .center
+    case .justifyLastLineLeft, .justifyLastLineRight, .justifyLastLineCenter, .justifyLastLineFull:
+      .justified
     }
   }
 }
@@ -121,20 +125,24 @@ final class TextCompositionLayer: CompositionLayer {
     // Prior to Lottie 4.3.0 the Main Thread rendering engine always just used `LegacyAnimationTextProvider`
     // and called it with the `keypathName` (only the last path component of the full keypath).
     // Starting in Lottie 4.3.0 we use `AnimationKeypathTextProvider` instead if implemented.
-    let textString: String
-    if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
-      textString = keypathTextValue
-    } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
-      textString = legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
-    } else {
-      textString = text.text
-    }
+    let textString: String =
+      if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
+        keypathTextValue
+      } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
+        legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
+      } else {
+        text.text
+      }
 
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
+    let start = rootNode?.textOutputNode.start.flatMap { Int($0) }
+    let end = rootNode?.textOutputNode.end.flatMap { Int($0) }
+    let selectedRangeOpacity = rootNode?.textOutputNode.selectedRangeOpacity
+    let textRangeUnit = rootNode?.textAnimatorProperties.textRangeUnit
 
     // Set all of the text layer options
     textLayer.text = textString
@@ -142,6 +150,12 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.alignment = text.justification.textAlignment
     textLayer.lineHeight = CGFloat(text.lineHeight)
     textLayer.tracking = tracking
+
+    // Configure the text animators
+    textLayer.start = start
+    textLayer.end = end
+    textLayer.textRangeUnit = textRangeUnit
+    textLayer.selectedRangeOpacity = selectedRangeOpacity
 
     if let fillColor = rootNode?.textOutputNode.fillColor {
       textLayer.fillColor = fillColor

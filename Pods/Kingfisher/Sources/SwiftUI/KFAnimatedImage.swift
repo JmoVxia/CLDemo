@@ -28,7 +28,16 @@
 import SwiftUI
 import Combine
 
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+/// Represents an animated image view in SwiftUI that manages its content using Kingfisher.
+///
+/// Similar to ``KFImage``, this view provides support for animated image formats like GIF.
+///
+/// - Important: Like ``KFImage``, `KFAnimatedImage` loads disk cached images synchronously by default 
+/// (`.loadDiskFileSynchronously()` is enabled). This prevents image flickering during SwiftUI view updates 
+/// but may impact performance when loading large animated images from disk. You can disable this behavior 
+/// by calling `.loadDiskFileSynchronously(false)` if you prefer better loading performance over visual consistency.
+///
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
 public struct KFAnimatedImage: KFImageProtocol {
     public typealias HoldingView = KFAnimatedImageViewRepresenter
     public var context: Context<HoldingView>
@@ -57,7 +66,7 @@ typealias KFCrossPlatformViewRepresentable = UIViewRepresentable
 
 /// A wrapped `UIViewRepresentable` of `AnimatedImageView`
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct KFAnimatedImageViewRepresenter: KFCrossPlatformViewRepresentable, KFImageHoldingView {
+public struct KFAnimatedImageViewRepresenter: KFCrossPlatformViewRepresentable, KFImageHoldingView, Sendable {
     public typealias RenderingView = AnimatedImageView
     public static func created(from image: KFCrossPlatformImage?, context: KFImage.Context<Self>) -> KFAnimatedImageViewRepresenter {
         KFAnimatedImageViewRepresenter(image: image, context: context)
@@ -84,8 +93,13 @@ public struct KFAnimatedImageViewRepresenter: KFCrossPlatformViewRepresentable, 
     }
     #endif
     
+    @MainActor
     private func makeImageView() -> AnimatedImageView {
         let view = AnimatedImageView()
+        
+        #if !os(macOS)
+        view.isUserInteractionEnabled = true
+        #endif
         
         self.context.renderConfigurations.forEach { $0(view) }
         
@@ -97,6 +111,7 @@ public struct KFAnimatedImageViewRepresenter: KFCrossPlatformViewRepresentable, 
         return view
     }
     
+    @MainActor
     private func updateImageView(_ imageView: AnimatedImageView) {
         imageView.image = image
     }

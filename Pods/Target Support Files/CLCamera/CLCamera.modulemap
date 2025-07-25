@@ -1,0 +1,6 @@
+module CLCamera {
+  umbrella header "CLCamera-umbrella.h"
+
+  export *
+  module * { export * }
+}

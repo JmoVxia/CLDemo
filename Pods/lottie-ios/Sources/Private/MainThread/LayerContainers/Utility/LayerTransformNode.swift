@@ -22,13 +22,13 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.opacity.keyframes))
 
     var propertyMap: [String: AnyNodeProperty] = [
-      "Anchor Point" : anchor,
-      PropertyName.scale.rawValue : scale,
+      "Anchor Point": anchor,
+      PropertyName.scale.rawValue: scale,
       PropertyName.rotation.rawValue: rotationZ,
-      "Rotation X" : rotationX,
-      "Rotation Y" : rotationY,
-      "Rotation Z" : rotationZ,
-      PropertyName.opacity.rawValue : opacity,
+      "Rotation X": rotationX,
+      "Rotation Y": rotationY,
+      "Rotation Z": rotationZ,
+      PropertyName.opacity.rawValue: opacity,
     ]
 
     if
@@ -119,17 +119,17 @@ class LayerTransformNode: AnimatorNode {
   func rebuildOutputs(frame _: CGFloat) {
     opacity = Float(transformProperties.opacity.value.cgFloatValue) * 0.01
 
-    let position: CGPoint
-    if let point = transformProperties.position?.value.pointValue {
-      position = point
-    } else if
-      let xPos = transformProperties.positionX?.value.cgFloatValue,
-      let yPos = transformProperties.positionY?.value.cgFloatValue
-    {
-      position = CGPoint(x: xPos, y: yPos)
-    } else {
-      position = .zero
-    }
+    let position: CGPoint =
+      if let point = transformProperties.position?.value.pointValue {
+        point
+      } else if
+        let xPos = transformProperties.positionX?.value.cgFloatValue,
+        let yPos = transformProperties.positionY?.value.cgFloatValue
+      {
+        CGPoint(x: xPos, y: yPos)
+      } else {
+        .zero
+      }
 
     localTransform = CATransform3D.makeTransform(
       anchor: transformProperties.anchor.value.pointValue,

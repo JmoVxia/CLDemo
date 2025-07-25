@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/24/19.
 //
 
+#if DEBUG
+
 import QuartzCore
 
 // MARK: - LayerDebugStyle
@@ -95,12 +97,12 @@ extension CALayer {
     }
 
     if visible {
-      let style: LayerDebugStyle
-      if let layerDebugging = self as? LayerDebugging {
-        style = layerDebugging.debugStyle
-      } else {
-        style = LayerDebugStyle.defaultStyle()
-      }
+      let style: LayerDebugStyle =
+        if let layerDebugging = self as? LayerDebugging {
+          layerDebugging.debugStyle
+        } else {
+          LayerDebugStyle.defaultStyle()
+        }
       let debugLayer = DebugLayer(style: style)
       var container = self
       if let cust = self as? CustomLayerDebugging {
@@ -220,3 +222,5 @@ extension [LayerModel] {
   }
 
 }
+
+#endif

@@ -14,6 +14,7 @@ extension [LayerModel] {
     assetLibrary: AssetLibrary?,
     layerImageProvider: LayerImageProvider,
     layerTextProvider: LayerTextProvider,
+    layerFontProvider: LayerFontProvider,
     textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
     frameRate: CGFloat,
@@ -21,7 +22,7 @@ extension [LayerModel] {
     -> [CompositionLayer]
   {
     var compositionLayers = [CompositionLayer]()
-    var layerMap = [Int : CompositionLayer]()
+    var layerMap = [Int: CompositionLayer]()
 
     /// Organize the assets into a dictionary of [ID : ImageAsset]
     var childLayers = [LayerModel]()
@@ -49,6 +50,7 @@ extension [LayerModel] {
           asset: precompAsset,
           layerImageProvider: layerImageProvider,
           layerTextProvider: layerTextProvider,
+          layerFontProvider: layerFontProvider,
           textProvider: textProvider,
           fontProvider: fontProvider,
           assetLibrary: assetLibrary,

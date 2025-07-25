@@ -1,43 +1,43 @@
 PODS:
   - CLCamera (1.0.2):
     - SnapKit
-  - CLPopoverManager (0.0.1)
+  - CLPopoverManager (0.0.3)
   - CryptoSwift (1.8.4)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
-  - Kingfisher (7.12.0)
-  - libwebp (1.3.2):
-    - libwebp/demux (= 1.3.2)
-    - libwebp/mux (= 1.3.2)
-    - libwebp/sharpyuv (= 1.3.2)
-    - libwebp/webp (= 1.3.2)
-  - libwebp/demux (1.3.2):
+  - Kingfisher (8.5.0)
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
     - libwebp/webp
-  - libwebp/mux (1.3.2):
+  - libwebp/mux (1.5.0):
     - libwebp/demux
-  - libwebp/sharpyuv (1.3.2)
-  - libwebp/webp (1.3.2):
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
   - LookinServer (1.2.8):
     - LookinServer/Core (= 1.2.8)
   - LookinServer/Core (1.2.8)
-  - lottie-ios (4.4.1)
+  - lottie-ios (4.5.2)
   - Masonry (1.1.0)
   - MJExtension (3.4.2)
-  - SDWebImage (5.20.0):
-    - SDWebImage/Core (= 5.20.0)
-  - SDWebImage/Core (5.20.0)
+  - SDWebImage (5.21.1):
+    - SDWebImage/Core (= 5.21.1)
+  - SDWebImage/Core (5.21.1)
   - SDWebImageWebPCoder (0.14.6):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SnapKit (5.7.1)
-  - SwiftFormat/CLI (0.55.4)
+  - SwiftFormat/CLI (0.57.2)
   - SwiftyJSON (5.0.2)
-  - TZImagePickerController (3.8.8):
-    - TZImagePickerController/Basic (= 3.8.8)
-    - TZImagePickerController/Location (= 3.8.8)
-  - TZImagePickerController/Basic (3.8.8)
-  - TZImagePickerController/Location (3.8.8)
+  - TZImagePickerController (3.8.9):
+    - TZImagePickerController/Basic (= 3.8.9)
+    - TZImagePickerController/Location (= 3.8.9)
+  - TZImagePickerController/Basic (3.8.9)
+  - TZImagePickerController/Location (3.8.9)
 
 DEPENDENCIES:
   - CLCamera (from `https://github.com/JmoVxia/CLCamera.git`)
@@ -86,28 +86,28 @@ CHECKOUT OPTIONS:
     :commit: 1dd010f76fe671cb28ee519ee4e00b537fe50500
     :git: https://github.com/JmoVxia/CLCamera.git
   CLPopoverManager:
-    :commit: 63d5f061c6d25689dc09732e3973f352c7c57413
+    :commit: 9cfe3547b4bcd83bce86956d6b89a2e44003e78f
     :git: https://github.com/JmoVxia/CLPopoverManager.git
 
 SPEC CHECKSUMS:
-  CLCamera: d849090d2bed834cb99fc8e2a9a6ac9bbbc025cb
-  CLPopoverManager: 51b977c4e499293c6dc9c560fb96e939c69621d0
+  CLCamera: 8aa4a3f48a01a5b74d4ebcac6551e162fea261d4
+  CLPopoverManager: ddb791ea98c8d6348ae3adacc0d7ca032a5b607a
   CryptoSwift: e64e11850ede528a02a0f3e768cec8e9d92ecb90
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  Kingfisher: 53a10ea35051a436b5fb626ca2dd8f3144d755e9
-  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  Kingfisher: ff0d31a1f07bdff6a1ebb3ba08b8e6e567b6500c
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
-  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
+  lottie-ios: 96784afc26ea031d3e2b6cae342a4b8915072489
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
-  SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
+  SDWebImage: f29024626962457f3470184232766516dee8dfea
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  SwiftFormat: 0184d1cd809c9d9e5e3f3c15c89fe0166f372788
+  SwiftFormat: 7a87845c4d54d5c1600e46b4d2d02408aab3a129
   SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
-  TZImagePickerController: d084a7b97c82d387e7669dd86dc9a9057500aacf
+  TZImagePickerController: 456f470b5dea97b37226ec7a694994a8663340b2
 
-PODFILE CHECKSUM: 817a9f6635815ee132800871dcfecfd381ee2044
+PODFILE CHECKSUM: 1aee504c6aec3e0a18bcfd0b26262797e45e91ae
 
 COCOAPODS: 1.16.2

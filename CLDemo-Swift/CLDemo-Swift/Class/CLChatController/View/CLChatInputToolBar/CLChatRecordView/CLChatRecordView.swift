@@ -105,7 +105,7 @@ class CLChatRecordView: UIView {
             }
             timeView.time = transToHourMinSec(time: Int(second))
         }
-        recorder.finishCallBack = { [weak self] duration, path in
+        recorder.finishCallback = { [weak self] duration, path in
             self?.finishRecorderCallBack?(TimeInterval(duration), path)
         }
         return recorder

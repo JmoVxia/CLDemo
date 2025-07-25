@@ -43,9 +43,9 @@ public enum LottieBackgroundBehavior {
   public static func `default`(for renderingEngine: RenderingEngine) -> LottieBackgroundBehavior {
     switch renderingEngine {
     case .mainThread:
-      return .pauseAndRestore
+      .pauseAndRestore
     case .coreAnimation:
-      return .continuePlaying
+      .continuePlaying
     }
   }
 }
@@ -69,17 +69,17 @@ public enum LottieLoopMode: Hashable {
 // MARK: Equatable
 
 extension LottieLoopMode: Equatable {
-  public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
+  public static func ==(lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
     switch (lhs, rhs) {
     case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
          (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):
-      return lhsAmount == rhsAmount
+      lhsAmount == rhsAmount
     case (.playOnce, .playOnce),
          (.loop, .loop),
          (.autoReverse, .autoReverse):
-      return true
+      true
     default:
-      return false
+      false
     }
   }
 }
@@ -567,9 +567,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
       // duration and curve are captured and added to the layer. This is used in the
       // layout block to animate the animationLayer's position and size.
       let rect = bounds
-      self.bounds = CGRect.zero
-      self.bounds = rect
-      self.setNeedsLayout()
+      bounds = CGRect.zero
+      bounds = rect
+      setNeedsLayout()
     }
   }
 
@@ -673,8 +673,17 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.setValueProvider(valueProvider, keypath: keypath)
   }
 
+  /// Sets a ValueProvider for the specified keypath. The value provider will be removed
+  /// on all properties that match the keypath.
+  public func removeValueProvider(for keypath: AnimationKeypath) {
+    lottieAnimationLayer.removeValueProvider(for: keypath)
+  }
+
   /// Reads the value of a property specified by the Keypath.
   /// Returns nil if no property is found.
+  ///
+  /// Note: This method isn't supported by the Core Animation rendering engine and will always return `nil` if used.
+  /// It is still supported by the Main Thread rendering engine.
   ///
   /// - Parameter for: The keypath used to search for the property.
   /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
@@ -813,7 +822,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Internal
 
-  // The backing CALayer for this animation view.
+  /// The backing CALayer for this animation view.
   let lottieAnimationLayer: LottieAnimationLayer
 
   var animationLayer: RootAnimationLayer? {
@@ -823,7 +832,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Set animation name from Interface Builder
   @IBInspectable var animationName: String? {
     didSet {
-      self.lottieAnimationLayer.animation = animationName.flatMap { LottieAnimation.named($0, animationCache: nil)
+      lottieAnimationLayer.animation = animationName.flatMap { LottieAnimation.named($0, animationCache: nil)
       }
     }
   }
@@ -835,15 +844,15 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
     lottieAnimationLayer.animationLoaded = { [weak self] _, animation in
       guard let self else { return }
-      self.animationLoaded?(self, animation)
-      self.invalidateIntrinsicContentSize()
-      self.setNeedsLayout()
+      animationLoaded?(self, animation)
+      invalidateIntrinsicContentSize()
+      setNeedsLayout()
     }
 
     lottieAnimationLayer.animationLayerDidLoad = { [weak self] _, _ in
       guard let self else { return }
-      self.invalidateIntrinsicContentSize()
-      self.setNeedsLayout()
+      invalidateIntrinsicContentSize()
+      setNeedsLayout()
     }
   }
 
@@ -932,7 +941,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
       }
     }
 
-    // UIView Animation does not implicitly set CAAnimation time or timing fuctions.
+    // UIView Animation does not implicitly set CAAnimation time or timing functions.
     // If layout is changed in an animation we must get the current animation duration
     // and timing function and then manually create a CAAnimation to match the UIView animation.
     // If layout is changed without animation, explicitly set animation duration to 0.0

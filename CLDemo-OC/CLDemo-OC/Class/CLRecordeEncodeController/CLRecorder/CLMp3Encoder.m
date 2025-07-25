@@ -7,7 +7,7 @@
 //
 
 #import "CLMp3Encoder.h"
-#import "lame.h"
+#import <LAME/lame.h>
 
 const int MP3_BUFF_SIZE = 4096;
 

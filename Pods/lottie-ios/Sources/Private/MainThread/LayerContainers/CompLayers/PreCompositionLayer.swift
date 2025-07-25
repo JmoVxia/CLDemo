@@ -16,6 +16,7 @@ final class PreCompositionLayer: CompositionLayer {
     asset: PrecompAsset,
     layerImageProvider: LayerImageProvider,
     layerTextProvider: LayerTextProvider,
+    layerFontProvider: LayerFontProvider,
     textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
     assetLibrary: AssetLibrary?,
@@ -38,6 +39,7 @@ final class PreCompositionLayer: CompositionLayer {
       assetLibrary: assetLibrary,
       layerImageProvider: layerImageProvider,
       layerTextProvider: layerTextProvider,
+      layerFontProvider: layerFontProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
       frameRate: frameRate,
@@ -77,6 +79,7 @@ final class PreCompositionLayer: CompositionLayer {
 
     layerImageProvider.addImageLayers(imageLayers)
     layerTextProvider.addTextLayers(textLayers)
+    layerFontProvider.addTextLayers(textLayers)
   }
 
   override init(layer: Any) {
@@ -104,7 +107,7 @@ final class PreCompositionLayer: CompositionLayer {
     guard let remappingNode else {
       return super.keypathProperties
     }
-    return ["Time Remap" : remappingNode]
+    return ["Time Remap": remappingNode]
   }
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {

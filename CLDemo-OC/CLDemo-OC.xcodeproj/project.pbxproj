@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0F42B9FFEC82DF938CEB9036 /* libPods-CLDemo-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B1FCC3DCD7EE8C5409A93 /* libPods-CLDemo-OC.a */; };
+		4F95DBF52E33273A004F9A2F /* LAME.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F95DBF42E33273A004F9A2F /* LAME.xcframework */; };
 		5B47C81D2680989C00A36D22 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B47C81C2680989C00A36D22 /* AppDelegate.m */; };
 		5B47C8262680989C00A36D22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B47C8242680989C00A36D22 /* Main.storyboard */; };
 		5B47C8282680989C00A36D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B47C8272680989C00A36D22 /* Assets.xcassets */; };
 		5B47C82B2680989C00A36D22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B47C8292680989C00A36D22 /* LaunchScreen.storyboard */; };
 		5B47C82E2680989C00A36D22 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B47C82D2680989C00A36D22 /* main.m */; };
-		5B645529269D8F1F0098D15D /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B645527269D8F1F0098D15D /* libmp3lame.a */; };
 		5BD0427C268323E50054F2B4 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD04273268323E50054F2B4 /* CLNavigationController.m */; };
 		5BD0427D268323E50054F2B4 /* CLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD04274268323E50054F2B4 /* CLController.m */; };
 		5BD0427E268323E50054F2B4 /* CLTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD04277268323E50054F2B4 /* CLTabbarController.m */; };
@@ -150,6 +150,7 @@
 /* Begin PBXFileReference section */
 		1311E5120E85A0026FAE2437 /* Pods-CLDemo-OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-OC.release.xcconfig"; path = "Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC.release.xcconfig"; sourceTree = "<group>"; };
 		202B1FCC3DCD7EE8C5409A93 /* libPods-CLDemo-OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLDemo-OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F95DBF42E33273A004F9A2F /* LAME.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = LAME.xcframework; sourceTree = "<group>"; };
 		5B47C8182680989C00A36D22 /* CLDemo-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CLDemo-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B47C81B2680989C00A36D22 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5B47C81C2680989C00A36D22 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -158,8 +159,6 @@
 		5B47C82A2680989C00A36D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B47C82C2680989C00A36D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B47C82D2680989C00A36D22 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5B645527269D8F1F0098D15D /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
-		5B645528269D8F1F0098D15D /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		5BD04272268323E50054F2B4 /* CLTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTabbarController.h; sourceTree = "<group>"; };
 		5BD04273268323E50054F2B4 /* CLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNavigationController.m; sourceTree = "<group>"; };
 		5BD04274268323E50054F2B4 /* CLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLController.m; sourceTree = "<group>"; };
@@ -414,8 +413,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F95DBF52E33273A004F9A2F /* LAME.xcframework in Frameworks */,
 				0F42B9FFEC82DF938CEB9036 /* libPods-CLDemo-OC.a in Frameworks */,
-				5B645529269D8F1F0098D15D /* libmp3lame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,15 +469,6 @@
 				5B47C82D2680989C00A36D22 /* main.m */,
 			);
 			path = "CLDemo-OC";
-			sourceTree = "<group>";
-		};
-		5B645526269D8F1F0098D15D /* LAME */ = {
-			isa = PBXGroup;
-			children = (
-				5B645527269D8F1F0098D15D /* libmp3lame.a */,
-				5B645528269D8F1F0098D15D /* lame.h */,
-			);
-			path = LAME;
 			sourceTree = "<group>";
 		};
 		5BD04271268323E50054F2B4 /* Base */ = {
@@ -1276,7 +1266,7 @@
 		5BF947DF2685D31700DA8A19 /* CLRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				5B645526269D8F1F0098D15D /* LAME */,
+				4F95DBF42E33273A004F9A2F /* LAME.xcframework */,
 				5BF947E42685D31700DA8A19 /* CLRecorder.h */,
 				5BF947E62685D31700DA8A19 /* CLRecorder.m */,
 				5BF947E32685D31700DA8A19 /* CLMp3Encoder.h */,
@@ -1304,7 +1294,7 @@
 				5B47C8142680989C00A36D22 /* Sources */,
 				5B47C8152680989C00A36D22 /* Frameworks */,
 				5B47C8162680989C00A36D22 /* Resources */,
-				7CCC6CDEAE92A9059F69DF42 /* [CP] Copy Pods Resources */,
+				C383ABC40C77B9C4DFB3A221 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1336,6 +1326,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				English,
 			);
 			mainGroup = 5B47C80F2680989B00A36D22;
 			productRefGroup = 5B47C8192680989C00A36D22 /* Products */;
@@ -1385,23 +1376,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7CCC6CDEAE92A9059F69DF42 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B610F7BC3B15AB1D1027B970 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1422,6 +1396,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C383ABC40C77B9C4DFB3A221 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CLDemo-OC/Pods-CLDemo-OC-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1701,7 +1696,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				INFOPLIST_FILE = "CLDemo-OC/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1709,6 +1704,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/LAME",
+					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/Lame/lame/libmp3lame/.libs",
+					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/Lame/lame/mpglib/.libs",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JmoVxia.CKD.CLDemo-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1728,7 +1725,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				INFOPLIST_FILE = "CLDemo-OC/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1736,6 +1733,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/LAME",
+					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/Lame/lame/libmp3lame/.libs",
+					"$(PROJECT_DIR)/CLDemo-OC/Class/CLRecordeEncodeController/CLRecorder/Lame/lame/mpglib/.libs",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JmoVxia.CKD.CLDemo-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

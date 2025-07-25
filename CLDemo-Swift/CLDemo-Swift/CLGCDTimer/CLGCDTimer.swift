@@ -9,25 +9,25 @@
 import UIKit
 
 class CLGCDTimer: NSObject {
-    public enum State {
+    enum State {
         case suspended
         case resumed
     }
 
     /// 执行时间
-    public private(set) var interval: TimeInterval!
+    private(set) var interval: TimeInterval!
     /// 延迟时间
-    public private(set) var delaySecs: TimeInterval!
+    private(set) var delaySecs: TimeInterval!
     /// 队列
-    public private(set) var serialQueue: DispatchQueue!
+    private(set) var serialQueue: DispatchQueue!
     /// 定时器
-    public private(set) var timer: DispatchSourceTimer!
+    private(set) var timer: DispatchSourceTimer!
     /// 是否正在运行
-    public private(set) var state: State = .suspended
+    private(set) var state: State = .suspended
     /// 响应次数
-    public private(set) var actionTimes = Int.zero
+    private(set) var actionTimes = Int.zero
     /// 响应
-    public private(set) var eventHandler: ((Int) -> Void)?
+    private(set) var eventHandler: ((Int) -> Void)?
 
     /// 创建定时器
     ///
@@ -37,9 +37,9 @@ class CLGCDTimer: NSObject {
     ///   - queue: 定时器调用的队列，默认主队列
     ///   - repeats: 是否重复执行，默认true
     ///   - action: 响应
-    public init(interval: TimeInterval,
-                delaySecs: TimeInterval = 0,
-                queue: DispatchQueue = .main)
+    init(interval: TimeInterval,
+         delaySecs: TimeInterval = 0,
+         queue: DispatchQueue = .main)
     {
         super.init()
         self.interval = interval
@@ -64,13 +64,13 @@ class CLGCDTimer: NSObject {
 
 extension CLGCDTimer {
     /// 开始
-    public func start(_ handler: @escaping ((_ count: Int) -> Void)) {
+    func start(_ handler: @escaping ((_ count: Int) -> Void)) {
         eventHandler = handler
         resume()
     }
 
     /// 暂停
-    public func suspend() {
+    func suspend() {
         guard let timer else { return }
         guard state != .suspended else { return }
         state = .suspended
@@ -78,7 +78,7 @@ extension CLGCDTimer {
     }
 
     /// 恢复定时器
-    public func resume() {
+    func resume() {
         guard state != .resumed else { return }
         guard let timer else { return }
         state = .resumed

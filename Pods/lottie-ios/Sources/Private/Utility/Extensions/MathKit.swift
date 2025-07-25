@@ -33,13 +33,6 @@ extension CGFloat {
     return toLow + (self - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)
   }
 
-  /// Returns a value that is clamped between the two numbers
-  ///
-  /// 1. The order of arguments does not matter.
-  func clamp(_ a: CGFloat, _ b: CGFloat) -> CGFloat {
-    CGFloat(Double(self).clamp(Double(a), Double(b)))
-  }
-
   /// Returns the difference between the receiver and the given number.
   /// - Parameter absolute: If *true* (Default) the returned value will always be positive.
   func diff(_ a: CGFloat, absolute: Bool = true) -> CGFloat {
@@ -54,20 +47,20 @@ extension CGFloat {
 // MARK: - Double
 
 extension Double {
-
   func remap(fromLow: Double, fromHigh: Double, toLow: Double, toHigh: Double) -> Double {
     toLow + (self - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)
   }
+}
 
+extension Numeric where Self: Comparable {
   /// Returns a value that is clamped between the two numbers
   ///
   /// 1. The order of arguments does not matter.
-  func clamp(_ a: Double, _ b: Double) -> Double {
+  func clamp(_ a: Self, _ b: Self) -> Self {
     let minValue = a <= b ? a : b
     let maxValue = a <= b ? b : a
     return max(min(self, maxValue), minValue)
   }
-
 }
 
 extension CGRect {
@@ -271,13 +264,13 @@ extension CGPoint {
   }
 
   /// Operator convenience to divide points with /
-  static func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    CGPoint(x: lhs.x / CGFloat(rhs), y: lhs.y / CGFloat(rhs))
+  static func /(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
   }
 
   /// Operator convenience to multiply points with *
-  static func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    CGPoint(x: lhs.x * CGFloat(rhs), y: lhs.y * CGFloat(rhs))
+  static func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
   }
 
   /// Operator convenience to add points with +
@@ -421,12 +414,11 @@ extension CGPoint {
     let c = inTangent.interpolate(to: to, amount: amount)
     let d = a.interpolate(to: b, amount: amount)
     let e = b.interpolate(to: c, amount: amount)
-    let f = d.interpolate(to: e, amount: amount)
-    return f
+    return d.interpolate(to: e, amount: amount)
   }
 
   func colinear(_ a: CGPoint, _ b: CGPoint) -> Bool {
-    let area = x * (a.y - b.y) + a.x * (b.y - y) + b.x * (y - a.y);
+    let area = x * (a.y - b.y) + a.x * (b.y - y) + b.x * (y - a.y)
     let accuracy: CGFloat = 0.05
     if area < accuracy, area > -accuracy {
       return true

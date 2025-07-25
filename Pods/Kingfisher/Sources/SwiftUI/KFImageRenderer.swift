@@ -31,7 +31,7 @@ import Combine
 /// A Kingfisher compatible SwiftUI `View` to load an image from a `Source`.
 /// Declaring a `KFImage` in a `View`'s body to trigger loading from the given `Source`.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView {
+struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView & Sendable {
     
     @StateObject var binder: KFImage.ImageBinder = .init()
     let context: KFImage.Context<HoldingView>
@@ -43,10 +43,23 @@ struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView
         }
         
         return ZStack {
-            renderedImage().opacity(binder.loaded ? 1.0 : 0.0)
+            if context.swiftUITransition != nil {
+                // SwiftUI loadTransition: insert/remove view for proper transition behavior
+                if binder.loaded {
+                    renderedImage()
+                }
+            } else {
+                // Fade transition or no transition: use opacity control
+                renderedImage()
+                    .opacity(binder.loaded ? 1.0 : 0.0)
+            }
             if binder.loadedImage == nil {
                 ZStack {
-                    if let placeholder = context.placeholder {
+                    // Priority: failureView > placeholder > Color.clear
+                    // failureView is only set when image loading fails
+                    if let failureView = binder.failureView {
+                        failureView()
+                    } else if let placeholder = context.placeholder {
                         placeholder(binder.progress)
                     } else {
                         Color.clear
@@ -90,10 +103,22 @@ struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView
     
     @ViewBuilder
     private func renderedImage() -> some View {
+        if let swiftUITransition = context.swiftUITransition {
+            // Apply SwiftUI loadTransition as the last step for correct rendering order
+            configuredImage.transition(swiftUITransition)
+        } else {
+            configuredImage
+        }
+    }
+    
+    @ViewBuilder
+    private var configuredImage: some View {
         let configuredImage = context.configurations
             .reduce(HoldingView.created(from: binder.loadedImage, context: context)) {
                 current, config in config(current)
             }
+        
+        // Apply contentConfiguration first, then loadTransition as the final step
         if let contentConfiguration = context.contentConfiguration {
             contentConfiguration(configuredImage)
         } else {

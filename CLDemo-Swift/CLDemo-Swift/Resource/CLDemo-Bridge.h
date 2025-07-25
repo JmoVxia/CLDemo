@@ -8,6 +8,6 @@
 #ifndef CLDemo_Bridge_h
 #define CLDemo_Bridge_h
 
-#import "CLRecorder.h"
+#import <LAME/lame.h>
 
 #endif /* CLDemo_Bridge_h */
