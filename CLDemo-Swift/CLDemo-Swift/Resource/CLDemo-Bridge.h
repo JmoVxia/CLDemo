@@ -9,5 +9,6 @@
 #define CLDemo_Bridge_h
 
 #import <LAME/lame.h>
+#import "CLLogView.h"
 
 #endif /* CLDemo_Bridge_h */

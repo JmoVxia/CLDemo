@@ -1,6 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift-resources.sh
 ${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle
 ${PODS_ROOT}/CLCamera/Camera/Resource/CLCamera.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/CocoaLumberjack/CocoaLumberjackPrivacy.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift/CryptoSwift.bundle
 ${PODS_ROOT}/DateToolsSwift/DateToolsSwift/DateTools/DateTools.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher/Kingfisher.bundle

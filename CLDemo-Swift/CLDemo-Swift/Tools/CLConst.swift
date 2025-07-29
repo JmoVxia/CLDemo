@@ -111,8 +111,8 @@ func milliStampFormat(with timeStamp: String, format: String) -> String {
 }
 
 /// 日志打印，会加入日志中
-func CLLog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
-    CLLogManager.CLLog(message, file: file, function: function, line: line)
+func CLLog(_ message: String, level: CLLogLevel = .info, file: String = #file, function: String = #function, line: UInt = #line) {
+    CLLogManager.CLLog(message, level: level, file: file, function: function, line: line)
 }
 
 /// 查找路径及其子路径下所有指定类型文件

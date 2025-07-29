@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F2A36C82E377627001684F1 /* CLLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A36C72E377627001684F1 /* CLLogManager.swift */; };
+		4F2A36CD2E38C0C1001684F1 /* CLLogBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A36CC2E38C0C1001684F1 /* CLLogBridge.m */; };
+		4F2A36D02E38C33B001684F1 /* CLLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A36CF2E38C33B001684F1 /* CLLogController.swift */; };
+		4F2A36D52E38C3A5001684F1 /* CLLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A36D42E38C3A5001684F1 /* CLLogView.m */; };
 		4F8167B62E332CA90046AF6D /* CLNestedSlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B52E332CA90046AF6D /* CLNestedSlideController.swift */; };
 		4F8167BA2E332D060046AF6D /* CLSegmentedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B92E332D060046AF6D /* CLSegmentedBar.swift */; };
 		4F8167BB2E332D060046AF6D /* CLPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B82E332D060046AF6D /* CLPageView.swift */; };
@@ -286,7 +290,6 @@
 		5BD4EB2C268184AB00B5284F /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB13268184AB00B5284F /* Array+Extension.swift */; };
 		5BD4EB2E2681850000B5284F /* CLConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB2D2681850000B5284F /* CLConst.swift */; };
 		5BD4EB31268185A900B5284F /* CLFontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB30268185A900B5284F /* CLFontManager.swift */; };
-		5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB7B26818A1300B5284F /* CLLogManager.swift */; };
 		5BD4EB8026818AF100B5284F /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4EB7F26818AF100B5284F /* Regex.swift */; };
 		5BD9C21C27BA2E00003B948D /* CLGrayscaleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD9C21B27BA2E00003B948D /* CLGrayscaleController.swift */; };
 		5BDCDB0A29CEA862000F8A6C /* CLMultiDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDCDB0929CEA862000F8A6C /* CLMultiDataSource.swift */; };
@@ -334,6 +337,12 @@
 
 /* Begin PBXFileReference section */
 		3B3CD2B2D686C071F5172431 /* Pods-CLDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		4F2A36C72E377627001684F1 /* CLLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLogManager.swift; sourceTree = "<group>"; };
+		4F2A36CB2E38C0C1001684F1 /* CLLogBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogBridge.h; sourceTree = "<group>"; };
+		4F2A36CC2E38C0C1001684F1 /* CLLogBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogBridge.m; sourceTree = "<group>"; };
+		4F2A36CF2E38C33B001684F1 /* CLLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLogController.swift; sourceTree = "<group>"; };
+		4F2A36D32E38C3A5001684F1 /* CLLogView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogView.h; sourceTree = "<group>"; };
+		4F2A36D42E38C3A5001684F1 /* CLLogView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogView.m; sourceTree = "<group>"; };
 		4F8167B52E332CA90046AF6D /* CLNestedSlideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideController.swift; sourceTree = "<group>"; };
 		4F8167B82E332D060046AF6D /* CLPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPageView.swift; sourceTree = "<group>"; };
 		4F8167B92E332D060046AF6D /* CLSegmentedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSegmentedBar.swift; sourceTree = "<group>"; };
@@ -619,7 +628,6 @@
 		5BD4EB13268184AB00B5284F /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		5BD4EB2D2681850000B5284F /* CLConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLConst.swift; sourceTree = "<group>"; };
 		5BD4EB30268185A900B5284F /* CLFontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLFontManager.swift; sourceTree = "<group>"; };
-		5BD4EB7B26818A1300B5284F /* CLLogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLogManager.swift; sourceTree = "<group>"; };
 		5BD4EB7F26818AF100B5284F /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		5BD9C21B27BA2E00003B948D /* CLGrayscaleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGrayscaleController.swift; sourceTree = "<group>"; };
 		5BDCDB0929CEA862000F8A6C /* CLMultiDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMultiDataSource.swift; sourceTree = "<group>"; };
@@ -679,6 +687,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F2A36CE2E38C31A001684F1 /* CLLogController */ = {
+			isa = PBXGroup;
+			children = (
+				4F2A36D22E38C394001684F1 /* View */,
+				4F2A36D12E38C389001684F1 /* Controller */,
+			);
+			path = CLLogController;
+			sourceTree = "<group>";
+		};
+		4F2A36D12E38C389001684F1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4F2A36CF2E38C33B001684F1 /* CLLogController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4F2A36D22E38C394001684F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4F2A36D32E38C3A5001684F1 /* CLLogView.h */,
+				4F2A36D42E38C3A5001684F1 /* CLLogView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4F8167B72E332CFB0046AF6D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1521,6 +1555,7 @@
 				5B800435268194B1000E39AC /* CLHomePageController */,
 				5B3CC416291EA8D000568D77 /* CLLineChartController */,
 				5BBFE84A29DE53BF00A5AC34 /* CLExcelController */,
+				4F2A36CE2E38C31A001684F1 /* CLLogController */,
 				5B23A65E2B8325F400DC4975 /* CLCaptureController */,
 				5BC9911926C65D780026B6FF /* CLHoneycombController */,
 				5BEF4CFA2881011A00A15433 /* CLTruncationController */,
@@ -2128,7 +2163,9 @@
 		5BD4EB7926818A1300B5284F /* CLLogManager */ = {
 			isa = PBXGroup;
 			children = (
-				5BD4EB7B26818A1300B5284F /* CLLogManager.swift */,
+				4F2A36CB2E38C0C1001684F1 /* CLLogBridge.h */,
+				4F2A36CC2E38C0C1001684F1 /* CLLogBridge.m */,
+				4F2A36C72E377627001684F1 /* CLLogManager.swift */,
 			);
 			path = CLLogManager;
 			sourceTree = "<group>";
@@ -2575,7 +2612,6 @@
 				5B3CC41D291EA9C600568D77 /* CLLineChartViewDataSource.swift in Sources */,
 				5BE668E7268488B90095F82E /* CLRoundAnimationView.swift in Sources */,
 				5BD0442026833B6C0054F2B4 /* CLMarqueeView.swift in Sources */,
-				5BD4EB7D26818A1300B5284F /* CLLogManager.swift in Sources */,
 				5B3309EB28FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
 				5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */,
@@ -2625,8 +2661,10 @@
 				5B8397FF26A15BEA00FD1D3C /* CLCircleRetroTransition.swift in Sources */,
 				5BE6693D26848DCD0095F82E /* CLBubblePopupView.swift in Sources */,
 				5B3309E328FFFB23000D44DF /* CLCalendarCell.swift in Sources */,
+				4F2A36CD2E38C0C1001684F1 /* CLLogBridge.m in Sources */,
 				5BD0442D26833CD60054F2B4 /* CLTagsCalculateController.swift in Sources */,
 				5B76932C26841C70008BB92B /* CLChatCell.swift in Sources */,
+				4F2A36C82E377627001684F1 /* CLLogManager.swift in Sources */,
 				5BD4EB21268184AB00B5284F /* String+Extension.swift in Sources */,
 				5B76931926841C70008BB92B /* CLChatInputToolBar.swift in Sources */,
 				5BE6694026848E280095F82E /* CLRotatingPictureViewController.swift in Sources */,
@@ -2692,6 +2730,7 @@
 				5BD4EB2E2681850000B5284F /* CLConst.swift in Sources */,
 				5BD4EB24268184AB00B5284F /* Result+Extension.swift in Sources */,
 				5BEF4CFE2881028D00A15433 /* CLTruncationLabel.swift in Sources */,
+				4F2A36D02E38C33B001684F1 /* CLLogController.swift in Sources */,
 				5BD0441E26833B6C0054F2B4 /* CLMarqueeVerticalCell.swift in Sources */,
 				5BD0439926832F980054F2B4 /* CLPlayGifController.swift in Sources */,
 				5B7692C226841566008BB92B /* CLIndexView.swift in Sources */,
@@ -2726,6 +2765,7 @@
 				5B39ECC9275747DE000FCF67 /* CLIngredientLeftTitleHead.swift in Sources */,
 				5B4895F6268097510046AF31 /* AppDelegate.swift in Sources */,
 				5B76931726841C70008BB92B /* CLChatRecordTimeView.swift in Sources */,
+				4F2A36D52E38C3A5001684F1 /* CLLogView.m in Sources */,
 				5B39ECBB27574748000FCF67 /* CLIngredientController.swift in Sources */,
 				5BD0434626832D3F0054F2B4 /* CLBreakPointResumeController.swift in Sources */,
 				5B8F692E2C787D6800C6E5DE /* CLMapTable.swift in Sources */,

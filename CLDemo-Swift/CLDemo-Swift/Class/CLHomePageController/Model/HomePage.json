@@ -12,6 +12,10 @@
     "class": "CLDarkModeController"
   },
   {
+    "title": "日志",
+    "class": "CLLogController"
+  },
+  {
     "title": "表格视图",
     "class": "CLExcelController"
   },
