@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        CLLog(@"OC调用日志", CLLogLevelInfo | CLLogLevelDebug);
+        CLLog(CLLogLevelMessage | CLLogLevelDebug, @"OC调用日志");
     }
     return self;
 }

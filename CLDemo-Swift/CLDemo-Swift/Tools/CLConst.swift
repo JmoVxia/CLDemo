@@ -111,7 +111,7 @@ func milliStampFormat(with timeStamp: String, format: String) -> String {
 }
 
 /// 日志打印，会加入日志中
-func CLLog(_ message: String, level: CLLogLevel = .info, file: String = #file, function: String = #function, line: UInt = #line) {
+func CLLog(_ message: String, level: CLLogLevel = .message, file: String = #file, function: String = #function, line: UInt = #line) {
     CLLogManager.CLLog(message, level: level, file: file, function: function, line: line)
 }
 

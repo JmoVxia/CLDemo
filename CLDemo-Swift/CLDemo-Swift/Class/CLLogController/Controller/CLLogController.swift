@@ -58,6 +58,13 @@ extension CLLogController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        for i in 0 ... 100 {
+            CLLog("test \(i)")
+        }
+    }
 }
 
 // MARK: - JmoVxia---布局

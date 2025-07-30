@@ -14,13 +14,9 @@ struct CLLogLevel: OptionSet {
     let rawValue: Int
 
     static let error = CLLogLevel(rawValue: 1 << 0)
-
     static let warning = CLLogLevel(rawValue: 1 << 1)
-
-    static let info = CLLogLevel(rawValue: 1 << 2)
-
+    static let message = CLLogLevel(rawValue: 1 << 2)
     static let debug = CLLogLevel(rawValue: 1 << 3)
-
     static let im = CLLogLevel(rawValue: 1 << 4)
 
     static let all: CLLogLevel = .init(allLevels.map(\.level))
@@ -28,12 +24,12 @@ struct CLLogLevel: OptionSet {
     private static let allLevels: [(level: CLLogLevel, name: String)] = [
         (.error, "错误"),
         (.warning, "警告"),
-        (.info, "信息"),
+        (.message, "信息"),
         (.debug, "调试"),
         (.im, "聊天"),
     ]
 
-    func chineseName() -> String {
+    func chineseDescription() -> String {
         let descriptions = CLLogLevel.allLevels
             .filter { contains($0.level) }
             .map(\.name)
@@ -50,12 +46,15 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
     }
 
     func format(message logMessage: DDLogMessage) -> String? {
-        let customLevel = logMessage.representedObject as? CLLogLevel ?? .info
+        let custom = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
         let timestamp = logMessage.timestamp.formattedString(format: "yyyy-MM-dd HH:mm:ss:SSS")
-        let fileName = URL(fileURLWithPath: logMessage.file).lastPathComponent
         let text = """
         ------------------------------------------
-        \(customLevel.chineseName()) \(timestamp) [\(fileName):\(logMessage.line) \(logMessage.function ?? "")]
+        生命周期: \(custom.1)
+        日志类型: \(custom.0.chineseDescription())
+        记录时间: \(timestamp)
+        执行队列: 队列名称—\(logMessage.queueLabel) 线程ID—\(logMessage.threadID) 线程名称—\(String(describing: logMessage.threadName))
+        调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
 
         \(logMessage.message)
 
@@ -67,26 +66,32 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
 // MARK: - JmoVxia---文件管理类
 
 private class CLLogFileManager: DDLogFileManagerDefault {
-    var didArchiveLogFileHandle: ((_ path: String, _ wasRolled: Bool) -> Void)?
+    var didArchiveLogFile: ((_ path: String, _ wasRolled: Bool) -> Void)?
 
     override var newLogFileName: String {
-        "\(Date().formattedString())+\(CLLogManager.lifecycleID).log"
+        "\(Date().formattedString())+\(CLLogManager.shared.lifecycleID).log"
+    }
+
+    override func isLogFile(withName fileName: String) -> Bool {
+        fileName.hasSuffix(".log")
     }
 
     override func didArchiveLogFile(atPath logFilePath: String, wasRolled: Bool) {
-        didArchiveLogFileHandle?(logFilePath, wasRolled)
+        didArchiveLogFile?(logFilePath, wasRolled)
     }
 }
 
 // MARK: - JmoVxia---日志管理类
 
 class CLLogManager: NSObject {
-    private static let shared = CLLogManager()
+    static let shared = CLLogManager()
 
-    @CLThreadSafe private(set) static var lifecycleID = generateLifecycleID()
+    @CLThreadSafe private(set) var lifecycleID = generateLifecycleID()
 
-    private static var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-    
+    private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+
+    private var hasEnteredBackground = false
+
     private lazy var uploadQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
@@ -95,7 +100,7 @@ class CLLogManager: NSObject {
 
     private lazy var logFileManager: CLLogFileManager = {
         let manager = CLLogFileManager()
-        manager.didArchiveLogFileHandle = { path, wasRolled in
+        manager.didArchiveLogFile = { path, _ in
             CLLogManager.upload(path)
         }
         return manager
@@ -113,7 +118,7 @@ class CLLogManager: NSObject {
 
     override private init() {
         super.init()
-        CLLogManager.addNotification()
+        CLLogManager.setupObservers()
         DDLog.add(fileLogger)
     }
 }
@@ -121,11 +126,11 @@ class CLLogManager: NSObject {
 // MARK: - JmoVxia---公共方法
 
 extension CLLogManager {
-    static func startLoggingService() {
-        appWillEnterForeground()
+    static func start() {
+        upload()
     }
 
-    static func CLLog(_ message: String, level: CLLogLevel = .info, file: String = #file, function: String = #function, line: UInt = #line) {
+    static func CLLog(_ message: String, level: CLLogLevel = .message, file: String = #file, function: String = #function, line: UInt = #line) {
         let logMessage = DDLogMessage(format: message,
                                       formatted: message,
                                       level: .verbose,
@@ -134,7 +139,7 @@ extension CLLogManager {
                                       file: file,
                                       function: function,
                                       line: line,
-                                      tag: level,
+                                      tag: (level, shared.lifecycleID),
                                       options: [],
                                       timestamp: Date())
         DDLog.log(asynchronous: true, message: logMessage)
@@ -144,7 +149,7 @@ extension CLLogManager {
 // MARK: - JmoVxia---OC桥接方法
 
 @objc extension CLLogManager {
-    static func CLLogForOC(_ message: String, level: Int, file: String = #file, function: String = #function, line: UInt = #line) {
+    static func logForObjectiveC(_ message: String, level: Int, file: String = #file, function: String = #function, line: UInt = #line) {
         CLLog(message, level: .init(rawValue: level), file: file, function: function, line: line)
     }
 }
@@ -152,24 +157,37 @@ extension CLLogManager {
 // MARK: - JmoVxia---监听
 
 private extension CLLogManager {
-    static func addNotification() {
+    static func setupObservers() {
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { _ in
             CLLogManager.appWillEnterForeground()
         }
 
-        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { _ in
-            CLLogManager.appWillResignActive()
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
+            CLLogManager.didEnterBackgroundNotification()
+        }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: .main) { _ in
+            CLLogManager.willTerminateNotification()
         }
     }
 
     static func appWillEnterForeground() {
-        CLLogManager.lifecycleID = generateLifecycleID()
-        CLLog("APP 进入前台")
+        if shared.hasEnteredBackground {
+            shared.hasEnteredBackground = false
+            shared.lifecycleID = generateLifecycleID()
+        }
         upload()
     }
 
-    static func appWillResignActive() {
-        CLLog("APP 进入后台")
+    static func didEnterBackgroundNotification() {
+        shared.hasEnteredBackground = true
+        beginBackgroundTask {
+            shared.fileLogger.rollLogFile(withCompletion: nil)
+        }
+    }
+
+    static func willTerminateNotification() {
+        guard !shared.hasEnteredBackground else { return }
         beginBackgroundTask {
             shared.fileLogger.rollLogFile(withCompletion: nil)
         }
@@ -188,9 +206,10 @@ private extension CLLogManager {
 
 private extension CLLogManager {
     static func upload(_ path: String? = nil) {
-        let paths = path != nil ? [path!] : shared.logFileManager.sortedLogFileInfos.filter { $0.isArchived == true }.map(\.filePath)
-        let operation = CLLogUploadOperation(filePaths: paths, maxConcurrentUploads: 0)
-        operation.completionCallback = { result in
+        let paths = path != nil ? [path!] : shared.logFileManager.sortedLogFileInfos.filter(\.isArchived).map(\.filePath)
+        guard !paths.isEmpty else { return }
+        let operation = CLLogGroupOperation(filePaths: paths, maxConcurrentUploads: 5)
+        operation.completionBlock = {
             endBackgroundTask()
         }
         shared.uploadQueue.addOperation(operation)
@@ -200,17 +219,17 @@ private extension CLLogManager {
 // MARK: - JmoVxia---后台任务
 
 private extension CLLogManager {
-    static func beginBackgroundTask(_ start: () -> Void) {
-        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "UploadLog") {
+    static func beginBackgroundTask(handler: () -> Void) {
+        shared.backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "UploadLog") {
             self.endBackgroundTask()
         }
-        guard backgroundTask != .invalid else { return }
-        start()
+        guard shared.backgroundTask != .invalid else { return }
+        handler()
     }
 
     static func endBackgroundTask() {
-        guard backgroundTask != .invalid else { return }
-        UIApplication.shared.endBackgroundTask(backgroundTask)
-        backgroundTask = .invalid
+        guard shared.backgroundTask != .invalid else { return }
+        UIApplication.shared.endBackgroundTask(shared.backgroundTask)
+        shared.backgroundTask = .invalid
     }
 }
