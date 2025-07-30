@@ -8,31 +8,6 @@
 import CocoaLumberjack
 import UIKit
 
-// MARK: - JmoVxia---属性包装
-
-@propertyWrapper
-class ThreadSafe<Value> {
-    private var value: Value
-    private var lock = os_unfair_lock_s()
-
-    init(wrappedValue: Value) {
-        value = wrappedValue
-    }
-
-    var wrappedValue: Value {
-        get {
-            os_unfair_lock_lock(&lock)
-            defer { os_unfair_lock_unlock(&lock) }
-            return value
-        }
-        set {
-            os_unfair_lock_lock(&lock)
-            defer { os_unfair_lock_unlock(&lock) }
-            value = newValue
-        }
-    }
-}
-
 // MARK: - JmoVxia---枚举
 
 struct CLLogLevel: OptionSet {
@@ -108,9 +83,15 @@ private class CLLogFileManager: DDLogFileManagerDefault {
 class CLLogManager: NSObject {
     private static let shared = CLLogManager()
 
-    @ThreadSafe private(set) static var lifecycleID = generateLifecycleID()
+    @CLThreadSafe private(set) static var lifecycleID = generateLifecycleID()
 
     private static var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    
+    private lazy var uploadQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
 
     private lazy var logFileManager: CLLogFileManager = {
         let manager = CLLogFileManager()
@@ -208,33 +189,11 @@ private extension CLLogManager {
 private extension CLLogManager {
     static func upload(_ path: String? = nil) {
         let paths = path != nil ? [path!] : shared.logFileManager.sortedLogFileInfos.filter { $0.isArchived == true }.map(\.filePath)
-        // TODO: 上传oss
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        let operation = CLLogUploadOperation(filePaths: paths, maxConcurrentUploads: 0)
+        operation.completionCallback = { result in
             endBackgroundTask()
-//            deleteFilesConcurrently(paths)
         }
-    }
-
-    static func deleteFilesConcurrently(_ paths: [String], completion: (() -> Void)? = nil) {
-        let queue = DispatchQueue.global(qos: .utility)
-        let group = DispatchGroup()
-
-        for path in paths {
-            group.enter()
-            queue.async {
-                do {
-                    try FileManager.default.removeItem(atPath: path)
-                    print("删除成功：\(path)")
-                } catch {
-                    print("删除失败：\(path), error: \(error)")
-                }
-                group.leave()
-            }
-        }
-
-        group.notify(queue: DispatchQueue.main) {
-            completion?()
-        }
+        shared.uploadQueue.addOperation(operation)
     }
 }
 

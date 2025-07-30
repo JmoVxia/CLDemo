@@ -18,6 +18,8 @@
 		4F95D5182E332045004F9A2F /* CLRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D5172E332045004F9A2F /* CLRecorder.swift */; };
 		4F95D5192E332045004F9A2F /* CLMp3Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D5162E332045004F9A2F /* CLMp3Encoder.swift */; };
 		4F95D51B2E332279004F9A2F /* CLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D51A2E332279004F9A2F /* CLPath.swift */; };
+		4FB7F7592E39CF29006736CF /* CLThreadSafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7F7582E39CF29006736CF /* CLThreadSafe.swift */; };
+		4FB7F75B2E39D032006736CF /* CLLogUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7F75A2E39D032006736CF /* CLLogUploadOperation.swift */; };
 		4FBF34DB2E33106B005D9018 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FBF34CA2E33106B005D9018 /* loading.json */; };
 		4FBF34DC2E33106B005D9018 /* CLYearMonthDayHourMinuteDataPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBF34C02E33106B005D9018 /* CLYearMonthDayHourMinuteDataPickerView.swift */; };
 		4FBF34DD2E33106B005D9018 /* CLPopupTipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBF34D42E33106B005D9018 /* CLPopupTipsController.swift */; };
@@ -350,6 +352,8 @@
 		4F95D5162E332045004F9A2F /* CLMp3Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMp3Encoder.swift; sourceTree = "<group>"; };
 		4F95D5172E332045004F9A2F /* CLRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRecorder.swift; sourceTree = "<group>"; };
 		4F95D51A2E332279004F9A2F /* CLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPath.swift; sourceTree = "<group>"; };
+		4FB7F7582E39CF29006736CF /* CLThreadSafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLThreadSafe.swift; sourceTree = "<group>"; };
+		4FB7F75A2E39D032006736CF /* CLLogUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLogUploadOperation.swift; sourceTree = "<group>"; };
 		4FBF34B62E33106B005D9018 /* CLPopupBMIInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupBMIInputController.swift; sourceTree = "<group>"; };
 		4FBF34B82E33106B005D9018 /* CLPopupCalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupCalendarController.swift; sourceTree = "<group>"; };
 		4FBF34BA2E33106B005D9018 /* CLDataPickerTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLDataPickerTitleView.swift; sourceTree = "<group>"; };
@@ -2166,6 +2170,8 @@
 				4F2A36CB2E38C0C1001684F1 /* CLLogBridge.h */,
 				4F2A36CC2E38C0C1001684F1 /* CLLogBridge.m */,
 				4F2A36C72E377627001684F1 /* CLLogManager.swift */,
+				4FB7F7582E39CF29006736CF /* CLThreadSafe.swift */,
+				4FB7F75A2E39D032006736CF /* CLLogUploadOperation.swift */,
 			);
 			path = CLLogManager;
 			sourceTree = "<group>";
@@ -2553,6 +2559,7 @@
 				5BD043B7268332BF0054F2B4 /* CLHistogramCell.swift in Sources */,
 				5BE668E0268488740095F82E /* CLRotateAnimationSwiftController.swift in Sources */,
 				5BE6680E268470D60095F82E /* CLBroadcastViewController.swift in Sources */,
+				4FB7F75B2E39D032006736CF /* CLLogUploadOperation.swift in Sources */,
 				5BD4EB14268184AB00B5284F /* UIColor+Extension.swift in Sources */,
 				5B7692C426841566008BB92B /* CLVernierCaliperView.swift in Sources */,
 				5B79829C26A00A35004A6473 /* CLChangeFontSizeController.swift in Sources */,
@@ -2661,6 +2668,7 @@
 				5B8397FF26A15BEA00FD1D3C /* CLCircleRetroTransition.swift in Sources */,
 				5BE6693D26848DCD0095F82E /* CLBubblePopupView.swift in Sources */,
 				5B3309E328FFFB23000D44DF /* CLCalendarCell.swift in Sources */,
+				4FB7F7592E39CF29006736CF /* CLThreadSafe.swift in Sources */,
 				4F2A36CD2E38C0C1001684F1 /* CLLogBridge.m in Sources */,
 				5BD0442D26833CD60054F2B4 /* CLTagsCalculateController.swift in Sources */,
 				5B76932C26841C70008BB92B /* CLChatCell.swift in Sources */,
