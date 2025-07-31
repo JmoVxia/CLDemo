@@ -140,7 +140,7 @@ private extension CLChangeFontSizeController {
 
         let fontSizeController = CLChangeFontSizeController()
         DispatchQueue.main.async {
-            UIApplication.shared.keyWindow?.rootViewController = tabbarController
+            keyWindow?.rootViewController = tabbarController
             homeController?.navigationController?.pushViewController(fontSizeController, animated: false)
         }
     }

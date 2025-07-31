@@ -90,7 +90,7 @@ extension CLBubblePopupView {
 
 extension CLBubblePopupView {
     func show(_ contentView: UIView, fromView: UIView) {
-        guard let rootView = UIApplication.shared.keyWindow else {
+        guard let rootView = keyWindow else {
             return
         }
         show(contentView, fromView: fromView, inView: rootView)

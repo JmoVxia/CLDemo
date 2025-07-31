@@ -1,9 +1,9 @@
-platform :ios, '15.0'
+platform :ios, '13.0'
 
 #use_frameworks!
 use_modular_headers!
 
-install! 'cocoapods', :deterministic_uuids => false
+install! 'cocoapods', :deterministic_uuids => false, :warn_for_unused_master_specs_repo => false
 
 inhibit_all_warnings!
 
@@ -44,8 +44,8 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 15.0
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 13.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
       end
       if target.name == 'Kingfisher'
         target.build_configurations.each do |config|

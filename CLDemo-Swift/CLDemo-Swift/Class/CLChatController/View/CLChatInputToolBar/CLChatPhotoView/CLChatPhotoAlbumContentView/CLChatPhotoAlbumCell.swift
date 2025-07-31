@@ -231,7 +231,7 @@ extension CLChatPhotoAlbumCell {
     }
 
     private func verticalAction(with recognizer: UIPanGestureRecognizer) {
-        guard let keyWindow = UIApplication.shared.keyWindow, let view = recognizer.view, let superview = view.superview else {
+        guard let keyWindow, let view = recognizer.view, let superview = view.superview else {
             return
         }
         let translation = recognizer.translation(in: keyWindow)

@@ -151,7 +151,7 @@ extension CLChatPhotoView {
             cameraPicker.delegate = self
             cameraPicker.allowsEditing = false
             cameraPicker.sourceType = .camera
-            UIApplication.shared.keyWindow?.rootViewController?.present(cameraPicker, animated: true)
+            keyWindow?.rootViewController?.present(cameraPicker, animated: true)
         }
     }
 }

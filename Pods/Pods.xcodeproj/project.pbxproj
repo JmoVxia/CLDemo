@@ -7500,7 +7500,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -7563,7 +7563,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7587,7 +7587,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CLCamera/CLCamera-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CLCamera/CLCamera.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7617,7 +7617,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CLCamera/CLCamera-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CLCamera/CLCamera.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7646,7 +7646,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CLNestedSlide/CLNestedSlide-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CLNestedSlide/CLNestedSlide.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7676,7 +7676,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CLNestedSlide/CLNestedSlide-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CLNestedSlide/CLNestedSlide.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7705,7 +7705,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CLPopoverManager/CLPopoverManager-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CLPopoverManager/CLPopoverManager.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7735,7 +7735,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CLPopoverManager/CLPopoverManager-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CLPopoverManager/CLPopoverManager.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7764,7 +7764,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CocoaLumberjack/CocoaLumberjack.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7794,7 +7794,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CocoaLumberjack/CocoaLumberjack.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7822,7 +7822,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = CocoaLumberjack;
 				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/ResourceBundle-CocoaLumberjackPrivacy-CocoaLumberjack-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = CocoaLumberjackPrivacy;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -7842,7 +7842,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = CocoaLumberjack;
 				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/ResourceBundle-CocoaLumberjackPrivacy-CocoaLumberjack-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = CocoaLumberjackPrivacy;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -7863,7 +7863,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CryptoSwift/CryptoSwift-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CryptoSwift/CryptoSwift.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7893,7 +7893,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/CryptoSwift/CryptoSwift-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/CryptoSwift/CryptoSwift.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7921,7 +7921,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = CryptoSwift;
 				INFOPLIST_FILE = "Target Support Files/CryptoSwift/ResourceBundle-CryptoSwift-CryptoSwift-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = CryptoSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -7941,7 +7941,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = CryptoSwift;
 				INFOPLIST_FILE = "Target Support Files/CryptoSwift/ResourceBundle-CryptoSwift-CryptoSwift-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = CryptoSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -7961,7 +7961,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/DateTools/DateTools-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/DateTools/DateTools.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -7990,7 +7990,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/DateTools/DateTools-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/DateTools/DateTools.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8018,7 +8018,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/DateToolsSwift/DateToolsSwift-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/DateToolsSwift/DateToolsSwift.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8047,7 +8047,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/DateToolsSwift/DateToolsSwift-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/DateToolsSwift/DateToolsSwift.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8077,7 +8077,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/Kingfisher/Kingfisher-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/Kingfisher/Kingfisher.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8108,7 +8108,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/Kingfisher/Kingfisher-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/Kingfisher/Kingfisher.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8136,7 +8136,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = Kingfisher;
 				INFOPLIST_FILE = "Target Support Files/Kingfisher/ResourceBundle-Kingfisher-Kingfisher-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = Kingfisher;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8156,7 +8156,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = Kingfisher;
 				INFOPLIST_FILE = "Target Support Files/Kingfisher/ResourceBundle-Kingfisher-Kingfisher-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = Kingfisher;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8176,7 +8176,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/LookinServer/LookinServer-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/LookinServer/LookinServer.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8204,7 +8204,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/LookinServer/LookinServer-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/LookinServer/LookinServer.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8232,7 +8232,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/MJExtension/MJExtension-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/MJExtension/MJExtension.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8262,7 +8262,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/MJExtension/MJExtension-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/MJExtension/MJExtension.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8290,7 +8290,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = MJExtension;
 				INFOPLIST_FILE = "Target Support Files/MJExtension/ResourceBundle-MJExtension-MJExtension-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = MJExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8310,7 +8310,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = MJExtension;
 				INFOPLIST_FILE = "Target Support Files/MJExtension/ResourceBundle-MJExtension-MJExtension-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = MJExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8330,7 +8330,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/Masonry/Masonry.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8359,7 +8359,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/Masonry/Masonry.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8387,7 +8387,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/SDWebImage/SDWebImage.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8416,7 +8416,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/SDWebImage/SDWebImage.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8444,7 +8444,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = SDWebImage;
 				INFOPLIST_FILE = "Target Support Files/SDWebImage/ResourceBundle-SDWebImage-SDWebImage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = SDWebImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8464,7 +8464,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = SDWebImage;
 				INFOPLIST_FILE = "Target Support Files/SDWebImage/ResourceBundle-SDWebImage-SDWebImage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = SDWebImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8484,7 +8484,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImageWebPCoder/SDWebImageWebPCoder-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Private/SDWebImageWebPCoder/SDWebImageWebPCoder.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8513,7 +8513,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImageWebPCoder/SDWebImageWebPCoder-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Private/SDWebImageWebPCoder/SDWebImageWebPCoder.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8542,7 +8542,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/SnapKit/SnapKit.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8572,7 +8572,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/SnapKit/SnapKit.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8600,7 +8600,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = SnapKit;
 				INFOPLIST_FILE = "Target Support Files/SnapKit/ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = SnapKit_Privacy;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8620,7 +8620,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = SnapKit;
 				INFOPLIST_FILE = "Target Support Files/SnapKit/ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = SnapKit_Privacy;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8637,7 +8637,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8656,7 +8656,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8678,7 +8678,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/SwiftyJSON/SwiftyJSON.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8708,7 +8708,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/SwiftyJSON/SwiftyJSON.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8736,7 +8736,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = SwiftyJSON;
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/ResourceBundle-SwiftyJSON-SwiftyJSON-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = SwiftyJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8756,7 +8756,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = SwiftyJSON;
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/ResourceBundle-SwiftyJSON-SwiftyJSON-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = SwiftyJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8777,7 +8777,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/TZImagePickerController/TZImagePickerController-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/TZImagePickerController/TZImagePickerController.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8807,7 +8807,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/TZImagePickerController/TZImagePickerController-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/TZImagePickerController/TZImagePickerController.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8835,7 +8835,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/libwebp/libwebp-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/libwebp/libwebp.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8864,7 +8864,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/libwebp/libwebp-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = Headers/Public/libwebp/libwebp.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8893,7 +8893,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios/lottie-ios-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = "Headers/Public/Lottie/lottie-ios.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8923,7 +8923,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios/lottie-ios-prefix.pch";
 				GENERATE_INFOPLIST_FILE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULEMAP_FILE = "Headers/Public/Lottie/lottie-ios.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -8951,7 +8951,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = Lottie;
 				INFOPLIST_FILE = "Target Support Files/lottie-ios/ResourceBundle-LottiePrivacyInfo-lottie-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = LottiePrivacyInfo;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8971,7 +8971,7 @@
 				DEVELOPMENT_TEAM = 533J5B8T42;
 				IBSC_MODULE = Lottie;
 				INFOPLIST_FILE = "Target Support Files/lottie-ios/ResourceBundle-LottiePrivacyInfo-lottie-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = LottiePrivacyInfo;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8991,7 +8991,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -9015,7 +9015,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -9038,7 +9038,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.modulemap";
 				OTHER_LDFLAGS = "";
@@ -9063,7 +9063,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.modulemap";
 				OTHER_LDFLAGS = "";

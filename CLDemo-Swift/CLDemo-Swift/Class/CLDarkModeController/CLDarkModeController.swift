@@ -167,7 +167,7 @@ extension CLDarkModeController {}
     }
 
     func change() {
-        guard let window = UIApplication.shared.keyWindow else { return }
+        guard let window = keyWindow else { return }
         if #available(iOS 13.0, *) { // 区分版本
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: { // 增加转场动画
                 window.overrideUserInterfaceStyle = CLTheme.mode.style // 重置系统模式

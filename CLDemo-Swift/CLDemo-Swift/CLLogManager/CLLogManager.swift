@@ -53,7 +53,7 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
         生命周期: \(custom.1)
         日志类型: \(custom.0.chineseDescription())
         记录时间: \(timestamp)
-        执行队列: 队列名称—\(logMessage.queueLabel) 线程ID—\(logMessage.threadID) 线程名称—\(String(describing: logMessage.threadName))
+        执行上下文: 队列—\(logMessage.queueLabel) | 线程ID—\(logMessage.threadID) | 线程名—\(logMessage.threadName ?? "")
         调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
 
         \(logMessage.message)

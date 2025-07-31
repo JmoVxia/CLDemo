@@ -160,7 +160,7 @@ private extension CLChatPhotoAlbumContentView {
             self.sendImageCallBack?(dataArray)
             self.restoreInitialState()
         }
-        UIApplication.shared.keyWindow?.rootViewController?.present(imagePicker, animated: true)
+        keyWindow?.rootViewController?.present(imagePicker, animated: true)
     }
 
     /// 刷新可见cell

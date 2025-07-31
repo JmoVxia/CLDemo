@@ -21,7 +21,7 @@ class CLActivityButton: UIButton {
     }
 
     private lazy var activityIndicator: UIActivityIndicatorView = { [unowned self] in
-        let activityIndicator = UIActivityIndicatorView(style: .white)
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
         return activityIndicator
     }()
 
