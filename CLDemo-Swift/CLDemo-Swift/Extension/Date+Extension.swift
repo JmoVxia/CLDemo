@@ -62,7 +62,7 @@ extension Date {
 }
 
 extension Date {
-    func formattedString(timeZone: TimeZone? = .init(identifier: "Asia/Shanghai"), format: String = "yyyy-MM-dd_HH-mm-ss-SSS") -> String {
+    func formattedString(timeZone: TimeZone? = .init(identifier: "Asia/Shanghai"), format: String = "yyyy-MM-dd HH:mm:ss:SSS") -> String {
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
         formatter.dateFormat = format
