@@ -34,7 +34,7 @@ struct CLLogLevel: OptionSet {
             .filter { contains($0.level) }
             .map(\.name)
             .joined(separator: "-")
-        return "[\(descriptions)]"
+        return descriptions
     }
 }
 
@@ -46,20 +46,51 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
     }
 
     func format(message logMessage: DDLogMessage) -> String? {
-        let custom = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
-        let timestamp = logMessage.timestamp.formattedString(format: "yyyy-MM-dd HH:mm:ss:SSS")
-        let text = """
-        ------------------------------------------
-        生命周期: \(custom.1)
-        日志类型: \(custom.0.chineseDescription())
-        记录时间: \(timestamp)
-        执行上下文: 队列—\(logMessage.queueLabel) | 线程ID—\(logMessage.threadID) | 线程名—\(logMessage.threadName ?? "")
-        调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
+//        let custom = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
+//        let timestamp = logMessage.timestamp.formattedString()
+//        let text = """
+//        ------------------------------------------
+//        生命周期: \(custom.1)
+//        日志类型: \(custom.0.chineseDescription())
+//        记录时间: \(timestamp)
+//        执行上下文: 队列—\(logMessage.queueLabel) | 线程ID—\(logMessage.threadID) | 线程名—\(String(describing: logMessage.threadName))
+//        调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
+//
+//        \(logMessage.message)
+//
+//        """
 
-        \(logMessage.message)
+        let customInfo = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
+        let lifecycleId = customInfo.1
+        let logLevel = customInfo.0
 
-        """
-        return text
+        let displayThreadName = if logMessage.queueLabel == "com.apple.main-thread" {
+            "主线程"
+        } else if let threadName = logMessage.threadName, !threadName.isEmpty {
+            "自定义线程-\(threadName)"
+        } else {
+            "子线程"
+        }
+        let logDict: [String: Any] = [
+            "timestamp": logMessage.timestamp.formattedString(),
+            "lifecycleId": lifecycleId,
+            "logTypes": logLevel.chineseDescription(),
+            "message": logMessage.message,
+            "fileName": logMessage.fileName,
+            "line": logMessage.line,
+            "function": logMessage.function ?? "",
+            "queueLabel": logMessage.queueLabel,
+            "threadID": logMessage.threadID,
+            "threadName": displayThreadName,
+        ]
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: logDict, options: []) else {
+            return nil
+        }
+        guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+            return nil
+        }
+
+        return jsonString + "\n"
     }
 }
 
@@ -69,7 +100,7 @@ private class CLLogFileManager: DDLogFileManagerDefault {
     var didArchiveLogFile: ((_ path: String, _ wasRolled: Bool) -> Void)?
 
     override var newLogFileName: String {
-        "\(Date().formattedString())+\(CLLogManager.shared.lifecycleID).log"
+        "\(Date().formattedString(format: "yyyy-MM-dd_HH-mm-ss-SSS"))+\(CLLogManager.shared.lifecycleID).log"
     }
 
     override func isLogFile(withName fileName: String) -> Bool {
@@ -165,10 +196,6 @@ private extension CLLogManager {
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
             CLLogManager.didEnterBackgroundNotification()
         }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: .main) { _ in
-            CLLogManager.willTerminateNotification()
-        }
     }
 
     static func appWillEnterForeground() {
@@ -181,13 +208,6 @@ private extension CLLogManager {
 
     static func didEnterBackgroundNotification() {
         shared.hasEnteredBackground = true
-        beginBackgroundTask {
-            shared.fileLogger.rollLogFile(withCompletion: nil)
-        }
-    }
-
-    static func willTerminateNotification() {
-        guard !shared.hasEnteredBackground else { return }
         beginBackgroundTask {
             shared.fileLogger.rollLogFile(withCompletion: nil)
         }
