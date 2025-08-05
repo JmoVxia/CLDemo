@@ -77,9 +77,9 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
     }
 
     func format(message logMessage: DDLogMessage) -> String? {
-        let customInfo = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
-        let lifecycleId = customInfo.1
-        let logLevel = customInfo.0
+        let customInfo = logMessage.representedObject as? (logLevel: CLLogLevel, lifecycleId: String) ?? (.message, "")
+        let lifecycleId = customInfo.lifecycleId
+        let logLevel = customInfo.logLevel
         let timestamp = logMessage.timestamp.formattedString()
         let displayThreadName = if logMessage.queueLabel == "com.apple.main-thread" {
             "主线程"
@@ -91,8 +91,8 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
 
         let text = """
         ------------------------------------------
-        生命周期: \(customInfo.1)
-        日志类型: \(customInfo.0.chineseDescription())
+        生命周期: \(lifecycleId)
+        日志类型: \(logLevel.chineseDescription())
         记录时间: \(timestamp)
         执行上下文: 队列—\(logMessage.queueLabel) | 线程ID—\(logMessage.threadID) | 线程名—\(displayThreadName)
         调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
@@ -182,6 +182,12 @@ class CLLogManager: NSObject {
         return manager
     }()
 
+    private lazy var logger: DDLog = {
+        let log = DDLog()
+        log.add(fileLogger)
+        return log
+    }()
+
     private lazy var fileLogger: DDFileLogger = {
         let logger = DDFileLogger(logFileManager: logFileManager)
         logger.logFormatter = CLLogFormatter()
@@ -194,7 +200,6 @@ class CLLogManager: NSObject {
 
     override private init() {
         super.init()
-        DDLog.add(fileLogger)
     }
 }
 
@@ -213,7 +218,7 @@ extension CLLogManager {
                                       tag: (level, lifecycleID),
                                       options: [],
                                       timestamp: Date())
-        DDLog.log(asynchronous: true, message: logMessage)
+        shared.logger.log(asynchronous: true, message: logMessage)
     }
 
     static func uploadArchivedLog() {
