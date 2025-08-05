@@ -99,6 +99,16 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
 private class CLLogFileManager: DDLogFileManagerDefault {
     var didArchiveLogFile: ((_ path: String, _ wasRolled: Bool) -> Void)?
 
+    override var logsDirectory: String {
+        let customPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+        let logPath = "\(customPath)/CLLogs"
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: logPath) {
+            try? fileManager.createDirectory(atPath: logPath, withIntermediateDirectories: true, attributes: nil)
+        }
+        return logPath
+    }
+
     override var newLogFileName: String {
         "\(Date().formattedString(format: "yyyy-MM-dd_HH-mm-ss-SSS"))+\(CLLogManager.shared.lifecycleID).log"
     }
@@ -141,7 +151,7 @@ class CLLogManager: NSObject {
         let logger = DDFileLogger(logFileManager: logFileManager)
         logger.logFormatter = CLLogFormatter()
         logger.rollingFrequency = 0
-        logger.logFileManager.maximumNumberOfLogFiles = 100
+        logger.logFileManager.maximumNumberOfLogFiles = 200
         logger.maximumFileSize = 50 * 1024
         logger.doNotReuseLogFiles = true
         return logger
