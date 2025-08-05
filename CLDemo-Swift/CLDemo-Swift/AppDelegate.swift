@@ -11,8 +11,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        CLLogManager.start()
-
         CLLog("APP 冷启动", level: [.message])
         DispatchQueue.global().async {
             CLLog("""
@@ -45,10 +43,12 @@ extension AppDelegate {
     }
 
     func applicationWillEnterForeground(_: UIApplication) {
+        CLLogManager.applicationWillEnterForeground()
         CLLog("APP 将要从后台返回", level: [.message, .im])
     }
 
     func applicationDidEnterBackground(_: UIApplication) {
+        CLLogManager.applicationDidEnterBackground()
         CLLog("APP 进入后台", level: [.message, .im])
     }
 

@@ -38,6 +38,37 @@ struct CLLogLevel: OptionSet {
     }
 }
 
+// MARK: - JmoVxia---生命周期管理
+
+class CLLifecycle {
+    private var internalID: String
+
+    private var previousID: String?
+
+    var currentID: String {
+        previousID ?? internalID
+    }
+
+    init() {
+        internalID = Self.generateID()
+    }
+
+    func prepareNewLifecycle() {
+        previousID = internalID
+        internalID = Self.generateID()
+    }
+
+    func confirmNewLifecycle() {
+        previousID = nil
+    }
+
+    private static func generateID() -> String {
+        let timestamp = Date().nanosecondStampString
+        let uuid = UUID().uuidString
+        return "\(timestamp)_\(uuid)".md5ForUpper32Bate
+    }
+}
+
 // MARK: - JmoVxia---自定义格式
 
 private class CLLogFormatter: NSObject, DDLogFormatter {
@@ -46,24 +77,10 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
     }
 
     func format(message logMessage: DDLogMessage) -> String? {
-//        let custom = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
-//        let timestamp = logMessage.timestamp.formattedString()
-//        let text = """
-//        ------------------------------------------
-//        生命周期: \(custom.1)
-//        日志类型: \(custom.0.chineseDescription())
-//        记录时间: \(timestamp)
-//        执行上下文: 队列—\(logMessage.queueLabel) | 线程ID—\(logMessage.threadID) | 线程名—\(String(describing: logMessage.threadName))
-//        调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
-//
-//        \(logMessage.message)
-//
-//        """
-
         let customInfo = logMessage.representedObject as? (CLLogLevel, String) ?? (.message, "")
         let lifecycleId = customInfo.1
         let logLevel = customInfo.0
-
+        let timestamp = logMessage.timestamp.formattedString()
         let displayThreadName = if logMessage.queueLabel == "com.apple.main-thread" {
             "主线程"
         } else if let threadName = logMessage.threadName, !threadName.isEmpty {
@@ -71,8 +88,23 @@ private class CLLogFormatter: NSObject, DDLogFormatter {
         } else {
             "子线程"
         }
+
+        let text = """
+        ------------------------------------------
+        生命周期: \(customInfo.1)
+        日志类型: \(customInfo.0.chineseDescription())
+        记录时间: \(timestamp)
+        执行上下文: 队列—\(logMessage.queueLabel) | 线程ID—\(logMessage.threadID) | 线程名—\(displayThreadName)
+        调用位置: [\(logMessage.fileName):\(logMessage.line) \(logMessage.function ?? "")]
+
+        \(logMessage.message)
+        ------------------------------------------
+        """
+
+        print(text)
+
         let logDict: [String: Any] = [
-            "timestamp": logMessage.timestamp.formattedString(),
+            "timestamp": timestamp,
             "lifecycleId": lifecycleId,
             "logTypes": logLevel.chineseDescription(),
             "message": logMessage.message,
@@ -110,7 +142,7 @@ private class CLLogFileManager: DDLogFileManagerDefault {
     }
 
     override var newLogFileName: String {
-        "\(Date().formattedString(format: "yyyy-MM-dd_HH-mm-ss-SSS"))+\(CLLogManager.shared.lifecycleID).log"
+        "\(Date().formattedString(format: "yyyy-MM-dd_HH-mm-ss-SSS")).log"
     }
 
     override func isLogFile(withName fileName: String) -> Bool {
@@ -127,11 +159,14 @@ private class CLLogFileManager: DDLogFileManagerDefault {
 class CLLogManager: NSObject {
     static let shared = CLLogManager()
 
-    @CLThreadSafe private(set) var lifecycleID = generateLifecycleID()
+    static var lifecycleID: String {
+        shared.lifecycle.currentID
+    }
+
+    @CLThreadSafe
+    private var lifecycle = CLLifecycle()
 
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-
-    private var hasEnteredBackground = false
 
     private lazy var uploadQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -159,7 +194,6 @@ class CLLogManager: NSObject {
 
     override private init() {
         super.init()
-        CLLogManager.setupObservers()
         DDLog.add(fileLogger)
     }
 }
@@ -167,10 +201,6 @@ class CLLogManager: NSObject {
 // MARK: - JmoVxia---公共方法
 
 extension CLLogManager {
-    static func start() {
-        upload()
-    }
-
     static func CLLog(_ message: String, level: CLLogLevel = .message, file: String = #file, function: String = #function, line: UInt = #line) {
         let logMessage = DDLogMessage(format: message,
                                       formatted: message,
@@ -180,10 +210,30 @@ extension CLLogManager {
                                       file: file,
                                       function: function,
                                       line: line,
-                                      tag: (level, shared.lifecycleID),
+                                      tag: (level, lifecycleID),
                                       options: [],
                                       timestamp: Date())
         DDLog.log(asynchronous: true, message: logMessage)
+    }
+
+    static func uploadArchivedLog() {
+        upload()
+    }
+}
+
+// MARK: - JmoVxia---生命周期
+
+extension CLLogManager {
+    static func applicationWillEnterForeground() {
+        shared.lifecycle.confirmNewLifecycle()
+        upload()
+    }
+
+    static func applicationDidEnterBackground() {
+        shared.lifecycle.prepareNewLifecycle()
+        beginBackgroundTask {
+            shared.fileLogger.rollLogFile(withCompletion: nil)
+        }
     }
 }
 
@@ -192,43 +242,6 @@ extension CLLogManager {
 @objc extension CLLogManager {
     static func logForObjectiveC(_ message: String, level: Int, file: String = #file, function: String = #function, line: UInt = #line) {
         CLLog(message, level: .init(rawValue: level), file: file, function: function, line: line)
-    }
-}
-
-// MARK: - JmoVxia---监听
-
-private extension CLLogManager {
-    static func setupObservers() {
-        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { _ in
-            CLLogManager.appWillEnterForeground()
-        }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
-            CLLogManager.didEnterBackgroundNotification()
-        }
-    }
-
-    static func appWillEnterForeground() {
-        if shared.hasEnteredBackground {
-            shared.hasEnteredBackground = false
-            shared.lifecycleID = generateLifecycleID()
-        }
-        upload()
-    }
-
-    static func didEnterBackgroundNotification() {
-        shared.hasEnteredBackground = true
-        beginBackgroundTask {
-            shared.fileLogger.rollLogFile(withCompletion: nil)
-        }
-    }
-}
-
-// MARK: - JmoVxia---生命周期生成
-
-private extension CLLogManager {
-    static func generateLifecycleID() -> String {
-        "\(Date().nanosecondStampString)_\(UUID().uuidString)".md5ForUpper32Bate
     }
 }
 
