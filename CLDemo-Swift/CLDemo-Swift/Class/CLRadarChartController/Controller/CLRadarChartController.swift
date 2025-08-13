@@ -10,7 +10,6 @@ import UIKit
 // MARK: - JmoVxia---类-属性
 
 class CLRadarChartController: CLController {
-    var data = ["血糖水平", "血糖水平", "血糖水平", "血糖水平", "血糖水平", "血糖水平", "低血糖事件\nmid/d"]
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -21,6 +20,24 @@ class CLRadarChartController: CLController {
     }
 
     deinit {}
+
+    let allLabels = [
+        "血糖水平", "血压", "体重", "心率", "血氧", "胆固醇", "低血糖事件\nmid/d",
+        "睡眠质量", "运动量", "饮食情况", "情绪指数", "体温", "尿检指标", "肝功能", "肾功能", "血脂",
+    ]
+    var data: [String] = []
+
+    lazy var chartView: CLRadarChartView = {
+        //        let chartView = CLRadarChartView(frame: .init(x: 0, y: 200, width: 0, height: 0))
+        //        chartView.dataSource = self
+        //        chartView.backgroundColor = .orange.withAlphaComponent(0.1)
+        //        view.addSubview(chartView)
+        //        chartView.reload()
+        let view = CLRadarChartView()
+        view.dataSource = self
+        view.backgroundColor = .orange.withAlphaComponent(0.1)
+        return view
+    }()
 }
 
 // MARK: - JmoVxia---生命周期
@@ -58,19 +75,13 @@ extension CLRadarChartController {
 
 private extension CLRadarChartController {
     func initSubViews() {
-//        let chartView = CLRadarChartView(frame: .init(x: 0, y: 200, width: 0, height: 0))
-//        chartView.dataSource = self
-//        chartView.backgroundColor = .orange.withAlphaComponent(0.1)
-//        view.addSubview(chartView)
-//        chartView.reload()
-        let chartView = CLRadarChartView()
-        chartView.dataSource = self
-        chartView.backgroundColor = .orange.withAlphaComponent(0.1)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(refreshData))
+        view.addGestureRecognizer(tap)
         view.addSubview(chartView)
         chartView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        chartView.reload()
+        refreshData()
     }
 
     func makeConstraints() {}
@@ -80,6 +91,11 @@ private extension CLRadarChartController {
 
 private extension CLRadarChartController {
     func initData() {}
+
+    func generateRandomData() {
+        let count = Int.random(in: 3 ... 16)
+        data = Array(allLabels.shuffled().prefix(count))
+    }
 }
 
 // MARK: - JmoVxia---override
@@ -88,7 +104,12 @@ extension CLRadarChartController {}
 
 // MARK: - JmoVxia---objc
 
-@objc private extension CLRadarChartController {}
+@objc private extension CLRadarChartController {
+    func refreshData() {
+        generateRandomData()
+        chartView.reload()
+    }
+}
 
 // MARK: - JmoVxia---私有方法
 
@@ -100,23 +121,23 @@ extension CLRadarChartController {}
 
 extension CLRadarChartController: CLRadarChartDataSource {
     func radarChart(_ radarChart: CLRadarChartView, chartFillColorAt index: Int) -> UIColor {
-        index == .zero ? "#546BFE".uiColor.withAlphaComponent(0.1) : "#02AA5D".uiColor.withAlphaComponent(0.1)
+        .random.withAlphaComponent(0.1)
     }
 
     func radarChart(_ radarChart: CLRadarChartView, chartBorderColorAt index: Int) -> UIColor {
-        index == .zero ? "#546BFE".uiColor : "#02AA5D".uiColor
+        .random.withAlphaComponent(0.4)
     }
 
     func radarChart(_ radarChart: CLRadarChartView, valuesForChartAt index: Int) -> [CGFloat] {
-        index == .zero ? [80, 70, 50, 70, 50] : [10, 20, 30, 80, 30]
+        data.map { _ in CGFloat.random(in: 10 ... 80) }
     }
 
     func radarChart(_ radarChart: CLRadarChartView, webLayerFillColorAt index: Int) -> UIColor {
-        index != 2 ? .white : "f9f9f9".uiColor
+        .random.withAlphaComponent(0.1)
     }
 
     func radarChart(_ radarChart: CLRadarChartView, webLayerBorderColorAt index: Int) -> UIColor {
-        "#EEEEEE".uiColor
+        .random
     }
 
     func radarChart(_ radarChart: CLRadarChartView, attributedTextAt index: Int) -> NSAttributedString {
@@ -139,7 +160,7 @@ extension CLRadarChartController: CLRadarChartDataSource {
     }
 
     func numberOfCharts(in radarChart: CLRadarChartView) -> Int {
-        2
+        Int.random(in: 1 ... 5)
     }
 
     func numberOfPoints(in radarChart: CLRadarChartView) -> Int {
@@ -147,10 +168,10 @@ extension CLRadarChartController: CLRadarChartDataSource {
     }
 
     func numberOfWebLayers(in radarChart: CLRadarChartView) -> Int {
-        3
+        Int.random(in: 3 ... 8)
     }
 
     func maximumRadius(in radarChart: CLRadarChartView) -> CGFloat {
-        view.bounds.width * 0.5
+        view.bounds.width * 0.45
     }
 }
