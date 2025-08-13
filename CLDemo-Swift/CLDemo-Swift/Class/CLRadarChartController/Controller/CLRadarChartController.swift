@@ -10,6 +10,7 @@ import UIKit
 // MARK: - JmoVxia---类-属性
 
 class CLRadarChartController: CLController {
+    var data = ["血糖水平", "血糖水平", "血糖水平", "血糖水平", "血糖水平", "血糖水平", "低血糖事件\nmid/d"]
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -57,7 +58,7 @@ extension CLRadarChartController {
 
 private extension CLRadarChartController {
     func initSubViews() {
-        let size = CLRadarChartView.calculateSize(radius: view.bounds.width * 0.5, side: 5, verticalInset: 40, horizontalInset: 70)
+        let size = CLRadarChartView.calculateSize(radius: view.bounds.width * 0.5, side: data.count, verticalInset: 40, horizontalInset: 70)
         let chartView = CLRadarChartView(frame: .init(x: 0, y: 200, width: size.width, height: size.height))
         chartView.dataSource = self
         chartView.backgroundColor = .orange.withAlphaComponent(0.1)
@@ -111,7 +112,7 @@ extension CLRadarChartController: CLRadarChartDataSource {
     }
 
     func radarChart(_ radarChart: CLRadarChartView, attributedTextAt index: Int) -> NSAttributedString {
-        .init(["血糖水平", "血糖波动", "血糖范围", "低血糖事件\nmid/d", "高血糖事件"][index], attributes: { $0
+        .init(data[index], attributes: { $0
                 .font(.mediumPingFangSC(14))
                 .foregroundColor("#6B6F6A".uiColor)
         })
@@ -134,7 +135,7 @@ extension CLRadarChartController: CLRadarChartDataSource {
     }
 
     func numberOfPoints(in radarChart: CLRadarChartView) -> Int {
-        5
+        data.count
     }
 
     func numberOfWebLayers(in radarChart: CLRadarChartView) -> Int {

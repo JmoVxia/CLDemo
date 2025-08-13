@@ -8,6 +8,8 @@
 import Foundation
 
 protocol CLRadarChartDataSource: AnyObject {
+    var labelMargin: CGFloat { get }
+
     func numberOfPoints(in radarChart: CLRadarChartView) -> Int
 
     func maximumRadius(in radarChart: CLRadarChartView) -> CGFloat
@@ -33,4 +35,8 @@ protocol CLRadarChartDataSource: AnyObject {
     func horizontalInset(in radarChart: CLRadarChartView) -> CGFloat
 
     func radarChart(_ radarChart: CLRadarChartView, attributedTextAt index: Int) -> NSAttributedString
+}
+
+extension CLRadarChartDataSource {
+    var labelMargin: CGFloat { 2 }
 }
