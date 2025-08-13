@@ -58,11 +58,19 @@ extension CLRadarChartController {
 
 private extension CLRadarChartController {
     func initSubViews() {
-        let size = CLRadarChartView.calculateSize(radius: view.bounds.width * 0.5, side: data.count, verticalInset: 40, horizontalInset: 70)
-        let chartView = CLRadarChartView(frame: .init(x: 0, y: 200, width: size.width, height: size.height))
+//        let chartView = CLRadarChartView(frame: .init(x: 0, y: 200, width: 0, height: 0))
+//        chartView.dataSource = self
+//        chartView.backgroundColor = .orange.withAlphaComponent(0.1)
+//        view.addSubview(chartView)
+//        chartView.reload()
+        let chartView = CLRadarChartView()
         chartView.dataSource = self
         chartView.backgroundColor = .orange.withAlphaComponent(0.1)
         view.addSubview(chartView)
+        chartView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        chartView.reload()
     }
 
     func makeConstraints() {}

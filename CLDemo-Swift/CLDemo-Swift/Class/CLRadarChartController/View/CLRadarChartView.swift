@@ -80,6 +80,8 @@ class CLRadarChartView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private var calculatedSize: CGSize?
+
     weak var dataSource: CLRadarChartDataSource?
 }
 
@@ -96,6 +98,10 @@ private extension CLRadarChartView {
 // MARK: - JmoVxia---override
 
 extension CLRadarChartView {
+    override var intrinsicContentSize: CGSize {
+        calculatedSize ?? .zero
+    }
+
     override func draw(_ rect: CGRect) {
         guard let dataSource else { return }
 
@@ -127,6 +133,22 @@ extension CLRadarChartView {
 // MARK: - JmoVxia---私有方法
 
 private extension CLRadarChartView {
+    func calculateSize(radius: CGFloat, side: Int, verticalInset: CGFloat, horizontalInset: CGFloat) -> CGSize {
+        let value = radius - horizontalInset
+        let maxHeight: CGFloat = {
+            if side % 2 == .zero {
+                return 2 * value + verticalInset * 2.0
+            } else {
+                let angle = (90 - (360 / CGFloat(side) * 0.5)) * .pi / 180
+                let tangent = sin(angle) * value
+                return tangent + value + verticalInset * 2.0
+            }
+        }()
+        let height = value * 2.0
+        let padding = maxHeight - height
+        return .init(width: radius * 2.0, height: height + max(0, padding))
+    }
+
     func drawWebLayer(in rect: CGRect, maxRadius: CGFloat, layers: Int, points: Int, angle: CGFloat, center: CGPoint) {
         for index in (1 ... layers).reversed() {
             let radius = maxRadius * CGFloat(index) / CGFloat(layers)
@@ -279,23 +301,21 @@ private extension CLRadarChartView {
 // MARK: - JmoVxia---公共方法
 
 extension CLRadarChartView {
-    static func calculateSize(radius: CGFloat, side: Int, verticalInset: CGFloat, horizontalInset: CGFloat) -> CGSize {
-        let value = radius - horizontalInset
-        let maxHeight: CGFloat = {
-            if side % 2 == .zero {
-                return 2 * value + verticalInset * 2.0
-            } else {
-                let angle = (90 - (360 / CGFloat(side) * 0.5)) * .pi / 180
-                let tangent = sin(angle) * value
-                return tangent + value + verticalInset * 2.0
-            }
-        }()
-        let height = value * 2.0
-        let padding = maxHeight - height
-        return .init(width: radius * 2.0, height: height + max(0, padding))
-    }
-
     func reload() {
+        guard let dataSource else { return }
+        let newSize = calculateSize(
+            radius: dataSource.maximumRadius(in: self),
+            side: dataSource.numberOfPoints(in: self),
+            verticalInset: dataSource.verticalInset(in: self),
+            horizontalInset: dataSource.horizontalInset(in: self)
+        )
+
+        if newSize != calculatedSize {
+            calculatedSize = newSize
+            frame.size = newSize
+            invalidateIntrinsicContentSize()
+        }
+
         setNeedsDisplay()
     }
 }
