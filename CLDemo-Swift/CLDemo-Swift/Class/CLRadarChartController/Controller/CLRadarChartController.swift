@@ -93,7 +93,7 @@ private extension CLRadarChartController {
     func initData() {}
 
     func generateRandomData() {
-        let count = Int.random(in: 3 ... 16)
+        let count = Int.random(in: 5 ... 8)
         data = Array(allLabels.shuffled().prefix(count))
     }
 }
@@ -148,11 +148,11 @@ extension CLRadarChartController: CLRadarChartDataSource {
     }
 
     func verticalInset(in radarChart: CLRadarChartView) -> CGFloat {
-        40
+        45
     }
 
     func horizontalInset(in radarChart: CLRadarChartView) -> CGFloat {
-        70
+        75
     }
 
     func maximumValue(in radarChart: CLRadarChartView) -> CGFloat {

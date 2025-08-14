@@ -88,9 +88,7 @@ class CLRadarChartView: UIView {
 // MARK: - JmoVxia---布局
 
 private extension CLRadarChartView {
-    func initSubViews() {
-        backgroundColor = .white
-    }
+    func initSubViews() {}
 
     func makeConstraints() {}
 }
@@ -126,11 +124,7 @@ extension CLRadarChartView {
     }
 }
 
-// MARK: - JmoVxia---objc
-
-@objc private extension CLRadarChartView {}
-
-// MARK: - JmoVxia---私有方法
+// MARK: - JmoVxia---计算
 
 private extension CLRadarChartView {
     func calculateSize(radius: CGFloat, side: Int, verticalInset: CGFloat, horizontalInset: CGFloat) -> CGSize {
@@ -149,6 +143,71 @@ private extension CLRadarChartView {
         return .init(width: radius * 2.0, height: height + max(0, padding))
     }
 
+    func calculateLabelOrigin(
+        for index: Int,
+        with size: CGSize,
+        polygonPoints: [CGPoint],
+        centerPoint: CGPoint,
+        maxRadius: CGFloat,
+        margin: CGFloat
+    ) -> CGPoint {
+        let vertex = polygonPoints[index]
+        let direction = (vertex - centerPoint).normalized
+
+        guard direction != .zero else {
+            return CGPoint(x: centerPoint.x - size.width / 2, y: centerPoint.y - maxRadius - size.height - margin)
+        }
+
+        let angle = atan2(direction.dy, direction.dx)
+
+        var initialOrigin: CGPoint
+
+        let π = CGFloat.pi
+        let π_8 = π / 8
+        let π_3_8 = 3 * π / 8
+        let π_5_8 = 5 * π / 8
+        let π_7_8 = 7 * π / 8
+
+        if angle > -π_8 && angle <= π_8 {
+            initialOrigin = CGPoint(x: vertex.x, y: vertex.y - size.height / 2)
+        } else if angle > π_8 && angle <= π_3_8 {
+            initialOrigin = CGPoint(x: vertex.x, y: vertex.y)
+        } else if angle > π_3_8 && angle <= π_5_8 {
+            initialOrigin = CGPoint(x: vertex.x - size.width / 2, y: vertex.y)
+        } else if angle > π_5_8 && angle <= π_7_8 {
+            initialOrigin = CGPoint(x: vertex.x - size.width, y: vertex.y)
+        } else if angle > π_7_8 || angle <= -π_7_8 {
+            initialOrigin = CGPoint(x: vertex.x - size.width, y: vertex.y - size.height / 2)
+        } else if angle > -π_7_8, angle <= -π_5_8 {
+            initialOrigin = CGPoint(x: vertex.x - size.width, y: vertex.y - size.height)
+        } else if angle > -π_5_8, angle <= -π_3_8 {
+            initialOrigin = CGPoint(x: vertex.x - size.width / 2, y: vertex.y - size.height)
+        } else {
+            initialOrigin = CGPoint(x: vertex.x, y: vertex.y - size.height)
+        }
+
+        var finalOrigin = initialOrigin + direction * margin
+
+        var labelRect = CGRect(origin: finalOrigin, size: size)
+        if CLGeometry.doesRectIntersectPolygon(labelRect, polygon: polygonPoints) {
+            let step: CGFloat = 1.0
+            let maxIterations = Int(maxRadius)
+            for _ in 0 ..< maxIterations {
+                finalOrigin = finalOrigin + direction * step
+                labelRect.origin = finalOrigin
+                if !CLGeometry.doesRectIntersectPolygon(labelRect, polygon: polygonPoints) {
+                    break
+                }
+            }
+        }
+
+        return finalOrigin
+    }
+}
+
+// MARK: - JmoVxia---绘制
+
+private extension CLRadarChartView {
     func drawWebLayer(in rect: CGRect, maxRadius: CGFloat, layers: Int, points: Int, angle: CGFloat, center: CGPoint) {
         for index in (1 ... layers).reversed() {
             let radius = maxRadius * CGFloat(index) / CGFloat(layers)
@@ -217,11 +276,9 @@ private extension CLRadarChartView {
         let polygonPoints = (0 ..< points).map { i in
             calculatePoint(radius: maxRadius, pointIndex: i, angle: angle, centerPoint: center)
         }
-
         for index in 0 ..< points {
             let attributedText = dataSource.radarChart(self, attributedTextAt: index)
             let size = attributedText.size()
-
             let origin = calculateLabelOrigin(
                 for: index,
                 with: size,
@@ -252,49 +309,6 @@ private extension CLRadarChartView {
         let x = radius * sin(angle * CGFloat(pointIndex))
         let y = radius * cos(angle * CGFloat(pointIndex))
         return centerPoint + CGVector(dx: x, dy: -y)
-    }
-
-    func calculateLabelOrigin(for index: Int, with size: CGSize, polygonPoints: [CGPoint], centerPoint: CGPoint, maxRadius: CGFloat, margin: CGFloat) -> CGPoint {
-        let vertex = polygonPoints[index]
-        let direction = (vertex - centerPoint).normalized
-        guard direction != .zero else {
-            return CGPoint(x: centerPoint.x - size.width / 2, y: centerPoint.y - maxRadius - size.height - 6.0)
-        }
-        let spacing = (margin > 0 ? margin : 6.0)
-        let anchor = vertex + direction * spacing
-
-        let initialOrigin = calculateInitialOrigin(from: anchor, for: size, basedOn: direction)
-
-        var finalOrigin = initialOrigin
-        var labelRect = CGRect(origin: finalOrigin, size: size)
-
-        if CLGeometry.doesRectIntersectPolygon(labelRect, polygon: polygonPoints) {
-            let step: CGFloat = 1.0
-            let maxIterations = Int(maxRadius * 0.5)
-
-            for _ in 0 ..< maxIterations {
-                finalOrigin = finalOrigin + direction * step
-                labelRect.origin = finalOrigin
-                if !CLGeometry.doesRectIntersectPolygon(labelRect, polygon: polygonPoints) {
-                    break
-                }
-            }
-        }
-        return finalOrigin
-    }
-
-    private func calculateInitialOrigin(from anchor: CGPoint, for size: CGSize, basedOn vector: CGVector) -> CGPoint {
-        var origin: CGPoint
-        let (w, h) = (size.width, size.height)
-
-        let axisThreshold = 1.0 / sqrt(2.0)
-
-        if abs(vector.dx) > axisThreshold {
-            origin = CGPoint(x: vector.dx > 0 ? anchor.x : anchor.x - w, y: anchor.y - h / 2)
-        } else {
-            origin = CGPoint(x: anchor.x - w / 2, y: vector.dy > 0 ? anchor.y : anchor.y - h)
-        }
-        return origin
     }
 }
 
