@@ -15,8 +15,8 @@ class CLLineChartController: CLController {
         return view
     }()
 
-    var points = [CLLineChartPoint]()
-    var points1 = [CLLineChartPoint]()
+    var points = [CGPoint]()
+    var points1 = [CGPoint]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,8 @@ class CLLineChartController: CLController {
         }
 
         for i in 0 ..< 40 {
-            points.append(CLLineChartPoint(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7000 ... 7500)))
-            points1.append(CLLineChartPoint(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7500 ... 8000)))
+            points.append(.init(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7000 ... 7500)))
+            points1.append(.init(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7500 ... 8000)))
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.lineChartView.reload()
@@ -37,11 +37,23 @@ class CLLineChartController: CLController {
 }
 
 extension CLLineChartController: CLLineChartViewDataSource {
-    func numberOfLines(in view: CLLineChartView) -> Int {
-        2
+    func chartView(_ chartView: CLLineChartView, gradientColorsForLineAt line: Int) -> [CGColor] {
+        ["#00FFFF".cgColor, "#00FFFF".uiColor.withAlphaComponent(0.0).cgColor]
     }
 
-    func chartView(_ chartView: CLLineChartView, numberOfPointsInLine line: Int) -> [CLLineChartPoint] {
+    func numberOfXTicks(in view: CLLineChartView) -> Int {
+        6
+    }
+
+    func numberOfYTicks(in view: CLLineChartView) -> Int {
+        6
+    }
+
+    func numberOfLines(in view: CLLineChartView) -> Int {
+        1
+    }
+
+    func chartView(_ chartView: CLLineChartView, numberOfPointsInLine line: Int) -> [CGPoint] {
         if line == 0 {
             points
         } else {
@@ -53,7 +65,7 @@ extension CLLineChartController: CLLineChartViewDataSource {
         let layer = CAShapeLayer()
         layer.lineWidth = 1
         layer.fillColor = UIColor.clear.cgColor
-        layer.strokeColor = UIColor.random.cgColor
+        layer.strokeColor = "#00FFFF".cgColor
         return layer
     }
 
@@ -76,8 +88,8 @@ extension CLLineChartController {
         points.removeAll()
         points1.removeAll()
         for i in 0 ..< 40 {
-            points.append(CLLineChartPoint(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7000 ... 7500)))
-            points1.append(CLLineChartPoint(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7500 ... 8000)))
+            points.append(.init(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7000 ... 7500)))
+            points1.append(.init(x: CGFloat(i) + 0.5, y: CGFloat.random(in: 7500 ... 8000)))
         }
         lineChartView.reload()
     }

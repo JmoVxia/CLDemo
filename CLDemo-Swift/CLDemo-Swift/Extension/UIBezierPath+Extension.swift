@@ -92,3 +92,50 @@ extension UIBezierPath {
         close()
     }
 }
+
+extension UIBezierPath {
+    /// 创建曲线路径
+    /// - Parameters:
+    ///   - points: 点数组
+    ///   - smoothness: 平滑度:0 -不光滑,1 -最大的平滑
+    ///   - interval: 区间
+    ///   - addZeros: 是否增加零点
+    /// - Returns:曲线 路径
+    convenience init(curve points: [CGPoint], withSmoothness smoothness: CGFloat, interval: CGRect, addZeros: Bool = false) {
+        func controlPoints(p1: CGPoint, p2: CGPoint, smoothness: CGFloat) -> (CGPoint, CGPoint) {
+            let percent = min(1, max(0, smoothness))
+            let cp1: CGPoint = {
+                var cp = p1
+                let x0 = min(p1.x, p2.x)
+                let x1 = max(p1.x, p2.x)
+                cp.x = x0 + (x1 - x0) * percent
+                return cp
+            }()
+            let cp2: CGPoint = {
+                var cp = p2
+                let x0 = max(p1.x, p2.x)
+                let x1 = min(p1.x, p2.x)
+                cp.x = x0 + (x1 - x0) * percent
+                return cp
+            }()
+            return (cp1, cp2)
+        }
+        self.init()
+        guard points.count > 0 else { return }
+        var prevPoint: CGPoint = points.first!
+        if addZeros {
+            move(to: CGPoint(x: interval.origin.x, y: interval.origin.y))
+            addLine(to: points[0])
+        } else {
+            move(to: points[0])
+        }
+        for i in 1 ..< points.count {
+            let cp = controlPoints(p1: prevPoint, p2: points[i], smoothness: smoothness)
+            addCurve(to: points[i], controlPoint1: cp.0, controlPoint2: cp.1)
+            prevPoint = points[i]
+        }
+        if addZeros {
+            addLine(to: CGPoint(x: prevPoint.x, y: interval.origin.y))
+        }
+    }
+}
