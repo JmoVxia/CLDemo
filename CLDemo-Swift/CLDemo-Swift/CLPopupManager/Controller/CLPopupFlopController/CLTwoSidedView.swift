@@ -20,8 +20,10 @@ class CLTwoSidedView: UIView {
 
     var bottomView: UIView?
 
-    private var isTurning: Bool = false
     private var isReversed: Bool = false
+
+    private let lock = NSRecursiveLock()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -40,22 +42,18 @@ class CLTwoSidedView: UIView {
 
 extension CLTwoSidedView {
     func transition(withDuration duration: TimeInterval, completion: (() -> Void)?) {
-        guard !isTurning, let top = topView, let bottom = bottomView else {
+        lock.lock()
+        guard let topView, let bottomView else {
+            lock.unlock()
             return
         }
-        isTurning = true
-        if isReversed {
-            UIView.transition(from: bottom, to: top, duration: duration, options: .transitionFlipFromLeft) { _ in
-                completion?()
-                self.isTurning = false
-                self.isReversed = false
-            }
-        } else {
-            UIView.transition(from: top, to: bottom, duration: duration, options: .transitionFlipFromRight) { _ in
-                completion?()
-                self.isTurning = false
-                self.isReversed = true
-            }
+        let fromView = isReversed ? bottomView : topView
+        let toView = isReversed ? topView : bottomView
+        let options: UIView.AnimationOptions = isReversed ? .transitionFlipFromLeft : .transitionFlipFromRight
+        UIView.transition(from: fromView, to: toView, duration: duration, options: options) { _ in
+            completion?()
+            self.isReversed = false
+            self.lock.unlock()
         }
     }
 }
