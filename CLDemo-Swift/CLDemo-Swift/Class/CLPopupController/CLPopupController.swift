@@ -134,6 +134,14 @@ extension CLPopupController {
         }
         do {
             let model = CLPopupModel()
+            model.title = "时间范围选择"
+            model.callback = { [weak self] in
+                self?.showHourMinuteDataRangPicker()
+            }
+            arrayDS.append(model)
+        }
+        do {
+            let model = CLPopupModel()
             model.title = "年月日时分选择"
             model.callback = { [weak self] in
                 self?.showYearMonthDayHourMinuteDataPicker()
@@ -187,6 +195,10 @@ extension CLPopupController: UITableViewDelegate {
 }
 
 extension CLPopupController {
+    func showHourMinuteDataRangPicker() {
+        CLPopoverManager.show(CLPopupDataRangPickerController())
+    }
+
     func showFlop() {
         CLPopoverManager.showFlop()
     }

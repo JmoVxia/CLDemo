@@ -18,6 +18,8 @@
 		4F95D5182E332045004F9A2F /* CLRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D5172E332045004F9A2F /* CLRecorder.swift */; };
 		4F95D5192E332045004F9A2F /* CLMp3Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D5162E332045004F9A2F /* CLMp3Encoder.swift */; };
 		4F95D51B2E332279004F9A2F /* CLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D51A2E332279004F9A2F /* CLPath.swift */; };
+		4FAF3F652E9F887400398A5C /* CLPopupDataRangPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAF3F642E9F887400398A5C /* CLPopupDataRangPickerView.swift */; };
+		4FAF3F682E9F89BC00398A5C /* CLPopupDataRangPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAF3F672E9F89BC00398A5C /* CLPopupDataRangPickerController.swift */; };
 		4FB7F7592E39CF29006736CF /* CLThreadSafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7F7582E39CF29006736CF /* CLThreadSafe.swift */; };
 		4FB7F75B2E39D032006736CF /* CLLogGroupOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7F75A2E39D032006736CF /* CLLogGroupOperation.swift */; };
 		4FB7F75D2E39E517006736CF /* StringError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7F75C2E39E517006736CF /* StringError.swift */; };
@@ -355,6 +357,8 @@
 		4F95D5162E332045004F9A2F /* CLMp3Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMp3Encoder.swift; sourceTree = "<group>"; };
 		4F95D5172E332045004F9A2F /* CLRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRecorder.swift; sourceTree = "<group>"; };
 		4F95D51A2E332279004F9A2F /* CLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPath.swift; sourceTree = "<group>"; };
+		4FAF3F642E9F887400398A5C /* CLPopupDataRangPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupDataRangPickerView.swift; sourceTree = "<group>"; };
+		4FAF3F672E9F89BC00398A5C /* CLPopupDataRangPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPopupDataRangPickerController.swift; sourceTree = "<group>"; };
 		4FB7F7582E39CF29006736CF /* CLThreadSafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLThreadSafe.swift; sourceTree = "<group>"; };
 		4FB7F75A2E39D032006736CF /* CLLogGroupOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLogGroupOperation.swift; sourceTree = "<group>"; };
 		4FB7F75C2E39E517006736CF /* StringError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringError.swift; sourceTree = "<group>"; };
@@ -740,6 +744,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4FAF3F662E9F890800398A5C /* CLPopupDataRangPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				4FAF3F672E9F89BC00398A5C /* CLPopupDataRangPickerController.swift */,
+				4FAF3F642E9F887400398A5C /* CLPopupDataRangPickerView.swift */,
+			);
+			path = CLPopupDataRangPickerController;
+			sourceTree = "<group>";
+		};
 		4FBF34B72E33106B005D9018 /* CLPopupBMIInputController */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,6 +856,7 @@
 		4FBF34D82E33106B005D9018 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4FAF3F662E9F890800398A5C /* CLPopupDataRangPickerController */,
 				4FBF34B72E33106B005D9018 /* CLPopupBMIInputController */,
 				4FBF34B92E33106B005D9018 /* CLPopupCalendarController */,
 				4FBF34C12E33106B005D9018 /* CLPopupDataPickerController */,
@@ -2461,9 +2475,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2544,6 +2562,7 @@
 				5B76931F26841C70008BB92B /* CLChatPhotoView.swift in Sources */,
 				5BC1352F269EBA1C00D1CCB5 /* CLBubbleTransition.swift in Sources */,
 				5BC13531269EBA9B00D1CCB5 /* CLBubbleInteractiveTransition.swift in Sources */,
+				4FAF3F652E9F887400398A5C /* CLPopupDataRangPickerView.swift in Sources */,
 				5BD0442E26833CD60054F2B4 /* CLTagsFrameHelper.swift in Sources */,
 				5BD0437126832EAB0054F2B4 /* CLVideoPlayer.swift in Sources */,
 				5BD4EB27268184AB00B5284F /* UIBezierPath+Extension.swift in Sources */,
@@ -2573,6 +2592,7 @@
 				5B76931626841C70008BB92B /* CLChatRecordView.swift in Sources */,
 				5B8397FC26A15BAC00FD1D3C /* CLCircleRetroTransitionController.swift in Sources */,
 				5BD4EB19268184AB00B5284F /* UIView+Extension.swift in Sources */,
+				4FAF3F682E9F89BC00398A5C /* CLPopupDataRangPickerController.swift in Sources */,
 				5B1C367026841FAF00D777EB /* CLPermissionsManager.swift in Sources */,
 				5B76932226841C70008BB92B /* CLChatEmojiView.swift in Sources */,
 				5B8F69322C7D69DB00C6E5DE /* CLGifPlayer.swift in Sources */,
