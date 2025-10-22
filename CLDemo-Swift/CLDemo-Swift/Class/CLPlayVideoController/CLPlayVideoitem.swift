@@ -24,11 +24,11 @@ class CLPlayVideoitem: NSObject {
 }
 
 extension CLPlayVideoitem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLPlayVideoCell.self
     }
 
-    func cellHeight() -> CGFloat {
+    var cellHeight: CGFloat {
         size.height + 60
     }
 }

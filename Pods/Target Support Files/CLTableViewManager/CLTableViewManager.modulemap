@@ -1,0 +1,6 @@
+module CLTableViewManager {
+  umbrella header "CLTableViewManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

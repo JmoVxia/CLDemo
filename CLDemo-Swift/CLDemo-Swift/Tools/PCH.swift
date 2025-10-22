@@ -9,3 +9,4 @@
 import Foundation
 
 @_exported import CLPopoverManager
+@_exported import CLTableViewManager

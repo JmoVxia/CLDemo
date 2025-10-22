@@ -153,7 +153,7 @@ private extension CLBreakPointResumeCell {
     }
 }
 
-extension CLBreakPointResumeCell: CLRowProtocol {
+extension CLBreakPointResumeCell: CLRowCellProtocol {
     func setItem(_ item: CLBreakPointResumeItem, indexPath: IndexPath) {
         item.progressChangeCallback = { [weak self] value in
             self?.displayProgress(value)

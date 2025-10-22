@@ -11,7 +11,6 @@ class CLTitleCellItem: NSObject {
     private(set) var title: String = ""
     private(set) var type: CLController.Type!
     var accessoryType: UITableViewCell.AccessoryType = .none
-    var didSelectCellCallback: ((IndexPath) -> Void)?
     init(title: String, type: CLController.Type) {
         self.title = title
         self.type = type
@@ -19,11 +18,11 @@ class CLTitleCellItem: NSObject {
 }
 
 extension CLTitleCellItem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLTitleCell.self
     }
 
-    func cellHeight() -> CGFloat {
+    var cellHeight: CGFloat {
         UIFont.mediumPingFangSC(18).lineHeight + 30
     }
 }

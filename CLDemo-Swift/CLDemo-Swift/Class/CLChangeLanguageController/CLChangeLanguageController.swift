@@ -25,15 +25,12 @@ class CLChangeLanguageController: CLController {
 
     deinit {}
 
-    private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler()
-        return hepler
-    }()
+    private let tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.dataSource = tableViewHepler
-        view.delegate = tableViewHepler
+        view.dataSource = tableViewRowManager
+        view.delegate = tableViewRowManager
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
@@ -109,29 +106,29 @@ private extension CLChangeLanguageController {
         do {
             let item = CLTitleCellItem(title: "跟随系统".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .system ? .checkmark : .none
-            item.didSelectCellCallback = { [weak self] value in
+            item.didSelect = { [weak self] value in
                 guard let self else { return }
                 changeLanguage(.system)
             }
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         do {
             let item = CLTitleCellItem(title: "中文".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .chineseSimplified ? .checkmark : .none
-            item.didSelectCellCallback = { [weak self] value in
+            item.didSelect = { [weak self] value in
                 guard let self else { return }
                 changeLanguage(.chineseSimplified)
             }
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         do {
             let item = CLTitleCellItem(title: "英文".localized, type: CLChangeLanguageController.self)
             item.accessoryType = CLLanguageManager.shared.currentLanguage == .english ? .checkmark : .none
-            item.didSelectCellCallback = { [weak self] value in
+            item.didSelect = { [weak self] value in
                 guard let self else { return }
                 changeLanguage(.english)
             }
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         tableView.reloadData()
     }

@@ -61,7 +61,7 @@ extension CLChatImageCell {
     }
 }
 
-extension CLChatImageCell: CLRowProtocol {
+extension CLChatImageCell: CLRowCellProtocol {
     func setItem(_ item: CLChatImageItem, indexPath: IndexPath) {
         if let path = item.imagePath {
             photoView.kf.setImage(with: URL(fileURLWithPath: path))

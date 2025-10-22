@@ -9,15 +9,12 @@
 import UIKit
 
 class CLBreakPointResumeController: CLController {
-    private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler()
-        return hepler
-    }()
+    private let tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.dataSource = tableViewHepler
-        view.delegate = tableViewHepler
+        view.dataSource = tableViewRowManager
+        view.delegate = tableViewRowManager
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
@@ -73,14 +70,14 @@ class CLBreakPointResumeController: CLController {
             item.deleteCallback = { [weak self] file in
                 self?.delete(file)
             }
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         tableView.reloadData()
     }
 
     func download(_ url: URL) {
         CLBreakPointResumeManager.download(url) { [weak self] progress in
-            let rows = self?.tableViewHepler.rows.filter { ($0 as? CLBreakPointResumeItem)?.url == url } as? [CLBreakPointResumeItem]
+            let rows = self?.tableViewRowManager.dataSource.filter { ($0 as? CLBreakPointResumeItem)?.url == url } as? [CLBreakPointResumeItem]
             rows?.forEach { $0.progress = progress }
         } completionBlock: { result in
             result.failure { error in
@@ -93,7 +90,7 @@ class CLBreakPointResumeController: CLController {
 
     func delete(_ url: URL) {
         try? CLBreakPointResumeManager.delete(url)
-        let rows = tableViewHepler.rows.filter { ($0 as? CLBreakPointResumeItem)?.url == url } as? [CLBreakPointResumeItem]
+        let rows = tableViewRowManager.dataSource.filter { ($0 as? CLBreakPointResumeItem)?.url == url } as? [CLBreakPointResumeItem]
         rows?.forEach { $0.progress = 0 }
     }
 }

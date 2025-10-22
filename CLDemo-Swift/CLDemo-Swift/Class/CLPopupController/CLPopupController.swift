@@ -196,7 +196,7 @@ extension CLPopupController: UITableViewDelegate {
 
 extension CLPopupController {
     func showHourMinuteDataRangPicker() {
-        CLPopoverManager.show(CLPopupDataRangPickerController())
+        CLPopoverManager.showDataRang()
     }
 
     func showFlop() {

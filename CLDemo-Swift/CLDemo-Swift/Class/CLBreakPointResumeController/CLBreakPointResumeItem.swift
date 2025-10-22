@@ -32,11 +32,11 @@ class CLBreakPointResumeItem: NSObject {
 }
 
 extension CLBreakPointResumeItem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLBreakPointResumeCell.self
     }
 
-    func cellHeight() -> CGFloat {
+    var cellHeight: CGFloat {
         110
     }
 }

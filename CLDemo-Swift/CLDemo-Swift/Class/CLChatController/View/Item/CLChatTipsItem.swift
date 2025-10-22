@@ -13,7 +13,7 @@ class CLChatTipsItem: CLChatItem {
 }
 
 extension CLChatTipsItem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLChatTipsCell.self
     }
 }

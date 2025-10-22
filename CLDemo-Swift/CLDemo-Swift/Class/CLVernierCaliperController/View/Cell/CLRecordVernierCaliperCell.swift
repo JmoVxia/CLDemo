@@ -104,7 +104,7 @@ extension CLRecordVernierCaliperCell {
     }
 }
 
-extension CLRecordVernierCaliperCell: CLRowProtocol {
+extension CLRecordVernierCaliperCell: CLRowCellProtocol {
     func setItem(_ item: CLRecordVernierCaliperItem, indexPath: IndexPath) {
         nameLabel.text = item.title
         unitLabel.text = "(\(item.unit))"

@@ -10,12 +10,12 @@
 
 ## 核心特性
 
-- **丰富的显示模式**: 提供五种精心设计的显示模式 (`queue`, `interrupt`, `replaceActive`, `replaceAll`, `unique`)，灵活应对各种复杂的弹窗场景。
+- **丰富的显示模式**: 提供七种精心设计的显示模式 (`queue`, `interrupt`,`suspend`,`replaceInheritSuspend`,`replaceClearSuspend`, `replaceAll`, `unique`)，灵活应对各种复杂的弹窗场景。
 - **优先级队列**: 支持为弹窗设置优先级，确保重要信息（如强制更新、系统警报）能够优先展示。
 - **防止重复弹出**: 可为弹窗设置唯一标识符 `identifier`，自动阻止相同弹窗的重复显示或入队。
 - **事件穿透**: 允许弹窗下的 UI 元素继续响应用户操作，并可配置在穿透时自动隐藏弹窗。
 - **全面的 UI 控制**: 独立于项目主体，轻松管理每个弹窗的屏幕方向、状态栏样式及可见性。
-- **面向协议和继承**: 通过继承 `CLPopoverController` 和遵守 `CLPopoverProtocol`，可以轻松创建完全自定义的弹窗，包括其 UI 和过渡动画。
+- **实现方式灵活**: 通过继承 `CLPopoverController` 快速实现、或者遵守 `CLPopoverProtocol`协议完全自定义实现。
 
 ## 工作原理
 
@@ -27,14 +27,14 @@
 
 ## 如何使用
 
-### 1. 创建你的弹窗控制器
+#### 方式一
 
-创建一个继承自 `CLPopoverController` 并遵守 `CLPopoverProtocol` 协议的 `UIViewController` 子类。
+继承`CLPopoverController`，重写`showAnimation`和`dismissAnimation`方法，快速实现
 
 ```swift
 import UIKit
 
-class MyCustomPopupController: CLPopoverController, CLPopoverProtocol {
+class MyCustomPopupController: CLPopoverController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class MyCustomPopupController: CLPopoverController, CLPopoverProtocol {
     }
 
     // 实现自定义的显示动画
-    func showAnimation(completion: (() -> Void)?) {
+    override func showAnimation(completion: (() -> Void)?) {
         view.alpha = 0
         transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -68,7 +68,7 @@ class MyCustomPopupController: CLPopoverController, CLPopoverProtocol {
     }
 
     // 实现自定义的隐藏动画
-    func dismissAnimation(completion: (() -> Void)?) {
+    override func dismissAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.alpha = 0
         }, completion: { _ in
@@ -78,7 +78,26 @@ class MyCustomPopupController: CLPopoverController, CLPopoverProtocol {
 }
 ```
 
-### 2. 显示与隐藏弹窗
+#### 方式二
+
+准守`CLPopoverProtocol`协议，完全自定义，这会导致`config`配置中的部分属性失效，需要自己处理
+
+```swift
+/// 是否自动旋转屏幕，继承CLPopoverController才生效
+public var shouldAutorotate = false
+/// 是否隐藏状态栏，继承CLPopoverController才生效
+public var prefersStatusBarHidden = false
+/// 状态栏样式，继承CLPopoverController才生效
+public var preferredStatusBarStyle = UIStatusBarStyle.lightContent
+/// 支持的界面方向，继承CLPopoverController才生效
+public var supportedInterfaceOrientations = UIInterfaceOrientationMask.portrait
+/// 用户界面样式，包括夜间模式，继承CLPopoverController才生效
+public var userInterfaceStyleOverride = CLUserInterfaceStyle.light
+```
+
+
+
+### 显示与隐藏弹窗
 
 ```swift
 // 创建弹窗实例
@@ -116,19 +135,23 @@ CLPopoverManager.dismissAll()
 - `.queue` (默认)
   - **行为**: 如果当前没有弹窗，则立即显示。否则，加入等待队列。当一个弹窗关闭后，管理器会从队列中选择优先级最高的下一个弹窗显示。
   - **适用场景**: 普通的、非紧急的提示，如“操作成功”、“消息已发送”等。
-
 - `.interrupt`
   - **行为**: 无视当前是否有弹窗正在显示或排队，立即在最顶层显示。这可能导致多个弹窗重叠。
   - **适用场景**: 需要立即引起用户注意，但又不希望打断其他流程的临时信息，例如顶部滑入的即时消息通知。
-
-- `.replaceActive`
-  - **行为**: 强制关闭并移除所有当前正在**显示**的弹窗，然后立即显示自己。此操作**不会**影响等待队列中的弹窗。
-  - **适用场景**: 需要替换当前内容的弹窗，例如在一个信息确认弹窗上，点击“查看详情”后，用详情弹窗替换掉确认弹窗。
+- `.suspend`
+  - **行为**：替换当正在显示的弹窗，将正在显示的弹窗隐藏并且提交到挂起队列，不会移除被挂起的弹窗，也不会移除等待中的弹窗
+  
+  - **适用场景**: 需要立即引起用户注意并且只显示自己，但又不希望中断其他流程的临时信息。
+- `.replaceInheritSuspend`
+  - **行为**: 强制关闭并移除所有当前正在显示的弹窗，然后立即显示自己。此操作会接管被替换弹窗的挂起队列，不会影响等待队列中的弹窗。
+  - **适用场景**: 需要替换当前内容的弹窗并且不影响前面的挂起逻辑，例如在一个信息确认弹窗上，点击“查看详情”后，用详情弹窗替换掉确认弹窗。
+- `.replaceClearSuspend`
+  - **行为**: 强制关闭并移除所有当前正在显示的弹窗，然后立即显示自己。此操作会清空被替换弹窗的挂起队列，不会影响等待队列中的弹窗。
+  - **适用场景**: 需要替换当前内容的弹窗并且清除前面的挂起逻辑，例如一个信息确认弹窗挂起了其他弹窗，点击“查看详情”后，用详情弹窗替换掉掉前面所有弹窗。
 
 - `.replaceAll`
-  - **行为**: 强制关闭并移除所有当前正在**显示**的弹窗，并**清空**整个等待队列，然后立即显示自己。
+  - **行为**: 强制关闭并移除所有当前正在显示的弹窗，并清空整个等待队列，然后立即显示自己。
   - **适用场景**: 关键的流程切换，例如用户被强制下线或需要重新登录时，使用此模式可以清理掉所有旧的弹窗，只显示登录提示。
-
 - `.unique`
   - **行为**: 与 `.replaceAll` 类似，会清空所有已显示和等待中的弹窗。此外，只要这个 `unique` 弹窗还在显示，后续**所有**新的弹窗（无论何种模式）都将被忽略，无法显示。
   - **适用场景**: 绝对独占的、模态的场景，例如新手引导流程、或需要用户完成特定任务才能继续的界面。
@@ -159,6 +182,10 @@ CLPopoverManager.dismissAll()
 
 优先级解决了“**谁先显示**”的问题，而显示模式解决了“**何时以及如何显示**”的问题。例如，一个高优先级的弹窗也可能需要排队（`.queue`），或者需要替换掉当前所有内容（`.replaceAll`）。两者结合，为处理各种复杂的弹窗需求提供了极大的灵活性。
 
+### 如何支持弹窗基础上`push`？
+
+准守`CLPopoverProtocol`协议，完全自己实现，这里你可以是一个`UINavigationController`控制器。
+
 ## 结语
 
 通过封装 [CLPopoverManager](https://github.com/JmoVxia/CLPopoverManager)，我们能够更好地管理 iOS 应用中的弹窗显示逻辑，提升用户体验，保障应用的稳定性。希望这个工具能够帮助到大家，同时也欢迎各位提出宝贵的意见和建议。
@@ -185,6 +212,6 @@ https://github.com/JmoVxia/CLPopoverManager.git
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/JmoVxia/CLPopoverManager.git", from: "0.0.3")
+    .package(url: "https://github.com/JmoVxia/CLPopoverManager.git", from: "0.0.5")
 ]
 ```

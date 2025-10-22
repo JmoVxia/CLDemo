@@ -70,7 +70,7 @@ extension CLChatTipsCell {
     }
 }
 
-extension CLChatTipsCell: CLRowProtocol {
+extension CLChatTipsCell: CLRowCellProtocol {
     func setItem(_ item: CLChatTipsItem, indexPath: IndexPath) {
         titleLabel.text = item.text
     }

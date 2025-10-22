@@ -172,21 +172,20 @@ extension CLPopupCalendarController {}
     func sureAction() {
         guard let start = calendarView.beginDate else { return }
         guard let end = calendarView.endDate else { return }
-
-        dismissAnimation {
+        CLPopoverManager.dismiss(key) {
             self.dismissCallback?(start, end)
         }
     }
 
     func close() {
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
 // MARK: - JmoVxia---私有方法
 
-extension CLPopupCalendarController: CLPopoverProtocol {
-    func showAnimation(completion: (() -> Void)?) {
+extension CLPopupCalendarController {
+    override func showAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         colorView.snp.remakeConstraints { make in
@@ -201,7 +200,7 @@ extension CLPopupCalendarController: CLPopoverProtocol {
         }
     }
 
-    func dismissAnimation(completion: (() -> Void)?) {
+    override func dismissAnimation(completion: (() -> Void)?) {
         colorView.snp.remakeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(view.snp.bottom)
@@ -211,7 +210,6 @@ extension CLPopupCalendarController: CLPopoverProtocol {
             self.view.layoutIfNeeded()
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

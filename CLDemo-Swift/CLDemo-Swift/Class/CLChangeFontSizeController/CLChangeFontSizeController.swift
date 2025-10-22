@@ -31,15 +31,12 @@ class CLChangeFontSizeController: CLController {
         return view
     }()
 
-    private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler()
-        return hepler
-    }()
+    private let tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.dataSource = tableViewHepler
-        view.delegate = tableViewHepler
+        view.dataSource = tableViewRowManager
+        view.delegate = tableViewRowManager
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
@@ -119,7 +116,7 @@ private extension CLChangeFontSizeController {
         updateTitleLabel { label in
             label.font = .boldPingFangSC(18)
         }
-        for item in tableViewHepler.rows {
+        for item in tableViewRowManager.dataSource {
             if let cellItem = item as? CLChatTextItem {
                 let text = cellItem.text
                 cellItem.text = text
@@ -155,21 +152,21 @@ private extension CLChangeFontSizeController {
             item.isFromMyself = false
             item.text = "预览字体大小"
             item.messageSendState = .sendSucess
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         do {
             let item = CLChatTextItem()
             item.isFromMyself = true
             item.text = "拖拽或者点击下面的滑块，可设置字体大小"
             item.messageSendState = .sendSucess
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         do {
             let item = CLChatTextItem()
             item.isFromMyself = true
             item.text = "设置后，可改变APP中的字体大小。如果在使用过程中存在问题或意见，可反馈给我们团队"
             item.messageSendState = .sendSucess
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         tableView.reloadData()
     }

@@ -16,7 +16,6 @@ class CLChatTextItem: CLChatItem {
         }
     }
 
-    var willDisplayCallback: ((IndexPath) -> Void)?
     var linkClickCallback: ((Int, NSAttributedString) -> Void)?
     private(set) var phoneRanges: [Regex.Match] = []
     private(set) var linkRanges: [Regex.Match] = []
@@ -50,11 +49,11 @@ extension CLChatTextItem {
 }
 
 extension CLChatTextItem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLChatTextCell.self
     }
 
-    func cellHeight() -> CGFloat {
+    var cellHeight: CGFloat {
         if let height {
             return height
         } else {

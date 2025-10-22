@@ -43,8 +43,8 @@ extension CLPopoverLoadingController {
     }
 }
 
-extension CLPopoverLoadingController: CLPopoverProtocol {
-    func showAnimation(completion: (() -> Void)?) {
+extension CLPopoverLoadingController {
+    override func showAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.25) {
             self.backgroundView.alpha = 1.0
         } completion: { _ in
@@ -52,7 +52,7 @@ extension CLPopoverLoadingController: CLPopoverProtocol {
         }
     }
 
-    func dismissAnimation(completion: (() -> Void)?) {
+    override func dismissAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.25) {
             self.backgroundView.alpha = 0.0
         } completion: { _ in

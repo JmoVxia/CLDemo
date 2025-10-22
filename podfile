@@ -37,6 +37,7 @@ pod 'CLCamera', :git => 'https://github.com/JmoVxia/CLCamera.git'
 pod 'CLPopoverManager', :git => 'https://github.com/JmoVxia/CLPopoverManager.git'
 pod 'CLNestedSlide'
 pod 'CocoaLumberjack/Swift'
+pod 'CLTableViewManager'
 
 
 end

@@ -230,4 +230,14 @@ extension CLPopoverManager {
             return controller.key
         }
     }
+
+    @discardableResult static func showDataRang(configCallback: ((CLPopoverConfig) -> Void)? = nil, confirmCallback: ((String, String, String, String) -> Void)? = nil) -> String {
+        mainSync {
+            let controller = CLPopupDataRangPickerController()
+            controller.confirmCallback = confirmCallback
+            configCallback?(controller.config)
+            CLPopoverManager.show(controller)
+            return controller.key
+        }
+    }
 }

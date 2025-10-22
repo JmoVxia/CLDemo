@@ -21,15 +21,12 @@ class CLHomePageController: CLController {
 
     deinit {}
 
-    private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler()
-        return hepler
-    }()
+    private let tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.dataSource = tableViewHepler
-        view.delegate = tableViewHepler
+        view.dataSource = tableViewRowManager
+        view.delegate = tableViewRowManager
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
@@ -115,11 +112,11 @@ private extension CLHomePageController {
 
             let item = CLTitleCellItem(title: model.title.localized, type: type)
             item.accessoryType = .disclosureIndicator
-            item.didSelectCellCallback = { [weak self, weak item] _ in
+            item.didSelect = { [weak self, weak item] _ in
                 guard let self, let item else { return }
                 push(item.type, title: item.title)
             }
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         tableView.reloadData()
     }

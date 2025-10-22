@@ -12,10 +12,22 @@ import UIKit
 class CLPopupDataRangPickerController: CLPopoverController {
     private lazy var pickView: CLPopupDataRangPickerView = {
         let view = CLPopupDataRangPickerView()
+        view.confirmCallback = { [weak self] startHour, startMinute, endHour, endMinute in
+            self?.hiddenAction()
+            self?.confirmCallback?(startHour, startMinute, endHour, endMinute)
+        }
+        view.cancelCallback = { [weak self] in
+            self?.hiddenAction()
+        }
+        view.closeCallback = { [weak self] in
+            self?.hiddenAction()
+        }
         return view
     }()
 
     deinit {}
+
+    var confirmCallback: ((String, String, String, String) -> Void)?
 }
 
 // MARK: - JmoVxia---生命周期
@@ -82,7 +94,7 @@ extension CLPopupDataRangPickerController {}
 
 @objc private extension CLPopupDataRangPickerController {
     func hiddenAction() {
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
@@ -96,8 +108,8 @@ extension CLPopupDataRangPickerController {}
 
 // MARK: - JmoVxia---CLPopoverProtocol
 
-extension CLPopupDataRangPickerController: CLPopoverProtocol {
-    func showAnimation(completion: (() -> Void)?) {
+extension CLPopupDataRangPickerController {
+    override func showAnimation(completion: (() -> Void)?) {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         pickView.snp.remakeConstraints { make in
@@ -112,7 +124,7 @@ extension CLPopupDataRangPickerController: CLPopoverProtocol {
         }
     }
 
-    func dismissAnimation(completion: (() -> Void)?) {
+    override func dismissAnimation(completion: (() -> Void)?) {
         pickView.snp.remakeConstraints { make in
             make.top.equalTo(view.snp.bottom)
             make.left.right.equalToSuperview()
@@ -122,7 +134,6 @@ extension CLPopupDataRangPickerController: CLPopoverProtocol {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

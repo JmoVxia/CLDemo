@@ -9,15 +9,12 @@
 import UIKit
 
 class CLPlayVideoController: CLController {
-    private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler(delegate: self)
-        return hepler
-    }()
+    private let tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.dataSource = tableViewHepler
-        view.delegate = tableViewHepler
+        view.dataSource = tableViewRowManager
+        view.delegate = tableViewRowManager
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.separatorStyle = .none
@@ -45,7 +42,7 @@ class CLPlayVideoController: CLController {
         }
         DispatchQueue.global().async {
             for path in Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil) {
-                self.tableViewHepler.rows.append(CLPlayVideoitem(path: path))
+                self.tableViewRowManager.dataSource.append(CLPlayVideoitem(path: path))
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -61,7 +58,7 @@ class CLPlayVideoController: CLController {
 
 extension CLPlayVideoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let path = (tableViewHepler.rows[indexPath.row] as? CLPlayVideoitem)?.path else { return }
+        guard let path = (tableViewRowManager.dataSource[indexPath.row] as? CLPlayVideoitem)?.path else { return }
         CLVideoPlayer.cancel(path)
     }
 }

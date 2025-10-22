@@ -78,7 +78,7 @@ extension CLChatTextCell {
     }
 }
 
-extension CLChatTextCell: CLRowProtocol {
+extension CLChatTextCell: CLRowCellProtocol {
     func setItem(_ item: CLChatTextItem, indexPath: IndexPath) {
         titleLabel.textColor = item.isFromMyself ? .white : .black
         titleLabel.attributedText = item.attributedText

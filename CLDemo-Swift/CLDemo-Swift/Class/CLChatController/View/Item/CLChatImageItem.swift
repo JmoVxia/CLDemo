@@ -27,7 +27,7 @@ class CLChatImageItem: CLChatItem {
 }
 
 extension CLChatImageItem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLChatImageCell.self
     }
 }

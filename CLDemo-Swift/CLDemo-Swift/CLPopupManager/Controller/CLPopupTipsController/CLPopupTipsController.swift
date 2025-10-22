@@ -65,24 +65,23 @@ extension CLPopupTipsController {
     }
 }
 
-extension CLPopupTipsController: CLPopoverProtocol {
-    func showAnimation(completion: (() -> Void)?) {
+extension CLPopupTipsController {
+    override func showAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.35, animations: {
             self.backgroundView.alpha = 1.0
         }, completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.dismissInterval) {
-                self.dismissAnimation {
+                CLPopoverManager.dismiss(self.key) {
                     self.dissmissCallBack?()
                 }
             }
         })
     }
 
-    func dismissAnimation(completion: (() -> Void)?) {
+    override func dismissAnimation(completion: (() -> Void)?) {
         UIView.animate(withDuration: 0.35, animations: {
             self.backgroundView.alpha = 0.0
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

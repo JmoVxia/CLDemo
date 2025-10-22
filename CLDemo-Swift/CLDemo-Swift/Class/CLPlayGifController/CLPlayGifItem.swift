@@ -24,11 +24,11 @@ class CLPlayGifItem: NSObject {
 }
 
 extension CLPlayGifItem: CLRowItemProtocol {
-    func cellClass() -> UITableViewCell.Type {
+    var cellType: UITableViewCell.Type {
         CLPlayGifCell.self
     }
 
-    func cellHeight() -> CGFloat {
+    var cellHeight: CGFloat {
         size.height + 60
     }
 }

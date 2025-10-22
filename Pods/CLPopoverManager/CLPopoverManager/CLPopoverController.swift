@@ -35,11 +35,15 @@ import UIKit
             config.supportedInterfaceOrientations = supportedInterfaceOrientations
         }
     }
+}
 
-    open var config = CLPopoverConfig()
+extension CLPopoverController: CLPopoverProtocol {
+    open func showAnimation(completion: (() -> Void)?) {
+        completion?()
+    }
 
-    open var key: String {
-        "\(Unmanaged.passUnretained(self).toOpaque())"
+    open func dismissAnimation(completion: (() -> Void)?) {
+        completion?()
     }
 }
 

@@ -46,7 +46,7 @@ class CLPlayVideoCell: UITableViewCell {
     }
 }
 
-extension CLPlayVideoCell: CLRowProtocol {
+extension CLPlayVideoCell: CLRowCellProtocol {
     func setItem(_ item: CLPlayVideoitem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in

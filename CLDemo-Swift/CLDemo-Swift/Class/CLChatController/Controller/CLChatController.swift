@@ -12,15 +12,12 @@ import UIKit
 class CLChatController: CLController {
     /// 图片上传路径
     private let imageUploadPath: String = NSHomeDirectory() + "/Documents" + "/CLChatImageUpload"
-    private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler()
-        return hepler
-    }()
+    private let tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: CLIntrinsicTableView = {
         let tableView = CLIntrinsicTableView()
-        tableView.dataSource = tableViewHepler
-        tableView.delegate = tableViewHepler
+        tableView.dataSource = tableViewRowManager
+        tableView.delegate = tableViewRowManager
         tableView.backgroundColor = UIColor.clear
         tableView.separatorStyle = .none
         if #available(iOS 11.0, *) {
@@ -76,8 +73,8 @@ extension CLChatController {
 
     private func reloadData() {
         tableView.reloadData()
-        if tableViewHepler.rows.count >= 1 {
-            let item = max(tableViewHepler.rows.count - 1, 0)
+        if tableViewRowManager.dataSource.count >= 1 {
+            let item = max(tableViewRowManager.dataSource.count - 1, 0)
             tableView.scrollToRow(at: IndexPath(item: item, section: 0), at: .bottom, animated: true)
         }
     }
@@ -88,7 +85,7 @@ extension CLChatController {
         for text in messages {
             let item = CLChatTipsItem()
             item.text = text
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         reloadData()
     }
@@ -98,12 +95,12 @@ extension CLChatController {
             let rightItem = CLChatTextItem()
             rightItem.isFromMyself = true
             rightItem.text = text
-            tableViewHepler.rows.append(rightItem)
+            tableViewRowManager.dataSource.append(rightItem)
 
             let leftItem = CLChatTextItem()
             leftItem.isFromMyself = false
             leftItem.text = text
-            tableViewHepler.rows.append(leftItem)
+            tableViewRowManager.dataSource.append(leftItem)
         }
         reloadData()
     }
@@ -117,13 +114,13 @@ extension CLChatController {
             rightItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: rightItem.messageId + "previewImage")
             rightItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
             rightItem.isFromMyself = true
-            tableViewHepler.rows.append(rightItem)
+            tableViewRowManager.dataSource.append(rightItem)
 
             let leftItem = CLChatImageItem()
             leftItem.imagePath = saveUploadImage(imageData: previewImageData, messageId: leftItem.messageId + "previewImage")
             leftItem.imageOriginalSize = CGSize(width: imageInfo.asset.pixelWidth, height: imageInfo.asset.pixelHeight)
             leftItem.isFromMyself = false
-            tableViewHepler.rows.append(leftItem)
+            tableViewRowManager.dataSource.append(leftItem)
         }
         reloadData()
     }
@@ -133,14 +130,14 @@ extension CLChatController {
             let item = CLChatVoiceItem()
             item.duration = duration
             item.path = path
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         do {
             let item = CLChatVoiceItem()
             item.isFromMyself = false
             item.duration = duration
             item.path = path
-            tableViewHepler.rows.append(item)
+            tableViewRowManager.dataSource.append(item)
         }
         reloadData()
     }

@@ -50,7 +50,7 @@ class CLPlayGifCell: UITableViewCell {
     var item: CLPlayGifItem?
 }
 
-extension CLPlayGifCell: CLRowProtocol {
+extension CLPlayGifCell: CLRowCellProtocol {
     func setItem(_ item: CLPlayGifItem, indexPath: IndexPath) {
         nameLabel.text = item.path.lastPathComponent
         animageView.snp.updateConstraints { make in

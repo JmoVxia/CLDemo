@@ -252,7 +252,7 @@ let package = Package(
     name: "BuildTools",
     platforms: [.macOS(.v10_11)],
     dependencies: [
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.55.0"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.58.5"),
     ],
     targets: [.target(name: "BuildTools", path: "")]
 )
@@ -286,7 +286,7 @@ You can also use `swift run -c release --package-path BuildTools swiftformat "$S
 1. Add the `swiftformat` binary to your project directory via [CocoaPods](https://cocoapods.org/), by adding the following line to your Podfile then running `pod install`:
 
     ```ruby
-    pod 'SwiftFormat/CLI', '~> 0.55'
+    pod 'SwiftFormat/CLI', '~> 0.58.5'
     ```
 
 **NOTE:** This will only install the pre-built command-line app, not the source code for the SwiftFormat framework.
@@ -354,7 +354,7 @@ You can use `SwiftFormat` as a SwiftPM command plugin.
 ```swift
 dependencies: [
     // ...
-    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.55.0"),
+    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.58.5"),
 ]
 ```
 
@@ -678,7 +678,7 @@ You can specify the Swift compiler version in one of two ways:
 
 You can specify your project's Swift compiler version using the `--swift-version` command line argument. You can also add the `--swift-version` option to your `.swiftformat` file.
 
-Another option is to add a `.swift-version` file to your project directory. This is a text file that should contain the minimum Swift version supported by your project, and is also supported by some other tools. The `--swift-version` argument takes precedence over any `.swift-version` files.
+Another option is to add a `.swift-version` file to your project directory. This is a text file that should contain the minimum Swift version supported by your project, and is also supported by some other tools. Any `.swift-version` files always take precedence over the `--swift-version` argument.
 
 Both the `.swift-version` file and the `--swift-version` option in a `.swiftformat` file are applied hierarchically; If you have submodules in your project that use a different Swift version, you can add separate swift version configurations for those directories.
 
@@ -729,6 +729,19 @@ The config file format is designed to be edited by hand. You may include blank l
 
 # rules
 --disable elseOnSameLine,semicolons
+```
+
+You can create multiple configuration sections within a single `.swiftformat` file to apply different formatting options to different parts of your project. Each section should specify a `--filter` glob pattern to determine which files the configuration applies to. Options in that section are used when formatting files that match `--filter` glob, in addition to the base options in the file.
+
+```
+--enable indent
+--indent 4
+
+[Tests]
+--filter **/Tests/**
+--enable noForceUnwrapInTests
+--enable noForceTryInTests
+--indent 2
 ```
 
 If you would prefer not to edit the configuration file by hand, you can use the [SwiftFormat for Xcode](#xcode-source-editor-extension) app to edit the configuration and export a configuration file. You can also use the swiftformat command-line-tool's `--inferoptions` command to generate a config file from your existing project, like this:
@@ -901,26 +914,25 @@ SwiftFormat can format Swift code blocks inside Markdown files (`.md`). This is 
   ```
 ````
 
-To format Swift code blocks in markdown files, use the `--markdown-files` option with either `format-strict` or `format-lenient`:
+To format Swift code blocks in markdown files, use the `--markdown-files` option with either `strict` or `lenient`:
 
 ```bash
-$ swiftformat . --markdown-files format-strict
-$ swiftformat . --markdown-files format-lenient
+$ swiftformat . --markdown-files strict
+$ swiftformat . --markdown-files lenient
 ```
 
 Or add it to your `.swiftformat` config file:
 
 ```
---markdown-files format-strict
---markdown-files format-lenient
+--markdown-files strict
 ```
 
 **Formatting modes:**
 
 SwiftFormat supports two modes for handling markdown files:
 
-- `format-lenient` (default): Ignores parsing errors in code blocks and continues formatting
-- `format-strict`: Fails if any code blocks contain parsing errors
+- `lenient` (default): Ignores parsing errors in code blocks and continues formatting
+- `strict`: Fails if any code blocks contain parsing errors
 
 SwiftFormat's tokenizer is more permissive than the Swift compiler and typically only emits errors when encountering unbalanced scope tokens like `(` or `{`.
 

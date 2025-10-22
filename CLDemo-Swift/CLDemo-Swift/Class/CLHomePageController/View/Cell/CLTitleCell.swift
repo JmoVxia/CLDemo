@@ -33,7 +33,7 @@ private extension CLTitleCell {
     func makeConstraints() {}
 }
 
-extension CLTitleCell: CLRowProtocol {
+extension CLTitleCell: CLRowCellProtocol {
     func setItem(_ item: CLTitleCellItem, indexPath: IndexPath) {
         textLabel?.text = item.title
         accessoryType = item.accessoryType
