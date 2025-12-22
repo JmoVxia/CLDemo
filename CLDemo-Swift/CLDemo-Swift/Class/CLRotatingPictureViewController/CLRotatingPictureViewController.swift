@@ -30,12 +30,12 @@ class CLRotatingPictureViewController: CLController {
         var screenHeight: CGFloat
 
         if #available(iOS 11.0, *) {
-            screenWidth = UIScreen.main.bounds.size.width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right
+            screenWidth = UIScreen.main.bounds.size.width - view.safeAreaInsets.left - view.safeAreaInsets.right
         } else {
             screenWidth = UIScreen.main.bounds.size.width
         }
         if #available(iOS 11.0, *) {
-            screenHeight = UIScreen.main.bounds.size.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom
+            screenHeight = UIScreen.main.bounds.size.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
         } else {
             screenHeight = UIScreen.main.bounds.size.width
         }

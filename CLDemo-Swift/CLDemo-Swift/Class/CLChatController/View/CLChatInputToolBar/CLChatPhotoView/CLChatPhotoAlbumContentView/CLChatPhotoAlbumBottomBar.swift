@@ -50,7 +50,9 @@ class CLChatPhotoAlbumBottomBar: UIView {
         view.titleLabel?.font = .mediumPingFangSC(16)
         view.clipsToBounds = true
         view.layer.cornerRadius = 3
-        view.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
+        view.configuration = config
         view.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
         return view
     }()

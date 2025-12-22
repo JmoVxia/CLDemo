@@ -3,15 +3,15 @@ PODS:
     - SnapKit
   - CLNestedSlide (1.0.2):
     - SnapKit
-  - CLPopoverManager (0.0.6)
-  - CLTableViewManager (0.0.2)
+  - CLPopoverManager (0.0.7)
+  - CLTableViewManager (0.0.4)
   - CocoaLumberjack/Core (3.9.0)
   - CocoaLumberjack/Swift (3.9.0):
     - CocoaLumberjack/Core
   - CryptoSwift (1.8.4)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
-  - Kingfisher (8.6.0)
+  - Kingfisher (8.6.2)
   - libwebp (1.5.0):
     - libwebp/demux (= 1.5.0)
     - libwebp/mux (= 1.5.0)
@@ -30,14 +30,14 @@ PODS:
   - lottie-ios (4.5.2)
   - Masonry (1.1.0)
   - MJExtension (3.4.2)
-  - SDWebImage (5.21.3):
-    - SDWebImage/Core (= 5.21.3)
-  - SDWebImage/Core (5.21.3)
-  - SDWebImageWebPCoder (0.14.6):
+  - SDWebImage (5.21.5):
+    - SDWebImage/Core (= 5.21.5)
+  - SDWebImage/Core (5.21.5)
+  - SDWebImageWebPCoder (0.15.0):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SnapKit (5.7.1)
-  - SwiftFormat/CLI (0.58.5)
+  - SwiftFormat/CLI (0.58.7)
   - SwiftyJSON (5.0.2)
   - TZImagePickerController (3.8.9):
     - TZImagePickerController/Basic (= 3.8.9)
@@ -98,31 +98,31 @@ CHECKOUT OPTIONS:
     :commit: 1dd010f76fe671cb28ee519ee4e00b537fe50500
     :git: https://github.com/JmoVxia/CLCamera.git
   CLPopoverManager:
-    :commit: d7a01b271d2f34d51d135a54e04eacd6293df1a2
+    :commit: d2724f3c8537fc4d065b21d906fc52964e539173
     :git: https://github.com/JmoVxia/CLPopoverManager.git
 
 SPEC CHECKSUMS:
-  CLCamera: 8aa4a3f48a01a5b74d4ebcac6551e162fea261d4
+  CLCamera: d849090d2bed834cb99fc8e2a9a6ac9bbbc025cb
   CLNestedSlide: 97ad3e5ad8a8c03977e00beab8d4345233116a43
-  CLPopoverManager: 39c8907439cb3a09b57cf8e4e6f483640c7573aa
-  CLTableViewManager: a40b11bd20593b1ec7494e0961977e62d3531003
+  CLPopoverManager: e28121ea9bee803057c3f8123ad1ada5d4c1a8a8
+  CLTableViewManager: 7d866e295db91f48e0a2a4e2f3ec0c686c0bd0b9
   CocoaLumberjack: 5644158777912b7de7469fa881f8a3f259c2512a
   CryptoSwift: e64e11850ede528a02a0f3e768cec8e9d92ecb90
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  Kingfisher: 64278f126a815d0e2d391cdf71311b85882c4de0
+  Kingfisher: 23d18f54677d973b713e54ce6a8f5eef6e7056ba
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
   lottie-ios: 96784afc26ea031d3e2b6cae342a4b8915072489
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
-  SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
-  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
+  SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
+  SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  SwiftFormat: c6c5deb5c69c5893d9012b17a0df3c3784921c8f
+  SwiftFormat: 101eb1f937296342c837851bed442344261b2860
   SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
   TZImagePickerController: 456f470b5dea97b37226ec7a694994a8663340b2
 
-PODFILE CHECKSUM: cff828003b18e93c46a058e4719315c626da97e8
+PODFILE CHECKSUM: 2e494ec45d820e25c725a11d2a5e9ae4a6c6f784
 
 COCOAPODS: 1.16.2

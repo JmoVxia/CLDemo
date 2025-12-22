@@ -7,6 +7,14 @@
 
 import UIKit
 
+private extension CLPopoverManager {
+    struct CLPopoverQueueItem {
+        let controller: CLPopoverProtocol
+        let enqueueTime = Date()
+        let completion: (() -> Void)?
+    }
+}
+
 // MARK: - 弹窗管理者
 
 @objcMembers public class CLPopoverManager: NSObject {
@@ -18,7 +26,7 @@ import UIKit
 
     private static let shared = CLPopoverManager()
 
-    private var waitQueue = [String: (controller: CLPopoverProtocol, enqueueTime: Date)]()
+    private var waitQueue = [String: CLPopoverQueueItem]()
 
     private var activeWindows = [CLPopoverWindow]()
 
@@ -40,8 +48,8 @@ public extension CLPopoverManager {
                 return
             }
 
-            guard !shared.waitQueue.values.contains(where: { waitController, _ in
-                waitController.config.identifier != nil && waitController.config.identifier == controller.config.identifier
+            guard !shared.waitQueue.values.contains(where: {
+                $0.controller.config.identifier != nil && $0.controller.config.identifier == controller.config.identifier
             }) else {
                 return
             }
@@ -83,7 +91,7 @@ public extension CLPopoverManager {
                 shared.activeWindows.removeAll()
             }
             if controller.config.popoverMode == .queue, !shared.activeWindows.isEmpty {
-                shared.waitQueue[controller.key] = (controller: controller, enqueueTime: Date())
+                shared.waitQueue[controller.key] = CLPopoverQueueItem(controller: controller, completion: completion)
                 return
             }
             display(controller, completion: completion)
@@ -112,12 +120,14 @@ public extension CLPopoverManager {
                     windows.forEach { $0.isHidden = false }
                     shared.activeWindows = windows
                     shared.suspendedWindows.removeValue(forKey: key)
-                } else if let nextController = shared.waitQueue.values.sorted(by: {
-                    $0.controller.config.popoverPriority != $1.controller.config.popoverPriority ?
-                        $0.controller.config.popoverPriority > $1.controller.config.popoverPriority :
-                        $0.enqueueTime < $1.enqueueTime
-                }).first?.controller {
-                    display(nextController)
+                } else if let nextItem = shared.waitQueue.values.max(by: { lhs, rhs in
+                    if lhs.controller.config.popoverPriority != rhs.controller.config.popoverPriority {
+                        lhs.controller.config.popoverPriority < rhs.controller.config.popoverPriority
+                    } else {
+                        lhs.enqueueTime > rhs.enqueueTime
+                    }
+                }) {
+                    display(nextItem.controller, completion: nextItem.completion)
                 }
             }
         }
@@ -138,11 +148,19 @@ public extension CLPopoverManager {
 
 private extension CLPopoverManager {
     static func display(_ controller: CLPopoverProtocol, completion: (() -> Void)? = nil) {
-        let window = CLPopoverWindow(frame: UIScreen.main.bounds)
+        let window: CLPopoverWindow = {
+            if #available(iOS 13.0, *) {
+                let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+                let preferredScene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+                let popoverWindow = preferredScene.map { CLPopoverWindow(windowScene: $0) } ?? CLPopoverWindow(frame: UIScreen.main.bounds)
+                popoverWindow.overrideUserInterfaceStyle = .init(rawValue: controller.config.userInterfaceStyleOverride.rawValue) ?? .light
+                return popoverWindow
+            } else {
+                return CLPopoverWindow(frame: UIScreen.main.bounds)
+            }
+        }()
+
         window.backgroundColor = .clear
-        if #available(iOS 13.0, *) {
-            window.overrideUserInterfaceStyle = .init(rawValue: controller.config.userInterfaceStyleOverride.rawValue) ?? .light
-        }
         window.autoHideWhenPenetrated = controller.config.autoHideWhenPenetrated
         window.allowsEventPenetration = controller.config.allowsEventPenetration
         window.windowLevel = .alert + 50

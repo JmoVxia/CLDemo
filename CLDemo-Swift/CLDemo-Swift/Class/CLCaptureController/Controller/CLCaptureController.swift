@@ -30,7 +30,9 @@ class CLCaptureController: CLController {
         view.layer.cornerRadius = 8
         view.setTitle("拍照", for: .normal)
         view.setTitleColor(.orange, for: .normal)
-        view.contentEdgeInsets = .init(top: 8, left: 12, bottom: 8, right: 12)
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
+        view.configuration = config
         view.addTarget(self, action: #selector(cameraAction), for: .touchUpInside)
         return view
     }()

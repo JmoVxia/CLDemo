@@ -82,7 +82,9 @@ class CLChatPhotoAlbumCell: UICollectionViewCell {
         view.setTitleColor(.white, for: .selected)
         view.setTitleColor(.white, for: .highlighted)
         view.titleLabel?.font = .mediumPingFangSC(12)
-        view.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        view.configuration = config
         return view
     }()
 

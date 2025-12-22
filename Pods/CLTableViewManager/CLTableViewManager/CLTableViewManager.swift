@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 public class CLTableViewManager: NSObject {
     private weak var delegate: UITableViewDelegate?
 
@@ -143,7 +144,7 @@ extension CLTableViewManager: UITableViewDataSource {
 
 private extension CLTableViewManager {
     func sectionItem(for gestureRecognizer: UITapGestureRecognizer) -> (CLSectionItemProtocol, Int)? {
-        guard let view = gestureRecognizer.view as? UITableViewHeaderFooterView else { return nil }
+        guard let view = gestureRecognizer.view else { return nil }
         guard let item = sectionItem(for: view.tag) else { return nil }
         return (item, view.tag)
     }
@@ -166,16 +167,43 @@ private extension CLTableViewManager {
             if let view {
                 return view
             } else {
+                let tap = UITapGestureRecognizer(target: self, action: selector)
+                tap.numberOfTapsRequired = 1
+                tap.cancelsTouchesInView = false
+                tap.delegate = self
                 let view = viewClass.init(reuseIdentifier: identifier)
-                view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: selector))
                 view.isUserInteractionEnabled = true
+                view.contentView.addGestureRecognizer(tap)
                 return view
             }
         }()
 
-        headerFooterView.tag = section
+        headerFooterView.contentView.tag = section
         (headerFooterView as? CLSectionHeaderFooterBaseProtocol)?.set(item: item, section: section)
         return headerFooterView
+    }
+}
+extension CLTableViewManager: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let tap = gestureRecognizer as? UITapGestureRecognizer else { return true }
+        guard tap.numberOfTapsRequired == 1 else { return true }
+        
+        var view: UIView? = touch.view
+        while let current = view {
+            guard current != gestureRecognizer.view else { return true }
+            
+            if let control = current as? UIControl, control.isUserInteractionEnabled && control.isEnabled {
+                return false
+            }
+            
+            if current.gestureRecognizers?.contains(where: { ($0 as? UITapGestureRecognizer)?.numberOfTapsRequired == 1 }) == true {
+                return false
+            }
+
+            view = current.superview
+        }
+        
+        return true
     }
 }
 

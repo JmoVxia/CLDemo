@@ -818,7 +818,7 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
                                      maxFileSize:(NSUInteger)maxFileSize
                                          options:(nullable SDImageCoderOptions *)options
 {
-    NSData *webpData;
+    NSData *webpData = nil;
     if (!imageRef) {
         return nil;
     }
@@ -950,16 +950,55 @@ WEBP_CSP_MODE ConvertCSPMode(CGBitmapInfo bitmapInfo) {
     result = WebPEncode(&config, &picture);
     WebPPictureFree(&picture);
     free(dest.data);
-    
+
     if (result) {
-        // success
-        webpData = [NSData dataWithBytes:writer.mem length:writer.size];
+        // Add ICC profile if present
+        // See: https://developers.google.com/speed/webp/docs/riff_container#color_profile
+        // Skip ICC profile when maxFileSize is set, as meeting the size limit takes priority
+        CFDataRef iccData = NULL;
+        if (colorSpace && maxFileSize == 0) {
+            if (@available(iOS 10, tvOS 10, macOS 10.12, watchOS 3, *)) {
+                iccData = CGColorSpaceCopyICCData(colorSpace);
+            }
+        }
+
+        if (iccData && CFDataGetLength(iccData) > 0) {
+            // Use WebPMux to add ICCP chunk
+            // This automatically converts Simple Format to Extended Format (VP8X)
+            WebPMux *mux = WebPMuxNew();
+            if (mux) {
+                WebPData webp_input = {
+                    .bytes = writer.mem,
+                    .size = writer.size
+                };
+
+                if (WebPMuxSetImage(mux, &webp_input, 0) == WEBP_MUX_OK) {
+                    WebPData icc_chunk = {
+                        .bytes = CFDataGetBytePtr(iccData),
+                        .size = CFDataGetLength(iccData)
+                    };
+
+                    if (WebPMuxSetChunk(mux, "ICCP", &icc_chunk, 0) == WEBP_MUX_OK) {
+                        WebPData output;
+                        if (WebPMuxAssemble(mux, &output) == WEBP_MUX_OK) {
+                            webpData = [NSData dataWithBytes:output.bytes length:output.size];
+                            WebPDataClear(&output);
+                        }
+                    }
+                }
+                WebPMuxDelete(mux);
+            }
+            CFRelease(iccData);
+        }
+
+        if (!webpData) {
+            webpData = [NSData dataWithBytes:writer.mem length:writer.size];
+        }
     } else {
-        // failed
         webpData = nil;
     }
     WebPMemoryWriterClear(&writer);
-    
+
     return webpData;
 }
 

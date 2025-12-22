@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+@MainActor
 public class CLTableViewRowManager: CLTableViewManager {
     public var dataSource: [CLRowItemProtocol] = []
     

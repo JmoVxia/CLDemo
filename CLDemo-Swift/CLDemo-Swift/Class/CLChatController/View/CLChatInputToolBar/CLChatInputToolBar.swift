@@ -88,7 +88,6 @@ class CLChatInputToolBar: UIView {
     private lazy var moreButton: UIButton = {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "addIcon"), for: .normal)
         view.setBackgroundImage(UIImage(named: "addIcon"), for: .selected)
         view.addTarget(self, action: #selector(photoButtonAction), for: .touchUpInside)
@@ -100,7 +99,6 @@ class CLChatInputToolBar: UIView {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         view.isHidden = true
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "keyboard"), for: .normal)
         view.setBackgroundImage(UIImage(named: "keyboard"), for: .selected)
         view.addTarget(self, action: #selector(photoButtonAction), for: .touchUpInside)
@@ -111,7 +109,6 @@ class CLChatInputToolBar: UIView {
     private lazy var emojiButton: UIButton = {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "facialIcon"), for: .normal)
         view.setBackgroundImage(UIImage(named: "facialIcon"), for: .selected)
         view.addTarget(self, action: #selector(emojiButtonAction), for: .touchUpInside)
@@ -123,7 +120,6 @@ class CLChatInputToolBar: UIView {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         view.isHidden = true
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "keyboard"), for: .normal)
         view.setBackgroundImage(UIImage(named: "keyboard"), for: .selected)
         view.addTarget(self, action: #selector(emojiButtonAction), for: .touchUpInside)
@@ -134,7 +130,6 @@ class CLChatInputToolBar: UIView {
     private lazy var recordButton: UIButton = {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "voiceIcon"), for: .normal)
         view.setBackgroundImage(UIImage(named: "voiceIcon"), for: .selected)
         view.addTarget(self, action: #selector(recordButtonAction), for: .touchUpInside)
@@ -146,7 +141,6 @@ class CLChatInputToolBar: UIView {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         view.isHidden = true
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "keyboard"), for: .normal)
         view.setBackgroundImage(UIImage(named: "keyboard"), for: .selected)
         view.addTarget(self, action: #selector(recordButtonAction), for: .touchUpInside)
@@ -158,7 +152,6 @@ class CLChatInputToolBar: UIView {
         let view = UIButton()
         view.expandClickEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         view.isHidden = true
-        view.adjustsImageWhenHighlighted = false
         view.setBackgroundImage(UIImage(named: "sendIcon"), for: .normal)
         view.setBackgroundImage(UIImage(named: "sendIcon"), for: .selected)
         view.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)

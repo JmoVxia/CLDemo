@@ -1,6 +1,6 @@
 {
   "name": "CLPopoverManager",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "summary": "CLPopoverManager",
   "homepage": "https://github.com/JmoVxia/CLPopoverManager",
   "license": {
@@ -14,8 +14,8 @@
     "ios": "13.0"
   },
   "source": {
-    "git": "https://github.com/JmoVxia/CLPopoverManager",
-    "tag": "0.0.6"
+    "git": "https://github.com/JmoVxia/CLPopoverManager.git",
+    "tag": "0.0.7"
   },
   "source_files": [
     "CLPopoverManager/**/*"

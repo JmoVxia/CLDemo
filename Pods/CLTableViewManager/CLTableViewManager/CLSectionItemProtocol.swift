@@ -21,9 +21,10 @@ private var didSelectFooterKey: UInt8 = 0
 /// 表示一个 TableView 的分区模型协议（Section Item）
 public protocol CLSectionItemProtocol: CLDataSourceItemProtocol {
     // MARK: - Rows
-
-    /// 当前分区下的所有行模型
-    var rows: [CLRowItemProtocol] { get set }
+    /// 内部使用的行数组（可能折叠/过滤）
+    var visibleRows: [CLRowItemProtocol] { get }
+    /// 对外公开的完整行数组
+    var rows: [CLRowItemProtocol] { set get }
 
     // MARK: - Header
 
@@ -73,6 +74,10 @@ public protocol CLSectionItemProtocol: CLDataSourceItemProtocol {
 }
 
 public extension CLSectionItemProtocol {
+    var visibleRows: [CLRowItemProtocol] {
+        rows
+    }
+
     var rows: [CLRowItemProtocol] {
         get { objc_getAssociatedObject(self, &rowsKey) as? [CLRowItemProtocol] ?? [] }
         set { objc_setAssociatedObject(self, &rowsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }

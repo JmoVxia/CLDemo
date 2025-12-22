@@ -7,11 +7,12 @@
 
 import UIKit
 
+@MainActor
 public class CLTableViewSectionManager: CLTableViewManager {
     public var dataSource: [CLSectionItemProtocol] = []
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.dataSource[safe: section]?.rows.count ?? .zero
+        self.dataSource[safe: section]?.visibleRows.count ?? .zero
     }
 
     public override func numberOfSections(in tableView: UITableView) -> Int {
@@ -23,6 +24,6 @@ public class CLTableViewSectionManager: CLTableViewManager {
     }
 
     override func itemForIndexPath(_ indexPath: IndexPath) -> CLRowItemProtocol? {
-        self.dataSource[safe: indexPath.section]?.rows[safe: indexPath.row]
+        self.dataSource[safe: indexPath.section]?.visibleRows[safe: indexPath.row]
     }
 }

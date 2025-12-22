@@ -28,7 +28,9 @@
   "resources": "Camera/Resource/CLCamera.bundle",
   "requires_arc": true,
   "dependencies": {
-    "SnapKit": []
+    "SnapKit": [
+
+    ]
   },
   "swift_version": "5.0"
 }
