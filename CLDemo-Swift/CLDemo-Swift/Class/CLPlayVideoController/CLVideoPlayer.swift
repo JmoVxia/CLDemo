@@ -8,8 +8,24 @@
 
 import UIKit
 
+private extension UIView {
+    struct AssociatedKeys {
+        static var videoPath: UInt8 = 0
+        static var debounceIntervalKey: UInt8 = 1
+    }
+
+    var path: String? {
+        get { objc_getAssociatedObject(self, &AssociatedKeys.videoPath) as? String }
+        set { objc_setAssociatedObject(self, &AssociatedKeys.videoPath, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+}
+
 class CLVideoPlayer: NSObject {
     private static var manager: CLVideoPlayer?
+    private static let lock = NSLock()
+
+    private var operations = [String: CLVideoOperation]()
+
     private class var shared: CLVideoPlayer {
         guard let shareManager = manager else {
             manager = CLVideoPlayer()
@@ -18,17 +34,9 @@ class CLVideoPlayer: NSObject {
         return shareManager
     }
 
-    private var operationDictionary = [String: CLVideoOperation]()
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 10
         return queue
-    }()
-
-    private lazy var operationSemap: DispatchSemaphore = {
-        let semap = DispatchSemaphore(value: 0)
-        semap.signal()
-        return semap
     }()
 
     override private init() {}
@@ -39,59 +47,61 @@ class CLVideoPlayer: NSObject {
 }
 
 extension CLVideoPlayer {
-    static func startPlay(_ path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
-        cancel(path)
-        let videoOperation = CLVideoOperation(path: path, imageCallback: imageCallback)
-        videoOperation.completionBlock = {
-            removeValue(path)
-            startPlay(path, imageCallback: imageCallback)
+    static func play(_ path: String, bindTo view: UIView) {
+        withLock {
+            guard shared.operations[path] == nil else { return }
+
+            cancelOperation(view.path ?? "")
+            view.path = path
+            let videoOperation = CLVideoOperation(path: path, bindTo: view)
+            videoOperation.completionBlock = { [weak manager] in
+                guard let manager else { return }
+                withLock {
+                    manager.operations.removeValue(forKey: path)
+                }
+            }
+            shared.operations[path] = videoOperation
+            shared.operationQueue.addOperation(videoOperation)
         }
-        setOperation(videoOperation, for: path)
-        shared.operationQueue.addOperation(videoOperation)
     }
 
     static func cancel(_ path: String) {
-        guard let operation = operation(path),
-              !operation.isCancelled
-        else {
-            return
-        }
-        operation.imageCallback = nil
-        operation.completionBlock = nil
-        operation.cancel()
-        removeValue(path)
-    }
-
-    static func cacanAll() {
-        for key in shared.operationDictionary.keys {
-            cancel(key)
+        withLock {
+            cancelOperation(path)
         }
     }
 
-    /// 销毁
+    static func cancelAll() {
+        withLock {
+            cancelAllOperations()
+        }
+    }
+
     static func destroy() {
-        cacanAll()
-        manager = nil
+        withLock {
+            cancelAllOperations()
+            manager = nil
+        }
     }
 }
 
-private extension CLVideoPlayer {
-    static func operation(_ value: String) -> CLVideoOperation? {
-        shared.operationSemap.wait()
-        let operation = shared.operationDictionary[value]
-        shared.operationSemap.signal()
-        return operation
+extension CLVideoPlayer {
+    private static func cancelOperation(_ path: String) {
+        guard let operation = shared.operations[path], !operation.isCancelled else { return }
+        operation.bindView = nil
+        operation.completionBlock = nil
+        operation.cancel()
+        shared.operations.removeValue(forKey: path)
     }
 
-    static func setOperation(_ value: CLVideoOperation, for key: String) {
-        shared.operationSemap.wait()
-        shared.operationDictionary[key] = value
-        shared.operationSemap.signal()
+    private static func cancelAllOperations() {
+        shared.operationQueue.cancelAllOperations()
+        shared.operations.removeAll()
     }
 
-    static func removeValue(_ value: String) {
-        shared.operationSemap.wait()
-        shared.operationDictionary.removeValue(forKey: value)
-        shared.operationSemap.signal()
+    private static func withLock(_ block: () -> Void) {
+        lock.lock()
+        defer { lock.unlock() }
+        return block()
     }
 }

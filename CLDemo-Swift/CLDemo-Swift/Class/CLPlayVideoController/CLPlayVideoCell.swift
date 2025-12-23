@@ -52,8 +52,6 @@ extension CLPlayVideoCell: CLRowCellProtocol {
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)
         }
-        CLVideoPlayer.startPlay(item.path) { image, imagePath in
-            self.animageView.layer.contents = image
-        }
+        CLVideoPlayer.play(item.path, bindTo: animageView)
     }
 }

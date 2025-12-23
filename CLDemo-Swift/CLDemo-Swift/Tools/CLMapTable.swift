@@ -7,9 +7,32 @@
 
 import Foundation
 
-struct CLMapTable<Key: Hashable, Value: AnyObject> {
-    private let mapTable = NSMapTable<WrappedKey<Key>, Value>.strongToWeakObjects()
-    private let queue = DispatchQueue(label: "com.CKDMapTable.queue")
+enum CLMapTableKeyType {
+    case strong
+    case weak
+}
+
+enum CLMapTableValueType {
+    case strong
+    case weak
+}
+
+struct CLMapTable<Key: Hashable, Value> {
+    private let mapTable: NSMapTable<WrappedKey<Key>, WrappedValue<Value>>
+    private let queue = DispatchQueue(label: "com.CLMapTable.queue")
+
+    init(keyType: CLMapTableKeyType = .strong, valueType: CLMapTableValueType = .weak) {
+        switch (keyType, valueType) {
+        case (.strong, .strong):
+            mapTable = NSMapTable<WrappedKey<Key>, WrappedValue<Value>>.strongToStrongObjects()
+        case (.strong, .weak):
+            mapTable = NSMapTable<WrappedKey<Key>, WrappedValue<Value>>.strongToWeakObjects()
+        case (.weak, .strong):
+            mapTable = NSMapTable<WrappedKey<Key>, WrappedValue<Value>>.weakToStrongObjects()
+        case (.weak, .weak):
+            mapTable = NSMapTable<WrappedKey<Key>, WrappedValue<Value>>.weakToWeakObjects()
+        }
+    }
 
     /// 获取所有键
     var keys: [Key] {
@@ -21,25 +44,25 @@ struct CLMapTable<Key: Hashable, Value: AnyObject> {
     /// 获取所有值
     var values: [Value] {
         queue.sync {
-            mapTable.objectEnumerator()?.allObjects.compactMap { $0 as? Value } ?? []
+            mapTable.objectEnumerator()?.allObjects.compactMap { ($0 as? WrappedValue<Value>)?.value } ?? []
         }
     }
 
     /// 获取指定键的对象
     func object(forKey aKey: Key) -> Value? {
         queue.sync {
-            mapTable.object(forKey: WrappedKey(aKey))
+            mapTable.object(forKey: WrappedKey(aKey))?.value
         }
     }
 
     /// 设置指定键的对象
     func setObject(_ anObject: Value, forKey aKey: Key) {
         queue.sync {
-            mapTable.setObject(anObject, forKey: WrappedKey(aKey))
+            mapTable.setObject(WrappedValue(anObject), forKey: WrappedKey(aKey))
         }
     }
 
-    /// 移除指定键的对象
+    /// 按照指定键移除对象
     func removeObject(forKey aKey: Key) {
         queue.sync {
             mapTable.removeObject(forKey: WrappedKey(aKey))
@@ -61,6 +84,15 @@ struct CLMapTable<Key: Hashable, Value: AnyObject> {
         override func isEqual(_ object: Any?) -> Bool {
             guard let other = object as? WrappedKey<T> else { return false }
             return value == other.value
+        }
+    }
+
+    private class WrappedValue<T>: NSObject {
+        let value: T
+
+        init(_ value: T) {
+            self.value = value
+            super.init()
         }
     }
 }

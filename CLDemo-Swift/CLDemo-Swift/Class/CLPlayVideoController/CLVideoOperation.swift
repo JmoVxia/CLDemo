@@ -10,8 +10,11 @@ import AVFoundation
 import UIKit
 
 class CLVideoOperation: Operation, @unchecked Sendable {
-    var imageCallback: ((CGImage, String) -> Void)?
-    private var path: String!
+    weak var bindView: UIView?
+    private let videoPath: String
+    private let maximumLoopCount: Int
+    private var currentLoopCount: Int = 0
+
     private var taskFinished: Bool = true {
         willSet {
             if taskFinished != newValue {
@@ -50,14 +53,15 @@ class CLVideoOperation: Operation, @unchecked Sendable {
         true
     }
 
-    init(path: String, imageCallback: @escaping ((CGImage, String) -> Void)) {
-        self.path = path
-        self.imageCallback = imageCallback
+    init(path: String, bindTo view: UIView, loopCount: Int = 0) {
+        videoPath = path
+        maximumLoopCount = loopCount
+        bindView = view
         super.init()
     }
 
     deinit {
-//        CLLog("CLVideoOperation deinit")
+        CLLog("CLVideoOperation deinit")
     }
 }
 
@@ -77,14 +81,6 @@ extension CLVideoOperation {
             }
         }
     }
-
-    override func cancel() {
-        if isExecuting {
-            taskFinished = true
-            taskExecuting = false
-        }
-        super.cancel()
-    }
 }
 
 extension CLVideoOperation {
@@ -92,34 +88,59 @@ extension CLVideoOperation {
         defer {
             complete()
         }
-        let url = URL(fileURLWithPath: path)
-        let asset = AVURLAsset(url: url, options: nil)
-        let videoTracks = asset.tracks(withMediaType: .video)
-        guard !videoTracks.isEmpty,
-              let assetReader = try? AVAssetReader(asset: asset),
-              let videoTrack = videoTracks.first
-        else {
-            return
-        }
-        let orientation = orientation(from: videoTrack)
-        let videoReaderTrackOptput = AVAssetReaderTrackOutput(track: videoTrack, outputSettings: [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA])
 
-        assetReader.add(videoReaderTrackOptput)
-        assetReader.startReading()
-
-        let timePerFrame = 1.0 / videoTrack.nominalFrameRate
-        while assetReader.status == .reading, videoTrack.nominalFrameRate > 0, !isCancelled {
-            guard let sampleBuffer = videoReaderTrackOptput.copyNextSampleBuffer(),
-                  let image = image(from: sampleBuffer, orientation: orientation)
-            else {
+        while !isCancelled {
+            if maximumLoopCount > 0, currentLoopCount >= maximumLoopCount {
                 break
             }
-            DispatchQueue.main.async {
-                self.imageCallback?(image, self.path)
+            autoreleasepool {
+                playOnce()
             }
-            Thread.sleep(forTimeInterval: TimeInterval(timePerFrame))
+            currentLoopCount += 1
         }
-        assetReader.cancelReading()
+
+        func playOnce() {
+            let url = URL(fileURLWithPath: videoPath)
+            let asset = AVURLAsset(url: url, options: nil)
+            let videoTracks = asset.tracks(withMediaType: .video)
+
+            guard !videoTracks.isEmpty,
+                  let assetReader = try? AVAssetReader(asset: asset),
+                  let videoTrack = videoTracks.first,
+                  videoTrack.nominalFrameRate > 0
+            else {
+                return
+            }
+
+            let orientation = orientation(from: videoTrack)
+            let output = AVAssetReaderTrackOutput(
+                track: videoTrack,
+                outputSettings: [
+                    kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
+                ]
+            )
+
+            assetReader.add(output)
+            assetReader.startReading()
+
+            let timePerFrame = 1.0 / videoTrack.nominalFrameRate
+
+            while assetReader.status == .reading, !isCancelled {
+                guard let sampleBuffer = output.copyNextSampleBuffer(),
+                      let image = image(from: sampleBuffer, orientation: orientation)
+                else {
+                    break
+                }
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.bindView?.layer.contents = image
+                }
+
+                Thread.sleep(forTimeInterval: TimeInterval(timePerFrame))
+            }
+
+            assetReader.cancelReading()
+        }
     }
 }
 
@@ -138,7 +159,7 @@ extension CLVideoOperation {
         if orientation == .up {
             return cgImage
         } else {
-            return fixImage(cgImage, orientation: orientation)
+            return fixedImage(cgImage, orientation: orientation)
         }
     }
 
@@ -157,7 +178,7 @@ extension CLVideoOperation {
         return orientation
     }
 
-    private func fixImage(_ image: CGImage, orientation: UIImage.Orientation) -> CGImage {
+    private func fixedImage(_ image: CGImage, orientation: UIImage.Orientation) -> CGImage {
         var rect: CGRect
         var rotate: CGFloat = 0
         var translateX: CGFloat = 0
@@ -192,20 +213,35 @@ extension CLVideoOperation {
             translateX = 0
             translateY = 0
         }
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context?.translateBy(x: 0.0, y: rect.height)
-        context?.scaleBy(x: 1.0, y: -1.0)
-        context?.rotate(by: CGFloat(rotate))
-        context?.translateBy(x: CGFloat(translateX), y: CGFloat(translateY))
-        context?.scaleBy(x: CGFloat(scaleX), y: CGFloat(scaleY))
-        context?.draw(image, in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height))
-        let cgImage = context?.makeImage()
-        UIGraphicsEndImageContext()
-        if let cgImage {
-            return cgImage
+
+        if #available(iOS 17.0, *) {
+            let renderer = UIGraphicsImageRenderer(size: rect.size)
+            let uiImage = renderer.image { ctx in
+                let context = ctx.cgContext
+                context.translateBy(x: 0.0, y: rect.height)
+                context.scaleBy(x: 1.0, y: -1.0)
+                context.rotate(by: rotate)
+                context.translateBy(x: translateX, y: translateY)
+                context.scaleBy(x: scaleX, y: scaleY)
+                context.draw(image, in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height))
+            }
+            return uiImage.cgImage ?? image
         } else {
-            return image
+            UIGraphicsBeginImageContext(rect.size)
+            let context = UIGraphicsGetCurrentContext()
+            context?.translateBy(x: 0.0, y: rect.height)
+            context?.scaleBy(x: 1.0, y: -1.0)
+            context?.rotate(by: rotate)
+            context?.translateBy(x: translateX, y: translateY)
+            context?.scaleBy(x: scaleX, y: scaleY)
+            context?.draw(image, in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height))
+            let cgImage = context?.makeImage()
+            UIGraphicsEndImageContext()
+            if let cgImage {
+                return cgImage
+            } else {
+                return image
+            }
         }
     }
 }
