@@ -334,6 +334,10 @@
 		5BF2B1552A41498B00FEBD58 /* 14.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1472A41498B00FEBD58 /* 14.gif */; };
 		5BF2B1562A41498B00FEBD58 /* 12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1482A41498B00FEBD58 /* 12.gif */; };
 		5BF2B1572A41498B00FEBD58 /* 8.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5BF2B1492A41498B00FEBD58 /* 8.gif */; };
+		B54301D02EFB7D0D00DB6DCE /* CLVideoFrameCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CC2EFB7D0D00DB6DCE /* CLVideoFrameCache.swift */; };
+		B54301D12EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CD2EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift */; };
+		B54301D22EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CE2EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift */; };
+		B54301D32EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CF2EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift */; };
 		C010E9D2E10B3C83DC2DFA27 /* libPods-CLDemo-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */; };
 /* End PBXBuildFile section */
 
@@ -675,6 +679,10 @@
 		5BF2B1482A41498B00FEBD58 /* 12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 12.gif; sourceTree = "<group>"; };
 		5BF2B1492A41498B00FEBD58 /* 8.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 8.gif; sourceTree = "<group>"; };
 		6B6549039237527F047D3A8E /* Pods-CLDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLDemo-Swift.release.xcconfig"; path = "Target Support Files/Pods-CLDemo-Swift/Pods-CLDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		B54301CC2EFB7D0D00DB6DCE /* CLVideoFrameCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameCache.swift; sourceTree = "<group>"; };
+		B54301CD2EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameDiskCache.swift; sourceTree = "<group>"; };
+		B54301CE2EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameCacheConfig.swift; sourceTree = "<group>"; };
+		B54301CF2EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameMemoryCache.swift; sourceTree = "<group>"; };
 		C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLDemo-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1876,12 +1884,11 @@
 		5BD0434826832EAB0054F2B4 /* CLPlayVideoController */ = {
 			isa = PBXGroup;
 			children = (
-				5BD0434A26832EAB0054F2B4 /* video */,
 				5BD0435B26832EAB0054F2B4 /* CLPlayVideoController.swift */,
-				5BD0434926832EAB0054F2B4 /* CLPlayVideoitem.swift */,
 				5BD0435A26832EAB0054F2B4 /* CLPlayVideoCell.swift */,
-				5BD0435C26832EAB0054F2B4 /* CLVideoOperation.swift */,
-				5BD0435D26832EAB0054F2B4 /* CLVideoPlayer.swift */,
+				5BD0434926832EAB0054F2B4 /* CLPlayVideoitem.swift */,
+				5BD0434A26832EAB0054F2B4 /* video */,
+				B54301D42EFBC12600DB6DCE /* CLVideoPlayer */,
 			);
 			path = CLPlayVideoController;
 			sourceTree = "<group>";
@@ -2313,6 +2320,19 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
+		B54301D42EFBC12600DB6DCE /* CLVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				B54301CE2EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift */,
+				B54301CC2EFB7D0D00DB6DCE /* CLVideoFrameCache.swift */,
+				B54301CD2EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift */,
+				B54301CF2EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift */,
+				5BD0435C26832EAB0054F2B4 /* CLVideoOperation.swift */,
+				5BD0435D26832EAB0054F2B4 /* CLVideoPlayer.swift */,
+			);
+			path = CLVideoPlayer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2552,6 +2572,7 @@
 				4FAF3F682E9F89BC00398A5C /* CLPopupDataRangPickerController.swift in Sources */,
 				5B1C367026841FAF00D777EB /* CLPermissionsManager.swift in Sources */,
 				5B76932226841C70008BB92B /* CLChatEmojiView.swift in Sources */,
+				B54301D32EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift in Sources */,
 				5B8F69322C7D69DB00C6E5DE /* CLGifPlayer.swift in Sources */,
 				5B39ECD027574AC0000FCF67 /* CLIngredients.swift in Sources */,
 				5BD0442626833C7C0054F2B4 /* CLStartsView.swift in Sources */,
@@ -2601,6 +2622,7 @@
 				5B83980B26A1673700FD1D3C /* CLTiledFlipRetroTransition.swift in Sources */,
 				5B3CC41D291EA9C600568D77 /* CLLineChartViewDataSource.swift in Sources */,
 				5BE668E7268488B90095F82E /* CLRoundAnimationView.swift in Sources */,
+				B54301D12EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift in Sources */,
 				5BD0442026833B6C0054F2B4 /* CLMarqueeView.swift in Sources */,
 				5B3309EB28FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
@@ -2662,6 +2684,7 @@
 				5B39ECC8275747DE000FCF67 /* CLIngredientRightTitleHead.swift in Sources */,
 				5B80043026819307000E39AC /* CLTabBarController.swift in Sources */,
 				5B76933126841C70008BB92B /* CLChatTipsItem.swift in Sources */,
+				B54301D22EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift in Sources */,
 				5B8004472681ADF0000E39AC /* CLRecordController.swift in Sources */,
 				5B81E9A127575D0A009DCB3E /* CLHanziPinyinController.swift in Sources */,
 				5B3309E628FFFB23000D44DF /* CLCalendarConfig.swift in Sources */,
@@ -2773,6 +2796,7 @@
 				5BAABFFC2681B3B200C2F609 /* CLTitleCell.swift in Sources */,
 				5B0DC70F26CA365E00909BF2 /* CLHoneycombScrollViewController.swift in Sources */,
 				5B80044A2681AE02000E39AC /* CLMealController.swift in Sources */,
+				B54301D02EFB7D0D00DB6DCE /* CLVideoFrameCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

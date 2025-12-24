@@ -48,10 +48,10 @@ class CLPlayVideoCell: UITableViewCell {
 
 extension CLPlayVideoCell: CLRowCellProtocol {
     func setItem(_ item: CLPlayVideoitem, indexPath: IndexPath) {
-        nameLabel.text = item.path.lastPathComponent
+        nameLabel.text = item.url.lastPathComponent
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)
         }
-        CLVideoPlayer.play(item.path, bindTo: animageView)
+        CLVideoPlayer.play(item.url, bindTo: animageView)
     }
 }
