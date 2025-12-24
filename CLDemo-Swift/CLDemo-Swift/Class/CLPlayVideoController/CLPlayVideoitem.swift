@@ -10,12 +10,12 @@ import AVFoundation
 import UIKit
 
 class CLPlayVideoitem: NSObject {
-    let path: String!
+    let url: URL!
     private(set) var size: CGSize = .zero
-    init(path: String) {
-        self.path = path
+    init(url: URL) {
+        self.url = url
 
-        let asset = AVURLAsset(url: URL(fileURLWithPath: path), options: nil)
+        let asset = AVURLAsset(url: url, options: nil)
         let generate = AVAssetImageGenerator(asset: asset)
         generate.appliesPreferredTrackTransform = true
         guard let oneRef = try? generate.copyCGImage(at: CMTimeMake(value: 1, timescale: 2), actualTime: nil) else { return }
