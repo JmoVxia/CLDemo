@@ -52,6 +52,6 @@ extension CLPlayVideoCell: CLRowCellProtocol {
         animageView.snp.updateConstraints { make in
             make.size.equalTo(item.size)
         }
-        CLVideoPlayer.play(item.url, bindTo: animageView)
+        animageView.cl.playVideo(with: item.url)
     }
 }

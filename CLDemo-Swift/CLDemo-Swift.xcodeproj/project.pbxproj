@@ -233,7 +233,6 @@
 		5BD0436D26832EAB0054F2B4 /* 9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5BD0435926832EAB0054F2B4 /* 9.mp4 */; };
 		5BD0436E26832EAB0054F2B4 /* CLPlayVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0435A26832EAB0054F2B4 /* CLPlayVideoCell.swift */; };
 		5BD0436F26832EAB0054F2B4 /* CLPlayVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0435B26832EAB0054F2B4 /* CLPlayVideoController.swift */; };
-		5BD0437026832EAB0054F2B4 /* CLVideoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0435C26832EAB0054F2B4 /* CLVideoOperation.swift */; };
 		5BD0437126832EAB0054F2B4 /* CLVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0435D26832EAB0054F2B4 /* CLVideoPlayer.swift */; };
 		5BD0438826832F980054F2B4 /* CLPlayGifItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0437426832F980054F2B4 /* CLPlayGifItem.swift */; };
 		5BD0438926832F980054F2B4 /* CLPlayGifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0437526832F980054F2B4 /* CLPlayGifCell.swift */; };
@@ -338,6 +337,10 @@
 		B54301D12EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CD2EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift */; };
 		B54301D22EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CE2EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift */; };
 		B54301D32EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54301CF2EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift */; };
+		B5B689D52F0E4A1800EE53A2 /* CLVideoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B689D22F0E4A1700EE53A2 /* CLVideoTask.swift */; };
+		B5B689D62F0E4A1800EE53A2 /* CLVideoTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B689D32F0E4A1800EE53A2 /* CLVideoTaskQueue.swift */; };
+		B5B689D72F0E4A1800EE53A2 /* CLVideoPlayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B689D42F0E4A1800EE53A2 /* CLVideoPlayer+Extension.swift */; };
+		B5B689DB2F0F927000EE53A2 /* NSRecursiveLock+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B689DA2F0F927000EE53A2 /* NSRecursiveLock+Extension.swift */; };
 		C010E9D2E10B3C83DC2DFA27 /* libPods-CLDemo-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */; };
 /* End PBXBuildFile section */
 
@@ -577,7 +580,6 @@
 		5BD0435926832EAB0054F2B4 /* 9.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 9.mp4; sourceTree = "<group>"; };
 		5BD0435A26832EAB0054F2B4 /* CLPlayVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayVideoCell.swift; sourceTree = "<group>"; };
 		5BD0435B26832EAB0054F2B4 /* CLPlayVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayVideoController.swift; sourceTree = "<group>"; };
-		5BD0435C26832EAB0054F2B4 /* CLVideoOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoOperation.swift; sourceTree = "<group>"; };
 		5BD0435D26832EAB0054F2B4 /* CLVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoPlayer.swift; sourceTree = "<group>"; };
 		5BD0437426832F980054F2B4 /* CLPlayGifItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayGifItem.swift; sourceTree = "<group>"; };
 		5BD0437526832F980054F2B4 /* CLPlayGifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlayGifCell.swift; sourceTree = "<group>"; };
@@ -683,6 +685,10 @@
 		B54301CD2EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameDiskCache.swift; sourceTree = "<group>"; };
 		B54301CE2EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameCacheConfig.swift; sourceTree = "<group>"; };
 		B54301CF2EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoFrameMemoryCache.swift; sourceTree = "<group>"; };
+		B5B689D22F0E4A1700EE53A2 /* CLVideoTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoTask.swift; sourceTree = "<group>"; };
+		B5B689D32F0E4A1800EE53A2 /* CLVideoTaskQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoTaskQueue.swift; sourceTree = "<group>"; };
+		B5B689D42F0E4A1800EE53A2 /* CLVideoPlayer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLVideoPlayer+Extension.swift"; sourceTree = "<group>"; };
+		B5B689DA2F0F927000EE53A2 /* NSRecursiveLock+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRecursiveLock+Extension.swift"; sourceTree = "<group>"; };
 		C8254A72163DF7A29F742753 /* libPods-CLDemo-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLDemo-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -2323,12 +2329,15 @@
 		B54301D42EFBC12600DB6DCE /* CLVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				B5B689DA2F0F927000EE53A2 /* NSRecursiveLock+Extension.swift */,
+				B5B689D42F0E4A1800EE53A2 /* CLVideoPlayer+Extension.swift */,
+				5BD0435D26832EAB0054F2B4 /* CLVideoPlayer.swift */,
+				B5B689D22F0E4A1700EE53A2 /* CLVideoTask.swift */,
+				B5B689D32F0E4A1800EE53A2 /* CLVideoTaskQueue.swift */,
 				B54301CE2EFB7D0D00DB6DCE /* CLVideoFrameCacheConfig.swift */,
 				B54301CC2EFB7D0D00DB6DCE /* CLVideoFrameCache.swift */,
 				B54301CD2EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift */,
 				B54301CF2EFB7D0D00DB6DCE /* CLVideoFrameMemoryCache.swift */,
-				5BD0435C26832EAB0054F2B4 /* CLVideoOperation.swift */,
-				5BD0435D26832EAB0054F2B4 /* CLVideoPlayer.swift */,
 			);
 			path = CLVideoPlayer;
 			sourceTree = "<group>";
@@ -2551,7 +2560,6 @@
 				5B39ECCA275747DE000FCF67 /* CLIngredientSearchCell.swift in Sources */,
 				5BD9C21C27BA2E00003B948D /* CLGrayscaleController.swift in Sources */,
 				5B09A0602C1BE3A90034395A /* PCH.swift in Sources */,
-				5BD0437026832EAB0054F2B4 /* CLVideoOperation.swift in Sources */,
 				5B0CDB0A26B7940100B45AD1 /* HexagonalItemView.swift in Sources */,
 				5B0DC71A26CA39FE00909BF2 /* CGRect+Extension.swift in Sources */,
 				5BD0438826832F980054F2B4 /* CLPlayGifItem.swift in Sources */,
@@ -2623,9 +2631,11 @@
 				5B3CC41D291EA9C600568D77 /* CLLineChartViewDataSource.swift in Sources */,
 				5BE668E7268488B90095F82E /* CLRoundAnimationView.swift in Sources */,
 				B54301D12EFB7D0D00DB6DCE /* CLVideoFrameDiskCache.swift in Sources */,
+				B5B689D72F0E4A1800EE53A2 /* CLVideoPlayer+Extension.swift in Sources */,
 				5BD0442026833B6C0054F2B4 /* CLMarqueeView.swift in Sources */,
 				5B3309EB28FFFB23000D44DF /* CLCalendarSectionBackgroundView.swift in Sources */,
 				5B76931A26841C70008BB92B /* CLChatPhotoAlbumCell.swift in Sources */,
+				B5B689D52F0E4A1800EE53A2 /* CLVideoTask.swift in Sources */,
 				5B39ECCD27574A2C000FCF67 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5B76933626841E11008BB92B /* CLGCDTimer.swift in Sources */,
 				5B0CDB0926B7940100B45AD1 /* HexagonalPattern.swift in Sources */,
@@ -2637,6 +2647,7 @@
 				5B76931026841C70008BB92B /* CLChatController.swift in Sources */,
 				5B80044D2681AE28000E39AC /* CLMeController.swift in Sources */,
 				5B80042926818E0A000E39AC /* CLBackView.swift in Sources */,
+				B5B689D62F0E4A1800EE53A2 /* CLVideoTaskQueue.swift in Sources */,
 				5B0DC71E26CA4AE400909BF2 /* CLHoneycombCustomCell.swift in Sources */,
 				5B63E55329D6898400F39220 /* CLMultiCell.swift in Sources */,
 				5BDCDB0A29CEA862000F8A6C /* CLMultiDataSource.swift in Sources */,
@@ -2698,6 +2709,7 @@
 				5BD043C7268334040054F2B4 /* CLScrollAnimationController.swift in Sources */,
 				5B83980826A1657100FD1D3C /* CLTiledFlipRetroTransitionController.swift in Sources */,
 				5B76931526841C70008BB92B /* CLIntrinsicTableView.swift in Sources */,
+				B5B689DB2F0F927000EE53A2 /* NSRecursiveLock+Extension.swift in Sources */,
 				5BD043A12683302E0054F2B4 /* CLDrawerTestController.swift in Sources */,
 				5B3309E528FFFB23000D44DF /* CLCalendarDelegateFlowLayout.swift in Sources */,
 				5BD043AE268332100054F2B4 /* CLAnimatedGradientController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CLVideoOperation.swift
+//  CLVideoTask.swift
 //  CLDemo
 //
 //  Created by Chen JmoVxia on 2021/5/8.
@@ -9,127 +9,232 @@
 import AVFoundation
 import UIKit
 
-class CLVideoOperation: Operation, @unchecked Sendable {
-    weak var bindView: UIView?
-    private let videoURL: URL
-    private let maximumLoopCount: Int
-    private var currentLoopCount: Int = 0
-    private var currentFrameIndex: Int = 0
-    private var decodedFrameCount: Int?
-    private let frameCache = CLVideoFrameCache.shared
+// MARK: - 任务状态枚举
 
-    // 缓存视频元数据，避免每次循环重复读取
+@objc enum CLVideoTaskState: Int {
+    case idle
+    case waiting
+    case executing
+    case suspended
+    case finished
+    case cancelled
+
+    var isFinal: Bool {
+        self == .finished || self == .cancelled
+    }
+}
+
+// MARK: - CLVideoTask
+
+final class CLVideoTask: NSObject, @unchecked Sendable {
+    // MARK: - 公开属性
+
+    let url: URL
+    let maximumLoopCount: Int
+
+    var bindViews: [UIView] {
+        lock.lock()
+        defer { lock.unlock() }
+        return bindViewsTable.allObjects
+    }
+
+    var isCancelled: Bool { state == .cancelled }
+    var isExecuting: Bool { state == .executing }
+    var isFinished: Bool { state == .finished }
+
+    // MARK: - 状态回调
+
+    var stateDidChange: (() -> Void)?
+
+    private(set) var state: CLVideoTaskState = .idle {
+        didSet {
+            guard state != oldValue else { return }
+            stateDidChange?()
+        }
+    }
+
+    // MARK: - 私有属性
+
+    private let bindViewsTable = NSHashTable<UIView>.weakObjects()
+    private let lock = NSRecursiveLock()
+    private var currentLoopCount = 0
+    private var currentFrameIndex = 0
+    private var decodedFrameCount: Int?
+    private lazy var frameCache = CLVideoFrameCache.shared
+
     private var cachedFrameRate: Float?
     private var cachedOrientation: UIImage.Orientation?
     private var cachedTimePerFrame: Float?
+    private var executionThread: Thread?
 
-    private var taskFinished: Bool = true {
-        willSet {
-            if taskFinished != newValue {
-                willChangeValue(forKey: "isFinished")
-            }
-        }
-        didSet {
-            if taskFinished != oldValue {
-                didChangeValue(forKey: "isFinished")
-            }
-        }
-    }
+    // MARK: - 初始化
 
-    private var taskExecuting: Bool = false {
-        willSet {
-            if taskExecuting != newValue {
-                willChangeValue(forKey: "isExecuting")
-            }
-        }
-        didSet {
-            if taskExecuting != oldValue {
-                didChangeValue(forKey: "isExecuting")
-            }
-        }
-    }
-
-    override var isFinished: Bool {
-        taskFinished
-    }
-
-    override var isExecuting: Bool {
-        taskExecuting
-    }
-
-    override var isAsynchronous: Bool {
-        true
-    }
-
-    init(url: URL, bindTo view: UIView, loopCount: Int = 0) {
-        videoURL = url
+    init(url: URL, loopCount: Int = 0) {
+        self.url = url
         maximumLoopCount = loopCount
-        bindView = view
         super.init()
     }
 
     deinit {
-//        CLLog("CLVideoOperation deinit")
+        CLLog("CLVideoTask deinit: \(url.lastPathComponent)")
     }
 }
 
-extension CLVideoOperation {
-    override func start() {
-        autoreleasepool {
-            if isCancelled {
-                taskFinished = true
-                taskExecuting = false
-            } else {
-                taskFinished = false
-                taskExecuting = true
-                startTask {
-                    taskFinished = true
-                    taskExecuting = false
-                }
+// MARK: - 绑定视图管理
+
+extension CLVideoTask {
+    /// 添加绑定视图
+    func addBindView(_ view: UIView) {
+        lock.withLock { bindViewsTable.add(view) }
+    }
+
+    /// 移除绑定视图
+    func removeBindView(_ view: UIView) {
+        lock.lock()
+        bindViewsTable.remove(view)
+        DispatchQueue.main.async {
+            view.layer.contents = nil
+        }
+        let hasViews = bindViewsTable.count > 0
+        lock.unlock()
+
+        if !hasViews {
+            cancel()
+        }
+    }
+}
+
+// MARK: - 状态控制
+
+extension CLVideoTask {
+    /// 设置任务为等待状态
+    func setWaitingState() {
+        lock.lock()
+        guard state == .idle else {
+            lock.unlock()
+            return
+        }
+        state = .waiting
+        lock.unlock()
+    }
+
+    /// 启动任务
+    func start() {
+        lock.lock()
+        guard state == .waiting else {
+            lock.unlock()
+            return
+        }
+        state = .executing
+        lock.unlock()
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.executeTask()
+        }
+    }
+
+    /// 取消任务
+    func cancel() {
+        lock.lock()
+        guard !state.isFinal else {
+            lock.unlock()
+            return
+        }
+        state = .cancelled
+        lock.unlock()
+        clearBindViewUrls()
+    }
+
+    /// 暂停任务
+    func suspend() {
+        lock.lock()
+        guard state == .executing else {
+            lock.unlock()
+            return
+        }
+        state = .suspended
+        lock.unlock()
+    }
+
+    /// 恢复任务
+    func resume() {
+        lock.lock()
+        guard state == .suspended else {
+            lock.unlock()
+            return
+        }
+        state = .executing
+        lock.unlock()
+    }
+}
+
+// MARK: - 私有方法
+
+extension CLVideoTask {
+    /// 等待暂停状态结束，返回是否应继续执行
+    @discardableResult
+    private func waitIfSuspended() -> Bool {
+        while state == .suspended, !isCancelled {
+            Thread.sleep(forTimeInterval: 0.1)
+        }
+        return !isCancelled
+    }
+
+    private func clearBindViewUrls() {
+        let views = bindViews
+        DispatchQueue.main.async {
+            views.forEach { $0.cl.videoURL = nil }
+        }
+    }
+
+    private func setStateFinished() {
+        lock.lock()
+        guard !state.isFinal else {
+            lock.unlock()
+            return
+        }
+        state = .finished
+        lock.unlock()
+        clearBindViewUrls()
+    }
+}
+
+// MARK: - 任务执行
+
+extension CLVideoTask {
+    private func executeTask() {
+        defer {
+            if !isCancelled {
+                setStateFinished()
             }
         }
-    }
-}
 
-extension CLVideoOperation {
-    private func startTask(_ complete: () -> Void) {
-        defer {
-            complete()
-        }
-
-        // 每次任务开始时重置帧索引和循环计数
         currentFrameIndex = 0
         currentLoopCount = 0
 
-        CLVideoFrameCacheLog.log("视频播放开始: \(videoURL.absoluteString)", level: .info)
-
-        // 预获取视频元数据，避免每次循环重复读取
-        let asset = AVURLAsset(url: videoURL, options: nil)
+        let asset = AVURLAsset(url: url, options: nil)
         let videoTracks = asset.tracks(withMediaType: .video)
 
-        guard !videoTracks.isEmpty,
-              let videoTrack = videoTracks.first,
+        guard let videoTrack = videoTracks.first,
               videoTrack.nominalFrameRate > 0
-        else {
-            return
-        }
+        else { return }
 
         let frameRate = videoTrack.nominalFrameRate
         let timePerFrame = 1.0 / frameRate
         let videoOrientation = orientation(from: videoTrack)
 
-        // 缓存元数据
         cachedFrameRate = frameRate
         cachedTimePerFrame = timePerFrame
         cachedOrientation = videoOrientation
 
         while !isCancelled {
-            if maximumLoopCount > 0, currentLoopCount >= maximumLoopCount {
-                break
-            }
+            guard waitIfSuspended() else { break }
+            if maximumLoopCount > 0, currentLoopCount >= maximumLoopCount { break }
+
             autoreleasepool {
                 playOnce(asset: asset, videoTrack: videoTrack, orientation: videoOrientation, timePerFrame: timePerFrame, frameRate: frameRate)
             }
+
             currentLoopCount += 1
             currentFrameIndex = 0
         }
@@ -138,35 +243,29 @@ extension CLVideoOperation {
     private func playOnce(asset: AVURLAsset, videoTrack: AVAssetTrack, orientation: UIImage.Orientation, timePerFrame: Float, frameRate: Float) {
         currentFrameIndex = 0
 
-        // 后续循环且帧数已知，直接从缓存播放
         if let decodedFrameCount, currentLoopCount > 0 {
             playCachedFrames(frameCount: decodedFrameCount, frameRate: frameRate, timePerFrame: timePerFrame)
             return
         }
 
-        guard let assetReader = try? AVAssetReader(asset: asset) else {
-            return
-        }
+        guard let assetReader = try? AVAssetReader(asset: asset) else { return }
 
         let output = AVAssetReaderTrackOutput(
             track: videoTrack,
-            outputSettings: [
-                kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
-            ]
+            outputSettings: [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         )
 
         assetReader.add(output)
         assetReader.startReading()
-
-        defer {
-            assetReader.cancelReading()
-        }
+        defer { assetReader.cancelReading() }
 
         var lastFrameTime = CACurrentMediaTime()
         let frameInterval = TimeInterval(timePerFrame)
 
         while assetReader.status == .reading, !isCancelled {
-            let cacheKey = CLVideoFrameCache.cacheKey(videoURL: videoURL, frameIndex: currentFrameIndex, frameRate: frameRate)
+            guard waitIfSuspended() else { break }
+
+            let cacheKey = CLVideoFrameCache.cacheKey(videoURL: url, frameIndex: currentFrameIndex, frameRate: frameRate)
 
             let hasFrame = playFrameWithCache(
                 cacheKey: cacheKey,
@@ -187,21 +286,18 @@ extension CLVideoOperation {
         }
     }
 
-    // 纯缓存播放：后续循环直接从缓存读取帧，无需创建 AVAssetReader
     private func playCachedFrames(frameCount: Int, frameRate: Float, timePerFrame: Float) {
         var lastFrameTime = CACurrentMediaTime()
         let frameInterval = TimeInterval(timePerFrame)
 
         for frameIndex in 0 ..< frameCount {
-            if isCancelled { break }
+            guard waitIfSuspended() else { break }
 
-            let cacheKey = CLVideoFrameCache.cacheKey(videoURL: videoURL, frameIndex: frameIndex, frameRate: frameRate)
+            let cacheKey = CLVideoFrameCache.cacheKey(videoURL: url, frameIndex: frameIndex, frameRate: frameRate)
 
-            // 优先从内存缓存获取
             if let cachedImage = frameCache.memoryCacheImageForKey(cacheKey) {
                 displayFrame(cachedImage, lastFrameTime: &lastFrameTime, frameInterval: frameInterval)
             } else {
-                // 内存未命中则查询磁盘缓存
                 let semaphore = DispatchSemaphore(value: 0)
                 var frameImage: CGImage?
 
@@ -209,7 +305,9 @@ extension CLVideoOperation {
                     frameImage = image
                     semaphore.signal()
                 }
-                semaphore.wait()
+
+                let waitResult = semaphore.wait(timeout: .now() + 0.5)
+                if waitResult == .timedOut || isCancelled { break }
 
                 if let frameImage {
                     displayFrame(frameImage, lastFrameTime: &lastFrameTime, frameInterval: frameInterval)
@@ -220,29 +318,24 @@ extension CLVideoOperation {
         }
     }
 
-    // 显示帧并精确控制帧率
     private func displayFrame(_ image: CGImage, lastFrameTime: inout CFTimeInterval, frameInterval: TimeInterval) {
+        let currentURL = url
+        let views = bindViews
+
         DispatchQueue.main.async {
-            self.bindView?.layer.contents = image
+            views.filter { $0.cl.videoURL == currentURL }.forEach { $0.layer.contents = image }
         }
 
-        // 精确帧率控制：计算下一帧应该显示的时间
         let targetTime = lastFrameTime + frameInterval
-        let now = CACurrentMediaTime()
-        let sleepTime = targetTime - now
-
+        let sleepTime = targetTime - CACurrentMediaTime()
         if sleepTime > 0 {
             Thread.sleep(forTimeInterval: sleepTime)
         }
-
         lastFrameTime = CACurrentMediaTime()
     }
 
-    // 边缓存边播放：检查缓存，未命中则解码并缓存
     private func playFrameWithCache(cacheKey: String, output: AVAssetReaderTrackOutput, orientation: UIImage.Orientation, lastFrameTime: inout CFTimeInterval, frameInterval: TimeInterval) -> Bool {
-        guard let sampleBuffer = output.copyNextSampleBuffer() else {
-            return false
-        }
+        guard let sampleBuffer = output.copyNextSampleBuffer() else { return false }
 
         var frameImage: CGImage?
 
@@ -250,127 +343,60 @@ extension CLVideoOperation {
             frameImage = cachedImage
         } else {
             let semaphore = DispatchSemaphore(value: 0)
-            frameCache.queryImageForKey(cacheKey) { [weak self] cachedImage in
-                guard let self else {
-                    semaphore.signal()
-                    return
-                }
+            frameCache.queryImageForKey(cacheKey) { cachedImage in
                 if let cachedImage {
                     frameImage = cachedImage
-                } else if let decodedImage = image(from: sampleBuffer, orientation: orientation) {
+                } else if let decodedImage = self.image(from: sampleBuffer, orientation: orientation) {
                     frameImage = decodedImage
-                    frameCache.storeImage(decodedImage, forKey: cacheKey)
-                } else {
-                    frameImage = nil
+                    self.frameCache.storeImage(decodedImage, forKey: cacheKey)
                 }
                 semaphore.signal()
             }
-            semaphore.wait()
+
+            let waitResult = semaphore.wait(timeout: .now() + 0.5)
+            if waitResult == .timedOut || isCancelled { return false }
         }
 
         if let frameImage {
             displayFrame(frameImage, lastFrameTime: &lastFrameTime, frameInterval: frameInterval)
             return true
-        } else {
-            return false
         }
-    }
-
-    // 先缓存所有帧再播放
-    private func precacheAllFrames() {
-        CLVideoFrameCacheLog.log("开始预缓存所有帧: \(videoURL.absoluteString)", level: .info)
-
-        let asset = AVURLAsset(url: videoURL, options: nil)
-        let videoTracks = asset.tracks(withMediaType: .video)
-
-        guard !videoTracks.isEmpty,
-              let assetReader = try? AVAssetReader(asset: asset),
-              let videoTrack = videoTracks.first,
-              videoTrack.nominalFrameRate > 0
-        else {
-            return
-        }
-
-        let orientation = orientation(from: videoTrack)
-        let output = AVAssetReaderTrackOutput(
-            track: videoTrack,
-            outputSettings: [
-                kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
-            ]
-        )
-
-        assetReader.add(output)
-        assetReader.startReading()
-
-        var frameIndex = 0
-        while assetReader.status == .reading, !isCancelled {
-            guard let sampleBuffer = output.copyNextSampleBuffer(),
-                  let decodedImage = image(from: sampleBuffer, orientation: orientation)
-            else {
-                break
-            }
-
-            let cacheKey = CLVideoFrameCache.cacheKey(videoURL: videoURL, frameIndex: frameIndex, frameRate: videoTrack.nominalFrameRate)
-
-            // 检查是否已缓存
-            let semaphore = DispatchSemaphore(value: 0)
-            var alreadyCached = false
-
-            frameCache.queryImageForKey(cacheKey) { cachedImage in
-                alreadyCached = (cachedImage != nil)
-                semaphore.signal()
-            }
-
-            semaphore.wait()
-
-            if !alreadyCached {
-                frameCache.storeImage(decodedImage, forKey: cacheKey)
-            }
-
-            frameIndex += 1
-
-            if frameIndex % 10 == 0 {
-                CLVideoFrameCacheLog.log("预缓存进度: \(frameIndex) 帧", level: .info)
-            }
-        }
-
-        assetReader.cancelReading()
-        CLVideoFrameCacheLog.log("预缓存完成: 共 \(frameIndex) 帧", level: .info)
+        return false
     }
 }
 
-extension CLVideoOperation {
+// MARK: - 图像处理
+
+extension CLVideoTask {
     private func image(from sampleBuffer: CMSampleBuffer, orientation: UIImage.Orientation) -> CGImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        defer { CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0)) }
+
         let baseAddress = CVPixelBufferGetBaseAddress(imageBuffer)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer)
         let width = CVPixelBufferGetWidth(imageBuffer)
         let height = CVPixelBufferGetHeight(imageBuffer)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue)
-        guard let context = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else { return nil }
-        guard let cgImage = context.makeImage() else { return nil }
-        if orientation == .up {
-            return cgImage
-        } else {
-            return fixedImage(cgImage, orientation: orientation)
-        }
+
+        guard let context = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue),
+              let cgImage = context.makeImage()
+        else { return nil }
+
+        return orientation == .up ? cgImage : fixedImage(cgImage, orientation: orientation)
     }
 
     private func orientation(from videoTrack: AVAssetTrack) -> UIImage.Orientation {
-        var orientation: UIImage.Orientation = .up
         let track = videoTrack.preferredTransform
         if track.a == 0, track.b == 1.0, track.c == -1.0, track.d == 0 {
-            orientation = .right
+            return .right
         } else if track.a == 0, track.b == -1.0, track.c == 1.0, track.d == 0 {
-            orientation = .left
-        } else if track.a == 1.0, track.b == 0, track.c == 0, track.d == 1.0 {
-            orientation = .up
+            return .left
         } else if track.a == -1.0, track.b == 0, track.c == 0, track.d == -1.0 {
-            orientation = .down
+            return .down
         }
-        return orientation
+        return .up
     }
 
     private func fixedImage(_ image: CGImage, orientation: UIImage.Orientation) -> CGImage {
@@ -382,6 +408,7 @@ extension CLVideoOperation {
         var scaleY: CGFloat = 1.0
 
         let size = CGSize(width: CGFloat(image.width), height: CGFloat(image.height))
+
         switch orientation {
         case .left:
             rotate = .pi * 0.5
@@ -423,6 +450,7 @@ extension CLVideoOperation {
             return uiImage.cgImage ?? image
         } else {
             UIGraphicsBeginImageContext(rect.size)
+            defer { UIGraphicsEndImageContext() }
             let context = UIGraphicsGetCurrentContext()
             context?.translateBy(x: 0.0, y: rect.height)
             context?.scaleBy(x: 1.0, y: -1.0)
@@ -430,13 +458,7 @@ extension CLVideoOperation {
             context?.translateBy(x: translateX, y: translateY)
             context?.scaleBy(x: scaleX, y: scaleY)
             context?.draw(image, in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height))
-            let cgImage = context?.makeImage()
-            UIGraphicsEndImageContext()
-            if let cgImage {
-                return cgImage
-            } else {
-                return image
-            }
+            return context?.makeImage() ?? image
         }
     }
 }

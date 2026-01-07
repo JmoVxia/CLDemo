@@ -25,7 +25,7 @@
 //  THE SOFTWARE.
 
 #if !os(watchOS)
-@preconcurrency import Photos
+ import Photos
 
 /// A structure that contains information about the result of loading a live photo.
 public struct LivePhotoLoadingInfoResult: Sendable {

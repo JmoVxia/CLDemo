@@ -24,7 +24,7 @@ extension CLLogUploadOperation {
     override func startTask(completion: @escaping () -> Void) {
         guard !isCancelled else { completion(); return }
         // TODO: 替换为你实际的 OSS 上传代码
-        print("上传开始：\(filePath)")
+//        print("上传开始：\(filePath)")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            let success = true
 //            if success {
@@ -37,7 +37,7 @@ extension CLLogUploadOperation {
 //            } else {
             ////                print("上传失败：\(self.filePath)")
 //            }
-            print("上传成功：\(self.filePath)")
+//            print("上传成功：\(self.filePath)")
             completion()
         }
     }

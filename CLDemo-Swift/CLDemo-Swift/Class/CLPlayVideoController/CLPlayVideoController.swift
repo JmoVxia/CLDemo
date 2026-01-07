@@ -9,7 +9,7 @@
 import UIKit
 
 class CLPlayVideoController: CLController {
-    private let tableViewRowManager = CLTableViewRowManager()
+    private lazy var tableViewRowManager = CLTableViewRowManager()
 
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
@@ -41,9 +41,9 @@ class CLPlayVideoController: CLController {
             make.top.equalTo(statusBarHeight + (navigationController?.navigationBar.bounds.height ?? 0))
         }
         DispatchQueue.global().async {
-            for path in Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil) {
-                self.tableViewRowManager.dataSource.append(CLPlayVideoitem(url: URL(fileURLWithPath: path)))
-            }
+            let allPaths = Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil)
+            let items = [[String]](repeating: allPaths, count: 5).flatMap { $0 }.shuffled().map { CLPlayVideoitem(url: URL(fileURLWithPath: $0)) }
+            self.tableViewRowManager.dataSource.append(contentsOf: items)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -51,8 +51,6 @@ class CLPlayVideoController: CLController {
     }
 
     deinit {
-        CLLog("CLPlayVideoController deinit")
         CLVideoPlayer.destroy()
     }
 }
-
