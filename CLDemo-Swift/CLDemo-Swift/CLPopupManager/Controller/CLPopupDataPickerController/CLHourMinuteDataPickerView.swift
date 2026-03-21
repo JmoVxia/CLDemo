@@ -22,15 +22,9 @@ class CLHourMinuteDataPickerView: UIView {
     private var nowDate: Date = .init(timeIntervalSinceNow: 0)
     private var hourIndex: Int = 0
     private var minuteIndex: Int = 0
-    private lazy var hourArray: [Int] = {
-        let hourArray = Array(0 ... 23)
-        return hourArray
-    }()
+    private lazy var hourArray: [Int] = Array(0 ... 23)
 
-    private lazy var minuteArray: [Int] = {
-        let minuteArray = Array(0 ... 59)
-        return minuteArray
-    }()
+    private lazy var minuteArray: [Int] = Array(0 ... 59)
 
     private lazy var lineView: UILabel = {
         let lineView = UILabel()

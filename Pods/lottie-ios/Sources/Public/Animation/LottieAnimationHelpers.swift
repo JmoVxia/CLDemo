@@ -28,8 +28,6 @@ extension LottieAnimation {
     CGSize(width: width, height: height)
   }
 
-  // MARK: Animation (Loading)
-
   /// Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found.
   ///
   /// - Parameter name: The name of the json file without the json extension. EG "StarAnimation"
@@ -42,9 +40,8 @@ extension LottieAnimation {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> LottieAnimation? {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
 
@@ -77,9 +74,8 @@ extension LottieAnimation {
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func filepath(
     _ filepath: String,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> LottieAnimation? {
     /// Check cache for animation
     if
       let animationCache,
@@ -111,9 +107,8 @@ extension LottieAnimation {
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> LottieAnimation? {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + "/" + name
 
@@ -151,9 +146,8 @@ extension LottieAnimation {
   ///
   public static func from(
     data: Data,
-    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy)
-    throws -> LottieAnimation
-  {
+    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy
+  ) throws -> LottieAnimation {
     switch strategy {
     case .legacyCodable:
       return try JSONDecoder().decode(LottieAnimation.self, from: data)
@@ -169,41 +163,53 @@ extension LottieAnimation {
   /// Loads a Lottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
+  /// - Returns: Loaded Lottie animation, or `nil` if loading failed.
   public static func loadedFrom(
     url: URL,
-    session: URLSession = .shared,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    async -> LottieAnimation?
-  {
-    await withCheckedContinuation { continuation in
-      LottieAnimation.loadedFrom(
-        url: url,
-        session: session,
-        closure: { result in
-          continuation.resume(returning: result)
-        },
-        animationCache: animationCache)
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) async -> LottieAnimation? {
+    var dataTask: URLSessionDataTask?
+    let cancelTask = { dataTask?.cancel() }
+    return await withTaskCancellationHandler {
+      await withCheckedContinuation { continuation in
+        dataTask = LottieAnimation.loadedFrom(
+          url: url,
+          session: session,
+          closure: { result in
+            continuation.resume(returning: result)
+          },
+          animationCache: animationCache
+        )
+      }
+    } onCancel: {
+      cancelTask()
     }
   }
 
   /// Loads a Lottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter closure: A closure to be called when the animation has loaded.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
+  /// - Returns: `URLSessionDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
+  @discardableResult
   public static func loadedFrom(
     url: URL,
-    session: URLSession = .shared,
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
     closure: @escaping LottieAnimation.DownloadClosure,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> URLSessionDataTask? {
     if let animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
+      return nil
     } else {
-      let task = session.dataTask(with: url) { data, _, error in
+      let task = session.lottieDataTask(with: url) { data, _, error in
         guard error == nil, let jsonData = data else {
           DispatchQueue.main.async {
             closure(nil)
@@ -222,11 +228,10 @@ extension LottieAnimation {
           }
         }
       }
-      task.resume()
+      task?.resume()
+      return task
     }
   }
-
-  // MARK: Animation (Helpers)
 
   /// Markers are a way to describe a point in time by a key name.
   ///
@@ -277,10 +282,16 @@ extension LottieAnimation {
   /// (optionally clamped to between 0 and 1).
   public func progressTime(
     forFrame frameTime: AnimationFrameTime,
-    clamped: Bool = true)
-    -> AnimationProgressTime
-  {
-    let progressTime = ((frameTime - startFrame) / (endFrame - startFrame))
+    clamped: Bool = true
+  ) -> AnimationProgressTime {
+    let progressTime: AnimationFrameTime
+    let frameDuration = endFrame - startFrame
+
+    if frameDuration == 0.0 {
+      progressTime = 0.0
+    } else {
+      progressTime = ((frameTime - startFrame) / frameDuration)
+    }
 
     if clamped {
       return progressTime.clamp(0, 1)
@@ -304,17 +315,3 @@ extension LottieAnimation {
     CGFloat(time * framerate) + startFrame
   }
 }
-
-// MARK: - Foundation.Bundle + Sendable
-
-/// Necessary to suppress warnings like:
-/// ```
-/// Non-sendable type 'Bundle' exiting main actor-isolated context in call to non-isolated
-/// static method 'named(_:bundle:subdirectory:dotLottieCache:)' cannot cross actor boundary
-/// ```
-/// This retroactive conformance is safe because Sendable is a marker protocol that doesn't
-/// include any runtime component. Multiple modules in the same package graph can provide this
-/// conformance without causing any conflicts.
-///
-// swiftlint:disable:next no_unchecked_sendable
-extension Foundation.Bundle: @unchecked Sendable { }

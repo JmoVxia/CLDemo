@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLBubbleTransitionController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLBubbleTransitionController: CLController {
@@ -92,10 +88,6 @@ private extension CLBubbleTransitionController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLBubbleTransitionController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLBubbleTransitionController {
@@ -105,11 +97,3 @@ extension CLBubbleTransitionController {}
         present(controller, animated: true)
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLBubbleTransitionController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLBubbleTransitionController {}

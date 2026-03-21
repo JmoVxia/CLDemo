@@ -29,7 +29,7 @@
 public struct RetrieveLivePhotoResult: @unchecked Sendable {
 }
 #else
- import PhotosUI
+@preconcurrency import PhotosUI
 
 /// A result type that contains the information of a retrieved live photo.
 ///

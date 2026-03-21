@@ -21,10 +21,7 @@ class CLBroadcastViewController: CLController {
         return array
     }()
 
-    private lazy var layoutView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private lazy var layoutView: UIView = .init()
 
     private lazy var collectionVerticalLabel: UILabel = {
         let view = UILabel()

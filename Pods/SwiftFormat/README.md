@@ -252,7 +252,7 @@ let package = Package(
     name: "BuildTools",
     platforms: [.macOS(.v10_11)],
     dependencies: [
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.58.7"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.60.1"),
     ],
     targets: [.target(name: "BuildTools", path: "")]
 )
@@ -286,7 +286,7 @@ You can also use `swift run -c release --package-path BuildTools swiftformat "$S
 1. Add the `swiftformat` binary to your project directory via [CocoaPods](https://cocoapods.org/), by adding the following line to your Podfile then running `pod install`:
 
     ```ruby
-    pod 'SwiftFormat/CLI', '~> 0.58.7'
+    pod 'SwiftFormat/CLI', '~> 0.60.1'
     ```
 
 **NOTE:** This will only install the pre-built command-line app, not the source code for the SwiftFormat framework.
@@ -354,7 +354,7 @@ You can use `SwiftFormat` as a SwiftPM command plugin.
 ```swift
 dependencies: [
     // ...
-    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.58.7"),
+    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.60.1"),
 ]
 ```
 
@@ -744,7 +744,7 @@ You can create multiple configuration sections within a single `.swiftformat` fi
 --indent 2
 ```
 
-If you would prefer not to edit the configuration file by hand, you can use the [SwiftFormat for Xcode](#xcode-source-editor-extension) app to edit the configuration and export a configuration file. You can also use the swiftformat command-line-tool's `--inferoptions` command to generate a config file from your existing project, like this:
+If you would prefer not to edit the configuration file by hand, you can use the [SwiftFormat for Xcode](#xcode-source-editor-extension) app to edit the configuration and export a configuration file. You can also use the swiftformat command-line-tool's `--infer-options` command to generate a config file from your existing project, like this:
 
 ```bash
 $ cd /path/to/project
@@ -1085,6 +1085,8 @@ Known issues
 * The `propertyTypes` rule can cause a build failure in cases where the property's type is a protocol / existential like `let shapeStyle: ShapeStyle = .myShapeStyle`, and the value used on the right-hand side is defined in an extension like `extension ShapeStyle where Self == MyShapeStyle { static var myShapeStyle: MyShapeStyle { ... } }`. As a workaround you can use the existential `any` syntax (`let shapeStyle: any ShapeStyle = .myShapeStyle`), which the rule will preserve as-is, or exclude the type name and/or property name with `--preserve-symbols ShapeStyle,myShapeStyle,etc`.
 
 * The `propertyTypes` rule can cause a build failure in cases like `let foo = Foo.bar` where the value is a static member that doesn't return the same time. For example, `let foo: Foo = .bar` would be invalid if the `bar` property was defined as `static var bar: Bar`. As a workaround you can write the name of the type explicitly, like `let foo: Bar = Foo.bar`, or exclude the type name and/or property name with `--preserve-symbols Bar,bar,etc`.
+
+* The `redundantEquatable` rule may incorrectly remove a `==` implementation that intentionally overrides a default `==` provided by another protocol. For example, `Strideable` provides a default `==` implementation derived from `distance(to:)`, and a type may override it with a custom `==`. SwiftFormat handles this case when the `Strideable` conformance is defined in the same file, but it cannot detect conformances in a different file, nor default `==` implementations provided by other protocols. As a workaround you can use the `// swiftformat:disable:next redundantEquatable` comment directive to disable the rule for the affected type (or just disable the `redundantEquatable` rule completely).
 
 
 Tip Jar

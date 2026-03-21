@@ -9,10 +9,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLIngredientLeftTitleHead {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLIngredientLeftTitleHead: UITableViewHeaderFooterView {
@@ -106,10 +102,6 @@ private extension CLIngredientLeftTitleHead {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLIngredientLeftTitleHead {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLIngredientLeftTitleHead {
@@ -117,11 +109,3 @@ extension CLIngredientLeftTitleHead {}
         clickCallback?()
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLIngredientLeftTitleHead {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLIngredientLeftTitleHead {}

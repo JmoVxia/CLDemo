@@ -25,8 +25,7 @@ class CLTagsFrameConfigure: NSObject {
     var isAlignment: Bool = true
     /// 默认配置
     class func defaultConfigure() -> CLTagsFrameConfigure {
-        let configure = CLTagsFrameConfigure()
-        return configure
+        CLTagsFrameConfigure()
     }
 }
 

@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLTruncationController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLTruncationController: CLController {
@@ -116,10 +112,6 @@ private extension CLTruncationController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLTruncationController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLTruncationController {
@@ -128,11 +120,3 @@ extension CLTruncationController {}
         truncationLabel.reload()
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLTruncationController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLTruncationController {}

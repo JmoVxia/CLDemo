@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLPopupDataRangPickerView {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLPopupDataRangPickerView: UIView {
@@ -189,10 +185,6 @@ private extension CLPopupDataRangPickerView {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLPopupDataRangPickerView {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLPopupDataRangPickerView {
@@ -213,14 +205,6 @@ extension CLPopupDataRangPickerView {}
         confirmCallback?(hours[startHourIndex], minutes[startMinuteIndex], hours[endHourIndex], minutes[endMinuteIndex])
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLPopupDataRangPickerView {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLPopupDataRangPickerView {}
 
 // MARK: - UIPickerViewDataSource, UIPickerViewDelegate
 

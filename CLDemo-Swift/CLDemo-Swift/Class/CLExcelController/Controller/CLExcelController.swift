@@ -104,18 +104,6 @@ private extension CLExcelController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLExcelController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLExcelController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLExcelController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLExcelController {}

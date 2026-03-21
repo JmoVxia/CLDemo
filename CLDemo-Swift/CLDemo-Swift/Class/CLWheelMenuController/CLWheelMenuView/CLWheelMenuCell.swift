@@ -32,10 +32,7 @@ class CLWheelMenuCell: UIView {
         return view
     }()
 
-    private(set) lazy var imageView: UIImageView = {
-        let view = UIImageView()
-        return view
-    }()
+    private(set) lazy var imageView: UIImageView = .init()
 
     init(frame: CGRect, startAngle: CGFloat, endAngle: CGFloat, contentsTransform: CATransform3D) {
         super.init(frame: frame)

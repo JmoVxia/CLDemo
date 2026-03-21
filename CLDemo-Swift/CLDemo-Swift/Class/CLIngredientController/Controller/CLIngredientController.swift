@@ -262,10 +262,6 @@ private extension CLIngredientController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLIngredientController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLIngredientController {}
@@ -345,10 +341,6 @@ private extension CLIngredientController {
         }
     }
 }
-
-// MARK: - JmoVxia---公共方法
-
-extension CLIngredientController {}
 
 extension CLIngredientController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

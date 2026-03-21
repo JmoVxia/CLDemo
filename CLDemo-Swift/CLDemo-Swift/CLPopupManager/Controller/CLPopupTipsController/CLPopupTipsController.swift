@@ -71,7 +71,7 @@ extension CLPopupTipsController {
             self.backgroundView.alpha = 1.0
         }, completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.dismissInterval) {
-                CLPopoverManager.dismiss(self.key) {
+                CLPopoverManager.dismiss(forKey: self.key) {
                     self.dissmissCallBack?()
                 }
             }

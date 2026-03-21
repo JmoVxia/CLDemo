@@ -123,10 +123,6 @@ private extension CLHoneycombController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLHoneycombController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLHoneycombController {}
@@ -143,7 +139,3 @@ private extension CLHoneycombController {
         navigationController?.pushViewController(controller, animated: true)
     }
 }
-
-// MARK: - JmoVxia---公共方法
-
-extension CLHoneycombController {}

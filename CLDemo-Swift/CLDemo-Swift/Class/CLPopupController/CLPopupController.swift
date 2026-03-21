@@ -14,10 +14,7 @@ class CLPopupModel: NSObject {
 }
 
 class CLPopupController: CLController {
-    lazy var arrayDS: [CLPopupModel] = {
-        let arrayDS = [CLPopupModel]()
-        return arrayDS
-    }()
+    lazy var arrayDS: [CLPopupModel] = .init()
 
     lazy var tableview: UITableView = {
         let tableview = UITableView()

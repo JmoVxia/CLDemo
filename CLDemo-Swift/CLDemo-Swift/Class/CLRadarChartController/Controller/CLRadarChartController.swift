@@ -98,10 +98,6 @@ private extension CLRadarChartController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLRadarChartController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLRadarChartController {
@@ -110,14 +106,6 @@ extension CLRadarChartController {}
         chartView.reload()
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLRadarChartController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLRadarChartController {}
 
 extension CLRadarChartController: CLRadarChartDataSource {
     func radarChart(_ radarChart: CLRadarChartView, chartFillColorAt index: Int) -> UIColor {

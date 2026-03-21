@@ -63,8 +63,7 @@ class CLTextViewConfig: NSObject {
     var encoding: Encoding = .gbk
 
     fileprivate class func defaultConfigure() -> CLTextViewConfig {
-        let configure = CLTextViewConfig()
-        return configure
+        CLTextViewConfig()
     }
 }
 

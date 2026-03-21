@@ -8,7 +8,7 @@
 
 import UIKit
 
-// 基于NSRegularExpression api 的正则处理工具类
+/// 基于NSRegularExpression api 的正则处理工具类
 public struct Regex {
     private let regularExpression: NSRegularExpression
     /// 使用正则表达式进行初始化
@@ -23,18 +23,16 @@ public struct Regex {
 
     /// 获取第一个匹配结果
     public func firstMatch(in string: String) -> Match? {
-        let firstMatch = regularExpression
+        regularExpression
             .firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count))
             .map { Match(result: $0, in: string) }
-        return firstMatch
     }
 
     /// 获取所有的匹配结果
     public func matches(in string: String) -> [Match] {
-        let matches = regularExpression
+        regularExpression
             .matches(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count))
             .map { Match(result: $0, in: string) }
-        return matches
     }
 
     /// 正则替换
@@ -50,7 +48,7 @@ public struct Regex {
     }
 }
 
-// 正则匹配可选项
+/// 正则匹配可选项
 public extension Regex {
     /// Options 定义了正则表达式匹配时的行为
     struct Options: OptionSet {
@@ -82,7 +80,7 @@ public extension Regex {
     }
 }
 
-// 正则匹配结果
+/// 正则匹配结果
 public extension Regex {
     /// Match 封装有单个匹配结果
     class Match: CustomStringConvertible {

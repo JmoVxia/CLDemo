@@ -130,10 +130,6 @@ private extension CLCustomTransitionController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLCustomTransitionController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLCustomTransitionController {}
@@ -149,7 +145,3 @@ private extension CLCustomTransitionController {
         navigationController?.pushViewController(controller, animated: true)
     }
 }
-
-// MARK: - JmoVxia---公共方法
-
-extension CLCustomTransitionController {}

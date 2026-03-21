@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLActivityButton {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLActivityButton: UIButton {
@@ -21,8 +17,7 @@ class CLActivityButton: UIButton {
     }
 
     private lazy var activityIndicator: UIActivityIndicatorView = { [unowned self] in
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
-        return activityIndicator
+        return UIActivityIndicatorView(style: .medium)
     }()
 
     private var title: String?
@@ -58,17 +53,9 @@ private extension CLActivityButton {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLActivityButton {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLActivityButton {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLActivityButton {}
 
 // MARK: - JmoVxia---公共方法
 

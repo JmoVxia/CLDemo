@@ -118,7 +118,7 @@ private extension CLQRCode {
 
         context.draw(imageRef, in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
 
-        let pixels = (0 ..< height).map { y -> [(CGPoint, Bool)] in
+        return (0 ..< height).map { y -> [(CGPoint, Bool)] in
             (0 ..< width).map { x -> (CGPoint, Bool) in
                 let byteIndex = (bytesPerRow * y) + x * bytesPerPixel
                 let red = rawData[byteIndex]
@@ -127,7 +127,6 @@ private extension CLQRCode {
                 return (.init(x: x, y: y), red == 0 && green == 0 && blue == 0)
             }
         }
-        return pixels
     }
 
     func drawQRCode(from codePoints: [[(CGPoint, Bool)]], size: CGFloat) -> UIImage {

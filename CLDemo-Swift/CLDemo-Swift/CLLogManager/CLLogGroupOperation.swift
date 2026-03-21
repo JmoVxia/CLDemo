@@ -10,10 +10,7 @@ import Foundation
 class CLLogGroupOperation: CLBaseAsyncOperation, @unchecked Sendable {
     private let filePaths: [String]
 
-    private lazy var uploadQueue: OperationQueue = {
-        let queue = OperationQueue()
-        return queue
-    }()
+    private lazy var uploadQueue: OperationQueue = .init()
 
     init(filePaths: [String], maxConcurrentUploads: Int = 1) {
         self.filePaths = filePaths

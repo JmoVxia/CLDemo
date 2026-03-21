@@ -10,9 +10,8 @@ final class TextLayer: BaseCompositionLayer {
 
   init(
     textLayerModel: TextLayerModel,
-    context: LayerContext)
-    throws
-  {
+    context: LayerContext
+  ) throws {
     self.textLayerModel = textLayerModel
     super.init(layerModel: textLayerModel)
     setupSublayers()
@@ -42,7 +41,8 @@ final class TextLayer: BaseCompositionLayer {
 
     let sourceText = try textLayerModel.text.exactlyOneKeyframe(
       context: textAnimationContext,
-      description: "text layer text")
+      description: "text layer text"
+    )
 
     // Prior to Lottie 4.3.0 the Core Animation rendering engine always just used `LegacyAnimationTextProvider`
     // but incorrectly called it with the full keypath string, unlike the Main Thread rendering engine
@@ -53,7 +53,8 @@ final class TextLayer: BaseCompositionLayer {
     } else if let legacyTextProvider = context.textProvider as? LegacyAnimationTextProvider {
       renderLayer.text = legacyTextProvider.textFor(
         keypathName: textAnimationContext.currentKeypath.fullPath,
-        sourceText: sourceText.text)
+        sourceText: sourceText.text
+      )
     } else {
       renderLayer.text = sourceText.text
     }
@@ -67,6 +68,39 @@ final class TextLayer: BaseCompositionLayer {
     }
 
     renderLayer.sizeToFit()
+
+    // Check if there are any dynamic color overrides for this text layer.
+    // NOTE: The Core Animation engine currently only supports static color overrides for text.
+    // Animated ValueProviders will only have their first keyframe applied.
+    if
+      let customFillColor = try textAnimationContext.valueProviderStore.customKeyframes(
+        of: .color,
+        for: textAnimationContext
+          .currentKeypath
+          .appendingKey(PropertyName.color.rawValue),
+        context: textAnimationContext
+      )
+    {
+      if customFillColor.keyframes.count > 1 {
+        try textAnimationContext.logCompatibilityIssue("""
+          The Core Animation rendering engine currently doesn't support animated text color overrides.
+          """)
+      }
+
+      renderLayer.fillColor = customFillColor.keyframes[0].value
+    }
+
+    if
+      let customStrokeColor = try textAnimationContext.valueProviderStore.customKeyframes(
+        of: .color,
+        for: textAnimationContext
+          .currentKeypath
+          .appendingKey(PropertyName.strokeColor.rawValue),
+        context: textAnimationContext
+      )
+    {
+      renderLayer.strokeColor = customStrokeColor.keyframes[0].value
+    }
   }
 
   func configureRenderLayer(with context: LayerContext) throws {

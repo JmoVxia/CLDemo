@@ -27,10 +27,7 @@ class CLBreakPointResumeCell: UITableViewCell {
         return view
     }()
 
-    private lazy var progressView: UIProgressView = {
-        let view = UIProgressView()
-        return view
-    }()
+    private lazy var progressView: UIProgressView = .init()
 
     private lazy var downloadButton: UIButton = {
         let view = UIButton()

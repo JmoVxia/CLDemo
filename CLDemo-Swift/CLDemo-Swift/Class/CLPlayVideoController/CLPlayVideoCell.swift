@@ -18,10 +18,7 @@ class CLPlayVideoCell: UITableViewCell {
         return view
     }()
 
-    lazy var animageView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    lazy var animageView: UIView = .init()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

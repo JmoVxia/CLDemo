@@ -140,14 +140,6 @@ private extension CLDarkModeController {
     }
 }
 
-// MARK: - JmoVxia---数据
-
-private extension CLDarkModeController {}
-
-// MARK: - JmoVxia---override
-
-extension CLDarkModeController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLDarkModeController {

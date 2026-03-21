@@ -38,9 +38,17 @@ final class CLVideoTask: NSObject, @unchecked Sendable {
         return bindViewsTable.allObjects
     }
 
-    var isCancelled: Bool { state == .cancelled }
-    var isExecuting: Bool { state == .executing }
-    var isFinished: Bool { state == .finished }
+    var isCancelled: Bool {
+        state == .cancelled
+    }
+
+    var isExecuting: Bool {
+        state == .executing
+    }
+
+    var isFinished: Bool {
+        state == .finished
+    }
 
     // MARK: - 状态回调
 

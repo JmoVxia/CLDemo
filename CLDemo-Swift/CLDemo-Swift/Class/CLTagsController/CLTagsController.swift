@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLTagsController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLTagsController: CLController {
@@ -114,10 +110,6 @@ private extension CLTagsController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLTagsController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLTagsController {}
@@ -134,7 +126,3 @@ private extension CLTagsController {
         navigationController?.pushViewController(controller, animated: true)
     }
 }
-
-// MARK: - JmoVxia---公共方法
-
-extension CLTagsController {}

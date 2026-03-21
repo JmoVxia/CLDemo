@@ -80,6 +80,6 @@ extension CLPopupMomentumController {
     }
 
     @objc private func hiddenAction() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }

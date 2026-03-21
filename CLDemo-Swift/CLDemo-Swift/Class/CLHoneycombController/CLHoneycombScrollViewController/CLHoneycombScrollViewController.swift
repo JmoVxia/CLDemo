@@ -110,21 +110,9 @@ private extension CLHoneycombScrollViewController {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLHoneycombScrollViewController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLHoneycombScrollViewController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLHoneycombScrollViewController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLHoneycombScrollViewController {}
 
 extension CLHoneycombScrollViewController: CLHoneycombDataSource {
     func honeycombViewNumberOfItemsPerRow(_ honeycombView: CLHoneycombView) -> Int {

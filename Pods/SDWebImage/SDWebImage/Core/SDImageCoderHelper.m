@@ -19,6 +19,8 @@
 #import "SDInternalMacros.h"
 #import "SDDeviceHelper.h"
 #import "SDImageIOAnimatedCoderInternal.h"
+#import "SDImageAPNGCoder.h"
+#import "SDImageGIFCoder.h"
 #import <Accelerate/Accelerate.h>
 
 #define kCGColorSpaceDeviceRGB CFSTR("kCGColorSpaceDeviceRGB")
@@ -174,29 +176,21 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     
 #else
     
-    NSMutableData *imageData = [NSMutableData data];
-    CFStringRef imageUTType = [NSData sd_UTTypeFromImageFormat:SDImageFormatGIF];
-    // Create an image destination. GIF does not support EXIF image orientation
-    CGImageDestinationRef imageDestination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)imageData, imageUTType, frameCount, NULL);
-    if (!imageDestination) {
-        // Handle failure.
+    SDImageFormat format;
+    if (@available(iOS 12.0, tvOS 12.0, macOS 10.14, watchOS 5.0, *)) {
+        format = SDImageFormatPNG;
+    } else {
+        format = SDImageFormatGIF;
+    }
+    NSData *imageData;
+    if (format == SDImageFormatPNG) {
+        imageData = [SDImageAPNGCoder.sharedCoder encodedDataWithFrames:frames loopCount:0 format:format options:nil];
+    } else {
+        imageData = [SDImageGIFCoder.sharedCoder encodedDataWithFrames:frames loopCount:0 format:format options:nil];
+    }
+    if (!imageData) {
         return nil;
     }
-    
-    for (size_t i = 0; i < frameCount; i++) {
-        SDImageFrame *frame = frames[i];
-        NSTimeInterval frameDuration = frame.duration;
-        CGImageRef frameImageRef = frame.image.CGImage;
-        NSDictionary *frameProperties = @{(__bridge NSString *)kCGImagePropertyGIFDictionary : @{(__bridge NSString *)kCGImagePropertyGIFDelayTime : @(frameDuration)}};
-        CGImageDestinationAddImage(imageDestination, frameImageRef, (__bridge CFDictionaryRef)frameProperties);
-    }
-    // Finalize the destination.
-    if (CGImageDestinationFinalize(imageDestination) == NO) {
-        // Handle failure.
-        CFRelease(imageDestination);
-        return nil;
-    }
-    CFRelease(imageDestination);
     CGFloat scale = MAX(frames.firstObject.image.scale, 1);
     
     SDAnimatedImageRep *imageRep = [[SDAnimatedImageRep alloc] initWithData:imageData];

@@ -84,18 +84,6 @@ private extension CLIngredientLeftTitleCell {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLIngredientLeftTitleCell {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLIngredientLeftTitleCell {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLIngredientLeftTitleCell {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLIngredientLeftTitleCell {}

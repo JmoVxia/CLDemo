@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLCalendarController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLCalendarController: CLController {
@@ -87,10 +83,6 @@ private extension CLCalendarController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLCalendarController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLCalendarController {
@@ -100,11 +92,3 @@ extension CLCalendarController {}
         present(controller, animated: true)
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLCalendarController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLCalendarController {}

@@ -51,10 +51,7 @@ extension CLChatInputToolBarDelegate {
 
 class CLChatInputToolBar: UIView {
     /// 内容视图
-    private lazy var contentView: UIView = {
-        let contentView = UIView()
-        return contentView
-    }()
+    private lazy var contentView: UIView = .init()
 
     /// 顶部线条
     private lazy var topLineView: UIView = {

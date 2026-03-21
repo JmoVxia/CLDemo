@@ -12,8 +12,12 @@
 		4F2A36D02E38C33B001684F1 /* CLLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A36CF2E38C33B001684F1 /* CLLogController.swift */; };
 		4F2A36D52E38C3A5001684F1 /* CLLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2A36D42E38C3A5001684F1 /* CLLogView.m */; };
 		4F8167B62E332CA90046AF6D /* CLNestedSlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B52E332CA90046AF6D /* CLNestedSlideController.swift */; };
-		4F8167BA2E332D060046AF6D /* CLSegmentedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B92E332D060046AF6D /* CLSegmentedBar.swift */; };
-		4F8167BB2E332D060046AF6D /* CLPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B82E332D060046AF6D /* CLPageView.swift */; };
+		4F8167BA2E332D060046AF6D /* CLNestedSlideSegmentedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B92E332D060046AF6D /* CLNestedSlideSegmentedBar.swift */; };
+		4F8167BB2E332D060046AF6D /* CLNestedSlidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8167B82E332D060046AF6D /* CLNestedSlidePageView.swift */; };
+		06734E519EFC48D1B3B49ED3 /* CLNestedSlideTablePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD228051BB34847AB4C46A6 /* CLNestedSlideTablePageController.swift */; };
+		2958F7EF016646E9B40C9DE2 /* CLNestedSlideRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE9A356863541999CED91B9 /* CLNestedSlideRowCell.swift */; };
+		2B19A2BA55EB438980C55AEB /* CLNestedSlideViewModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944EB3A76E4545CC95915FF2 /* CLNestedSlideViewModeController.swift */; };
+		FBE05035F96F474BB575D0D7 /* CLNestedSlideControllerModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7A7039EF0482E9ADAADB5 /* CLNestedSlideControllerModeController.swift */; };
 		4F95D5152E331CB1004F9A2F /* LAME.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F95D5142E331CB1004F9A2F /* LAME.xcframework */; };
 		4F95D5182E332045004F9A2F /* CLRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D5172E332045004F9A2F /* CLRecorder.swift */; };
 		4F95D5192E332045004F9A2F /* CLMp3Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95D5162E332045004F9A2F /* CLMp3Encoder.swift */; };
@@ -353,8 +357,12 @@
 		4F2A36D32E38C3A5001684F1 /* CLLogView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLogView.h; sourceTree = "<group>"; };
 		4F2A36D42E38C3A5001684F1 /* CLLogView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLogView.m; sourceTree = "<group>"; };
 		4F8167B52E332CA90046AF6D /* CLNestedSlideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideController.swift; sourceTree = "<group>"; };
-		4F8167B82E332D060046AF6D /* CLPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPageView.swift; sourceTree = "<group>"; };
-		4F8167B92E332D060046AF6D /* CLSegmentedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSegmentedBar.swift; sourceTree = "<group>"; };
+		4F8167B82E332D060046AF6D /* CLNestedSlidePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlidePageView.swift; sourceTree = "<group>"; };
+		4F8167B92E332D060046AF6D /* CLNestedSlideSegmentedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideSegmentedBar.swift; sourceTree = "<group>"; };
+		944EB3A76E4545CC95915FF2 /* CLNestedSlideViewModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideViewModeController.swift; sourceTree = "<group>"; };
+		D5F7A7039EF0482E9ADAADB5 /* CLNestedSlideControllerModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideControllerModeController.swift; sourceTree = "<group>"; };
+		9BD228051BB34847AB4C46A6 /* CLNestedSlideTablePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideTablePageController.swift; sourceTree = "<group>"; };
+		CBE9A356863541999CED91B9 /* CLNestedSlideRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNestedSlideRowCell.swift; sourceTree = "<group>"; };
 		4F95D5142E331CB1004F9A2F /* LAME.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = LAME.xcframework; sourceTree = "<group>"; };
 		4F95D5162E332045004F9A2F /* CLMp3Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMp3Encoder.swift; sourceTree = "<group>"; };
 		4F95D5172E332045004F9A2F /* CLRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRecorder.swift; sourceTree = "<group>"; };
@@ -735,6 +743,9 @@
 			isa = PBXGroup;
 			children = (
 				4F8167B52E332CA90046AF6D /* CLNestedSlideController.swift */,
+				944EB3A76E4545CC95915FF2 /* CLNestedSlideViewModeController.swift */,
+				D5F7A7039EF0482E9ADAADB5 /* CLNestedSlideControllerModeController.swift */,
+				9BD228051BB34847AB4C46A6 /* CLNestedSlideTablePageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -742,8 +753,9 @@
 		4F8167BC2E332D0A0046AF6D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4F8167B82E332D060046AF6D /* CLPageView.swift */,
-				4F8167B92E332D060046AF6D /* CLSegmentedBar.swift */,
+				4F8167B82E332D060046AF6D /* CLNestedSlidePageView.swift */,
+				4F8167B92E332D060046AF6D /* CLNestedSlideSegmentedBar.swift */,
+				CBE9A356863541999CED91B9 /* CLNestedSlideRowCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2534,8 +2546,12 @@
 				5B3309E928FFFB23000D44DF /* CLCalendarFlowLayout.swift in Sources */,
 				5BE6681F268475C90095F82E /* CLInfiniteView.swift in Sources */,
 				5BD043A52683302E0054F2B4 /* CLDrawerPresentationController.swift in Sources */,
-				4F8167BA2E332D060046AF6D /* CLSegmentedBar.swift in Sources */,
-				4F8167BB2E332D060046AF6D /* CLPageView.swift in Sources */,
+				4F8167BA2E332D060046AF6D /* CLNestedSlideSegmentedBar.swift in Sources */,
+				4F8167BB2E332D060046AF6D /* CLNestedSlidePageView.swift in Sources */,
+				2B19A2BA55EB438980C55AEB /* CLNestedSlideViewModeController.swift in Sources */,
+				FBE05035F96F474BB575D0D7 /* CLNestedSlideControllerModeController.swift in Sources */,
+				06734E519EFC48D1B3B49ED3 /* CLNestedSlideTablePageController.swift in Sources */,
+				2958F7EF016646E9B40C9DE2 /* CLNestedSlideRowCell.swift in Sources */,
 				5BE6692726848D000095F82E /* CLWaveView.swift in Sources */,
 				4FB7F7612E39FD92006736CF /* CLBaseAsyncOperation.swift in Sources */,
 				5BC9911726C658150026B6FF /* CLHomePageModel.swift in Sources */,

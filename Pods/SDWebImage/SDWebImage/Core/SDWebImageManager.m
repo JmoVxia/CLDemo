@@ -300,15 +300,10 @@ static id<SDImageLoader> _defaultImageLoader;
     // Check whether we should query cache
     BOOL shouldQueryCache = !SD_OPTIONS_CONTAINS(options, SDWebImageFromLoaderOnly);
     if (shouldQueryCache) {
-        // transformed cache key
+        // maybe thumbnail/transformed cache key
         NSString *key = [self cacheKeyForURL:url context:context];
-        // to avoid the SDImageCache's sync logic use the mismatched cache key
-        // we should strip the `thumbnail` related context
-        SDWebImageMutableContext *mutableContext = [context mutableCopy];
-        mutableContext[SDWebImageContextImageThumbnailPixelSize] = nil;
-        mutableContext[SDWebImageContextImagePreserveAspectRatio] = nil;
         @weakify(operation);
-        id<SDWebImageOperation> cacheOperation = [imageCache queryImageForKey:key options:options context:mutableContext cacheType:queryCacheType completion:^(UIImage * _Nullable cachedImage, NSData * _Nullable cachedData, SDImageCacheType cacheType) {
+        id<SDWebImageOperation> cacheOperation = [imageCache queryImageForKey:key options:options context:context cacheType:queryCacheType completion:^(UIImage * _Nullable cachedImage, NSData * _Nullable cachedData, SDImageCacheType cacheType) {
             @strongify(operation);
             if (!operation || operation.isCancelled) {
                 // Image combined operation cancelled by user
@@ -323,6 +318,12 @@ static id<SDImageLoader> _defaultImageLoader;
                 if (mayInOriginalCache) {
                     [self callOriginalCacheProcessForOperation:operation url:url options:options context:context progress:progressBlock completed:completedBlock];
                     return;
+                }
+            } else {
+                // Write back the disk image into memory cache, with the correct key
+                if (cacheType == SDImageCacheTypeDisk) {
+                    // Sync
+                    [imageCache storeImage:cachedImage imageData:nil forKey:key cacheType:SDImageCacheTypeMemory completion:nil];
                 }
             }
             // Continue download process
@@ -376,6 +377,12 @@ static id<SDImageLoader> _defaultImageLoader;
                 // Original image cache miss. Continue download process
                 [self callDownloadProcessForOperation:operation url:url options:options context:context cachedImage:nil cachedData:nil cacheType:SDImageCacheTypeNone progress:progressBlock completed:completedBlock];
                 return;
+            } else {
+                // Write back the disk image into memory cache, with the correct key
+                if (cacheType == SDImageCacheTypeDisk) {
+                    // Sync
+                    [imageCache storeImage:cachedImage imageData:nil forKey:key cacheType:SDImageCacheTypeMemory completion:nil];
+                }
             }
                         
             // Skip downloading and continue transform process, and ignore .refreshCached option for now

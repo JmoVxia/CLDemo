@@ -868,31 +868,46 @@ open class ImageCache: @unchecked Sendable {
     @objc public func backgroundCleanExpiredDiskCache() {
         // if 'sharedApplication()' is unavailable, then return
         guard let sharedApplication = KingfisherWrapper<UIApplication>.shared else { return }
-        
-        let taskActor = ActorBox<UIBackgroundTaskIdentifier?>(nil)
-        
-        let createdTask = sharedApplication.beginBackgroundTask(withName: "Kingfisher:backgroundCleanExpiredDiskCache") {
-            Task {
-                guard let bgTask = await taskActor.value, bgTask != .invalid else { return }
-                sharedApplication.endBackgroundTask(bgTask)
-                await taskActor.setValue(.invalid)
+
+        actor BackgroundTaskState {
+            private var value: UIBackgroundTaskIdentifier? = nil
+
+            func setValue(_ newValue: UIBackgroundTaskIdentifier) {
+                value = newValue
+            }
+
+            func takeValidValueAndInvalidate() -> UIBackgroundTaskIdentifier? {
+                guard let task = value, task != .invalid else { return nil }
+                value = .invalid
+                return task
             }
         }
-        
-        cleanExpiredDiskCache {
-            Task {
-                guard let bgTask = await taskActor.value, bgTask != .invalid else { return }
+
+        let taskState = BackgroundTaskState()
+
+        let endBackgroundTaskIfNeeded: @Sendable () -> Void = {
+            Task { @MainActor in
+                guard let bgTask = await taskState.takeValidValueAndInvalidate() else { return }
+                guard let sharedApplication = KingfisherWrapper<UIApplication>.shared else { return }
                 #if compiler(>=6)
                 sharedApplication.endBackgroundTask(bgTask)
                 #else
                 await sharedApplication.endBackgroundTask(bgTask)
                 #endif
-                await taskActor.setValue(.invalid)
             }
         }
-        
-        Task {
-            await taskActor.setValue(createdTask)
+
+        let createdTask = sharedApplication.beginBackgroundTask(
+            withName: "Kingfisher:backgroundCleanExpiredDiskCache",
+            expirationHandler: endBackgroundTaskIfNeeded
+        )
+
+        Task { await taskState.setValue(createdTask) }
+
+        cleanExpiredDiskCache {
+            Task { @MainActor in
+                endBackgroundTaskIfNeeded()
+            }
         }
     }
 #endif
@@ -923,6 +938,81 @@ open class ImageCache: @unchecked Sendable {
         if memoryStorage.isCached(forKey: computedKey) { return .memory }
         if diskStorage.isCached(forKey: computedKey, forcedExtension: forcedExtension) { return .disk }
         return .none
+    }
+
+    /// Checks cache type for a given key and processor identifier combination asynchronously.
+    ///
+    /// This method is an opt-in alternative to ``imageCachedType(forKey:processorIdentifier:forcedExtension:)``.
+    /// It performs any disk existence/meta check on the cache's I/O queue to avoid blocking the calling thread.
+    ///
+    /// - Parameters:
+    ///   - key: The key used for caching the image.
+    ///   - identifier: The processor identifier used for this image. The default value is the
+    ///     ``DefaultImageProcessor/identifier`` of the ``DefaultImageProcessor/default`` image processor.
+    ///   - forcedExtension: The expected extension of the file. If `nil`, the file extension will be determined by the
+    ///     disk storage configuration instead.
+    ///   - callbackQueue: The callback queue on which the `completionHandler` is invoked. Default is `.mainCurrentOrAsync`.
+    ///   - completionHandler: Called with the resolved ``CacheType``.
+    public func imageCachedTypeAsync(
+        forKey key: String,
+        processorIdentifier identifier: String = DefaultImageProcessor.default.identifier,
+        forcedExtension: String? = nil,
+        callbackQueue: CallbackQueue = .mainCurrentOrAsync,
+        completionHandler: @escaping @Sendable (CacheType) -> Void
+    ) {
+        let computedKey = key.computedKey(with: identifier)
+
+        // Memory cache check remains synchronous (no I/O).
+        if memoryStorage.isCached(forKey: computedKey) {
+            callbackQueue.execute {
+                completionHandler(.memory)
+            }
+            return
+        }
+
+        // Disk cache check on the I/O queue.
+        ioQueue.async { [weak self] in
+            guard let self else {
+                callbackQueue.execute {
+                    completionHandler(.none)
+                }
+                return
+            }
+
+            let cached = self.diskStorage.isCached(forKey: computedKey, forcedExtension: forcedExtension)
+            let result: CacheType = cached ? .disk : .none
+            callbackQueue.execute {
+                completionHandler(result)
+            }
+        }
+    }
+
+    /// Checks cache type for a given key and processor identifier combination asynchronously.
+    ///
+    /// This is an `async`/`await` convenience wrapper of
+    /// ``imageCachedTypeAsync(forKey:processorIdentifier:forcedExtension:callbackQueue:completionHandler:)``.
+    ///
+    /// - Parameters:
+    ///   - key: The key used for caching the image.
+    ///   - identifier: The processor identifier used for this image.
+    ///   - forcedExtension: The expected extension of the file.
+    ///
+    /// - Returns: A ``CacheType`` instance that indicates the cache status.
+    public func imageCachedTypeAsync(
+        forKey key: String,
+        processorIdentifier identifier: String = DefaultImageProcessor.default.identifier,
+        forcedExtension: String? = nil
+    ) async -> CacheType {
+        await withCheckedContinuation { continuation in
+            imageCachedTypeAsync(
+                forKey: key,
+                processorIdentifier: identifier,
+                forcedExtension: forcedExtension,
+                callbackQueue: .untouch
+            ) { cacheType in
+                continuation.resume(returning: cacheType)
+            }
+        }
     }
     
     /// Returns whether the file exists in the cache for a given `key` and `identifier` combination.
@@ -1292,7 +1382,8 @@ extension KingfisherWrapper where Base: UIApplication {
     public static var shared: UIApplication? {
         let selector = NSSelectorFromString("sharedApplication")
         guard Base.responds(to: selector) else { return nil }
-        return Base.perform(selector).takeUnretainedValue() as? UIApplication
+        guard let unmanaged = Base.perform(selector) else { return nil }
+        return unmanaged.takeUnretainedValue() as? UIApplication
     }
 }
 #endif

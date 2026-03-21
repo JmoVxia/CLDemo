@@ -9,10 +9,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLIngredientSearchView {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLIngredientSearchView: UIView {

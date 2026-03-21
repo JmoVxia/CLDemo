@@ -43,25 +43,13 @@ class CLYearMonthDayHourMinuteDataPickerView: UIView {
         return yearArray
     }()
 
-    private lazy var monthArray: [Int] = {
-        var monthArray = [Int]()
-        return monthArray
-    }()
+    private lazy var monthArray: [Int] = .init()
 
-    private lazy var dayArray: [Int] = {
-        let dayArray = [Int]()
-        return dayArray
-    }()
+    private lazy var dayArray: [Int] = .init()
 
-    private lazy var hourArray: [Int] = {
-        let hourArray = Array(0 ... 23)
-        return hourArray
-    }()
+    private lazy var hourArray: [Int] = Array(0 ... 23)
 
-    private lazy var minuteArray: [Int] = {
-        let minuteArray = Array(0 ... 59)
-        return minuteArray
-    }()
+    private lazy var minuteArray: [Int] = Array(0 ... 59)
 
     private lazy var yearLabel: CLDataPickerTitleView = {
         let yearLabel = CLDataPickerTitleView()

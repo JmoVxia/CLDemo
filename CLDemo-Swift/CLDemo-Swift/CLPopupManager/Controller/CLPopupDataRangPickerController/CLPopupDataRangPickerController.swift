@@ -86,25 +86,13 @@ private extension CLPopupDataRangPickerController {
     func configData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLPopupDataRangPickerController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLPopupDataRangPickerController {
     func hiddenAction() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLPopupDataRangPickerController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLPopupDataRangPickerController {}
 
 // MARK: - JmoVxia---CLPopoverProtocol
 

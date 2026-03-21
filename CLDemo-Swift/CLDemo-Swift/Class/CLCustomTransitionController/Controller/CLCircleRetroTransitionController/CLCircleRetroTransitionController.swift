@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLCircleRetroTransitionController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLCircleRetroTransitionController: CLController {

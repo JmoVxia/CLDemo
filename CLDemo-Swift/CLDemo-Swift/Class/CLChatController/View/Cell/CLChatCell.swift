@@ -23,10 +23,7 @@ class CLChatCell: UITableViewCell {
     }
 
     /// 底部内容view
-    lazy var bottomContentView: UIView = {
-        let bottomContentView = UIView()
-        return bottomContentView
-    }()
+    lazy var bottomContentView: UIView = .init()
 
     /// 发送中动画view
     lazy var sendingAnimation: LottieAnimationView = {

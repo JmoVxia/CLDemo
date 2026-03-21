@@ -252,7 +252,7 @@ extension CLPopupTwoInputController: UITextFieldDelegate {
 }
 
 extension CLPopupTwoInputController {
-    // 键盘显示
+    /// 键盘显示
     @objc func keyboardWillShow(notification: Notification) {
         DispatchQueue.main.async {
             guard let userInfo = notification.userInfo, let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval, let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSInteger else { return }
@@ -272,7 +272,7 @@ extension CLPopupTwoInputController {
         }
     }
 
-    // 键盘隐藏
+    /// 键盘隐藏
     @objc func keyboardWillHide(notification: Notification) {
         guard let userInfo = notification.userInfo, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval, let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSInteger else { return }
         if !isDismiss, isMoveUp {
@@ -322,7 +322,7 @@ extension CLPopupTwoInputController {
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }
 

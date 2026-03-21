@@ -90,10 +90,6 @@ private extension CLCaptureController {
     func configData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLCaptureController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLCaptureController {
@@ -115,11 +111,3 @@ extension CLCaptureController: CLCameraControllerDelegate {
         CLLog("videoURL: \(videoURL)")
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLCaptureController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLCaptureController {}

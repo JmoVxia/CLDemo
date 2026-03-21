@@ -17,15 +17,9 @@ class CLIndexView: UIView {
     }
 
     var lineHeight: CGFloat = 0.0
-    private lazy var shapeLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        return layer
-    }()
+    private lazy var shapeLayer: CAShapeLayer = .init()
 
-    private lazy var path: UIBezierPath = {
-        let path = UIBezierPath()
-        return path
-    }()
+    private lazy var path: UIBezierPath = .init()
 
     override init(frame: CGRect) {
         super.init(frame: frame)

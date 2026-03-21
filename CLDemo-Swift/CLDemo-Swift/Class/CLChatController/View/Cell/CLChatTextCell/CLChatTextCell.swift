@@ -31,16 +31,10 @@ class CLChatTextCell: CLChatCell {
     }()
 
     /// 左侧气泡
-    private lazy var leftBubbleImage: UIImage = {
-        var image = UIImage(named: "leftBg")!
-        return image
-    }()
+    private lazy var leftBubbleImage: UIImage = .init(named: "leftBg")!
 
     /// 右侧气泡
-    private lazy var rightBubbleImage: UIImage = {
-        var image = UIImage(named: "rightBg")!
-        return image
-    }()
+    private lazy var rightBubbleImage: UIImage = .init(named: "rightBg")!
 }
 
 extension CLChatTextCell {

@@ -38,5 +38,7 @@ protocol CLRadarChartDataSource: AnyObject {
 }
 
 extension CLRadarChartDataSource {
-    var labelMargin: CGFloat { 10 }
+    var labelMargin: CGFloat {
+        10
+    }
 }

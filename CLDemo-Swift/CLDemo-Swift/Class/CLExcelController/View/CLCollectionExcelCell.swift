@@ -90,18 +90,6 @@ private extension CLCollectionExcelCell {
     }
 }
 
-// MARK: - JmoVxia---override
-
-extension CLCollectionExcelCell {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLCollectionExcelCell {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLCollectionExcelCell {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLCollectionExcelCell {}

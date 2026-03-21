@@ -25,10 +25,7 @@ class CLSubsectionSlider: UIView {
     var changeCallback: ((Int) -> Void)?
     var endCallback: ((Int) -> Void)?
     /// 点击手势
-    private lazy var tapGesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(sliderDidTap(_:)))
-        return gesture
-    }()
+    private lazy var tapGesture: UITapGestureRecognizer = .init(target: self, action: #selector(sliderDidTap(_:)))
 
     /// 背景
     private lazy var sliderBackgroundImageView: UIImageView = {

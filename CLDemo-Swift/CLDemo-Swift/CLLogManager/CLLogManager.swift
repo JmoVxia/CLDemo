@@ -30,11 +30,10 @@ struct CLLogLevel: OptionSet {
     ]
 
     func chineseDescription() -> String {
-        let descriptions = CLLogLevel.allLevels
+        CLLogLevel.allLevels
             .filter { contains($0.level) }
             .map(\.name)
             .joined(separator: "-")
-        return descriptions
     }
 }
 

@@ -61,10 +61,7 @@ class CLPopupFlopController: CLPopoverController {
         return rightFlopButton
     }()
 
-    private lazy var prizeView: CLFlopPrizeView = {
-        let prizeView = CLFlopPrizeView()
-        return prizeView
-    }()
+    private lazy var prizeView: CLFlopPrizeView = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +109,7 @@ class CLPopupFlopController: CLPopoverController {
     }
 
     @objc func closeButtonAction() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 
     @objc func flopButtonAction(tap: UITapGestureRecognizer) {

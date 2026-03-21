@@ -38,8 +38,7 @@ class CLRoundAnimationViewConfigure: NSObject {
     var position: CLAnimationPosition = .animationOut
 
     fileprivate class func defaultConfigure() -> CLRoundAnimationViewConfigure {
-        let configure = CLRoundAnimationViewConfigure()
-        return configure
+        CLRoundAnimationViewConfigure()
     }
 }
 

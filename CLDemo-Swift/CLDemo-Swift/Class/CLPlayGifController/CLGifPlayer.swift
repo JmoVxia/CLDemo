@@ -11,11 +11,8 @@ import UIKit
 class CLGifPlayer: NSObject {
     private let operationMap = CLMapTable<String, CLGifOperation>()
 
-    private lazy var operationQueue: OperationQueue = {
-        let queue = OperationQueue()
+    private lazy var operationQueue: OperationQueue = .init()
 //        queue.maxConcurrentOperationCount = 10
-        return queue
-    }()
 
     private static var manager: CLGifPlayer?
 

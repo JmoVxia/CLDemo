@@ -9,10 +9,7 @@
 import UIKit
 
 class CLTagsCalculateController: CLController {
-    lazy var arrayDS: [CLTagsItem] = {
-        let arrayDS = [CLTagsItem]()
-        return arrayDS
-    }()
+    lazy var arrayDS: [CLTagsItem] = .init()
 
     lazy var tableview: UITableView = {
         let tableview = UITableView()

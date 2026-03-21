@@ -194,21 +194,21 @@ extension CLPopupMessageController {
 
 extension CLPopupMessageController {
     @objc func sureButtonAction() {
-        CLPopoverManager.dismiss(key) {
+        CLPopoverManager.dismiss(forKey: key) {
             self.sureCallBack?()
             self.sureCallBack = nil
         }
     }
 
     @objc func leftButtonAction() {
-        CLPopoverManager.dismiss(key) {
+        CLPopoverManager.dismiss(forKey: key) {
             self.leftCallBack?()
             self.leftCallBack = nil
         }
     }
 
     @objc func rightButtonAction() {
-        CLPopoverManager.dismiss(key) {
+        CLPopoverManager.dismiss(forKey: key) {
             self.rightCallBack?()
             self.rightCallBack = nil
         }

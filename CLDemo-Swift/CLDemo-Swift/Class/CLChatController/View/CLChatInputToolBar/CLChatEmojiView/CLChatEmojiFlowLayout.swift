@@ -50,7 +50,6 @@ extension CLChatEmojiFlowLayout {
         let page = item / (itemCountPerRow * rowCount)
         let x = item % itemCountPerRow + page * itemCountPerRow
         let y = item / itemCountPerRow - page * rowCount
-        let indexItem = x * rowCount + y
-        return indexItem
+        return x * rowCount + y
     }
 }

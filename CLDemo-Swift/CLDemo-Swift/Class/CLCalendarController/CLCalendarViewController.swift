@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLCalendarViewController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLCalendarViewController: CLController {
@@ -85,21 +81,9 @@ private extension CLCalendarViewController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLCalendarViewController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLCalendarViewController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLCalendarViewController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLCalendarViewController {}
 
 extension CLCalendarViewController: CLCalendarDelegate {
     func didSelectDate(date: Date, in view: CLCalendarView) {

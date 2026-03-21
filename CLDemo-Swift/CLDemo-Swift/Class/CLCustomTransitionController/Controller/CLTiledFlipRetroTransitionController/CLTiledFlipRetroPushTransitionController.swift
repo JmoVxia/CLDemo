@@ -8,10 +8,6 @@
 import SnapKit
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLTiledFlipRetroPushTransitionController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLTiledFlipRetroPushTransitionController: CLController {

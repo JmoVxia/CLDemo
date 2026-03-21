@@ -13,10 +13,6 @@ struct CLMultiIndexPath {
 }
 
 extension CLMultiIndexPath: Equatable {
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.indexPath == rhs.indexPath && lhs.column == rhs.column
-    }
-
     static func != (lhs: Self, rhs: Self) -> Bool {
         lhs.indexPath != rhs.indexPath || lhs.column != rhs.column
     }

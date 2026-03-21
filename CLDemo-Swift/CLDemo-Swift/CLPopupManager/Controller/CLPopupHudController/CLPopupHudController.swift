@@ -269,10 +269,10 @@ extension CLPopoverHudController {
         switch animationType {
         case .success:
             successAnimation()
-            CLPopoverManager.dismiss(key)
+            CLPopoverManager.dismiss(forKey: key)
         case .error:
             errorAnimation()
-            CLPopoverManager.dismiss(key)
+            CLPopoverManager.dismiss(forKey: key)
         case .loading:
             loadingAnimation()
         }

@@ -109,11 +109,3 @@ private extension CLAnimatedGradientController {
         }
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLAnimatedGradientController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLAnimatedGradientController {}

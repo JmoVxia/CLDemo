@@ -91,18 +91,6 @@ private extension CLMeController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLMeController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLMeController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLMeController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLMeController {}

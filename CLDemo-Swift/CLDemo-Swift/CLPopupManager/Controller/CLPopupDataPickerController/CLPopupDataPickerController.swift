@@ -154,7 +154,7 @@ extension CLPopupDataPickerController {
 
 extension CLPopupDataPickerController {
     @objc func cancelAction() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 
     @objc func sureAction() {
@@ -169,7 +169,7 @@ extension CLPopupDataPickerController {
         } else if let picker = dataPicker as? CLDurationDataPickerView {
             durationCallback?(String(format: "%02d", picker.duration), picker.unit)
         }
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }
 

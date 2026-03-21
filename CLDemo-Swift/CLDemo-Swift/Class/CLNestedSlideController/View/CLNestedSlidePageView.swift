@@ -1,16 +1,8 @@
-//
-//  CLPageView.swift
-//  CLNestedSlide
-//
-//  Created by Chen JmoVxia on 2024/7/3.
-//  Copyright © 2024 JmoVxia. All rights reserved.
-//
-
-import CLNestedSlide
+import CLPinnedPage
 import SnapKit
 import UIKit
 
-class CLPageView: UIView, CLNestedSlideViewPage {
+final class CLNestedSlidePageView: UIView, CLPinnedViewPage {
     private let tableView = UITableView()
 
     var scrollView: UIScrollView {
@@ -29,9 +21,9 @@ class CLPageView: UIView, CLNestedSlideViewPage {
     }
 }
 
-private extension CLPageView {
+private extension CLNestedSlidePageView {
     func setupUI() {
-        tableView.bounces = false
+        tableView.bounces = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -46,7 +38,7 @@ private extension CLPageView {
     }
 }
 
-extension CLPageView: UITableViewDataSource, UITableViewDelegate {
+extension CLNestedSlidePageView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         50
     }

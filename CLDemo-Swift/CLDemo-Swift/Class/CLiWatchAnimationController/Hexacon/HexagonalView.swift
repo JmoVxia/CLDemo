@@ -63,8 +63,13 @@ protocol HexagonalViewDataSource: AnyObject {
 }
 
 extension HexagonalViewDataSource {
-    func hexagonalView(_ hexagonalView: HexagonalView, imageForIndex index: Int) -> UIImage? { nil }
-    func hexagonalView(_ hexagonalView: HexagonalView, viewForIndex index: Int) -> UIView? { nil }
+    func hexagonalView(_ hexagonalView: HexagonalView, imageForIndex index: Int) -> UIImage? {
+        nil
+    }
+
+    func hexagonalView(_ hexagonalView: HexagonalView, viewForIndex index: Int) -> UIView? {
+        nil
+    }
 }
 
 final class HexagonalView: UIScrollView {
@@ -94,16 +99,16 @@ final class HexagonalView: UIScrollView {
      */
     var itemAppearance: HexagonalItemViewAppearance
 
-    // we are using a zoom cache setted to 1 to make the snap work even if the user haven't zoomed yet
+    /// we are using a zoom cache setted to 1 to make the snap work even if the user haven't zoomed yet
     private var zoomScaleCache: CGFloat = 1
 
-    // ArrayUsed to contain all the view in the Hexagonal grid
+    /// ArrayUsed to contain all the view in the Hexagonal grid
     private var viewsArray = [HexagonalItemView]()
 
-    // manager to create the hexagonal grid
+    /// manager to create the hexagonal grid
     private var hexagonalPattern: HexagonalPattern!
 
-    // used to snap the view after scroll
+    /// used to snap the view after scroll
     private var centerOnEndScroll = false
 
     // MARK: - init

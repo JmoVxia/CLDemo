@@ -10,34 +10,54 @@ import DateToolsSwift
 import UIKit
 
 /// 根据时间生成随机字符串
-var dateRandomString: String { "\(nanosecondStampString)-\(UUID().uuidString)-\(TimeInterval.random(in: 0.01 ... 10000))".md5ForUpper32Bate }
+var dateRandomString: String {
+    "\(nanosecondStampString)-\(UUID().uuidString)-\(TimeInterval.random(in: 0.01 ... 10000))".md5ForUpper32Bate
+}
 
 /// 秒级时间戳
-var timeStamp: Int64 { Date().timeStamp }
+var timeStamp: Int64 {
+    Date().timeStamp
+}
 
 /// 毫秒级时间戳
-var milliStamp: Int64 { Date().milliStamp }
+var milliStamp: Int64 {
+    Date().milliStamp
+}
 
 /// 纳秒级时间戳
-var nanosecondStamp: Int64 { Date().nanosecondStamp }
+var nanosecondStamp: Int64 {
+    Date().nanosecondStamp
+}
 
 /// 秒级时间戳
-var timeStampString: String { Date().timeStampString }
+var timeStampString: String {
+    Date().timeStampString
+}
 
 /// 毫秒级时间戳
-var milliStampString: String { Date().milliStampString }
+var milliStampString: String {
+    Date().milliStampString
+}
 
 /// 纳秒级时间戳
-var nanosecondStampString: String { Date().nanosecondStampString }
+var nanosecondStampString: String {
+    Date().nanosecondStampString
+}
 
 /// 屏幕宽
-var screenWidth: CGFloat { UIScreen.main.bounds.size.width }
+var screenWidth: CGFloat {
+    UIScreen.main.bounds.size.width
+}
 
 /// 屏幕高
-var screenHeight: CGFloat { UIScreen.main.bounds.size.height }
+var screenHeight: CGFloat {
+    UIScreen.main.bounds.size.height
+}
 
 /// AppDelegate
-var appDelegate: AppDelegate? { mainSync { UIApplication.shared.delegate as? AppDelegate } }
+var appDelegate: AppDelegate? {
+    mainSync { UIApplication.shared.delegate as? AppDelegate }
+}
 
 /// 状态栏高度
 var statusBarHeight: CGFloat {
@@ -54,10 +74,14 @@ var statusBarHeight: CGFloat {
 }
 
 /// 安全区域
-var safeAreaEdgeInsets: UIEdgeInsets { mainSync { keyWindow?.safeAreaInsets ?? .zero } }
+var safeAreaEdgeInsets: UIEdgeInsets {
+    mainSync { keyWindow?.safeAreaInsets ?? .zero }
+}
 
 /// 是否是刘海屏
-var isIPhoneXScreen: Bool { safeAreaEdgeInsets.bottom > 0 }
+var isIPhoneXScreen: Bool {
+    safeAreaEdgeInsets.bottom > 0
+}
 
 /// keyWindow
 var keyWindow: UIWindow? {

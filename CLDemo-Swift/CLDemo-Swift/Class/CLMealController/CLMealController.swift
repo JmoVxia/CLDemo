@@ -91,18 +91,6 @@ private extension CLMealController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLMealController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLMealController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLMealController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLMealController {}

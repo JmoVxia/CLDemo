@@ -91,18 +91,6 @@ private extension CLChatContactController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLChatContactController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLChatContactController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLChatContactController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLChatContactController {}

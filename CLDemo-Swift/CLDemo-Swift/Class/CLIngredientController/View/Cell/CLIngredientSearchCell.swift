@@ -67,18 +67,6 @@ private extension CLIngredientSearchCell {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLIngredientSearchCell {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLIngredientSearchCell {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLIngredientSearchCell {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLIngredientSearchCell {}

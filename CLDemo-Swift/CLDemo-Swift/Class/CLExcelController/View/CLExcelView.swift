@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLExcelView {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLExcelView: UIView {
@@ -25,10 +21,7 @@ class CLExcelView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private lazy var layout: CLCollectionExcelLayout = {
-        let layout = CLCollectionExcelLayout()
-        return layout
-    }()
+    private lazy var layout: CLCollectionExcelLayout = .init()
 
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: self.bounds, collectionViewLayout: self.layout)
@@ -63,10 +56,6 @@ private extension CLExcelView {
         }
     }
 }
-
-// MARK: - JmoVxia---override
-
-extension CLExcelView {}
 
 // MARK: - JmoVxia---objc
 

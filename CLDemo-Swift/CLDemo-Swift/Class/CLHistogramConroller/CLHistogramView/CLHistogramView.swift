@@ -91,10 +91,7 @@ class CLHistogramView: UIView {
         return view
     }()
 
-    private lazy var topToolBar: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private lazy var topToolBar: UIView = .init()
 
     private lazy var tableview: UITableView = {
         let view = UITableView()

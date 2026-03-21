@@ -7,8 +7,24 @@
 
 import UIKit
 
-@MainActor
+private var tapGestureKey: UInt8 = 0
+
+private extension UITableViewHeaderFooterView {
+    var sectionTap: CLSectionTapGestureRecognizer? {
+        get { objc_getAssociatedObject(self, &tapGestureKey) as? CLSectionTapGestureRecognizer }
+        set { objc_setAssociatedObject(self, &tapGestureKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+}
+
+private class CLSectionTapGestureRecognizer: UITapGestureRecognizer {
+    var session: Int = 0
+}
+
 public class CLTableViewManager: NSObject {
+    private var lastTapHeaderTime: CFAbsoluteTime = 0
+    
+    private var lastTapFooterTime: CFAbsoluteTime = 0
+
     private weak var delegate: UITableViewDelegate?
 
     typealias dataSource = [CLDataSourceItemProtocol]
@@ -132,11 +148,18 @@ extension CLTableViewManager: UITableViewDataSource {
 
 @objc extension CLTableViewManager {
     func didSelectHeaderView(_ gestureRecognizer: UITapGestureRecognizer) {
+        let now = CFAbsoluteTimeGetCurrent()
+        guard now - lastTapHeaderTime > 0.5 else { return }
+        lastTapHeaderTime = now
         guard let item = sectionItem(for: gestureRecognizer) else { return }
         item.0.didSelectHeader?(item.1)
     }
 
     func didSelectFooterView(_ gestureRecognizer: UITapGestureRecognizer) {
+        let now = CFAbsoluteTimeGetCurrent()
+        guard now - lastTapFooterTime > 0.5 else { return }
+        lastTapFooterTime = now
+
         guard let item = sectionItem(for: gestureRecognizer) else { return }
         item.0.didSelectFooter?(item.1)
     }
@@ -144,9 +167,9 @@ extension CLTableViewManager: UITableViewDataSource {
 
 private extension CLTableViewManager {
     func sectionItem(for gestureRecognizer: UITapGestureRecognizer) -> (CLSectionItemProtocol, Int)? {
-        guard let view = gestureRecognizer.view else { return nil }
-        guard let item = sectionItem(for: view.tag) else { return nil }
-        return (item, view.tag)
+        guard let tap = gestureRecognizer as? CLSectionTapGestureRecognizer else { return nil }
+        guard let item = sectionItem(for: tap.session) else { return nil }
+        return (item, tap.session)
     }
 
     func dequeueReusableHeaderFooterView(for section: Int, in tableView: UITableView, isHeader: Bool) -> UIView? {
@@ -163,29 +186,28 @@ private extension CLTableViewManager {
         let identifier = "\(viewClass)"
 
         let headerFooterView = {
-            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier)
-            if let view {
+            if let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) {
                 return view
             } else {
-                let tap = UITapGestureRecognizer(target: self, action: selector)
+                let tap = CLSectionTapGestureRecognizer(target: self, action: selector)
                 tap.numberOfTapsRequired = 1
                 tap.cancelsTouchesInView = false
                 tap.delegate = self
                 let view = viewClass.init(reuseIdentifier: identifier)
                 view.isUserInteractionEnabled = true
                 view.contentView.addGestureRecognizer(tap)
+                view.sectionTap = tap
                 return view
             }
         }()
-
-        headerFooterView.contentView.tag = section
+        headerFooterView.sectionTap?.session = section
         (headerFooterView as? CLSectionHeaderFooterBaseProtocol)?.set(item: item, section: section)
         return headerFooterView
     }
 }
 extension CLTableViewManager: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        guard let tap = gestureRecognizer as? UITapGestureRecognizer else { return true }
+        guard let tap = gestureRecognizer as? CLSectionTapGestureRecognizer else { return true }
         guard tap.numberOfTapsRequired == 1 else { return true }
         
         var view: UIView? = touch.view

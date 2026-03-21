@@ -54,6 +54,21 @@ public struct KFAnimatedImage: KFImageProtocol {
         context.renderConfigurations.append(block)
         return self
     }
+
+#if os(iOS)
+    /// Whether the animated frame buffer should be purged when the app enters background.
+    ///
+    /// This is an opt-in behavior to reduce memory footprint when your app is in background. When enabled,
+    /// the internal `AnimatedImageView` stops animating and purges preloaded frames on
+    /// `UIApplication.didEnterBackgroundNotification`. If the view was animating before entering background, it will
+    /// prepare frames and resume animation on `UIApplication.willEnterForegroundNotification`.
+    ///
+    /// - Parameter purge: Whether to enable the frame purging behavior. Default is `true`.
+    /// - Returns: A `KFAnimatedImage` view that configures the behavior.
+    public func purgeFramesOnBackground(_ purge: Bool = true) -> Self {
+        configure { $0.purgeFramesOnBackground = purge }
+    }
+#endif
 }
 
 #if os(macOS)

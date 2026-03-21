@@ -23,12 +23,12 @@ class CLChatImageCell: CLChatCell {
         photoView.isExclusiveTouch = true
         return photoView
     }()
-    /// 进度
+    // 进度
 //    private lazy var progressView: CLChatImageProgressView = {
 //        let progressView = CLChatImageProgressView.init(frame: CGRect(x: 0, y: 0, width: 45, height: 45))
 //        return progressView
 //    }()
-    /// 下载按钮
+    // 下载按钮
 //    private lazy var downloadFailButton: UIButton = {
 //        let downloadFailButton = UIButton()
     ////        downloadFailButton.setImage(PTImageSVG.knockDownloadIcon, for: .normal)

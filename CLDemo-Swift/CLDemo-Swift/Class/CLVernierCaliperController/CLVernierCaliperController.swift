@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLVernierCaliperController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLVernierCaliperController: CLController {

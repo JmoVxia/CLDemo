@@ -34,7 +34,7 @@ extension UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: 0.35)
     }
 
-    // 获取反色(补色)
+    /// 获取反色(补色)
     var invertColor: UIColor {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
         getRed(&r, green: &g, blue: &b, alpha: nil)

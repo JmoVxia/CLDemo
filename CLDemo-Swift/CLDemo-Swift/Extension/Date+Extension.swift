@@ -6,8 +6,7 @@ extension Date {
     /// 秒级时间戳
     var timeStamp: Int64 {
         let timeInterval: TimeInterval = timeIntervalSince1970
-        let timeStamp = Int64(timeInterval)
-        return timeStamp
+        return Int64(timeInterval)
     }
 
     /// 毫秒级时间戳

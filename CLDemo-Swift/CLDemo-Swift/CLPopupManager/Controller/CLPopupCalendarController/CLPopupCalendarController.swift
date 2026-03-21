@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - JmoVxia---枚举
-
-extension CLPopupCalendarController {}
-
 // MARK: - JmoVxia---类-属性
 
 class CLPopupCalendarController: CLPopoverController {
@@ -162,23 +158,19 @@ private extension CLPopupCalendarController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLPopupCalendarController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLPopupCalendarController {
     func sureAction() {
         guard let start = calendarView.beginDate else { return }
         guard let end = calendarView.endDate else { return }
-        CLPopoverManager.dismiss(key) {
+        CLPopoverManager.dismiss(forKey: key) {
             self.dismissCallback?(start, end)
         }
     }
 
     func close() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }
 
@@ -214,10 +206,6 @@ extension CLPopupCalendarController {
         }
     }
 }
-
-// MARK: - JmoVxia---公共方法
-
-extension CLPopupCalendarController {}
 
 extension CLPopupCalendarController: CLCalendarDelegate {
     func didSelectDate(date: Date, in view: CLCalendarView) {

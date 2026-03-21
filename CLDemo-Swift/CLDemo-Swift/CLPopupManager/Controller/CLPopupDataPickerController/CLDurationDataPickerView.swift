@@ -19,10 +19,7 @@ class CLDurationDataPickerView: UIView {
 
     private var durationIndex: Int = 0
     private var unitIndex: Int = 0
-    private lazy var durationArray: [Int] = {
-        let hourArray = Array(1 ... 60)
-        return hourArray
-    }()
+    private lazy var durationArray: [Int] = Array(1 ... 60)
 
     private lazy var unitArray: [String] = ["分钟", "小时"]
 

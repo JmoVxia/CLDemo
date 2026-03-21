@@ -9,10 +9,7 @@
 import UIKit
 
 class CLHistogramConroller: CLController {
-    private lazy var histogramView: CLHistogramView = {
-        let view = CLHistogramView()
-        return view
-    }()
+    private lazy var histogramView: CLHistogramView = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()

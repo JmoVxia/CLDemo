@@ -81,11 +81,3 @@ extension CLMultiCell {
 // MARK: - JmoVxia---objc
 
 @objc private extension CLMultiCell {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLMultiCell {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLMultiCell {}

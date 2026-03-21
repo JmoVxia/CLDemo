@@ -20,9 +20,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     fontProvider: AnimationFontProvider,
     maskAnimationToBounds: Bool,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
-    logger: LottieLogger)
-    throws
-  {
+    logger: LottieLogger
+  ) throws {
     self.animation = animation
     self.imageProvider = imageProvider
     self.textProvider = textProvider
@@ -86,6 +85,15 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     var timingConfiguration: CAMediaTimingConfiguration
     var recordHierarchyKeypath: ((String) -> Void)?
 
+    var expectedAnimationDuration: TimeInterval {
+      let animationDuration = Double(animationContext.playTo - animationContext.playFrom) / animationContext.framerate
+      let durationMultiplier = timingConfiguration.autoreverses ? 2.0 : 1.0
+      let speed = Double(timingConfiguration.speed)
+      let repeatCount = Double(timingConfiguration.repeatCount)
+      let timeOffset = timingConfiguration.timeOffset
+      return animationDuration * durationMultiplier / speed * repeatCount - timeOffset
+    }
+
     static func ==(_ lhs: AnimationConfiguration, _ rhs: AnimationConfiguration) -> Bool {
       lhs.animationContext == rhs.animationContext
         && lhs.timingConfiguration == rhs.timingConfiguration
@@ -130,11 +138,12 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   ///     will only be set up a single time.
   func playAnimation(
     configuration: AnimationConfiguration,
-    playbackState: PlaybackState = .playing)
-  {
+    playbackState: PlaybackState = .playing
+  ) {
     pendingAnimationConfiguration = (
       animationConfiguration: configuration,
-      playbackState: playbackState)
+      playbackState: playbackState
+    )
 
     setNeedsDisplay()
   }
@@ -192,13 +201,18 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// queued by calling `playAnimation` but not yet actually set up
   private var pendingAnimationConfiguration: (
     animationConfiguration: AnimationConfiguration,
-    playbackState: PlaybackState)?
+    playbackState: PlaybackState
+  )?
 
   /// A modification that should be applied to the next animation configuration
   private var pendingAnimationConfigurationModification: ((inout AnimationConfiguration) -> Void)?
 
   /// Configuration for the animation that is currently setup in this layer
   private var currentAnimationConfiguration: AnimationConfiguration?
+
+  /// The real-world time at which the animation playback was started.
+  /// Used to calculate the animation's current progress, including time spent in the background.
+  private var animationStartedAt: Date?
 
   /// The current progress of the placeholder `CAAnimation`,
   /// which is also the realtime animation progress of this layer's animation
@@ -237,7 +251,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       textProvider: textProvider,
       fontProvider: fontProvider,
       compatibilityTracker: compatibilityTracker,
-      layerName: "root layer")
+      layerName: "root layer"
+    )
   }
 
   private func setup() {
@@ -247,7 +262,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   private func setupChildLayers() throws {
     try setupLayerHierarchy(
       for: animation.layers,
-      context: layerContext)
+      context: layerContext
+    )
 
     try validateReasonableNumberOfTimeRemappingLayers()
   }
@@ -270,7 +286,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       loggingState: loggingState,
       currentKeypath: AnimationKeypath(keys: []),
       textProvider: textProvider,
-      recordHierarchyKeypath: configuration.recordHierarchyKeypath)
+      recordHierarchyKeypath: configuration.recordHierarchyKeypath
+    )
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -283,6 +300,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
     // Setup a placeholder animation to let us track the realtime animation progress
     setupPlaceholderAnimation(context: layerContext)
+    animationStartedAt = Date()
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in sublayers ?? [] {
@@ -343,15 +361,27 @@ extension CoreAnimationLayer: RootAnimationLayer {
   var isAnimationPlaying: Bool? {
     switch pendingAnimationConfiguration?.playbackState {
     case .playing:
-      true
+      return true
+
     case .paused:
-      false
+      return false
+
     case nil:
       switch playbackState {
       case .playing:
-        animation(forKey: #keyPath(animationProgress)) != nil
+        if animation(forKey: #keyPath(animationProgress)) != nil {
+          return true
+        }
+
+        guard let animationStartedAt, let currentAnimationConfiguration else { return false }
+        if currentAnimationConfiguration.timingConfiguration.repeatCount == .greatestFiniteMagnitude {
+          return true
+        } else {
+          return animationStartedAt.distance(to: Date()) < currentAnimationConfiguration.expectedAnimationDuration
+        }
+
       case nil, .paused:
-        false
+        return false
       }
     }
   }
@@ -392,8 +422,11 @@ extension CoreAnimationLayer: RootAnimationLayer {
           // However when the animation is paused, we need to be able to render the final frame.
           // To allow this we have to extend the length of the animation by one frame.
           playTo: animation.endFrame + 1,
-          closure: nil),
-        timingConfiguration: CAMediaTimingConfiguration(speed: 0))
+          framerate: animation.framerate,
+          closure: nil
+        ),
+        timingConfiguration: CAMediaTimingConfiguration(speed: 0)
+      )
 
       if
         pendingAnimationConfiguration == nil,
@@ -405,7 +438,8 @@ extension CoreAnimationLayer: RootAnimationLayer {
       else {
         playAnimation(
           configuration: requiredAnimationConfiguration,
-          playbackState: .paused(frame: newValue))
+          playbackState: .paused(frame: newValue)
+        )
       }
     }
   }
@@ -536,6 +570,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   func removeAnimations() {
     currentAnimationConfiguration = nil
     currentPlaybackState = nil
+    animationStartedAt = nil
     removeAllAnimations()
 
     for sublayer in allSublayers {
@@ -567,7 +602,8 @@ extension CoreAnimationLayer: RootAnimationLayer {
       """
       This animation has a very large number of layers with time remapping (\(numberOfLayersWithTimeRemapping) \
       layers over \(numberOfFrames) frames) so will perform poorly with the Core Animation rendering engine.
-      """)
+      """
+    )
   }
 
 }
@@ -578,7 +614,7 @@ extension CALayer {
   /// All of the layers in the layer tree that are descendants from this later
   @nonobjc
   var allSublayers: [CALayer] {
-    var allSublayers: [CALayer] = []
+    var allSublayers = [CALayer]()
 
     for sublayer in sublayers ?? [] {
       allSublayers.append(sublayer)

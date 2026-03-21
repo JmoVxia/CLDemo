@@ -25,8 +25,7 @@ class CLRotateAnimationViewConfigure: NSObject {
     var backgroundColor: UIColor = .red
 
     fileprivate class func defaultConfigure() -> CLRotateAnimationViewConfigure {
-        let configure = CLRotateAnimationViewConfigure()
-        return configure
+        CLRotateAnimationViewConfigure()
     }
 }
 

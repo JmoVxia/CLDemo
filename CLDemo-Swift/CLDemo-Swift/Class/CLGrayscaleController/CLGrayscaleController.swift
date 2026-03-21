@@ -248,10 +248,6 @@ private extension CLGrayscaleController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLGrayscaleController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLGrayscaleController {
@@ -280,11 +276,3 @@ extension CLGrayscaleController {}
         }
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLGrayscaleController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLGrayscaleController {}

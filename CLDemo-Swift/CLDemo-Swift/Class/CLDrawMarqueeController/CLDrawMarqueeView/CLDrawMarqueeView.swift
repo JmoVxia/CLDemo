@@ -44,10 +44,7 @@ class CLDrawMarqueeView: UIView {
         label.bounds.height
     }
 
-    private lazy var label: UILabel = {
-        let view = UILabel()
-        return view
-    }()
+    private lazy var label: UILabel = .init()
 
     init(speed: CGFloat = 2.0, direction: Direction = .left) {
         super.init(frame: .zero)

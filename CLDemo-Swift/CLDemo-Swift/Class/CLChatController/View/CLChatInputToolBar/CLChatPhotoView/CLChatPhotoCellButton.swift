@@ -24,10 +24,7 @@ class CLChatPhotoCellButton: UIControl {
         }
     }
 
-    private var iconImageView: UIImageView = {
-        let iconImageView = UIImageView()
-        return iconImageView
-    }()
+    private var iconImageView: UIImageView = .init()
 
     private var textLabel: UILabel = {
         let textLabel = UILabel()

@@ -13,9 +13,17 @@ private extension CLBaseAsyncOperation {
         case executing = "isExecuting"
         case finished = "isFinished"
 
-        var isReady: Bool { self == .ready }
-        var isExecuting: Bool { self == .executing }
-        var isFinished: Bool { self == .finished }
+        var isReady: Bool {
+            self == .ready
+        }
+
+        var isExecuting: Bool {
+            self == .executing
+        }
+
+        var isFinished: Bool {
+            self == .finished
+        }
     }
 }
 
@@ -35,10 +43,21 @@ class CLBaseAsyncOperation: Operation, @unchecked Sendable {
         }
     }
 
-    override var isReady: Bool { super.isReady && state.isReady }
-    override var isExecuting: Bool { state.isExecuting }
-    override var isFinished: Bool { state.isFinished }
-    override var isAsynchronous: Bool { true }
+    override var isReady: Bool {
+        super.isReady && state.isReady
+    }
+
+    override var isExecuting: Bool {
+        state.isExecuting
+    }
+
+    override var isFinished: Bool {
+        state.isFinished
+    }
+
+    override var isAsynchronous: Bool {
+        true
+    }
 }
 
 extension CLBaseAsyncOperation {
@@ -61,5 +80,7 @@ extension CLBaseAsyncOperation {
 }
 
 extension CLBaseAsyncOperation {
-    @objc func startTask(completion: @escaping () -> Void) { completion() }
+    @objc func startTask(completion: @escaping () -> Void) {
+        completion()
+    }
 }

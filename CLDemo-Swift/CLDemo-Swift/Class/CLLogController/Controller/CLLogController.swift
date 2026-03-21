@@ -88,18 +88,6 @@ private extension CLLogController {
     func configData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLLogController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLLogController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLLogController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLLogController {}

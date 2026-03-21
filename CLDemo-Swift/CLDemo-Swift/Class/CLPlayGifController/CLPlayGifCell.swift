@@ -20,10 +20,7 @@ class CLPlayGifCell: UITableViewCell {
         return view
     }()
 
-    private lazy var animageView: SDAnimatedImageView = {
-        let view = SDAnimatedImageView()
-        return view
-    }()
+    private lazy var animageView: SDAnimatedImageView = .init()
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {

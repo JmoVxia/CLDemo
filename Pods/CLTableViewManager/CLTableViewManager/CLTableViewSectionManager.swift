@@ -7,7 +7,6 @@
 
 import UIKit
 
-@MainActor
 public class CLTableViewSectionManager: CLTableViewManager {
     public var dataSource: [CLSectionItemProtocol] = []
     

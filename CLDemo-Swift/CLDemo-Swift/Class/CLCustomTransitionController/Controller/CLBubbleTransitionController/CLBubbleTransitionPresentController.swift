@@ -105,10 +105,6 @@ private extension CLBubbleTransitionPresentController {
     func initData() {}
 }
 
-// MARK: - JmoVxia---override
-
-extension CLBubbleTransitionPresentController {}
-
 // MARK: - JmoVxia---objc
 
 @objc private extension CLBubbleTransitionPresentController {
@@ -117,11 +113,3 @@ extension CLBubbleTransitionPresentController {}
         bubbleDelegate.interactiveTransition.finish()
     }
 }
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLBubbleTransitionPresentController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLBubbleTransitionPresentController {}

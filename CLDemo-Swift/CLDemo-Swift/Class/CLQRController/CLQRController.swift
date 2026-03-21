@@ -21,10 +21,7 @@ class CLQRController: CLController {
 
     deinit {}
 
-    private lazy var qrImageView: UIImageView = {
-        let view = UIImageView()
-        return view
-    }()
+    private lazy var qrImageView: UIImageView = .init()
 }
 
 // MARK: - JmoVxia---生命周期
@@ -99,11 +96,3 @@ extension CLQRController {
 // MARK: - JmoVxia---objc
 
 @objc private extension CLQRController {}
-
-// MARK: - JmoVxia---私有方法
-
-private extension CLQRController {}
-
-// MARK: - JmoVxia---公共方法
-
-extension CLQRController {}

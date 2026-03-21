@@ -40,8 +40,8 @@ target 'CLDemo-Swift' do
   pod 'TZImagePickerController'
   pod 'LookinServer', :configurations => ['Debug']
   pod 'CocoaLumberjack/Swift'
-  pod 'CLTableViewManager'
-  pod 'CLNestedSlide'
+  pod 'CLTableViewManager', :git => 'https://github.com/JmoVxia/CLTableViewManager.git'
+  pod 'CLPinnedPage', :git => 'https://github.com/JmoVxia/CLPinnedPage.git'
 
   # 本地 / 私有组件
   pod 'CLCamera', :git => 'https://github.com/JmoVxia/CLCamera.git'

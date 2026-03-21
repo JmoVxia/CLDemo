@@ -35,36 +35,72 @@ private extension CLPopoverManager {
     private var dismissingKeys = Set<String>()
 }
 
+private extension CLPopoverManager {
+    func activeWindows(for groupID: String?) -> [CLPopoverWindow] {
+        activeWindows.filter { $0.rootPopoverController?.config.groupID == groupID }
+    }
+
+    func waitQueueItems(for groupID: String?) -> [String: CLPopoverQueueItem] {
+        waitQueue.filter { $0.value.controller.config.groupID == groupID }
+    }
+
+    func suspendedWindows(for groupID: String?) -> [String: [CLPopoverWindow]] {
+        suspendedWindows.filter { _, windows in
+            guard let firstWindow = windows.first else { return false }
+            return firstWindow.rootPopoverController?.config.groupID == groupID
+        }
+    }
+}
+
 public extension CLPopoverManager {
     /// 显示自定义弹窗
     static func show(_ controller: CLPopoverProtocol, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
-            guard !shared.activeWindows.contains(where: { window in
-                guard let root = window.rootPopoverController else { return false }
-                return root.config.popoverMode == .unique
-                    || root.key == controller.key
-                    || (root.config.identifier != nil && root.config.identifier == controller.config.identifier)
-            }) else {
+            let groupID = controller.config.groupID
+
+            if shared.activeWindows.contains(where: { $0.rootPopoverController?.config.popoverMode == .globalUnique }) {
                 return
             }
 
-            guard !shared.waitQueue.values.contains(where: {
-                $0.controller.config.identifier != nil && $0.controller.config.identifier == controller.config.identifier
-            }) else {
+            let sameGroupHasUnique = shared.activeWindows.contains(where: {
+                guard let ctrl = $0.rootPopoverController else { return false }
+                return ctrl.config.popoverMode == .groupUnique && ctrl.config.groupID == groupID
+            })
+            if sameGroupHasUnique {
+                return
+            }
+
+            let allExistingControllers: [CLPopoverProtocol] = {
+                var controllers = [CLPopoverProtocol]()
+                controllers.append(contentsOf: shared.activeWindows.compactMap(\.rootPopoverController))
+                controllers.append(contentsOf: shared.waitQueue.values.map(\.controller))
+                controllers.append(contentsOf: shared.suspendedWindows.values.flatMap { $0 }.compactMap(\.rootPopoverController))
+                return controllers
+            }()
+
+            let controllerKey = controller.key
+            let controllerIdentifier = controller.config.identifier
+
+            if allExistingControllers.contains(where: {
+                $0.key == controllerKey || (controllerIdentifier != nil && $0.config.identifier == controllerIdentifier)
+            }) {
                 return
             }
 
             switch controller.config.popoverMode {
             case .queue, .interrupt:
                 break
+
             case .suspend:
-                shared.suspendedWindows[controller.key] = shared.activeWindows
-                shared.activeWindows.forEach { $0.isHidden = true }
-                shared.activeWindows.removeAll()
+                let sameGroupWindows = shared.activeWindows(for: groupID)
+                shared.suspendedWindows[controller.key] = sameGroupWindows
+                sameGroupWindows.forEach { $0.isHidden = true }
+                shared.activeWindows.removeAll { $0.rootPopoverController?.config.groupID == groupID }
+
             case .replaceInheritSuspend:
-                let windowsToReplace = shared.activeWindows
+                let windowsToReplace = shared.activeWindows(for: groupID)
                 windowsToReplace.forEach { $0.isHidden = true }
-                shared.activeWindows.removeAll()
+                shared.activeWindows.removeAll { $0.rootPopoverController?.config.groupID == groupID }
 
                 var allInheritedSuspended = [CLPopoverWindow]()
                 for window in windowsToReplace {
@@ -72,34 +108,52 @@ public extension CLPopoverManager {
                     guard let suspended = shared.suspendedWindows.removeValue(forKey: replacedKey) else { continue }
                     allInheritedSuspended.append(contentsOf: suspended)
                 }
-                guard !allInheritedSuspended.isEmpty else { break }
-                shared.suspendedWindows[controller.key] = allInheritedSuspended
+                if !allInheritedSuspended.isEmpty {
+                    shared.suspendedWindows[controller.key] = allInheritedSuspended
+                }
+
             case .replaceClearSuspend:
-                let windowsToReplace = shared.activeWindows
+                let windowsToReplace = shared.activeWindows(for: groupID)
                 windowsToReplace.forEach { $0.isHidden = true }
-                shared.activeWindows.removeAll()
+                shared.activeWindows.removeAll { $0.rootPopoverController?.config.groupID == groupID }
                 for window in windowsToReplace {
                     guard let replacedKey = window.rootPopoverController?.key else { continue }
                     guard let suspendedToClear = shared.suspendedWindows.removeValue(forKey: replacedKey) else { continue }
                     suspendedToClear.forEach { $0.isHidden = true }
                 }
-            case .replaceAll, .unique:
+
+            case .replaceAll, .groupUnique:
+                shared.waitQueue = shared.waitQueue.filter { $0.value.controller.config.groupID != groupID }
+
+                let sameGroupSuspendedKeys = shared.suspendedWindows(for: groupID).keys
+                for key in sameGroupSuspendedKeys {
+                    shared.suspendedWindows[key]?.forEach { $0.isHidden = true }
+                    shared.suspendedWindows.removeValue(forKey: key)
+                }
+
+                let sameGroupActiveWindows = shared.activeWindows(for: groupID)
+                sameGroupActiveWindows.forEach { $0.isHidden = true }
+                shared.activeWindows.removeAll { $0.rootPopoverController?.config.groupID == groupID }
+
+            case .globalUnique:
                 shared.waitQueue.removeAll()
                 shared.suspendedWindows.values.flatMap { $0 }.forEach { $0.isHidden = true }
                 shared.suspendedWindows.removeAll()
                 shared.activeWindows.forEach { $0.isHidden = true }
                 shared.activeWindows.removeAll()
             }
-            if controller.config.popoverMode == .queue, !shared.activeWindows.isEmpty {
+
+            if controller.config.popoverMode == .queue, !shared.activeWindows(for: groupID).isEmpty {
                 shared.waitQueue[controller.key] = CLPopoverQueueItem(controller: controller, completion: completion)
                 return
             }
+
             display(controller, completion: completion)
         }
     }
 
     /// 隐藏指定弹窗
-    static func dismiss(_ key: String?, completion: (() -> Void)? = nil) {
+    static func dismiss(forKey key: String?, completion: (() -> Void)? = nil) {
         guard let key else { return }
         DispatchQueue.main.async {
             guard !shared.dismissingKeys.contains(key) else { return }
@@ -108,19 +162,31 @@ public extension CLPopoverManager {
                 completion?()
                 return
             }
+
+            let groupID = window.rootPopoverController?.config.groupID
+
             shared.dismissingKeys.insert(key)
             window.rootPopoverController?.dismissAnimation {
                 window.isHidden = true
                 completion?()
                 shared.activeWindows.removeAll(where: { $0.rootPopoverController?.key == key })
                 shared.dismissingKeys.remove(key)
-                if shared.activeWindows.isEmpty, shared.suspendedWindows.isEmpty, shared.waitQueue.isEmpty { return dismissAll() }
-                guard shared.activeWindows.isEmpty else { return }
+
+                if shared.activeWindows.isEmpty, shared.suspendedWindows.isEmpty, shared.waitQueue.isEmpty {
+                    return dismissAll()
+                }
+
+                guard shared.activeWindows(for: groupID).isEmpty else { return }
+
                 if let windows = shared.suspendedWindows[key], !windows.isEmpty {
                     windows.forEach { $0.isHidden = false }
-                    shared.activeWindows = windows
+                    shared.activeWindows.append(contentsOf: windows)
                     shared.suspendedWindows.removeValue(forKey: key)
-                } else if let nextItem = shared.waitQueue.values.max(by: { lhs, rhs in
+                    return
+                }
+
+                let sameGroupWaitQueue = shared.waitQueueItems(for: groupID)
+                if let nextItem = sameGroupWaitQueue.values.max(by: { lhs, rhs in
                     if lhs.controller.config.popoverPriority != rhs.controller.config.popoverPriority {
                         lhs.controller.config.popoverPriority < rhs.controller.config.popoverPriority
                     } else {
@@ -130,6 +196,28 @@ public extension CLPopoverManager {
                     display(nextItem.controller, completion: nextItem.completion)
                 }
             }
+        }
+    }
+
+    /// 隐藏指定分组的所有弹窗
+    static func dismiss(forGroup groupID: String) {
+        DispatchQueue.main.async {
+            shared.waitQueue = shared.waitQueue.filter { $0.value.controller.config.groupID != groupID }
+
+            let sameGroupSuspendedKeys = shared.suspendedWindows(for: groupID).keys
+            for key in sameGroupSuspendedKeys {
+                shared.suspendedWindows[key]?.forEach { $0.isHidden = true }
+                shared.suspendedWindows.removeValue(forKey: key)
+            }
+
+            let sameGroupActiveWindows = shared.activeWindows(for: groupID)
+            sameGroupActiveWindows.forEach { $0.isHidden = true }
+            shared.activeWindows.removeAll { $0.rootPopoverController?.config.groupID == groupID }
+
+            let keysToRemove = shared.dismissingKeys.filter { key in
+                sameGroupActiveWindows.contains { $0.rootPopoverController?.key == key }
+            }
+            shared.dismissingKeys.subtract(keysToRemove)
         }
     }
 
@@ -143,6 +231,65 @@ public extension CLPopoverManager {
             shared.activeWindows.forEach { $0.isHidden = true }
             shared.activeWindows.removeAll()
         }
+    }
+}
+
+// MARK: - 状态查询（用于测试）
+
+public extension CLPopoverManager {
+    /// 获取当前活跃弹窗数量
+    static var activeCount: Int {
+        shared.activeWindows.count
+    }
+
+    /// 获取指定分组的活跃弹窗数量
+    static func activeCount(for groupID: String?) -> Int {
+        shared.activeWindows(for: groupID).count
+    }
+
+    /// 获取当前等待队列数量
+    static var waitQueueCount: Int {
+        shared.waitQueue.count
+    }
+
+    /// 获取指定分组的等待队列数量
+    static func waitQueueCount(for groupID: String?) -> Int {
+        shared.waitQueueItems(for: groupID).count
+    }
+
+    /// 获取当前挂起弹窗数量
+    static var suspendedCount: Int {
+        shared.suspendedWindows.values.flatMap { $0 }.count
+    }
+
+    /// 获取指定分组的挂起弹窗数量
+    static func suspendedCount(for groupID: String?) -> Int {
+        shared.suspendedWindows(for: groupID).values.flatMap { $0 }.count
+    }
+
+    /// 获取所有活跃弹窗的 identifier 列表
+    static var activeIdentifiers: [String] {
+        shared.activeWindows.compactMap { $0.rootPopoverController?.config.identifier }
+    }
+
+    /// 获取指定分组的活跃弹窗 identifier 列表
+    static func activeIdentifiers(for groupID: String?) -> [String] {
+        shared.activeWindows(for: groupID).compactMap { $0.rootPopoverController?.config.identifier }
+    }
+
+    /// 检查指定 identifier 的弹窗是否正在显示
+    static func isActive(identifier: String) -> Bool {
+        shared.activeWindows.contains { $0.rootPopoverController?.config.identifier == identifier }
+    }
+
+    /// 检查指定 identifier 的弹窗是否在等待队列中
+    static func isInWaitQueue(identifier: String) -> Bool {
+        shared.waitQueue.values.contains { $0.controller.config.identifier == identifier }
+    }
+
+    /// 检查指定 identifier 的弹窗是否被挂起
+    static func isSuspended(identifier: String) -> Bool {
+        shared.suspendedWindows.values.flatMap { $0 }.contains { $0.rootPopoverController?.config.identifier == identifier }
     }
 }
 

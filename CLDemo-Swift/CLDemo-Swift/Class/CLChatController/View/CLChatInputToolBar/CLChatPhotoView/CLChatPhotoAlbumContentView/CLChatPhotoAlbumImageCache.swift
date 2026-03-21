@@ -20,10 +20,7 @@ class CLChatPhotoAlbumImageCache: NSObject {
         }
     }
 
-    private var imageManager: PHCachingImageManager = {
-        let manager = PHCachingImageManager()
-        return manager
-    }()
+    private var imageManager: PHCachingImageManager = .init()
 
     private lazy var cachedImages: NSCache<NSString, CLChatPhotoAlbumImageItem> = {
         let cache = NSCache<NSString, CLChatPhotoAlbumImageItem>()

@@ -24,8 +24,8 @@ extension LottieAnimationView {
     subdirectory: String? = nil,
     imageProvider: AnimationImageProvider? = nil,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     let animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
@@ -40,8 +40,8 @@ extension LottieAnimationView {
     filePath: String,
     imageProvider: AnimationImageProvider? = nil,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     let animation = LottieAnimation.filepath(filePath, animationCache: animationCache)
     let provider = imageProvider ??
       FilepathImageProvider(filepath: URL(fileURLWithPath: filePath).deletingLastPathComponent().path)
@@ -53,15 +53,16 @@ extension LottieAnimationView {
   /// - Parameter url: The url to load the animation from.
   /// - Parameter imageProvider: An image provider for the animation's image data.
   /// If none is supplied Lottie will search in the main bundle for images.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter closure: A closure to be called when the animation has loaded.
   public convenience init(
     url: URL,
     imageProvider: AnimationImageProvider? = nil,
-    session: URLSession = .shared,
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
     closure: @escaping LottieAnimationView.DownloadClosure,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     if let animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       self.init(animation: animation, imageProvider: imageProvider, configuration: configuration)
       closure(nil)
@@ -90,14 +91,12 @@ extension LottieAnimationView {
     bundle: Bundle = Bundle.main,
     imageProvider: AnimationImageProvider? = nil,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     let animation = LottieAnimation.asset(name, bundle: bundle, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
-
-  // MARK: DotLottie
 
   /// Loads a Lottie animation from a .lottie file in the supplied bundle.
   ///
@@ -114,8 +113,8 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
-  {
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil
+  ) {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
     DotLottieFile.named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache) { result in
       switch result {
@@ -140,8 +139,8 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
-  {
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil
+  ) {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
     DotLottieFile.loadedFrom(filepath: filePath, dotLottieCache: dotLottieCache) { result in
       switch result {
@@ -159,15 +158,16 @@ extension LottieAnimationView {
   ///
   /// - Parameter dotLottieUrl: The url to load the lottie file from.
   /// - Parameter animationId: Animation id to play. Optional. Defaults to first animation in file.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter completion: A closure to be called when the animation has loaded.
   public convenience init(
     dotLottieUrl url: URL,
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    session: URLSession = .shared,
-    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
-  {
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil
+  ) {
     if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
       completion?(self, nil)
@@ -198,8 +198,8 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
-  {
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil
+  ) {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
     DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
       switch result {

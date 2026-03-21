@@ -1,99 +1,90 @@
-//
-//  CLNestedSlideController.swift
-//  CLDemo-Swift
-//
-//  Created by Chen JmoVxia on 2024/7/3.
-//
-
-import CLNestedSlide
+import SnapKit
 import UIKit
 
-class CLNestedSlideController: CLController {
-    // MARK: - UI 组件
-
-    private lazy var nestedSlideView: CLNestedSlideView = {
-        let view = CLNestedSlideView(isLazyLoading: false)
-        view.dataSource = self
-        view.delegate = self
-        return view
+final class CLNestedSlideController: CLController {
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "CLPinnedPage Demo"
+        label.textAlignment = .center
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        return label
     }()
 
-    /// 顶部渐变卡片头部
-    private lazy var headerView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .orange.withAlphaComponent(0.35)
-        // 主标题
-        let titleLabel = UILabel()
-        titleLabel.text = "CLNestedSlide Demo"
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 28, weight: .bold)
-        titleLabel.textAlignment = .center
-        // 副标题
-        let subtitleLabel = UILabel()
-        subtitleLabel.text = "专业级嵌套滑动演示"
-        subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.85)
-        subtitleLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        subtitleLabel.textAlignment = .center
-        v.addSubview(titleLabel)
-        v.addSubview(subtitleLabel)
-        titleLabel.snp.makeConstraints { make in make.centerX.equalToSuperview(); make.top.equalToSuperview().offset(48) }
-        subtitleLabel.snp.makeConstraints { make in make.centerX.equalToSuperview(); make.top.equalTo(titleLabel.snp.bottom).offset(8) }
-        return v
+    private lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "选择演示方案"
+        label.textAlignment = .center
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        return label
     }()
 
-    /// 毛玻璃分段栏
-    private lazy var segmentedBar: CLSegmentedBar = {
-        let bar = CLSegmentedBar()
-        bar.setTitles(["首页", "发现", "我的", "设置"])
-        bar.onSelect = { [weak self] index in self?.nestedSlideView.scrollToPage(at: index, animated: true) }
-        return bar
+    private lazy var viewModeButton: UIButton = makePrimaryButton(title: "View 方案")
+    private lazy var controllerModeButton: UIButton = makePrimaryButton(title: "Controller 方案")
+
+    private lazy var buttonStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [viewModeButton, controllerModeButton])
+        stackView.axis = .vertical
+        stackView.spacing = 14
+        stackView.distribution = .fillEqually
+        return stackView
     }()
-
-    /// 页面数据
-    private let pageData: [(String, String, UIColor)] = [
-        ("首页", "这里是首页内容\n可以展示主要功能", .systemGreen),
-        ("发现", "这里是发现页面\n可以浏览新内容", .systemBlue),
-        ("我的", "这里是个人中心\n管理个人信息", .systemOrange),
-        ("设置", "这里是设置页面\n配置应用选项", .systemPurple),
-    ]
-
-    // MARK: - 生命周期
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 245 / 255, green: 247 / 255, blue: 251 / 255, alpha: 1)
+        updateTitleLabel { label in
+            label.text = "滑动嵌套"
+        }
         setupUI()
-    }
-
-    /// UI布局
-    private func setupUI() {
-        view.addSubview(nestedSlideView)
-        nestedSlideView.snp.makeConstraints { make in make.edges.equalTo(view.safeAreaLayoutGuide) }
-        headerView.snp.makeConstraints { make in make.height.equalTo(240) }
-        segmentedBar.snp.makeConstraints { make in make.height.equalTo(60) }
-        nestedSlideView.headerView = headerView
-        nestedSlideView.hoverView = segmentedBar
-        nestedSlideView.reload()
+        bindActions()
     }
 }
 
-extension CLNestedSlideController: CLNestedSlideViewDataSource {
-    func numberOfPages(in nestedSlideView: CLNestedSlideView) -> Int { pageData.count }
-    func nestedSlideView(_ nestedSlideView: CLNestedSlideView, pageFor index: Int) -> CLNestedSlideViewPage {
-        CLPageView()
-    }
-}
+private extension CLNestedSlideController {
+    func setupUI() {
+        view.addSubview(titleLabel)
+        view.addSubview(subtitleLabel)
+        view.addSubview(buttonStack)
 
-extension CLNestedSlideController: CLNestedSlideViewDelegate {
-    func contentScrollViewDidScroll(_ nestedSlideView: CLNestedSlideView, scrollView: UIScrollView, progress: CGFloat) {
-        let currentIndex = Int(progress.rounded())
-        let clampedIndex = min(max(currentIndex, 0), pageData.count - 1)
-        let offset = progress - CGFloat(clampedIndex)
-        segmentedBar.updateIndicatorWithOffset(baseIndex: clampedIndex, offset: offset)
-        segmentedBar.updateTitleColorWithProgress(baseIndex: clampedIndex, offset: offset)
+        titleLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(24)
+            make.centerY.equalToSuperview().offset(-90)
+        }
+
+        subtitleLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(24)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+        }
+
+        buttonStack.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(24)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(36)
+            make.height.equalTo(116)
+        }
     }
 
-    func contentScrollViewDidScrollToPage(at index: Int) {
-        segmentedBar.setSelectedIndex(index)
+    func bindActions() {
+        viewModeButton.addTarget(self, action: #selector(handleViewModeTapped), for: .touchUpInside)
+        controllerModeButton.addTarget(self, action: #selector(handleControllerModeTapped), for: .touchUpInside)
+    }
+
+    func makePrimaryButton(title: String) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(red: 47 / 255, green: 103 / 255, blue: 245 / 255, alpha: 1)
+        button.layer.cornerRadius = 14
+        return button
+    }
+
+    @objc func handleViewModeTapped() {
+        navigationController?.pushViewController(CLNestedSlideViewModeController(), animated: true)
+    }
+
+    @objc func handleControllerModeTapped() {
+        navigationController?.pushViewController(CLNestedSlideControllerModeController(), animated: true)
     }
 }

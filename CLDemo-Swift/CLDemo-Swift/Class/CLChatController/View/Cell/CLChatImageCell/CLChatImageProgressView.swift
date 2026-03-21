@@ -8,11 +8,11 @@
 import UIKit
 
 class CLChatImageProgressView: UIView {
-    // 环形进度
+    /// 环形进度
     private var progess: CGFloat = 0.0
-    // 中心文本显示
+    /// 中心文本显示
     private var label: UILabel?
-    // 环形的宽
+    /// 环形的宽
     private var lineWidth: CGFloat = 2.0
     // 进度条的layer层
     private var foreLayer: CAShapeLayer?

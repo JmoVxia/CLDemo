@@ -7,9 +7,15 @@
 
 extension Result {
     /// 是否成功
-    var isSuccess: Bool { if case .success = self { true } else { false } }
+    var isSuccess: Bool {
+        if case .success = self { true } else { false }
+    }
+
     /// 是否错误
-    var isError: Bool { !isSuccess }
+    var isError: Bool {
+        !isSuccess
+    }
+
     /// 成功case
     var success: Success? {
         if case let .success(item) = self {

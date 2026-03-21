@@ -75,10 +75,7 @@ class CLChatRecordView: UIView {
     }()
 
     /// 图标
-    private lazy var iconImageView: UIImageView = {
-        let iconImageView = UIImageView(image: UIImage(named: "icon_voice"))
-        return iconImageView
-    }()
+    private lazy var iconImageView: UIImageView = .init(image: UIImage(named: "icon_voice"))
 
     /// 提示
     private lazy var tipsLabel: UILabel = {
@@ -90,10 +87,7 @@ class CLChatRecordView: UIView {
     }()
 
     /// 时间
-    private lazy var timeView: CLChatRecordTimeView = {
-        let timeView = CLChatRecordTimeView()
-        return timeView
-    }()
+    private lazy var timeView: CLChatRecordTimeView = .init()
 
     /// 录音器
     private lazy var recorder: CLRecorder = {
