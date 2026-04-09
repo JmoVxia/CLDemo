@@ -24,8 +24,8 @@
 
 @interface CLChartView ()<CLMaxChartLegendViewDelegate>
 
-/**遮罩*/
-@property (nonatomic,strong) CLChartMaskView *maskView;
+/**图表内容视图，避免与 UIView.maskView 重名*/
+@property (nonatomic,strong) CLChartMaskView *chartMaskContentView;
 /**顶部工具条*/
 @property (nonatomic,strong) CLChartToolBar *toolBar;
 /**全屏名称工具条*/
@@ -45,11 +45,11 @@
 
 @implementation CLChartView
 
-- (CLChartMaskView *) maskView{
-    if (_maskView == nil){
-        _maskView = [[CLChartMaskView alloc] initWithFrame:CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight)];
+- (CLChartMaskView *)chartMaskContentView{
+    if (_chartMaskContentView == nil){
+        _chartMaskContentView = [[CLChartMaskView alloc] initWithFrame:CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight)];
     }
-    return _maskView;
+    return _chartMaskContentView;
 }
 - (CLChartToolBar *) toolBar{
     if (_toolBar == nil){
@@ -82,7 +82,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         _isFullScreen = NO;
-        [self addSubview:self.maskView];
+        [self addSubview:self.chartMaskContentView];
         [self addSubview:self.toolBar];
         [self addSubview:self.zoomButton];
         [self addSubview:self.nameToolBar];
@@ -106,7 +106,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.maskView.dic = _dic;
+    self.chartMaskContentView.dic = _dic;
 }
 
 - (void)zoomButtonAction:(UIButton*)button{
@@ -140,14 +140,14 @@
         self.zoomButton.frame = CGRectMake(self.frame.size.height - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
         self.nameToolBar.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.height - rightSpace - leftSpace - 40, toolBarHeight);
-        self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
+        self.chartMaskContentView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.height - rightSpace - leftSpace, self.frame.size.width - bottomSpace - toolBarHeight);
     }else{
         self.zoomButton.frame = CGRectMake(self.frame.size.width - rightSpace - 40, 0, 40, toolBarHeight);
         self.toolBar.frame = CGRectMake(leftSpace, 0, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
         self.nameToolBar.frame = CGRectMake(leftSpace + 40, toolBarHeight, self.frame.size.width - rightSpace - leftSpace - 40, toolBarHeight);
-        self.maskView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
+        self.chartMaskContentView.frame = CGRectMake(leftSpace ,toolBarHeight, self.frame.size.width - rightSpace - leftSpace, self.frame.size.height - bottomSpace - toolBarHeight);
     }
-    self.maskView.isFullScreen = isFullScreen;
+    self.chartMaskContentView.isFullScreen = isFullScreen;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 
@@ -155,7 +155,7 @@
 #pragma mark - 按钮点击事件
 //一周
 - (void)maxChartLegendViewDidSelectedWeek:(UIButton*)button{
-    self.maskView.dayType = Week;
+    self.chartMaskContentView.dayType = Week;
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedWeek:)]) {
         [_delegate CLChartViewDidSelectedWeek:button];
     }else{
@@ -166,7 +166,7 @@
 }
 //一月
 - (void)maxChartLegendViewDidSelectedOneMonth:(UIButton*)button{
-    self.maskView.dayType = OneMonth;
+    self.chartMaskContentView.dayType = OneMonth;
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedOneMonth:)]) {
         [_delegate CLChartViewDidSelectedOneMonth:button];
     }else{
@@ -175,7 +175,7 @@
 }
 //三月
 - (void)maxChartLegendViewDidSelectedThreeMonth:(UIButton*)button{
-    self.maskView.dayType = ThreeMonth;
+    self.chartMaskContentView.dayType = ThreeMonth;
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedThreeMonth:)]) {
         [_delegate CLChartViewDidSelectedThreeMonth:button];
     }else{
@@ -184,7 +184,7 @@
 }
 //六月
 - (void)maxChartLegendViewDidSelectedSixMonth:(UIButton*)button{
-    self.maskView.dayType = SixMonth;
+    self.chartMaskContentView.dayType = SixMonth;
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedSixMonth:)]) {
         [_delegate CLChartViewDidSelectedSixMonth:button];
     }else{
@@ -193,7 +193,7 @@
 }
 //一年
 - (void)maxChartLegendViewDidSelectedYear:(UIButton*)button{
-    self.maskView.dayType = Year;
+    self.chartMaskContentView.dayType = Year;
     if (_delegate && [_delegate respondsToSelector:@selector(CLChartViewDidSelectedYear:)]) {
         [_delegate CLChartViewDidSelectedYear:button];
     }else{

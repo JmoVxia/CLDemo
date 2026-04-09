@@ -74,11 +74,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-## CLPinnedPage
+## CLPopoverManager
 
 MIT License
 
-Copyright (c) 2025 JmoVxia
+Copyright (c) 2024 JmoVxia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -99,11 +99,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-## CLPopoverManager
+## CLStickyPage
 
 MIT License
 
-Copyright (c) 2024 JmoVxia
+Copyright (c) 2025 JmoVxia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

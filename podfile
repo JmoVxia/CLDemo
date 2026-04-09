@@ -41,7 +41,7 @@ target 'CLDemo-Swift' do
   pod 'LookinServer', :configurations => ['Debug']
   pod 'CocoaLumberjack/Swift'
   pod 'CLTableViewManager', :git => 'https://github.com/JmoVxia/CLTableViewManager.git'
-  pod 'CLPinnedPage', :git => 'https://github.com/JmoVxia/CLPinnedPage.git'
+  pod 'CLStickyPage', :git => 'https://github.com/JmoVxia/CLStickyPage.git'
 
   # 本地 / 私有组件
   pod 'CLCamera', :git => 'https://github.com/JmoVxia/CLCamera.git'
@@ -57,9 +57,6 @@ post_install do |installer|
     target.build_configurations.each do |config|
       # 统一最低系统版本
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
-
-      # 强制 Pods 使用 Swift 5，避免 Swift 6 兼容问题
-      config.build_settings['SWIFT_VERSION'] = '5.0'
 
       # 禁用所有警告
       config.build_settings['CLANG_WARN_DEPRECATED_DECLARATIONS'] = 'NO'

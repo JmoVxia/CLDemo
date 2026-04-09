@@ -1,9 +1,9 @@
 PODS:
   - CLCamera (1.0.2):
     - SnapKit
-  - CLPinnedPage (1.0.3):
-    - SnapKit
   - CLPopoverManager (0.0.9)
+  - CLStickyPage (1.0.1):
+    - SnapKit
   - CLTableViewManager (0.0.4)
   - CocoaLumberjack/Core (3.9.0)
   - CocoaLumberjack/Swift (3.9.0):
@@ -11,7 +11,7 @@ PODS:
   - CryptoSwift (1.8.4)
   - DateTools (2.0.0)
   - DateToolsSwift (5.0.0)
-  - Kingfisher (8.8.0)
+  - Kingfisher (8.8.1)
   - libwebp (1.5.0):
     - libwebp/demux (= 1.5.0)
     - libwebp/mux (= 1.5.0)
@@ -47,8 +47,8 @@ PODS:
 
 DEPENDENCIES:
   - CLCamera (from `https://github.com/JmoVxia/CLCamera.git`)
-  - CLPinnedPage (from `https://github.com/JmoVxia/CLPinnedPage.git`)
   - CLPopoverManager (from `https://github.com/JmoVxia/CLPopoverManager.git`)
+  - CLStickyPage (from `https://github.com/JmoVxia/CLStickyPage.git`)
   - CLTableViewManager (from `https://github.com/JmoVxia/CLTableViewManager.git`)
   - CocoaLumberjack/Swift
   - CryptoSwift
@@ -88,10 +88,10 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CLCamera:
     :git: https://github.com/JmoVxia/CLCamera.git
-  CLPinnedPage:
-    :git: https://github.com/JmoVxia/CLPinnedPage.git
   CLPopoverManager:
     :git: https://github.com/JmoVxia/CLPopoverManager.git
+  CLStickyPage:
+    :git: https://github.com/JmoVxia/CLStickyPage.git
   CLTableViewManager:
     :git: https://github.com/JmoVxia/CLTableViewManager.git
 
@@ -99,26 +99,26 @@ CHECKOUT OPTIONS:
   CLCamera:
     :commit: 1dd010f76fe671cb28ee519ee4e00b537fe50500
     :git: https://github.com/JmoVxia/CLCamera.git
-  CLPinnedPage:
-    :commit: 55ec1e3632d9891f00fe3d24fe54ccb0607827c3
-    :git: https://github.com/JmoVxia/CLPinnedPage.git
   CLPopoverManager:
     :commit: 25eb75cfc002f0bbf027864c1161de8dc2af098a
     :git: https://github.com/JmoVxia/CLPopoverManager.git
+  CLStickyPage:
+    :commit: 4d315d0d29136b547a251da338c0d54dc00866a7
+    :git: https://github.com/JmoVxia/CLStickyPage.git
   CLTableViewManager:
     :commit: 8b51b1cefd370cd0f7279614d8ae2bc71b5a343c
     :git: https://github.com/JmoVxia/CLTableViewManager.git
 
 SPEC CHECKSUMS:
   CLCamera: d849090d2bed834cb99fc8e2a9a6ac9bbbc025cb
-  CLPinnedPage: 6d24d817cfebe2cbecf3391674cc531b56ffddae
   CLPopoverManager: 5a7f999af3ecaa72727578a01c3626c813aa378d
+  CLStickyPage: e563ecdbc8df7360773f12999344f2568ff72575
   CLTableViewManager: 7d866e295db91f48e0a2a4e2f3ec0c686c0bd0b9
   CocoaLumberjack: 5644158777912b7de7469fa881f8a3f259c2512a
   CryptoSwift: e64e11850ede528a02a0f3e768cec8e9d92ecb90
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  Kingfisher: beeaf65ed57dfa710d416aea4093277e8a9b1968
+  Kingfisher: b6c16059112dd6bdadf3d7ae01472ea1ef01a6b8
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
   lottie-ios: 8f959969761e9c45d70353667d00af0e5b9cadb3
@@ -131,6 +131,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
   TZImagePickerController: 3751b9b850d00802e9f4f7bd8e1365ee5c4f0990
 
-PODFILE CHECKSUM: 1c1010087c27265fe7dfba48456a0f7ad84e6548
+PODFILE CHECKSUM: 039e288f473508eb50fce59928abe3bf240457a5
 
 COCOAPODS: 1.16.2

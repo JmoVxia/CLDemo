@@ -14,26 +14,26 @@ extension Data {
     }
 
     var int64: Int64 {
-        var value: Int64 = 0
-        NSData(bytes: bytes, length: count).getBytes(&value, length: count)
-        return value
+        integerValue()
     }
 
     var int8: Int8 {
-        var value: Int8 = 0
-        NSData(bytes: bytes, length: count).getBytes(&value, length: count)
-        return value
+        integerValue()
     }
 
     var int16: Int16 {
-        var value: Int16 = 0
-        NSData(bytes: bytes, length: count).getBytes(&value, length: count)
-        return value
+        integerValue()
     }
 
     var int32: Int32 {
-        var value: Int32 = 0
-        NSData(bytes: bytes, length: count).getBytes(&value, length: count)
+        integerValue()
+    }
+
+    private func integerValue<T: FixedWidthInteger>() -> T {
+        var value: T = 0
+        Swift.withUnsafeMutableBytes(of: &value) { (destination: UnsafeMutableRawBufferPointer) in
+            _ = copyBytes(to: destination)
+        }
         return value
     }
 }
